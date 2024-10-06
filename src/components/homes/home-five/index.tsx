@@ -9,14 +9,14 @@ import BLockFeatureTwo from "./BLockFeatureTwo";
 import Brand from "./Brand";
 import Feedback from "./Feedback";
 import HeroBanner from "./HeroBanner";
-import HeaderThree from "@/layouts/headers/HeaderThree";
+import HeaderOne from "@/layouts/headers/HeaderOne";
 import FancyBanner from "@/components/common/FancyBanner";
 import PropertyOne from "../home-four/PropertyOne";
 
 const HomeFive = () => {
    return (
       <>
-         <HeaderThree />
+         <HeaderOne />
          <HeroBanner />
          <BLockFeatureOne />
          <Brand />

@@ -1,5 +1,5 @@
 "use client"
-import DashboardHeaderTwo from "@/layouts/headers/dashboard/DashboardHeaderTwo"
+import DashboardHeaderOne from "@/layouts/headers/dashboard/DashboardHeaderOne"
 import Image from "next/image"
 import UserAvatarSetting from "./UserAvatarSetting"
 import AddressAndLocation from "./AddressAndLocation"
@@ -12,7 +12,7 @@ const ProfileBody = () => {
    return (
       <div className="dashboard-body">
          <div className="position-relative">
-            <DashboardHeaderTwo title="Profile" />
+            <DashboardHeaderOne title="Profile" />
             <h2 className="main-title d-block d-lg-none">Profile</h2>
 
             <div className="bg-white card-box border-20">

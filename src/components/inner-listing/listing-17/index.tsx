@@ -1,10 +1,10 @@
-import HeaderFour from "@/layouts/headers/HeaderFour"
+import HeaderOne from "@/layouts/headers/HeaderOne"
 import ListingSeventeenArea from "./ListingSeventeenArea"
 
 const ListingSix = () => {
    return (
       <>
-         <HeaderFour />
+         <HeaderOne />
          <ListingSeventeenArea />
       </>
    )

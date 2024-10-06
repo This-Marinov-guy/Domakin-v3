@@ -2,7 +2,7 @@
 import Image, { StaticImageData } from "next/image"
 import NiceSelect from "@/ui/NiceSelect"
 import RecentMessage from "./RecentMessage"
-import DashboardHeaderTwo from "@/layouts/headers/dashboard/DashboardHeaderTwo"
+import DashboardHeaderOne from "@/layouts/headers/dashboard/DashboardHeaderOne"
 
 import icon_1 from "@/assets/images/dashboard/icon/icon_12.svg"
 import icon_2 from "@/assets/images/dashboard/icon/icon_13.svg"
@@ -53,7 +53,7 @@ const DashboardBody = () => {
    return (
       <div className="dashboard-body">
          <div className="position-relative">
-            <DashboardHeaderTwo title="Dashboard" />
+            <DashboardHeaderOne title="Dashboard" />
 
             <h2 className="main-title d-block d-lg-none">Dashboard</h2>
             <div className="bg-white border-20">

@@ -6,7 +6,7 @@ import footer_data from "@/data/home-data/FooterData"
 import footerLogo from "@/assets/images/logo/logo_06.svg"
 import footerShape_1 from "@/assets/images/shape/shape_52.svg"
 
-const FooterThree = () => {
+const FooterFour = () => {
    return (
       <div className="footer-three">
          <div className="container container-large">
@@ -68,4 +68,4 @@ const FooterThree = () => {
    )
 }
 
-export default FooterThree
+export default FooterFour

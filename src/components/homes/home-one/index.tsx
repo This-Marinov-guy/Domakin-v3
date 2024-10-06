@@ -1,4 +1,4 @@
-import FooterOne from "@/layouts/footers/FooterOne"
+import FooterFour from "@/layouts/footers/FooterFour"
 import HeaderOne from "@/layouts/headers/HeaderOne"
 import Banner from "./Banner"
 import Feedback from "./Feedback"
@@ -29,7 +29,7 @@ const HomeOne = () => {
       <BLockFeatureFive style={false} />
       <FancyBanner style={false} />
       <FancyBannerThree />
-      <FooterOne style={false} />
+      <FooterFour />
     </>
   )
 }

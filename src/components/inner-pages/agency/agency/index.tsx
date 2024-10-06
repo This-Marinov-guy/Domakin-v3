@@ -1,5 +1,5 @@
 import BreadcrumbThree from "@/components/common/breadcrumb/BreadcrumbThree"
-import HeaderFour from "@/layouts/headers/HeaderFour"
+import HeaderOne from "@/layouts/headers/HeaderOne"
 import AgencyArea from "./AgencyArea"
 import FooterFour from "@/layouts/footers/FooterFour"
 import FancyBanner from "@/components/common/FancyBanner"
@@ -7,7 +7,7 @@ import FancyBanner from "@/components/common/FancyBanner"
 const Agency = () => {
    return (
       <>
-         <HeaderFour />
+         <HeaderOne />
          <BreadcrumbThree title="Agency" link="#" link_title="Pages" sub_title="Agency" style={true} />
          <AgencyArea />
          <FancyBanner/>

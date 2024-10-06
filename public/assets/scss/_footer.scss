@@ -330,13 +330,13 @@
         text-align: center;
         line-height: 38px;
         border-radius: 50%;
-        border: 1px solid #000;
+        border: 1px solid $color-two;
         font-size: 20px;
-        color: #000;
+        color: $color-two;
         margin-right: 16px;
         @include transition(0.2s);
         &:hover {
-            background: #000;
+            background: $color-two;
             color: #fff;
         }
     }
@@ -350,7 +350,7 @@
             line-height: 44px;
             @include transition(0.2s);
             &:hover {
-                color: $color-one;
+                color: $color-two;
             }
         }
     }

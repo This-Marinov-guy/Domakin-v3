@@ -1,4 +1,4 @@
-import DashboardHeaderTwo from "@/layouts/headers/dashboard/DashboardHeaderTwo"
+import DashboardHeaderOne from "@/layouts/headers/dashboard/DashboardHeaderOne"
 import Image from "next/image";
 import Link from "next/link"
 
@@ -50,7 +50,7 @@ const SavedSearchBody = () => {
    return (
       <div className="dashboard-body">
          <div className="position-relative">
-            <DashboardHeaderTwo title="Saved Search" />
+            <DashboardHeaderOne title="Saved Search" />
             <h2 className="main-title d-block d-lg-none">Saved Search</h2>
 
             <div className="bg-white card-box p0 border-20">

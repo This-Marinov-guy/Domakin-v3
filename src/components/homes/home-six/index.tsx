@@ -9,13 +9,13 @@ import Feedback from "./Feedback"
 import Brand from "./Brand"
 import Blog from "../home-four/Blog"
 import FancyBanner from "./FancyBanner"
-import FooterFive from "@/layouts/footers/FooterFive"
-import HeaderFour from "@/layouts/headers/HeaderFour"
+import FooterFour from "@/layouts/footers/FooterFour"
+import HeaderOne from "@/layouts/headers/HeaderOne"
 
 const HomeSix = () => {
    return (
       <>
-         <HeaderFour />
+         <HeaderOne />
          <HeroBanner />
          <Category />
          <BLockFeatureTwo style={true} />
@@ -27,7 +27,7 @@ const HomeSix = () => {
          <Brand />
          <Blog />
          <FancyBanner />
-         <FooterFive />
+         <FooterFour />
       </>
    )
 }

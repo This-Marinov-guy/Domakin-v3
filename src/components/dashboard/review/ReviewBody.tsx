@@ -1,5 +1,5 @@
 "use client"
-import DashboardHeaderTwo from "@/layouts/headers/dashboard/DashboardHeaderTwo"
+import DashboardHeaderOne from "@/layouts/headers/dashboard/DashboardHeaderOne"
 import NiceSelect from "@/ui/NiceSelect";
 import UserReview from "./UserReview";
 import Image from "next/image";
@@ -14,7 +14,7 @@ const ReviewBody = () => {
    return (
       <div className="dashboard-body">
          <div className="position-relative">
-            <DashboardHeaderTwo title="Review" />
+            <DashboardHeaderOne title="Review" />
             <h2 className="main-title d-block d-lg-none">Reviews</h2>
 
             <div className="d-sm-flex align-items-center justify-content-between mb-25">

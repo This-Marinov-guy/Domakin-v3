@@ -1,6 +1,7 @@
 import React from "react";
 import HomeOne from "@/components/homes/home-one";
 import Wrapper from "@/layouts/Wrapper";
+import HomeSix from "@/components/homes/home-six";
 
 export const metadata = {
   title: "Homy - Real Estate React Next js Template",
@@ -8,7 +9,7 @@ export const metadata = {
 const index = () => {
   return (
     <Wrapper>
-      <HomeOne />
+      <HomeSix />
     </Wrapper>
   );
 };

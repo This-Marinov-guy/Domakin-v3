@@ -1,5 +1,5 @@
 "use client"
-import DashboardHeaderTwo from "@/layouts/headers/dashboard/DashboardHeaderTwo"
+import DashboardHeaderOne from "@/layouts/headers/dashboard/DashboardHeaderOne"
 import Overview from "./Overview"
 import ListingDetails from "./ListingDetails"
 import Link from "next/link"
@@ -10,7 +10,7 @@ const AddPropertyBody = () => {
    return (
       <div className="dashboard-body">
          <div className="position-relative">
-            <DashboardHeaderTwo title="Add New Property" />
+            <DashboardHeaderOne title="Add New Property" />
             <h2 className="main-title d-block d-lg-none">Add New Property</h2>
             <Overview />
             <ListingDetails />

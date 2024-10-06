@@ -7,15 +7,15 @@ import Brand from './Brand'
 import Blog from './Blog'
 import AddressBanner from './AddressBanner'
 import FancyBanner from './FancyBanner'
-import FooterThree from '@/layouts/footers/FooterThree'
+import FooterFour from '@/layouts/footers/FooterFour'
 import HeroBanner from './HeroBanner'
-import HeaderTwo from '@/layouts/headers/HeaderTwo'
+import HeaderOne from '@/layouts/headers/HeaderOne'
 import PropertyOne from './PropertyOne'
 
 const HomeFour = () => {
   return (
     <>
-      <HeaderTwo style_1={false} style_2={true} />
+      <HeaderOne style_1={false} style_2={true} />
       <HeroBanner />
       <PropertyOne style_1={false} style_2={false} />
       <PropertyTwo />
@@ -27,7 +27,7 @@ const HomeFour = () => {
       <Blog />
       <AddressBanner style={false} />
       <FancyBanner style={false} />
-      <FooterThree />
+      <FooterFour />
     </>
   )
 }

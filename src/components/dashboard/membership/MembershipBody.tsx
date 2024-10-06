@@ -1,4 +1,4 @@
-import DashboardHeaderTwo from "@/layouts/headers/dashboard/DashboardHeaderTwo"
+import DashboardHeaderOne from "@/layouts/headers/dashboard/DashboardHeaderOne"
 import Link from "next/link"
 import Pricing from "./Pricing"
 
@@ -6,7 +6,7 @@ const MembershipBody = () => {
    return (
       <div className="dashboard-body">
          <div className="position-relative">
-            <DashboardHeaderTwo title="Membership" />
+            <DashboardHeaderOne title="Membership" />
             <h2 className="main-title d-block d-lg-none">Membership</h2>
 
             <div className="membership-plan-wrapper mb-20">

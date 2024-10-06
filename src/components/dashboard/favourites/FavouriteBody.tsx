@@ -1,4 +1,4 @@
-import DashboardHeaderTwo from "@/layouts/headers/dashboard/DashboardHeaderTwo";
+import DashboardHeaderOne from "@/layouts/headers/dashboard/DashboardHeaderOne";
 import FavouriteArea from "./FavouriteArea";
 
 const FavouriteBody = () => {
@@ -6,7 +6,7 @@ const FavouriteBody = () => {
    return (
       <div className="dashboard-body">
          <div className="position-relative">
-            <DashboardHeaderTwo title="Favourites" />
+            <DashboardHeaderOne title="Favourites" />
             <FavouriteArea/>
          </div>
       </div>

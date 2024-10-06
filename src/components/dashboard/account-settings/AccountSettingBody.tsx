@@ -1,5 +1,5 @@
 "use client"
-import DashboardHeaderTwo from "@/layouts/headers/dashboard/DashboardHeaderTwo"
+import DashboardHeaderOne from "@/layouts/headers/dashboard/DashboardHeaderOne"
 import Link from "next/link"
 
 const AccountSettingBody = () => {
@@ -7,7 +7,7 @@ const AccountSettingBody = () => {
 
       <div className="dashboard-body">
          <div className="position-relative">
-            <DashboardHeaderTwo title="Account Settings" />
+            <DashboardHeaderOne title="Account Settings" />
             <h2 className="main-title d-block d-lg-none">Account Settings</h2>
             <div className="bg-white card-box border-20">
                <h4 className="dash-title-three">Edit & Update</h4>

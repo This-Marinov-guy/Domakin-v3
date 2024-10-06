@@ -1,12 +1,12 @@
 import ListingDetailsFourArea from "./ListingDetailsFourArea"
 import FancyBanner from "@/components/common/FancyBanner"
 import FooterFour from "@/layouts/footers/FooterFour"
-import HeaderFour from "@/layouts/headers/HeaderFour"
+import HeaderOne from "@/layouts/headers/HeaderOne"
 
 const ListingDetailsFour = () => {
    return (
       <>
-         <HeaderFour />
+         <HeaderOne />
          <ListingDetailsFourArea />
          <FancyBanner />
          <FooterFour />

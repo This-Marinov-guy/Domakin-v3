@@ -1,12 +1,12 @@
 "use client"
-import DashboardHeaderTwo from "@/layouts/headers/dashboard/DashboardHeaderTwo"
+import DashboardHeaderOne from "@/layouts/headers/dashboard/DashboardHeaderOne"
 import Link from "next/link"
 
 const PasswordChangeBody = () => {
   return (
     <div className="dashboard-body">
       <div className="position-relative">
-        <DashboardHeaderTwo title="Change Password" />
+        <DashboardHeaderOne title="Change Password" />
         <div className="bg-white card-box border-20">
           <form onSubmit={(e) => e.preventDefault()}>
             <div className="row">

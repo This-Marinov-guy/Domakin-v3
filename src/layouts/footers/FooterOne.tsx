@@ -9,7 +9,7 @@ import footerShape_2 from "@/assets/images/shape/shape_33.svg"
 
 const icon_1: string[] = ["facebook", "twitter", "instagram"]
 
-const FooterOne = ({ style }: any) => {
+const FooterFour = ({ style }: any) => {
    return (
       <div className={`footer-one ${style ? "dark-bg" : ""}`}>
          <div className="position-relative z-1">
@@ -58,4 +58,4 @@ const FooterOne = ({ style }: any) => {
    )
 }
 
-export default FooterOne
+export default FooterFour

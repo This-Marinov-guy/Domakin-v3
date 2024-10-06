@@ -1,5 +1,5 @@
 "use client"
-import DashboardHeaderTwo from "@/layouts/headers/dashboard/DashboardHeaderTwo"
+import DashboardHeaderOne from "@/layouts/headers/dashboard/DashboardHeaderOne"
 import MailOffcanvas from "./MailOffcanvas"
 import Link from "next/link"
 import Image from "next/image"
@@ -14,7 +14,7 @@ const MessageBody = () => {
    return (
       <div className="dashboard-body">
          <div className="position-relative">
-            <DashboardHeaderTwo title="Message" />
+            <DashboardHeaderOne title="Message" />
 
             <div className="row gx-0 align-items-center">
                <MailOffcanvas />
