@@ -51,7 +51,7 @@ const ListingDetails = () => {
                   <label htmlFor="">Kitchens*</label>
                   <NumberNiceSelect className="nice-select"
                      options={[
-                        { value: 1, text: 0 },
+
                         { value: 2, text: 1 },
                         { value: 3, text: 2 },
                         { value: 4, text: 3 },

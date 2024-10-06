@@ -12,15 +12,17 @@ type NiceSelectProps = {
   defaultCurrent: number;
   placeholder: string;
   className?: string;
+  style?: object;
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
   name: string;
-}
+};
 
 const NiceSelect: FC<NiceSelectProps> = ({
   options,
   defaultCurrent,
   placeholder,
   className,
+  style,
   onChange,
   name,
 }) => {
@@ -42,6 +44,7 @@ const NiceSelect: FC<NiceSelectProps> = ({
   return (
     <div
       className={`nice-select form-select-lg ${className || ""} ${open ? "open" : ""}`}
+      style={style}
       role="button"
       tabIndex={0}
       onClick={() => setOpen((prev) => !prev)}
