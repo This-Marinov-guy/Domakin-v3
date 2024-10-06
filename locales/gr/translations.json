@@ -1,0 +1,920 @@
+{
+  "language": "gr",
+  "header": {
+    "home": "Αρχική Σελίδα ",
+    "change_language": "Άλλαξε Γλώσσα",
+    "about": "Σχετικά",
+    "contact": "Επικοινωνία",
+    "register": "Εγγραφή",
+    "the_netherlands": "Ολλανδία",
+    "services": "Υπηρεσίες",
+    "legacy": "Κληροδότημα",
+    "agents": "Πράκτορες",
+    "our_services": "Οι Υπηρεσίες μας",
+    "recommendations": "Συστάσεις",
+    "add_listing": "Προσθήκη Αγγελίας"
+  },
+  "footer": {
+    "all_rights_reserved": "Όλα τα δικαιώματα διατηρούνται από @ Domakin",
+    "terms_policy": "Όροι & Πολιτική",
+    "the_netherlands": "Ολλανδία",
+    "company": "Εταιρεία",
+    "about_us": "Σχετικά με μας",
+    "team": "Ομάδα",
+    "services": "Υπηρεσίες",
+    "viewings": "Προβολές",
+    "expect_more_soon": "Ερχονται κι αλλα σύντομα...",
+    "support": "Βοήθεια",
+    "contact_us": "Επικοινωνήστε μαζί μας",
+    "renting": "Ενοικίαση",
+    "lending": "Δάνηση",
+    "recommendations": "Συστάσεις"
+  },
+  "about": {
+    "about_the_company": "Για την Εταιρεία",
+    "about_us": "Σχετικά με μας",
+    "helping_you_find_a_place": "Σας βοηθάμε να βρείτε σπίτι",
+    "when_to_reach_us": "Πότε να επικοινωνήσετε μαζί μας:",
+    "at_the_end_of_2022": "Τέλη του 2022 μερικοί από τους ιδρυτές του Δομακήν ξεκίνησαν το NPO",
+    "with_the_aim_to_help": "Με στόχο να βοηθήσουν τους Φοιτητές της Βουλγαρίας στο Γκρόνινγκεν. Μέρος της αποστολής μας περιλαμβάνει μια από τις μεγαλύτερες προκλήσεις των μαθητών στο Γκρόνινγκεν - να βρούμε διαμονή. Για αυτόν τον λόγο δημιουργήσαμε το Δομακήν με στόχο να κάνουμε αυτή την διαδικασία πιο έυκολη για πολλούς που δυσκολεύονται να βρουν χώρο διαμονής.",
+    "it_is_hard_for": "Είναι δύσκολο για ένα φοιτητή να βρεί κατοίκηση τον πρώτο τους χρόνο και ακόμη και τις ερχόμενες χρονιές. Η ομάδα του Δομακήν θα σας βοηθήσουν με:",
+    "if_you_are_located": "Αν βρίσκεστε στην Ελλάδα ή Κύπρο και θέλετε να βρείτε κατοικία αλλά δεν μπορείτε να πάτε στη προβολή, είμαστε εδώ για σας!",
+    "if_you_want": "Αν θέλετε να βρείτε κατοικία, είμαστε εδώ για σας!",
+    "if_you_are_searching": "Αν ψάχνετε για καινούργιο συγκάτοικο ή θέλετε να μεταφέρετε το συμβόλαιο σας σε κάποιον άλλο, είμαστε εδώ για σας!"
+  },
+  "partners": {
+    "official_partners": "Επίσημοι Συνεργάτες"
+  },
+  "contact": {
+    "contact_us": "Επικοινωνήστε μαζί μας",
+    "contact": "Επικοινωνία",
+    "email": "E-mail",
+    "telephone": "Τηλέφωνο",
+    "expect_soon": "Περιμένετε Σύντομα",
+    "office_address": "Διεύθυνση Γραφείου",
+    "your_message_was_sent_successfully": "Το μήνυμά σας στάλθηκε με επιτυχία",
+    "error_please_try_again": "Σφάλμα! Παρακαλώ δοκιμάστε ξανά!",
+    "contact_us_directly": "Επικοινωνήστε άμεσα μαζί μας",
+    "enter_your_email": "Εισάγετε το email σας",
+    "enter_the_subject": "Εισαγάγετε το θέμα",
+    "enter_your_message": "Εισάγετε το μήνυμά σας",
+    "send": "Στείλτε"
+  },
+  "viewing": {
+    "viewing_service": "Υπηρεσίες Προβολής",
+    "viewing": "Προβολή",
+    "let_us_make_the_viewing_for_you": "Αφήστε μας να κάνουμε την προβολή για σας",
+    "description": "Έχετε βρει δωμάτιο/διαμέρισμα άλλα δεν μπορείτε να πάτε στη προβολή ή είσαστε στη διαδικασία αναζήτησης και θέλετε να σιγουρευτείτε οτι κάποιος θα σας εκπροσωπέυσει στη προβολή.",
+    "service_offer": "Εμείς προσφέρουμε πράκτορες για προβολές όπου πάμε στι προβολή στη θέση σας. Με το αίτημα σας καταγράφουμε ολόκληρη τη διαδικασία και κανουμε οποιαδήποτε ερώτηση στον ιδιοκτήτη. Αν υπάρχει η πιθανότητα,  μπορούμε να κάνουμε μια ζωντανή σύνδεση μαζί σας έτσι ώστε να μπορείτε να ζήσετε ρεαλιστικά την προβολή. Επικοινωνήστε μαζί μας ακολουθώντας τα παρακάτω βήματα:",
+    "step_1": "1) Καταγράψτε τα στοιχεία σας στη φόρμα",
+    "step_2": "2) Περιμένετε καποιον απο τους αντιπροσώπους μας να επικοινωνήσει μαζί σας",
+    "step_3": "3) Κανονίστε τις προβολές και αφήστε τα υπόλοιπα σε εμάς",
+    "fill_your_details": "Συμπληρώστε τα στοιχεία σας",
+    "name": "Όνομα",
+    "surname": "Επώνυμο",
+    "phone_to_be_contacted": "Κινητό Τηλέφωνο (+ και κωδικός χώρας)",
+    "email": "Email",
+    "comments": "Οποιαδήποτε σχόλια θέλετε να σταλούν στον αντιπρόσωπό μας",
+    "consent": "Δίνω τη συγκατάθεσή μου να επικοινωνήσει η εταιρεία μέσω τηλεφώνου ή email και να αποθηκεύσει τα στοιχεία μου μόνο για λόγους εξυπηρέτησης",
+    "submit_request": "Υποβολή Αίτησης",
+    "errors": {
+      "name_required": "Το όνομα απαιτείται",
+      "surname_required": "Το επώνυμο απαιτείται",
+      "phone_number_invalid": "Ο αριθμός τηλεφώνου δεν είναι πλήρης ή δεν ξεκινά με κωδικό χώρας (παράδειγμα +30 ή +357)",
+      "phone_required": "Το τηλέφωνο απαιτείται",
+      "email_invalid": "Παρακαλώ εισάγετε ένα έγκυρο email",
+      "email_required": "Παρακαλώ εισάγετε ένα email",
+      "terms_required": "Οι όροι πρέπει να γίνουν αποδεκτοί",
+      "city_required": "Παρακαλώ δώστε την πόλη της προβολής",
+      "date_required": "Παρακαλώ δώστε την ημερομηνία προβολής",
+      "time_required": "Παρακαλώ δώστε την ώρα της προβολής"
+    },
+    "successful_request": "Επιτυχής Αίτηση",
+    "confirmation_message": "Τα στοιχεία σας έχουν σταλεί, οπότε περιμένετε σύντομα να επικοινωνήσετε μαζί μας από έναν από τους αντιπροσώπους μας! Ευχαριστούμε και πάλι για την εμπιστοσύνη και τα λέμε σύντομα!",
+    "city_of_viewing": "Πόλη προβολής",
+    "date": "Ημερομηνία:",
+    "time": "Ώρα:",
+    "address_of_viewing_optional": "Διευθυνση προβολής (προαιρετικό)"
+  },
+  "renting": {
+    "renting_accommodations": "Ενοικίαση κατοικίας",
+    "renting": "Ενοικίαση",
+    "find_the_perfect_place_for_you": "Βρείτε το ιδανικό μέρος για εσάς",
+    "platform_description": "Η πλατφόρμα μας περιέχει διαφορετικές ιδιότητες.",
+    "step_1": "1) Επιλέξτε μια ιδιότητα από την παρακάτω λίστα και πατήστε 'Επιλογή'",
+    "step_2": "2) Συμπληρώστε τη φόρμα που θα εμφανιστεί μόλις επιλέξετε μια ιδιότητα",
+    "step_3": "3) Περιμένετε να επικοινωνήσει ο αντιπρόσωπός μας μαζί σας για να ολοκληρωθεί η συμφωνία",
+    "step_4": "4) Ολοκληρώστε τη συμφωνία με τον αντιπρόσωπό μας",
+    "services": "Υπηρεσίες",
+    "properties": "Ιδιοκτησίες",
+    "per_month": "ανα μήνα",
+    "select": "επιλογή",
+    "no_properties_message": "Δεν υπάρχουν ιδιοκτησίες αυτή τη στιγμή - ελέγξτε ξανά αργότερα!",
+    "free_of_charge": "ΧΩΡΙΣ ΧΡΕΩΣΗ",
+    "per_night": "ανα βράδυ"
+  },
+  "lending": {
+    "transfer_and_old_contract": "Μεταγραφή και παλιό συμβόλαιο",
+    "transferring": "Μεταφορά",
+    "transfer_your_old_contract_through_us": "Μεταφέρετε το παλιό σας συμβόλαιο μέσω εμάς",
+    "description": "Σας προσφέρουμε να μεταφέρετε το υπόλοιπο της σύμβασής σας σε έναν από τους πελάτες μας. Προκειμένου να επιτευχθεί αυτό, το συμβόλαιό σας θα πρέπει να επιτρέπει τέτοια εκτέλεση και ο ιδιοκτήτης σας θα πρέπει να έχει ενημερωθεί. Να ξεκινήσετε, ακολουθήστε τα παρακάτω βήματα:",
+    "step_1": "1) Συμπληρώστε τη φόρμα",
+    "step_2": "2) Περιμένετε να επικοινωνήσει ο αντιπρόσωπός μας μαζί σας",
+    "step_3": "3) Μαζί ελέγξτε το συμβόλαιο και ολοκληρώστε την υπηρεσία"
+  },
+  "emergency_housing": {
+    "emergency_housing": "Διαμονή για έκτακτη ανάγκη",
+    "looking_for_place": "Αν ψάχνετε για ένα μέρος για να μείνετε μέχρι να βρείτε το δικό σας",
+    "short_stay_description": "Βρείτε ένα μέρος για μια σύντομη διαμονή σε ένα από τα αξιόπιστα ακίνητά μας που έχουν δανειστεί από έμπιστα άτομα. Το κόστος είναι χαμηλό (αν υπάρχει) και η διαμονή είναι περιορισμένη, αλλά μπορεί να βοηθήσει κάποιον που έχει ανάγκη. Εάν χρειάζεστε στέγαση έκτακτης ανάγκης στην Ολλανδία, ακολουθήστε τα παρακάτω βήματα:",
+    "step_1": "1) Επιλέξτε την επιλογή 'Αναζήτηση' παρακάτω",
+    "step_2": "2) Επιλέξτε δωμάτιο και πατήστε επιλογή",
+    "step_3": "3) Συμπληρώστε τα στοιχεία σας στη φόρμα που θα εμφανιστεί",
+    "step_4": "4) Περιμένετε απάντηση από την πλευρά μας για να λάβετε τις πληροφορίες σχετικά με τον ιδιοκτήτη του διαμερίσματος",
+    "offering_place": "Αν δίνεται την κατοικία σας για μικρό χρονικό διάστημα",
+    "lend_extra_bed": "Δανείστε ένα επιπλέον κρεβάτι/καναπέ σε κάποιον που έχει ανάγκη για μια σύντομη διαμονή. Πολλοί άνθρωποι, και πιο συγκεκριμένα φοιτητές, έρχονται στην Ολλανδία χωρίς μέρος να ζήσουν για να μην χάσουν τις σπουδές τους. Μπορείτε να βοηθήσετε πάρα πολύ προσφέροντάς να στεγάσετε επειγόντως έναν φοιτητή μέχρι να βρει τη διαμονή του με τη βοήθειά μας. Για να καταχωρήσετε τη κατοικία σας,  ακολουθήστε τα παρακάτω βήματα:",
+    "step_1_offer": "1) Επιλέξτε την επιλογή 'Προσφορά' παρακάτω",
+    "step_2_offer": "3) Συμπληρώστε τα στοιχεία σας και της κατοικίας σας στη φόρμα που θα εμφανιστεί",
+    "step_3_offer": "4) Περιμένετε απάντηση από την πλευρά μας για να σας εγκρίνουμε",
+    "thank_you_message": "\"Η ομάδα του Δομακήν ευχαριστεί όλους όσους είναι πρόθυμοι να βοηθήσουν\"",
+    "ellipsis": "...",
+    "searching": "Αναζήτηση",
+    "offering": "Προσφορά",
+    "personal_information": "Προσωπικά Στοιχεία",
+    "name": "Όνομα",
+    "surname": "Επώνυμο",
+    "phone": "Κινητό Τηλέφωνο (+ και κωδικό χώρας)",
+    "email": "Email",
+    "brief_description": "Περιγράψτε με συντομία το εαυτό σας",
+    "property_information": "Πληροφορίες Κατοικίας",
+    "location": "Τοποθεσία",
+    "max_staying_period": "Μέγιστος χρόνος διαμονής",
+    "price_per_night": "Τιμή ανά διανυκτέρευση",
+    "free_of_charge": "*Μπορείτε επίσης να το δανείσετε χωρίς χρέωση",
+    "property_description": "Περιγραφή της κατοικίας (όπως είναι κρεβάτι/καναπές/κ.λπ., τι άλλο μπορεί να χρησιμοποιήσει ο ενοικιαστής)",
+    "permission": "Δίνω την άδειά μου να επικοινωνήσει η εταιρεια μαζί μου για τους σκοπούς της υπηρεσίας",
+    "room_pictures": "Φωτογραφίες δωματίου",
+    "image_submission": "* Ανεβάστε τουλαχιστον 1 εικόνα και όχι παραπάνω από 6",
+    "extra_images": "* Δεν θα ληφθούν επιπλέον εικόνες ",
+    "supported_formats": "* Οι υποστηριζόμενες μορφές είναι jpg, jpeg και png",
+    "send_room": "Στείλε διαμέρισμα",
+    "dont_forget_images": "*Μην ξεχάσετε τις εικόνες",
+    "errors": {
+      "name_required": "Το όνομα απαιτείται",
+      "surname_required": "Το επώνυμο απαιτείται",
+      "email_required": " Το email απαιτείται",
+      "phone_too_short": "Το τηλέφωνο δεν είναι αρκετά μεγάλο",
+      "invalid_phone": "μη έγκυρο τηλέφωνο (παρακαλώ προσθέστε + και κωδικός χώρας)",
+      "phone_required": "Το τηλέφωνο απαιτείται",
+      "description_required": "Απαιτείται η περιγραφή σας",
+      "location_required": "Απαιτείται τοποθεσία",
+      "period_required": "Χρονικό διάστημα απαιτείται",
+      "price_required": "Απαιτείται τιμή",
+      "property_description_required": "απαιτείται η περιγραφή του διαμερίσματος",
+      "terms_required": "Οι όροι πρέπει να γίνουν αποδεκτοί",
+      "invalid_file": "Υπάρχει μη έγκυρο αρχείο",
+      "missing_fields": "Υπάρχουν ορισμένα πεδία που λείπουν ή δεν είναι έγκυρα - διορθώστε και προσπαθήστε ξανά!"
+    }
+  },
+  "home": {
+    "company_for_accommodation_searching": "Από φοιτητές για φοιτητές",
+    "find_your_place_to_live": "Βρείτε το νέο σας σπίτι στην Ολλανδία με το Domakin",
+    "with_our_help": "με την βοήθειά μας",
+    "description": "Η νεαρή μας ομάδα θα σας βοηθήσει να βρείτε ένα μέρος για να ζήσετε σε οποιοδήποτε μέρος της Ολλανδίας",
+    "contact_us": "Επικοινωνήστε μαζί μας"
+  },
+  "features": {
+    "our_main_focus": "Ο κύριος μας στόχος",
+    "our_services": "Οι Υπηρεσίες μας",
+    "viewings": "Προβολές",
+    "agents_service": "Οι αντιπρόσωποι μας πραγματοποιούν τις επισκέψεις στο διαμέρισμα για εσάς, ακολουθώντας επίσης τις απαιτήσεις οποιουδήποτε πελάτη",
+    "check_it_out": "Ελέγξτε το",
+    "rent_an_apartment": "Νοικιάστε ένα διαμέρισμα",
+    "property_inquiry": "Ελέγξτε τα διαμερίσματα στην ιστοσελίδα μας και κάντε μια ερώτηση για περισσότερες πληροφορίες",
+    "list_a_room": "Δηλώστε δωμάτιο",
+    "services": "Υπηρεσίες",
+    "search_for_new_flatmate_or_transfer_contract": "Αναζητήστε νέο συγκάτοικο / Μεταφέρετε το συμβόλαιό σας",
+    "emergency_housing": "Διαμονή για έκτακτη ανάγκη",
+    "emergency_housing_description": "Αναζήτηση ή παροχή διαμονής για σύντομο χρονικό διάστημα σε καταστάσεις έκτακτης ανάγκης",
+    "pricing_information": "Μπορείτε να βρείτε τις τιμές μας παρακάτω"
+  },
+  "team": {
+    "team": "Ομάδα",
+    "property_agents": "Πρακτορες Ιδιοκτησίας",
+    "members": [
+      {
+        "name": "Λάζαρ Ποπόβ",
+        "position": "Πράκτορας Προβολής",
+        "about": "26, Πτυχίο Τεχνητής Νοημοσύνης",
+        "about_extra": "Γεια σας, ονομάζομαι Λάζαρ. Είμαι από το Ρούσε, αλλά μένω στο Γκρόνινγκεν εδώ και πέντε χρόνια. Έχω μεταπτυχιακό στην \"Τεχνητή Νοημοσύνη\". Είμαι εξοικειωμένος με την πόλη και έχω εμπειρία στην αναζήτηση και εύρεση κατοικιών. Τα ενδιαφέροντά μου περιλαμβάνουν μαχητικά αθλήματα και τεχνητή νοημοσύνη. Εκτός από πράκτορας στο Domakin.nl, είμαι επίσης πρόεδρος και συνιδρυτής της μη κερδοσκοπικής φοιτητικής οργάνωσης Bulgarian Society Groningen. Θα χαρώ να σας βοηθήσω!"
+      },
+      {
+        "name": "Σάββα Ποπόβ",
+        "position": "Πράκτορας Προβολής",
+        "about": "20, Σπουδαστής Creative Media",
+        "about_extra": "Γεια σας, είμαι ο Σάββα και είμαι φοιτητής στο πρόγραμμα \"Creative Media and Technologies\" στο Γκρόνινγκεν. Έχω περάσει πολύ από το καλοκαίρι μου πριν έρθω σε αυτήν την πόλη ψάχνοντας για διαμερίσματα, πηγαίνοντας σε προβολές και ζητώντας συμβουλές από γνωστούς. Μετά από πολλές ανεπιτυχείς προσπάθειες, κατάφερα τελικά να βρω ένα μέρος και πιστεύω ότι τώρα έχω μια καλή κατανόηση των λαθών και των επιτυχιών στο κυνήγι διαμερισμάτων. Θα χαρώ να βοηθήσω όποιον βρεθεί σε παρόμοια κατάσταση!"
+      },
+      {
+        "name": "Κονσταντίν Σόνεβ",
+        "position": "Πράκτορας Προβολής",
+        "about": "21, Creative Media student",
+        "about_extra": "Γεια σας, με λένε Κονσταντίν και σπουδάζω \"Creative Media and Technologies\" στο Γκρόνινγκεν. Στο τέλος του προηγούμενου ακαδημαϊκού έτους, έπρεπε να ψάξω για ένα νέο διαμέρισμα. Ήταν εξαιρετικά δύσκολο να βρω δωμάτιο στην πόλη και έμεινα ικανοποιημένος όταν τελικά βρήκα ένα μέρος μετά από πολλές ανεπιτυχείς προσπάθειες. Υπάρχουν πολλές δυσκολίες στην εύρεση διαμερισμάτων λόγω της μεγάλης εισροής φοιτητών και των υψηλών ενοικίων. Γνωρίζουμε ότι πολλοί από εσάς έχετε την επιθυμία να σπουδάσετε στην πόλη και αντιμετωπίζετε τις ίδιες δυσκολίες, ειδικά όταν δεν βρίσκεστε στην πόλη. Γι' αυτό εμείς στο Domakin.nl θέλουμε να βοηθήσουμε παρέχοντας τις υπηρεσίες μας. Ανυπομονώ να συνεργαστούμε!"
+      },
+      {
+        "name": "Διμίταρ Σταμάτοβ",
+        "position": "Πράκτορας Προβολής",
+        "about": "22, Φοιτητής Διεθνών Επιχειρήσεων",
+        "about_extra": "Γεια σας, ονομάζομαι Διμίταρ Σταμάτοβ, είμαι 22 ετών και είμαι τριτοετής φοιτητής στην Ολλανδία. Σπουδάζω επιχειρήσεις και εργάζομαι ως μπάρμαν και στον ελεύθερο χρόνο μου προπονούμαι σε μαχητικά αθλήματα και ασχολούμαι με τη μουσική. Όπως κάθε φοιτητής στην Ολλανδία, ξέρω πόσο δύσκολο είναι να βρεις διαμονή, ειδικά το πρώτο έτος. Γι' αυτό θα ήμουν ευτυχής να βοηθήσω οποιονδήποτε μελλοντικό φοιτητή στη δουλειά μου ως αντιπρόσωπος στο Domakin.nl."
+      },
+      {
+        "name": "Βλαδισλάβ Μαρίνοβ",
+        "position": "IT Manager",
+        "about": "22, Φοιτητής Διεθνών Επιχειρήσεων",
+        "about_extra": " Γεια σας, με λένε Βλαδισλάβ και είμαι φοιτητής επιχειρήσεων στο Λονδίνο της Αγγλίας. Αν και σε διαφορετική χώρα, είμαι εξοικειωμένος με τα προβλήματα που μπορεί να αντιμετωπίσει ένας μαθητής όταν ψάχνει για κατοικία. Το άγχος, η απελπισία και ο θυμός είναι μερικά μόνο συναισθήματα που έχω νιώσει προσωπικά ψάχνοντας για διαμέρισμα στο Λονδίνο και γνωρίζω τις δυσκολίες που μπορεί να αντιμετωπίσει κάποιος, ειδικά όταν ψάχνει από απόσταση. Είναι χαρά για μένα να δουλεύω σε αυτή την πλατφόρμα, η οποία πιστεύω ότι θα βοηθήσει πολλούς ανθρώπους!"
+      },
+      {
+        "name": "Ράδοστ Λοζάνοβα",
+        "position": "Design Manager",
+        "about": "22, Φοιτητής Διεθνών Επιχειρήσεων",
+        "about_extra": "Χαίρετε! Είμαι η Radost, δημιουργικός διευθυντής και συνιδρυτής του Bulgarian Society Groningen. Ως φοιτήτρια, έχω ζήσει σε πολλές χώρες, οι οποίες περιελάμβαναν συχνές μετακινήσεις. Ως μέλος της ομάδας Domakin.nl, θα χαρώ να βοηθήσω περισσότερους Βούλγαρους να βρουν το νέο τους σπίτι στην Ολλανδία."
+      }
+    ],
+    "agents": "Πράκτορες",
+    "marketing": "Marketing",
+    "design": "Design"
+  },
+  "error": {
+    "be_careful_error": "Προσοχή - Μόλις λάβατε ένα σφάλμα!",
+    "page_not_found": "Η σελίδα δεν Βρέθηκε",
+    "page_not_exists": "Η σελίδα που ψάχνετε δεν υπάρχει",
+    "back_to_home": "Πίσω στην Αρχική Σελίδα"
+  },
+  "donations": {
+    "your_contribution_means_a_lot": "Εκτιμούμε την συνεισφορά σας",
+    "thank_you": "Ευχαριστώ",
+    "name_optional": "Όνομα (προαιρετικό)",
+    "amount_in_eur": "Ποσό σε EUR",
+    "message_optional": "Γράψετε μας μήνυμα (προαιρετικό)",
+    "continue": "Συνέχεια",
+    "pay": "Πληρωμή",
+    "processing": "Επεξεργασία...",
+    "unexpected_error_occurred": "Παρουσιάστηκε απροσδόκητο σφάλμα.",
+    "insert_positive_amount": "Εισάγετε ένα θετικό ποσό",
+    "minimum_amount_2_euro": "Το ελάχιστο ποσό είναι 2 ευρώ",
+    "insert_amount": "Εισάγετε ένα ποσό"
+  },
+  "feedbacks": {
+    "help_the_organization": "Βοηθήστε την Εταιρία",
+    "about": "Σχετικά",
+    "feedbacks_and_donations": "Σχόλια και Φιλοδωρήματα",
+    "share_your_experience": "Μοιραστείτε την εμπειρία σας για να τη δουν οι άλλοι",
+    "name": "Όνομα",
+    "share_your_feedback": "Μοιραστείτε τα σχόλια σας",
+    "minimum_20_characters": "Τουλάχιστον 20 χαρακτήρες",
+    "send": "Αποστολή",
+    "name_required": "Το όνομα απαιτείται",
+    "do_not_leave_empty": "Μην αφήνετε άδειο",
+    "please_type_at_least_20_characters": "Πληκτρολογήστε τουλάχιστον 20 χαρακτήρες",
+    "you_passed_the_300_characters_limit": "Ξεπεράσατε το όριο των 300 χαρακτήρων",
+    "thank_you_your_feedback_was_sent": "Σας ευχαριστούμε, τα σχόλιά σας στάλθηκαν σε εμάς για έγκριση!",
+    "feedbacks": "Σχόλια",
+    "donations": "Φιλοδωρήματα",
+    "want_to_support_the_organisation": "Θέλετε να υποστηρίξετε την εταιρεία;",
+    "you_can_now_donate_or_leave_feedback": "Τώρα μπορείτε να κάνετε φιλοδώρημα ή να αφήσετε θετικά σχόλια, ώστε να συνεχίσουμε να βοηθάμε άλλους μαθητές",
+    "contribute": "Συνεισφορά",
+    "no_feedbacks": "Δεν υπάρχουν σχόλια ακόμα - Μια ευκαιρία να είστε ο πρώτος!"
+  },
+  "recommendations": {
+    "our_recommendations": "Οι συστάσεις μας",
+    "support": "υποστήριξη",
+    "our_services": "Οι Υπηρεσίες μας",
+    "recommended_from_domakin_nl": "Συνιστάται από το Domakin.nl",
+    "team_made_list": "Η ομάδα του Domakin.nl έφτιαξε αυτήν τη λίστα για να βοηθήσει οποιονδήποτε να βρει ή να δανείσει κατοικία σε όλη την Ολλανδία. Εδώ μπορείτε να βρείτε πλατφόρμες που θα σας βοηθήσουν με την αναζήτησή σας και μπορείτε πάντα να βασίζεστε σε εμάς για υποστήριξη ή επιπλέον υπηρεσίες! Απλώς κάντε κλικ στο όνομα για να δείτε την πλατφόρμα.",
+    "websites": "Ιστοσελίδες",
+    "by_domakin_nl": "by Domakin.nl",
+    "contact_for_help": "Σε περίπτωση που χρειάζεστε περισσότερες πληροφορίες ή οποιαδήποτε βοήθεια, επικοινωνήστε μαζί μας μέσω της σελίδας επικοινωνίας ή της σελίδας υπηρεσιών μας!",
+    "beware_of_scammers": "Να είστε ενήμεροι για τους απατεώνες στο Facebook. Μοιραστείτε έγγραφα μόνο με αξιόπιστα προφίλ και χρειάζεστε πάντα μια προσωπική συνάντηση ή βιντεοκλήση. Εάν έχετε αμφιβολίες, καλέστε μας για βοήθεια."
+  },
+  "privacy_policy_content": {
+    "legal": "Νομικά",
+    "terms_and_policy": "Όροι & Πολιτική",
+    "effective_date": "Ημερομηνία έναρξης: 1η Αυγούστου 2023",
+    "introduction": "Στο Δομακήν, δεσμευόμαστε να προστατεύουμε το απόρρητό σας και να διασφαλίζουμε την ασφάλεια των προσωπικών σας πληροφοριών. Αυτή η Πολιτική Απορρήτου περιγράφει πώς συλλέγουμε, χρησιμοποιούμε και προστατεύουμε τα δεδομένα σας ενώ χρησιμοποιείτε την πλατφόρμα μας για να βρείτε κατοικία στην Ολλανδία. Με την πρόσβαση και τη χρήση του ιστότοπου ή της εφαρμογής για κινητά του Domakin (αναφέρεται ως \"Πλατφόρμα\"), συναινείτε στις πρακτικές που περιγράφονται στην παρούσα Πολιτική Απορρήτου.",
+    "information_we_collect": "1. Πληροφορίες που Συλλέγουμε",
+    "information_details": "Ενδέχεται να συλλέξουμε διάφορους τύπους πληροφοριών από εσάς, συμπεριλαμβανομένων ενδεικτικά: Προσωπικά στοιχεία: Το όνομά σας, η διεύθυνση email, ο αριθμός τηλεφώνου και άλλα στοιχεία επικοινωνίας.\nProfile information: Λεπτομέρειες σχετικά με τις προτιμήσεις, τα ενδιαφέροντα και τις απαιτήσεις διαμονής σας.\nCommunication information: Αρχεία αλληλογραφίας μεταξύ εσάς και του Δομακήν.\nUsage information:Δεδομένα σχετικά με τις αλληλεπιδράσεις σας με την Πλατφόρμα, όπως ερωτήματα αναζήτησης, προβεβλημένες καταχωρήσεις και αλληλεπιδράσεις χρηστών. Δηλώσεις οικογένειας και εισοδήματος: Μερικές πληροφορίες για την οικογένειά σας, το εισόδημά της, προσωπικό εισόδημα και οποιεσδήποτε άλλες οικονομικές πληροφορίες που μπορεί να ζητηθούν από έναν ιδιοκτήτη ή μια πλευρά που τα απαιτεί μόνο για σκοπούς δανεισμού κατοικίας.",
+    "how_we_use_your_information": "2. Πώς χρησιμοποιούμε τις πληροφορίες σας",
+    "usage_purposes": "Χρησιμοποιούμε τις πληροφορίες που συλλέγουμε για τους ακόλουθους σκοπούς: Για να διευκολύνουμε τη χρήση της Πλατφόρμας και να παρέχουμε εξατομικευμένες υπηρεσίες.\nΓια να σας ταιριάζει με τις κατάλληλες λίστες διαμερισματων με βάση τις προτιμήσεις σας.\nΓια να βελτιώσουμε τις υπηρεσίες μας, την εμπειρία χρήστη και την υποστήριξη πελατών.\nΓια να επικοινωνήσουμε μαζί σας σχετικά με τον λογαριασμό, τις καταχωρίσεις και τις σχετικές ενημερώσεις σας.\nΓια να αναλύσουμε τα πρότυπα χρήσης και να διεξάγουμε έρευνα για να βελτιώσουμε τις προσφορές μας.",
+    "sharing_of_information": "3. Κοινή χρήση πληροφοριών",
+    "sharing_circumstances": "Ενδέχεται να κοινοποιήσουμε τις πληροφορίες σας στις ακόλουθες περιπτώσεις: Με παρόχους διαμερισμάτων: Οι πληροφορίες του προφίλ σας ενδέχεται να κοινοποιηθούν στους ιδιοκτήτες κατοικιών για διευκόλυνση της κράτησης και της επικοινωνίας.\nΜε τρίτους παρόχους υπηρεσιών: Ενδέχεται να προσλάβουμε αξιόπιστα τρίτα μέρη για να μας βοηθήσουν στην παροχή υπηρεσιών, όπως η επεξεργασία πληρωμών ή η ανάλυση δεδομένων.\nΝομική συμμόρφωση: Ενδέχεται να αποκαλύψουμε πληροφορίες εάν απαιτείται από το νόμο ή για να προστατεύσουμε τα δικαιώματα, το απόρρητο, την ασφάλεια ή την ιδιοκτησία μας ή άλλων.",
+    "your_choices": "4. Οι επιλογές σας",
+    "your_choices_description": "Χρησιμοποιούμε βιομηχανικά πρότυπα ασφαλείας μέτρα για την προστασία των δεδομένων σας από μη εξουσιοδοτημένη πρόσβαση, αποκάλυψη, τροποποίηση ή καταστροφή.",
+    "data_security": "5. Ασφάλεια Δεδομένων",
+    "security_measures": "Χρησιμοποιούμε βιομηχανικά πρότυπα ασφαλείας μέτρα για την προστασία των δεδομένων σας από μη εξουσιοδοτημένη πρόσβαση, αποκάλυψη, τροποποίηση ή καταστροφή.",
+    "children_s_privacy": "6. Απόρρητο των παιδιών",
+    "children_policy": "Η πλατφόρμα δεν προορίζεται για άτομα κάτω των 16 ετών. Δεν συλλέγουμε εν γνώσει μας προσωπικές πληροφορίες από ανηλίκους χωρίς τη γονική συναίνεση.",
+    "contracting": "7.Συμβαλλόμενος",
+    "contract_policy": "Για την ασφάλεια και την προστασία των δικαιωμάτων και των δύο πλευρών, ενδέχεται να σας ζητηθεί να συμπληρώσετε τα στοιχεία σας και να υπογράψετε ένα συμβόλαιο, όταν περιλαμβάνονται οικονομικές συναλλαγές. Το συμβόλαιο μπορεί να διατηρηθεί από εμάς και να χρησιμοποιηθεί για νομικές ενέργειες, εφόσον κάποια από τις πλευρές δεν συμμορφωθεί με τους όρους της. Το Δομακήν εγγύετιται ότι θα παρέχει αντίγραφο του συμβολαίου στον πελάτη και σε οποιοδήποτε άλλο εμπλεκόμενο μέρος, εφόσον ζητηθεί και εγκριθεί σχετικό αίτημα.",
+    "contact_us": "Αν υπάρχουν ερωτήσεις, προβληματισμοί ή αιτήματα σε σχέση με την ιδιωτικότητά σας.",
+    "contact_details": "Επικοινωνήστε μαζί μας"
+  },
+  "locations": {
+    "amsterdam": "Αμστερνταμ",
+    "breda": "Μπρέντα",
+    "eindhoven": "Αϊντχόβεν",
+    "enschede": "Ένσχεδε",
+    "groningen": "Γκρόνινγκεν",
+    "leeuwarden": "Λέουβαρντεν",
+    "maastricht": "Μάαστριχτ",
+    "nijmegen": "Ναϊμεχεν",
+    "rotterdam": "Ροτερνταμ",
+    "hague": "Χάγη",
+    "tilburg": "Τιλμπουργκ",
+    "utrecht": "Ουτρέχτη",
+    "venlo": "Βενλό"
+  },
+  "property": {
+    "property_details": "Λεπτομέρειες Κατοικίας",
+    "gallery": "Φωτογραφίες",
+    "back_to_properties": "Επιστροφή σε κατοικίες",
+    "related_properties": "Σχετικές Ιδιοκτησίες",
+    "location": "Τοποθεσία",
+    "free_from_period": "Διαθέσιμο από/περίοδο",
+    "price_in_euro": "Τιμή σε Ευρώ",
+    "bills": "Λογαριασμούς",
+    "flatmates": "συγκάτοικους",
+    "no_related_properties_found": "Δεν βρέθηκαν σχετικές ιδιοκτησίες",
+    "no_properties_for_the_criteria": "Δεν υπάρχουν κατοικίες με αυτά τα κριτήρια"
+  },
+  "filter": {
+    "search_keyword": "Ψάξτε Λέξεις Κλειδιά...",
+    "your_range": "Το εύρος σας",
+    "property_location": "Τοποθεσία κατοικίας",
+    "filter_by_price": "Φίλτρο ανα τιμή",
+    "toggle_all": "εναλλαγή όλων",
+    "availability": "Διαθεσιμότητα"
+  },
+  "statusCodeMapping": {
+    "free": "Διαθέσιμο",
+    "in_process": "Σε Διαδικασία",
+    "taken": "Μη Διαθέσιμο"
+  },
+  "FOR_RENT": [
+    {
+      "id": "25",
+      "hidden": false,
+      "status": "RENT",
+      "price": 950,
+      "statusCode": 0,
+      "title": "Δωμάτιο σε κοινόχρηστο διαμέρισμα",
+      "city": "Hague",
+      "location": "Goeverneurlaan 462 Χάγη",
+      "description": {
+        "property": "Άνετο δωμάτιο σε ευρύχωρο διαμέρισμα. Το δωμάτιο που προσφέρεται είναι από την πρώτη και δεύτερη φωτογραφία, και τα έπιπλα μπορούν να αγοραστούν για επιπλέον 150 ευρώ. Είναι δυνατή η εγγραφή.",
+        "period": "1 Οκτωβρίου 2024 - 1 Ιουλίου 2025 με δυνατότητα παράτασης",
+        "bills": "συμπεριλαμβάνονται ορισμένοι λογαριασμοί",
+        "flatmates": "2"
+      },
+      "main_image": "4.jpg",
+      "images": ["2.jpg", "3.jpg", "1.jpg", "5.jpg", "6.jpg", "7.jpg"]
+    },
+    {
+      "id": "24",
+      "hidden": false,
+      "status": "TAKEN",
+      "price": 832,
+      "statusCode": 2,
+      "title": "Subrent studio",
+      "city": "Groningen",
+      "location": "Gedempte Zuiderdiep, Groningen",
+      "description": {
+        "property": "Cozy 20 sq. meters room studio apartment with own kitchen and bathroom. Located close to the city centre of Groningen, 4 mins walking from Vismarkt, 8 mins from Groningen train station and 10 mins from the University Library. The building hosts mainly students. Registration can be made for the time of stay",
+        "period": "available September-December 2024/January 2025",
+        "bills": "bills are included",
+        "flatmates": "No roommates/ flatmates"
+      },
+      "main_image": "4.jpg",
+      "images": ["2.jpg", "3.jpg", "1.jpg", "5.jpg", "6.jpg", "7.jpg"]
+    },
+    {
+      "id": "23",
+      "hidden": false,
+      "status": "TAKEN",
+      "price": 453,
+      "statusCode": 2,
+      "title": "Room in shared apartment",
+      "city": "Groningen",
+      "location": "Petrus Driessenstraat, Groningen",
+      "description": {
+        "property": "Cozy 15 sq. meters room, close to the city center. The room comes furnished. The house is shared with 3 other Bulgarian roommates. There is 1 kitchen, 1 toilet, 1 bathroom, and a shared room for relaxation. Registration is NOT possible.",
+        "period": "available 22nd of August - 31st of January",
+        "bills": "bills are NOT included",
+        "flatmates": "up to 3 roommates"
+      },
+      "main_image": "1.jpg",
+      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"]
+    },
+    {
+      "id": "22",
+      "hidden": false,
+      "status": "Taken",
+      "price": 440,
+      "statusCode": 2,
+      "title": "Room in female apartment",
+      "city": "Groningen",
+      "location": "Oosterhamrikkade, Groningen",
+      "description": {
+        "property": "The room is 17m2 (furnished). The apartment has everything needed and the furniture remains as shown in the pictures. The room is available for a short term while the owner is on exchange, and registration is NOT possible.",
+        "period": "available from August to February 2025",
+        "bills": "all bills included",
+        "flatmates": "up to 3 roommates"
+      },
+      "main_image": "1.jpg",
+      "images": ["2.jpg", "3.jpg", "4.jpg"]
+    },
+    {
+      "id": "21",
+      "status": "Taken",
+      "price": 353,
+      "statusCode": 2,
+      "title": "Private room",
+      "city": "Groningen",
+      "location": "Goudlaan, Groningen ",
+      "description": {
+        "property": "The room is 14m2 (furnished). It is located in the area of Vinkhuizen. The address is Goudlaan 233 (Groningen) and the rent is €353 all included. The price of the furniture is €200. The deposit is €353. The shared facilities of the house are kitchen, bathroom, small toilet and yard. The house has 3 floors and it is for 6 tenants. Registration IS possible",
+        "period": "available from July 23rd",
+        "bills": "all bills included",
+        "flatmates": "up to 5"
+      },
+      "main_image": "1.jpg",
+      "images": [
+        "1.jpg",
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg",
+        "9.jpg",
+        "10.jpg"
+      ]
+    },
+    {
+      "id": "20",
+      "status": "Taken",
+      "price": 1150,
+      "statusCode": 2,
+      "title": "Boat House",
+      "city": "Leeuwarden",
+      "location": "Central Leeuwarden",
+      "description": {
+        "property": "The house-boat is located near the city centre, very close to Cambuur (city stadium where shops of any kind are located). It is 5 minutes to city centre, 5 mins to Cambuur, 5 mins to NHL Stenden by bike. The house-boat has 2 bedrooms, big living room, fully-furnished kitchen (with dishwasher), a bath room, 2 toilets (+ washing machine and dryer. It is around 50-60 m2",
+        "period": "available from January 2025",
+        "bills": "some bills are covered",
+        "flatmates": "up to 2-3"
+      },
+      "main_image": "1.jpg",
+      "images": [
+        "1.jpg",
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg",
+        "9.jpg",
+        "10.jpg",
+        "11.jpg",
+        "12.jpg",
+        "13.jpg",
+        "14.jpg"
+      ]
+    },
+    {
+      "id": "19",
+      "status": "Taken",
+      "price": 850,
+      "statusCode": 2,
+      "title": "Room in a shared apartment",
+      "city": "Groningen",
+      "location": "Sabotagelaan, Groningen",
+      "description": {
+        "property": "A room is available from August 1st in a shared apartment for an indefinite time. The room is spacious, equipped with a queen-sized bed and a TV. It is located a 10-minute walk or a 5-minute bike ride from the city center and has multiple grocery stores nearby. The bus station is a 3-minute walk away. The apartment is shared with only one other person and a clean, responsible roommate is preferred (preferably a girl). The house features two stories, a kitchen, living room, balcony, laundry room, and two bathrooms, situated in a residential area. Registration is possible. The rent is 850 per month.",
+        "period": "available from August",
+        "bills": "bills included",
+        "flatmates": "1"
+      },
+      "main_image": "1.jpg",
+      "images": [
+        "1.jpg",
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg",
+        "9.jpg",
+        "10.jpg"
+      ]
+    },
+    {
+      "id": "18",
+      "status": "Taken",
+      "price": 1000,
+      "statusCode": 2,
+      "title": "Fully-furnished studio",
+      "city": "Rotterdam",
+      "location": "Rotterdam South",
+      "description": {
+        "property": "A fully-furnished studio in Rotterdam South for a short stay. The apartment is located in a fantastic area with several stores only three-minute walk away. Public transport is easily accessible, with bus stop around the corner and the metro Zuidplein only a 5-minute walk away. The studio also includes extras like a washing machine, laundry machine, and personal toilet. Registration is NOT possible.",
+        "period": "from 15/07/24 to 02/25 (~6 months)",
+        "bills": "bills included",
+        "flatmates": "-"
+      },
+      "main_image": "1.jpg",
+      "images": ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"]
+    },
+    {
+      "id": "17",
+      "status": "Taken",
+      "price": 630,
+      "statusCode": 2,
+      "title": "Room in a shared apartment",
+      "city": "Groningen",
+      "location": "Oosterhamrikkade, Groningen",
+      "description": {
+        "property": "Room in a shared apartment with 2 girls. Spacious room in a shared apartment with 2 Bulgarian room. There is a shared toilet, shower, kitchen + living room. Registration IS possible",
+        "period": "12 months",
+        "bills": "bills included",
+        "flatmates": "2"
+      },
+      "main_image": "1.jpg",
+      "images": ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg"]
+    },
+    {
+      "id": "16",
+      "status": "Taken",
+      "price": 400,
+      "statusCode": 2,
+      "title": "Cosy room in Venlo",
+      "city": "Venlo",
+      "location": "Molensingel, Venlo",
+      "description": {
+        "property": "Room in a house in Venlo. The kitchen, bath and toilet are shared with 3 other guys. Registration is possible",
+        "period": "1st of July",
+        "bills": "utilities included",
+        "flatmates": "3"
+      },
+      "folder": "property_venlo_molensingel",
+      "main_image": "1.jpeg",
+      "images": ["1.jpeg", "2.jpeg"]
+    },
+    {
+      "id": "15",
+      "status": "Taken",
+      "price": 828.76,
+      "statusCode": 2,
+      "title": "Studio in a central location",
+      "city": "Groningen",
+      "location": "Peperstraat, 9711PC, Groningen",
+      "description": {
+        "property": "The studio is located in the city center. It has its own kitchen and bathroom. The toilet is located on the lower floor and is currently shared with 3 other girls.",
+        "period": "available immediately",
+        "bills": "utilities included",
+        "flatmates": "3"
+      },
+      "folder": "property_groningen_peperstraat",
+      "main_image": "Thumbnail.jpeg",
+      "images": ["1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg"]
+    },
+    {
+      "id": "14",
+      "status": "Taken",
+      "price": 989,
+      "statusCode": 2,
+      "title": "Studio",
+      "city": "Groningen",
+      "location": "Oosterhamrikkade Groningen",
+      "description": {
+        "property": "Spacious Room in community building. Registration is NOT possible!",
+        "period": "currently available",
+        "bills": "all bills included",
+        "flatmates": "-"
+      },
+      "main_image": "1.jpg",
+      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg"]
+    },
+    {
+      "id": "13",
+      "status": "Taken",
+      "price": 400,
+      "statusCode": 2,
+      "title": "Small sunny room",
+      "city": "Groningen",
+      "location": "Fokkerstraat Groningen",
+      "description": {
+        "property": "A small sunny room in a 2-floor house. A bike comes with the room. Registration is possible",
+        "period": "available from August to January 2025",
+        "bills": "all bills included as well as bike",
+        "flatmates": "3х girls"
+      },
+      "main_image": "1.jpg",
+      "images": ["2.jpg", "3.jpg"]
+    },
+    {
+      "id": "12",
+      "status": "Taken",
+      "price": 600,
+      "statusCode": 2,
+      "title": "2 rooms",
+      "city": "Rotterdam",
+      "location": "Maasdamweg Rotterdam",
+      "description": {
+        "property": "2 separate bedroooms in a beautiful shared house",
+        "period": "available now",
+        "bills": "bills included but might vary",
+        "flatmates": "1х boy and 1х girl"
+      },
+      "main_image": "1.jpg",
+      "images": ["2.mp4"]
+    },
+    {
+      "id": "11",
+      "status": "Taken",
+      "price": 385,
+      "statusCode": 2,
+      "title": "Room in a shared apartment",
+      "city": "Groningen",
+      "location": "Huygensstraat, Groningen",
+      "description": {
+        "property": "Cosy room in shared apartment. The new tenant must be female",
+        "period": "12-months contract",
+        "bills": "all bills included",
+        "flatmates": "1х Greek и 1х Vietnamese"
+      },
+      "main_image": "2.jpg",
+      "images": ["1.mp4"]
+    },
+    {
+      "id": "10",
+      "status": "Taken",
+      "price": 430,
+      "statusCode": 2,
+      "title": "Room in a shared apartment",
+      "city": "Groningen",
+      "location": "Petrus Driessenstraat, Groningen",
+      "description": {
+        "property": "9 sq meters. Registration is possible",
+        "period": "12 month contract",
+        "bills": "bills are not included (approx 120 per month)",
+        "flatmates": "3 Bulgarian males"
+      },
+      "main_image": "1.jpeg",
+      "images": ["2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg"]
+    },
+    {
+      "id": "9",
+      "status": "Taken",
+      "price": 510,
+      "statusCode": 2,
+      "title": "3 rooms in shared apartment",
+      "city": "Groningen",
+      "location": "Eikenlaan, Groningen",
+      "description": {
+        "property": "The apartment is suitable for 3 friends. Only 1 registration is possible on the property. The rent for the how apartment is 1545 euro.",
+        "period": "12 month contract",
+        "bills": "bills are not included",
+        "flatmates": "2 people"
+      },
+      "main_image": "1.jpg",
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg",
+        "9.jpg",
+        "10.jpg"
+      ]
+    },
+    {
+      "id": "8",
+      "status": "Taken",
+      "price": 410,
+      "statusCode": 2,
+      "title": "Room in a shared apartment",
+      "city": "Groningen",
+      "location": "Turkooisstraat, Groningen",
+      "description": {
+        "property": "Size of the room is 20 sq. meters. All furnitures can be bought from the current lender for 400 euro (furnitures are from IKEA and cost approxiamtely 400 euro)",
+        "period": "Free from 1st of July",
+        "bills": "main bills are included. Deposit of 410 euro is required. Wi-Fi can be paid if used according to the current plan",
+        "flatmates": "2 Bulgarians and 2 Germans"
+      },
+      "main_image": "1.jpg",
+      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"]
+    },
+    {
+      "id": "7",
+      "status": "Taken",
+      "price": 395,
+      "statusCode": 2,
+      "title": "Room 19 sq meters",
+      "city": "Groningen",
+      "location": "Saffierstraat, Groningen",
+      "description": {
+        "property": "19 sq meters room, 395 euro rent, 1 euro for washing machine, 1 euro for dryer, 8 euro for Wi-Fi. Furniture can be bought from the current tenant.",
+        "period": "Free from December",
+        "bills": "All bills included (laundry, dryer and Wi-Fi are paid extra)",
+        "flatmates": "3 flatmates - 2 x Bulgarians (male and female), 1 х Argentian female"
+      },
+      "main_image": "1.jpg",
+      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg"]
+    },
+    {
+      "id": "6",
+      "status": "Taken",
+      "price": 1100,
+      "statusCode": 2,
+      "title": "Room in a spacious apartment",
+      "city": "Rotterdam",
+      "location": "Center of Rotterdam",
+      "description": {
+        "property": "Apartment with 2 floors - 2nd is with 2 bedrooms and bath, 1st floor is with the living room and the kitchen. All furnitures available. Close to bars/restaurants, transport and markets.",
+        "period": "Currently available",
+        "bills": "approximately 80 euro monthly bills",
+        "flatmates": "1 girl (Bulgarian)"
+      },
+      "main_image": "1.jpg",
+      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg"]
+    },
+    {
+      "id": "5",
+      "status": "Taken",
+      "price": 395,
+      "statusCode": 2,
+      "title": "Room 19 sq meters",
+      "city": "Groningen",
+      "location": "Saffierstraat, Groningen",
+      "description": {
+        "property": "19 sq meters room, 395 euro rent, 1 euro for washing machine, 1 euro for dryer, 8 euro for Wi-Fi. Furniture can be bought from the current tenant.",
+        "period": "Free from December",
+        "bills": "All bills included (laundry, dryer and Wi-Fi are paid extra)",
+        "flatmates": "3 flatmates - 2 x Bulgarians (male and female), 1 х Argentian female"
+      },
+      "main_image": "1.jpg",
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg",
+        "9.jpg",
+        "10.jpg"
+      ]
+    },
+    {
+      "id": "4",
+      "status": "Taken",
+      "price": 627,
+      "statusCode": 2,
+      "title": "Studio for subrent",
+      "city": "Groningen",
+      "location": "Gelkingestraat, Groningen",
+      "description": {
+        "property": "A nice studio in the center for subrent - does NOT allow for registration",
+        "period": "2th October 2023- 2nd March 2024",
+        "bills": "All fees included",
+        "flatmates": "No roommates/ flatmates"
+      },
+      "folder": "studio2",
+      "main_image": "1.jpg",
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg",
+        "9.jpg",
+        "10.jpg",
+        "11.jpg",
+        "12.jpg"
+      ]
+    },
+    {
+      "id": "3",
+      "status": "Taken",
+      "price": "~1050",
+      "statusCode": 2,
+      "title": "Single Room",
+      "city": "Amsterdam",
+      "location": "Tweede Oosterparkstraat 3, Amsterdam",
+      "description": {
+        "property": "A small but nice room in a two bedroom apartment. Living room, kitchen, bathroom have everything included. Optional furniture purchase.",
+        "period": "8th of September 2023 - June 2024 with a possibility of extension",
+        "bills": "Rent includes service cost, bills, wifi, el, gas, water",
+        "flatmates": "There is one more working male tenant - 26 years old."
+      },
+      "main_image": "1.jpg",
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg",
+        "9.jpg",
+        "10.jpg"
+      ]
+    },
+    {
+      "id": "2",
+      "status": "Taken",
+      "price": 784,
+      "statusCode": 2,
+      "title": "Studio",
+      "city": "Groningen",
+      "location": "Hoogeweg 1, Groningen",
+      "description": {
+        "property": "Small studio for a short period.As registration of living is not possible at the place, it is NOT suitable for first year students who have not yet been registered. ",
+        "period": "Available until February 2024",
+        "bills": "Rent includes service cost, bills, wifi, el, gas, water",
+        "flatmates": "No flatmates"
+      },
+      "folder": "studio",
+      "main_image": "1.jpg",
+      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg"]
+    }
+  ],
+  "EMERGENCY_HOUSING": [
+    {
+      "id": "1",
+      "status": "Available",
+      "statusCode": 0,
+      "title": "Coach in Common Space",
+      "location": "Petrus Driessenstraat 42A, Groningen",
+      "description": {
+        "property": "Includes bathroom, washing machine, WI-FI and other essential utility",
+        "period": "Maximum period of stay of 14 days",
+        "flatmates": "4 university students around the age of 22 for flatmates"
+      },
+      "main_image": "/img/emergency-housing/1.jpg",
+      "images": [
+        "/img/emergency-housing/3.jpg",
+        "/img/emergency-housing/4.jpg",
+        "/img/emergency-housing/5.jpg",
+        "/img/emergency-housing/6.jpg",
+        "/img/emergency-housing/7.jpg"
+      ],
+      "owner": {
+        "image": "/img/emergency-housing/owner1.jpg",
+        "description": "Γειά σας, είμαστε ο Σάββας, ο Κονσταντίν και ο Δημίταρ, είμαστε μελοι του BGSG. Είναι χαρά μας να σας βοηθήσουμε προσφέροντας έκτακτη διαμονή στην κατοικία μας!"
+      }
+    },
+    {
+      "id": "2",
+      "status": "Available",
+      "statusCode": 0,
+      "title": "Coach in Common Space",
+      "location": "Petrus Driessenstraat 42A, Groningen",
+      "description": {
+        "property": "Includes bathroom, washing machine, WI-FI and other essential utility",
+        "period": "Maximum period of stay of 14 days",
+        "flatmates": "4 university students around the age of 22 for flatmates"
+      },
+      "main_image": "/img/emergency-housing/2.jpg",
+      "images": [
+        "/img/emergency-housing/3.jpg",
+        "/img/emergency-housing/4.jpg",
+        "/img/emergency-housing/5.jpg",
+        "/img/emergency-housing/6.jpg",
+        "/img/emergency-housing/7.jpg"
+      ],
+      "owner": {
+        "image": "/img/emergency-housing/owner1.jpg",
+        "description": "Γειά σας, είμαστε ο Σάββας, ο Κονσταντίν και ο Δημίταρ, είμαστε μελοι του BGSG. Είναι χαρά μας να σας βοηθήσουμε προσφέροντας έκτακτη διαμονή στην κατοικία μας!"
+      }
+    }
+  ],
+  "react_error": {
+    "something_went_wrong": "Κάτι πήγε λάθος! Παρακαλώ δοκιμάστε ξανά ή Αναφέρετε το πρόβλημα για να λάβετε βοήθεια.",
+    "try_again": "Δοκιμάστε ξανά",
+    "go_home": "Επιστροφή στην αρχική σελίδα"
+  },
+  "api": {
+    "invalid_action": "Μη έγκυρη ενέργεια",
+    "request_failed": "Το αίτημα απέτυχε. Δοκιμάστε ξανά αργότερα.",
+    "too_many_requests": "Πάρα πολλά αιτήματα! Δοκιμάστε ξανά αργότερα!.",
+    "forbidden_access": "Απαγορεύεται η πρόσβαση",
+    "not_enough_pictures": "Ελλειπής υλικό, παρακαλώ ανεβάστε τουλάχιστον τρεις εικόνες.",
+    "failed_fetching_feedbacks": "Δεν καταφέραμε να λάβουμε τα σχόλια! Δοκιμάστε ξανά!"
+  }
+}
