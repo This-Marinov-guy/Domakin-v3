@@ -6,6 +6,9 @@ export const FACEBOOK = "https://www.facebook.com/profile.php?id=100093230497851
 export const INSTAGRAM = "https://www.instagram.com/domakin.nl/";
 export const LINKEDIN = "https://www.linkedin.com/company/domakin/";
 
+export const ADDRESS = '';
+export const PHONE = '';
+
 // status
 export const STATUS_COLORS = {
     0: 'bg-green',

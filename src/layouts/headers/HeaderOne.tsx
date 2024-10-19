@@ -8,10 +8,13 @@ import LoginModal from "@/modals/LoginModal";
 
 import logo_1 from "@/assets/img/logo-2.png";
 import ChangeLanguage from "./Menu/ChangeLanguage";
+import useTranslation from "next-translate/useTranslation";
 
 const HeaderOne = ({ style }: any) => {
   const { sticky } = UseSticky();
 
+  const {t} = useTranslation('translations');
+  
   return (
     <>
       <header
@@ -49,7 +52,7 @@ const HeaderOne = ({ style }: any) => {
                       className="btn-two"
                       target="_blank"
                     >
-                      <span>Add Listing</span>{" "}
+                      <span>{t('header.add_listing')}</span>{" "}
                       <i className="fa-thin fa-arrow-up-right"></i>
                     </Link>
                   </li>
