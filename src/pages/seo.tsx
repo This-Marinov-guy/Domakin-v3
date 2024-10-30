@@ -28,7 +28,6 @@ const SEO = () => {
       />
       <meta property="og:image" content="/img/logo-2.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta name="robots" content="index, follow" />
       <link rel="icon" href="/favicon.ico" />
       <link rel="manifest" href="/manifest.json" />
       <link rel="robots" href="/robots.txt" />
