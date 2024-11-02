@@ -28,19 +28,19 @@ const address_data: DataType[] = [
     address_1: EMAIL,
     link: "mailto:" + EMAIL,
   },
-  {
-    id: 2,
-    icon: locationIcon,
-    class_name: "skew-line",
-    title: "contact.office_address",
-    address_1: ADDRESS,
-  },
-  {
-    id: 2,
-    icon: locationIcon,
-    title: "contact.telephone",
-    address_1: PHONE,
-  },
+  // {
+  //   id: 2,
+  //   icon: locationIcon,
+  //   class_name: "skew-line",
+  //   title: "contact.office_address",
+  //   address_1: ADDRESS,
+  // },
+  // {
+  //   id: 2,
+  //   icon: locationIcon,
+  //   title: "contact.telephone",
+  //   address_1: PHONE,
+  // },
 ];
 
 const ContactArea = () => {
@@ -60,7 +60,7 @@ const ContactArea = () => {
 
       <div className="address-banner wow fadeInUp mt-60 lg-mt-40">
         <div className="container">
-          <div className="d-flex flex-wrap justify-content-center justify-content-lg-between">
+          <div className="d-flex flex-wrap justify-content-center">
             {address_data.map((item) => (
               <div
                 key={item.id}

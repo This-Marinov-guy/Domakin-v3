@@ -1,7 +1,7 @@
 export const isProd = process.env.NODE_ENV === "production";
 
 // social
-export const EMAIL = 'domakin.nl@gmail.com';
+export const EMAIL = 'info@domakin.nl';
 export const FACEBOOK = "https://www.facebook.com/profile.php?id=100093230497851";
 export const INSTAGRAM = "https://www.instagram.com/domakin.nl/";
 export const LINKEDIN = "https://www.linkedin.com/company/domakin/";

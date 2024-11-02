@@ -13,13 +13,13 @@ import useTranslation from "next-translate/useTranslation";
 const HeaderOne = ({ style }: any) => {
   const { sticky } = UseSticky();
 
-  const {t} = useTranslation('translations');
-  
+  const { t } = useTranslation("translations");
+
   return (
     <>
       <header
         className={`theme-main-menu menu-overlay menu-style-one sticky-menu ${
-          sticky ? "fixed" : ""
+          sticky && "fixed"
         }`}
       >
         {/* {!style && (
@@ -52,7 +52,7 @@ const HeaderOne = ({ style }: any) => {
                       className="btn-two"
                       target="_blank"
                     >
-                      <span>{t('header.add_listing')}</span>{" "}
+                      <span>{t("header.add_listing")}</span>{" "}
                       <i className="fa-thin fa-arrow-up-right"></i>
                     </Link>
                   </li>
