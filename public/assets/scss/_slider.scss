@@ -20,6 +20,15 @@
    }
 }
 
+.no-dots {
+   list-style-type: none;
+}
+
+.icon-blue {
+   margin: 0 10px;
+   color: $color-two;
+}
+
 .slick-dots {
    list-style-type: none;
    display: flex !important;
