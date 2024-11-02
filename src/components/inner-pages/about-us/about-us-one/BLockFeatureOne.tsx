@@ -37,25 +37,7 @@ const BLockFeatureOne = () => {
                 <div className="upper-title">{sub_title}</div>
                 <h3>{desc_1}</h3>
               </div>
-              <Link href="/contact" className="btn-two">
-                {t("header.contact")}
-              </Link>
-              <ul className="no-dots counter-wrapper border-top pt-40 md-pt-10 mt-65 md-mt-40">
-                <li>
-                  <i className="icon-blue fa-solid fa-users-viewfinder" />
-                  {t("about.if_you_are_located")}
-                </li>
-                <br />
-                <li>
-                  <i className="icon-blue fa-solid fa-magnifying-glass-location" />
-                  {t("about.if_you_want")}
-                </li>
-                <br />
-                <li>
-                  <i className="icon-blue fa-solid fa-people-arrows" />
-                  {t("about.if_you_are_searching")}
-                </li>
-              </ul>
+              <img src={"/assets/img/gallery/map.png"} alt="About Us" />
               {/* <div className="counter-wrapper border-top pt-40 md-pt-10 mt-65 md-mt-40">
                 <div className="row">
                   <div className="col-xxl-6 col-sm-5">
@@ -93,6 +75,22 @@ const BLockFeatureOne = () => {
                   {desc_2} {desc_3} {desc_4}
                 </p>
                 <p className="fs-22 lh-lg mt-20">{desc_5}</p>
+                <ul className="no-dots">
+                  <li>
+                    <i className="icon-blue fa-solid fa-users-viewfinder" />
+                    {t("about.if_you_are_located")}
+                  </li>
+                  <br />
+                  <li>
+                    <i className="icon-blue fa-solid fa-magnifying-glass-location" />
+                    {t("about.if_you_want")}
+                  </li>
+                  <br />
+                  <li>
+                    <i className="icon-blue fa-solid fa-people-arrows" />
+                    {t("about.if_you_are_searching")}
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
