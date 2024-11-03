@@ -50,17 +50,17 @@ const BLockFeatureOne = () => {
                 <p className="fs-22 lh-lg mt-20">{desc_5}</p>
                 <ul className="no-dots">
                   <li>
-                    <i className="icon-blue fa-solid fa-users-viewfinder" />
+                    <i className="mr-5 icon-blue fa-solid fa-users-viewfinder" />
                     {t("about.if_you_are_located")}
                   </li>
                   <br />
                   <li>
-                    <i className="icon-blue fa-solid fa-magnifying-glass-location" />
+                    <i className="mr-5 icon-blue fa-solid fa-magnifying-glass-location" />
                     {t("about.if_you_want")}
                   </li>
                   <br />
                   <li>
-                    <i className="icon-blue fa-solid fa-people-arrows" />
+                    <i className="mr-5 icon-blue fa-solid fa-people-arrows" />
                     {t("about.if_you_are_searching")}
                   </li>
                 </ul>
