@@ -6,7 +6,7 @@ import AgentArea from "@/components/homes/home-one/AgentArea";
 import Brand from "./Brand";
 import FooterFour from "@/layouts/footers/FooterFour";
 import FancyBanner from "@/components/common/FancyBanner";
-import BlockFeatureTwo from "../../services/service-one/BlockFeatureTwo";
+import ServicesList from "../../services/service-one/ServicesList";
 import BLockFeatureOne from "./BLockFeatureOne";
 import useTranslation from "next-translate/useTranslation";
 
@@ -22,7 +22,7 @@ const AboutUsOne = () => {
       />
       <BLockFeatureOne />
       <VideoBanner />
-      <BlockFeatureTwo />
+      <ServicesList />
       <Feedback style={true} />
       <Brand />
       <FancyBanner style={false} />
