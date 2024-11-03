@@ -1,7 +1,6 @@
 import Image from "next/image";
 import service_data from "@/data/inner-data/ServiceData";
 import Link from "next/link";
-
 import serviceShape_1 from "@/assets/images/shape/title_shape_07.svg";
 import serviceShape_2 from "@/assets/images/shape/shape_73.svg";
 import serviceShape_3 from "@/assets/images/shape/shape_74.svg";
@@ -11,7 +10,55 @@ import { underlineWordElement } from "@/utils/reactHelpers";
 import useTranslation from "next-translate/useTranslation";
 
 const ServicesList = ({ style, withPricing = true }: any) => {
-  const { t ,lang } = useTranslation("translations");
+  const { t, lang } = useTranslation("translations");
+
+  const serviceItems = service_data.filter(
+    (items) => items.page === "service_1"
+  );
+
+  const servicesList = serviceItems.map((item) => (
+    <div
+      key={item.id}
+      className="col-lg-4 col-md-6 d-flex mt-40 wow fadeInUp"
+      data-wow-delay="0.1s"
+    >
+      <div className="card-style-ten d-flex align-items-start flex-column w-100 h-100">
+        <Image
+          src={item.icon}
+          width={item.iconWidth ?? 150}
+          height={item.iconHeight ?? 150}
+          alt=""
+          className="lazy-img"
+        />
+        <h6>{t(item.title)}</h6>
+        <p>{t(item.desc)}</p>
+        <Link href={item.link} className="btn-twelve sm mt-auto">
+          {item.btn ? t(item.btn) : t("features.our_main_focus")}
+        </Link>
+      </div>
+    </div>
+  ));
+
+  // Add pricing image as a grid item if withPricing is true
+  if (withPricing) {
+    servicesList.push(
+      <div
+        key="pricing-image"
+        className="col-lg-4 col-md-6 d-flex mt-40 wow fadeInUp"
+        data-wow-delay="0.1s"
+      >
+        <div className="card-style-ten d-flex align-items-center justify-content-center w-100 h-100">
+          <Image
+            src={`/assets/img/pricing/pricing-${lang}.png`}
+            width={400}
+            height={400}
+            alt="pricing"
+            className="lazy-img"
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -34,32 +81,7 @@ const ServicesList = ({ style, withPricing = true }: any) => {
             </div>
           </div>
         </div>
-        <div className="row gx-xxl-5">
-          {service_data
-            .filter((items) => items.page === "service_1")
-            .map((item) => (
-              <div
-                key={item.id}
-                className="col-lg-4 col-md-6 d-flex mt-40 wow fadeInUp"
-                data-wow-delay="0.1s"
-              >
-                <div className="card-style-ten d-flex align-items-start flex-column w-100 h-100">
-                    <Image
-                      src={item.icon}
-                      width={150}
-                      height={150}
-                      alt=""
-                      className="lazy-img"
-                    />
-                  <h6>{t(item.title)}</h6>
-                  <p>{t(item.desc)}</p>
-                  <Link href={item.link} className="btn-twelve sm mt-auto">
-                    {item.btn ? t(item.btn) : t("features.our_main_focus")}
-                  </Link>
-                </div>
-              </div>
-            ))}
-        </div>
+        <div className="row gx-xxl-5">{servicesList}</div>
       </div>
       {style ? (
         <>
@@ -87,15 +109,6 @@ const ServicesList = ({ style, withPricing = true }: any) => {
             className="lazy-img shapes shape_02"
           />
         </>
-      )}
-      {withPricing && (
-        <Image
-          className="mt-40 m-a"
-          src={`/assets/img/pricing/pricing-${lang}.png`}
-          width={400}
-          height={400}
-          alt="pricing"
-        />
       )}
     </div>
   );
