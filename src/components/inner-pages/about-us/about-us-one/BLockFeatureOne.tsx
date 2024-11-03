@@ -33,9 +33,9 @@ const BLockFeatureOne = () => {
         <div className="row gx-xl-5">
           <div className="col-lg-6 wow fadeInLeft">
             <div className="me-xxl-4">
-              <div className="title-one mb-60 lg-mb-40">
+              <div className="title-one lg-mb-40">
                 <div className="upper-title">{sub_title}</div>
-                <h3>{desc_1}</h3>
+                <h4>{desc_1}</h4>
               </div>
               <img src={"/assets/img/gallery/map.png"} alt="About Us" />
             </div>
@@ -44,10 +44,10 @@ const BLockFeatureOne = () => {
           <div className="col-lg-6 wow fadeInRight">
             <div className="block-two md-mt-40">
               <div className="bg-wrapper">
-                <p className="fs-22 lh-lg mt-20">
+                <p>
                   {desc_2} {desc_3} {desc_4}
                 </p>
-                <p className="fs-22 lh-lg mt-20">{desc_5}</p>
+                <p className="mt-20">{desc_5}</p>
                 <ul className="no-dots">
                   <li>
                     <i className="mr-5 icon-blue fa-solid fa-users-viewfinder" />
