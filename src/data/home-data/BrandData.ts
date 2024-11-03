@@ -17,7 +17,7 @@ const brand_data: DataType[] = [
    {
       id: 1,
       page: "home_2",
-      img: [brandLogo_1, brandLogo_2, brandLogo_3, brandLogo_4, brandLogo_5, brandLogo_6, brandLogo_3],
+      img: [],
    },
 ]
 

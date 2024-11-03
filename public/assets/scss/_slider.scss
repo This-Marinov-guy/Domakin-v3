@@ -148,3 +148,45 @@
 .slick-arrow.slick-hidden {
    display: none;
 }
+
+.custom-arrow {
+  color: $color-two;
+  border: none;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  cursor: pointer;
+  position: absolute;
+  z-index: 900;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-50%) scale(1.5);
+    background-color: transparent !important;
+    box-shadow: none;
+  }
+}
+
+.custom-prev-arrow {
+  left: 0px;
+}
+
+.custom-next-arrow {
+  right: 0px;
+}
+
+.custom-arrow:hover {
+  background: #bbb;
+}
+
+.cool-travel {
+  background-color: #77a02e;
+  border-radius: 44%;
+  padding: 20px;
+}

@@ -1,18 +1,23 @@
 import BrandTwo from '@/components/common/brand/BrandTwo'
+import useTranslation from 'next-translate/useTranslation'
 
 const Brand = () => {
+   const {t} = useTranslation('translations');
+
    return (
-      <div className="partner-section-one mt-150 xl-mt-120 lg-mt-100 mb-130 xl-mb-100 lg-mb-60">
+     <div className="partner-section-one mt-80 xl-mt-60 lg-mt-60 mb-60 xl-mb-60 lg-mb-60">
+       <div className="container">
+         <h4 className="text-center mb-50 lg-mb-20">
+           {t("partners.official_partners")}
+         </h4>
+       </div>
+       <div className="bg-wrapper bg-white">
          <div className="container">
-            <h6 className="text-center fs-20 mb-50 lg-mb-20">100+ Company trusted by us.</h6>
+           <BrandTwo />
          </div>
-         <div className="bg-wrapper bg-white">
-            <div className="container">
-               <BrandTwo />
-            </div>
-         </div>
-      </div>
-   )
+       </div>
+     </div>
+   );
 }
 
 export default Brand

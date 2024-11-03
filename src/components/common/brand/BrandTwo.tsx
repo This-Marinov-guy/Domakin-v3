@@ -2,20 +2,19 @@
 import Image, { StaticImageData } from "next/image"
 import Slider from "react-slick"
 
-import brandLogo_1 from "@/assets/images/logo/p_logo_07.png"
-import brandLogo_2 from "@/assets/images/logo/p_logo_08.png"
-import brandLogo_3 from "@/assets/images/logo/p_logo_09.png"
-import brandLogo_4 from "@/assets/images/logo/p_logo_10.png"
-import brandLogo_5 from "@/assets/images/logo/p_logo_11.png"
-import brandLogo_6 from "@/assets/images/logo/p_logo_12.png"
+import brandLogo_1 from "@/assets/img/partners/2.jpg";
+import brandLogo_2 from "@/assets/img/partners/1.png"
+import brandLogo_3 from "@/assets/img/partners/3.png"
+import brandLogo_4 from "@/assets/img/partners/4.png"
 
-const brand_data: StaticImageData[] = [brandLogo_1, brandLogo_2, brandLogo_3, brandLogo_4, brandLogo_5, brandLogo_6, brandLogo_3]
+const brand_data: StaticImageData[] = [brandLogo_1, brandLogo_2, brandLogo_3, brandLogo_4, brandLogo_3]
 
 const setting = {
    dots: false,
    arrows: false,
+   infinity: true,
    centerPadding: '0px',
-   slidesToShow: 6,
+   slidesToShow: 4,
    slidesToScroll: 1,
    autoplay: true,
    autoplaySpeed: 3500,
@@ -43,12 +42,14 @@ const setting = {
 
 const BrandTwo = () => {
    return (
-      <Slider {...setting} className="partner-logo-one">
-         {brand_data.map((brand, i) => (
-            <div key={i} className="item"><Image src={brand} alt="" /></div>
-         ))}
-      </Slider>
-   )
+     <Slider {...setting} className="partner-logo-one">
+       {brand_data.map((brand, i) => (
+         <div key={i} className={"item " + (i === 1 && "cool-travel")}>
+           <Image height={100} width={200} src={brand} alt="" />
+         </div>
+       ))}
+     </Slider>
+   );
 }
 
 export default BrandTwo
