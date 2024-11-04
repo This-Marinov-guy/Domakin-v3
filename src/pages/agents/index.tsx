@@ -17,8 +17,8 @@ const index = () => {
 
   return (
     <Wrapper>
-      <HeaderOne style={true} />
-      <BreadcrumbOne
+      <HeaderOne style={true} /> 
+       <BreadcrumbOne
         title={t("team.team")}
         sub_title={t("team.property_agents")}
       />

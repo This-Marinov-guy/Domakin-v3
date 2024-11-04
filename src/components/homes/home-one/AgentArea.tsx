@@ -46,7 +46,7 @@ const AgentArea = ({ style, withDetails = false }: any) => {
 
   return (
     <div
-      className={`agent-section-one position-relative z-1 xl-mt-120 ${
+      className={`center-dots position-relative z-1 xl-mt-120 ${
         style ? "mt-170" : "mt-150"
       }`}
     >
@@ -61,7 +61,7 @@ const AgentArea = ({ style, withDetails = false }: any) => {
               {Array.from({ length: 6 }, (v, i) => i).map((item, index) => (
                 <div key={index} className="item">
                   <div className="agent-card-one position-relative">
-                    <div style={{ height: "20em" }} className="img border-20">
+                    <div style={{ height: "30em" }} className="img border-20">
                       <Image
                         src={`/assets/img/team/${item + 1}.jpg`}
                         height={1000}
@@ -76,8 +76,8 @@ const AgentArea = ({ style, withDetails = false }: any) => {
                         <button
                           id={`${item}`}
                           onClick={(e: any) => {
-                            const id = e.target.id;
-                            if (id == agentDetailsId) {
+                            const id = +e.target.id;
+                            if (id === agentDetailsId) {
                               setAgentDetailsId(null);
                             } else {
                               setAgentDetailsId(+id);
@@ -87,7 +87,7 @@ const AgentArea = ({ style, withDetails = false }: any) => {
                             style ? "btn-eight" : "btn-eight fw-normal"
                           }`}
                         >
-                          Details
+                          {t('renting.select')}
                         </button>
                       )}
                     </div>
@@ -109,7 +109,7 @@ const AgentArea = ({ style, withDetails = false }: any) => {
           )}
         </div>
 
-        <AgencyDetailsArea style={false} id={agentDetailsId}/>
+        <AgencyDetailsArea style={false} id={agentDetailsId} />
       </div>
     </div>
   );

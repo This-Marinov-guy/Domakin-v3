@@ -35,14 +35,14 @@ export const CustomNextArrow = (props: any) => {
 };
 
 const setting = {
-  arrows: true,
+  arrows: false,
   dots: true,
   slidesToShow: 3,
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 3000,
-  prevArrow: <CustomPrevArrow />,
-  nextArrow: <CustomNextArrow />,
+  // prevArrow: <CustomPrevArrow />,
+  // nextArrow: <CustomNextArrow />,
   responsive: [
     {
       breakpoint: 992,
@@ -64,7 +64,7 @@ const Feedback = ({ style }: any) => {
 
    return (
      <div
-       className={`feedback-section-six bg-pink-two position-relative z-1 pt-110 xl-pt-80 pb-100 xl-pb-80 ${
+       className={`center-dots bg-pink-two position-relative z-1 pt-60 xl-pt-40 pb-60 xl-pb-40 ${
          style ? "" : "mt-170 xl-mt-120"
        }`}
      >
@@ -76,26 +76,21 @@ const Feedback = ({ style }: any) => {
            {feedback_data
              .filter((items) => items.page === "home_5")
              .map((item) => (
-               <div key={item.id} className="item">
-                 <div
-                   className={`feedback-block-six ${style ? "rounded-4" : ""}`}
-                 >
-                   <div className="d-flex justify-content-between align-items-center">
-                     <ul className="rating style-none d-flex">
-                       <li>
-                         <Rating initialValue={5} size={25} readonly={true} />
-                       </li>
-                     </ul>
-                     <Image src={item.quote_icon} alt="" className="icon" />
-                   </div>
-                   <blockquote>{item.desc}</blockquote>
-                   <div className="d-flex align-items-center justify-content-between">
-                     <h6 className="fs-20 m0">
-                       {item.title}
-                      
-                     </h6>
-                     
-                   </div>
+               <div
+                 key={item.id}
+                 className={`feedback-block-six ${style ? "rounded-4" : ""}`}
+               >
+                 <div className="d-flex justify-content-between align-items-center">
+                   <ul className="rating style-none d-flex">
+                     <li>
+                       <Rating initialValue={5} size={25} readonly={true} />
+                     </li>
+                   </ul>
+                   <Image src={item.quote_icon} alt="" className="icon" />
+                 </div>
+                 <blockquote>{item.desc}</blockquote>
+                 <div className="d-flex align-items-center justify-content-between">
+                   <h6 className="fs-20 m0">{item.title}</h6>
                  </div>
                </div>
              ))}
