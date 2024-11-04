@@ -36,6 +36,7 @@ export const CustomNextArrow = (props: any) => {
 
 const setting = {
   arrows: true,
+  dots: true,
   slidesToShow: 3,
   slidesToScroll: 1,
   autoplay: true,

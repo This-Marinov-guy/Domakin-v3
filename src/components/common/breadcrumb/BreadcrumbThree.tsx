@@ -15,7 +15,7 @@ const BreadcrumbThree = ({ title, link, link_title, sub_title, style }: any) => 
                   <ul className="theme-breadcrumb style-none d-inline-flex align-items-center justify-content-center position-relative z-1 bottom-line">
                      <li><Link href="/">Home</Link></li>
                      <li>/</li>
-                     <li><Link href={link}>{link_title}</Link></li>
+                     <li><Link href={link ?? '/'}>{link_title}</Link></li>
                      <li>/</li>
                      <li>{sub_title}</li>
                   </ul>
