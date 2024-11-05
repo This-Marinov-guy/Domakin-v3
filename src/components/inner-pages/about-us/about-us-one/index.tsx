@@ -8,6 +8,7 @@ import FancyBanner from "@/components/common/FancyBanner";
 import ServicesList from "../../services/service-one/ServicesList";
 import BLockFeatureOne from "./BLockFeatureOne";
 import useTranslation from "next-translate/useTranslation";
+import CreateFeedback from "@/components/forms/CreateFeedback";
 
 const AboutUsOne = () => {
   const {t} = useTranslation('translations');
@@ -23,6 +24,7 @@ const AboutUsOne = () => {
       <VideoBanner />
       <ServicesList />
       <Feedback style={true} />
+      <CreateFeedback />
       <Brand />
       <FancyBanner style={false} />
       <FooterFour />

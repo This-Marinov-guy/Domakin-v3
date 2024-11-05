@@ -35,14 +35,14 @@ export const CustomNextArrow = (props: any) => {
 };
 
 const setting = {
-  arrows: false,
+  arrows: true,
   dots: true,
   slidesToShow: 3,
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 3000,
-  // prevArrow: <CustomPrevArrow />,
-  // nextArrow: <CustomNextArrow />,
+  prevArrow: <CustomPrevArrow />,
+  nextArrow: <CustomNextArrow />,
   responsive: [
     {
       breakpoint: 992,
@@ -51,6 +51,7 @@ const setting = {
       },
     },
     {
+      arrows: false,
       breakpoint: 575,
       settings: {
         slidesToShow: 1,
@@ -74,7 +75,6 @@ const Feedback = ({ style }: any) => {
          </div>
          <Slider {...setting}>
            {feedback_data
-             .filter((items) => items.page === "home_5")
              .map((item) => (
                <div
                  key={item.id}
