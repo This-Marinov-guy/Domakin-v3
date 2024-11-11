@@ -1,11 +1,12 @@
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
+import { handleShare } from "@/utils/helpers";
 
-const icon = [
-  "fa-brands fa-whatsapp",
-  "fa-brands fa-x-twitter",
-  "fa-brands fa-instagram",
-  "fa-brands fa-viber"
+const icons = [
+  { className: "fa-brands fa-whatsapp", name: "WhatsApp" },
+  { className: "fa-brands fa-facebook", name: "Facebook" },
+  { className: "fa-brands fa-linkedin", name: "LinkedIn" },
+  { className: "fa-brands fa-instagram", name: "Instagram" },
 ];
 
 const Recommendations = () => {
@@ -231,7 +232,7 @@ const Recommendations = () => {
                 </div>
               </div>
               <div className="bottom-widget d-sm-flex align-items-center justify-content-between">
-                <ul className="d-flex align-items-center tags style-none pt-20">
+                {/* <ul className="d-flex align-items-center tags style-none pt-20">
                   <li>Tag:</li>
                   <li>
                     <Link href="#">Apartments,</Link>
@@ -242,14 +243,21 @@ const Recommendations = () => {
                   <li>
                     <Link href="#">Sale</Link>
                   </li>
-                </ul>
+                </ul> */}
                 <ul className="d-flex share-icon align-items-center style-none pt-20">
                   <li>Share:</li>
-                  {icon.map((icon, index) => (
+                  {icons.map((icon, index) => (
                     <li key={index}>
-                      <Link href="#">
-                        <i className={icon}></i>
-                      </Link>
+                      <a
+                        href={
+                          //TODO: fix the sharing
+                          // handleShare(icon.name, window.location.href) ??
+                           "#"
+                        }
+                        target="_blank"
+                      >
+                        <i className={icon.className}></i>
+                      </a>
                     </li>
                   ))}
                 </ul>

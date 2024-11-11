@@ -18,7 +18,7 @@ export const getGeoInfo = async () => {
   }
 };
 
-export function capitalizeFirstLetters(str:string) {
+export function capitalizeFirstLetters(str: string) {
   return str
     .split(" ")
     .map((word) => {
@@ -26,3 +26,31 @@ export function capitalizeFirstLetters(str:string) {
     })
     .join(" ");
 }
+
+export const handleShare = (
+  platform: string,
+  shareUrl: string = "domakin.nl",
+  shareText: string = "Check out this page!"
+) => {
+  let url = "";
+  const encodedUrl = encodeURIComponent(shareUrl);
+  const encodedText = encodeURIComponent(shareText);
+
+  switch (platform) {
+    case "WhatsApp":
+      url = `https://wa.me/?text=${encodedText}%20${encodedUrl}`;
+      break;
+    case "Facebook":
+      url = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+      break;
+    case "LinkedIn":
+      url = `https://www.linkedin.com/shareArticle?url=${encodedUrl}&title=${encodedText}`;
+      break;
+    case "Instagram":
+      return;
+    default:
+      return;
+  }
+
+  return url;
+};
