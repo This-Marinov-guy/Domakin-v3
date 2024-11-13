@@ -17,7 +17,6 @@ const HomeSix = () => {
       <>
          <HeaderOne />
          <HeroBanner />
-         <Category />
          <BLockFeatureTwo style={true} />
          <PropertyOne />
          <Property style_1={false} style_2={true} />
