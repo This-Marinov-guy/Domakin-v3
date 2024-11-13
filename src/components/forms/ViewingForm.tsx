@@ -1,0 +1,102 @@
+"use client";
+import React, { useRef } from "react";
+import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import useTranslation from "next-translate/useTranslation";
+
+const ViewingForm = () => {
+  const { t } = useTranslation("translations");
+
+  return (
+    <form className="form-style-one wow fadeInUp pt-40 pb-40">
+      <div className="container m-a row controls">
+        <h4 className="mb-20">{t("viewing.fill_your_details")}</h4>
+        
+        <div className="col-6">
+          <div className="input-group-meta form-group mb-30">
+            <label htmlFor="">{t("viewing.name")}</label>
+            <input type="text" name="subject" />
+            {/* <p className="form_error">{errors.subject?.message}</p> */}
+          </div>
+        </div>
+
+        <div className="col-6">
+          <div className="input-group-meta form-group mb-30">
+            <label htmlFor="">{t("viewing.surname")}</label>
+            <input type="text" name="subject" />
+            {/* <p className="form_error">{errors.subject?.message}</p> */}
+          </div>
+        </div>
+
+        <div className="col-6">
+          <div className="input-group-meta form-group mb-30">
+            <label htmlFor="">{t("viewing.phone_to_be_contacted")}</label>
+            <input type="text" name="subject" />
+            {/* <p className="form_error">{errors.subject?.message}</p> */}
+          </div>
+        </div>
+
+        <div className="col-6">
+          <div className="input-group-meta form-group mb-30">
+            <label htmlFor="">{t("viewing.email")}</label>
+            <input type="email" name="subject" />
+            {/* <p className="form_error">{errors.subject?.message}</p> */}
+          </div>
+        </div>
+
+        <div className="col-6">
+          <div className="input-group-meta form-group mb-30">
+            <label htmlFor="">{t("viewing.city_of_viewing")}</label>
+            <input type="text" name="subject" />
+            {/* <p className="form_error">{errors.subject?.message}</p> */}
+          </div>
+        </div>
+
+        <div className="col-6">
+          <div className="input-group-meta form-group mb-30">
+            <label htmlFor="">{t("viewing.address_of_viewing_optional")}</label>
+            <input type="text" name="subject" />
+            {/* <p className="form_error">{errors.subject?.message}</p> */}
+          </div>
+        </div>
+
+        <div className="col-6">
+          <div className="input-group-meta form-group mb-30">
+            <label htmlFor="">{t("viewing.date")}</label>
+            <input type="date" name="subject" />
+            {/* <p className="form_error">{errors.subject?.message}</p> */}
+          </div>
+        </div>
+
+        <div className="col-6">
+          <div className="input-group-meta form-group mb-30">
+            <label htmlFor="">{t("viewing.time")}</label>
+            <input type="time" name="subject" />
+            {/* <p className="form_error">{errors.subject?.message}</p> */}
+          </div>
+        </div>
+
+        <div className="col-12">
+          <div className="input-group-meta form-group mb-40">
+            <textarea placeholder={t("viewing.comments")} name="email" />
+            {/* <p className="form_error">{errors.email?.message}</p> */}
+          </div>
+        </div>
+
+        <div className="col-12">
+          <button
+            type="submit"
+            className="btn-nine text-uppercase rounded-3 fw-normal w-100"
+          >
+            {t("contact.send")}
+          </button>
+        </div>
+      </div>
+    </form>
+  );
+};
+
+export default ViewingForm;

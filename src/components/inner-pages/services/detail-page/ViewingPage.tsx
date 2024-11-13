@@ -7,6 +7,7 @@ import FancyBanner from "@/components/common/FancyBanner";
 import CardStyleOne from "@/components/common/CardStyleOne";
 import StepDescriptionOne from "@/components/common/StepDescriptionOne";
 import useTranslation from "next-translate/useTranslation";
+import ViewingForm from "@/components/forms/ViewingForm";
 
 const ViewingPage = () => {
   const {t} = useTranslation('translations');
@@ -39,6 +40,7 @@ const ViewingPage = () => {
         style={false}
       />
       <StepDescriptionOne details={details} />
+      <ViewingForm />
       <FancyBanner />
       <FooterFour />
     </>

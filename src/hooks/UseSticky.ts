@@ -17,6 +17,8 @@ const UseSticky = (): StickyState => {
    };
 
    useEffect(() => {
+      stickyHeader();
+      
       window.addEventListener("scroll", stickyHeader);
 
       return (): void => {

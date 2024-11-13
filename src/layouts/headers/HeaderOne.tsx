@@ -33,11 +33,11 @@ const HeaderOne = ({ style }: any) => {
              </p>
            </div>
          )} */}
-        <div className="inner-content gap-one">
+        <div className="inner-content px-10">
           <div className="top-header position-relative">
             <div className="d-flex align-items-center justify-content-between">
               <div className="logo order-lg-0">
-                <Link href="/" className="d-flex align-items-center">
+                <Link href="/" className="mt-5 d-flex align-items-center">
                   <Image className="round-logo" src={logo_1} alt="" />
                 </Link>
               </div>
