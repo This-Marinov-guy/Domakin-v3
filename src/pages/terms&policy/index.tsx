@@ -32,7 +32,7 @@ const index = () => {
         </div>
 
         <div className="col-lg-4 mt-20">
-          <div className="widget ltn__banner-widget go-top">
+          <div className="d-none d-sm-block widget ltn__banner-widget go-top">
             <img src="/assets/img/logo.png" alt="Banner Image" />
           </div>
           <div className="need-support text-center mt-100">

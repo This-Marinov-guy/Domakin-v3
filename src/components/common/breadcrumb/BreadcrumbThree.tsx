@@ -20,9 +20,6 @@ const BreadcrumbThree = ({ title, link, link_title, sub_title, style }: any) => 
                      <li>{sub_title}</li>
                   </ul>
                </div>
-               <div className="col-lg-6">
-                  <p className="sub-heading">Over 745,000 listings, apartments, lots and  plots available now!</p>
-               </div>
             </div>
 
             {style && <div className="search-wrapper-one layout-one position-relative mt-80 xl-mt-50">

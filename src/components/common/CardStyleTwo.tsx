@@ -4,7 +4,7 @@ import feature_data from "@/data/home-data/FeatureData";
 
 const CardStyleTwo = () => {
    return (
-      <div className="row gx-lg-5 align-items-center mt-120 lg-mt-50">
+      <div className="row gx-lg-5 align-items-center mt-20 lg-mt-50">
          <div className="col-lg-3">
             <div className="card-style-three mt-40 wow fadeInUp">
                <div className="bg-wrapper text-center">
