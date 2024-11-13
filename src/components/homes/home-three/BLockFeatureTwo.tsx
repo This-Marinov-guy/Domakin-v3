@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import Count from "@/components/common/Count"
-import CardStyleTwo from "@/components/common/CardStyleTwo"
+import StepDescriptionOne from "@/components/common/StepDescriptionOne"
 
 import featureimg_1 from "@/assets/images/shape/shape_37.svg"
 import featureimg_2 from "@/assets/images/media/img_29.jpg"
@@ -73,7 +73,7 @@ const BLockFeatureTwo = () => {
                   </div>
                </div>
 
-               <CardStyleTwo />
+               <StepDescriptionOne />
             </div>
          </div>
       </div>
