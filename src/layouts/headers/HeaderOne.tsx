@@ -48,7 +48,7 @@ const HeaderOne = ({ style }: any) => {
                   </li>
                   <li className="d-none d-md-inline-block ms-3">
                     <Link
-                      href="/dashboard/add-property"
+                      href="/services/add-listing"
                       className="btn-two"
                       target="_blank"
                     >
