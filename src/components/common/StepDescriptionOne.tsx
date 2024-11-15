@@ -36,7 +36,7 @@ const StepDescriptionOne = (props: StepDetailsProps) => {
         <div className="col-lg-12">
           <div className="row gx-xl-5">
             {details.steps.map((d, i) => (
-              <div key={i} className="col-md-4">
+              <div key={i} className="m-a col-md-4">
                 <div className="card-style-four mt-40 wow fadeInUp">
                   <div className="d-flex align-items-start justify-content-center gap-3">
                     <div className="icon rounded-circle d-flex align-items-center justify-content-center position-relative style-two">

@@ -1,6 +1,5 @@
 "use client"
 import DropdownTwo from "@/components/search-dropdown/inner-dropdown/DropdownTwo";
-import UseShortedProperty from "@/hooks/useShortedProperty";
 import NiceSelect from "@/ui/NiceSelect";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,6 +8,7 @@ import ReactPaginate from "react-paginate";
 import featureIcon_1 from "@/assets/images/icon/icon_04.svg"
 import featureIcon_2 from "@/assets/images/icon/icon_05.svg"
 import featureIcon_3 from "@/assets/images/icon/icon_06.svg"
+import UseShortedProperty from "@/hooks/useShortedProperty";
 
 const ListingThreeArea = ({ style }: any) => {
 
@@ -42,7 +42,7 @@ const ListingThreeArea = ({ style }: any) => {
 
    return (
 
-      <div className={`property-listing-six pb-170 xl-pb-120 ${style ? "pt-150 xl-pt-100" : "pt-110 md-pt-80 mt-150 xl-mt-120 bg-pink-two"}`}>
+      <div className={`property-listing-six pb-170 xl-pb-120 ${style ? "pt-80 xl-pt-60" : "pt-80 md-pt-40 mt-80 xl-mt-60 bg-pink-two"}`}>
          <div className="container">
             {!style && <div className="search-wrapper-one layout-one bg position-relative mb-75 md-mb-50">
                <div className="bg-wrapper border-layout">
