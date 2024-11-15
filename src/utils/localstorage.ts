@@ -12,3 +12,6 @@ export const getLocalStorage = <T>(name: string): T[] => {
       return [] as T[];
    }
 };
+
+// LOCAL STORAGE LABELS
+export const LOCAL_STORAGE_LOCATION = "DOMAKIN_location";

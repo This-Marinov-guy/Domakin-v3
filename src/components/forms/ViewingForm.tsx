@@ -1,11 +1,14 @@
 "use client";
 import React, { useRef } from "react";
+import TimePicker from "rc-time-picker";
 import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "next-translate/useTranslation";
+import SingleDatePicker from "../ui/inputs/dates/SingleDatePicker";
+import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
 
 const ViewingForm = () => {
   const { t } = useTranslation("translations");
@@ -14,7 +17,7 @@ const ViewingForm = () => {
     <form className="form-style-one wow fadeInUp pt-40 pb-40">
       <div className="container m-a row controls">
         <h4 className="mb-20">{t("viewing.fill_your_details")}</h4>
-        
+
         <div className="col-6">
           <div className="input-group-meta form-group mb-30">
             <label htmlFor="">{t("viewing.name")}</label>
@@ -34,7 +37,7 @@ const ViewingForm = () => {
         <div className="col-6">
           <div className="input-group-meta form-group mb-30">
             <label htmlFor="">{t("viewing.phone_to_be_contacted")}</label>
-            <input type="text" name="subject" />
+            <PrefixPhoneInput />
             {/* <p className="form_error">{errors.subject?.message}</p> */}
           </div>
         </div>
@@ -66,7 +69,7 @@ const ViewingForm = () => {
         <div className="col-6">
           <div className="input-group-meta form-group mb-30">
             <label htmlFor="">{t("viewing.date")}</label>
-            <input type="date" name="subject" />
+            <SingleDatePicker />
             {/* <p className="form_error">{errors.subject?.message}</p> */}
           </div>
         </div>
@@ -74,7 +77,7 @@ const ViewingForm = () => {
         <div className="col-6">
           <div className="input-group-meta form-group mb-30">
             <label htmlFor="">{t("viewing.time")}</label>
-            <input type="time" name="subject" />
+            <TimePicker showSecond={false} minuteStep={15}/>
             {/* <p className="form_error">{errors.subject?.message}</p> */}
           </div>
         </div>

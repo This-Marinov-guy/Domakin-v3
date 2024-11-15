@@ -1,4 +1,9 @@
 import axios from "axios";
+// import { clarity } from "react-microsoft-clarity";
+import Resizer from "react-image-file-resizer";
+import { LANGUAGES } from "./defines";
+import setLanguage from "next-translate/setLanguage";
+import { LOCAL_STORAGE_LOCATION } from "./localstorage";
 
 export const isProd = () => {
   return process.env.NODE_ENV === "production";
@@ -54,3 +59,50 @@ export const handleShare = (
 
   return url;
 };
+
+export const cleanFileName = (file: File) => {
+  return file.name.length > 15
+    ? file.name.slice(0, 15) + "..." + file.type.split("/")[1]
+    : file.name;
+};
+
+export const createFileName = (index: Number) => {
+  return `${index}.jpg`;
+};
+
+export const resizeFile = (file: File, width = 800, height = 800, format = "JPG") =>
+  new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      width,
+      height,
+      format,
+      100,
+      0,
+      (blob) => {
+        // @ts-expect-error
+        resolve(new File([blob], "resized-image.jpg", { type: "image/jpg" }));
+      },
+      "blob"
+    );
+  });
+
+  export const getGeoLocation = () => {
+    let location = localStorage.getItem(LOCAL_STORAGE_LOCATION) || "";
+
+    if (location) {
+      return location;
+    }
+
+    fetch(`https://ipinfo.io/json?token=${process.env.REACT_APP_GEO_TOKEN}`)
+      .then((response) => response.json())
+      .then((data) => {
+        location = data.country;
+        localStorage.setItem(LOCAL_STORAGE_LOCATION, location);
+      })
+      .catch((error) => {
+        console.error("Error fetching location data:", error);
+      });
+
+    return location;
+  };

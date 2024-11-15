@@ -38,8 +38,8 @@ const PropertiesPage = () => {
     <>
       <HeaderOne />
       <BreadcrumbThree
-        title="Give out your room"
-        link_title="Lending"
+        title={t("renting.renting_accommodations")}
+        link_title={t("renting.renting")}
         style={false}
       />
       <StepDescriptionOne details={details} />

@@ -3,6 +3,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import SEO from "./seo";
 
 import "../styles/index.scss";
+import "rc-time-picker/assets/index.css";
 import PageLoader from "@/components/ui/loading/PageLoader";
 
 const MyApp = ({ Component, pageProps }: any) => {

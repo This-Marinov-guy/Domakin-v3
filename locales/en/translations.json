@@ -72,7 +72,7 @@
     "fill_your_details": "Fill your details",
     "name": "Name",
     "surname": "Surname",
-    "phone_to_be_contacted": "Phone to be contacted (+ and country code)",
+    "phone_to_be_contacted": "Phone",
     "email": "Email",
     "comments": "Any comments you would like to be sent to our agent",
     "consent": "I give my consent to be contacted by the company via phone or email and for them to store my information for service purposes only",
@@ -94,13 +94,13 @@
     "city_of_viewing": "City of viewing",
     "date": "Date:",
     "time": "Time:",
-    "address_of_viewing_optional": "Address of viewing (optional)"
+    "address_of_viewing_optional": "Address of viewing"
   },
   "renting": {
     "renting_accommodations": "Renting accommodations",
     "renting": "Renting",
     "find_the_perfect_place_for_you": "Find the perfect place for you",
-    "platform_description": "Our platform contains different properties.",
+    "platform_description": "Our website offers a variety of accommodations based on different criteria. Browse the list of available properties and click on the image to view the gallery. If interested, follow the steps:",
     "step_1": " Choose a property from the list below and click 'Select'",
     "step_2": " Fill the form that will appear once a property has been selected",
     "step_3": " Wait to be contacted by our agent to finalize the deal",
