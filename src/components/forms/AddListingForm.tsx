@@ -1,6 +1,7 @@
 import NiceSelect from "@/ui/NiceSelect";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import PrefixMultiFilePreviewInput from "../ui/inputs/files/MultiFilePreviewInput";
 
 const AddListingForm = ({ guest: bool = false }) => {
   const { t } = useTranslation("translations");
@@ -139,9 +140,11 @@ const AddListingForm = ({ guest: bool = false }) => {
           </div>
         </div>
 
-        //Files with DropZone
+        <div className="col-12 mt-10 mb-40">
+          <PrefixMultiFilePreviewInput />
+        </div>
 
-        <div className="col-12 mb-20">
+        <div className="col-12 mb-20 d-flex gap-3 align-items-center justify-content-start">
           <input
             type="checkbox"
             name="Amenities"
@@ -149,7 +152,7 @@ const AddListingForm = ({ guest: bool = false }) => {
             // checked={selectedAmenities.includes(list)}
             // onChange={handleAmenityChange}
           />
-          <label className="ml-5">
+          <label>
             I give my permission to be contacted by the organization for the
             purposes of the service
           </label>
