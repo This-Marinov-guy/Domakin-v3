@@ -24,19 +24,20 @@ const PrefixPhoneInput = (props: any) => {
         type="button"
         data-bs-toggle="dropdown"
         aria-expanded="false"
+        data-bs-auto-close="outside"
       >
         Code
       </button>
       <ul className="dropdown-menu phone-prefix-dropdown">
         {/* Add searchbar */}
         {EUROPEAN_COUNTRIES.map((c, i) => {
-            return (
-              <li key={i}>
-                <a className="dropdown-item" href="#">
-                  {c.phoneCode}
-                </a>
-              </li>
-            );
+          return (
+            <li key={i}>
+              <a className="dropdown-item" href="#">
+                {c.phoneCode}
+              </a>
+            </li>
+          );
         })}
       </ul>
       <input

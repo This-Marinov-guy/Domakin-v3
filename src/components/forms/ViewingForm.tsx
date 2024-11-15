@@ -77,7 +77,7 @@ const ViewingForm = () => {
         <div className="col-6">
           <div className="input-group-meta form-group mb-30">
             <label htmlFor="">{t("viewing.time")}</label>
-            <TimePicker showSecond={false} minuteStep={15}/>
+            <TimePicker showSecond={false} minuteStep={15} placeholder="Select Time"/>
             {/* <p className="form_error">{errors.subject?.message}</p> */}
           </div>
         </div>
