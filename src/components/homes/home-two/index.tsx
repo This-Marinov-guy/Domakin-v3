@@ -25,7 +25,7 @@ const HomeTwo = () => {
       <Blog style={false} />
       <FAQ />
       <FancyBannerTwo/>
-      <FooterFour style={true} />
+      {/* <FooterFour style={true} /> */}
     </>
   )
 }

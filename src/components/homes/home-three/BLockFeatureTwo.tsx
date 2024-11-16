@@ -73,7 +73,7 @@ const BLockFeatureTwo = () => {
                   </div>
                </div>
 
-               <StepDescriptionOne />
+               {/* <StepDescriptionOne /> */}
             </div>
          </div>
       </div>
