@@ -2,7 +2,7 @@
 import Image, { StaticImageData } from "next/image"
 import Slider from "react-slick"
 
-import brandLogo_1 from "@/assets/img/partners/2.jpg";
+import brandLogo_1 from "@/assets/img/partners/2.png";
 import brandLogo_2 from "@/assets/img/partners/1.png"
 import brandLogo_3 from "@/assets/img/partners/3.png"
 import brandLogo_4 from "@/assets/img/partners/4.png"
