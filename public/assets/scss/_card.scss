@@ -430,3 +430,42 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 12px 30px rgba(0, 0, 0, 0.15); /* More intense shadow */
   border-radius: 8px; /* Optional rounded corners */
 }
+
+.bg-fixed {
+  background-attachment: fixed;
+}
+
+.bg-black {
+  background-color: $text-dark !important;
+  color: $color-four !important;
+}
+
+.bg-white {
+  background-color: $color-five !important;
+  color: $text-dark !important;
+}
+
+.bg-red {
+  background-color: $color-six !important;
+  color: $color-four !important;
+}
+
+.bg-yellow {
+  background-color: $yellow !important;
+  color: $color-four !important;
+}
+
+.bg-green {
+  background-color: $green !important;
+  color: $color-four !important;
+}
+
+.bg-blue {
+  background-color: $color-two !important;
+  color: $color-four !important;
+}
+
+.bg-orange {
+  background-color: $color-one !important;
+  color: $color-four !important;
+}

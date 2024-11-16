@@ -4,7 +4,7 @@ import Wrapper from "@/layouts/Wrapper";
 import HomeSix from "@/components/homes/home-six";
 
 export const metadata = {
-  title: "Homy - Real Estate React Next js Template",
+  title: "Domakin",
 };
 const index = () => {
   return (

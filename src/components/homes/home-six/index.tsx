@@ -1,34 +1,27 @@
-import BLockFeatureTwo from "../home-five/BLockFeatureTwo"
-import Property from "../home-four/PropertyOne"
-import Category from "./Category"
 import HeroBanner from "./HeroBanner"
-import PropertyOne from "./PropertyOne"
-import HomeSixBLockFeatureTwo from "./BLockFeatureTwo"
-import BLockFeatureThree from "./BLockFeatureThree"
-import Feedback from "./Feedback"
+import Feedback from "@/components/homes/home-five/Feedback";
 import Brand from "./Brand"
-import Blog from "../home-four/Blog"
-import FancyBanner from "./FancyBanner"
+import FancyBanner from "@/components/common/FancyBanner";
 import FooterFour from "@/layouts/footers/FooterFour"
 import HeaderOne from "@/layouts/headers/HeaderOne"
+import ServicesList from "@/components/inner-pages/services/service-one/ServicesList"
+import CreateFeedback from "@/components/forms/CreateFeedback"
+import BLockFeatureOne from "@/components/inner-pages/about-us/about-us-one/BLockFeatureOne"
 
 const HomeSix = () => {
    return (
-      <>
-         <HeaderOne />
-         <HeroBanner />
-         <BLockFeatureTwo style={true} />
-         <PropertyOne />
-         <Property style_1={false} style_2={true} />
-         <HomeSixBLockFeatureTwo />
-         <BLockFeatureThree />
-         <Feedback />
-         <Brand />
-         <Blog />
-         <FancyBanner />
-         <FooterFour />
-      </>
-   )
+     <>
+       <HeaderOne />
+       <HeroBanner />
+       <BLockFeatureOne />
+       <ServicesList />
+       <Feedback style={true} />
+       <CreateFeedback />
+       <Brand />
+       <FancyBanner style={false} />
+       <FooterFour />
+     </>
+   );
 }
 
 export default HomeSix
