@@ -88,8 +88,8 @@
 // Card Style Four
 .card-style-four {
   .icon {
-    width: 52px;
-    height: 52px;
+    min-width: 52px !important;
+    min-height: 52px !important;
     border: 2px solid #000;
     &:before {
       content: "";

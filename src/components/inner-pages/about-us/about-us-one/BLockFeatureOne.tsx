@@ -48,19 +48,19 @@ const BLockFeatureOne = () => {
                   {desc_2} {desc_3} {desc_4}
                 </p>
                 <p className="mt-20">{desc_5}</p>
-                <ul className="no-dots">
-                  <li>
-                    <i className="mr-5 icon-blue fa-solid fa-users-viewfinder" />
+                <ul style={{padding: '0'}} className="no-dots">
+                  <li className="d-flex align-items-center gap-3">
+                    <i className="icon-blue fa-solid fa-users-viewfinder" />
                     {t("about.if_you_are_located")}
                   </li>
                   <br />
-                  <li>
-                    <i className="mr-5 icon-blue fa-solid fa-magnifying-glass-location" />
+                  <li className="d-flex align-items-center gap-3">
+                    <i className="icon-blue fa-solid fa-magnifying-glass-location" />
                     {t("about.if_you_want")}
                   </li>
                   <br />
-                  <li>
-                    <i className="mr-5 icon-blue fa-solid fa-people-arrows" />
+                  <li className="d-flex align-items-center gap-3">
+                    <i className="icon-blue fa-solid fa-people-arrows" />
                     {t("about.if_you_are_searching")}
                   </li>
                 </ul>
