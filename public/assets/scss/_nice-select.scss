@@ -1,11 +1,14 @@
 .nice-select {
+   display: flex;
+   align-items: center;
+   justify-content: start;
+   gap: 3px;
    -webkit-tap-highlight-color: transparent;
    background-color: #fff;
    border-radius: 5px;
    box-sizing: border-box;
    clear: both;
    cursor: pointer;
-   display: block;
    font-family: inherit;
    font-size: 0.9em;
    height: 35px;

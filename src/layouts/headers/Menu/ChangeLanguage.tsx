@@ -36,6 +36,7 @@ const ChangeLanguage = () => {
       onChange={selectHandler}
       name=""
       placeholder=""
+      icon="/assets/img/icons/translate-icon.png"
     />
   );
 };

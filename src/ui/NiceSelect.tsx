@@ -13,6 +13,7 @@ type NiceSelectProps = {
   placeholder: string;
   className?: string;
   style?: object;
+  icon?: string;
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
   name: string;
 };
@@ -24,6 +25,7 @@ const NiceSelect: FC<NiceSelectProps> = ({
   className,
   style,
   onChange,
+  icon,
   name,
 }) => {
   const [open, setOpen] = useState(false);
@@ -51,6 +53,7 @@ const NiceSelect: FC<NiceSelectProps> = ({
       onKeyDown={(e) => e}
       ref={ref}
     >
+      {icon && <img src={icon} style={{width: '20px'}} alt='icon'/>}
       <span className="current">{current?.text || placeholder}</span>
       <ul
         className="list"

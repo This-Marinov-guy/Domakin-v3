@@ -43,16 +43,16 @@ const service_data: DataType[] = [
     desc: "features.search_for_new_flatmate_or_transfer_contract",
     link: "/services/add-listing",
   },
-  {
-    id: 4,
-    iconHeight: 100,
-    iconWidth: 100,
-    page: "service_1",
-    icon: "/assets/img/icons/icon-img/8.png",
-    title: "features.emergency_housing",
-    desc: "features.emergency_housing_description",
-    link: "/services/emergency-housing",
-  },
+  // {
+  //   id: 4,
+  //   iconHeight: 100,
+  //   iconWidth: 100,
+  //   page: "service_1",
+  //   icon: "/assets/img/icons/icon-img/8.png",
+  //   title: "features.emergency_housing",
+  //   desc: "features.emergency_housing_description",
+  //   link: "/services/emergency-housing",
+  // },
 ];
 
 export default service_data;

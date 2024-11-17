@@ -46,10 +46,10 @@ const menu_data: MenuItem[] = [
         mega_title: "footer.renting",
         mega_menus: [
           { link: "/services/renting", title: "features.rent_an_apartment" },
-          {
-            link: "/services/emergency-housing",
-            title: "features.emergency_housing",
-          },
+          // {
+          //   link: "/services/emergency-housing",
+          //   title: "features.emergency_housing",
+          // },
         ],
       },
       {
@@ -57,20 +57,20 @@ const menu_data: MenuItem[] = [
         mega_title: "footer.lending",
         mega_menus: [
           { link: "/services/add-listing", title: "footer.lending" },
-          {
-            link: "/services/emergency-housing",
-            title: "features.emergency_housing",
-          },
+          // {
+          //   link: "/services/emergency-housing",
+          //   title: "features.emergency_housing",
+          // },
         ],
       },
     ],
   },
-  {
-    id: 4,
-    has_dropdown: false,
-    title: "header.recommendations",
-    link: "/our-recommendations",
-  },
+  // {
+  //   id: 4,
+  //   has_dropdown: false,
+  //   title: "header.recommendations",
+  //   link: "/our-recommendations",
+  // },
   {
     id: 5,
     has_dropdown: false,

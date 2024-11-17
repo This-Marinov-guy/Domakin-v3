@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-import footerLogo from "@/assets/img/logo.png"
+import footerLogo from "@/assets/img/logo-transparent.png"
 import footerShape from "@/assets/images/assets/ils_06.svg"
 import Link from "next/link"
 import footer_data from "@/data/home-data/FooterData"
@@ -74,7 +74,7 @@ const FooterFour = () => {
          <div className="bottom-footer">
            <p className="m0 text-center fs-16">KVK: {KVK}</p>
            <p className="m0 text-center fs-16">
-             {t("footer.all_rights_reserved")} 2022
+             {t("footer.all_rights_reserved")} {new Date().getFullYear()}
            </p>
          </div>
        </div>

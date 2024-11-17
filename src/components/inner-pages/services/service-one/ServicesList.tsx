@@ -17,9 +17,10 @@ const ServicesList = ({ style, withPricing = true }: any) => {
   );
 
   const servicesList = serviceItems.map((item) => (
-    <div
+    <Link
+      href={item.link}
       key={item.id}
-      className="col-lg-4 col-md-6 d-flex mt-40 wow fadeInUp"
+      className="col-lg-4 col-md-6 d-flex mt-40 wow fadeInUp pop-hover"
       data-wow-delay="0.1s"
     >
       <div className="card-style-ten d-flex align-items-start flex-column w-100 h-100">
@@ -32,11 +33,8 @@ const ServicesList = ({ style, withPricing = true }: any) => {
         />
         <h6>{t(item.title)}</h6>
         <p>{t(item.desc)}</p>
-        <Link href={item.link} className="btn-twelve sm mt-auto">
-          {item.btn ? t(item.btn) : t("features.our_main_focus")}
-        </Link>
       </div>
-    </div>
+    </Link>
   ));
 
   // Add pricing image as a grid item if withPricing is true
@@ -44,7 +42,7 @@ const ServicesList = ({ style, withPricing = true }: any) => {
     servicesList.push(
       <div
         key="pricing-image"
-        className="col-lg-4 col-md-6 d-flex mt-40 wow fadeInUp"
+        className="col-lg-4 col-md-6 d-flex mt-40 wow m-a fadeInUp"
         data-wow-delay="0.1s"
       >
         <div className="card-style-ten d-flex align-items-center justify-content-center w-100 h-100">

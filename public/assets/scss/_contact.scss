@@ -124,3 +124,11 @@ input[type="checkbox"] {
   width: 80%;
   height: 100%;
 }
+
+.pop-hover {
+  transition: transform 0.3s ease; /* Smooth transition */
+
+  &:hover {
+    transform: translateY(-15px); /* Move up */
+  }
+}
