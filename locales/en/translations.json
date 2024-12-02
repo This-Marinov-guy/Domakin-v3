@@ -1095,6 +1095,12 @@
     }
   ],
 
+  "subscribe_email": {
+    "description": "Subscribe to our newsletter and receive updates for new properties and services!",
+    "email": "Email Address",
+    "send": "Send"
+  },
+
   "files": {
     "required": "Please attach a file!",
     "wrong_file_type": "There is an issue with the file, please ensure it is {{allowed_types}}",
@@ -1109,6 +1115,7 @@
     "try_again": "Try again",
     "go_home": "Go Home"
   },
+
   "api": {
     "invalid_action": "Invalid action",
     "request_failed": "The request failed, please try again",

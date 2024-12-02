@@ -12,17 +12,9 @@ const BLockFeatureOne = () => {
     sub_title: t("about.about_us"),
     desc_1: t("about.helping_you_find_a_place"),
     desc_2: t("about.at_the_end_of_2022"),
-    desc_3: (
-      <a
-        style={{ color: "#ff914d" }}
-        href="https://bulgariansociety.nl"
-        target="_blank"
-      >
-        Bulgarian Society Netherlands (BGSNL){" "}
-      </a>
-    ),
-    desc_4: t("about.with_the_aim_to_help"),
-    desc_5: t("about.it_is_hard_for"),
+    desc_3: t("about.with_the_aim_to_help"),
+    desc_4: t("about.it_is_hard_for"),
+    desc_5: t("about.services_we_offer"),
   };
 
   const { sub_title, desc_1, desc_2, desc_3, desc_4, desc_5 } = feature_content;
@@ -45,10 +37,10 @@ const BLockFeatureOne = () => {
             <div className="block-two md-mt-40">
               <div className="bg-wrapper">
                 <p>
-                  {desc_2} {desc_3} {desc_4}
+                  {desc_2} {desc_3}
                 </p>
-                <p className="mt-20">{desc_5}</p>
-                <ul style={{padding: '0'}} className="no-dots">
+                <p className="mt-20">{desc_4}</p>
+                <ul style={{ padding: "0" }} className="no-dots">
                   <li className="d-flex align-items-center gap-3">
                     <i className="icon-blue fa-solid fa-users-viewfinder" />
                     {t("about.if_you_are_located")}
@@ -62,6 +54,21 @@ const BLockFeatureOne = () => {
                   <li className="d-flex align-items-center gap-3">
                     <i className="icon-blue fa-solid fa-people-arrows" />
                     {t("about.if_you_are_searching")}
+                  </li>
+                </ul>
+
+                <p className="mt-20">{desc_5}</p>
+                <ul style={{ padding: "0" }}>
+                  <li className="d-flex align-items-center gap-3">
+                    - {t("about.service_1")}
+                  </li>
+                  <br />
+                  <li className="d-flex align-items-center gap-3">
+                    - {t("about.service_2")}
+                  </li>
+                  <br />
+                  <li className="d-flex align-items-center gap-3">
+                    - {t("about.service_3")}
                   </li>
                 </ul>
               </div>
