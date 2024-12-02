@@ -208,37 +208,25 @@
       {
         "name": "Lazar Popov",
         "position": "Viewing Agent",
-        "about": "26, Bachelor in Artificial Intelligence",
+        "about": "Bachelor in Artificial Intelligence",
         "about_extra": "Hello, my name is Lazar. I'm from Ruse, but I have been living in Groningen for five years now. I have a master's degree in Artificial Intelligence. I am familiar with the city and have experience in searching for and finding rental properties. My interests include combat sports and artificial intelligence. Besides being an agent at Domakin.nl, I am also the president and co-founder of the non-profit student organization Bulgarian Society Groningen. I would be happy to assist you!"
       },
       {
         "name": "Sava Popov",
         "position": "Viewing Agent",
-        "about": "20, Creative Media student",
+        "about": "Creative Media student",
         "about_extra": "Hello, I'm Sava and I'm a student in the \"Creative Media and Technologies\" program in Groningen. I have spent a lot of my summer time before coming to this town in searching for apartments, going on viewings, and asking acquaintances for advice. After numerous unsuccessful attempts, I finally managed to find a place, and I believe I now have a good understanding of the mistakes and successes in apartment hunting. I would be glad to help anyone who is in a similar situation!"
-      },
-      {
-        "name": "Konstantin Sonev",
-        "position": "Viewing Agent",
-        "about": "21, Creative Media student",
-        "about_extra": "Hello, my name is Konstantin, and I study \"Creative Media and Technologies\" in Groningen. At the end of the previous academic year, I had to search for a new apartment. It was extremely difficult to find a room in the city, and I was satisfied when I finally found a place after multiple unsuccessful attempts. There are many difficulties in finding apartments due to the high influx of students and high rents. We know that many of you have the desire to study in the city and face the same difficulties, especially when you are not in the city. That's why we at Domakin.nl want to help by providing our services. I look forward to working together!"
-      },
-      {
-        "name": "Dimitar Stamatov",
-        "position": "Viewing Agent",
-        "about": "22, International Business student",
-        "about_extra": "Hello, my name is Dimitar Stamatov, I'm 22 years old, and I'm a third-year student in the Netherlands. I study business and work as a bartender, and in my free time, I train in combat sports and engage in music. Like every student in the Netherlands, I know how difficult it is to find accommodation, especially in the first year. That's why I would be happy to assist any future student with my work as an agent at Domakin.nl."
       },
       {
         "name": "Vladislav Marinov",
         "position": "IT Manager",
-        "about": "22, International Business student",
+        "about": "International Business student",
         "about_extra": " Hello, my name is Vladislav, and I'm a business graduate from London, England. Although in a different country, I am also familiar with the problems a student can encounter when searching for accommodation. Stress, despair, and anger are just a few emotions I have experienced personally while looking for an apartment in London, and I know the difficulties one can face, especially when searching remotely. It is a pleasure for me to work on this platform, which I believe will help many people!"
       },
       {
         "name": "Radost Lozanova",
         "position": "Design Manager",
-        "about": "22, International Business student",
+        "about": "International Business student",
         "about_extra": "Hello! I'm Radost, a creative director and co-founder of Bulgarian Society Groningen. As a student, I have lived in several countries, which involved frequent moving. As part of the Domakin.nl team, I would be happy to help more Bulgarians find their new home in the Netherlands."
       }
     ],
