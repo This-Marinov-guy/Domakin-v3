@@ -2,7 +2,6 @@ export const setLocalStorage = <T>(name: string, items: T[]): void => {
    localStorage.setItem(name, JSON.stringify(items));
 };
 
-
 export const getLocalStorage = <T>(name: string): T[] => {
    const data = localStorage.getItem(name);
    if (data) {
@@ -15,3 +14,4 @@ export const getLocalStorage = <T>(name: string): T[] => {
 
 // LOCAL STORAGE LABELS
 export const LOCAL_STORAGE_LOCATION = "DOMAKIN_location";
+export const LOCAL_STORAGE_PROPERTY_VIEW = "DOMAKIN_property_view";

@@ -22,3 +22,7 @@ export const REFERRAL_BONUS = 50;
 
 // KVK
 export const KVK = '90831268'
+
+//views
+export const LIST = '1';
+export const GRID = '2';
