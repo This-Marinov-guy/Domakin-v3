@@ -35,12 +35,16 @@
     "about_us": "About us",
     "helping_you_find_a_place": "Helping you find a place",
     "when_to_reach_us": "When to reach us:",
-    "at_the_end_of_2022": "At the end of 2022 some of the founders of Domakin started the NPO",
-    "with_the_aim_to_help": "with the aim to help the Bulgarian students of Groningen. Part of our mission includes one of the biggest challenges of students in Groningen - finding an accommodation. That is why we created Domakin in order to make this process easier for many that find difficulties in finding a place to live.",
-    "it_is_hard_for": "It is hard for a student to find a place to live in their first year and even in the rest. The team of Domakin will help you with:",
-    "if_you_are_located": "If you are located in Bulgaria and want to find a place but you are unable to make the viewing, we are here for you!",
-    "if_you_want": "If you want to find a place, we are here for you!",
-    "if_you_are_searching": "If you are searching for a new flatmate or want to transfer your contract to someone else, we are here for you!"
+    "at_the_end_of_2022": "In 2023, the team of Domakin came together to address an issue many students like them face during their journey in the Netherlands - finding housing.",
+    "with_the_aim_to_help": "Some of the founders of Domakin had already established a student organization across the country. After speaking to students, agencies, and parents, it became clear that the biggest challenge for international students in the Netherlands remains finding housing. Thus, Domakin was founded with a mission to make this process easier for as many students as possible.",
+    "it_is_hard_for": "As a team who has experienced these challenges first hand during our studies in the Netherlands, we are here to assist you in finding your new home:",
+    "if_you_are_located": "If you are looking for accommodation in the Netherlands, we are here to help you!",
+    "if_you_want": "If you are currently located abroad and are unable to attend a viewing, we are here to represent you at a viewing!",
+    "if_you_are_searching": "If you are are leaving your room or searching for a flatmate and want to help another student find housing, we offer a platform to list your room!",
+    "services_we_offer": "We offer the following services:",
+    "service_1": "Representing you at a viewing",
+    "service_2": "A platform to search for housing",
+    "service_3": "A platform to list your room or apartment"
   },
   "partners": {
     "official_partners": "Official Partners"
@@ -66,13 +70,13 @@
     "let_us_make_the_viewing_for_you": "Let us make the viewing for you",
     "description": "You have found a room/apartment but you are unable to attend the viewing or you are in the process of searching and want to ensure that someone can represent you for the viewing.",
     "service_offer": "We offer agents for viewings where we go to the viewing instead of you. By your request we document the whole process and make any inquiries to the landlord. If there is a possibility, we can make a live connection with you so you can realistically experience the viewing. Contact us by following the steps below:",
-    "step_1": " Fill your details in the form",
-    "step_2": " Wait for one of our agents to contact you",
-    "step_3": " Arrange the viewing/s and leave the rest to us",
+    "step_1": "1) Fill your details in the form",
+    "step_2": "2) Wait for one of our agents to contact you",
+    "step_3": "3) Arrange the viewing/s and leave the rest to us",
     "fill_your_details": "Fill your details",
     "name": "Name",
     "surname": "Surname",
-    "phone_to_be_contacted": "Phone",
+    "phone_to_be_contacted": "Phone to be contacted (+ and country code)",
     "email": "Email",
     "comments": "Any comments you would like to be sent to our agent",
     "consent": "I give my consent to be contacted by the company via phone or email and for them to store my information for service purposes only",
@@ -94,17 +98,17 @@
     "city_of_viewing": "City of viewing",
     "date": "Date:",
     "time": "Time:",
-    "address_of_viewing_optional": "Address of viewing"
+    "address_of_viewing_optional": "Address of viewing (optional)"
   },
   "renting": {
     "renting_accommodations": "Renting accommodations",
     "renting": "Renting",
     "find_the_perfect_place_for_you": "Find the perfect place for you",
-    "platform_description": "Our website offers a variety of accommodations based on different criteria. Browse the list of available properties and click on the image to view the gallery. If interested, follow the steps:",
-    "step_1": " Choose a property from the list below and click 'Select'",
-    "step_2": " Fill the form that will appear once a property has been selected",
-    "step_3": " Wait to be contacted by our agent to finalize the deal",
-    "step_4": " Finish the deal with our agent",
+    "platform_description": "Our platform contains different properties.",
+    "step_1": "1) Choose a property from the list below and click 'Select'",
+    "step_2": "2) Fill the form that will appear once a property has been selected",
+    "step_3": "3) Wait to be contacted by our agent to finalize the deal",
+    "step_4": "4) Finish the deal with our agent",
     "services": "Services",
     "properties": "Properties",
     "per_month": "per month",
@@ -118,23 +122,23 @@
     "transferring": "Transfering",
     "transfer_your_old_contract_through_us": "Transfer your old contract through us",
     "description": "We offer you to transfer the remain of your contract to one of our clients. In order to achieve this, your contract should allow for such execution and your landlord should be informed. To start, simply follow the steps below:",
-    "step_1": " Fill the form",
-    "step_2": " Wait for our agent to contact you",
-    "step_3": " Together check the contract and finalize the service"
+    "step_1": "1) Fill the form",
+    "step_2": "2) Wait for our agent to contact you",
+    "step_3": "3) Together check the contract and finalize the service"
   },
   "emergency_housing": {
     "emergency_housing": "Emergency Housing",
     "looking_for_place": "If you are looking for a place to stay until finding your own",
     "short_stay_description": "Find a place for a short stay in one of our trusted properties lent by trusted people. The cost is low (if any) and the stay is limited but can help someone in need. If you need emergency housing in the Netherlands, simply follow the steps:",
-    "step_1": " Select the 'Searching' option below",
-    "step_2": " Choose a room by clicking select",
-    "step_3": " Fill your details in the form that will appear",
-    "step_4": " Wait for a response from our side to receive the information about the owner of the property",
+    "step_1": "1) Select the 'Searching' option below",
+    "step_2": "2) Choose a room by clicking select",
+    "step_3": "3) Fill your details in the form that will appear",
+    "step_4": "4) Wait for a response from our side to receive the information about the owner of the property",
     "offering_place": "If you are giving a place for a short time",
     "lend_extra_bed": "Lend an extra bed/coach to someone in need for a short stay. Many people, and more specifically students, come to the Netherlands without a place to live in order not to miss out on their studies. You can significantly help by offering to urgently house a student until they find their accommodation with our help. To list your property, simply follow these steps:",
-    "step_1_offer": " Select the 'Offering' option below",
-    "step_2_offer": " Fill your details and the property's in the form that will appear",
-    "step_3_offer": " Wait for a response from our side to approve you",
+    "step_1_offer": "1) Select the 'Offering' option below",
+    "step_2_offer": "3) Fill your details and the property's in the form that will appear",
+    "step_3_offer": "4) Wait for a response from our side to approve you",
     "thank_you_message": "\"The team of Domakin is genuinely thankful to all who are willing to help\"",
     "ellipsis": "...",
     "searching": "Searching",
@@ -176,8 +180,8 @@
     }
   },
   "home": {
-    "company_for_accommodation_searching": "From students for students",
-    "find_your_place_to_live": "Find your new home in the Netherlands with Domakin",
+    "company_for_accommodation_searching": "Housing from students for students",
+    "find_your_place_to_live": "Find your new home in the Netherlands with the help of Domakin",
     "with_our_help": "with our help",
     "description": "Our young team will help you find a place to live in any part of the Netherlands",
     "contact_us": "Contact us"
@@ -205,7 +209,7 @@
         "name": "Lazar Popov",
         "position": "Viewing Agent",
         "about": "26, Bachelor in Artificial Intelligence",
-        "about_extra": "Hello, my name is Lazar. I'm from Ruse, but I have been living in Groningen for five years now. I have a master's degree in \"Artificial Intelligence\". I am familiar with the city and have experience in searching for and finding rental properties. My interests include combat sports and artificial intelligence. Besides being an agent at Domakin.nl, I am also the president and co-founder of the non-profit student organization Bulgarian Society Groningen. I would be happy to assist you!"
+        "about_extra": "Hello, my name is Lazar. I'm from Ruse, but I have been living in Groningen for five years now. I have a master's degree in Artificial Intelligence. I am familiar with the city and have experience in searching for and finding rental properties. My interests include combat sports and artificial intelligence. Besides being an agent at Domakin.nl, I am also the president and co-founder of the non-profit student organization Bulgarian Society Groningen. I would be happy to assist you!"
       },
       {
         "name": "Sava Popov",
@@ -229,7 +233,7 @@
         "name": "Vladislav Marinov",
         "position": "IT Manager",
         "about": "22, International Business student",
-        "about_extra": " Hello, my name is Vladislav, and I'm a business student in London, England. Although in a different country, I am also familiar with the problems a student can encounter when searching for accommodation. Stress, despair, and anger are just a few emotions I have experienced personally while looking for an apartment in London, and I know the difficulties one can face, especially when searching remotely. It is a pleasure for me to work on this platform, which I believe will help many people!"
+        "about_extra": " Hello, my name is Vladislav, and I'm a business graduate from London, England. Although in a different country, I am also familiar with the problems a student can encounter when searching for accommodation. Stress, despair, and anger are just a few emotions I have experienced personally while looking for an apartment in London, and I know the difficulties one can face, especially when searching remotely. It is a pleasure for me to work on this platform, which I believe will help many people!"
       },
       {
         "name": "Radost Lozanova",
@@ -359,11 +363,209 @@
   },
   "FOR_RENT": [
     {
-      "id": "25",
+      "id": "33",
+      "hidden": false,
+      "status": "RENT",
+      "price": 850,
+      "statusCode": 0,
+      "title": "Sub-rent Room",
+      "city": "Amsterdam",
+      "location": "Amsterdam",
+      "description": {
+        "property": "The property is fully furnished and equipped, allowing tenants to move in with minimal preparation. 🌱 Sub-rent period: December 13, 2024, to January 13, 2025 (€850, all-inclusive). 🌱 The location is highly convenient, with an AH, Vormar, OBA store, and various Turkish shops nearby. 🌱 Public transport is easily accessible: Tram 13 to Centraal Station stops within 100m of the building, and Bus 369 connects to Sloterdijk station in just 10 minutes. 🌱 The property is approximately a 30-minute bike ride or 45-minute train ride to the University of Amsterdam campus. 🍀 Lease Transfer: As a tenant is seeking to relocate and has the landlord's approval, there is an opportunity to transfer the lease, with address registration possible.",
+        "period": "From Dec 13th 2024 - To Jan 13th 2025",
+        "bills": "included",
+        "flatmates": "2 people"
+      },
+      "main_image": "1.jpg",
+      "images": ["2.jpg", "3.jpg", "4.jpg"]
+    },
+    {
+      "id": "32",
+      "hidden": false,
+      "status": "RENT",
+      "price": 475,
+      "statusCode": 0,
+      "title": "20 m2 room in a shared house",
+      "city": "Groningen",
+      "location": "Neptunnusstraat, Groningen",
+      "description": {
+        "property": "Cosy room with sun light! Furniture need to be bought from the previous tenant and a deposit of 1 monthly rent is required. Registration is possible!",
+        "period": "From end of December (at least for 1 year)",
+        "bills": "not included",
+        "flatmates": "4-5 people"
+      },
+      "main_image": "1.jpeg",
+      "images": ["2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpeg", "7.jpeg"]
+    },
+    {
+      "id": "31",
       "hidden": false,
       "status": "RENT",
       "price": 950,
       "statusCode": 0,
+      "title": "12 m2 room in a shared house",
+      "city": "Amsterdam",
+      "location": "Nadezjda Mandelstamstraat",
+      "description": {
+        "property": "Enjoy a well-equipped home with convenient amenities, including a laundry area, washing machine, and dishwasher. The property also features two bathrooms, a large terrace, and a garden—perfect for relaxation and social gatherings. A reliable heating system ensures comfort throughout the seasons. Located in a vibrant neighborhood, you’ll be just moments away from Amsterdam Bijlmer Arena, nearby stations, gyms, supermarkets, and several universities. This room offers a convenient and welcoming living experience with easy access to all the essentials for a balanced lifestyle. Registration is possible!",
+        "period": "1 March - 1 September 2025",
+        "bills": "all included",
+        "flatmates": "2 males"
+      },
+      "main_image": "1.jpeg",
+      "images": [
+        "2.jpeg",
+        "3.jpeg",
+        "4.jpeg",
+        "5.jpeg",
+        "6.jpeg",
+        "7.jpeg",
+        "8.jpeg",
+        "9.jpeg",
+        "10.jpeg",
+        "11.jpeg",
+        "12.jpeg",
+        "13.jpeg"
+      ]
+    },
+    {
+      "id": "30",
+      "hidden": false,
+      "status": "RENT",
+      "price": 560,
+      "statusCode": 0,
+      "title": "Spacious Room in shared house",
+      "city": "Leeuwarden",
+      "location": "Bleeklaan, Leeuwarden",
+      "description": {
+        "property": "Spacious room in 2-floor house. The first floor is common and on the second there are the 4 bedrooms. The location is suitable for young people, it is close to shops and bus stops - just 15 mins away from the city center. Registration is possible for minimum period of 1 year.",
+        "period": "Available now",
+        "bills": "not included",
+        "flatmates": "3"
+      },
+      "main_image": "1.jpeg",
+      "images": [
+        "2.jpeg",
+        "3.jpeg",
+        "4.jpeg",
+        "5.jpeg",
+        "6.jpeg",
+        "7.jpeg",
+        "8.jpeg",
+        "9.jpeg",
+        "10.jpeg",
+        "11.jpeg"
+      ]
+    },
+    {
+      "id": "29",
+      "hidden": false,
+      "status": "RENT",
+      "price": 1474,
+      "statusCode": 0,
+      "title": "Spacious 2-bedroom apartment",
+      "city": "Rotterdam",
+      "location": "Lisstraat, Rotterdam",
+      "description": {
+        "property": "New furnished apartment with two bedrooms, living room and a separate kitchen. There is also a balcony. We are looking for 2 new tenants to move in. Registration is possible. ",
+        "period": "Available from 1st of December",
+        "bills": "around 100-150 €",
+        "flatmates": "1"
+      },
+      "main_image": "1.jpeg",
+      "images": [
+        "2.jpeg",
+        "3.jpeg",
+        "4.jpeg",
+        "5.jpeg",
+        "6.jpeg",
+        "7.jpeg",
+        "8.jpeg",
+        "9.jpeg",
+        "10.jpeg",
+        "11.jpeg",
+        "12.jpeg"
+      ]
+    },
+    {
+      "id": "28",
+      "hidden": false,
+      "status": "RENT",
+      "price": 320,
+      "statusCode": 0,
+      "title": "Small room in a shared house",
+      "city": "Leeuwarden",
+      "location": "Marijkestraat, Leeuwarden",
+      "description": {
+        "property": "Basically, the house has 2 floors and a basement. On the 2nd floor there are 3 rooms and a bathroom. On the main floor there's the living room, kitchen, and toilet. And in the basement there's 2 rooms where we keep the washing machine. The offered room is on the 2nd floor. New tenants will need to purchase the existing furniture for €160. Additionally, the new tenant will take over as head tenant, meaning they will be responsible for collecting rent from other housemates. The house is situated in a quiet neighbourhood, just a 3-minute walk from Lidl and 15 minutes from the train station. There’s also a bus stop right in front of the house. A security deposit of 320 euro is also required. Contract must be at least 1 year.",
+        "period": "From mid December earliest or start of January the latest",
+        "bills": "around 100 euro",
+        "flatmates": "2-3"
+      },
+      "main_image": "1.jpeg",
+      "images": [
+        "2.jpeg",
+        "3.jpeg",
+        "4.jpeg",
+        "5.jpeg",
+        "6.jpeg",
+        "7.jpeg",
+        "8.jpeg",
+        "9.jpeg",
+        "10.jpeg"
+      ]
+    },
+    {
+      "id": "27",
+      "hidden": false,
+      "status": "RENT",
+      "price": 550,
+      "statusCode": 0,
+      "title": "Furnished Girl Room",
+      "city": "Groningen",
+      "location": "Speenkruidstraat, Groningen",
+      "description": {
+        "property": "Sunny room in a well-connected area. Looking for a female tenant, preferably a student and vegan/vegetarian. All furniture is included, and registration is possible! No deposit is required for the room.",
+        "period": "From November 1st | Long-term",
+        "bills": "bills not included",
+        "flatmates": "1 female vegan"
+      },
+      "main_image": "1.jpeg",
+      "images": ["2.jpeg", "3.jpeg"]
+    },
+    {
+      "id": "26",
+      "hidden": false,
+      "status": "TAKEN",
+      "price": 795,
+      "statusCode": 2,
+      "title": "Studio",
+      "city": "Groningen",
+      "location": "Aweg, Groningen",
+      "description": {
+        "property": "Studio in the center of the city. Close to all necessary shops and utilities as well as to parks, universities and clubs. Registration is possible!",
+        "period": "1st of November | Long-term",
+        "bills": "all bills included",
+        "flatmates": "-"
+      },
+      "main_image": "1.jpeg",
+      "images": [
+        "2.jpeg",
+        "3.jpeg",
+        "4.jpeg",
+        "5.jpeg",
+        "6.jpeg",
+        "7.jpeg",
+        "8.mp4"
+      ]
+    },
+    {
+      "id": "25",
+      "hidden": false,
+      "status": "TAKEN",
+      "price": 950,
+      "statusCode": 2,
       "title": "Room in a shared apartment",
       "city": "Hague",
       "location": "Goeverneurlaan 462 The Hague",
@@ -904,15 +1106,25 @@
       }
     }
   ],
+
+  "files": {
+    "required": "Please attach a file!",
+    "wrong_file_type": "There is an issue with the file, please ensure it is {{allowed_types}}",
+    "file_too_big": "The file is too large - please attach a file under 3 MB",
+    "motivational_letter_input": "Motivational letter that we will send to the landlord/roommate",
+    "motivational_letter_example": "You can use our ready-made motivational letter template",
+    "download": "Download"
+  },
+
   "react_error": {
     "something_went_wrong": "Something went wrong. Please try again or report the problem to get some help.",
     "try_again": "Try again",
     "go_home": "Go Home"
   },
-  "api" : {
+  "api": {
     "invalid_action": "Invalid action",
     "request_failed": "The request failed, please try again",
-    "too_many_requests" : "Too many requests, please try again later.",
+    "too_many_requests": "Too many requests, please try again later.",
     "forbidden_access": "Forbidden: Access is denied",
     "not_enough_pictures": "Not enough pictures, please submit at least 3",
     "failed_fetching_feedbacks": "We could not get the feedbacks - please try again!"
