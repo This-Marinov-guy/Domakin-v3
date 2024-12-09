@@ -127,7 +127,7 @@ const footer_data: DataType[] = [
     widget_title: "footer.support",
     footer_link: [
       { link: "/contact", link_title: "footer.contact_us" },
-      { link: "/our-recommendations", link_title: "footer.recommendations" },
+      // { link: "/our-recommendations", link_title: "footer.recommendations" },
       { link: "/terms&policy", link_title: "footer.terms_policy" },
     ],
   },
