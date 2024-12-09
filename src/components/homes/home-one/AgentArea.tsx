@@ -58,10 +58,10 @@ const AgentArea = ({ style, withDetails = false }: any) => {
 
           <div className="wrapper position-relative z-1">
             <Slider {...settings} className="agent-slider-one">
-              {Array.from({ length: 6 }, (v, i) => i).map((item, index) => (
+              {Array.from({ length: 5 }, (v, i) => i).map((item, index) => (
                 <div key={index} className="item">
                   <div className="agent-card-one position-relative">
-                    <div style={{ height: "30em" }} className="img border-20">
+                    <div style={{ height: "22em" }} className="img border-20">
                       <Image
                         src={`/assets/img/team/${item + 1}.jpg`}
                         height={1000}

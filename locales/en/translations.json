@@ -207,27 +207,33 @@
     "members": [
       {
         "name": "Lazar Popov",
-        "position": "Viewing Agent",
+        "position": "CEO",
         "about": "Bachelor in Artificial Intelligence",
         "about_extra": "Hello, my name is Lazar. I'm from Ruse, but I have been living in Groningen for five years now. I have a master's degree in Artificial Intelligence. I am familiar with the city and have experience in searching for and finding rental properties. My interests include combat sports and artificial intelligence. Besides being an agent at Domakin.nl, I am also the president and co-founder of the non-profit student organization Bulgarian Society Groningen. I would be happy to assist you!"
       },
       {
         "name": "Sava Popov",
-        "position": "Viewing Agent",
-        "about": "Creative Media student",
+        "position": "Groningen Manager",
+        "about": "Bachelor in Creative Media",
         "about_extra": "Hello, I'm Sava and I'm a student in the \"Creative Media and Technologies\" program in Groningen. I have spent a lot of my summer time before coming to this town in searching for apartments, going on viewings, and asking acquaintances for advice. After numerous unsuccessful attempts, I finally managed to find a place, and I believe I now have a good understanding of the mistakes and successes in apartment hunting. I would be glad to help anyone who is in a similar situation!"
       },
       {
-        "name": "Vladislav Marinov",
-        "position": "IT Manager",
-        "about": "International Business student",
-        "about_extra": " Hello, my name is Vladislav, and I'm a business graduate from London, England. Although in a different country, I am also familiar with the problems a student can encounter when searching for accommodation. Stress, despair, and anger are just a few emotions I have experienced personally while looking for an apartment in London, and I know the difficulties one can face, especially when searching remotely. It is a pleasure for me to work on this platform, which I believe will help many people!"
+        "name": "Paolina Gochecva",
+        "position": "Rotterdam Manager",
+        "about": "Bachelor in Micro and Macro Economics",
+        "about_extra": "Hello, my name is Paolina. I’m originally from Varna, Bulgaria, and I’ve been living in Rotterdam for nearly three years now. I am currently finishing my studies in Economics and have also taken various business and management courses to strengthen my expertise. I’m passionate about staying active through sports and enjoy traveling to explore different cultures. Alongside being the Regional Manager for Domakin in Rotterdam, I have held several leadership positions in non-profit student organisations. I’m familiar with the rental market in Rotterdam and would be delighted to help you find your perfect home!"
       },
       {
         "name": "Radost Lozanova",
         "position": "Design Manager",
-        "about": "International Business student",
+        "about": "Bachelor in Euroculture",
         "about_extra": "Hello! I'm Radost, a creative director and co-founder of Bulgarian Society Groningen. As a student, I have lived in several countries, which involved frequent moving. As part of the Domakin.nl team, I would be happy to help more Bulgarians find their new home in the Netherlands."
+      },
+      {
+        "name": "Vladislav Marinov",
+        "position": "CTO",
+        "about": "Bachelor in Business Management",
+        "about_extra": " Hello, my name is Vladislav, and I'm a business graduate from London, England. Although in a different country, I am also familiar with the problems a student can encounter when searching for accommodation. Stress, despair, and anger are just a few emotions I have experienced personally while looking for an apartment in London, and I know the difficulties one can face, especially when searching remotely. It is a pleasure for me to work on this platform, which I believe will help many people!"
       }
     ],
     "agents": "Agents",
