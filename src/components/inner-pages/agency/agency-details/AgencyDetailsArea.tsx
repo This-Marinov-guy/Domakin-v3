@@ -1,17 +1,11 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import AgencyNavTabs from "./AgencyNavTabs";
-import NiceSelect from "@/ui/NiceSelect";
-import Review from "./Review";
-import ReviewForm from "./ReviewForm";
-import AgencyDetailsSidebar from "./AgencyDetailsSidebar";
-
-import agencyDetailsLogo from "@/assets/images/logo/p_logo_22.png";
 import useTranslation from "next-translate/useTranslation";
 import { useEffect, useRef } from "react";
+import { TEAM_SOCIALS } from "@/utils/defines";
 
-const icon = ["whatsapp", "x-twitter", "instagram", "viber"];
+const icon = ["instagram", "linkedin"];
 
 const AgencyDetailsArea = ({ style, id }: any) => {
   const { t } = useTranslation("translations");
@@ -27,7 +21,7 @@ const AgencyDetailsArea = ({ style, id }: any) => {
   if (id === undefined || id === null) {
     return null;
   }
-  
+
   return (
     <div
       ref={panelRef}
@@ -75,13 +69,15 @@ const AgencyDetailsArea = ({ style, id }: any) => {
                       </p>
                     </div>
                     <ul className="style-none d-flex align-items-center social-icon">
-                      {icon.map((icon, i) => (
-                        <li key={i}>
-                          <Link href="#">
-                            <i className={`fa-brands fa-${icon}`}></i>
-                          </Link>
-                        </li>
-                      ))}
+                      {Object.entries(TEAM_SOCIALS[id]).map(
+                        ([icon, href], i) => (
+                          <li key={i}>
+                            <Link href={href}>
+                              <i className={`fa-brands fa-${icon}`}></i>
+                            </Link>
+                          </li>
+                        )
+                      )}
                     </ul>
                   </div>
                 </div>
