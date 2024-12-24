@@ -5,6 +5,7 @@ import SEO from "./seo";
 import "../styles/index.scss";
 import "rc-time-picker/assets/index.css";
 import PageLoader from "@/components/ui/loading/PageLoader";
+import MainLayout from "@/layouts/MainLayout";
 
 const MyApp = ({ Component, pageProps }: any) => {
   const recaptchaRef = React.createRef();
@@ -16,7 +17,7 @@ const MyApp = ({ Component, pageProps }: any) => {
   return (
     <Suspense fallback={<PageLoader />}>
       <SEO />
-      {/* <Script src="/js/plugins.js" strategy="beforeInteractive" /> */}
+      <MainLayout>
         <Component {...pageProps} recaptchaRef={recaptchaRef} />
         {/* <ReCAPTCHA
           size="invisible"
@@ -24,6 +25,7 @@ const MyApp = ({ Component, pageProps }: any) => {
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ""}
           onChange={onChange}
         /> */}
+      </MainLayout>
     </Suspense>
   );
 };
