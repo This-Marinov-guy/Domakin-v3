@@ -33,7 +33,7 @@ const HeroBanner = () => {
                     className="fa-solid fa-house"
                     style={{ color: "#004aad" }}
                   ></i>{" "}
-                  {t("home.find_your_place_to_live")} {t("home.with_our_help")}
+                  {t("home.find_your_place_to_live")}
                 </p>
               </div>
             </div>
