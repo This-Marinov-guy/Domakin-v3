@@ -6,9 +6,9 @@ import { useState } from "react";
 import UseSticky from "@/hooks/UseSticky";
 import LoginModal from "@/modals/LoginModal";
 
-import logo_1 from "@/assets/img/logo-2.png";
 import ChangeLanguage from "./Menu/ChangeLanguage";
 import useTranslation from "next-translate/useTranslation";
+import { logoByTheme } from "@/utils/config";
 
 const HeaderOne = ({ style }: any) => {
   const { sticky } = UseSticky();
@@ -38,7 +38,7 @@ const HeaderOne = ({ style }: any) => {
             <div className="d-flex align-items-center justify-content-between">
               <div className="logo order-lg-0">
                 <Link href="/" className="mt-5 d-flex align-items-center">
-                  <Image className="round-logo" src={logo_1} alt="" />
+                  <Image className="round-logo" src={logoByTheme()} alt="" />
                 </Link>
               </div>
               <div className="right-widget ms-auto ms-lg-0 me-3 me-lg-0 order-lg-3">

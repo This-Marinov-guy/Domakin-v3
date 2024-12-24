@@ -4,8 +4,8 @@ import Link from "next/link"
 import Image from "next/image"
 import UseSticky from "@/hooks/UseSticky"
 
-import logo_1 from "@/assets/img/logo-2.png";
 import useTranslation from "next-translate/useTranslation"
+import { logoByTheme } from "@/utils/config"
 
 const HeaderOne = () => {
 
@@ -25,7 +25,7 @@ const HeaderOne = () => {
              <div className="d-flex align-items-center">
                <div className="logo order-lg-0">
                  <Link href="/" className="d-flex align-items-center">
-                   <Image className="round-logo" src={logo_1} alt="" />
+                   <Image className="round-logo" src={logoByTheme()} alt="" />
                  </Link>
                </div>
 

@@ -5,10 +5,10 @@ import locationIcon from "@/assets/images/icon/icon_39.svg";
 import emailIcon from "@/assets/img/icons/10.png";
 import phoneIcon from "@/assets/img/icons/11.png";
 
-import logo1 from "@/assets/img/logo-2.png";
 import ContactForm from "@/components/forms/ContactForm";
 import useTranslation from "next-translate/useTranslation";
 import { ADDRESS, EMAIL, PHONE } from "@/utils/defines";
+import { logoByTheme } from "@/utils/config";
 
 interface DataType {
   id: number;
@@ -105,7 +105,7 @@ const ContactArea = () => {
                 src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=dhaka collage&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
               ></iframe> */}
               <Image
-                src={logo1}
+                src={logoByTheme()}
                 width={200}
                 height={200}
                 alt="Logo"

@@ -1,12 +1,14 @@
 "use client";
 
+import { logoByTheme } from "@/utils/config";
+import Image from "next/image";
 import React from "react";
 
 const PageLoader = () => {
   return (
     <div className="page-loader">
       <div className="loading-div">
-        <img src="/assets/img/logo-2.png" alt="logo" />
+        <Image src={logoByTheme()} alt="logo" />
         <h1>Loading...</h1>
       </div>
     </div>
