@@ -4,8 +4,15 @@ import React, { useEffect, useState } from "react";
 import { EUROPEAN_COUNTRIES } from "@/utils/countries";
 import { getGeoLocation } from "@/utils/helpers";
 import { LOCAL_STORAGE_LOCATION } from "@/utils/localstorage";
+import useTranslation from "next-translate/useTranslation";
+import Search from "../Search";
 
 const Prefix = () => {
+  const {t} = useTranslation("translations");
+
+  const PHONE_CODES = EUROPEAN_COUNTRIES.map((c) => c.phoneCode);
+  const [options, setOptions] = useState(PHONE_CODES);
+
   return (
     <>
       <button
@@ -19,16 +26,14 @@ const Prefix = () => {
         aria-expanded="false"
         data-bs-auto-close="outside"
       >
-        Code
+        {t("common.code")}
       </button>
       <ul className="dropdown-menu phone-prefix-dropdown">
-        {/* Add searchbar */}
-        {EUROPEAN_COUNTRIES.map((c, i) => {
+        <Search options={PHONE_CODES} setOptions={setOptions} />
+        {options.map((c, i) => {
           return (
-            <li key={i}>
-              <a className="dropdown-item" href="#">
-                {c.phoneCode}
-              </a>
+            <li className="dropdown-item" key={i}>
+              {c}
             </li>
           );
         })}

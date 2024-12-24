@@ -2,6 +2,7 @@ import NiceSelect from "@/ui/NiceSelect";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import PrefixMultiFilePreviewInput from "../ui/inputs/files/MultiFilePreviewInput";
+import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
 
 const AddListingForm = ({ guest: bool = false }) => {
   const { t } = useTranslation("translations");
@@ -31,7 +32,7 @@ const AddListingForm = ({ guest: bool = false }) => {
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">Phone</label>
-              <input type="text" name="subject" />
+              <PrefixPhoneInput />
               {/* <p className="form_error">{errors.subject?.message}</p> */}
             </div>
           </div>
