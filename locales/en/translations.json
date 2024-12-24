@@ -1101,6 +1101,16 @@
     }
   ],
 
+  "cookies": {
+    "title": "Cookie Policy",
+    "content": "To guarantee a smooth experience we need our clients to accept the mandatory cookies before using the website - you can read more in the legal section after."
+  },
+
+  "common": {
+    "agree": "Agree",
+    "continue": "Continue"
+  },
+
   "subscribe_email": {
     "description": "Subscribe to our newsletter and receive updates for new properties and services!",
     "email": "Email Address",
