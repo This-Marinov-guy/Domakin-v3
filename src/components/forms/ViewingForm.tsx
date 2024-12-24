@@ -1,11 +1,6 @@
 "use client";
-import React, { useRef } from "react";
+import React from "react";
 import TimePicker from "rc-time-picker";
-import emailjs from "@emailjs/browser";
-import { toast } from "react-toastify";
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "next-translate/useTranslation";
 import SingleDatePicker from "../ui/inputs/dates/SingleDatePicker";
 import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
