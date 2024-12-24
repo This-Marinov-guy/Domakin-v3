@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import { animationCreate } from "@/utils/utils";
 import ScrollToTop from "@/components/common/ScrollToTop";
 import { StoreProvider } from "@/stores/storeContext";
+import ModalsLayout from "./ModalsLayout";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
@@ -23,6 +24,7 @@ const MainLayout = ({ children }: any) => {
     <StoreProvider>
       <TrackingLayout>
         {children}
+        <ModalsLayout/>
         <ScrollToTop />
         <ToastContainer
           position="top-center"
