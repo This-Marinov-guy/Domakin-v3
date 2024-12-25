@@ -153,6 +153,8 @@
     "location": "Location",
     "city": "City",
     "address": "Address",
+    "property_images": "Images of the room / common areas / outsides / utilities / etc.",
+    "image_requirements": "Submit at least 3 images and no more than 10",
     "precise_address": "Please give the exact address and number so we can arrange a viewing (we will not share it on our website)",
     "size": "Size",
     "period": "Period of availability",
@@ -170,9 +172,9 @@
     "property_description": "Description of property (such as is it a bed/coach/etc., what else can the tenant use)",
     "permission": "I give my permission to be contacted by the organization for the purposes of the service",
     "room_pictures": "Room pictures",
-    "image_submission": "* Submit at least 1 image and no more than 6",
+    "image_submission": "Submit at least 1 image and no more than 6",
     "extra_images": "* Extra images will not be received",
-    "supported_formats": "* Supported formats are jpg, jpeg and png",
+    "supported_formats": "Supported formats are jpg, jpeg and png",
     "send_room": "send room",
     "dont_forget_images": "* Don't forget images",
     "errors": {
@@ -1132,7 +1134,7 @@
     "privacy": "Privacy Policy",
     "terms": "Terms & Conditions",
     "permission_contact": "I give my permission to be contacted by the organization for the purposes of the service",
-    "permission_terms": "I have read and agree to the {{links}}"
+    "permission_terms": "I have read and agree to the <link>Terms & Conditions</link>"
   },
   
   "common": {

@@ -4,7 +4,7 @@ import { resizeFile } from "@/utils/helpers";
 import useTranslation from "next-translate/useTranslation";
 
 const PrefixMultiFilePreviewInput = (props: any) => {
-  const { onInput, onReject, maxSizeNote, allowedFormatsNotes } = props;
+  const { onInput, onReject, maxSizeNote, allowedFormatsNotes, isInvalid } = props;
 
   const { t } = useTranslation("translations");
 
@@ -63,22 +63,22 @@ const PrefixMultiFilePreviewInput = (props: any) => {
         onDropRejected={onReject}
       >
         {({ getRootProps, getInputProps, isDragActive }) => (
-          <div className="w-full" {...getRootProps()}>
+          <div className='w-full' {...getRootProps()}>
             <input {...getInputProps()} />
-            <div className="file-dropzone-container">
+            <div
+              className={`file-dropzone-container ${
+                isInvalid ? "is-invalid" : ""
+              }`}
+            >
               {imageLoading ? (
-                <p>{t('common.loading')}</p>
+                <p>{t("common.loading")}</p>
               ) : (
                 <div className="text-center">
                   <i
                     className="fa-light fa-cloud-arrow-up"
                     style={{ color: "purple", fontSize: "30px" }}
                   ></i>
-                  <p>{t('files.drag_files')}</p>
-                  {!!maxSizeNote && <small>{maxSizeNote}</small>}
-                  {!!allowedFormatsNotes && (
-                    <small>{allowedFormatsNotes}</small>
-                  )}
+                  <p>{t("files.drag_files")}</p>
                   {files.length > 0 &&
                     files.map((file, index) => (
                       <div key={index} className="file-preview">
@@ -89,6 +89,12 @@ const PrefixMultiFilePreviewInput = (props: any) => {
                         ></i>
                       </div>
                     ))}
+                    
+                  {!!maxSizeNote && <small>{maxSizeNote}</small>}
+                  <br/>
+                  {!!allowedFormatsNotes && (
+                    <small>{allowedFormatsNotes}</small>
+                  )}
                 </div>
               )}
             </div>

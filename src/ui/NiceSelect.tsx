@@ -16,6 +16,7 @@ type NiceSelectProps = {
   icon?: string;
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
   name: string;
+  isInvalid?: boolean;
 };
 
 const NiceSelect: FC<NiceSelectProps> = ({
@@ -27,6 +28,7 @@ const NiceSelect: FC<NiceSelectProps> = ({
   onChange,
   icon,
   name,
+  isInvalid,
 }) => {
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState<Option>(options[defaultCurrent]);
@@ -45,7 +47,7 @@ const NiceSelect: FC<NiceSelectProps> = ({
 
   return (
     <div
-      className={`nice-select form-select-lg ${className || ""} ${open ? "open" : ""}`}
+      className={`nice-select form-select-lg ${className || ""} ${open ? "open" : ""} ${isInvalid ? "is-invalid" : ""}`}
       style={style}
       role="button"
       tabIndex={0}

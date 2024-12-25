@@ -2,7 +2,24 @@
   font-family: $main-font !important;
 }
 
-.form-control.is-invalid {  
+.form-control.is-invalid,
+.is-invalid {
   border-color: $danger !important;
   border-width: 2px !important;
+}
+
+label {
+  a {
+    color: $color-two;
+  }
+
+  a:visited {
+    color: $color-one;
+    transition: all 0.5s;
+  }
+
+  a:hover {
+    color: $color-two;
+    transition: all 0.5s;
+  }
 }

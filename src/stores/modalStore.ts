@@ -23,11 +23,11 @@ export default class ModalStore {
     makeAutoObservable(this); // Automatically makes properties observable and methods actions
   }
 
-  setActiveModal(
+  setActiveModal = (
     modalName: string,
     modalSettings: Record<string, any> = {},
     isResetLastActive: boolean = true
-  ) {
+  ) => {
     if (isResetLastActive) {
       this.resetModal();
     }
@@ -42,28 +42,28 @@ export default class ModalStore {
     }
   }
 
-  closeModal() {
+  closeModal = () => {
     this.resetModal();
     this.historyStack.pop();
     this.historyStackSettings.pop();
     this.setPrevActiveModalFromQueue();
   }
 
-  closeAll() {
+  closeAll = () => {
     this.resetModal();
     this.resetHistoryStack();
   }
 
-  resetHistoryStack() {
+  resetHistoryStack = () => {
     this.historyStack = [];
   }
 
-  resetModal() {
+  resetModal = () => {
     this.modals = initialValues;
     this.modalSettings = defaultModalSettings;
   }
 
-  setPrevActiveModalFromQueue() {
+  setPrevActiveModalFromQueue = () => {
     if (this.historyStack.length > 0) {
       this.modals[this.lastUsedModal] = true;
 
@@ -73,7 +73,7 @@ export default class ModalStore {
     }
   }
 
-  changeActiveModalSettings(newSettings: Record<string, any>) {
+  changeActiveModalSettings = (newSettings: Record<string, any>) => {
     this.modalSettings = { ...this.modalSettings, ...newSettings };
   }
 

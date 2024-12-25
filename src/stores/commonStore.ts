@@ -11,11 +11,11 @@ export default class CommonStore {
   @observable loading = false;
   @observable error = null;
 
-  @action startLoading() {
+  @action startLoading = () => {
     this.loading = true;
   }
 
-  @action stopLoading() {
+  @action stopLoading = () => {
     this.loading = false;
   }
 }
