@@ -40,7 +40,7 @@ const LendingPage = () => {
         style={false}
       />
       <StepDescriptionOne details={details} />
-      <AddListingForm guest/>
+      <AddListingForm/>
       <FancyBanner />
       <FooterFour />
     </>
