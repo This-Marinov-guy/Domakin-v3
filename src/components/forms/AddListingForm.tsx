@@ -1,26 +1,45 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import NiceSelect from "@/ui/NiceSelect";
-import Trans from 'next-translate/Trans';
+import Trans from "next-translate/Trans";
+import Spinner from "react-bootstrap/Spinner";
 import useTranslation from "next-translate/useTranslation";
 import PrefixMultiFilePreviewInput from "../ui/inputs/files/MultiFilePreviewInput";
 import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
+import { useServer } from "@/hooks/useServer";
+import { transformToFormData } from "@/utils/helpers";
 
 const AddListingForm = () => {
   const { t } = useTranslation("translations");
 
+  const { sendRequest, loading } = useServer();
+
   const {
+    propertyStore,
     propertyStore: {
       addListingData: { personalData, propertyData, terms },
       updateListingData,
+      addErrorFields,
       errorFields,
     },
   } = useStore();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    sendRequest(
+      "/viewing/create",
+      "POST",
+      transformToFormData(propertyStore.addListingData)
+    ).then((res) => {
+      if (res.status) {
+        // success
+      } else if (res.invalid_fields){
+        addErrorFields(res.invalid_fields);
+      }
+    });
   };
 
   return (
@@ -266,7 +285,7 @@ const AddListingForm = () => {
             isInvalid={errorFields.includes("images")}
             // maxSizeNote={t("files.allowed_sizes_note", { allowed_size: "5MB" })}
             allowedFormatsNotes={t("files.allowed_types_note", {
-              allowed_types: "jpg, png, jpeg, webp, svg, bmp, heic",
+              allowed_types: "jpg, png, jpeg, webp, svg, bmp, heic, mp4",
             })}
           />
         </div>
@@ -308,11 +327,12 @@ const AddListingForm = () => {
 
         <div className="col-12">
           <button
+            disabled={loading}
             type="submit"
             onClick={handleSubmit}
             className="btn-nine text-uppercase rounded-3 fw-normal w-100"
           >
-            {t("contact.send")}
+            {loading ? <Spinner animation="border" /> : t("contact.send")}
           </button>
         </div>
       </div>

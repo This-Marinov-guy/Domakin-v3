@@ -58,12 +58,13 @@ const PrefixMultiFilePreviewInput = (props: any) => {
           "image/svg+xml": [".svg"],
           "image/bmp": [],
           "image/heic": [".heif", ".heic"],
+          "video/mp4": [".mp4"],
         }}
         maxFiles={5}
         onDropRejected={onReject}
       >
         {({ getRootProps, getInputProps, isDragActive }) => (
-          <div className='w-full' {...getRootProps()}>
+          <div className="w-full" {...getRootProps()}>
             <input {...getInputProps()} />
             <div
               className={`file-dropzone-container ${
@@ -89,9 +90,9 @@ const PrefixMultiFilePreviewInput = (props: any) => {
                         ></i>
                       </div>
                     ))}
-                    
+
                   {!!maxSizeNote && <small>{maxSizeNote}</small>}
-                  <br/>
+                  <br />
                   {!!allowedFormatsNotes && (
                     <small>{allowedFormatsNotes}</small>
                   )}
