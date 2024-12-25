@@ -38,7 +38,7 @@ export default class PropertyStore {
   @observable addListingData: any = defaultFormData;
   @observable errorFields: string[] = [];
 
-  @action updateListingData(key: string, value: any, nestedKey: string = "") {
+  @action updateListingData(key: string, nestedKey: string, value: any) {
     if (nestedKey) {
       this.addListingData[key][nestedKey] = value;
     } else {

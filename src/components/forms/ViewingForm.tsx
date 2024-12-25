@@ -31,7 +31,7 @@ const ViewingForm = () => {
 
         <div className="col-6">
           <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.phone_to_be_contacted")}</label>
+            <label htmlFor="">{t("viewing.phone")}</label>
             <PrefixPhoneInput />
             {/* <p className="form_error">{errors.subject?.message}</p> */}
           </div>
