@@ -1146,9 +1146,12 @@
   },
 
   "api": {
+    "error": "Error",
+    "fill_fields": "Please fill all the required fields",
     "invalid_action": "Invalid action",
     "request_failed": "The request failed, please try again",
     "too_many_requests": "Too many requests, please try again later.",
+    "general_error": "Something unexpected happened, please try again or contact us for help",
     "forbidden_access": "Forbidden: Access is denied",
     "not_enough_pictures": "Not enough pictures, please submit at least 3",
     "failed_fetching_feedbacks": "We could not get the feedbacks - please try again!"
