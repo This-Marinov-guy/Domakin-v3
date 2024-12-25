@@ -46,14 +46,31 @@ export const useApi = () => {
         headers,
       });
 
+      if (options?.withError && !response.data.status) {
+        const errorMessage = response?.data.tag
+          ? t(response?.data.tag)
+          : response?.data.message ?? t("api.general_error");
+
+        toast.error(errorMessage, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+
       return response.data;
     } catch (err: any) {
-      !isProd && console.log(err.response.data ?? err);
+      !isProd && console.log(err.response?.data ?? err);
 
       if (options?.withError) {
-        const errorMessage = err.response.data.tag
-          ? t(err.response.data.tag)
-          : err.response.data.message ?? t("api.general_error");
+        const errorMessage = err.response?.data.tag
+          ? t(err.response?.data.tag)
+          : err.response?.data.message ?? t("api.general_error");
 
         toast.error(errorMessage, {
           position: "top-center",
