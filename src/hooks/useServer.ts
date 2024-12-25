@@ -10,7 +10,8 @@ interface Options {
   withError?: boolean;
 }
 
-export const useHttpClient = () => {
+// for main server calls
+export const useServer = () => {
   const {
     commonStore: { loading, startLoading, stopLoading },
   } = useStore();
