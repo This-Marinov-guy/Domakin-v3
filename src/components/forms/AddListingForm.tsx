@@ -1,14 +1,24 @@
+import React from "react";
+import Form from "react-bootstrap/Form";
 import NiceSelect from "@/ui/NiceSelect";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import PrefixMultiFilePreviewInput from "../ui/inputs/files/MultiFilePreviewInput";
 import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
+import { useStore } from "@/stores/storeContext";
 
-const AddListingForm = ({ guest: bool = false }) => {
+const AddListingForm = () => {
   const { t } = useTranslation("translations");
 
+  const {propertyStore} = useStore();
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+  };
+
   return (
-    <form className="form-style-one wow fadeInUp pt-40 pb-40">
+    <form
+      className="form-style-one wow fadeInUp pt-40 pb-40"
+    >
       <div className="container m-a controls">
         <div className="row mt-20 mb-20">
           <h4 className="mb-20">Personal Information</h4>
@@ -16,8 +26,12 @@ const AddListingForm = ({ guest: bool = false }) => {
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">Name</label>
-              <input type="text" name="subject" />
-              {/* <p className="form_error">{errors.subject?.message}</p> */}
+              <Form.Control
+                type="text"
+                value={""}
+                onChange={() => {}}
+                isInvalid={true}
+              />
             </div>
           </div>
 
@@ -162,6 +176,7 @@ const AddListingForm = ({ guest: bool = false }) => {
         <div className="col-12">
           <button
             type="submit"
+            onClick={handleSubmit}
             className="btn-nine text-uppercase rounded-3 fw-normal w-100"
           >
             {t("contact.send")}

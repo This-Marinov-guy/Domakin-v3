@@ -27,7 +27,10 @@ export const useServer = () => {
     method: string = "GET",
     data: object | null = null,
     headers: object = {},
-    options: Options = {}
+    options: Options = {
+      withLoading: true,
+      withError: true,
+    }
   ) => {
     if (options?.withLoading) startLoading();
 
@@ -61,7 +64,7 @@ export const useServer = () => {
           draggable: true,
           progress: undefined,
           theme: "colored",
-        });;
+        });
       }
     } finally {
       stopLoading();

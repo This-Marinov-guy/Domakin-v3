@@ -1112,6 +1112,15 @@
     "email": "Email Address",
     "send": "Send"
   },
+
+  "legals": {
+    "title": "Legal Documents",
+    "cookies": "Cookies",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "permission_contact": "I give my permission to be contacted by the organization for the purposes of the service",
+    "permission_terms": "I have read and agree to the {{links}}"
+  },
   
   "common": {
     "agree": "Agree",

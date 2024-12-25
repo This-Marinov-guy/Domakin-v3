@@ -102,3 +102,21 @@ export const resizeFile = (file: File, width = 800, height = 800, format = "JPG"
 
     return location;
   };
+
+  export const transformToFormData = (data: any) => {
+    const formData = new FormData();
+
+    for (const key in data) {
+      if (Array.isArray(data[key])) {
+        data[key].forEach((element: any) => {
+          formData.append(key, element);
+        });
+      } else if (typeof data[key] === 'object' && data[key] !== null) {
+        formData.append(key, JSON.stringify(data[key]));
+      } else {
+        formData.append(key, data[key]);
+      }
+    }
+
+    return formData;
+  }

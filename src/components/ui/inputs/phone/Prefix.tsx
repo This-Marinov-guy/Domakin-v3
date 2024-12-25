@@ -7,7 +7,9 @@ import { LOCAL_STORAGE_LOCATION } from "@/utils/localstorage";
 import useTranslation from "next-translate/useTranslation";
 import Search from "../Search";
 
-const Prefix = () => {
+const Prefix = (props: any) => {
+  const {value, onChange} = props;
+
   const {t} = useTranslation("translations");
 
   const PHONE_CODES = EUROPEAN_COUNTRIES.map((c) => c.phoneCode);
@@ -26,13 +28,13 @@ const Prefix = () => {
         aria-expanded="false"
         data-bs-auto-close="outside"
       >
-        {t("common.code")}
+        {value || t("common.code")}
       </button>
       <ul className="dropdown-menu phone-prefix-dropdown">
         <Search options={PHONE_CODES} setOptions={setOptions} />
         {options.map((c, i) => {
           return (
-            <li className="dropdown-item" key={i}>
+            <li onClick={() => onChange(c)} className="dropdown-item" key={i}>
               {c}
             </li>
           );
