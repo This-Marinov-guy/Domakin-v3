@@ -30,13 +30,13 @@ const AddListingForm = () => {
     e.preventDefault();
 
     sendRequest(
-      "/viewing/create",
+      "/property/create",
       "POST",
-      transformToFormData(propertyStore.addListingData)
+      transformToFormData(propertyStore.addListingData),
     ).then((res) => {
-      if (res.status) {
+      if (res?.status) {
         // success
-      } else if (res.invalid_fields){
+      } else if (res?.invalid_fields) {
         addErrorFields(res.invalid_fields);
       }
     });
@@ -59,7 +59,7 @@ const AddListingForm = () => {
                 onChange={(e) => {
                   updateListingData("personalData", "name", e.target.value);
                 }}
-                isInvalid={errorFields.includes("name")}
+                isInvalid={errorFields.includes("personalData.name")}
               />
             </div>
           </div>
@@ -73,7 +73,7 @@ const AddListingForm = () => {
                 onChange={(e) => {
                   updateListingData("personalData", "surname", e.target.value);
                 }}
-                isInvalid={errorFields.includes("surname")}
+                isInvalid={errorFields.includes("personalData.surname")}
               />
             </div>
           </div>
@@ -85,7 +85,7 @@ const AddListingForm = () => {
                 onChange={(value: string) => {
                   updateListingData("personalData", "phone", value);
                 }}
-                isInvalid={errorFields.includes("phone")}
+                isInvalid={errorFields.includes("personalData.phone")}
               />
             </div>
           </div>
@@ -99,7 +99,7 @@ const AddListingForm = () => {
                 onChange={(e) => {
                   updateListingData("personalData", "email", e.target.value);
                 }}
-                isInvalid={errorFields.includes("email")}
+                isInvalid={errorFields.includes("personalData.email")}
               />
             </div>
           </div>
@@ -119,7 +119,7 @@ const AddListingForm = () => {
                 onChange={(e) => {
                   updateListingData("propertyData", "city", e.target.value);
                 }}
-                isInvalid={errorFields.includes("city")}
+                isInvalid={errorFields.includes("propertyData.city")}
               />
             </div>
           </div>
@@ -133,7 +133,7 @@ const AddListingForm = () => {
                 onChange={(e) => {
                   updateListingData("propertyData", "address", e.target.value);
                 }}
-                isInvalid={errorFields.includes("address")}
+                isInvalid={errorFields.includes("propertyData.address")}
               />
               <small>* {t("emergency_housing.precise_address")}</small>
             </div>
@@ -148,7 +148,7 @@ const AddListingForm = () => {
                 onChange={(e) => {
                   updateListingData("propertyData", "size", e.target.value);
                 }}
-                isInvalid={errorFields.includes("size")}
+                isInvalid={errorFields.includes("propertyData.size")}
               />
             </div>
           </div>
@@ -162,7 +162,7 @@ const AddListingForm = () => {
                 onChange={(e) => {
                   updateListingData("propertyData", "period", e.target.value);
                 }}
-                isInvalid={errorFields.includes("period")}
+                isInvalid={errorFields.includes("propertyData.period")}
               />
             </div>
           </div>
@@ -176,7 +176,7 @@ const AddListingForm = () => {
                 onChange={(e) => {
                   updateListingData("propertyData", "rent", e.target.value);
                 }}
-                isInvalid={errorFields.includes("rent")}
+                isInvalid={errorFields.includes("propertyData.rent")}
               />
             </div>
           </div>
@@ -190,7 +190,7 @@ const AddListingForm = () => {
                 onChange={(e) => {
                   updateListingData("propertyData", "bills", e.target.value);
                 }}
-                isInvalid={errorFields.includes("bills")}
+                isInvalid={errorFields.includes("propertyData.bills")}
               />
             </div>
           </div>
@@ -208,7 +208,7 @@ const AddListingForm = () => {
                     e.target.value
                   );
                 }}
-                isInvalid={errorFields.includes("flatmates")}
+                isInvalid={errorFields.includes("propertyData.flatmates")}
               />
             </div>
           </div>
@@ -230,7 +230,7 @@ const AddListingForm = () => {
                     e.target.value
                   );
                 }}
-                isInvalid={errorFields.includes("registration")}
+                isInvalid={errorFields.includes("propertyData.registration")}
                 name=""
                 placeholder=""
               />
@@ -250,7 +250,7 @@ const AddListingForm = () => {
                     e.target.value
                   );
                 }}
-                isInvalid={errorFields.includes("description")}
+                isInvalid={errorFields.includes("propertyData.description")}
               />
               <small>* {t("emergency_housing.description_disclaimer")}</small>
             </div>
@@ -265,7 +265,7 @@ const AddListingForm = () => {
                 onChange={(e) => {
                   updateListingData("propertyData", "note", e.target.value);
                 }}
-                isInvalid={errorFields.includes("note")}
+                isInvalid={errorFields.includes("propertyData.note")}
               />
             </div>
           </div>
@@ -282,7 +282,7 @@ const AddListingForm = () => {
             onChange={(files: any) => {
               updateListingData("propertyData", "images", files);
             }}
-            isInvalid={errorFields.includes("images")}
+            isInvalid={errorFields.includes("propertyData.images")}
             // maxSizeNote={t("files.allowed_sizes_note", { allowed_size: "5MB" })}
             allowedFormatsNotes={t("files.allowed_types_note", {
               allowed_types: "jpg, png, jpeg, webp, svg, bmp, heic, mp4",
@@ -291,7 +291,7 @@ const AddListingForm = () => {
         </div>
 
         <div className="col-12 mb-20 d-flex gap-3 align-items-center justify-content-start">
-          <input
+          <Form.Check
             type="checkbox"
             name="Amenities"
             value={terms.contact}
@@ -299,12 +299,13 @@ const AddListingForm = () => {
             onChange={(e) => {
               updateListingData("terms", "contact", e.target.checked);
             }}
+            isInvalid={errorFields.includes("terms.contact")}
           />
           <label>{t("legals.permission_contact")}</label>
         </div>
 
         <div className="col-12 mb-20 d-flex gap-3 align-items-center justify-content-start">
-          <input
+          <Form.Check
             type="checkbox"
             name="Amenities"
             value={terms.legals}
@@ -312,6 +313,7 @@ const AddListingForm = () => {
             onChange={(e) => {
               updateListingData("terms", "legals", e.target.checked);
             }}
+            isInvalid={errorFields.includes("terms.legals")}
           />
           <label>
             <Trans
