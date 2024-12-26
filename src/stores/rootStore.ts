@@ -9,14 +9,14 @@ class RootStore {
   userStore;
   modalStore;
   propertyStore;
-  servicesStore;
+  serviceStore;
 
   constructor() {
     this.commonStore = new CommonStore(this);
     this.userStore = new UserStore(this);
     this.modalStore = new ModalStore(this);
     this.propertyStore = new PropertyStore(this);
-    this.servicesStore = new ServiceStore(this);
+    this.serviceStore = new ServiceStore(this);
   }
 }
 

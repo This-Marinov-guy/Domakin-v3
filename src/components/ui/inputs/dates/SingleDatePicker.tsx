@@ -1,32 +1,31 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 
 const SingleDatePicker = (props: any) => {
-  const [selected, setSelected] = useState(props.initialValue);
   const calendarRef = useRef(null);
 
-  const handleDateSelect = (date: string) => {
-    setSelected(date);
-    props.onSelect(date);
+  const handleDateSelect = (date:string) => {
+    props.onChange(date);
   };
 
   return (
     <div className="dropdown" ref={calendarRef}>
       <input
         type="text"
-        value={selected ? new Date(selected).toLocaleDateString() : ""}
+        value={props.value ? new Date(props.value).toLocaleDateString() : ""}
         placeholder={props.placeholder ?? "Select a date"}
         data-bs-toggle="dropdown"
         aria-expanded="false"
         data-bs-auto-close="outside"
+        className={`${props.isInvalid ? "is-invalid" : ""} form-control`}
       />
       <div className="calendar dropdown-menu">
         <DayPicker
           mode="single"
           captionLayout="dropdown"
-          selected={selected}
-          // onSelect={handleDateSelect}
+          selected={props.value}
+          onSelect={(date: any) => handleDateSelect(date)}
         />
       </div>
     </div>

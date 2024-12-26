@@ -8,40 +8,35 @@ import { LOCAL_STORAGE_LOCATION } from "@/utils/localstorage";
 import Prefix from "./Prefix";
 
 const PrefixPhoneInput = (props: any) => {
-  const { className, style, onChange, isInvalid } = props;
+  const { className, style, value, onChange, isInvalid } = props;
 
   const [selectedCode, setSelectedCode] = useState("");
 
-  const [value, setValue] = useState(undefined);
+  const [mainPart, setMainPart] = useState("");
 
   useEffect(() => {
-    const storedLocation = localStorage.getItem(LOCAL_STORAGE_LOCATION);
-    if (storedLocation) {
+    if (typeof window !== "undefined" && window.localStorage) {
       const country = EUROPEAN_COUNTRIES.find(
-        (c) => c.iso2.toUpperCase() === storedLocation.toUpperCase()
+        (c) => c.iso2.toUpperCase() === getGeoLocation()
       );
 
       if (country) {
         setSelectedCode(country.phoneCode);
-      }
-    } else {
-      const geoLocation = getGeoLocation();
-      const country = EUROPEAN_COUNTRIES.find(
-        (c) => c.iso2.toUpperCase() === geoLocation
-      );
-
-      if (country) {
-        setSelectedCode(country.phoneCode);
-        localStorage.setItem(LOCAL_STORAGE_LOCATION, country.iso2);
       }
     }
   }, []);
 
   useEffect(() => {
-    if (onChange && selectedCode && value) {
-      onChange(selectedCode + value);
+    if (onChange && selectedCode && mainPart) {
+      onChange(selectedCode + mainPart);
     }
-  }, [selectedCode, value]);
+  }, [selectedCode, mainPart]);
+
+  useEffect(() => {
+    if (!value) {
+      setMainPart("");
+    }
+  }, [value]);
 
   return (
     <div className="phone-input">
@@ -60,8 +55,8 @@ const PrefixPhoneInput = (props: any) => {
       <Form.Control
         type="number"
         className="phone-content form-control"
-        value={value}
-        onChange={(e: any) => setValue(e.target.value)}
+        value={mainPart}
+        onChange={(e: any) => setMainPart(e.target.value)}
         isInvalid={isInvalid}
       />
     </div>

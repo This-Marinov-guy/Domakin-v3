@@ -1,4 +1,21 @@
-import { action, makeAutoObservable, observable } from "mobx"
+import { action, makeAutoObservable, observable } from "mobx";
+
+const defaultViewingData = {
+  name: "",
+  surname: "",
+  email: "",
+  phone: "",
+  city: "",
+  address: "",
+  date: "",
+  time: "",
+  note: "",
+
+  terms: {
+    contact: false,
+    legals: false,
+  },
+};
 
 export default class ServiceStore {
   rootStore;
@@ -8,14 +25,26 @@ export default class ServiceStore {
     this.rootStore = root;
   }
 
-  @observable loading = false;
-  @observable error = null;
+  // viewing
+  @observable viewingData: any = { ...defaultViewingData };
+  @observable viewingErrorFields: string[] = [];
 
-  @action startLoading = () => {
-    this.loading = true;
-  }
+  @action
+  updateViewingData = (key: string, nestedKey: string, value: any) => {
+    if (nestedKey) {
+      this.viewingData[key][nestedKey] = value;
+    } else {
+      this.viewingData[key] = value;
+    }
+  };
 
-  @action stopLoading = () => {
-    this.loading = false;
-  }
+  @action
+  addViewingErrorFields = (fields: string[]) => {
+    this.viewingErrorFields = fields;
+  };
+
+  @action
+  resetViewingData = () => {
+    this.viewingData = { ...defaultViewingData };
+  };
 }

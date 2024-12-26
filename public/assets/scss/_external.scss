@@ -4,6 +4,11 @@
 
 .form-control.is-invalid,
 .is-invalid {
+  input {
+    border-color: $danger !important;
+    border-width: 2px !important;
+  }
+  
   border-color: $danger !important;
   border-width: 2px !important;
 }
