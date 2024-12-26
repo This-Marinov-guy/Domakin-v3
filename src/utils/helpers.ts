@@ -66,8 +66,14 @@ export const createFileName = (index: Number) => {
   return `${index}.jpg`;
 };
 
-export const resizeFile = (file: File, width = 800, height = 800, format = "JPG", withOriginalName = true) =>
-  new Promise((resolve) => {    
+export const resizeFile = (
+  file: File,
+  width = 800,
+  height = 800,
+  format = "JPG",
+  withOriginalName = true
+) =>
+  new Promise((resolve) => {
     Resizer.imageFileResizer(
       file,
       width,
@@ -76,47 +82,57 @@ export const resizeFile = (file: File, width = 800, height = 800, format = "JPG"
       100,
       0,
       (blob) => {
-        // @ts-expect-error
-        resolve(new File([blob], withOriginalName ? file.name.slice(0, 20) : "resized-image.jpg", { type: "image/jpg" }));
+        resolve(
+          new File(
+            // @ts-expect-error
+            [blob],
+            withOriginalName ? file.name.slice(0, 20) : "resized-image.jpg",
+            { type: "image/jpg" }
+          )
+        );
       },
       "blob"
     );
   });
 
-  export const getGeoLocation = () => {
-    let location = localStorage.getItem(LOCAL_STORAGE_LOCATION) || "";
+export const getGeoLocation = () => {
+  let location = "";
 
-    if (location) {
-      return location;
-    }
-
-    fetch(`https://ipinfo.io/json?token=${process.env.REACT_APP_GEO_TOKEN}`)
-      .then((response) => response.json())
-      .then((data) => {
-        location = data.country;
-        localStorage.setItem(LOCAL_STORAGE_LOCATION, location);
-      })
-      .catch((error) => {
-        console.error("Error fetching location data:", error);
-      });
-
-    return location;
-  };
-
-  export const transformToFormData = (data: any) => {
-    const formData = new FormData();
-
-    for (const key in data) {
-      if (Array.isArray(data[key])) {
-        data[key].forEach((element: any, index) => {
-          formData.append(`${key}[${index}]`, element);
-        });
-      } else if (typeof data[key] === 'object' && data[key] !== null) {
-        formData.append(key, JSON.stringify(data[key]));
-      } else {
-        formData.append(key, data[key]);
-      }
-    }
-
-    return formData;
+  if (typeof window !== "undefined" && window.localStorage) {
+    location = localStorage.getItem(LOCAL_STORAGE_LOCATION) ?? '';
   }
+
+  if (location) {
+    return location;
+  }
+
+  fetch(`https://ipinfo.io/json?token=${process.env.REACT_APP_GEO_TOKEN}`)
+    .then((response) => response.json())
+    .then((data) => {
+      location = data.country;
+      localStorage.setItem(LOCAL_STORAGE_LOCATION, location);
+    })
+    .catch((error) => {
+      console.error("Error fetching location data:", error);
+    });
+
+  return location;
+};
+
+export const transformToFormData = (data: any) => {
+  const formData = new FormData();
+
+  for (const key in data) {
+    if (Array.isArray(data[key])) {
+      data[key].forEach((element: any, index) => {
+        formData.append(`${key}[${index}]`, element);
+      });
+    } else if (typeof data[key] === "object" && data[key] !== null) {
+      formData.append(key, JSON.stringify(data[key]));
+    } else {
+      formData.append(key, data[key]);
+    }
+  }
+
+  return formData;
+};

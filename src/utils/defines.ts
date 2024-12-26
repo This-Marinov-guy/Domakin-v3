@@ -53,3 +53,4 @@ export const GRID = '2';
 
 //modals
 export const COOKIE_MODAL = 'COOKIE_MODAL';
+export const LOGIN_MODAL = 'LOGIN_MODAL';
