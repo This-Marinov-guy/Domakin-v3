@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Search from "@/components/ui/inputs/Search";
 import NiceSelect from "@/ui/NiceSelect";
 import { capitalizeFirstLetters } from "@/utils/helpers";
 import useTranslation from "next-translate/useTranslation";
