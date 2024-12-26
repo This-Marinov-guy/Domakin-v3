@@ -74,32 +74,36 @@ export const resizeFile = (
   withOriginalName = true
 ) =>
   new Promise((resolve) => {
-    Resizer.imageFileResizer(
-      file,
-      width,
-      height,
-      format,
-      100,
-      0,
-      (blob) => {
-        resolve(
-          new File(
-            // @ts-expect-error
-            [blob],
-            withOriginalName ? file.name.slice(0, 20) : "resized-image.jpg",
-            { type: "image/jpg" }
-          )
-        );
-      },
-      "blob"
-    );
+    if (file.type.startsWith("image/")) {
+      Resizer.imageFileResizer(
+        file,
+        width,
+        height,
+        format,
+        100,
+        0,
+        (blob) => {
+          resolve(
+            new File(
+              // @ts-expect-error
+              [blob],
+              withOriginalName ? file.name.slice(0, 20) : "resized-image.jpg",
+              { type: "image/jpg" }
+            )
+          );
+        },
+        "blob"
+      );
+    } else {
+      resolve(file);
+    }
   });
 
 export const getGeoLocation = () => {
   let location = "";
 
   if (typeof window !== "undefined" && window.localStorage) {
-    location = localStorage.getItem(LOCAL_STORAGE_LOCATION) ?? '';
+    location = localStorage.getItem(LOCAL_STORAGE_LOCATION) ?? "";
   }
 
   if (location) {
