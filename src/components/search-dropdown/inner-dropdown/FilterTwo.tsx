@@ -4,8 +4,9 @@ import NiceSelect from "@/ui/NiceSelect";
 import { capitalizeFirstLetters } from "@/utils/helpers";
 import useTranslation from "next-translate/useTranslation";
 import RangesSelect from "@/ui/RangesSelect";
+import SearchQuery from "@/components/ui/inputs/SearchQuery";
 
-const FilterTwo = ({ properties, setFilterProperties }: any) => {
+const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) => {
   const min = 200;
   const max = 1500;
   const { t } = useTranslation("translations");
@@ -18,14 +19,14 @@ const FilterTwo = ({ properties, setFilterProperties }: any) => {
     t("locations", {}, { returnObjects: true }) ?? []
   ).map((key) => key.toLowerCase());
   const locations = [t("filter.all"), ...locationsList];
-  
-  const availability = Object.keys(statusCodeMapping).map(
+
+  const availabilities = Object.keys(statusCodeMapping).map(
     (item, index) => index
   );
 
   const [priceFilter, setPriceFilter] = useState([min, max]);
   const [cityFilter, setCityFilter] = useState(locations);
-  const [availFilter, setAvailFilter] = useState(availability);
+  const [availFilter, setAvailFilter] = useState(availabilities);
 
   useEffect(() => {
     let data = properties;
@@ -39,7 +40,6 @@ const FilterTwo = ({ properties, setFilterProperties }: any) => {
   }, [priceFilter]);
 
   useEffect(() => {
-    debugger;
     let data = properties;
 
     data = data.filter((item: any) =>
@@ -74,14 +74,13 @@ const FilterTwo = ({ properties, setFilterProperties }: any) => {
                 })}
                 defaultCurrent={0}
                 onChange={(e) => {
-                  // const city = e.target.name.toLowerCase();
-                  // let newCityFilter;
-                  // if (e.target.checked) {
-                  //   newCityFilter = [...cityFilter, city];
-                  // } else {
-                  //   newCityFilter = cityFilter.filter((item) => item !== city);
-                  // }
-                  // setCityFilter(newCityFilter);
+                  const city = e.target.value.toLowerCase();
+
+                  if (locations.includes(city)) {
+                    setCityFilter([city]);
+                  } else {
+                    setCityFilter(locations);
+                  }
                 }}
                 name=""
                 placeholder=""
@@ -93,7 +92,7 @@ const FilterTwo = ({ properties, setFilterProperties }: any) => {
               <div className="label">{t("filter.availability")}</div>
               <NiceSelect
                 className="nice-select"
-                options={availability.map((item: any) => {
+                options={availabilities.map((item: any) => {
                   return {
                     value: item,
                     text: statusCodeMapping[statusKeys[item]],
@@ -101,13 +100,13 @@ const FilterTwo = ({ properties, setFilterProperties }: any) => {
                 })}
                 defaultCurrent={0}
                 onChange={(e) => {
-                  // let newAvailFilter;
-                  // if (e.target.checked) {
-                  //   newAvailFilter = [...availFilter, item];
-                  // } else {
-                  //   newAvailFilter = availFilter.filter((i) => i !== item);
-                  // }
-                  // setAvailFilter(newAvailFilter);
+                  const availability = +e.target.value;
+
+                  if (availabilities.includes(availability)) {
+                    setAvailFilter([availability]);
+                  } else {
+                    setAvailFilter(availabilities);
+                  }
                 }}
                 name=""
                 placeholder=""
@@ -137,9 +136,9 @@ const FilterTwo = ({ properties, setFilterProperties }: any) => {
                 >
                   <i className="fa-light fa-sliders-up"></i>
                 </Link> */}
-                <Search
-                  options={properties.map((p: any) => p.title)}
-                  setOptions={setFilterProperties}
+                <SearchQuery
+                  query={query}
+                  setQuery={setQuery}
                 />
               </div>
             </div>

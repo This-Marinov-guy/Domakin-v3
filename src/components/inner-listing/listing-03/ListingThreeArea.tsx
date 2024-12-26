@@ -47,6 +47,7 @@ const ListingThreeArea = ({ style }: any) => {
   );
 
   const pageCount = Math.ceil(filterProperties.length / pageLimit);
+
   const [query, setQuery] = useState("");
   const keys = ["title", "location", "city"];
 
@@ -92,6 +93,7 @@ const ListingThreeArea = ({ style }: any) => {
               <FilterTwo
                 properties={properties}
                 setFilterProperties={setFilterProperties}
+                query={query}
                 setQuery={setQuery}
               />
             </div>
@@ -102,7 +104,7 @@ const ListingThreeArea = ({ style }: any) => {
           <div
             dangerouslySetInnerHTML={{
               __html: t("filter.showing", {
-                start: offset + 1,
+                start: paginatedProperties.length ? offset + 1 : 0,
                 end: offset + paginatedProperties.length,
                 total: filterProperties.length,
               }),
@@ -110,7 +112,7 @@ const ListingThreeArea = ({ style }: any) => {
           />
           <div className="d-flex align-items-center xs-mt-20">
             <div className="short-filter d-flex align-items-center">
-              <div className="fs-16 me-2">{t('filter.sort')}:</div>
+              <div className="fs-16 me-2">{t("filter.sort")}:</div>
               {/* <NiceSelect
                 className="nice-select"
                 options={[
@@ -143,12 +145,19 @@ const ListingThreeArea = ({ style }: any) => {
         </div>
 
         <div className="row gx-xxl-5" ref={startRef}>
-          {paginatedProperties.map((property: any) =>
-            listStyle === LIST ? (
-              <PropertyCardList property={property} />
-            ) : (
-              <PropertyCardGrid property={property} />
+          {paginatedProperties?.length > 0 ? (
+            paginatedProperties.map((property: any) =>
+              listStyle === LIST ? (
+                <PropertyCardList property={property} />
+              ) : (
+                <PropertyCardGrid property={property} />
+              )
             )
+          ) : (
+            <h6 className="text-center d-flex flex-column">
+              <i className="fa-solid fa-people-robbery mb-10 fs-1"></i>
+              {t("property.no_properties_for_the_criteria")}
+            </h6>
           )}
         </div>
 

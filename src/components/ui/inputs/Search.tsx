@@ -10,10 +10,17 @@ interface SearchProps {
 }
 
 const Search = (props: SearchProps) => {
-  const {t} = useTranslation("translations");
+  const { t } = useTranslation("translations");
 
   const handleChange = (e: any) => {
-    const newOptions = props.options.filter((o) => o.toLowerCase().includes(e.target.value.toLowerCase()));
+    if (e.target.value === "") {
+      props.setOptions(props.options);
+      return;
+    }
+
+    const newOptions = props.options.filter((o) =>
+      o.toLowerCase().includes(e.target.value.toLowerCase())
+    );
     props.setOptions(newOptions);
   };
 
