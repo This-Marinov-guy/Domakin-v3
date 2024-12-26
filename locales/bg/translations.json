@@ -368,7 +368,11 @@
     "availability": "Наличност",
     "showing": "Показване на <span class='color-dark fw-500'>{{start}}</span>–<span class='color-dark fw-500'>{{end}}</span> от <span class='color-dark fw-500'>{{total}}</span> резултата",
     "sort": "Подреди по",
-    "all": "Всички"
+    "all": "Всички",
+    "newest": "Най-нови",
+    "oldest": "Най-стари",
+    "price_low_high": "Цена: от ниска към висока",
+    "price_high_low": "Цена: от висока към ниска"
   },
   "statusCodeMapping": {
     "free": "Свободна",
@@ -478,6 +482,8 @@
       "status": "НАЕМ",
       "price": 1474,
       "statusCode": 0,
+      "city": "Rotterdam",
+      "location": "Lisstraat, Rotterdam",
       "title": "Просторен апартамент с две спални",
       "description": {
         "property": "Нов обзаведен апартамент с две спални, всекидневна и отделна кухня. Има и балкон. Търсим двама нови наематели. Възможна е регистрация.",

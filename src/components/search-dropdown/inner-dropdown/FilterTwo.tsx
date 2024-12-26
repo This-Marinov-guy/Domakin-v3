@@ -8,7 +8,7 @@ import SearchQuery from "@/components/ui/inputs/SearchQuery";
 
 const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) => {
   const min = 200;
-  const max = 1500;
+  const max = 2000;
   const { t } = useTranslation("translations");
 
   const statusCodeMapping =

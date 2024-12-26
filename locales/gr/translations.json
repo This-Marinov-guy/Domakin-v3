@@ -366,7 +366,11 @@
     "availability": "Διαθεσιμότητα",
     "showing": "Εμφάνιση <span class='color-dark fw-500'>{{start}}</span>–<span class='color-dark fw-500'>{{end}}</span> από <span class='color-dark fw-500'>{{total}}</span> αποτελέσματα",
     "sort": "Ταξινόμηση κατά",
-    "all": "Όλα"
+    "all": "Όλα",
+    "newest": "Νεότερα",
+    "oldest": "Παλαιότερα",
+    "price_low_high": "Τιμή: Χαμηλή προς Υψηλή",
+    "price_high_low": "Τιμή: Υψηλή προς Χαμηλή"
   },
   "statusCodeMapping": {
     "free": "Διαθέσιμο",
@@ -476,6 +480,8 @@
       "status": "ΕΝΟΙΚΙΟ",
       "price": 1474,
       "statusCode": 0,
+      "city": "Rotterdam",
+      "location": "Lisstraat, Rotterdam",
       "title": "Ευρύχωρο διαμέρισμα με 2 υπνοδωμάτια",
       "description": {
         "property": "Καινούργιο επιπλωμένο διαμέρισμα με δύο υπνοδωμάτια, σαλόνι και ξεχωριστή κουζίνα. Υπάρχει και μπαλκόνι. Ψάχνουμε για δύο νέους ενοικιαστές. Είναι δυνατή η εγγραφή.",

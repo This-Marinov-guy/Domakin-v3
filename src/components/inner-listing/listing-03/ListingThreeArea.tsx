@@ -4,10 +4,17 @@ import FilterTwo from "@/components/search-dropdown/inner-dropdown/FilterTwo";
 import ReactPaginate from "react-paginate";
 import useTranslation from "next-translate/useTranslation";
 import { GRID, LIST } from "@/utils/defines";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { LOCAL_STORAGE_PROPERTY_VIEW } from "@/utils/localstorage";
 import PropertyCardGrid from "@/components/ui/cards/properties/PropertyCardGrid";
 import PropertyCardList from "@/components/ui/cards/properties/PropertyCardList";
+import NiceSelect from "@/ui/NiceSelect";
+import {
+  SORT_NEWEST,
+  SORT_OLDEST,
+  SORT_PRICE_LOW,
+  SORT_PRICE_HIGH,
+} from "@/utils/enum";
 
 const ListingThreeArea = ({ style }: any) => {
   const { t, lang } = useTranslation("translations");
@@ -41,6 +48,7 @@ const ListingThreeArea = ({ style }: any) => {
   const pageLimit = 6;
   const endOffset = offset + pageLimit;
 
+  const [sortIndex, setSortIndex] = useState(SORT_NEWEST);
   const [filterProperties, setFilterProperties] = useState(properties);
   const [paginatedProperties, setPaginatedProperties] = useState(
     properties.slice(offset, endOffset)
@@ -51,20 +59,36 @@ const ListingThreeArea = ({ style }: any) => {
   const [query, setQuery] = useState("");
   const keys = ["title", "location", "city"];
 
+  const handleSort = (values: any[], sorting: string) => {
+    switch (sorting) {
+      case SORT_NEWEST:
+        return values.sort((a: any, b: any) => b.id - a.id);
+      case SORT_OLDEST:
+        return values.sort((a: any, b: any) => a.id - b.id);
+      case SORT_PRICE_LOW:
+        return values.sort((a: any, b: any) => a.price - b.price);
+      case SORT_PRICE_HIGH:
+        return values.sort((a: any, b: any) => b.price - a.price);
+      default:
+        return values;
+    }
+  };
+
   useEffect(() => {
     const newData = properties.filter((item) =>
       keys.some((key) => item[key].toLowerCase().includes(query))
     );
 
-    //reset current page as results will be minimal
     setFilterProperties(newData);
     setOffset(0);
     setCurrentPage(0);
   }, [lang, query]);
 
   useEffect(() => {
-    setPaginatedProperties(filterProperties.slice(offset, endOffset));
-  }, [filterProperties, offset, endOffset]);
+    setPaginatedProperties(
+      handleSort(filterProperties.slice(offset, endOffset), sortIndex)
+    );
+  }, [filterProperties, offset, endOffset, sortIndex]);
 
   useEffect(() => {
     const newPaginatedProperties = forRentList.filter((item1) =>
@@ -113,21 +137,23 @@ const ListingThreeArea = ({ style }: any) => {
           <div className="d-flex align-items-center xs-mt-20">
             <div className="short-filter d-flex align-items-center">
               <div className="fs-16 me-2">{t("filter.sort")}:</div>
-              {/* <NiceSelect
+              <NiceSelect
                 className="nice-select"
                 options={[
-                  { value: "newest", text: "Newest" },
-                  { value: "best_seller", text: "Best Seller" },
-                  { value: "best_match", text: "Best Match" },
-                  { value: "price_low", text: "Price Low" },
-                  { value: "price_high", text: "Price High" },
+                  { value: SORT_NEWEST, text: t("filter.newest") },
+                  { value: SORT_OLDEST, text: t("filter.oldest") },
+                  { value: SORT_PRICE_LOW, text: t("filter.price_low_high") },
+                  { value: SORT_PRICE_HIGH, text: t("filter.price_high_low") },
                 ]}
                 defaultCurrent={0}
-                properties={properties}
-                setFilterProperties={setFilterProperties}
+                onChange={(e) => {
+                  const index = e.target.value;
+
+                  setSortIndex(index);
+                }}
                 name=""
                 placeholder=""
-              /> */}
+              />
             </div>
             <button
               onClick={toggleView}

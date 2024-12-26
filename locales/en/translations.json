@@ -366,7 +366,11 @@
     "availability": "Availabilty",
     "showing": "Showing <span class='color-dark fw-500'>{{start}}</span>–<span class='color-dark fw-500'>{{end}}</span> of <span class='color-dark fw-500'>{{total}}</span> results",
     "sort": "Sort by",
-    "all": "All"
+    "all": "All",
+    "newest": "Newest",
+    "oldest": "Oldest",
+    "price_low_high": "Price: Low to High",
+    "price_high_low": "Price: High to Low"
   },
   "statusCodeMapping": {
     "free": "Free",
