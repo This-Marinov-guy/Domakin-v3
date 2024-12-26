@@ -1166,7 +1166,8 @@
     "max_files": "You can attach up to {{max_files}} files",
     "motivational_letter_input": "Motivational letter that we will send to the landlord/roommate",
     "motivational_letter_example": "You can use our ready-made motivational letter template",
-    "download": "Download"
+    "download": "Download",
+    "file_corrupted": "The file might be corrupted, please try again or use another file"
   },
 
   "react_error": {

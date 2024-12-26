@@ -31,27 +31,56 @@ const defaultFormData = {
 export default class PropertyStore {
   rootStore;
 
+  @observable addListingData: any = { ...defaultFormData };
+  @observable errorFields: string[] = [];
+
   constructor(root: any) {
     makeAutoObservable(this);
     this.rootStore = root;
+
+    if (typeof window !== "undefined" && window.localStorage) {
+      this.loadListingData();
+    }
   }
 
-  @observable addListingData: any = defaultFormData;
-  @observable errorFields: string[] = [];
+  @action
+  loadListingData = () => {
+    const data = localStorage.getItem("addListingData");
 
-  @action updateListingData = (key: string, nestedKey: string, value: any) => {
+    if (data) {
+      this.addListingData = JSON.parse(data);
+    } else {
+      this.addListingData = { ...defaultFormData };
+    }
+  };
+
+  @action
+  updateListingData = (key: string, nestedKey: string, value: any) => {
     if (nestedKey) {
       this.addListingData[key][nestedKey] = value;
     } else {
       this.addListingData[key] = value;
     }
-  }
 
-  @action addErrorFields = (fields: string[]) => {
+    if (typeof window !== "undefined" && window.localStorage) {
+      localStorage.setItem(
+        "addListingData",
+        JSON.stringify(this.addListingData)
+      );
+    }
+  };
+
+  @action
+  addErrorFields = (fields: string[]) => {
     this.errorFields = fields;
-  }
+  };
 
-  @action resetListingData = () => {
-    this.addListingData = defaultFormData;
-  }
+  @action
+  resetListingData = () => {
+    this.addListingData = { ...defaultFormData };
+
+    if (typeof window !== "undefined" && window.localStorage) {
+      localStorage.removeItem("addListingData");
+    }
+  };
 }

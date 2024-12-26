@@ -34,9 +34,7 @@ const PrefixMultiFilePreviewInput = (props: any) => {
             return await resizeFile(file);
           } catch (err) {
             toast.error(
-              t("files.wrong_file_type", {
-                allowed_types: "jpg, png, webp, heic",
-              }) as unknown as ToastContent<unknown>,
+              t("files.file_corrupted") as unknown as ToastContent<unknown>,
               {
                 position: "top-center",
                 autoClose: 5000,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import NiceSelect from "@/ui/NiceSelect";
 import Trans from "next-translate/Trans";
@@ -33,12 +33,12 @@ const AddListingForm = () => {
     sendRequest(
       "/property/create",
       "POST",
-      transformToFormData(propertyStore.addListingData),
+      transformToFormData(propertyStore.addListingData)
     ).then((res) => {
       if (res?.status) {
         propertyStore.resetListingData();
 
-        toast.success('The property was uploaded successfully for approval', {
+        toast.success("The property was uploaded successfully for approval", {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -53,6 +53,10 @@ const AddListingForm = () => {
       }
     });
   };
+
+  useEffect(() => {
+    propertyStore.loadListingData();
+  }, []);
 
   return (
     <form className="form-style-one wow fadeInUp pt-40 pb-40">
