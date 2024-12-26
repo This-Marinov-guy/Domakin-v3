@@ -363,7 +363,10 @@
     "property_location": "Property Location",
     "filter_by_price": "Filter By Price",
     "toggle_all": "Toggle All",
-    "availability": "Availabilty"
+    "availability": "Availabilty",
+    "showing": "Showing <span class='color-dark fw-500'>{{start}}</span>–<span class='color-dark fw-500'>{{end}}</span> of <span class='color-dark fw-500'>{{total}}</span> results",
+    "sort": "Sort by",
+    "all": "All"
   },
   "statusCodeMapping": {
     "free": "Free",

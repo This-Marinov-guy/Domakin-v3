@@ -365,7 +365,10 @@
     "property_location": "Филтриране по локация",
     "filter_by_price": "Филтриране по цена",
     "toggle_all": "Селектирай Всички",
-    "availability": "Наличност"
+    "availability": "Наличност",
+    "showing": "Показване на <span class='color-dark fw-500'>{{start}}</span>–<span class='color-dark fw-500'>{{end}}</span> от <span class='color-dark fw-500'>{{total}}</span> резултата",
+    "sort": "Подреди по",
+    "all": "Всички"
   },
   "statusCodeMapping": {
     "free": "Свободна",

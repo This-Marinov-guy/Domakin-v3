@@ -363,7 +363,10 @@
     "property_location": "Τοποθεσία κατοικίας",
     "filter_by_price": "Φίλτρο ανα τιμή",
     "toggle_all": "εναλλαγή όλων",
-    "availability": "Διαθεσιμότητα"
+    "availability": "Διαθεσιμότητα",
+    "showing": "Εμφάνιση <span class='color-dark fw-500'>{{start}}</span>–<span class='color-dark fw-500'>{{end}}</span> από <span class='color-dark fw-500'>{{total}}</span> αποτελέσματα",
+    "sort": "Ταξινόμηση κατά",
+    "all": "Όλα"
   },
   "statusCodeMapping": {
     "free": "Διαθέσιμο",

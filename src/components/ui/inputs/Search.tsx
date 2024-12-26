@@ -18,12 +18,12 @@ const Search = (props: SearchProps) => {
   };
 
   return (
-    <div className="search-container">
+    <div className="search-container m-a">
       <i className="fa-solid fa-magnifying-glass search-icon"></i>
       <input
         type="text"
         onChange={handleChange}
-        className={`search-field ${props.className}`}
+        className={`search-field w-100 ${props.className}`}
         placeholder={props.placeholder ?? t("common.search")}
         style={props.style}
       />

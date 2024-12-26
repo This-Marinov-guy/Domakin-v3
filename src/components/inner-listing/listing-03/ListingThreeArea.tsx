@@ -1,25 +1,25 @@
 "use client";
-import DropdownTwo from "@/components/search-dropdown/inner-dropdown/DropdownTwo";
-import NiceSelect from "@/ui/NiceSelect";
 
+import FilterTwo from "@/components/search-dropdown/inner-dropdown/FilterTwo";
 import ReactPaginate from "react-paginate";
-
-import featureIcon_1 from "@/assets/images/icon/icon_04.svg";
-import featureIcon_2 from "@/assets/images/icon/icon_05.svg";
-import featureIcon_3 from "@/assets/images/icon/icon_06.svg";
-import UseShortedProperty from "@/hooks/useShortedProperty";
 import useTranslation from "next-translate/useTranslation";
-import { GRID, LIST, STATUS_COLORS } from "@/utils/defines";
-import { useState } from "react";
+import { GRID, LIST } from "@/utils/defines";
+import { useEffect, useRef, useState } from "react";
 import { LOCAL_STORAGE_PROPERTY_VIEW } from "@/utils/localstorage";
 import PropertyCardGrid from "@/components/ui/cards/properties/PropertyCardGrid";
 import PropertyCardList from "@/components/ui/cards/properties/PropertyCardList";
-import Link from "next/link";
 
 const ListingThreeArea = ({ style }: any) => {
-  const { t } = useTranslation("translations");
+  const { t, lang } = useTranslation("translations");
 
-  const [listStyle, setListStyle] = useState(localStorage.getItem(LOCAL_STORAGE_PROPERTY_VIEW) || GRID);
+  const [listStyle, setListStyle] = useState(GRID);
+
+  useEffect(() => {
+    const savedStyle = localStorage.getItem(LOCAL_STORAGE_PROPERTY_VIEW);
+    if (savedStyle) {
+      setListStyle(savedStyle);
+    }
+  }, []);
 
   const toggleView = () => {
     const newView = listStyle === GRID ? LIST : GRID;
@@ -34,32 +34,49 @@ const ListingThreeArea = ({ style }: any) => {
     (p: any) => p.hidden == false || p.hidden === undefined
   );
 
-  const itemsPerPage = 9;
-  const page = "listing_4";
+  const startRef = useRef<HTMLDivElement>(null);
 
-  const {
-    itemOffset,
-    sortedProperties,
-    currentItems,
-    pageCount,
-    handlePageClick,
-    handleBathroomChange,
-    handleBedroomChange,
-    handleSearchChange,
-    handlePriceChange,
-    maxPrice,
-    priceValue,
-    resetFilters,
-    selectedAmenities,
-    handleAmenityChange,
-    handleLocationChange,
-    handleStatusChange,
-    handleTypeChange,
-    handlePriceDropChange,
-  } = UseShortedProperty({ itemsPerPage, page });
+  const [offset, setOffset] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const pageLimit = 6;
+  const endOffset = offset + pageLimit;
 
-  const handleResetFilter = () => {
-    resetFilters();
+  const [filterProperties, setFilterProperties] = useState(properties);
+  const [paginatedProperties, setPaginatedProperties] = useState(
+    properties.slice(offset, endOffset)
+  );
+
+  const pageCount = Math.ceil(filterProperties.length / pageLimit);
+  const [query, setQuery] = useState("");
+  const keys = ["title", "location", "city"];
+
+  useEffect(() => {
+    const newData = properties.filter((item) =>
+      keys.some((key) => item[key].toLowerCase().includes(query))
+    );
+
+    //reset current page as results will be minimal
+    setFilterProperties(newData);
+    setOffset(0);
+    setCurrentPage(0);
+  }, [lang, query]);
+
+  useEffect(() => {
+    setPaginatedProperties(filterProperties.slice(offset, endOffset));
+  }, [filterProperties, offset, endOffset]);
+
+  useEffect(() => {
+    const newPaginatedProperties = forRentList.filter((item1) =>
+      filterProperties.some((item2) => item2.id === item1.id)
+    );
+    setPaginatedProperties(newPaginatedProperties.slice(offset, endOffset));
+  }, [lang]);
+
+  const handlePageClick = (event: any) => {
+    const newOffset = (event.selected * pageLimit) % filterProperties.length;
+    setOffset(newOffset);
+    setCurrentPage(event.selected);
+    startRef.current!.scrollIntoView();
   };
 
   return (
@@ -72,38 +89,29 @@ const ListingThreeArea = ({ style }: any) => {
         {!style && (
           <div className="search-wrapper-one layout-one bg position-relative mb-75 md-mb-50">
             <div className="bg-wrapper border-layout">
-              <DropdownTwo
-                handlePriceDropChange={handlePriceDropChange}
-                handleSearchChange={handleSearchChange}
-                handleBedroomChange={handleBedroomChange}
-                handleBathroomChange={handleBathroomChange}
-                handlePriceChange={handlePriceChange}
-                maxPrice={maxPrice}
-                priceValue={priceValue}
-                handleResetFilter={handleResetFilter}
-                selectedAmenities={selectedAmenities}
-                handleAmenityChange={handleAmenityChange}
-                handleLocationChange={handleLocationChange}
-                handleStatusChange={handleStatusChange}
+              <FilterTwo
+                properties={properties}
+                setFilterProperties={setFilterProperties}
+                setQuery={setQuery}
               />
             </div>
           </div>
         )}
 
         <div className="listing-header-filter d-sm-flex justify-content-between align-items-center mb-40 lg-mb-30">
-          <div>
-            Showing{" "}
-            <span className="color-dark fw-500">
-              {itemOffset + 1}–{itemOffset + currentItems.length}
-            </span>{" "}
-            of{" "}
-            <span className="color-dark fw-500">{sortedProperties.length}</span>{" "}
-            results
-          </div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: t("filter.showing", {
+                start: offset + 1,
+                end: offset + paginatedProperties.length,
+                total: filterProperties.length,
+              }),
+            }}
+          />
           <div className="d-flex align-items-center xs-mt-20">
             <div className="short-filter d-flex align-items-center">
-              <div className="fs-16 me-2">Short by:</div>
-              <NiceSelect
+              <div className="fs-16 me-2">{t('filter.sort')}:</div>
+              {/* <NiceSelect
                 className="nice-select"
                 options={[
                   { value: "newest", text: "Newest" },
@@ -113,10 +121,11 @@ const ListingThreeArea = ({ style }: any) => {
                   { value: "price_high", text: "Price High" },
                 ]}
                 defaultCurrent={0}
-                onChange={handleTypeChange}
+                properties={properties}
+                setFilterProperties={setFilterProperties}
                 name=""
                 placeholder=""
-              />
+              /> */}
             </div>
             <button
               onClick={toggleView}
@@ -133,8 +142,8 @@ const ListingThreeArea = ({ style }: any) => {
           </div>
         </div>
 
-        <div className="row gx-xxl-5">
-          {properties.map((property: any) =>
+        <div className="row gx-xxl-5" ref={startRef}>
+          {paginatedProperties.map((property: any) =>
             listStyle === LIST ? (
               <PropertyCardList property={property} />
             ) : (
@@ -146,13 +155,15 @@ const ListingThreeArea = ({ style }: any) => {
         <div className="pt-50 md-pt-20 text-center">
           <ReactPaginate
             breakLabel="..."
-            nextLabel={<i className="fa-regular fa-chevron-right"></i>}
             onPageChange={handlePageClick}
-            pageRangeDisplayed={pageCount}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
             pageCount={pageCount}
-            previousLabel={<i className="fa-regular fa-chevron-left"></i>}
             renderOnZeroPageCount={null}
             className="pagination-two d-inline-flex align-items-center justify-content-center style-none"
+            previousLabel={<i className="fa-regular fa-chevron-left"></i>}
+            nextLabel={<i className="fa-regular fa-chevron-right"></i>}
+            forcePage={currentPage}
           />
         </div>
       </div>
