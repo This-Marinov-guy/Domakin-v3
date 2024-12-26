@@ -8,21 +8,16 @@ import { useState } from "react";
 import logo from "@/assets/img/logo-3.png";
 import useTranslation from "next-translate/useTranslation";
 import ChangeLanguage from "./ChangeLanguage";
+import { useStore } from "@/stores/storeContext";
+import { LOGIN_MODAL } from "@/utils/defines";
 
 const NavMenu = () => {
   const pathname = usePathname();
-  const currentRoute = usePathname();
   const [navTitle, setNavTitle] = useState("");
 
   const { t } = useTranslation("translations");
 
-  const isMenuItemActive = (menuLink: string) => {
-    return currentRoute === menuLink;
-  };
-
-  const isSubMenuItemActive = (subMenuLink: string) => {
-    return currentRoute === subMenuLink;
-  };
+  const {modalStore} = useStore();  
 
   //openMobileMenu
   const openMobileMenu = (menu: any) => {
@@ -111,6 +106,23 @@ const NavMenu = () => {
           )}
         </li>
       ))}
+
+      <li className="d-block d-lg-none d-md-inline-block ms-3 mt-20">
+        <Link href="/services/add-listing" className="btn-two" target="_blank">
+          <span>{t("header.add_listing")}</span>{" "}
+          <i className="fa-thin fa-arrow-up-right"></i>
+        </Link>
+      </li>
+
+      <li className="d-block d-lg-none d-md-inline-block ms-3 mt-10">
+        <button
+          onClick={() => modalStore.setActiveModal(LOGIN_MODAL)}
+          className="btn-fourteen"
+        >
+          <i className="fa-regular fa-lock"></i>{" "}
+          <span>{t("account:authentication.login")}</span>
+        </button>
+      </li>
     </ul>
   );
 };

@@ -1,3 +1,6 @@
 {
-    
+    "authentication": {
+        "login": "Login",
+        "register": "Register"
+    }
 }

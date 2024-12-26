@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link";
 import { useState } from "react";
 import VideoPopup from "@/modals/VideoPopup";
-import FilterTwo from "@/components/search-dropdown/home-dropdown/FilterTwo";
+import DropdownTwo from "@/components/search-dropdown/home-dropdown/DropdownTwo";
 
 import titleShape from "@/assets/images/shape/shape_11.svg"
 import bannerImg_1 from "@/assets/images/assets/ils_03.png"
@@ -36,7 +36,7 @@ const HeroBanner = () => {
                      </div>
                   </div>
 
-                  <FilterTwo />
+                  <DropdownTwo />
                </div>
             </div>
             <Image src={bannerImg_1} alt="" className="lazy-img shapes illustration" />

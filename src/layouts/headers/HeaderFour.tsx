@@ -7,6 +7,7 @@ import UseSticky from "@/hooks/UseSticky"
 import useTranslation from "next-translate/useTranslation"
 import { logoByTheme } from "@/utils/config"
 
+// NOTE: we do not use this
 const HeaderOne = () => {
 
    const { sticky } = UseSticky();
@@ -71,7 +72,6 @@ const HeaderOne = () => {
            </div>
          </div>
        </header>
-
      </>
    );
 }

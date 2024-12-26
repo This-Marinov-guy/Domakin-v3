@@ -172,11 +172,11 @@ const ListingThreeArea = ({ style }: any) => {
 
         <div className="row gx-xxl-5" ref={startRef}>
           {paginatedProperties?.length > 0 ? (
-            paginatedProperties.map((property: any) =>
+            paginatedProperties.map((property: any, index) =>
               listStyle === LIST ? (
-                <PropertyCardList property={property} />
+                <PropertyCardList key={index} property={property} />
               ) : (
-                <PropertyCardGrid property={property} />
+                <PropertyCardGrid key={index} property={property} />
               )
             )
           ) : (

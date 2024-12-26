@@ -27,7 +27,7 @@ const LoginModal = () => {
     setActiveTab(index);
   };
 
-  const handleClose = () => {   
+  const handleClose = () => {
     const newQuery = { ...router.query };
 
     delete newQuery.login;
@@ -37,7 +37,7 @@ const LoginModal = () => {
       pathname: router.pathname,
       query: newQuery,
     });
-    
+
     modalStore.closeAll();
   };
 
