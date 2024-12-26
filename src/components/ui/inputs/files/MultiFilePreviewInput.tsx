@@ -3,6 +3,7 @@ import Dropzone from "react-dropzone";
 import { resizeFile } from "@/utils/helpers";
 import useTranslation from "next-translate/useTranslation";
 import { observer } from "mobx-react-lite";
+import { toast, ToastContent } from "react-toastify";
 
 const PrefixMultiFilePreviewInput = (props: any) => {
   const {
@@ -32,14 +33,21 @@ const PrefixMultiFilePreviewInput = (props: any) => {
           try {
             return await resizeFile(file);
           } catch (err) {
-            // toast({
-            //   title: t("common.inputs.imageInput.file_error", {
-            //     fileName: file.fileName,
-            //   }),
-            //   status: "error",
-            //   duration: 10000,
-            //   isClosable: true,
-            // });
+            toast.error(
+              t("files.wrong_file_type", {
+                allowed_types: "jpg, png, webp, heic",
+              }) as unknown as ToastContent<unknown>,
+              {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+              }
+            );
           }
         })
       );
@@ -48,7 +56,6 @@ const PrefixMultiFilePreviewInput = (props: any) => {
       console.error("Error processing files:", error);
     } finally {
       setImageLoading(false);
-      //   checkoutStore.setIsLoading(false);
     }
   };
 
