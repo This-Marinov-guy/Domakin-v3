@@ -15,6 +15,7 @@ body {
   font-size: 18px;
   position: relative;
   color: $text-color;
+  overflow-x: hidden;
 }
 .font-garamond {
   font-family: $sub-font;

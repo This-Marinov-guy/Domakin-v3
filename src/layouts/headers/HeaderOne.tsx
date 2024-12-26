@@ -53,7 +53,6 @@ const HeaderOne = ({ style }: any) => {
                   <Link
                     href="/services/add-listing"
                     className="btn-two"
-                    target="_blank"
                   >
                     <span>{t("header.add_listing")}</span>
                     <i className="fa-thin fa-arrow-up-right"></i>

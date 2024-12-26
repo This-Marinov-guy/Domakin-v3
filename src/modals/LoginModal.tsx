@@ -10,18 +10,25 @@ import loginIcon_1 from "@/assets/images/icon/google.png";
 import loginIcon_2 from "@/assets/images/icon/facebook.png";
 import RegisterForm from "@/components/forms/RegisterForm";
 import { useStore } from "@/stores/storeContext";
-import { LOGIN_MODAL } from "@/utils/defines";
+import { LOGIN_IN, LOGIN_MODAL, SIGN_UP } from "@/utils/defines";
 import { useRouter } from "next/router";
-
-const tab_title: string[] = ["Login", "Signup"];
+import { observer } from "mobx-react-lite";
+import useTranslation from "next-translate/useTranslation";
 
 const LoginModal = () => {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(LOGIN_IN);
+
+  const { t } = useTranslation("account");
 
   const { modalStore } = useStore();
 
   const router = useRouter();
   const { query } = router;
+
+  const tab_title: string[] = [
+    t("authentication.login"),
+    t("authentication.register"),
+  ];
 
   const handleTabClick = (index: any) => {
     setActiveTab(index);
@@ -43,12 +50,12 @@ const LoginModal = () => {
 
   useEffect(() => {
     if (query.signup) {
-      setActiveTab(1);
+      setActiveTab(SIGN_UP);
       modalStore.setActiveModal(LOGIN_MODAL);
     }
 
     if (query.login) {
-      setActiveTab(0);
+      setActiveTab(LOGIN_IN);
       modalStore.setActiveModal(LOGIN_MODAL);
     }
   }, [query]);
@@ -91,14 +98,14 @@ const LoginModal = () => {
               <div className="tab-content mt-30">
                 <div
                   className={`tab-pane fade ${
-                    activeTab === 0 ? "show active" : ""
+                    activeTab === LOGIN_IN ? "show active" : ""
                   }`}
                 >
                   <div className="text-center mb-20">
-                    <h2>Welcome Back!</h2>
+                    <h2>{t("authentication.welcome_back")}</h2>
                     <p className="fs-20 color-dark">
-                      Still don&apos;t have an account?{" "}
-                      <Link href="#">Sign up</Link>
+                      {t("authentication.no_account")}
+                      <Link className="ml-5" href="#" onClick={() => handleTabClick(SIGN_UP)}>{t("authentication.sign_up")}</Link>
                     </p>
                   </div>
                   <LoginForm />
@@ -106,13 +113,14 @@ const LoginModal = () => {
 
                 <div
                   className={`tab-pane fade ${
-                    activeTab === 1 ? "show active" : ""
+                    activeTab === SIGN_UP ? "show active" : ""
                   }`}
                 >
                   <div className="text-center mb-20">
-                    <h2>Register</h2>
+                    <h2>{t("authentication.register")}</h2>
                     <p className="fs-20 color-dark">
-                      Already have an account? <Link href="#">Login</Link>
+                      {t("authentication.already_registered")}
+                      <Link className="ml-5" href="#" onClick={() => handleTabClick(LOGIN_IN)}>{t("authentication.log_in")}</Link>
                     </p>
                   </div>
                   <RegisterForm />
@@ -152,4 +160,4 @@ const LoginModal = () => {
   );
 };
 
-export default LoginModal;
+export default observer(LoginModal);

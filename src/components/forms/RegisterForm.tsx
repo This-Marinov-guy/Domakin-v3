@@ -1,82 +1,218 @@
-"use client"
+"use client";
 import { useState } from "react";
-import Link from "next/link";
-import { toast } from 'react-toastify';
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
+import Form from "react-bootstrap/Form";
+import Spinner from "react-bootstrap/Spinner";
 import Image from "next/image";
 
 import OpenEye from "@/assets/images/icon/icon_68.svg";
+import { useServer } from "@/hooks/useServer";
+import useTranslation from "next-translate/useTranslation";
+import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
+import Trans from "next-translate/Trans";
+import { toast } from "react-toastify";
+import { useStore } from "@/stores/storeContext";
+import { useRouter } from "next/navigation";
 
-interface FormData {
-   name: string;
-   email: string;
-   password: string;
-}
+const defaultData = {
+  name: "",
+  phone: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+  terms: false,
+};
 
 const RegisterForm = () => {
+  const { t } = useTranslation("account");
 
-   const schema = yup
-      .object({
-         name: yup.string().required().label("Name"),
-         email: yup.string().required().email().label("Email"),
-         password: yup.string().required().label("Password"),
-      })
-      .required();
+  const {modalStore} = useStore();
 
-   const { register, handleSubmit, reset, formState: { errors }, } = useForm<FormData>({ resolver: yupResolver(schema), });
-   const onSubmit = (data: FormData) => {
-      const notify = () => toast('Registration successfully', { position: 'top-center' });
-      notify();
-      reset();
-   };
+  const router = useRouter();
 
-   const [isPasswordVisible, setPasswordVisibility] = useState(false);
+  const { loading, sendRequest } = useServer();
 
-   const togglePasswordVisibility = () => {
-      setPasswordVisibility(!isPasswordVisible);
-   };
+  const [form, setForm] = useState(defaultData);
+  const [errors, setErrors] = useState<string[]>([]);
+  const [isPasswordVisible, setPasswordVisibility] = useState(false);
 
-   return (
-      <form onSubmit={handleSubmit(onSubmit)}>
-         <div className="row">
-            <div className="col-12">
-               <div className="input-group-meta position-relative mb-25">
-                  <label>Name*</label>
-                  <input type="text" {...register("name")} placeholder="Zubayer Hasan" />
-                  <p className="form_error">{errors.name?.message}</p>
-               </div>
-            </div>
-            <div className="col-12">
-               <div className="input-group-meta position-relative mb-25">
-                  <label>Email*</label>
-                  <input type="email" {...register("email")} placeholder="Youremail@gmail.com" />
-                  <p className="form_error">{errors.email?.message}</p>
-               </div>
-            </div>
-            <div className="col-12">
-               <div className="input-group-meta position-relative mb-20">
-                  <label>Password*</label>
-                  <input type={isPasswordVisible ? "text" : "password"} {...register("password")} placeholder="Enter Password" className="pass_log_id" />
-                  <span className="placeholder_icon"><span className={`passVicon ${isPasswordVisible ? "eye-slash" : ""}`}><Image onClick={togglePasswordVisibility} src={OpenEye} alt="" /></span></span>
-                  <p className="form_error">{errors.password?.message}</p>
-               </div>
-            </div>
-            <div className="col-12">
-               <div className="agreement-checkbox d-flex justify-content-between align-items-center">
-                  <div>
-                     <input type="checkbox" id="remember2" />
-                     <label htmlFor="remember2">By hitting the &quot;Register&quot; button, you agree to the <Link href="#">Terms conditions</Link> & <Link href="#">Privacy Policy</Link></label>
-                  </div>
-               </div>
-            </div>
-            <div className="col-12">
-               <button type="submit" className="btn-two w-100 text-uppercase d-block mt-20">SIGN UP</button>
-            </div>
-         </div>
-      </form>
-   )
-}
+  const togglePasswordVisibility = () => {
+    setPasswordVisibility(!isPasswordVisible);
+  };
+
+  const handleChange = (e: any) => {
+    setForm((prevState) => {
+      return { ...prevState, [e.target.name]: e.target.value };
+    });
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    sendRequest(
+          "/authenticate/signup",
+          "POST",
+          form
+        ).then((res) => {
+          if (res?.status) {
+            setForm(defaultData);
+
+            modalStore.closeAll();
+
+            router.push("/account");
+    
+            toast.success("The property was uploaded successfully for approval", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+          } else if (res?.invalid_fields) {
+            setErrors(res.invalid_fields);
+          }
+        });
+  };
+
+  return (
+    <form>
+      <div className="row">
+        <div className="col-12">
+          <div className="input-group-meta position-relative mb-25">
+            <label htmlFor="">{t("authentication.email")}</label>
+            <Form.Control
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={(e) => {
+                handleChange(e);
+              }}
+              isInvalid={errors.includes("email")}
+            />
+          </div>
+        </div>
+
+        <div className="col-lg-6 col-md-6 col-12">
+          <div className="input-group-meta position-relative mb-25">
+            <label htmlFor="">{t("authentication.name")}</label>
+            <Form.Control
+              type="text"
+              name="name"
+              value={form.name}
+              onChange={(e) => {
+                handleChange(e);
+              }}
+              isInvalid={errors.includes("name")}
+            />
+          </div>
+        </div>
+
+        <div className="col-lg-6 col-md-6 col-12">
+          <div className="input-group-meta position-relative mb-25">
+            <label htmlFor="">{t("authentication.phone")}</label>
+            <PrefixPhoneInput
+              value={form.phone}
+              onChange={(value: string) => {
+                setForm((prevState) => {
+                  return { ...prevState, phone: value };
+                });
+              }}
+              isInvalid={errors.includes("phone")}
+            />
+          </div>
+        </div>
+
+        <div className="col-lg-6 col-md-6 col-12">
+          <div className="input-group-meta position-relative mb-20">
+            <label htmlFor="">{t("authentication.password")}</label>
+            <Form.Control
+              type={isPasswordVisible ? "text" : "password"}
+              name="password"
+              value={form.password}
+              onChange={(e) => {
+                handleChange(e);
+              }}
+              isInvalid={errors.includes("password")}
+            />
+            <span className="placeholder_icon">
+              <span
+                className={`passVicon ${isPasswordVisible ? "eye-slash" : ""}`}
+              >
+                <Image
+                  onClick={togglePasswordVisibility}
+                  src={OpenEye}
+                  alt=""
+                />
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div className="col-lg-6 col-md-6 col-12">
+          <div className="input-group-meta position-relative mb-20">
+            <label htmlFor="">{t("authentication.confirm_password")}</label>
+            <Form.Control
+              type={isPasswordVisible ? "text" : "password"}
+              name="confirmPassword"
+              value={form.confirmPassword}
+              onChange={(e) => {
+                handleChange(e);
+              }}
+              isInvalid={errors.includes("confirmPassword")}
+            />
+            <span className="placeholder_icon">
+              <span
+                className={`passVicon ${isPasswordVisible ? "eye-slash" : ""}`}
+              >
+                <Image
+                  onClick={togglePasswordVisibility}
+                  src={OpenEye}
+                  alt=""
+                />
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div className="col-12 mb-20 d-flex gap-3 align-items-center justify-content-start">
+          <Form.Check
+            type="checkbox"
+            name="Amenities"
+            checked={form.terms}
+            onChange={(e) => {
+              setForm((prevState) => {
+                return { ...prevState, terms: e.target.checked };
+              });
+            }}
+            isInvalid={errors.includes("terms")}
+          />
+          <label>
+            <Trans
+              i18nKey="account:authentication.terms"
+              components={{
+                link: (
+                  <a href="/terms&policy" target="_blank" rel="noreferrer"></a>
+                ),
+              }}
+            />
+          </label>
+        </div>
+
+        <div className="col-12">
+          <button
+            type="submit"
+            disabled={loading}
+            onClick={handleSubmit}
+            className="btn-two w-100 text-uppercase d-block mt-20"
+          >
+            {loading ? <Spinner/> : t("authentication.sign_up")}
+          </button>
+        </div>
+      </div>
+    </form>
+  );
+};
 
 export default RegisterForm;
