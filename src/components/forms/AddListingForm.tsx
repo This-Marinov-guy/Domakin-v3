@@ -98,6 +98,7 @@ const AddListingForm = () => {
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("viewing.phone")}</label>
               <PrefixPhoneInput
+                value={personalData.phone}
                 onChange={(value: string) => {
                   updateListingData("personalData", "phone", value);
                 }}
