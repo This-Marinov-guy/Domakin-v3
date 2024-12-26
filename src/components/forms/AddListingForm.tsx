@@ -10,6 +10,7 @@ import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import { useServer } from "@/hooks/useServer";
 import { transformToFormData } from "@/utils/helpers";
+import { toast } from "react-toastify";
 
 const AddListingForm = () => {
   const { t } = useTranslation("translations");
@@ -35,7 +36,18 @@ const AddListingForm = () => {
       transformToFormData(propertyStore.addListingData),
     ).then((res) => {
       if (res?.status) {
-        // success
+        propertyStore.resetListingData();
+
+        toast.success('The property was uploaded successfully for approval', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       } else if (res?.invalid_fields) {
         addErrorFields(res.invalid_fields);
       }
@@ -242,7 +254,7 @@ const AddListingForm = () => {
               <label htmlFor="">{t("emergency_housing.description")}</label>
               <Form.Control
                 as="textarea"
-                value={propertyData.flatmates}
+                value={propertyData.description}
                 onChange={(e) => {
                   updateListingData(
                     "propertyData",
@@ -278,11 +290,11 @@ const AddListingForm = () => {
 
         <div className="col-12 mt-10 mb-40">
           <PrefixMultiFilePreviewInput
-            value={propertyData.images}
+            value={propertyStore.addListingData.images}
             onChange={(files: any) => {
-              updateListingData("propertyData", "images", files);
+              updateListingData("images", "", files);
             }}
-            isInvalid={errorFields.includes("propertyData.images")}
+            isInvalid={errorFields.includes("images")}
             // maxSizeNote={t("files.allowed_sizes_note", { allowed_size: "5MB" })}
             allowedFormatsNotes={t("files.allowed_types_note", {
               allowed_types: "jpg, png, jpeg, webp, svg, bmp, heic, mp4",

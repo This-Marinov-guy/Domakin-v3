@@ -66,8 +66,8 @@ export const createFileName = (index: Number) => {
   return `${index}.jpg`;
 };
 
-export const resizeFile = (file: File, width = 800, height = 800, format = "JPG") =>
-  new Promise((resolve) => {
+export const resizeFile = (file: File, width = 800, height = 800, format = "JPG", withOriginalName = true) =>
+  new Promise((resolve) => {    
     Resizer.imageFileResizer(
       file,
       width,
@@ -77,7 +77,7 @@ export const resizeFile = (file: File, width = 800, height = 800, format = "JPG"
       0,
       (blob) => {
         // @ts-expect-error
-        resolve(new File([blob], "resized-image.jpg", { type: "image/jpg" }));
+        resolve(new File([blob], withOriginalName ? file.name.slice(0, 20) : "resized-image.jpg", { type: "image/jpg" }));
       },
       "blob"
     );
@@ -108,8 +108,8 @@ export const resizeFile = (file: File, width = 800, height = 800, format = "JPG"
 
     for (const key in data) {
       if (Array.isArray(data[key])) {
-        data[key].forEach((element: any) => {
-          formData.append(key, element);
+        data[key].forEach((element: any, index) => {
+          formData.append(`${key}[${index}]`, element);
         });
       } else if (typeof data[key] === 'object' && data[key] !== null) {
         formData.append(key, JSON.stringify(data[key]));

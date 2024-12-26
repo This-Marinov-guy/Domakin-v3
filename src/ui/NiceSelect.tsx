@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useCallback, useRef, FC, ChangeEvent } from "react";
+import React, { useState, useCallback, useRef, FC, ChangeEvent, useEffect } from "react";
 import { useClickAway } from "react-use";
 
 interface Option {
@@ -38,6 +38,12 @@ const NiceSelect: FC<NiceSelectProps> = ({
   const ref = useRef<HTMLDivElement | null>(null);
 
   useClickAway(ref, onClose);
+
+  useEffect(() => {
+    onChange({
+      target: { value: options[defaultCurrent].value },
+    } as ChangeEvent<HTMLSelectElement>);
+  }, []);
 
   const currentHandler = (item: Option) => {
     setCurrent(item);

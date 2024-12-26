@@ -18,13 +18,14 @@ const defaultFormData = {
     flatmates: "",
     registration: "",
     description: "",
-    images: [],
   },
 
   terms: {
     contact: false,
     legals: false,
   },
+
+  images: [],
 };
 
 export default class PropertyStore {

@@ -2,20 +2,26 @@ import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 import { resizeFile } from "@/utils/helpers";
 import useTranslation from "next-translate/useTranslation";
+import { observer } from "mobx-react-lite";
 
 const PrefixMultiFilePreviewInput = (props: any) => {
-  const { onInput, onReject, maxSizeNote, allowedFormatsNotes, isInvalid } = props;
+  const {
+    onChange,
+    value,
+    onReject,
+    maxSizeNote,
+    allowedFormatsNotes,
+    isInvalid,
+  } = props;
 
   const { t } = useTranslation("translations");
 
-  const [files, setFiles] = useState<any[]>([]);
   const [imageLoading, setImageLoading] = useState(false);
 
   const handleRemove = (e: React.MouseEvent, index: number) => {
     e.stopPropagation();
 
-    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
-    onInput && onInput(files.filter((_, i) => i !== index));
+    onChange && onChange(value.filter((_: any, i: number) => i !== index));
   };
 
   const onDrop = async (acceptedFiles: File[]) => {
@@ -37,7 +43,7 @@ const PrefixMultiFilePreviewInput = (props: any) => {
           }
         })
       );
-      setFiles(resizedImages);
+      onChange([...value, ...resizedImages]);
     } catch (error) {
       console.error("Error processing files:", error);
     } finally {
@@ -80,8 +86,8 @@ const PrefixMultiFilePreviewInput = (props: any) => {
                     style={{ color: "purple", fontSize: "30px" }}
                   ></i>
                   <p>{t("files.drag_files")}</p>
-                  {files.length > 0 &&
-                    files.map((file, index) => (
+                  {value.length > 0 &&
+                    value.map((file: any, index: number) => (
                       <div key={index} className="file-preview">
                         <p>{file.name}</p>
                         <i
@@ -106,4 +112,4 @@ const PrefixMultiFilePreviewInput = (props: any) => {
   );
 };
 
-export default PrefixMultiFilePreviewInput;
+export default observer(PrefixMultiFilePreviewInput);
