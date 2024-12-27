@@ -94,7 +94,7 @@ const AddListingForm = () => {
             </div>
           </div>
 
-          <div className="col-6">
+          <div className="col-lg-6 col-md-6 col-12">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("viewing.phone")}</label>
               <PrefixPhoneInput
@@ -107,7 +107,7 @@ const AddListingForm = () => {
             </div>
           </div>
 
-          <div className="col-6">
+          <div className="col-lg-6 col-md-6 col-12">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("emergency_housing.email")}</label>
               <Form.Control
@@ -143,6 +143,20 @@ const AddListingForm = () => {
 
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("emergency_housing.period")}</label>
+              <Form.Control
+                type="text"
+                value={propertyData.period}
+                onChange={(e) => {
+                  updateListingData("propertyData", "period", e.target.value);
+                }}
+                isInvalid={errorFields.includes("propertyData.period")}
+              />
+            </div>
+          </div>
+
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("emergency_housing.address")}</label>
               <Form.Control
                 type="text"
@@ -166,20 +180,6 @@ const AddListingForm = () => {
                   updateListingData("propertyData", "size", e.target.value);
                 }}
                 isInvalid={errorFields.includes("propertyData.size")}
-              />
-            </div>
-          </div>
-
-          <div className="col-6">
-            <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">{t("emergency_housing.period")}</label>
-              <Form.Control
-                type="text"
-                value={propertyData.period}
-                onChange={(e) => {
-                  updateListingData("propertyData", "period", e.target.value);
-                }}
-                isInvalid={errorFields.includes("propertyData.period")}
               />
             </div>
           </div>

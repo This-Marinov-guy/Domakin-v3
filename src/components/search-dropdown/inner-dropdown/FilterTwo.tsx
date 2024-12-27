@@ -8,20 +8,25 @@ import SearchQuery from "@/components/ui/inputs/SearchQuery";
 const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) => {
   const min = 200;
   const max = 2000;
+
   const { t } = useTranslation("translations");
+
+  const initValue = {
+    text: t("filter.all"),
+    value: 'all',
+  }
 
   const statusCodeMapping =
     t("statusCodeMapping", {}, { returnObjects: true }) ?? [];
   const statusKeys: any = Object.keys(statusCodeMapping);
+  const availabilities = [t('filter.all'), ...Object.keys(statusCodeMapping).map(
+    (item, index) => index
+  )];
 
   const locationsList = Object.keys(
     t("locations", {}, { returnObjects: true }) ?? []
   ).map((key) => key.toLowerCase());
   const locations = [t("filter.all"), ...locationsList];
-
-  const availabilities = Object.keys(statusCodeMapping).map(
-    (item, index) => index
-  );
 
   const [priceFilter, setPriceFilter] = useState([min, max]);
   const [cityFilter, setCityFilter] = useState(locations);
@@ -91,12 +96,15 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
               <div className="label">{t("filter.availability")}</div>
               <NiceSelect
                 className="nice-select"
-                options={availabilities.map((item: any) => {
-                  return {
-                    value: item,
-                    text: statusCodeMapping[statusKeys[item]],
-                  };
-                })}
+                options={[
+                  initValue,
+                  ...availabilities.map((item: any) => {
+                    return {
+                      value: item,
+                      text: statusCodeMapping[statusKeys[item]],
+                    };
+                  }),
+                ]}
                 defaultCurrent={0}
                 onChange={(e) => {
                   const availability = +e.target.value;
@@ -135,10 +143,7 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
                 >
                   <i className="fa-light fa-sliders-up"></i>
                 </Link> */}
-                <SearchQuery
-                  query={query}
-                  setQuery={setQuery}
-                />
+                <SearchQuery query={query} setQuery={setQuery} />
               </div>
             </div>
           </div>

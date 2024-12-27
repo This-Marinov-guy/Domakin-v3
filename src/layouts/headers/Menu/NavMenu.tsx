@@ -108,7 +108,7 @@ const NavMenu = () => {
       ))}
 
       <li className="d-block d-lg-none d-md-inline-block ms-3 mt-20">
-        <Link href="/services/add-listing" className="btn-two" target="_blank">
+        <Link href="/services/add-listing" className="btn-two">
           <span>{t("header.add_listing")}</span>{" "}
           <i className="fa-thin fa-arrow-up-right"></i>
         </Link>

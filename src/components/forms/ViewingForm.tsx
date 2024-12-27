@@ -82,7 +82,7 @@ const ViewingForm = () => {
           </div>
         </div>
 
-        <div className="col-6">
+        <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta form-group mb-30">
             <label htmlFor="">{t("viewing.phone")}</label>
             <PrefixPhoneInput
@@ -95,7 +95,7 @@ const ViewingForm = () => {
           </div>
         </div>
 
-        <div className="col-6">
+        <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta form-group mb-30">
             <label htmlFor="">{t("viewing.email")}</label>
             <Form.Control
@@ -125,7 +125,7 @@ const ViewingForm = () => {
 
         <div className="col-6">
           <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.address_of_viewing_optional")}</label>
+            <label htmlFor="">{t("emergency_housing.address")}</label>
             <Form.Control
               type="text"
               value={viewingData.address}

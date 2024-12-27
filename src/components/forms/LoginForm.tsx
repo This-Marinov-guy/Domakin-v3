@@ -126,7 +126,7 @@ const LoginForm = () => {
         </div>
         <div className="col-12">
           <div className="agreement-checkbox d-flex justify-content-between align-items-center">
-            <div className="col-6 mb-20 d-flex gap-3 align-items-center justify-content-start">
+            <div className="col-7 d-flex gap-3 align-items-center justify-content-start">
               <Form.Check
                 type="checkbox"
                 name="Amenities"
