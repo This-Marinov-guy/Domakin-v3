@@ -12,6 +12,7 @@ import Trans from "next-translate/Trans";
 import { toast } from "react-toastify";
 import { useStore } from "@/stores/storeContext";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 
 const defaultData = {
   name: "",
@@ -31,6 +32,11 @@ const RegisterForm = () => {
 
   const { loading, sendRequest } = useServer();
 
+   const { register } = useAuth({
+     middleware: "guest",
+     redirectIfAuthenticated: "/account",
+   });
+
   const [form, setForm] = useState(defaultData);
   const [errors, setErrors] = useState<string[]>([]);
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
@@ -48,32 +54,13 @@ const RegisterForm = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    sendRequest(
-          "/authenticate/signup",
-          "POST",
-          form
-        ).then((res) => {
-          if (res?.status) {
-            setForm(defaultData);
-
-            modalStore.closeAll();
-
-            router.push("/account");
-    
-            toast.success("The property was uploaded successfully for approval", {
-              position: "top-center",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: false,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-            });
-          } else if (res?.invalid_fields) {
-            setErrors(res.invalid_fields);
-          }
-        });
+    register({
+      name:form.name,
+      email: form.email,
+      password: form.password,
+      password_confirmation: form.confirmPassword,
+      setErrors,
+    });
   };
 
   return (
