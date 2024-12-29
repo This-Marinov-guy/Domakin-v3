@@ -15,11 +15,17 @@ import {
   SORT_PRICE_LOW,
   SORT_PRICE_HIGH,
 } from "@/utils/enum";
+import { useStore } from "@/stores/storeContext";
+import PageLoader from "@/components/ui/loading/PageLoader";
 
-const ListingThreeArea = ({ style }: any) => {
+const ListingThreeArea = ({ style, properties }: any) => {
   const { t, lang } = useTranslation("translations");
 
   const [listStyle, setListStyle] = useState(GRID);
+
+  const {
+    // propertyStore: { properties },
+  } = useStore();
 
   useEffect(() => {
     const savedStyle = localStorage.getItem(LOCAL_STORAGE_PROPERTY_VIEW);
@@ -34,12 +40,6 @@ const ListingThreeArea = ({ style }: any) => {
     setListStyle(newView);
     localStorage.setItem(LOCAL_STORAGE_PROPERTY_VIEW, newView);
   };
-
-  const forRentList: any[] = t("FOR_RENT", {}, { returnObjects: true }) ?? [];
-
-  const properties = forRentList.filter(
-    (p: any) => p.hidden == false || p.hidden === undefined
-  );
 
   const startRef = useRef<HTMLDivElement>(null);
 
@@ -75,7 +75,7 @@ const ListingThreeArea = ({ style }: any) => {
   };
 
   useEffect(() => {
-    const newData = properties.filter((item) =>
+    const newData = properties.filter((item: any) =>
       keys.some((key) => item[key].toLowerCase().includes(query))
     );
 
@@ -91,8 +91,8 @@ const ListingThreeArea = ({ style }: any) => {
   }, [filterProperties, offset, endOffset, sortIndex]);
 
   useEffect(() => {
-    const newPaginatedProperties = forRentList.filter((item1) =>
-      filterProperties.some((item2) => item2.id === item1.id)
+    const newPaginatedProperties = properties.filter((item1: any) =>
+      filterProperties.some((item2: any) => item2.id === item1.id)
     );
     setPaginatedProperties(newPaginatedProperties.slice(offset, endOffset));
   }, [lang]);
@@ -172,7 +172,7 @@ const ListingThreeArea = ({ style }: any) => {
 
         <div className="row gx-xxl-5" ref={startRef}>
           {paginatedProperties?.length > 0 ? (
-            paginatedProperties.map((property: any, index) =>
+            paginatedProperties.map((property: any, index: number) =>
               listStyle === LIST ? (
                 <PropertyCardList key={index} property={property} />
               ) : (

@@ -40,7 +40,7 @@ const property_overview_data: DataType[] = [
    },
 ]
 
-const CommonPropertyOverview = () => {
+const CommonPropertyOverview = ({property}: any) => {
    return (
       <ul className="style-none d-flex flex-wrap align-items-center justify-content-between">
          {property_overview_data.map((item) => (

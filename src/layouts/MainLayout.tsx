@@ -15,10 +15,11 @@ if (typeof window !== "undefined") {
 const MainLayout = ({ children }: any) => {
   const { sendRequest } = useServer();
 
-  const {lang} = useTranslation();
+  const { t, lang } = useTranslation();
 
   const {
     commonStore: { toggleFeedbackLoading, setFeedbacks },
+    propertyStore: { togglePropertiesLoading, setProperties },
   } = useStore();
 
   const loadFeedback = async () => {
@@ -44,6 +45,20 @@ const MainLayout = ({ children }: any) => {
     toggleFeedbackLoading();
   };
 
+  const loadProperties = async () => {
+    // togglePropertiesLoading();
+
+    // const forRentList: any[] = t("FOR_RENT", {}, { returnObjects: true }) ?? [];
+    
+    // const properties = forRentList.filter(
+    //   (p: any) => p.hidden == false || p.hidden === undefined
+    // );
+
+    // setProperties(properties);
+
+    // togglePropertiesLoading();
+  };
+
   useEffect(() => {
     // animation
     const timer = setTimeout(() => {
@@ -54,6 +69,7 @@ const MainLayout = ({ children }: any) => {
   }, []);
 
   useEffect(() => {
+    loadProperties();
     loadFeedback();
   }, []);
 

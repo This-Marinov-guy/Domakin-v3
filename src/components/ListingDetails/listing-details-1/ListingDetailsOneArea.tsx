@@ -1,34 +1,107 @@
-"use client"
-import NiceSelect from "@/ui/NiceSelect"
-import MediaGallery from "./MediaGallery"
-import Review from "@/components/inner-pages/agency/agency-details/Review"
-import Sidebar from "./Sidebar"
-import CommonBanner from "../listing-details-common/CommonBanner"
-import CommonPropertyOverview from "../listing-details-common/CommonPropertyOverview"
-import CommonPropertyFeatureList from "../listing-details-common/CommonPropertyFeatureList"
-import CommonAmenities from "../listing-details-common/CommonAmenities"
-import CommonPropertyVideoTour from "../listing-details-common/CommonPropertyVideoTour"
-import CommonPropertyFloorPlan from "../listing-details-common/CommonPropertyFloorPlan"
-import CommonNearbyList from "../listing-details-common/CommonNearbyList"
-import CommonSimilarProperty from "../listing-details-common/CommonSimilarProperty"
-import CommonProPertyScore from "../listing-details-common/CommonProPertyScore"
-import CommonLocation from "../listing-details-common/CommonLocation"
-import CommonReviewForm from "../listing-details-common/CommonReviewForm"
+"use client";
+import NiceSelect from "@/ui/NiceSelect";
+import MediaGallery from "./MediaGallery";
+import Review from "@/components/inner-pages/agency/agency-details/Review";
+import Sidebar from "./Sidebar";
+import CommonBanner from "../listing-details-common/CommonBanner";
+import CommonPropertyOverview from "../listing-details-common/CommonPropertyOverview";
+import CommonPropertyFeatureList from "../listing-details-common/CommonPropertyFeatureList";
+import CommonAmenities from "../listing-details-common/CommonAmenities";
+import CommonPropertyVideoTour from "../listing-details-common/CommonPropertyVideoTour";
+import CommonPropertyFloorPlan from "../listing-details-common/CommonPropertyFloorPlan";
+import CommonNearbyList from "../listing-details-common/CommonNearbyList";
+import CommonSimilarProperty from "../listing-details-common/CommonSimilarProperty";
+import CommonProPertyScore from "../listing-details-common/CommonProPertyScore";
+import CommonLocation from "../listing-details-common/CommonLocation";
+import CommonReviewForm from "../listing-details-common/CommonReviewForm";
+import PageLoader from "@/components/ui/loading/PageLoader";
+import { useStore } from "@/stores/storeContext";
+import Link from "next/link";
+import useTranslation from "next-translate/useTranslation";
 
-const ListingDetailsOneArea = () => {
+const ListingDetailsOneArea = ({ property, style_3 }: any) => {
+  const { t } = useTranslation("translations");
 
-   const selectHandler = (e: any) => { };
+    const folder = `/assets/img/properties/${
+      property.folder ?? "property_" + property.id
+    }/`;
+    const allImages = [
+      folder + property.main_image,
+      ...property.images.map((img: any) => folder + img),
+    ];
 
-   return (
-      <div className="listing-details-one theme-details-one bg-pink pt-180 lg-pt-150 pb-150 xl-pb-120">
-         <div className="container">
-            <CommonBanner />
-            <MediaGallery />
-            <div className="property-feature-list bg-white shadow4 border-20 p-40 mt-50 mb-60">
-               <h4 className="sub-title-one mb-40 lg-mb-20">Property Overview</h4>
-               <CommonPropertyOverview />
+  return (
+    <div className="listing-details-one theme-details-one bg-pink pt-180 lg-pt-150 pb-50 xl-pb-50">
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-6">
+            <h3 className="property-titlee">{property.title}</h3>
+            <div className="d-flex flex-wrap mt-10">
+              {/* <div
+                className={`list-type text-uppercase mt-15 me-3 ${
+                  style_3
+                    ? "bg-white text-dark fw-500"
+                    : "text-uppercase border-20"
+                }`}
+              >
+                FOR SELL
+              </div> */}
+              <div className="address mt-15">
+                <i className="bi bi-geo-alt"></i> {property.location}
+              </div>
             </div>
-            <div className="row">
+          </div>
+          <div className="col-lg-6 text-lg-end">
+            <div className="d-inline-block md-mt-40">
+              <div className="price color-dark fw-500">
+                {property.price} € / {t("renting.per_month")}
+              </div>
+
+              {/* <ul className="style-none d-flex align-items-center action-btns">
+                <li className="me-auto fw-500 color-dark">
+                  <i className="fa-sharp fa-regular fa-share-nodes me-2"></i>
+                  Share
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className={`d-flex align-items-center justify-content-center tran3s ${
+                      style_3 ? "" : "rounded-circle"
+                    }`}
+                  >
+                    <i className="fa-light fa-heart"></i>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className={`d-flex align-items-center justify-content-center tran3s ${
+                      style_3 ? "" : "rounded-circle"
+                    }`}
+                  >
+                    <i className="fa-light fa-bookmark"></i>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className={`d-flex align-items-center justify-content-center tran3s ${
+                      style_3 ? "" : "rounded-circle"
+                    }`}
+                  >
+                    <i className="fa-light fa-circle-plus"></i>
+                  </Link>
+                </li>
+              </ul> */}
+            </div>
+          </div>
+        </div>{" "}
+        <MediaGallery images={allImages} />
+        <div className="property-feature-list bg-white shadow4 border-20 p-40 mt-20 mb-60">
+          <h4 className="sub-title-one mb-40 lg-mb-20">{property.title}</h4>
+          <CommonPropertyOverview property={property} />
+        </div>
+        {/* <div className="row">
                <div className="col-xl-8">
                   <div className="property-overview mb-50 bg-white shadow4 border-20 p-40">
                      <h4 className="mb-20">Overview</h4>
@@ -84,10 +157,10 @@ const ListingDetailsOneArea = () => {
                   </div>
                </div>
                <Sidebar />
-            </div>
-         </div>
+            </div> */}
       </div>
-   )
-}
+    </div>
+  );
+};
 
-export default ListingDetailsOneArea
+export default ListingDetailsOneArea;

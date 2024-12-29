@@ -31,6 +31,10 @@ const defaultFormData = {
 export default class PropertyStore {
   rootStore;
 
+  @observable properties: any[] = [];
+
+  @observable propertiesLoading: boolean = true;
+
   @observable addListingData: any = { ...defaultFormData };
   @observable errorFields: string[] = [];
 
@@ -52,6 +56,11 @@ export default class PropertyStore {
     } else {
       this.addListingData = { ...defaultFormData };
     }
+  };
+
+  @action
+  setProperties = (properties: any[]) => {
+    this.properties = properties;
   };
 
   @action
@@ -82,5 +91,10 @@ export default class PropertyStore {
     if (typeof window !== "undefined" && window.localStorage) {
       localStorage.removeItem("addListingData");
     }
+  };
+
+  @action
+  togglePropertiesLoading = () => {
+    this.propertiesLoading = !this.propertiesLoading;
   };
 }
