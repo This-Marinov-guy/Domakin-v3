@@ -20,12 +20,14 @@ const MyApp = ({ Component, pageProps }: any) => {
       <SEO />
       <MainLayout>
         <Component {...pageProps} recaptchaRef={recaptchaRef} />
-        {/* <ReCAPTCHA
-          size="invisible"
-          badge="bottomleft"
-          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ""}
-          onChange={onChange}
-        /> */}
+        <div className="rc-anchor">
+          <ReCAPTCHA
+            size="invisible"
+            badge="bottomleft"
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ""}
+            onChange={onChange}
+          />
+        </div>
       </MainLayout>
     </Suspense>
   );

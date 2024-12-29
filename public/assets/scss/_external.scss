@@ -8,7 +8,7 @@
     border-color: $danger !important;
     border-width: 2px !important;
   }
-  
+
   border-color: $danger !important;
   border-width: 2px !important;
 }
@@ -32,4 +32,9 @@ label {
 .spinner-border {
   display: block !important;
   margin: 8px auto !important;
+}
+
+.rc-anchor {
+  position: absolute !important;
+  z-index: 99999999 !important;
 }
