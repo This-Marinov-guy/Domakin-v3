@@ -9,6 +9,10 @@ export default class CommonStore {
   }
 
   @observable loading = false;
+  @observable feedbackLoading = false;
+
+  @observable feedbacks = [];
+
   @observable error = null;
 
   @action startLoading = () => {
@@ -17,5 +21,13 @@ export default class CommonStore {
 
   @action stopLoading = () => {
     this.loading = false;
+  }
+
+  @action toggleFeedbackLoading = () => {
+    this.feedbackLoading = !this.feedbackLoading;
+  }
+
+  @action setFeedbacks = (feedbacks: []) => {
+    this.feedbacks = feedbacks;
   }
 }

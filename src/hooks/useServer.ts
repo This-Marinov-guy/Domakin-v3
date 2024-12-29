@@ -16,7 +16,7 @@ export const useServer = () => {
     commonStore: { loading, startLoading, stopLoading },
   } = useStore();
 
-  const {t} = useTranslation("translations");
+  const { t } = useTranslation("translations");
 
   const user = {
     token: "",
@@ -25,7 +25,7 @@ export const useServer = () => {
   const sendRequest = async (
     url: string,
     method: string = "GET",
-    data: object | null = null,
+    data: any,
     headers: object = {},
     options: Options = {
       withLoading: true,
@@ -38,13 +38,26 @@ export const useServer = () => {
       axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
     }
 
-    try {
-      const response = await axios.request({
+    let requestData = {};
+
+    if (["GET", "DELETE"].includes(method)) {
+      requestData = {
+        url: `${SERVER_ENDPOINT}/api${url}?${new URLSearchParams(data as Record<string, string> || {}).toString()}`,
+        method,
+        data: {},
+        headers,
+      };
+    } else {
+      requestData = {
         url: SERVER_ENDPOINT + "/api" + url,
         method,
         data,
         headers,
-      });
+      };
+    }
+
+    try {
+      const response = await axios.request(requestData);
 
       if (options?.withError && !response.data.status) {
         const errorMessage = response?.data.tag
@@ -71,7 +84,7 @@ export const useServer = () => {
         const errorMessage = err.response?.data.tag
           ? t(err.response?.data.tag)
           : err.response?.data.message ?? t("api.general_error");
-        
+
         toast.error(errorMessage, {
           position: "top-center",
           autoClose: 5000,

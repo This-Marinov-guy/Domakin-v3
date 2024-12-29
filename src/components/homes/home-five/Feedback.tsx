@@ -1,12 +1,17 @@
-"use client"
-import feedback_data from "@/data/home-data/FeedbackData"
+"use client";
+import Skeleton from "react-loading-skeleton";
 import Image from "next/image";
-import { Rating } from 'react-simple-star-rating';
+import { Rating } from "react-simple-star-rating";
 import Slider from "react-slick";
 
-import feedbackShape_1 from "@/assets/images/shape/shape_55.svg"
-import feedbackShape_2 from "@/assets/images/shape/shape_56.svg"
+import feedbackShape_1 from "@/assets/images/shape/shape_55.svg";
+import feedbackShape_2 from "@/assets/images/shape/shape_56.svg";
 import useTranslation from "next-translate/useTranslation";
+import { observer } from "mobx-react-lite";
+import { useStore } from "@/stores/storeContext";
+
+import quoteIcon from "@/assets/images/icon/icon_29.svg";
+import ListingLoadingOne from "@/components/ui/loading/ListingLoadingOne";
 
 export const CustomPrevArrow = (props: any) => {
   const { onClick } = props;
@@ -61,57 +66,67 @@ const setting = {
 };
 
 const Feedback = ({ style }: any) => {
-   const {t} = useTranslation('translations');
+  const { t } = useTranslation("translations");
 
-   return (
-     <div
-       className={`center-dots bg-pink-two position-relative z-1 pt-60 xl-pt-40 pb-60 xl-pb-40 ${
-         style ? "" : "mt-170 xl-mt-120"
-       }`}
-     >
-       <div className={`container ${style ? "" : "container-large"}`}>
-         <div className="title-one text-center mb-80 xl-mb-50 md-mb-30">
-           <h3>{t("feedbacks.feedbacks")}</h3>
-         </div>
-         <Slider {...setting}>
-           {feedback_data
-             .map((item) => (
-               <div
-                 key={item.id}
-                 className={`feedback-block-six ${style ? "rounded-4" : ""}`}
-               >
-                 <div className="d-flex justify-content-between align-items-center">
-                   <ul className="rating style-none d-flex">
-                     <li>
-                       <Rating initialValue={5} size={25} readonly={true} />
-                     </li>
-                   </ul>
-                   <Image src={item.quote_icon} alt="" className="icon" />
-                 </div>
-                 <blockquote>{item.desc}</blockquote>
-                 <div className="d-flex align-items-center justify-content-between">
-                   <h6 className="fs-20 m0">{item.title}</h6>
-                 </div>
-               </div>
-             ))}
-         </Slider>
-         {!style && (
-           <>
-             <Image
-               src={feedbackShape_1}
-               alt=""
-               className="lazy-img shapes shape_01"
-             />
-             <Image
-               src={feedbackShape_2}
-               alt=""
-               className="lazy-img shapes shape_02"
-             />
-           </>
-         )}
-       </div>
-     </div>
-   );
-}
+  const {
+    commonStore: { feedbackLoading, feedbacks },
+  } = useStore();
 
-export default Feedback
+  if (feedbackLoading)
+    return <ListingLoadingOne title={t("feedbacks.feedbacks")} />;
+
+  return (
+    <div
+      className={`center-dots bg-pink-two position-relative z-1 pt-60 xl-pt-40 pb-60 xl-pb-40 ${
+        style ? "" : "mt-170 xl-mt-120"
+      }`}
+    >
+      <div className={`container ${style ? "" : "container-large"}`}>
+        <div className="title-one text-center mb-80 xl-mb-50 md-mb-30">
+          <h3>{t("feedbacks.feedbacks")}</h3>
+        </div>
+        {feedbacks?.length > 0 ? <Slider {...setting}>
+          {feedbacks.map((item: any) => (
+            <div
+              key={item.id}
+              className={`feedback-block-six ${style ? "rounded-4" : ""}`}
+            >
+              <div className="d-flex justify-content-between align-items-center">
+                <ul className="rating style-none d-flex">
+                  <li>
+                    <Rating initialValue={5} size={25} readonly={true} />
+                  </li>
+                </ul>
+                <Image src={quoteIcon} alt="" className="icon" />
+              </div>
+              <blockquote>{item.content}</blockquote>
+              <div className="d-flex align-items-center justify-content-between">
+                <h6 className="fs-20 m0">{item.name}</h6>
+              </div>
+            </div>
+          ))}
+        </Slider>
+        :
+        <h6 className="text-center d-flex flex-column">
+          {t("feedbacks.no_feedbacks")}
+        </h6>}
+        {!style && (
+          <>
+            <Image
+              src={feedbackShape_1}
+              alt=""
+              className="lazy-img shapes shape_01"
+            />
+            <Image
+              src={feedbackShape_2}
+              alt=""
+              className="lazy-img shapes shape_02"
+            />
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default observer(Feedback);

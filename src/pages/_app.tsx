@@ -4,6 +4,7 @@ import SEO from "./seo";
 
 import "../styles/index.scss";
 import "rc-time-picker/assets/index.css";
+import "react-loading-skeleton/dist/skeleton.css";
 import PageLoader from "@/components/ui/loading/PageLoader";
 import MainLayout from "@/layouts/MainLayout";
 
