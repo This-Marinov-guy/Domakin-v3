@@ -8,6 +8,7 @@ import PageLoader from "@/components/ui/loading/PageLoader";
 import { useStore } from "@/stores/storeContext";
 import useTranslation from "next-translate/useTranslation";
 import { useParams } from "next/navigation";
+import { observer } from "mobx-react-lite";
 
 const PropertyDetailsOne = () => {
   const {
@@ -22,7 +23,7 @@ const PropertyDetailsOne = () => {
 
   const property = forRentList.find((p: any) => p.id == slug);
 
-  if (propertiesLoading || !property.id) {
+  if (propertiesLoading || !property.id) {    
     return <PageLoader />;
   }
 
@@ -37,4 +38,4 @@ const PropertyDetailsOne = () => {
   );
 };
 
-export default PropertyDetailsOne;
+export default observer(PropertyDetailsOne);

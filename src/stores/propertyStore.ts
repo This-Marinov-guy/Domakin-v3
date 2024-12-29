@@ -33,7 +33,7 @@ export default class PropertyStore {
 
   @observable properties: any[] = [];
 
-  @observable propertiesLoading: boolean = true;
+  @observable propertiesLoading: boolean = false;
 
   @observable addListingData: any = { ...defaultFormData };
   @observable errorFields: string[] = [];
