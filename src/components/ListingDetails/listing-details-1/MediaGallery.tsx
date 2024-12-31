@@ -1,37 +1,40 @@
 import Image, { StaticImageData } from "next/image";
 import Fancybox from "@/components/common/Fancybox";
-
-import bigCarousel_1 from "@/assets/images/listing/img_43.jpg"
-import bigCarousel_2 from "@/assets/images/listing/img_44.jpg"
-import bigCarousel_3 from "@/assets/images/listing/img_45.jpg"
-import bigCarousel_4 from "@/assets/images/listing/img_46.jpg"
-
-import smallCarousel_1 from "@/assets/images/listing/img_43_s.jpg"
-import smallCarousel_2 from "@/assets/images/listing/img_44_s.jpg"
-import smallCarousel_3 from "@/assets/images/listing/img_45_s.jpg"
-import smallCarousel_4 from "@/assets/images/listing/img_46_s.jpg"
-
-const largeThumb: string[] = ["1", "2", "3"];
-
-interface DataType {
-  big_carousel: StaticImageData[];
-  small_carousel: StaticImageData[];
-}
-
-const gallery_data: DataType = {
-  big_carousel: [bigCarousel_1, bigCarousel_2, bigCarousel_3, bigCarousel_4],
-  small_carousel: [smallCarousel_1, smallCarousel_2, smallCarousel_3, smallCarousel_4],
-}
-
-const { big_carousel, small_carousel } = gallery_data;
+import { useState } from "react";
 
 const MediaGallery = ({ style, images }: any) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [thumbGroup, setThumbGroup] = useState(0);
+
+  const IMAGES_PER_GROUP = 3;
+
+  const totalGroups = Math.ceil(images.length / IMAGES_PER_GROUP);
+
+  const getCurrentThumbnails = () => {
+    const start = thumbGroup * IMAGES_PER_GROUP;
+    return images.slice(start, start + IMAGES_PER_GROUP);
+  };
+
+  const showNavigation = images.length > IMAGES_PER_GROUP;
+
+  const handleNextGroup = () => {
+    if (thumbGroup < totalGroups - 1) {
+      setThumbGroup((prev) => prev + 1);
+    }
+  };
+
+  const handlePrevGroup = () => {
+    if (thumbGroup > 0) {
+      setThumbGroup((prev) => prev - 1);
+    }
+  };
+
   return (
     <div className="media-gallery mt-100 xl-mt-80 lg-mt-60">
       <div id="media_slider" className="carousel slide row">
         <div className="col-lg-10">
           <div
-            className={` bg-white border-20 md-mb-20 ${
+            className={`bg-white border-20 md-mb-20 ${
               style ? "" : "shadow4 p-30"
             }`}
           >
@@ -48,7 +51,7 @@ const MediaGallery = ({ style, images }: any) => {
                     },
                   }}
                 >
-                  {images.map((thumb: any, index: any) => (
+                  {images.map((thumb: any, index: number) => (
                     <a
                       key={index}
                       className="d-block"
@@ -59,15 +62,20 @@ const MediaGallery = ({ style, images }: any) => {
                 </Fancybox>
               </div>
 
-              <div className="carousel-inner w-50 h-50">
+              <div className="d-flex align-items-center justify-content-center carousel-inner w-75 h-50">
                 {images.map((image: any, index: number) => (
-                  <div key={index} className="carousel-item active">
+                  <div
+                    key={index}
+                    className={`carousel-item ${
+                      index === activeIndex ? "active" : ""
+                    }`}
+                  >
                     <Image
                       src={image}
                       width={1000}
                       height={1000}
                       alt="gallery"
-                      className="w-100 border-20"
+                      className="w-50 border-20"
                     />
                   </div>
                 ))}
@@ -76,8 +84,11 @@ const MediaGallery = ({ style, images }: any) => {
               <button
                 className="carousel-control-prev"
                 type="button"
-                data-bs-target="#media_slider"
-                data-bs-slide="prev"
+                onClick={() =>
+                  setActiveIndex((prev) =>
+                    prev > 0 ? prev - 1 : images.length - 1
+                  )
+                }
               >
                 <i className="bi bi-chevron-left"></i>
                 <span className="visually-hidden">Previous</span>
@@ -85,8 +96,11 @@ const MediaGallery = ({ style, images }: any) => {
               <button
                 className="carousel-control-next"
                 type="button"
-                data-bs-target="#media_slider"
-                data-bs-slide="next"
+                onClick={() =>
+                  setActiveIndex((prev) =>
+                    prev < images.length - 1 ? prev + 1 : 0
+                  )
+                }
               >
                 <i className="bi bi-chevron-right"></i>
                 <span className="visually-hidden">Next</span>
@@ -97,34 +111,61 @@ const MediaGallery = ({ style, images }: any) => {
 
         <div className="col-lg-2">
           <div
-            className={`carousel-indicators position-relative p-15 w-100 h-100 ${
+            className={`position-relative ${
               style ? "" : "border-15 bg-white shadow4"
             }`}
           >
-            {images.slice(1).map((image: any, i: number) => (
-              <button
-                key={i}
-                type="button"
-                data-bs-target="#media_slider"
-                data-bs-slide-to={`${i}`}
-                className="active"
-                aria-current="true"
-                aria-label="Slide 1"
-              >
-                <Image
-                  src={image}
-                  width={1000}
-                  height={1000}
-                  alt="small_gallery"
-                  className="w-100 border-10"
-                />
-              </button>
-            ))}
+            {showNavigation && (
+              <div className="thumbnail-navigation d-flex justify-content-between align-items-center px-3 py-2">
+                <button
+                  className={`nav-btn ${thumbGroup === 0 ? "invisible" : ""}`}
+                  onClick={handlePrevGroup}
+                >
+                  <i className="bi bi-chevron-left"></i>
+                </button>
+                <span className="nav-indicator">
+                  {thumbGroup + 1} / {totalGroups}
+                </span>
+                <button
+                  className={`nav-btn ${
+                    thumbGroup === totalGroups - 1 ? "invisible" : ""
+                  }`}
+                  onClick={handleNextGroup}
+                >
+                  <i className="bi bi-chevron-right"></i>
+                </button>
+              </div>
+            )}
+
+            <div className="thumbnails-container p-3">
+              <div className="thumbnails-row d-flex flex-column gap-2">
+                {getCurrentThumbnails().map((image: any, i: number) => {
+                  const currentIndex = thumbGroup * IMAGES_PER_GROUP + i;
+                  return (
+                    <button
+                      key={currentIndex}
+                      onClick={() => setActiveIndex(currentIndex)}
+                      className={`thumbnail-item border-0 p-0 position-relative ${
+                        currentIndex === activeIndex ? "active" : ""
+                      }`}
+                    >
+                      <Image
+                        src={image}
+                        alt={`thumbnail-${currentIndex}`}
+                        width={200}
+                        height={150}
+                        className="img-fluid border-10"
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default MediaGallery
+export default MediaGallery;
