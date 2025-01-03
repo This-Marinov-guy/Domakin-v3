@@ -1,4 +1,4 @@
-export const isProd = process.env.NODE_ENV === "production";
+export const ENV_PROD = process.env.NODE_ENV === "production";
 
 // social
 export const EMAIL = 'info@domakin.nl';

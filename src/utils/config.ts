@@ -1,9 +1,9 @@
 import logoWinter from "@/assets/img/logo-4.png";
 import logoDefault from "@/assets/img/logo-2.png";
-import { isProd } from "./defines";
+import { ENV_PROD } from "./defines";
 
 // server
-export const SERVER_ENDPOINT = isProd
+export const SERVER_ENDPOINT = ENV_PROD
   ? process.env.NEXT_PUBLIC_SERVER_URL
   : "http://localhost:8000";
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getApiUrl, SERVER_ENDPOINT } from "@/utils/config";
-import { isProd } from "@/utils/defines";
+import { ENV_PROD } from "@/utils/defines";
 import { useStore } from "@/stores/storeContext";
 import { toast } from "react-toastify";
 import useTranslation from "next-translate/useTranslation";
@@ -65,7 +65,7 @@ export const useApi = () => {
 
       return response.data;
     } catch (err: any) {
-      !isProd && console.log(err.response?.data ?? err);
+      !ENV_PROD && console.log(err.response?.data ?? err);
 
       if (options?.withError) {
         const errorMessage = err.response?.data.tag

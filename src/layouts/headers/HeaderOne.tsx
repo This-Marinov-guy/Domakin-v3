@@ -10,7 +10,7 @@ import ChangeLanguage from "./Menu/ChangeLanguage";
 import useTranslation from "next-translate/useTranslation";
 import { logoByTheme } from "@/utils/config";
 import { useStore } from "@/stores/storeContext";
-import { LOGIN_MODAL } from "@/utils/defines";
+import { ENV_PROD, LOGIN_MODAL } from "@/utils/defines";
 
 const HeaderOne = ({ style }: any) => {
   const { sticky } = UseSticky();
@@ -59,7 +59,7 @@ const HeaderOne = ({ style }: any) => {
                   </Link>
                 </li>
 
-                <li className="d-none d-lg-inline-block ms-3">
+                {!ENV_PROD && <li className="d-none d-lg-inline-block ms-3">
                   <button
                     onClick={() => modalStore.setActiveModal(LOGIN_MODAL)}
                     className="btn-fourteen"
@@ -67,7 +67,7 @@ const HeaderOne = ({ style }: any) => {
                     <i className="fa-regular fa-lock"></i>{" "}
                     <span>{t("account:authentication.login")}</span>
                   </button>
-                </li>
+                </li>}
               </ul>
             </div>
             <nav className="navbar navbar-expand-lg p0 order-lg-2">

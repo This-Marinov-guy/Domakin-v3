@@ -1,12 +1,12 @@
 import axios from "axios";
 // import { clarity } from "react-microsoft-clarity";
 import Resizer from "react-image-file-resizer";
-import { isProd, LANGUAGES } from "./defines";
+import { ENV_PROD, LANGUAGES } from "./defines";
 import setLanguage from "next-translate/setLanguage";
 import { LOCAL_STORAGE_LOCATION } from "./localstorage";
 
 export const getGeoInfo = async () => {
-  if (!isProd) {
+  if (!ENV_PROD) {
     return;
   }
 

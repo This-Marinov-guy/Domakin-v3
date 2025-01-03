@@ -27,7 +27,7 @@ const ScreenButton = ({
     <button
       ref={buttonRef} // Add ref to the button element
       onClick={scrollToRef}
-      className="btn-six centered-btn"
+      className={`btn-six centered-btn ${isVisible ? "fade-out" : "fade-in"}`}
       style={{ display: isVisible ? "none" : "block" }} // Hide the button when visible
     >
       {t("renting.apply_now")}

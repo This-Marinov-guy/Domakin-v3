@@ -350,3 +350,29 @@
   transform: translateX(-50%);
   bottom: 20px;
 }
+
+.fade-in {
+  opacity: 0; /* Start fully invisible */
+  animation: fadeIn 0.5s forwards; /* Smoothly appear */
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* Back to original position */
+  }
+}
+
+/* Add the fade-out animation */
+.fade-out {
+  opacity: 1; /* Start fully visible */
+  transform: translateY(0); /* Original position */
+  animation: fadeOut 0.5s forwards; /* Smoothly disappear */
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0; /* Fully invisible */
+    transform: translateY(20px); /* Move down slightly */
+  }
+}

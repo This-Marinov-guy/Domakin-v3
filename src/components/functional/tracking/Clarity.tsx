@@ -1,9 +1,9 @@
 import React from "react";
 import Script from "next/script";
-import { isProd } from "@/utils/defines";
+import { ENV_PROD } from "@/utils/defines";
 
 const Clarity = () => {
-  if (!isProd || !process.env.NEXT_PUBLIC_CLARITY_ENABLE) {
+  if (!ENV_PROD || !process.env.NEXT_PUBLIC_CLARITY_ENABLE) {
     return null;
   } 
 

@@ -9,7 +9,7 @@ import logo from "@/assets/img/logo-3.png";
 import useTranslation from "next-translate/useTranslation";
 import ChangeLanguage from "./ChangeLanguage";
 import { useStore } from "@/stores/storeContext";
-import { LOGIN_MODAL } from "@/utils/defines";
+import { ENV_PROD, LOGIN_MODAL } from "@/utils/defines";
 
 const NavMenu = () => {
   const pathname = usePathname();
@@ -114,7 +114,7 @@ const NavMenu = () => {
         </Link>
       </li>
 
-      <li className="d-block d-lg-none d-md-inline-block ms-3 mt-10">
+      {!ENV_PROD && <li className="d-block d-lg-none d-md-inline-block ms-3 mt-10">
         <button
           onClick={() => modalStore.setActiveModal(LOGIN_MODAL)}
           className="btn-fourteen"
@@ -122,7 +122,7 @@ const NavMenu = () => {
           <i className="fa-regular fa-lock"></i>{" "}
           <span>{t("account:authentication.login")}</span>
         </button>
-      </li>
+      </li>}
     </ul>
   );
 };
