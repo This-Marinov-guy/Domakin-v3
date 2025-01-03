@@ -94,7 +94,7 @@
       "time_required": "Please provide the time of the viewing"
     },
     "successful_request": "Successful Request",
-    "confirmation_message": "Your information has been sent so expect soon to be contacted by one of our agents! Thank you again for the trust and see you soon!",
+    "confirmation_message": "Your information has been sent so expect soon to be contacted by one of our agents!",
     "city_of_viewing": "City of viewing",
     "date": "Date:",
     "time": "Time:",
@@ -115,7 +115,8 @@
     "select": "select",
     "no_properties_message": "No properties at the moment - please check again later!",
     "free_of_charge": "FREE OF CHARGE",
-    "per_night": "per night"
+    "per_night": "per night",
+    "apply_now": "Apply now"
   },
   "lending": {
     "transfer_and_old_contract": "Transfer and old contract",

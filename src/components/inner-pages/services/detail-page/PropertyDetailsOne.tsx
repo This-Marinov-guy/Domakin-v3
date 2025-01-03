@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import FooterFour from "@/layouts/footers/FooterFour";
 import HeaderOne from "@/layouts/headers/HeaderOne";
 import FancyBanner from "@/components/common/FancyBanner";
@@ -10,6 +10,7 @@ import useTranslation from "next-translate/useTranslation";
 import { useParams } from "next/navigation";
 import { observer } from "mobx-react-lite";
 import RelatedProperties from "@/components/ListingDetails/listing-details-1/RelatedProperties";
+import ScreenButton from "@/components/ui/buttons/ScreenButton";
 
 const PropertyDetailsOne = () => {
   const {
@@ -17,6 +18,8 @@ const PropertyDetailsOne = () => {
   } = useStore();
 
   const { t } = useTranslation("translations");
+
+  const formRef = useRef(null);
 
   const { slug } = useParams();
 
@@ -35,8 +38,9 @@ const PropertyDetailsOne = () => {
   return (
     <>
       <HeaderOne />
+      <ScreenButton refElement={formRef} />
       <ListingDetailsOneArea property={property} />
-      <RentingForm />
+      <RentingForm refElement={formRef} />
       <RelatedProperties properties={relatedProperties} />
       <FancyBanner />
       <FooterFour />

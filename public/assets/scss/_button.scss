@@ -342,3 +342,11 @@
     color: #fff;
   }
 }
+
+.centered-btn {
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+}
