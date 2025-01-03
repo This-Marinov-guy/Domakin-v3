@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import TrackingLayout from "./TrackingLayout";
 import { ToastContainer } from "react-toastify";
-import { animationCreate } from "@/utils/utils";
 import ScrollToTop from "@/components/common/ScrollToTop";
 import { StoreProvider, useStore } from "@/stores/storeContext";
 import ModalsLayout from "./ModalsLayout";
@@ -47,26 +46,13 @@ const MainLayout = ({ children }: any) => {
 
   const loadProperties = async () => {
     // togglePropertiesLoading();
-
     // const forRentList: any[] = t("FOR_RENT", {}, { returnObjects: true }) ?? [];
-    
     // const properties = forRentList.filter(
     //   (p: any) => p.hidden == false || p.hidden === undefined
     // );
-
     // setProperties(properties);
-
     // togglePropertiesLoading();
   };
-
-  useEffect(() => {
-    // animation
-    const timer = setTimeout(() => {
-      animationCreate();
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     loadProperties();

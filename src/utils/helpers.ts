@@ -127,7 +127,9 @@ export const transformToFormData = (data: any) => {
   const formData = new FormData();
 
   for (const key in data) {
-    if (Array.isArray(data[key])) {
+    if (data[key] instanceof File) {
+      formData.append(key, data[key]);
+    } else if (Array.isArray(data[key])) {
       data[key].forEach((element: any, index) => {
         formData.append(`${key}[${index}]`, element);
       });

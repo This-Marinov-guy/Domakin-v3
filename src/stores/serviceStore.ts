@@ -17,6 +17,21 @@ const defaultViewingData = {
   },
 };
 
+const defaultRentingData = {
+  property: "",
+  name: "",
+  surname: "",
+  email: "",
+  phone: "",
+  letter: null,
+  note: "",
+
+  terms: {
+    contact: false,
+    legals: false,
+  },
+};
+
 export default class ServiceStore {
   rootStore;
 
@@ -46,5 +61,28 @@ export default class ServiceStore {
   @action
   resetViewingData = () => {
     this.viewingData = { ...defaultViewingData };
+  };
+
+  // renting
+  @observable rentingData: any = { ...defaultRentingData };
+  @observable rentingErrorFields: string[] = [];
+
+  @action
+  updateRentingData = (key: string, nestedKey: string, value: any) => {
+    if (nestedKey) {
+      this.rentingData[key][nestedKey] = value;
+    } else {
+      this.rentingData[key] = value;
+    }
+  };
+
+  @action
+  addRentingErrorFields = (fields: string[]) => {
+    this.rentingErrorFields = fields;
+  };
+
+  @action
+  resetRentingData = () => {
+    this.rentingData = { ...defaultRentingData };
   };
 }

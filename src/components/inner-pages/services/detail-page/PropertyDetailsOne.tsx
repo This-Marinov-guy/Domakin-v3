@@ -40,7 +40,7 @@ const PropertyDetailsOne = () => {
       <HeaderOne />
       <ScreenButton refElement={formRef} />
       <ListingDetailsOneArea property={property} />
-      <RentingForm refElement={formRef} />
+      <RentingForm refElement={formRef} property={property} />
       <RelatedProperties properties={relatedProperties} />
       <FancyBanner />
       <FooterFour />

@@ -1,53 +1,63 @@
-import React, { useEffect } from "react";
+"use client";
+
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-import Trans from "next-translate/Trans";
 import Spinner from "react-bootstrap/Spinner";
 import useTranslation from "next-translate/useTranslation";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import { useServer } from "@/hooks/useServer";
 import { toast, ToastContent } from "react-toastify";
-import SingleDatePicker from "../ui/inputs/dates/SingleDatePicker";
 import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
-import TimePickerInput from "../ui/inputs/dates/TimePickerInput";
+import { transformToFormData } from "@/utils/helpers";
+import Trans from "next-translate/Trans";
 
-const RentingForm = ({ refElement }: any) => {
+const RentingForm = ({ refElement, property }: any) => {
   const { t } = useTranslation("translations");
 
   const { sendRequest, loading } = useServer();
 
+  const [success, setSuccess] = useState(false);
+
   const {
     serviceStore: {
-      viewingData,
-      viewingErrorFields,
-      updateViewingData,
-      addViewingErrorFields,
-      resetViewingData,
+      rentingData,
+      rentingErrorFields,
+      updateRentingData,
+      addRentingErrorFields,
+      resetRentingData,
     },
   } = useStore();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    sendRequest("/viewing/create", "POST", viewingData).then((res) => {
+    sendRequest(
+      "/renting/create",
+      "POST",
+      transformToFormData({
+        ...rentingData,
+        property: `${property.  id} | ${property.title} | ${property.location}`,
+      })
+    ).then((res) => {
       if (res?.status) {
-        resetViewingData();
-
-        toast.success(t("viewing.confirmation_message") as ToastContent, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        resetRentingData();
+        setSuccess(true);
       } else if (res?.invalid_fields) {
-        addViewingErrorFields(res.invalid_fields);
+        addRentingErrorFields(res.invalid_fields);
       }
     });
   };
+
+  if (success) {
+    refElement.current = null;
+
+    return (
+      <div className="d-flex align-items-center justify-content-center bg-pink">
+        <i className="text-success fa-solid fa-clipboard-check icon-big"></i>
+      </div>
+    );
+  }
 
   return (
     <form ref={refElement} className="form-style-one wow fadeInUp pt-40 pb-40">
@@ -59,11 +69,11 @@ const RentingForm = ({ refElement }: any) => {
             <label htmlFor="">{t("viewing.name")}</label>
             <Form.Control
               type="text"
-              value={viewingData.name}
+              value={rentingData.name}
               onChange={(e) => {
-                updateViewingData("name", "", e.target.value);
+                updateRentingData("name", "", e.target.value);
               }}
-              isInvalid={viewingErrorFields.includes("name")}
+              isInvalid={rentingErrorFields.includes("name")}
             />
           </div>
         </div>
@@ -73,11 +83,11 @@ const RentingForm = ({ refElement }: any) => {
             <label htmlFor="">{t("viewing.surname")}</label>
             <Form.Control
               type="text"
-              value={viewingData.surname}
+              value={rentingData.surname}
               onChange={(e) => {
-                updateViewingData("surname", "", e.target.value);
+                updateRentingData("surname", "", e.target.value);
               }}
-              isInvalid={viewingErrorFields.includes("surname")}
+              isInvalid={rentingErrorFields.includes("surname")}
             />
           </div>
         </div>
@@ -86,11 +96,11 @@ const RentingForm = ({ refElement }: any) => {
           <div className="input-group-meta form-group mb-30">
             <label htmlFor="">{t("viewing.phone")}</label>
             <PrefixPhoneInput
-              value={viewingData.phone}
+              value={rentingData.phone}
               onChange={(value: string) => {
-                updateViewingData("phone", "", value);
+                updateRentingData("phone", "", value);
               }}
-              isInvalid={viewingErrorFields.includes("phone")}
+              isInvalid={rentingErrorFields.includes("phone")}
             />
           </div>
         </div>
@@ -100,70 +110,41 @@ const RentingForm = ({ refElement }: any) => {
             <label htmlFor="">{t("viewing.email")}</label>
             <Form.Control
               type="text"
-              value={viewingData.email}
+              value={rentingData.email}
               onChange={(e) => {
-                updateViewingData("email", "", e.target.value);
+                updateRentingData("email", "", e.target.value);
               }}
-              isInvalid={viewingErrorFields.includes("email")}
+              isInvalid={rentingErrorFields.includes("email")}
             />
           </div>
         </div>
 
-        <div className="col-6">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.city_of_viewing")}</label>
+        <div className="col-lg-6col-md-12 col-12 mb-40">
+          <div className="input-item input-item-name">
+            <label htmlFor="">{t("files.motivational_letter_input")}</label>
             <Form.Control
-              type="text"
-              value={viewingData.city}
-              onChange={(e) => {
-                updateViewingData("city", "", e.target.value);
+              type="file"
+              accept=".docx,.pdf"
+              onChange={(event: any) => {
+                const file = event.target.files[0];
+
+                updateRentingData("letter", "", file);
               }}
-              isInvalid={viewingErrorFields.includes("city")}
+              className="w-full p-2 border rounded"
+              isInvalid={rentingErrorFields.includes("letter")}
             />
           </div>
         </div>
 
-        <div className="col-6">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("emergency_housing.address")}</label>
-            <Form.Control
-              type="text"
-              value={viewingData.address}
-              onChange={(e) => {
-                updateViewingData("address", "", e.target.value);
-              }}
-              isInvalid={viewingErrorFields.includes("address")}
-            />
-          </div>
-        </div>
-
-        <div className="col-6">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.date")}</label>
-            <SingleDatePicker
-              placeholder=""
-              value={viewingData.date}
-              onChange={(value: string) => {
-                updateViewingData("date", "", value);
-              }}
-              isInvalid={viewingErrorFields.includes("date")}
-            />
-          </div>
-        </div>
-
-        <div className="col-6">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.time")}</label>
-            <TimePickerInput
-              showSecond={false}
-              minuteStep={15}
-              value={viewingData.time}
-              onChange={(value: any) => {
-                updateViewingData("time", "", value);
-              }}
-              isInvalid={viewingErrorFields.includes("time")}
-            />
-          </div>
+        <div className="col-lg-6col-md-12 col-12 mb-40 d-flex align-items-center gap-3">
+          <label htmlFor="">{t("files.motivational_letter_example")}</label>
+          <a
+            href="/img/templates/motivational_letter_template.pdf"
+            className="btn-eleven text-uppercase"
+            target="_blank"
+          >
+            {t("files.download")}
+          </a>
         </div>
 
         <div className="col-12">
@@ -171,11 +152,11 @@ const RentingForm = ({ refElement }: any) => {
             <Form.Control
               as="textarea"
               placeholder={t("viewing.comments")}
-              value={viewingData.note}
+              value={rentingData.note}
               onChange={(e) => {
-                updateViewingData("note", "", e.target.value);
+                updateRentingData("note", "", e.target.value);
               }}
-              isInvalid={viewingErrorFields.includes("note")}
+              isInvalid={rentingErrorFields.includes("note")}
             />
           </div>
         </div>
@@ -184,12 +165,12 @@ const RentingForm = ({ refElement }: any) => {
           <Form.Check
             type="checkbox"
             name="Amenities"
-            value={viewingData.terms.contact}
-            checked={viewingData.terms.contact}
+            value={rentingData.terms.contact}
+            checked={rentingData.terms.contact}
             onChange={(e) => {
-              updateViewingData("terms", "contact", e.target.checked);
+              updateRentingData("terms", "contact", e.target.checked);
             }}
-            isInvalid={viewingErrorFields.includes("terms.contact")}
+            isInvalid={rentingErrorFields.includes("terms.contact")}
           />
           <label>{t("legals.permission_contact")}</label>
         </div>
@@ -198,12 +179,12 @@ const RentingForm = ({ refElement }: any) => {
           <Form.Check
             type="checkbox"
             name="Amenities"
-            value={viewingData.terms.legals}
-            checked={viewingData.terms.legals}
+            value={rentingData.terms.legals}
+            checked={rentingData.terms.legals}
             onChange={(e) => {
-              updateViewingData("terms", "legals", e.target.checked);
+              updateRentingData("terms", "legals", e.target.checked);
             }}
-            isInvalid={viewingErrorFields.includes("terms.legals")}
+            isInvalid={rentingErrorFields.includes("terms.legals")}
           />
           <label>
             <Trans
@@ -232,4 +213,4 @@ const RentingForm = ({ refElement }: any) => {
   );
 };
 
-export default RentingForm;
+export default observer(RentingForm);
