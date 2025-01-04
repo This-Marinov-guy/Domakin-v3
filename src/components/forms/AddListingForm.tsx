@@ -1,131 +1,254 @@
+import React, { useEffect } from "react";
+import Form from "react-bootstrap/Form";
 import NiceSelect from "@/ui/NiceSelect";
+import Trans from "next-translate/Trans";
+import Spinner from "react-bootstrap/Spinner";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import PrefixMultiFilePreviewInput from "../ui/inputs/files/MultiFilePreviewInput";
+import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
+import { useStore } from "@/stores/storeContext";
+import { observer } from "mobx-react-lite";
+import { useServer } from "@/hooks/useServer";
+import { transformToFormData } from "@/utils/helpers";
+import { toast } from "react-toastify";
 
-const AddListingForm = ({ guest: bool = false }) => {
+const AddListingForm = () => {
   const { t } = useTranslation("translations");
+
+  const { sendRequest, loading } = useServer();
+
+  const {
+    propertyStore,
+    propertyStore: {
+      addListingData: { personalData, propertyData, terms },
+      updateListingData,
+      addErrorFields,
+      errorFields,
+    },
+  } = useStore();
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    addErrorFields([]);
+
+    sendRequest(
+      "/property/create",
+      "POST",
+      transformToFormData(propertyStore.addListingData)
+    ).then((res) => {
+      if (res?.status) {
+        propertyStore.resetListingData();
+
+        toast.success("The property was uploaded successfully for approval", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      } else if (res?.invalid_fields) {
+        addErrorFields(res.invalid_fields);
+      }
+    });
+  };
+
+  useEffect(() => {
+    propertyStore.loadListingData();
+  }, []);
 
   return (
     <form className="form-style-one wow fadeInUp pt-40 pb-40">
       <div className="container m-a controls">
         <div className="row mt-20 mb-20">
-          <h4 className="mb-20">Personal Information</h4>
+          <h4 className="mb-20">
+            {t("emergency_housing.personal_information")}
+          </h4>
 
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">Name</label>
-              <input type="text" name="subject" />
-              {/* <p className="form_error">{errors.subject?.message}</p> */}
+              <label htmlFor="">{t("emergency_housing.name")}</label>
+              <Form.Control
+                type="text"
+                value={personalData.name}
+                onChange={(e) => {
+                  updateListingData("personalData", "name", e.target.value);
+                }}
+                isInvalid={errorFields.includes("personalData.name")}
+              />
             </div>
           </div>
 
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">Surname</label>
-              <input type="text" name="subject" />
-              {/* <p className="form_error">{errors.subject?.message}</p> */}
+              <label htmlFor="">{t("emergency_housing.surname")}</label>
+              <Form.Control
+                type="text"
+                value={personalData.surname}
+                onChange={(e) => {
+                  updateListingData("personalData", "surname", e.target.value);
+                }}
+                isInvalid={errorFields.includes("personalData.surname")}
+              />
             </div>
           </div>
 
-          <div className="col-6">
+          <div className="col-lg-6 col-md-6 col-12">
             <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">Phone</label>
-              <input type="text" name="subject" />
-              {/* <p className="form_error">{errors.subject?.message}</p> */}
+              <label htmlFor="">{t("viewing.phone")}</label>
+              <PrefixPhoneInput
+                value={personalData.phone}
+                onChange={(value: string) => {
+                  updateListingData("personalData", "phone", value);
+                }}
+                isInvalid={errorFields.includes("personalData.phone")}
+              />
             </div>
           </div>
 
-          <div className="col-6">
+          <div className="col-lg-6 col-md-6 col-12">
             <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">Email</label>
-              <input type="email" name="subject" />
-              {/* <p className="form_error">{errors.subject?.message}</p> */}
+              <label htmlFor="">{t("emergency_housing.email")}</label>
+              <Form.Control
+                type="email"
+                value={personalData.email}
+                onChange={(e) => {
+                  updateListingData("personalData", "email", e.target.value);
+                }}
+                isInvalid={errorFields.includes("personalData.email")}
+              />
             </div>
           </div>
         </div>
 
         <div className="row mt-20 mb-20">
-          <h4 className="mb-20">Property Details</h4>
+          <h4 className="mb-20">
+            {t("emergency_housing.property_information")}
+          </h4>
 
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">City</label>
-              <input type="text" name="subject" />
-              {/* <p className="form_error">{errors.subject?.message}</p> */}
+              <label htmlFor="">{t("emergency_housing.city")}</label>
+              <Form.Control
+                type="text"
+                value={propertyData.city}
+                onChange={(e) => {
+                  updateListingData("propertyData", "city", e.target.value);
+                }}
+                isInvalid={errorFields.includes("propertyData.city")}
+              />
             </div>
           </div>
 
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">Address</label>
-              <input type="text" name="subject" />
-              <small>*Exclude any street numbers for security reasons</small>
-              {/* <p className="form_error">{errors.subject?.message}</p> */}
+              <label htmlFor="">{t("emergency_housing.period")}</label>
+              <Form.Control
+                type="text"
+                value={propertyData.period}
+                onChange={(e) => {
+                  updateListingData("propertyData", "period", e.target.value);
+                }}
+                isInvalid={errorFields.includes("propertyData.period")}
+              />
+            </div>
+          </div>
+
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("emergency_housing.address")}</label>
+              <Form.Control
+                type="text"
+                value={propertyData.address}
+                onChange={(e) => {
+                  updateListingData("propertyData", "address", e.target.value);
+                }}
+                isInvalid={errorFields.includes("propertyData.address")}
+              />
+              <small>* {t("emergency_housing.precise_address")}</small>
             </div>
           </div>
 
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">Size</label>
-              <input type="text" name="subject" />
-              {/* <p className="form_error">{errors.subject?.message}</p> */}
+              <label htmlFor="">{t("emergency_housing.size")}</label>
+              <Form.Control
+                type="text"
+                value={propertyData.size}
+                onChange={(e) => {
+                  updateListingData("propertyData", "size", e.target.value);
+                }}
+                isInvalid={errorFields.includes("propertyData.size")}
+              />
             </div>
           </div>
 
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">Phone</label>
-              <input type="text" name="subject" />
-              {/* <p className="form_error">{errors.subject?.message}</p> */}
+              <label htmlFor="">{t("emergency_housing.rent")}</label>
+              <Form.Control
+                type="text"
+                value={propertyData.rent}
+                onChange={(e) => {
+                  updateListingData("propertyData", "rent", e.target.value);
+                }}
+                isInvalid={errorFields.includes("propertyData.rent")}
+              />
             </div>
           </div>
 
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">Period of availability</label>
-              <input type="email" name="subject" />
-              {/* <p className="form_error">{errors.subject?.message}</p> */}
+              <label htmlFor="">{t("emergency_housing.bills")}</label>
+              <Form.Control
+                type="text"
+                value={propertyData.bills}
+                onChange={(e) => {
+                  updateListingData("propertyData", "bills", e.target.value);
+                }}
+                isInvalid={errorFields.includes("propertyData.bills")}
+              />
             </div>
           </div>
 
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">Rent (in euro)</label>
-              <input type="text" name="subject" />
-              {/* <p className="form_error">{errors.subject?.message}</p> */}
-            </div>
-          </div>
-
-          <div className="col-6">
-            <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">Approximate cost of bills (in euro)</label>
-              <input type="text" name="subject" />
-              {/* <p className="form_error">{errors.subject?.message}</p> */}
-            </div>
-          </div>
-
-          <div className="col-6">
-            <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">
-                Number of flatmates / roommates (please specify)
-              </label>
-              <input type="text" name="subject" />
-              {/* <p className="form_error">{errors.subject?.message}</p> */}
+              <label htmlFor="">{t("emergency_housing.flatmates")}</label>
+              <Form.Control
+                type="text"
+                value={propertyData.flatmates}
+                onChange={(e) => {
+                  updateListingData(
+                    "propertyData",
+                    "flatmates",
+                    e.target.value
+                  );
+                }}
+                isInvalid={errorFields.includes("propertyData.flatmates")}
+              />
             </div>
           </div>
 
           <div className="col-md-6">
             <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">Is registration possible</label>
+              <label htmlFor="">{t("emergency_housing.registration")}</label>
               <NiceSelect
                 className="nice-select border-one d-flex align-items-center"
                 options={[
-                  { value: "yes", text: "Yes" },
-                  { value: "no", text: "No" },
+                  { value: "yes", text: t("common.yes") },
+                  { value: "no", text: t("common.no") },
                 ]}
                 defaultCurrent={0}
-                onChange={() => {}}
+                onChange={(e) => {
+                  updateListingData(
+                    "propertyData",
+                    "registration",
+                    e.target.value
+                  );
+                }}
+                isInvalid={errorFields.includes("propertyData.registration")}
                 name=""
                 placeholder=""
               />
@@ -134,36 +257,102 @@ const AddListingForm = ({ guest: bool = false }) => {
 
           <div className="col-12">
             <div className="input-group-meta form-group mb-40">
-              <textarea placeholder={t("viewing.comments")} name="email" />
-              {/* <p className="form_error">{errors.email?.message}</p> */}
+              <label htmlFor="">{t("emergency_housing.description")}</label>
+              <Form.Control
+                as="textarea"
+                value={propertyData.description}
+                onChange={(e) => {
+                  updateListingData(
+                    "propertyData",
+                    "description",
+                    e.target.value
+                  );
+                }}
+                isInvalid={errorFields.includes("propertyData.description")}
+              />
+              <small>* {t("emergency_housing.description_disclaimer")}</small>
+            </div>
+          </div>
+
+          <div className="col-12">
+            <div className="input-group-meta form-group mb-40">
+              <label htmlFor="">{t("emergency_housing.note")}</label>
+              <Form.Control
+                as="textarea"
+                value={propertyData.note}
+                onChange={(e) => {
+                  updateListingData("propertyData", "note", e.target.value);
+                }}
+                isInvalid={errorFields.includes("propertyData.note")}
+              />
             </div>
           </div>
         </div>
 
+        <h4>{t("emergency_housing.property_images")}</h4>
+        <small>* {t("emergency_housing.image_requirements")}</small>
+        <br />
+        <small className="mb-40">* {t("emergency_housing.extra_images")}</small>
+
         <div className="col-12 mt-10 mb-40">
-          <PrefixMultiFilePreviewInput />
+          <PrefixMultiFilePreviewInput
+            value={propertyStore.addListingData.images}
+            onChange={(files: any) => {
+              updateListingData("images", "", files);
+            }}
+            isInvalid={errorFields.includes("images")}
+            // maxSizeNote={t("files.allowed_sizes_note", { allowed_size: "5MB" })}
+            allowedFormatsNotes={t("files.allowed_types_note", {
+              allowed_types: "jpg, png, jpeg, webp, svg, bmp, heic, mp4",
+            })}
+          />
         </div>
 
         <div className="col-12 mb-20 d-flex gap-3 align-items-center justify-content-start">
-          <input
+          <Form.Check
             type="checkbox"
             name="Amenities"
-            // value={list}
-            // checked={selectedAmenities.includes(list)}
-            // onChange={handleAmenityChange}
+            value={terms.contact}
+            checked={terms.contact}
+            onChange={(e) => {
+              updateListingData("terms", "contact", e.target.checked);
+            }}
+            isInvalid={errorFields.includes("terms.contact")}
+          />
+          <label>{t("legals.permission_contact")}</label>
+        </div>
+
+        <div className="col-12 mb-20 d-flex gap-3 align-items-center justify-content-start">
+          <Form.Check
+            type="checkbox"
+            name="Amenities"
+            value={terms.legals}
+            checked={terms.legals}
+            onChange={(e) => {
+              updateListingData("terms", "legals", e.target.checked);
+            }}
+            isInvalid={errorFields.includes("terms.legals")}
           />
           <label>
-            I give my permission to be contacted by the organization for the
-            purposes of the service
+            <Trans
+              i18nKey="translations:legals.permission_terms"
+              components={{
+                link: (
+                  <a href="/terms&policy" target="_blank" rel="noreferrer"></a>
+                ),
+              }}
+            />
           </label>
         </div>
 
         <div className="col-12">
           <button
+            disabled={loading}
             type="submit"
+            onClick={handleSubmit}
             className="btn-nine text-uppercase rounded-3 fw-normal w-100"
           >
-            {t("contact.send")}
+            {loading ? <Spinner animation="border" /> : t("contact.send")}
           </button>
         </div>
       </div>
@@ -171,4 +360,4 @@ const AddListingForm = ({ guest: bool = false }) => {
   );
 };
 
-export default AddListingForm;
+export default observer(AddListingForm);

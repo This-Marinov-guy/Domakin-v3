@@ -29,7 +29,7 @@ const ChangeLanguage = () => {
 
   return (
     <NiceSelect
-      style={{ height: "50px" }}
+      style={{ height: "50px", minWidth: "130px" }}
       className="nice-select fw-normal"
       options={options}
       defaultCurrent={defOption}

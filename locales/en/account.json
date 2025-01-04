@@ -1,0 +1,20 @@
+{
+    "authentication": {
+        "login": "Login",
+        "register": "Register",
+        "welcome_back": "Welcome back!",
+        "no_account": "Still don't have an account?",
+        "sign_up": "Sign up",
+        "log_in": "Log in",
+        "forgot_password": "Forgot password?",
+        "keep_logged_in": "Keep me logged in",
+        "or": "or",
+        "email": "Email",
+        "password": "Password",
+        "name": "Name",
+        "phone": "Phone",
+        "confirm_password": "Confirm password",
+        "already_registered": "Already have an account?",
+        "terms": "By hitting the Register button, you agree to the <link>Terms & Conditions</link>"
+    }
+}

@@ -1,4 +1,4 @@
-export const isProd = process.env.NODE_ENV === "production";
+export const ENV_PROD = process.env.NODE_ENV === "production";
 
 // social
 export const EMAIL = 'info@domakin.nl';
@@ -50,3 +50,12 @@ export const KVK = '90831268'
 //views
 export const LIST = '1';
 export const GRID = '2';
+
+//modals
+export const COOKIE_MODAL = 'COOKIE_MODAL';
+export const LOGIN_MODAL = 'LOGIN_MODAL';
+
+// tabs
+export const FORGOTTEN_PASS = 2;
+export const SIGN_UP = 1;
+export const LOGIN_IN = 0;

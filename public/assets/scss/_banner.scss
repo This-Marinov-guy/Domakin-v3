@@ -514,7 +514,7 @@
 // Fancy Banner Two
 .fancy-banner-two {
   background: url(../images/media/img_12.jpg) no-repeat center;
-  background-size: cover;
+  background-size: fill;
   background-attachment: fixed;
   &:before {
     content: "";

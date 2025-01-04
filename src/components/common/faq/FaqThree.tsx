@@ -11,9 +11,7 @@ const FaqThree = () => {
          <div key={item.id} className="accordion-item">
            <h2 className="accordion-header">
              <button
-               className={`accordion-button ${
-                 item.id === 1 ? "" : "collapsed"
-               }`}
+               className={`accordion-button collapsed`}
                type="button"
                data-bs-toggle="collapse"
                data-bs-target={`#collapse${item.id}`}
@@ -25,9 +23,7 @@ const FaqThree = () => {
            </h2>
            <div
              id={`collapse${item.id}`}
-             className={`accordion-collapse collapse ${
-               item.id === 1 ? "show" : ""
-             }`}
+             className={`accordion-collapse collapse`}
              data-bs-parent="#accordionThree"
            >
              <div className="accordion-body">

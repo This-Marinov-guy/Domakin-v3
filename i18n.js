@@ -4,7 +4,7 @@ module.exports = {
   locales: ["en", "bg", "gr"],
   defaultLocale: "en",
   pages: {
-    "*": ["translations"],
+    "*": ["translations", "account"],
   },
   staticsHoc: hoistNonReactStatics,
   loadLocaleFrom: (locale, namespace) =>

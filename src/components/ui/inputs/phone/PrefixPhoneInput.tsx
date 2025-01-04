@@ -1,67 +1,66 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
+import Form from "react-bootstrap/Form";
 import { EUROPEAN_COUNTRIES } from "@/utils/countries";
 import { getGeoLocation } from "@/utils/helpers";
 import { LOCAL_STORAGE_LOCATION } from "@/utils/localstorage";
 import Prefix from "./Prefix";
 
 const PrefixPhoneInput = (props: any) => {
-  const { className, style, onChange, placeholder } = props;
-  //   const [selectedCode, setSelectedCode] = useState(
-  //     EUROPEAN_COUNTRIES.find((c) => c.iso2.toUpperCase() === getGeoLocation())
-  //   );
+  const { className, style, value, onChange, isInvalid } = props;
 
-  //   const [value, setValue] = useState(undefined);
+  const [selectedCode, setSelectedCode] = useState("");
 
-  //   useEffect(() => {
-  //     if (onChange && selectedCode && value) {
-  //       onChange(selectedCode.phoneCode + value);
-  //     }
-  //   }, [selectedCode, value]);
+  const [mainPart, setMainPart] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.localStorage) {
+      const country = EUROPEAN_COUNTRIES.find(
+        (c) => c.iso2.toUpperCase() === getGeoLocation()
+      );
+
+      if (country) {
+        setSelectedCode(country.phoneCode);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (onChange && selectedCode && mainPart) {
+      onChange(selectedCode + mainPart);
+    }
+  }, [selectedCode, mainPart]);
+
+  useEffect(() => {
+    if (!value) {
+      setMainPart("");
+    }
+  }, [value]);
 
   return (
     <div className="phone-input">
-      <Prefix />
-      <input
+      <Prefix
+        value={selectedCode}
+        onChange={(code: string) => {
+          const country = EUROPEAN_COUNTRIES.find((c) => c.phoneCode === code);
+
+          if (country) {
+            localStorage.setItem(LOCAL_STORAGE_LOCATION, country.iso2);
+          }
+
+          setSelectedCode(code);
+        }}
+      />
+      <Form.Control
         type="number"
         className="phone-content form-control"
-        aria-label="Text input with dropdown button"
+        value={mainPart}
+        onChange={(e: any) => setMainPart(e.target.value)}
+        isInvalid={isInvalid}
       />
     </div>
   );
-
-  {
-    /* return (
-    <div className={"phone_code " + className} style={style}>
-      <Dropdown
-        value={selectedCode}
-        filter
-        onChange={(e) => {
-          const inputValue = e.value;
-
-          localStorage.setItem(
-            LOCAL_STORAGE_LOCATION,
-            EUROPEAN_COUNTRIES.find(
-              (c) => c.phoneCode === inputValue.phoneCode
-            )["iso2"]
-          );
-
-          setSelectedCode(inputValue);
-        }}
-        options={EUROPEAN_COUNTRIES}
-        optionLabel="phoneCode"
-        placeholder="Prefix"
-        className="phone_code_prefix"
-      />
-      <InputNumber
-        value={value}
-        useGrouping={false}
-        onValueChange={(e) => setValue(e.target.value)}
-        className="phone_code_content"
-        placeholder={placeholder ?? "Phone Number"}
-      />
-    </div>
-  ); */
-  }
 };
 
 export default PrefixPhoneInput;

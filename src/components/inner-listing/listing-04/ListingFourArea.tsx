@@ -1,5 +1,5 @@
 "use client";
-import DropdownTwo from "@/components/search-dropdown/inner-dropdown/DropdownTwo";
+import FilterTwo from "@/components/search-dropdown/inner-dropdown/FilterTwo";
 import UseShortedProperty from "@/hooks/useShortedProperty";
 import NiceSelect from "@/ui/NiceSelect";
 import Link from "next/link";
@@ -50,7 +50,7 @@ const ListingFourArea = () => {
       <div className="container">
         <div className="search-wrapper-one layout-one bg position-relative mb-75 md-mb-50">
           <div className="bg-wrapper border-layout">
-            <DropdownTwo
+            <FilterTwo
               handlePriceDropChange={handlePriceDropChange}
               handleSearchChange={handleSearchChange}
               handleBedroomChange={handleBedroomChange}

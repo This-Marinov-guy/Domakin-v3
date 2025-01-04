@@ -9,7 +9,7 @@ const PropertyCardList = (props: {
   style?: boolean;
 }) => {
   const { property, style } = props;
-
+    
   return (
     <div
       key={property.id}
@@ -17,6 +17,11 @@ const PropertyCardList = (props: {
     >
       <div className="d-flex flex-wrap layout-one">
         <div
+          style={{
+            backgroundImage: `url(/assets/img/properties/${
+              property.folder ?? "property_" + property.id
+            }/${property.main_image})`,
+          }}
           className={`img-gallery position-relative z-1 border-20 overflow-hidden`}
         >
           <div
@@ -28,7 +33,7 @@ const PropertyCardList = (props: {
             {property.status}
           </div>
           <div className="img-slider-btn">
-            03 <i className="fa-regular fa-image"></i>
+            {property.images.length} <i className="fa-regular fa-image"></i>
             <Fancybox
               options={{
                 Carousel: {
@@ -43,7 +48,7 @@ const PropertyCardList = (props: {
                   data-fancybox="gallery2"
                   href={`/assets/img/properties/${
                     property.folder ?? "property_" + property.id
-                  }/${property.main_image}`}
+                  }/${thumb}`}
                 ></a>
               ))}
             </Fancybox>

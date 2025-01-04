@@ -4,7 +4,7 @@ import NiceSelect from "@/ui/NiceSelect";
 
 const tab_title: string[] = ["Buy", "Rent",];
 
-const DropdownTwo = () => {
+const FilterTwo = () => {
 
    const selectHandler = (e: any) => { };
    const [activeTab, setActiveTab] = useState(0);
@@ -176,4 +176,4 @@ const DropdownTwo = () => {
    )
 }
 
-export default DropdownTwo
+export default FilterTwo

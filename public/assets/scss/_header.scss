@@ -385,10 +385,10 @@
 /*----- For Desktop -------*/
 @media screen and (min-width: 992px) {
   .justify-content-between .navbar {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    // position: absolute;
+    // top: 50%;
+    // left: 25%;
+    // transform: translate(-50%, -50%);
   }
   .navbar .dropdown-menu {
     font-size: 1em;

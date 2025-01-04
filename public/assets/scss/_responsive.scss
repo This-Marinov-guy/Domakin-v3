@@ -42,7 +42,7 @@
   }
   .container.container-large {
     max-width: 1574px;
-    padding: 0 12px;
+    padding: 8px 12px;
   }
 }
 /*(min-width: 1400px)*/
@@ -53,12 +53,10 @@
   .btn-one,
   .btn-ten {
     font-size: 16px;
-    line-height: 48px;
   }
   .btn-five,
   .btn-six {
-    line-height: 50px;
-    padding: 0 30px;
+    padding: 8px 30px;
     font-size: 16px;
   }
   .btn-three {
@@ -68,18 +66,15 @@
     font-size: 14px;
   }
   .btn-seven {
-    line-height: 53px;
     font-size: 16px;
-    padding: 0 20px;
+    padding: 8px 20px;
   }
   .btn-eight {
-    line-height: 48px;
     font-size: 16px;
   }
   .btn-nine {
     font-size: 14px;
-    line-height: 50px;
-    padding: 0 25px;
+    padding: 8px 25px;
   }
   .btn-eight.inverse {
     font-size: 16px;
@@ -88,7 +83,6 @@
   .btn-one.border-0,
   .btn-ten.border-0,
   .btn-eight.border-0 {
-    line-height: 50px;
   }
   .btn-ten i {
     margin-left: 10px;
@@ -171,7 +165,7 @@
     padding: 28px 0 20px;
   }
   .accordion-style-two .accordion {
-    padding: 0 20px;
+    padding: 8px 20px;
   }
   .footer-one .footer-intro {
     padding: 20px;
@@ -252,10 +246,10 @@
     width: 150px;
   }
   .block-feature-ten .email-form input {
-    padding: 0 180px 0 15px;
+    padding: 8px 180px 0 15px;
   }
   .block-feature-ten .media-gallery {
-    padding: 0 40px 40px 40px;
+    padding: 8px 40px 40px 40px;
   }
   .blog-meta-two .post-data .blog-title h4 {
     font-size: 22px;
@@ -312,7 +306,7 @@
   }
   .grid-2column .grid-sizer,
   .grid-2column .isotop-item {
-    padding: 0 12px;
+    padding: 8px 12px;
   }
   .theme-details-one .review-panel-one .load-more-review {
     line-height: 55px;
@@ -362,11 +356,11 @@
   }
   .listing-type-filter ul li {
     font-size: 15px;
-    padding: 0 5px;
+    padding: 8px 5px;
   }
   .listing-type-filter ul li a {
     line-height: 40px;
-    padding: 0 25px;
+    padding: 8px 25px;
   }
   .listing-type-filter ul li:first-child {
     margin-right: auto;
@@ -379,7 +373,7 @@
   }
   .grid-3column .grid-sizer,
   .grid-3column .isotop-item {
-    padding: 0 12px;
+    padding: 8px 12px;
   }
   .service-details .service-sidebar .service-category {
     padding: 15px;
@@ -443,7 +437,7 @@
     left: auto;
   }
   .search-wrapper-one .bg-wrapper .search-btn-four {
-    padding: 0 26px;
+    padding: 8px 26px;
   }
   .inner-banner-three {
     margin: 116px 25px 0;
@@ -492,7 +486,7 @@
     right: 15px;
   }
   .theme-details-one .media-gallery-grid {
-    padding: 0 25px;
+    padding: 8px 25px;
   }
 }
 /*(min-width: 1200px) and (max-width: 1399px)*/
@@ -656,7 +650,7 @@
     font-size: 35px;
   }
   .feedback-section-five .content-wrapper {
-    padding: 0 40px;
+    padding: 8px 40px;
   }
   .blog-meta-two .post-img {
     height: 300px;
@@ -818,7 +812,7 @@
     width: 150px;
   }
   .block-feature-four form input {
-    padding: 0 160px 0 15px;
+    padding: 8px 160px 0 15px;
   }
   .fancy-banner-two .form-wrapper form {
     height: 70px;
@@ -847,7 +841,7 @@
   .layout-two .input-box-one .label,
   .layout-two .input-box-one .nice-select,
   .layout-two .input-box-one .type-input {
-    padding: 0;
+    padding: 8px;
   }
   .layout-two.search-wrapper-one .bg-wrapper .search-btn-two {
     width: 100%;
@@ -956,14 +950,14 @@
     padding-top: 100px;
   }
   .search-wrapper-one .bg-wrapper .search-modal-btn {
-    padding: 0 20px;
+    padding: 8px 20px;
     height: 50px;
     font-size: 13px;
   }
   .search-wrapper-one .bg-wrapper .search-btn-four {
     height: 50px;
     font-size: 13px;
-    padding: 0 30px;
+    padding: 8px 30px;
   }
   .listing-card-six .btn-four {
     width: 80px;
@@ -975,7 +969,7 @@
     padding: 18px 0;
   }
   .block-feature-thirteen .media-gallery {
-    padding: 0 40px 30px 0;
+    padding: 8px 40px 30px 0;
   }
   .block-feature-thirteen .media-gallery:before {
     left: 50px;
@@ -1087,7 +1081,7 @@
     margin: 0;
   }
   .theme-details-one .media-gallery-grid {
-    padding: 0 12px;
+    padding: 8px 12px;
   }
   .pricing-nav-one .nav .nav-link {
     width: 145px;
@@ -1111,7 +1105,7 @@
     padding: 15px;
   }
   .project-details-one .details-text .project-info-outline .main-bg {
-    padding: 0 20px;
+    padding: 8px 20px;
   }
   .card-style-ten {
     padding: 30px 20px 40px;
@@ -1264,7 +1258,7 @@
   }
   .layout-one .input-box-one .label,
   .layout-one .input-box-one .nice-select {
-    padding: 0;
+    padding: 8px;
   }
   .feedback-block-one blockquote {
     font-size: 24px;
@@ -1370,7 +1364,7 @@
     padding: 12px;
   }
   .accordion-style-two .accordion-item .accordion-body {
-    padding: 0 20px 25px 0;
+    padding: 8px 20px 25px 0;
   }
   .accordion-style-two .accordion-item .accordion-button {
     font-size: 18px;
@@ -1461,7 +1455,7 @@
     height: 300px;
   }
   .feedback-section-five .content-wrapper {
-    padding: 0 15px;
+    padding: 8px 15px;
   }
   .feedback-block-five blockquote {
     font-size: 26px;
@@ -1564,7 +1558,7 @@
     font-size: 32px;
   }
   .footer-four.dark-bg .news-letter-area .form-wrapper form input {
-    padding: 0 160px 0 15px;
+    padding: 8px 160px 0 15px;
   }
   .error-section h3 {
     font-size: 40px;
@@ -1869,7 +1863,7 @@
     width: 55px;
   }
   #searchModal .modal-dialog form input {
-    padding: 0 65px 0 20px;
+    padding: 8px 65px 0 20px;
   }
   .address-banner .block {
     width: 100%;
@@ -1926,7 +1920,7 @@
   }
   .pricing-section-one .dot-bg-wrapper {
     background: none;
-    padding: 0;
+    padding: 8px;
   }
   .pricing-section-one .main-bg {
     border: none;

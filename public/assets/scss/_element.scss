@@ -1159,3 +1159,29 @@
   background: #fff;
   color: #000;
 }
+
+.search-container {
+  margin: auto;
+  width: 90%;
+  position: relative;
+
+  .search-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: gray;
+    font-size: 20px;
+  }
+
+  .search-field {
+    height: 40px !important;
+  }
+
+  input {
+    padding-left: 40px !important;
+  }
+}
+
+.error {
+  color: red;
+}

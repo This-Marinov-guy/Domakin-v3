@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useCallback, useRef, FC, ChangeEvent } from "react";
+import React, { useState, useCallback, useRef, FC, ChangeEvent, useEffect } from "react";
 import { useClickAway } from "react-use";
 
 interface Option {
@@ -16,6 +16,7 @@ type NiceSelectProps = {
   icon?: string;
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
   name: string;
+  isInvalid?: boolean;
 };
 
 const NiceSelect: FC<NiceSelectProps> = ({
@@ -27,6 +28,7 @@ const NiceSelect: FC<NiceSelectProps> = ({
   onChange,
   icon,
   name,
+  isInvalid,
 }) => {
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState<Option>(options[defaultCurrent]);
@@ -37,6 +39,12 @@ const NiceSelect: FC<NiceSelectProps> = ({
 
   useClickAway(ref, onClose);
 
+  useEffect(() => {
+    onChange({
+      target: { value: options[defaultCurrent].value },
+    } as ChangeEvent<HTMLSelectElement>);
+  }, []);
+
   const currentHandler = (item: Option) => {
     setCurrent(item);
     onChange({ target: { value: item.value } } as ChangeEvent<HTMLSelectElement>);
@@ -45,7 +53,7 @@ const NiceSelect: FC<NiceSelectProps> = ({
 
   return (
     <div
-      className={`nice-select form-select-lg ${className || ""} ${open ? "open" : ""}`}
+      className={`nice-select form-select-lg ${className || ""} ${open ? "open" : ""} ${isInvalid ? "is-invalid" : ""}`}
       style={style}
       role="button"
       tabIndex={0}

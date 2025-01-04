@@ -1,16 +1,13 @@
 import axios from "axios";
 // import { clarity } from "react-microsoft-clarity";
 import Resizer from "react-image-file-resizer";
-import { LANGUAGES } from "./defines";
+import { ENV_PROD, LANGUAGES } from "./defines";
 import setLanguage from "next-translate/setLanguage";
 import { LOCAL_STORAGE_LOCATION } from "./localstorage";
-
-export const isProd = () => {
-  return process.env.NODE_ENV === "production";
-};
+import { SERVER_ENDPOINT } from "./config";
 
 export const getGeoInfo = async () => {
-  if (!isProd()) {
+  if (!ENV_PROD) {
     return;
   }
 
@@ -70,39 +67,94 @@ export const createFileName = (index: Number) => {
   return `${index}.jpg`;
 };
 
-export const resizeFile = (file: File, width = 800, height = 800, format = "JPG") =>
+export const resizeFile = (
+  file: File,
+  width = 800,
+  height = 800,
+  format = "JPG",
+  withOriginalName = true
+) =>
   new Promise((resolve) => {
-    Resizer.imageFileResizer(
-      file,
-      width,
-      height,
-      format,
-      100,
-      0,
-      (blob) => {
-        // @ts-expect-error
-        resolve(new File([blob], "resized-image.jpg", { type: "image/jpg" }));
-      },
-      "blob"
-    );
+    if (file.type.startsWith("image/")) {
+      Resizer.imageFileResizer(
+        file,
+        width,
+        height,
+        format,
+        100,
+        0,
+        (blob) => {
+          resolve(
+            new File(
+              // @ts-expect-error
+              [blob],
+              withOriginalName ? file.name.slice(0, 20) : "resized-image.jpg",
+              { type: "image/jpg" }
+            )
+          );
+        },
+        "blob"
+      );
+    } else {
+      resolve(file);
+    }
   });
 
-  export const getGeoLocation = () => {
-    let location = localStorage.getItem(LOCAL_STORAGE_LOCATION) || "";
+export const getGeoLocation = () => {
+  let location = "";
 
-    if (location) {
-      return location;
-    }
+  if (typeof window !== "undefined" && window.localStorage) {
+    location = localStorage.getItem(LOCAL_STORAGE_LOCATION) ?? "";
+  }
 
-    fetch(`https://ipinfo.io/json?token=${process.env.REACT_APP_GEO_TOKEN}`)
-      .then((response) => response.json())
-      .then((data) => {
-        location = data.country;
-        localStorage.setItem(LOCAL_STORAGE_LOCATION, location);
-      })
-      .catch((error) => {
-        console.error("Error fetching location data:", error);
-      });
-
+  if (location) {
     return location;
-  };
+  }
+
+  fetch(`https://ipinfo.io/json?token=${process.env.REACT_APP_GEO_TOKEN}`)
+    .then((response) => response.json())
+    .then((data) => {
+      location = data.country;
+      localStorage.setItem(LOCAL_STORAGE_LOCATION, location);
+    })
+    .catch((error) => {
+      console.error("Error fetching location data:", error);
+    });
+
+  return location;
+};
+
+export const transformToFormData = (data: any) => {
+  const formData = new FormData();
+
+  for (const key in data) {
+    if (data[key] instanceof File) {
+      formData.append(key, data[key]);
+    } else if (Array.isArray(data[key])) {
+      data[key].forEach((element: any, index) => {
+        formData.append(`${key}[${index}]`, element);
+      });
+    } else if (typeof data[key] === "object" && data[key] !== null) {
+      formData.append(key, JSON.stringify(data[key]));
+    } else {
+      formData.append(key, data[key]);
+    }
+  }
+
+  return formData;
+};
+
+export const getCookie = (name: any) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    const part = parts.pop();
+
+    if (part) {
+      return part.split(";").shift();
+    }
+  }
+  return null;
+};
+
+export const csrf = () => axios.get(SERVER_ENDPOINT + "/sanctum/csrf-cookie");

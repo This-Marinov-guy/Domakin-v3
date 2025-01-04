@@ -7,6 +7,9 @@ import StepDescriptionOne from "@/components/common/StepDescriptionOne";
 import useTranslation from "next-translate/useTranslation";
 import AddListingForm from "@/components/forms/AddListingForm";
 import ListingThreeArea from "@/components/inner-listing/listing-03/ListingThreeArea";
+import { useStore } from "@/stores/storeContext";
+import PageLoader from "@/components/ui/loading/PageLoader";
+import { observer } from "mobx-react-lite";
 
 const PropertiesPage = () => {
   const { t } = useTranslation("translations");
@@ -34,6 +37,19 @@ const PropertiesPage = () => {
     ],
   };
 
+  const forRentList: any[] = t("FOR_RENT", {}, { returnObjects: true }) ?? [];
+
+  const properties = forRentList.filter(
+    (p: any) => p.hidden == false || p.hidden === undefined
+  );
+
+  if (
+    // propertiesLoading ||
+    !properties
+  ) {
+    return <PageLoader />;
+  }
+
   return (
     <>
       <HeaderOne />
@@ -43,11 +59,11 @@ const PropertiesPage = () => {
         style={false}
       />
       <StepDescriptionOne details={details} />
-      <ListingThreeArea />
+      <ListingThreeArea properties={properties} />
       <FancyBanner />
       <FooterFour />
     </>
   );
 };
 
-export default PropertiesPage;
+export default observer(PropertiesPage);

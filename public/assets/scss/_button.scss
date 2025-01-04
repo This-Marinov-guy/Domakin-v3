@@ -2,17 +2,17 @@
 .btn-one {
   font-weight: 500;
   color: $color-one;
-  padding: 0 25px;
+  padding: 10px 25px;
   min-width: 130px;
   text-align: center;
-  line-height: 53px;
   border: 1px solid $color-one;
   border-radius: 10px;
-  @include transition (0.3s);
+  @include transition(0.3s);
   i {
-      margin-right: 5px;
+    margin-right: 5px;
   }
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: #000;
     border-color: #000;
     color: #fff;
@@ -24,19 +24,19 @@
   justify-content: center;
   font-weight: 500;
   color: #fff;
-  padding: 0 22px;
+  padding: 10px 22px;
   min-width: 160px;
   text-align: center;
-  line-height: 53px;
   border: 1px solid $color-two;
   background: $color-one;
   border-radius: 10px;
-  @include transition (0.3s);
+  @include transition(0.3s);
   i {
     font-size: 1.5em;
     margin-left: 15px;
   }
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: $color-two;
     color: #fff;
   }
@@ -51,12 +51,13 @@
   justify-content: center;
   font-weight: 500;
   color: $text-dark;
-  @include transition (0.3s);
+  @include transition(0.3s);
   i {
     font-size: 1.2em;
     margin-left: 5px;
   }
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     color: $color-two;
     span {
       text-decoration: underline;
@@ -69,17 +70,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0C0C0C;
+  background: #0c0c0c;
   color: #fff;
   font-size: 1.3em;
-  @include transition (0.3s);
-  &:hover, &:focus {
+  @include transition(0.3s);
+  &:hover,
+  &:focus {
     background: $color-one;
   }
   &.inverse {
     background: $color-one;
-    &:hover, &:focus {
-      background: #0C0C0C;
+    &:hover,
+    &:focus {
+      background: #0c0c0c;
     }
   }
 }
@@ -89,26 +92,26 @@
   justify-content: center;
   font-weight: 500;
   color: #fff;
-  padding: 0 40px;
+  padding: 10px 40px;
   min-width: 150px;
   text-align: center;
-  line-height: 55px;
   border-radius: 10px;
   background: #000;
-  @include transition (0.3s);
+  @include transition(0.3s);
   &.text-uppercase {
     font-size: 16px;
     letter-spacing: 1px;
   }
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: $color-one;
   }
   &.sm {
     font-size: 14px;
-    padding: 0 30px;
+    padding: 10px 30px;
   }
   &.md {
-    padding: 0 26px;
+    padding: 10px 26px;
   }
   i {
     font-size: 1.3em;
@@ -118,14 +121,14 @@
 .btn-six {
   font-weight: 500;
   color: #fff;
-  padding: 0 35px;
+  padding: 10px 35px;
   min-width: 160px;
   text-align: center;
-  line-height: 55px;
   background: $color-one;
   border-radius: 40px;
-  @include transition (0.3s);
-  &:hover, &:focus {
+  @include transition(0.3s);
+  &:hover,
+  &:focus {
     background: $color-two;
     color: #fff;
   }
@@ -136,17 +139,17 @@
   justify-content: center;
   font-weight: 500;
   color: #030303;
-  padding: 0 25px;
+  padding: 10px 25px;
   min-width: 160px;
   text-align: center;
-  line-height: 58px;
   border: 1px solid #000;
-  @include transition (0.3s);
+  @include transition(0.3s);
   i {
     font-size: 1.3em;
     margin-left: 15px;
   }
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: $color-two;
     border-color: $color-two;
     color: #fff;
@@ -159,12 +162,11 @@
   font-weight: 500;
   font-size: 18px;
   color: #030303;
-  padding: 0 22px;
+  padding: 10px 22px;
   min-width: 160px;
   text-align: center;
-  line-height: 51px;
   border: 1px solid #000;
-  @include transition (0.3s);
+  @include transition(0.3s);
   i {
     font-size: 1.1em;
     margin-left: 12px;
@@ -182,7 +184,8 @@
       margin-left: 12px;
     }
   }
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: $color-two;
     border-color: $color-two;
     color: #fff;
@@ -197,13 +200,13 @@
   font-size: 16px;
   letter-spacing: 1px;
   color: #fff;
-  padding: 0 35px;
+  padding: 10px 35px;
   min-width: 160px;
   text-align: center;
-  line-height: 55px;
   background: $color-one;
-  @include transition (0.3s);
-  &:hover, &:focus {
+  @include transition(0.3s);
+  &:hover,
+  &:focus {
     background: $color-two;
     color: #fff;
   }
@@ -215,18 +218,18 @@
   font-weight: 500;
   color: #000;
   background-color: $color-one;
-  padding: 0 22px;
+  padding: 10px 22px;
   min-width: 160px;
   text-align: center;
-  line-height: 53px;
   border: 1px solid #000;
   border-radius: 50px;
-  @include transition (0.3s);
+  @include transition(0.3s);
   i {
     font-size: 1.3em;
     margin-left: 15px;
   }
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: $color-two;
     border-color: $color-two;
     color: #fff;
@@ -240,27 +243,29 @@
   color: #000;
   position: relative;
   font-size: 16px;
-  padding-bottom: 5px;
-  @include transition (0.3s);
+  padding-b1opxttom: 5px;
+  @include transition(0.3s);
   i {
     font-weight: 900;
     font-size: 0.8em;
     margin-left: 2px;
   }
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     bottom: 0;
     height: 2px;
     width: 97%;
     background: #000;
-    @include transition (0.3s);
+    @include transition(0.3s);
   }
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     color: $color-two;
   }
-  &:hover:before, &:focus:before {
+  &:hover:before,
+  &:focus:before {
     background: $color-two;
   }
   &.white-vr {
@@ -268,10 +273,12 @@
     &:before {
       background: #fff;
     }
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       color: $color-two;
     }
-    &:hover:before, &:focus:before {
+    &:hover:before,
+    &:focus:before {
       background: $color-two;
     }
   }
@@ -280,18 +287,18 @@
   font-weight: 500;
   font-size: 18px;
   color: #030303;
-  padding: 0 25px;
+  padding: 10px 25px;
   min-width: 170px;
   text-align: center;
-  line-height: 48px;
   border: 1px solid #000;
   border-radius: 10px;
-  @include transition (0.3s);
+  @include transition(0.3s);
   &.sm {
     font-size: 16px;
     min-width: 160px;
   }
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: $color-one;
     border-color: $color-one;
     color: #fff;
@@ -306,10 +313,66 @@
   justify-content: center;
   color: #000;
   font-size: 1.5em;
-  @include transition (0.3s);
-  &:hover, &:focus {
+  @include transition(0.3s);
+  &:hover,
+  &:focus {
     background: $color-one;
     border-color: $color-one;
     color: #fff;
+  }
+}
+
+.btn-fourteen {
+  font-weight: 500;
+  background: #000;
+  border-color: #000;
+  color: #fff;
+  padding: 10px 25px;
+  min-width: 130px;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 10px;
+  @include transition(0.3s);
+  i {
+    margin-right: 5px;
+  }
+  &:hover {
+    background: $color-one;
+    border-color: $color-one;
+    color: #fff;
+  }
+}
+
+.centered-btn {
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+}
+
+.fade-in {
+  opacity: 0; /* Start fully invisible */
+  animation: fadeIn 0.5s forwards; /* Smoothly appear */
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* Back to original position */
+  }
+}
+
+/* Add the fade-out animation */
+.fade-out {
+  opacity: 1; /* Start fully visible */
+  transform: translateY(0); /* Original position */
+  animation: fadeOut 0.5s forwards; /* Smoothly disappear */
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0; /* Fully invisible */
+    transform: translateY(20px); /* Move down slightly */
   }
 }

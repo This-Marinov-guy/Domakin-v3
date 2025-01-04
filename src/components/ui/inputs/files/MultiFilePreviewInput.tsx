@@ -1,49 +1,64 @@
 import React, { useState } from "react";
-import { cleanFileName, createFileName, resizeFile } from "@/utils/helpers";
 import Dropzone from "react-dropzone";
+import { resizeFile } from "@/utils/helpers";
 import useTranslation from "next-translate/useTranslation";
+import { observer } from "mobx-react-lite";
+import { toast, ToastContent } from "react-toastify";
 
 const PrefixMultiFilePreviewInput = (props: any) => {
-  const { onInput, onReject, maxSizeNote, allowedFormatsNotes } = props;
+  const {
+    onChange,
+    value,
+    onReject,
+    maxSizeNote,
+    allowedFormatsNotes,
+    isInvalid,
+  } = props;
 
-  const { t } = useTranslation("components");
+  const { t } = useTranslation("translations");
 
-  const [files, setFiles] = useState([]);
   const [imageLoading, setImageLoading] = useState(false);
+
+  const handleRemove = (e: React.MouseEvent, index: number) => {
+    e.stopPropagation();
+
+    onChange && onChange(value.filter((_: any, i: number) => i !== index));
+  };
 
   const onDrop = async (acceptedFiles: File[]) => {
     setImageLoading(true);
-    // checkoutStore.setIsLoading(true);
-
     try {
       const resizedImages = await Promise.all(
         acceptedFiles.map(async (file: File) => {
           try {
             return await resizeFile(file);
           } catch (err) {
-            // toast({
-            //   title: t("common.inputs.imageInput.file_error", {
-            //     fileName: file.fileName,
-            //   }),
-            //   status: "error",
-            //   duration: 10000,
-            //   isClosable: true,
-            // });
+            toast.error(
+              t("files.file_corrupted") as unknown as ToastContent<unknown>,
+              {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+              }
+            );
           }
         })
       );
-
-      // setFiles(resizedImages);
+      onChange([...value, ...resizedImages]);
     } catch (error) {
       console.error("Error processing files:", error);
     } finally {
       setImageLoading(false);
-      //   checkoutStore.setIsLoading(false);
     }
   };
 
   return (
-    <div className="d-flex align-items-stretch justify-content-center gap-3 flex-lg-row flex-md-column flex-sm-column">
+    <div className="flex items-stretch justify-center gap-3 lg:flex-row md:flex-col sm:flex-col">
       <Dropzone
         onDrop={onDrop}
         accept={{
@@ -54,31 +69,41 @@ const PrefixMultiFilePreviewInput = (props: any) => {
           "image/svg+xml": [".svg"],
           "image/bmp": [],
           "image/heic": [".heif", ".heic"],
+          "video/mp4": [".mp4"],
         }}
         maxFiles={5}
         onDropRejected={onReject}
       >
         {({ getRootProps, getInputProps, isDragActive }) => (
-          <div {...getRootProps()}>
+          <div className="w-full" {...getRootProps()}>
             <input {...getInputProps()} />
-            <div className="file-dropzone-container">
+            <div
+              className={`file-dropzone-container ${
+                isInvalid ? "is-invalid" : ""
+              }`}
+            >
               {imageLoading ? (
-                <></>
-              ) : //   <Spinner />
-              files.length > 0 ? (
-                files.map((file, index) => (
-                  <div key={index} className="center_div">
-                    <p>{createFileName(index + 1)}</p>
-                  </div>
-                ))
+                <p>{t("common.loading")}</p>
               ) : (
                 <div className="text-center">
                   <i
                     className="fa-light fa-cloud-arrow-up"
                     style={{ color: "purple", fontSize: "30px" }}
                   ></i>
-                  <p>Drag files or click to upload</p>
+                  <p>{t("files.drag_files")}</p>
+                  {value.length > 0 &&
+                    value.map((file: any, index: number) => (
+                      <div key={index} className="file-preview">
+                        <p>{file.name}</p>
+                        <i
+                          onClick={(e) => handleRemove(e, index)}
+                          className="fa-solid fa-xmark error z-100 cursor-pointer"
+                        ></i>
+                      </div>
+                    ))}
+
                   {!!maxSizeNote && <small>{maxSizeNote}</small>}
+                  <br />
                   {!!allowedFormatsNotes && (
                     <small>{allowedFormatsNotes}</small>
                   )}
@@ -88,28 +113,8 @@ const PrefixMultiFilePreviewInput = (props: any) => {
           </div>
         )}
       </Dropzone>
-
-      <div className="file-preview-container">
-        <div className="d-flex align-items-center justify-content-center gap-3">
-          <i
-            className="fa-regular fa-file-lines"
-            style={{ color: "grey", fontSize: "30px" }}
-          ></i>
-          <i
-            className="fa-regular fa-file-image"
-            style={{ color: "grey", fontSize: "30px" }}
-          ></i>
-          <i
-            className="fa-regular fa-file-code"
-            style={{ color: "grey", fontSize: "30px" }}
-          ></i>
-        </div>
-        <p style={{ fontSize: "1.3em" }} className="text-center mt-10">
-          Upload files to see preview
-        </p>
-      </div>
     </div>
   );
 };
 
-export default PrefixMultiFilePreviewInput;
+export default observer(PrefixMultiFilePreviewInput);

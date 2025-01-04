@@ -76,7 +76,7 @@
     "fill_your_details": "Fill your details",
     "name": "Name",
     "surname": "Surname",
-    "phone_to_be_contacted": "Phone to be contacted (+ and country code)",
+    "phone": "Phone",
     "email": "Email",
     "comments": "Any comments you would like to be sent to our agent",
     "consent": "I give my consent to be contacted by the company via phone or email and for them to store my information for service purposes only",
@@ -94,7 +94,7 @@
       "time_required": "Please provide the time of the viewing"
     },
     "successful_request": "Successful Request",
-    "confirmation_message": "Your information has been sent so expect soon to be contacted by one of our agents! Thank you again for the trust and see you soon!",
+    "confirmation_message": "Your information has been sent so expect soon to be contacted by one of our agents!",
     "city_of_viewing": "City of viewing",
     "date": "Date:",
     "time": "Time:",
@@ -115,7 +115,8 @@
     "select": "select",
     "no_properties_message": "No properties at the moment - please check again later!",
     "free_of_charge": "FREE OF CHARGE",
-    "per_night": "per night"
+    "per_night": "per night",
+    "apply_now": "Apply now"
   },
   "lending": {
     "transfer_and_old_contract": "Transfer and old contract",
@@ -151,15 +152,30 @@
     "brief_description": "Briefly describe yourself",
     "property_information": "Property information",
     "location": "Location",
+    "city": "City",
+    "address": "Address",
+    "property_images": "Images of the room / common areas / outsides / utilities / etc.",
+    "image_requirements": "Submit at least 3 images and no more than 10",
+    "precise_address": "Please give the exact address and number so we can arrange a viewing (we will not share it on our website)",
+    "size": "Size",
+    "period": "Period of availability",
+    "rent": "Rent in euro",
+    "bills": "Approximate cost of bills in euro",
+    "flatmates": "Number of flatmates / roommates",
+    "registration": "Is address registration possible",
+    "description": "Description of property",
+    "description_disclaimer": "Briefly explain what the tenant can expect from the property, location and flatmates as well as any other important information",
+    "note": "Note to our agents",
+    "what_is_included": "What is included",
     "max_staying_period": "Maximum staying period",
     "price_per_night": "Price per night",
     "free_of_charge": "*You can also lend it out of charge",
     "property_description": "Description of property (such as is it a bed/coach/etc., what else can the tenant use)",
     "permission": "I give my permission to be contacted by the organization for the purposes of the service",
     "room_pictures": "Room pictures",
-    "image_submission": "* Submit at least 1 image and no more than 6",
+    "image_submission": "Submit at least 1 image and no more than 6",
     "extra_images": "* Extra images will not be received",
-    "supported_formats": "* Supported formats are jpg, jpeg and png",
+    "supported_formats": "Supported formats are jpg, jpeg and png",
     "send_room": "send room",
     "dont_forget_images": "* Don't forget images",
     "errors": {
@@ -207,39 +223,33 @@
     "members": [
       {
         "name": "Lazar Popov",
-        "position": "Viewing Agent",
-        "about": "26, Bachelor in Artificial Intelligence",
+        "position": "CEO",
+        "about": "Bachelor in Artificial Intelligence",
         "about_extra": "Hello, my name is Lazar. I'm from Ruse, but I have been living in Groningen for five years now. I have a master's degree in Artificial Intelligence. I am familiar with the city and have experience in searching for and finding rental properties. My interests include combat sports and artificial intelligence. Besides being an agent at Domakin.nl, I am also the president and co-founder of the non-profit student organization Bulgarian Society Groningen. I would be happy to assist you!"
       },
       {
         "name": "Sava Popov",
-        "position": "Viewing Agent",
-        "about": "20, Creative Media student",
+        "position": "Groningen Manager",
+        "about": "Bachelor in Creative Media",
         "about_extra": "Hello, I'm Sava and I'm a student in the \"Creative Media and Technologies\" program in Groningen. I have spent a lot of my summer time before coming to this town in searching for apartments, going on viewings, and asking acquaintances for advice. After numerous unsuccessful attempts, I finally managed to find a place, and I believe I now have a good understanding of the mistakes and successes in apartment hunting. I would be glad to help anyone who is in a similar situation!"
       },
       {
-        "name": "Konstantin Sonev",
-        "position": "Viewing Agent",
-        "about": "21, Creative Media student",
-        "about_extra": "Hello, my name is Konstantin, and I study \"Creative Media and Technologies\" in Groningen. At the end of the previous academic year, I had to search for a new apartment. It was extremely difficult to find a room in the city, and I was satisfied when I finally found a place after multiple unsuccessful attempts. There are many difficulties in finding apartments due to the high influx of students and high rents. We know that many of you have the desire to study in the city and face the same difficulties, especially when you are not in the city. That's why we at Domakin.nl want to help by providing our services. I look forward to working together!"
-      },
-      {
-        "name": "Dimitar Stamatov",
-        "position": "Viewing Agent",
-        "about": "22, International Business student",
-        "about_extra": "Hello, my name is Dimitar Stamatov, I'm 22 years old, and I'm a third-year student in the Netherlands. I study business and work as a bartender, and in my free time, I train in combat sports and engage in music. Like every student in the Netherlands, I know how difficult it is to find accommodation, especially in the first year. That's why I would be happy to assist any future student with my work as an agent at Domakin.nl."
-      },
-      {
-        "name": "Vladislav Marinov",
-        "position": "IT Manager",
-        "about": "22, International Business student",
-        "about_extra": " Hello, my name is Vladislav, and I'm a business graduate from London, England. Although in a different country, I am also familiar with the problems a student can encounter when searching for accommodation. Stress, despair, and anger are just a few emotions I have experienced personally while looking for an apartment in London, and I know the difficulties one can face, especially when searching remotely. It is a pleasure for me to work on this platform, which I believe will help many people!"
+        "name": "Paolina Gochecva",
+        "position": "Rotterdam Manager",
+        "about": "Bachelor in Micro and Macro Economics",
+        "about_extra": "Hello, my name is Paolina. I’m originally from Varna, Bulgaria, and I’ve been living in Rotterdam for nearly three years now. I am currently finishing my studies in Economics and have also taken various business and management courses to strengthen my expertise. I’m passionate about staying active through sports and enjoy traveling to explore different cultures. Alongside being the Regional Manager for Domakin in Rotterdam, I have held several leadership positions in non-profit student organisations. I’m familiar with the rental market in Rotterdam and would be delighted to help you find your perfect home!"
       },
       {
         "name": "Radost Lozanova",
         "position": "Design Manager",
-        "about": "22, International Business student",
+        "about": "Bachelor in Euroculture",
         "about_extra": "Hello! I'm Radost, a creative director and co-founder of Bulgarian Society Groningen. As a student, I have lived in several countries, which involved frequent moving. As part of the Domakin.nl team, I would be happy to help more Bulgarians find their new home in the Netherlands."
+      },
+      {
+        "name": "Vladislav Marinov",
+        "position": "CTO",
+        "about": "Bachelor in Business Management",
+        "about_extra": " Hello, my name is Vladislav, and I'm a business graduate from London, England. Although in a different country, I am also familiar with the problems a student can encounter when searching for accommodation. Stress, despair, and anger are just a few emotions I have experienced personally while looking for an apartment in London, and I know the difficulties one can face, especially when searching remotely. It is a pleasure for me to work on this platform, which I believe will help many people!"
       }
     ],
     "agents": "Agents",
@@ -354,7 +364,14 @@
     "property_location": "Property Location",
     "filter_by_price": "Filter By Price",
     "toggle_all": "Toggle All",
-    "availability": "Availabilty"
+    "availability": "Availabilty",
+    "showing": "Showing <span class='color-dark fw-500'>{{start}}</span>–<span class='color-dark fw-500'>{{end}}</span> of <span class='color-dark fw-500'>{{total}}</span> results",
+    "sort": "Sort by",
+    "all": "All",
+    "newest": "Newest",
+    "oldest": "Oldest",
+    "price_low_high": "Price: Low to High",
+    "price_high_low": "Price: High to Low"
   },
   "statusCodeMapping": {
     "free": "Free",
@@ -1189,13 +1206,58 @@
     }
   ],
 
+  "cookies": {
+    "title": "Cookie Policy",
+    "content": "To guarantee a smooth experience we need our clients to accept the mandatory cookies before using the website - you can read more in the legal section after."
+  },
+
+  
+  "subscribe_email": {
+    "description": "Subscribe to our newsletter and receive updates for new properties and services!",
+    "email": "Email Address",
+    "send": "Send"
+  },
+
+  "legals": {
+    "title": "Legal Documents",
+    "cookies": "Cookies",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "permission_contact": "I give my permission to be contacted by the organization for the purposes of the service",
+    "permission_terms": "I have read and agree to the <link>Terms & Conditions</link>"
+  },
+  
+  "common": {
+    "agree": "Agree",
+    "continue": "Continue",
+    "search": "Search",
+    "code": "Code",
+    "back": "Back",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "uploading": "Uploading...",
+    "yes": "Yes",
+    "no": "No",
+    "mandatory": "Mandatory",
+    "optional": "Optional",
+    "fields": "Fields",
+    "field": "Field"
+  },
+
   "files": {
+    "drag_files": "Drag files or click to upload",
     "required": "Please attach a file!",
     "wrong_file_type": "There is an issue with the file, please ensure it is {{allowed_types}}",
     "file_too_big": "The file is too large - please attach a file under 3 MB",
+    "allowed_type_note": "Please attach a file of type: {{allowed_types}}",
+    "allowed_types_note": "Please attach files of type: {{allowed_types}}",
+    "allowed_sizes_note": "Please attach files under {{allowed_size}}",
+    "allowed_size_note": "Please attach file under {{allowed_size}}",
+    "max_files": "You can attach up to {{max_files}} files",
     "motivational_letter_input": "Motivational letter that we will send to the landlord/roommate",
     "motivational_letter_example": "You can use our ready-made motivational letter template",
-    "download": "Download"
+    "download": "Download",
+    "file_corrupted": "The file might be corrupted, please try again or use another file"
   },
 
   "react_error": {
@@ -1203,10 +1265,14 @@
     "try_again": "Try again",
     "go_home": "Go Home"
   },
+
   "api": {
+    "error": "Error",
+    "fill_fields": "Please fill all the required fields",
     "invalid_action": "Invalid action",
     "request_failed": "The request failed, please try again",
     "too_many_requests": "Too many requests, please try again later.",
+    "general_error": "Something unexpected happened, please try again or contact us for help",
     "forbidden_access": "Forbidden: Access is denied",
     "not_enough_pictures": "Not enough pictures, please submit at least 3",
     "failed_fetching_feedbacks": "We could not get the feedbacks - please try again!"
