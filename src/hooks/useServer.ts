@@ -34,6 +34,8 @@ export const useServer = () => {
   ) => {
     if (options?.withLoading) startLoading();
 
+    axios.defaults.withCredentials = true;
+
     if (user && !!user.token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
     }
