@@ -380,11 +380,93 @@
   },
   "FOR_RENT": [
     {
-      "id": "33",
+      "id": "37",
       "hidden": false,
       "status": "RENT",
-      "price": 850,
+      "price": 540,
       "statusCode": 0,
+      "title": "Small room in a shared house",
+      "city": "Leeuwarden",
+      "location": "Lenteklokje, Leeuwarden",
+      "description": {
+        "property": "The 12 m2 room has a desk, chair, double bed, drawer, closet, radiator and mirror. There is shared kitchen and bathroom with 5 other tenants. Registration is possible!",
+        "period": "From January 3rd on, for at least half an year",
+        "bills": "all bills are included",
+        "flatmates": "5 people"
+      },
+      "main_image": "1.jpg",
+      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg"]
+    },
+    {
+      "id": "36",
+      "hidden": false,
+      "status": "RENT",
+      "price": 899,
+      "statusCode": 0,
+      "title": "Bright Room",
+      "city": "Rotterdam",
+      "location": "Rotterdam",
+      "description": {
+        "property": "A free room, available in a new 5-bedroom apartment in Rotterdam. The apartment is well-maintained. Registration is not possible.",
+        "period": "Free now",
+        "bills": "all bills are included",
+        "flatmates": "4 people"
+      },
+      "main_image": "1.jpeg",
+      "images": ["2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpeg"]
+    },
+    {
+      "id": "35",
+      "hidden": false,
+      "status": "Тaken",
+      "price": 820,
+      "statusCode": 2,
+      "title": "Modern Room",
+      "city": "Amsterdam",
+      "location": "Loenermark, Amsterdam",
+      "description": {
+        "property": "Apartment with 4 bedrooms offers a free room. The Apartment is new and well-maintained. The location is great because you are a 5-minute walk to Noord metro station. Registration will be possible, shortly after the room is occupied.",
+        "period": "Free now",
+        "bills": "all bills are included",
+        "flatmates": "3 people"
+      },
+      "main_image": "1.jpeg",
+      "images": ["2.jpeg", "3.jpeg", "4.jpeg"]
+    },
+    {
+      "id": "34",
+      "hidden": false,
+      "status": "TAKEN",
+      "price": 410,
+      "statusCode": 2,
+      "title": "Sub-rent Room",
+      "city": "Groningen",
+      "location": "Zwarteweg, Groningen",
+      "description": {
+        "property": "The room is spacious , fully furnished with a long balcony that connects to the kitchen. The tenants are 3 boys ages 20-22 and the shared facilities are the kitchen (sink, cabinets,2 fridges, stove, oven, microwave, and a new washing machine), bathroom, separate toilet (recently renovated). We have a cleaning schedule that is strictly followed. The location is in a great neighborhood next to Noorderplantsoen , it takes 10 minutes by bike to reach Zernike campus and 15 minutes walking to reach the center. supermarket Plus is right around the corner and stores like Albert Heijin, Jumbo, Aldi , Kruidvat and Paddepoel shopping center are 10 minutes walking distance. The boys are very kind and reliable we get along very well as communication , respecting each other, keeping a friendly environment is a priority and sometimes we enjoy a beer together. Registration is NOT possible.",
+        "period": "From 1st of February until 31st of July",
+        "bills": "only internet is not included (13 euro monthly fee)",
+        "flatmates": "3 people"
+      },
+      "main_image": "2.jpg",
+      "images": [
+        "1.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg",
+        "9.jpg",
+        "10.jpg"
+      ]
+    },
+    {
+      "id": "33",
+      "hidden": false,
+      "status": "TAKEN",
+      "price": 850,
+      "statusCode": 2,
       "title": "Sub-rent Room",
       "city": "Amsterdam",
       "location": "Amsterdam",
@@ -400,9 +482,9 @@
     {
       "id": "32",
       "hidden": false,
-      "status": "RENT",
+      "status": "TAKEN",
       "price": 475,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "20 m2 room in a shared house",
       "city": "Groningen",
       "location": "Neptunnusstraat, Groningen",
@@ -418,9 +500,9 @@
     {
       "id": "31",
       "hidden": false,
-      "status": "RENT",
+      "status": "TAKEN",
       "price": 950,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "12 m2 room in a shared house",
       "city": "Amsterdam",
       "location": "Nadezjda Mandelstamstraat",
@@ -449,9 +531,9 @@
     {
       "id": "30",
       "hidden": false,
-      "status": "RENT",
+      "status": "TAKEN",
       "price": 560,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Spacious Room in shared house",
       "city": "Leeuwarden",
       "location": "Bleeklaan, Leeuwarden",
@@ -478,9 +560,9 @@
     {
       "id": "29",
       "hidden": false,
-      "status": "RENT",
+      "status": "TAKEN",
       "price": 1474,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Spacious 2-bedroom apartment",
       "city": "Rotterdam",
       "location": "Lisstraat, Rotterdam",
@@ -508,9 +590,9 @@
     {
       "id": "28",
       "hidden": false,
-      "status": "RENT",
+      "status": "TAKEN",
       "price": 320,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Small room in a shared house",
       "city": "Leeuwarden",
       "location": "Marijkestraat, Leeuwarden",
@@ -536,9 +618,9 @@
     {
       "id": "27",
       "hidden": false,
-      "status": "RENT",
+      "status": "TAKEN",
       "price": 550,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Furnished Girl Room",
       "city": "Groningen",
       "location": "Speenkruidstraat, Groningen",

@@ -382,11 +382,93 @@
   },
   "FOR_RENT": [
     {
+      "id": "37",
+      "hidden": false,
+      "status": "RENT",
+      "price": 540,
+      "statusCode": 0,
+      "title": "Малка стая в обща къща",
+      "city": "Leeuwarden",
+      "location": "Lenteklokje, Leeuwarden",
+      "description": {
+        "property": "Стаята от 12 м2 разполага с бюро, стол, двойно легло, скрин, гардероб, радиатор и огледало. Има обща кухня и баня с още 5 наематели. Регистрацията е възможна!",
+        "period": "От 3-ти януари за поне половин година",
+        "bills": "всички сметки са включени",
+        "flatmates": "5 души"
+      },
+      "main_image": "1.jpg",
+      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg"]
+    },
+    {
+      "id": "36",
+      "hidden": false,
+      "status": "RENT",
+      "price": 899,
+      "statusCode": 0,
+      "city": "Rotterdam",
+      "location": "Rotterdam",
+      "title": "Модерна стая",
+      "description": {
+        "property": "Апартамент с 4 спални предлага свободна стая. Апартаментът е нов и добре поддържан. Регистрация НЕ е възможна",
+        "period": "Свободен сега",
+        "bills": "всички сметки са включени",
+        "flatmates": "4 души"
+      },
+      "main_image": "1.jpeg",
+      "images": ["2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpeg"]
+    },
+    {
+      "id": "35",
+      "hidden": false,
+      "status": "Заета",
+      "price": 820,
+      "statusCode": 2,
+      "title": "Модерна Стая",
+      "city": "Amsterdam",
+      "location": "Loenermark, Amsterdam",
+      "description": {
+        "property": "Апартамент с 4 спални предлага свободна стая. Апартаментът е нов и добре поддържан. Местоположението е отлично, защото е на 5 минути пеша от метростанция Noord. Регистрацията ще бъде възможна малко след като стаята бъде заета.",
+        "period": "Свободна сега",
+        "bills": "всички сметки са включени",
+        "flatmates": "3 души"
+      },
+      "main_image": "1.jpeg",
+      "images": ["2.jpeg", "3.jpeg", "4.jpeg"]
+    },
+    {
+      "id": "34",
+      "hidden": false,
+      "status": "Заета",
+      "price": 410,
+      "statusCode": 2,
+      "city": "Groningen",
+      "location": "Zwarteweg, Groningen",
+      "title": "Стая под наем",
+      "description": {
+        "property": "Стаята е просторна, напълно обзаведена, с дълъг балкон, който е свързан с кухнята. Наемателите са 3 момчета на възраст 20-22 години, а споделените удобства включват кухня (мивка, шкафове, 2 хладилника, печка, фурна, микровълнова печка и нова пералня), баня, отделна тоалетна (скоро обновена). Има стриктно спазван график за почистване. Мястото е в страхотен квартал до Noorderplantsoen, на 10 минути с колело от кампуса Zernike и на 15 минути пеша от центъра. Супермаркетът Plus е точно зад ъгъла, а магазини като Albert Heijn, Jumbo, Aldi, Kruidvat и търговският център Paddepoel са на 10 минути пеша. Момчетата са много мили и надеждни, разбираме се много добре, тъй като комуникацията, уважението един към друг и поддържането на приятелска атмосфера са приоритет. Понякога се наслаждаваме на бира заедно. Регистрацията НЕ е възможна.",
+        "period": "От 1 февруари до 31 юли",
+        "bills": "Само интернетът не е включен (13 евро месечна такса)",
+        "flatmates": "3 души"
+      },
+      "main_image": "2.jpg",
+      "images": [
+        "1.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg",
+        "9.jpg",
+        "10.jpg"
+      ]
+    },
+    {
       "id": "33",
       "hidden": false,
-      "status": "НАЕМ",
+      "status": "Заета",
       "price": 850,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Стая под наем",
       "city": "Amsterdam",
       "location": "Amsterdam",
@@ -402,9 +484,9 @@
     {
       "id": "32",
       "hidden": false,
-      "status": "НАЕМ",
+      "status": "Заета",
       "price": 475,
-      "statusCode": 0,
+      "statusCode": 2,
       "city": "Groningen",
       "location": "Neptunnusstraat, Groningen",
       "title": "Стая от 20 кв.м в споделена къща",
@@ -420,9 +502,9 @@
     {
       "id": "31",
       "hidden": false,
-      "status": "НАЕМ",
+      "status": "Заета",
       "price": 950,
-      "statusCode": 0,
+      "statusCode": 2,
       "city": "Amsterdam",
       "location": "Nadezjda Mandelstamstraat",
       "title": "12 м2 стая в споделена къща",
@@ -451,9 +533,9 @@
     {
       "id": "30",
       "hidden": false,
-      "status": "НАЕМ",
+      "status": "Заета",
       "price": 560,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Просторна стая в споделена къща",
       "city": "Leeuwarden",
       "location": "Bleeklaan, Leeuwarden",
@@ -480,11 +562,9 @@
     {
       "id": "29",
       "hidden": false,
-      "status": "НАЕМ",
+      "status": "Заета",
       "price": 1474,
-      "statusCode": 0,
-      "city": "Rotterdam",
-      "location": "Lisstraat, Rotterdam",
+      "statusCode": 2,
       "title": "Просторен апартамент с две спални",
       "description": {
         "property": "Нов обзаведен апартамент с две спални, всекидневна и отделна кухня. Има и балкон. Търсим двама нови наематели. Възможна е регистрация.",
@@ -510,9 +590,9 @@
     {
       "id": "28",
       "hidden": false,
-      "status": "Свободна",
+      "status": "Заета",
       "price": 320,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Малка стая в споделена къща",
       "city": "Leeuwarden",
       "location": "Marijkestraat, Leeuwarden",
@@ -538,9 +618,9 @@
     {
       "id": "27",
       "hidden": false,
-      "status": "Свободна",
+      "status": "Заета",
       "price": 550,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Обзаведена стая",
       "city": "Groningen",
       "location": "Speenkruidstraat, Groningen",
@@ -558,7 +638,7 @@
       "hidden": false,
       "status": "Заета",
       "price": 795,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Студио",
       "city": "Groningen",
       "location": "Aweg, Groningen",

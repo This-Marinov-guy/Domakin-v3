@@ -380,11 +380,93 @@
   },
   "FOR_RENT": [
     {
-      "id": "33",
+      "id": "37",
       "hidden": false,
       "status": "RENT",
-      "price": 850,
+      "price": 540,
       "statusCode": 0,
+      "title": "Μικρό δωμάτιο σε κοινόχρηστο σπίτι",
+      "city": "Leeuwarden",
+      "location": "Lenteklokje, Leeuwarden",
+      "description": {
+        "property": "Το δωμάτιο 12 τ.μ. διαθέτει γραφείο, καρέκλα, διπλό κρεβάτι, συρταριέρα, ντουλάπα, καλοριφέρ και καθρέφτη. Υπάρχει κοινή κουζίνα και μπάνιο με άλλους 5 ενοίκους. Η εγγραφή είναι δυνατή!",
+        "period": "Από τις 3 Ιανουαρίου και για τουλάχιστον μισό χρόνο",
+        "bills": "όλοι οι λογαριασμοί περιλαμβάνονται",
+        "flatmates": "5 άτομα"
+      },
+      "main_image": "1.jpg",
+      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg"]
+    },
+    {
+      "id": "36",
+      "hidden": false,
+      "status": "RENT",
+      "price": 899,
+      "statusCode": 0,
+      "city": "Rotterdam",
+      "location": "Rotterdam",
+      "title": "Μοντέρνο δωμάτιο",
+      "description": {
+        "property": "Διαμέρισμα με 4 υπνοδωμάτια προσφέρει ένα ελεύθερο δωμάτιο. Το διαμέρισμα είναι καινούργιο και καλά συντηρημένο. Η εγγραφή ΔΕΝ είναι δυνατή",
+        "period": "Διαθέσιμο τώρα",
+        "bills": "όλοι οι λογαριασμοί περιλαμβάνονται",
+        "flatmates": "4 άτομα"
+      },
+      "main_image": "1.jpeg",
+      "images": ["2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpeg"]
+    },
+    {
+      "id": "35",
+      "hidden": false,
+      "status": "TAKEN",
+      "price": 820,
+      "statusCode": 2,
+      "title": "Μοντέρνο Δωμάτιο",
+      "city": "Amsterdam",
+      "location": "Loenermark, Amsterdam",
+      "description": {
+        "property": "Διαμέρισμα με 4 υπνοδωμάτια προσφέρει ένα δωρεάν δωμάτιο. Το διαμέρισμα είναι καινούργιο και καλά συντηρημένο. Η τοποθεσία είναι εξαιρετική, καθώς απέχει 5 λεπτά με τα πόδια από τον σταθμό μετρό Noord. Η εγγραφή θα είναι δυνατή, λίγο μετά την κατοίκηση του δωματίου.",
+        "period": "Διαθέσιμο τώρα",
+        "bills": "όλοι οι λογαριασμοί περιλαμβάνονται",
+        "flatmates": "3 άτομα"
+      },
+      "main_image": "1.jpeg",
+      "images": ["2.jpeg", "3.jpeg", "4.jpeg"]
+    },
+    {
+      "id": "34",
+      "hidden": false,
+      "status": "TAKEN",
+      "price": 410,
+      "statusCode": 2,
+      "city": "Groningen",
+      "location": "Zwarteweg, Groningen",
+      "title": "Υποενοικίαση Δωματίου",
+      "description": {
+        "property": "Το δωμάτιο είναι ευρύχωρο, πλήρως επιπλωμένο, με μεγάλο μπαλκόνι που συνδέεται με την κουζίνα. Οι ένοικοι είναι 3 αγόρια ηλικίας 20-22 ετών και οι κοινόχρηστες εγκαταστάσεις περιλαμβάνουν την κουζίνα (νεροχύτης, ντουλάπια, 2 ψυγεία, φούρνος, φούρνος μικροκυμάτων και ένα νέο πλυντήριο ρούχων), μπάνιο, ξεχωριστή τουαλέτα (πρόσφατα ανακαινισμένη). Υπάρχει πρόγραμμα καθαρισμού που ακολουθείται αυστηρά. Η τοποθεσία είναι σε μια εξαιρετική γειτονιά δίπλα στο Noorderplantsoen, χρειάζονται 10 λεπτά με ποδήλατο για να φτάσετε στην πανεπιστημιούπολη Zernike και 15 λεπτά με τα πόδια για το κέντρο. Το σούπερ μάρκετ Plus είναι ακριβώς στη γωνία, ενώ καταστήματα όπως Albert Heijn, Jumbo, Aldi, Kruidvat και το εμπορικό κέντρο Paddepoel βρίσκονται 10 λεπτά με τα πόδια. Τα αγόρια είναι πολύ ευγενικά και αξιόπιστα, τα πηγαίνουμε πολύ καλά καθώς η επικοινωνία, ο σεβασμός μεταξύ μας και η διατήρηση ενός φιλικού περιβάλλοντος είναι προτεραιότητες. Μερικές φορές απολαμβάνουμε μια μπύρα μαζί. Δεν είναι δυνατή η εγγραφή.",
+        "period": "Από 1η Φεβρουαρίου έως 31 Ιουλίου",
+        "bills": "Μόνο το internet δεν περιλαμβάνεται (13 ευρώ μηνιαία χρέωση)",
+        "flatmates": "3 άτομα"
+      },
+      "main_image": "2.jpg",
+      "images": [
+        "1.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg",
+        "9.jpg",
+        "10.jpg"
+      ]
+    },
+    {
+      "id": "33",
+      "hidden": false,
+      "status": "TAKEN",
+      "price": 850,
+      "statusCode": 2,
       "title": "Δωμάτιο προς ενοικίαση",
       "city": "Amsterdam",
       "location": "Amsterdam",
@@ -400,9 +482,9 @@
     {
       "id": "32",
       "hidden": false,
-      "status": "RENT",
+      "status": "TAKEN",
       "price": 475,
-      "statusCode": 0,
+      "statusCode": 2,
       "city": "Groningen",
       "location": "Neptunnusstraat, Groningen",
       "title": "Δωμάτιο 20 τ.μ. σε κοινόχρηστο σπίτι",
@@ -418,9 +500,9 @@
     {
       "id": "31",
       "hidden": false,
-      "status": "RENT",
+      "status": "TAKEN",
       "price": 950,
-      "statusCode": 0,
+      "statusCode": 2,
       "city": "Amsterdam",
       "location": "Nadezjda Mandelstamstraat",
       "title": "12 τ.μ. δωμάτιο σε κοινόχρηστο σπίτι",
@@ -449,9 +531,9 @@
     {
       "id": "30",
       "hidden": false,
-      "status": "RENT",
+      "status": "TAKEN",
       "price": 560,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Ευρύχωρο Δωμάτιο σε κοινόχρηστο σπίτι",
       "city": "Leeuwarden",
       "location": "Bleeklaan, Leeuwarden",
@@ -478,11 +560,9 @@
     {
       "id": "29",
       "hidden": false,
-      "status": "ΕΝΟΙΚΙΟ",
+      "status": "TAKEN",
       "price": 1474,
-      "statusCode": 0,
-      "city": "Rotterdam",
-      "location": "Lisstraat, Rotterdam",
+      "statusCode": 2,
       "title": "Ευρύχωρο διαμέρισμα με 2 υπνοδωμάτια",
       "description": {
         "property": "Καινούργιο επιπλωμένο διαμέρισμα με δύο υπνοδωμάτια, σαλόνι και ξεχωριστή κουζίνα. Υπάρχει και μπαλκόνι. Ψάχνουμε για δύο νέους ενοικιαστές. Είναι δυνατή η εγγραφή.",
@@ -508,9 +588,9 @@
     {
       "id": "28",
       "hidden": false,
-      "status": "RENT",
+      "status": "TAKEN",
       "price": 320,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Μικρό δωμάτιο σε κοινόχρηστο σπίτι",
       "city": "Leeuwarden",
       "location": "Marijkestraat, Leeuwarden",
@@ -536,9 +616,9 @@
     {
       "id": "27",
       "hidden": false,
-      "status": "RENT",
+      "status": "TAKEN",
       "price": 550,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Επιπλωμένο Δωμάτιο",
       "city": "Groningen",
       "location": "Speenkruidstraat, Groningen",
