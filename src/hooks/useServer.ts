@@ -4,6 +4,7 @@ import { ENV_PROD } from "@/utils/defines";
 import { useStore } from "@/stores/storeContext";
 import { toast } from "react-toastify";
 import useTranslation from "next-translate/useTranslation";
+import { getCookie } from "@/utils/helpers";
 
 interface Options {
   withLoading?: boolean;
@@ -35,6 +36,10 @@ export const useServer = () => {
     if (options?.withLoading) startLoading();
 
     axios.defaults.withCredentials = true;
+    axios.defaults.withXSRFToken = true;
+    axios.defaults.headers.common["X-CSRF-TOKEN"] = decodeURIComponent(
+      getCookie("domakin_api_session") ?? ""
+    );
 
     if (user && !!user.token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
@@ -44,7 +49,9 @@ export const useServer = () => {
 
     if (["GET", "DELETE"].includes(method)) {
       requestData = {
-        url: `${SERVER_ENDPOINT}/api${url}?${new URLSearchParams(data as Record<string, string> || {}).toString()}`,
+        url: `${SERVER_ENDPOINT}/api${url}?${new URLSearchParams(
+          (data as Record<string, string>) || {}
+        ).toString()}`,
         method,
         data: {},
         headers,
