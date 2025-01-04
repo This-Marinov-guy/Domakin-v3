@@ -1,7 +1,5 @@
 "use client"
-import Image from "next/image"
-import Link from "next/link"
-import titleShape from "@/assets/images/shape/title_shape_06.svg"
+
 import useTranslation from "next-translate/useTranslation"
 import { underlineWordElement } from "@/utils/reactHelpers"
 
