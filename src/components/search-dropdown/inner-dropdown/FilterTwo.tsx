@@ -47,7 +47,7 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
     let data = properties;
 
     data = data.filter((item: any) =>
-      cityFilter.includes(item.city.toLowerCase())
+      cityFilter.includes(item?.city?.toLowerCase())
     );
 
     setFilterProperties(data);

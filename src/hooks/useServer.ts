@@ -38,7 +38,7 @@ export const useServer = () => {
     axios.defaults.withCredentials = true;
     axios.defaults.withXSRFToken = true;
     axios.defaults.headers.common["X-CSRF-TOKEN"] = decodeURIComponent(
-      getCookie("domakin_api_session") ?? ""
+      getCookie(process.env.NEXT_PUBLIC_SESSION_ID) ?? ""
     );
 
     if (user && !!user.token) {
