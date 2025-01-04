@@ -4,7 +4,7 @@ import { ENV_PROD } from "@/utils/defines";
 import { useStore } from "@/stores/storeContext";
 import { toast } from "react-toastify";
 import useTranslation from "next-translate/useTranslation";
-import { getCookie } from "@/utils/helpers";
+import { csrf, getCookie } from "@/utils/helpers";
 
 interface Options {
   withLoading?: boolean;
@@ -37,8 +37,15 @@ export const useServer = () => {
 
     axios.defaults.withCredentials = true;
     axios.defaults.withXSRFToken = true;
+
+    const sessionCookie = getCookie(process.env.NEXT_PUBLIC_SESSION_ID);
+
+    if (!sessionCookie) {
+      await csrf();
+    }
+
     axios.defaults.headers.common["X-CSRF-TOKEN"] = decodeURIComponent(
-      getCookie(process.env.NEXT_PUBLIC_SESSION_ID) ?? ""
+      sessionCookie ?? ""
     );
 
     if (user && !!user.token) {

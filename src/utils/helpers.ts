@@ -4,6 +4,7 @@ import Resizer from "react-image-file-resizer";
 import { ENV_PROD, LANGUAGES } from "./defines";
 import setLanguage from "next-translate/setLanguage";
 import { LOCAL_STORAGE_LOCATION } from "./localstorage";
+import { SERVER_ENDPOINT } from "./config";
 
 export const getGeoInfo = async () => {
   if (!ENV_PROD) {
@@ -143,7 +144,7 @@ export const transformToFormData = (data: any) => {
   return formData;
 };
 
-export const getCookie = (name:any) => {
+export const getCookie = (name: any) => {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) {
@@ -154,4 +155,6 @@ export const getCookie = (name:any) => {
     }
   }
   return null;
-}
+};
+
+export const csrf = () => axios.get(SERVER_ENDPOINT + "/sanctum/csrf-cookie");
