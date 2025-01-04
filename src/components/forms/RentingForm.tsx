@@ -31,6 +31,7 @@ const RentingForm = ({ refElement, property }: any) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    addRentingErrorFields([]);
 
     sendRequest(
       "/renting/create",

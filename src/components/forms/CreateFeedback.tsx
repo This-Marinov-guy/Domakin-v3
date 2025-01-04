@@ -4,6 +4,7 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import { toast, ToastContent } from "react-toastify";
+import { observer } from "mobx-react-lite";
 
 const defaultData = {
   name: "",
@@ -26,6 +27,7 @@ const CreateFeedback = () => {
 
   const handleSubmit = async (e:any) => {
     e.preventDefault();
+    setErrors([]);
 
     sendRequest("/feedback/create", "POST", {
       ...form,
@@ -99,4 +101,4 @@ const CreateFeedback = () => {
   );
 };
 
-export default CreateFeedback;
+export default observer(CreateFeedback);

@@ -29,6 +29,7 @@ const AddListingForm = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    addErrorFields([]);
 
     sendRequest(
       "/property/create",

@@ -28,6 +28,7 @@ const ViewingForm = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    addViewingErrorFields([]);
 
     sendRequest("/viewing/create", "POST", viewingData).then((res) => {
       if (res?.status) {
