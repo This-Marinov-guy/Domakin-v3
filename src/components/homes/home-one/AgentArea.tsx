@@ -56,45 +56,48 @@ const AgentArea = ({ style, withDetails = false }: any) => {
             <h3>{underlineWordElement(t("team.property_agents"), 0)}</h3>
           </div>
 
-          <div className="wrapper position-relative z-1">
-            <Slider {...settings} className="agent-slider-one">
-              {Array.from({ length: 5 }, (v, i) => i).map((item, index) => (
-                <div key={index} className="item">
-                  <div className="agent-card-one position-relative">
-                    <div style={{ height: "22em" }} className="img border-20">
-                      <Image
-                        src={`/assets/img/team/${item + 1}.jpg`}
-                        height={1000}
-                        width={1000}
-                        alt=""
-                        className="w-100 tran5s"
-                      />
-                    </div>
-                    <div className="text-center">
-                      <h6>{t(`team.members.${item}.name`)}</h6>
-                      {withDetails && (
-                        <button
-                          id={`${item}`}
-                          onClick={(e: any) => {
-                            const id = +e.target.id;
-                            if (id === agentDetailsId) {
-                              setAgentDetailsId(null);
-                            } else {
-                              setAgentDetailsId(+id);
-                            }
-                          }}
-                          className={` ${
-                            style ? "btn-eight" : "btn-eight fw-normal"
-                          }`}
-                        >
-                          {t('renting.select')}
-                        </button>
-                      )}
-                    </div>
+          <div className="wrapper position-relative z-1 row">
+            {Array.from({ length: 5 }, (v, i) => i).map((item, index) => (
+              <div
+                key={index}
+                style={{ height: "20em", width: "10em" }}
+                className="col-lg-4 col-md-6 col-12 m-a mb-20"
+              >
+                <div className="agent-card-one position-relative">
+                  <div className="img border-20">
+                    <Image
+                      src={`/assets/img/team/${item + 1}.jpg`}
+                      height={1000}
+                      width={1000}
+                      alt=""
+                      style={{height: '12em', objectFit: 'cover'}}
+                      className="tran5s"
+                    />
+                  </div>
+                  <div className="text-center">
+                    <h6>{t(`team.members.${item}.name`)}</h6>
+                    {withDetails && (
+                      <button
+                        id={`${item}`}
+                        onClick={(e: any) => {
+                          const id = +e.target.id;
+                          if (id === agentDetailsId) {
+                            setAgentDetailsId(null);
+                          } else {
+                            setAgentDetailsId(+id);
+                          }
+                        }}
+                        className={` ${
+                          style ? "btn-eight" : "btn-eight fw-normal"
+                        }`}
+                      >
+                        {t("renting.select")}
+                      </button>
+                    )}
                   </div>
                 </div>
-              ))}
-            </Slider>
+              </div>
+            ))}
           </div>
 
           {!withDetails && (

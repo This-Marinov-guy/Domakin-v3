@@ -158,3 +158,7 @@ export const getCookie = (name: any) => {
 };
 
 export const csrf = () => axios.get(SERVER_ENDPOINT + "/sanctum/csrf-cookie");
+
+export const replaceSpacesWithNewlines = (inputString: string) => {
+  return inputString.replace(/\n/g, " ");
+}
