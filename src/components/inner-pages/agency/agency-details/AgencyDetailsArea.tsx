@@ -46,7 +46,7 @@ const AgencyDetailsArea = ({ style, id }: any) => {
                       ""
                     ) : (
                       <Image
-                        src={`/assets/img/team/${id + 1}.jpg`}
+                        src={`/assets/img/team/${id + 1}.webp`}
                         height={400}
                         width={400}
                         alt=""

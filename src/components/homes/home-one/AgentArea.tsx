@@ -66,7 +66,7 @@ const AgentArea = ({ style, withDetails = false }: any) => {
                 <div className="agent-card-one position-relative">
                   <div className="img border-20">
                     <Image
-                      src={`/assets/img/team/${item + 1}.jpg`}
+                      src={`/assets/img/team/${item + 1}.webp`}
                       height={1000}
                       width={1000}
                       alt=""
