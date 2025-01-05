@@ -60,8 +60,7 @@ const AgentArea = ({ style, withDetails = false }: any) => {
             {Array.from({ length: 5 }, (v, i) => i).map((item, index) => (
               <div
                 key={index}
-                style={{ height: "20em", width: "10em" }}
-                className="col-lg-4 col-md-6 col-12 m-a mb-20"
+                className="col-lg-4 col-md-6 col-12 agent_container"
               >
                 <div className="agent-card-one position-relative">
                   <div className="img border-20">
@@ -70,7 +69,6 @@ const AgentArea = ({ style, withDetails = false }: any) => {
                       height={1000}
                       width={1000}
                       alt=""
-                      style={{height: '12em', objectFit: 'cover'}}
                       className="tran5s"
                     />
                   </div>
