@@ -16,7 +16,8 @@ const PropertyCardList = (props: {
       className="listing-card-seven border-20 p-20 mb-50 wow fadeInUp"
     >
       <div className="d-flex flex-wrap layout-one">
-        <div
+        <Link
+          href={`/services/renting/property/${property.id}`}
           style={{
             backgroundImage: `url(/assets/img/properties/${
               property.folder ?? "property_" + property.id
@@ -53,7 +54,7 @@ const PropertyCardList = (props: {
               ))}
             </Fancybox>
           </div>
-        </div>
+        </Link>
         <div className="property-info">
           <Link
             href={`/services/renting/property/${property.id}`}
