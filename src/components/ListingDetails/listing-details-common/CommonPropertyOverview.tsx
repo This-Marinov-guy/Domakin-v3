@@ -47,20 +47,32 @@ const CommonPropertyOverview = ({ property }: any) => {
     },
   ];
 
+  const itemCount = property_overview_data.length;
+
   return (
-    <ul className="style-none row">
+    <div className="row">
       {property_overview_data.map((item) => (
-        <li className={`col-${12 / property_overview_data.length}`} key={item.id}>
-          <div className="d-flex align-items-center mt-10">
-            <Image src={item.icon} alt="" className="lazy-img icon" />
+        <div
+          className={`mb-10 col-lg-4 col-md-6 col-12`}
+          key={item.id}
+        >
+          <Image
+            height={30}
+            src={item.icon}
+            alt=""
+            className="m-a lazy-img icon w-10"
+          />
+          <div className="d-flex align-items-center justify-content-center gap-3 mt-10">
             {item.title && (
               <span className="fs-20 color-dark fw-bold">{item.title}</span>
             )}
           </div>
-          <span className="fs-20 color-dark">{item.content}</span>
-        </li>
+          <span className="d-flex align-items-center justify-content-center fs-20 color-dark">
+            {item.content}
+          </span>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
 

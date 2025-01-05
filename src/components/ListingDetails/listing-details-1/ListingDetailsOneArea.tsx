@@ -99,8 +99,8 @@ const ListingDetailsOneArea = ({ property, style_3 }: any) => {
           </div>
         </div>{" "}
         <MediaGallery images={allImages} />
-        <div className="property-feature-list bg-white shadow4 border-20 p-40 mt-20 mb-60">
-          <h4 className="sub-title-one mb-40 lg-mb-20">
+        <div className="property-feature-list bg-white shadow4 border-20 p-40 mt-20 mb-10">
+          <h4 className="sub-title-one mb-40 lg-mb-20 text-center">
             {t("property.property_details")}
           </h4>
           <CommonPropertyOverview property={property} />
