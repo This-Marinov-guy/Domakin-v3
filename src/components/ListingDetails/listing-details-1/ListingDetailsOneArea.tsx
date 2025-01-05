@@ -35,7 +35,7 @@ const ListingDetailsOneArea = ({ property, style_3 }: any) => {
       <div className="container">
         <div className="row">
           <div className="col-lg-6">
-            <h3 className="property-titlee">{property.title}</h3>
+            <h4 className="property-titlee">{property.title}</h4>
             <div className="d-flex flex-wrap mt-10">
               {/* <div
                 className={`list-type text-uppercase mt-15 me-3 ${
@@ -54,7 +54,9 @@ const ListingDetailsOneArea = ({ property, style_3 }: any) => {
           <div className="col-lg-6 text-lg-end">
             <div className="d-inline-block md-mt-40">
               <div className="price color-dark fw-500">
-                {property.price} € / {t("renting.per_month")}
+                <h4>
+                  {property.price} € / {t("renting.per_month")}
+                </h4>
               </div>
 
               {/* <ul className="style-none d-flex align-items-center action-btns">

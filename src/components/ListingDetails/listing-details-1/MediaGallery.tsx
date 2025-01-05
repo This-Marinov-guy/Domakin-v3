@@ -30,82 +30,80 @@ const MediaGallery = ({ style, images }: any) => {
   };
 
   return (
-    <div className="media-gallery mt-100 xl-mt-80 lg-mt-60">
+    <div className="media-gallery mt-40">
       <div id="media_slider" className="carousel slide row">
-        <div className="col-lg-10">
-          <div
-            className={`bg-white border-20 md-mb-20 ${
-              style ? "" : "shadow4 p-30"
-            }`}
-          >
-            <div className="position-relative z-1 overflow-hidden border-20">
-              <div className="img-fancy-btn border-10 fw-500 fs-16 color-dark">
-                {images.length}{" "}
-                <span className="color-gray">
-                  <i className="fa-regular fa-images"></i>
-                </span>
-                <Fancybox
-                  options={{
-                    Carousel: {
-                      infinite: true,
-                    },
-                  }}
-                >
-                  {images.map((thumb: any, index: number) => (
-                    <a
-                      key={index}
-                      className="d-block"
-                      data-fancybox="img2"
-                      href={thumb}
-                    ></a>
-                  ))}
-                </Fancybox>
-              </div>
-
-              <div className="d-flex align-items-center justify-content-center carousel-inner w-75 h-50">
-                {images.map((image: any, index: number) => (
-                  <div
+        <div
+          className={`col-lg-10 bg-white border-20 md-mb-20 ${
+            style ? "" : "shadow4 p-30"
+          }`}
+        >
+          <div className="position-relative z-1 overflow-hidden border-20">
+            <div className="img-fancy-btn border-10 fw-500 fs-16 color-dark">
+              {images.length}{" "}
+              <span className="color-gray">
+                <i className="fa-regular fa-images"></i>
+              </span>
+              <Fancybox
+                options={{
+                  Carousel: {
+                    infinite: true,
+                  },
+                }}
+              >
+                {images.map((thumb: any, index: number) => (
+                  <a
                     key={index}
-                    className={`carousel-item ${
-                      index === activeIndex ? "active" : ""
-                    }`}
-                  >
-                    <Image
-                      src={image}
-                      width={1000}
-                      height={1000}
-                      alt="gallery"
-                      className="w-50 border-20"
-                    />
-                  </div>
+                    className="d-block"
+                    data-fancybox="img2"
+                    href={thumb}
+                  ></a>
                 ))}
-              </div>
-
-              <button
-                className="carousel-control-prev"
-                type="button"
-                onClick={() =>
-                  setActiveIndex((prev) =>
-                    prev > 0 ? prev - 1 : images.length - 1
-                  )
-                }
-              >
-                <i className="bi bi-chevron-left"></i>
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                onClick={() =>
-                  setActiveIndex((prev) =>
-                    prev < images.length - 1 ? prev + 1 : 0
-                  )
-                }
-              >
-                <i className="bi bi-chevron-right"></i>
-                <span className="visually-hidden">Next</span>
-              </button>
+              </Fancybox>
             </div>
+
+            <div className="d-flex align-items-center justify-content-around carousel-inner w-100">
+              {images.map((image: any, index: number) => (
+                <div
+                  key={index}
+                  className={`carousel-item ${
+                    index === activeIndex ? "active" : ""
+                  }`}
+                >
+                  <Image
+                    src={image}
+                    width={1000}
+                    height={1000}
+                    alt="gallery"
+                    className="w-50 border-20"
+                  />
+                </div>
+              ))}
+            </div>
+
+            <button
+              className="carousel-control-prev"
+              type="button"
+              onClick={() =>
+                setActiveIndex((prev) =>
+                  prev > 0 ? prev - 1 : images.length - 1
+                )
+              }
+            >
+              <i className="bi bi-chevron-left"></i>
+              <span className="visually-hidden">Previous</span>
+            </button>
+            <button
+              className="carousel-control-next"
+              type="button"
+              onClick={() =>
+                setActiveIndex((prev) =>
+                  prev < images.length - 1 ? prev + 1 : 0
+                )
+              }
+            >
+              <i className="bi bi-chevron-right"></i>
+              <span className="visually-hidden">Next</span>
+            </button>
           </div>
         </div>
 
