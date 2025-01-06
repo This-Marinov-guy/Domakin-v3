@@ -9,7 +9,7 @@ import serviceShape_5 from "@/assets/images/shape/shape_76.svg";
 import { underlineWordElement } from "@/utils/reactHelpers";
 import useTranslation from "next-translate/useTranslation";
 
-const ServicesList = ({ style, withPricing = true }: any) => {
+const ServicesList = ({ style, withPricing = false }: any) => {
   const { t, lang } = useTranslation("translations");
 
   const serviceItems = service_data.filter(
@@ -23,7 +23,7 @@ const ServicesList = ({ style, withPricing = true }: any) => {
       className="col-lg-4 col-md-6 d-flex mt-40 wow fadeInUp pop-hover"
       data-wow-delay="0.1s"
     >
-      <div className="card-style-ten d-flex align-items-start flex-column w-100 h-100">
+      <div className="card-style-ten d-flex align-items-center flex-column w-100 h-100">
         <Image
           src={item.icon}
           width={item.iconWidth ?? 150}

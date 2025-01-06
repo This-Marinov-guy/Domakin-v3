@@ -7,12 +7,13 @@ import phoneIcon from "@/assets/img/icons/11.png";
 
 import ContactForm from "@/components/forms/ContactForm";
 import useTranslation from "next-translate/useTranslation";
-import { ADDRESS, EMAIL, PHONE } from "@/utils/defines";
+import { ADDRESS, EMAIL, INSTAGRAM, PHONE } from "@/utils/defines";
 import { logoByTheme } from "@/utils/config";
 
 interface DataType {
   id: number;
   icon?: string;
+  forceIcon?: string;
   class_name?: string;
   title: string;
   link?: string,
@@ -27,6 +28,13 @@ const address_data: DataType[] = [
     title: "contact.email",
     address_1: EMAIL,
     link: "mailto:" + EMAIL,
+  },
+  {
+    id: 1,
+    forceIcon: "fa-brands fa-instagram",
+    title: "Instagram",
+    address_1: "domakin.nl",
+    link: INSTAGRAM,
   },
   // {
   //   id: 2,
@@ -60,7 +68,7 @@ const ContactArea = () => {
 
       <div className="address-banner wow fadeInUp mt-60 lg-mt-40">
         <div className="container">
-          <div className="d-flex flex-wrap justify-content-center">
+          <div className="d-flex flex-wrap justify-content-center gap-5">
             {address_data.map((item) => (
               <div
                 key={item.id}
@@ -68,7 +76,7 @@ const ContactArea = () => {
               >
                 <div className="d-xl-flex align-items-center">
                   <div className="icon rounded-circle d-flex align-items-center justify-content-center">
-                    <Image src={item.icon ?? ""} alt="" className="lazy-img" />
+                    {item.forceIcon ? <i style={{color: 'white', fontSize: '1.8em'}} className={item.forceIcon}/>  : <Image src={item.icon ?? ""} alt="" className="lazy-img" />}
                   </div>
                   <div className="text">
                     <p className="fs-22">{t(item.title)}</p>
@@ -91,7 +99,7 @@ const ContactArea = () => {
         </div>
       </div>
 
-      <div className="bg-pink mt-150 xl-mt-120 md-mt-80">
+      <div className="bg-pink mt-60">
         <div className="row">
           <div className="col-xl-7 col-lg-6">
             <div className="form-style-one wow fadeInUp">

@@ -57,7 +57,7 @@ const BLockFeatureOne = () => {
                   </li>
                 </ul>
 
-                <p className="mt-20">{desc_5}</p>
+                {/* <p className="mt-20">{desc_5}</p>
                 <ul style={{ padding: "0" }}>
                   <li className="d-flex align-items-center gap-3">
                     - {t("about.service_1")}
@@ -70,7 +70,7 @@ const BLockFeatureOne = () => {
                   <li className="d-flex align-items-center gap-3">
                     - {t("about.service_3")}
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </div>
           </div>

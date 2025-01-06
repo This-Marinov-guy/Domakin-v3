@@ -13,10 +13,9 @@ const HomeSix = () => {
      <>
        <HeaderOne />
        <HeroBanner />
-       <BLockFeatureOne />
        <ServicesList />
+       <BLockFeatureOne />
        <Feedback style={true} />
-       <CreateFeedback />
        <Brand />
        <FancyBanner style={false} />
        <FooterFour />

@@ -20,6 +20,17 @@ interface MenuItem {
 
 const menu_data: MenuItem[] = [
   {
+    id: 3,
+    has_dropdown: true,
+    title: "header.services",
+    link: "#",
+    sub_menus: [
+      { link: "/services/viewing", title: "features.viewings" },
+      { link: "/services/renting", title: "features.rent_an_apartment" },
+      { link: "/services/add-listing", title: "footer.lending" },
+    ],
+  },
+  {
     id: 2,
     has_dropdown: true,
     title: "header.about",
@@ -29,54 +40,18 @@ const menu_data: MenuItem[] = [
       { link: "/agents", title: "header.agents" },
     ],
   },
-  {
-    id: 3,
-    has_dropdown: true,
-    title: "header.services",
-    class_name: "mega-dropdown-sm",
-    link: "#",
-    menu_column: [
-      {
-        id: 1,
-        mega_title: "features.viewings",
-        mega_menus: [{ link: "/services/viewing", title: "features.viewings" }],
-      },
-      {
-        id: 2,
-        mega_title: "footer.renting",
-        mega_menus: [
-          { link: "/services/renting", title: "features.rent_an_apartment" },
-          // {
-          //   link: "/services/emergency-housing",
-          //   title: "features.emergency_housing",
-          // },
-        ],
-      },
-      {
-        id: 3,
-        mega_title: "footer.lending",
-        mega_menus: [
-          { link: "/services/add-listing", title: "footer.lending" },
-          // {
-          //   link: "/services/emergency-housing",
-          //   title: "features.emergency_housing",
-          // },
-        ],
-      },
-    ],
-  },
   // {
   //   id: 4,
   //   has_dropdown: false,
   //   title: "header.recommendations",
   //   link: "/our-recommendations",
+  // // },
+  // {
+  //   id: 5,
+  //   has_dropdown: false,
+  //   title: "footer.support",
+  //   link: "/support-us",
   // },
-  {
-    id: 5,
-    has_dropdown: false,
-    title: "footer.support",
-    link: "/support-us",
-  },
   {
     id: 6,
     has_dropdown: false,
@@ -85,3 +60,35 @@ const menu_data: MenuItem[] = [
   },
 ];
 export default menu_data;
+
+// NOTE: leave for template
+// class_name: "mega-dropdown-sm",
+// menu_column: [
+    //   {
+    //     id: 1,
+    //     mega_title: "features.viewings",
+    //     mega_menus: [{ link: "/services/viewing", title: "features.viewings" }],
+    //   },
+    //   {
+    //     id: 2,
+    //     mega_title: "footer.renting",
+    //     mega_menus: [
+    //       { link: "/services/renting", title: "features.rent_an_apartment" },
+    //       // {
+    //       //   link: "/services/emergency-housing",
+    //       //   title: "features.emergency_housing",
+    //       // },
+    //     ],
+    //   },
+    //   {
+    //     id: 3,
+    //     mega_title: "footer.lending",
+    //     mega_menus: [
+    //       { link: "/services/add-listing", title: "footer.lending" },
+    //       // {
+    //       //   link: "/services/emergency-housing",
+    //       //   title: "features.emergency_housing",
+    //       // },
+    //     ],
+    //   },
+    // ],
