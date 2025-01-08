@@ -32,3 +32,6 @@ export const logoByTheme = () => {
       return logoDefault;
   }
 };
+
+// server
+export const GENERAL_ERROR_RESPONSE_CODES = [419];

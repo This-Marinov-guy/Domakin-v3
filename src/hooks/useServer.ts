@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SERVER_ENDPOINT } from "@/utils/config";
+import { GENERAL_ERROR_RESPONSE_CODES, SERVER_ENDPOINT } from "@/utils/config";
 import { ENV_PROD } from "@/utils/defines";
 import { useStore } from "@/stores/storeContext";
 import { toast } from "react-toastify";
@@ -97,9 +97,13 @@ export const useServer = () => {
       !ENV_PROD && console.log(err.response?.data ?? err);
 
       if (options?.withError) {
-        const errorMessage = err.response?.data.tag
+        let errorMessage = err.response?.data.tag
           ? t(err.response?.data.tag)
           : err.response?.data.message ?? t("api.general_error");
+
+        if (GENERAL_ERROR_RESPONSE_CODES.includes(err.response.data.code)) {
+          errorMessage = t("api.general_error");
+        }
 
         toast.error(errorMessage, {
           position: "top-center",
