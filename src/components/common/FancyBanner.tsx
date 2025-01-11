@@ -8,10 +8,9 @@ import { capitalizeFirstLetters } from "@/utils/helpers";
 const FancyBanner = ({ style }: any) => {
   const { t } = useTranslation("translations");
 
-  const locationsList = Object.keys(
+  const locations = Object.keys(
     t("locations", {}, { returnObjects: true }) ?? []
   ).map((key) => key.toLowerCase());
-  const locations = [t("filter.select_city"), ...locationsList];
 
   return (
     <div className="fancy-banner-two position-relative z-1 pt-90 lg-pt-50 pb-90 lg-pb-50">
@@ -39,7 +38,8 @@ const FancyBanner = ({ style }: any) => {
                   const city = e.target.value.toLowerCase();
                 }}
                 name=""
-                placeholder=""
+                placeholder={t("filter.select_city")}
+                multi
               />
 
               <form onSubmit={(e) => e.preventDefault()}>
