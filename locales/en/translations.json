@@ -219,7 +219,7 @@
   },
   "team": {
     "team": "Team",
-    "property_agents": "Property Agents",
+    "property_agents": "Agents",
     "members": [
       {
         "name": "Lazar Popov",

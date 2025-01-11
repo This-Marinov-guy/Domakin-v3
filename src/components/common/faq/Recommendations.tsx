@@ -13,11 +13,11 @@ const Recommendations = () => {
   const { t } = useTranslation("translations");
 
   return (
-    <div className="blog-details border-top mt-60 xl-mt-40 pt-40 xl-pt-40 mb-40 xl-mb-40">
+    <div className="blog-details border-top mt-40 mb-40">
       <div className="container">
         <div className="row gx-xl-5">
           <div className="col-lg-12">
-            <div className="blog-post-meta mb-60 lg-mb-40">
+            <div className="blog-post-meta mb-20 lg-mb-40">
               <h3 className="blog-title">
                 {t("recommendations.recommended_from_domakin_nl")}
               </h3>
