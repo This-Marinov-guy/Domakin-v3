@@ -294,3 +294,8 @@
   height: auto;
   object-fit: cover;
 }
+
+.feedback-content {
+   max-height: 300px;
+   overflow-y: scroll;
+}

@@ -6,6 +6,7 @@ import icon_3 from "@/assets/images/icon/icon_45.svg";
 import icon_4 from "@/assets/images/icon/icon_50.svg";
 import icon_5 from "@/assets/images/icon/icon_44.svg";
 import useTranslation from "next-translate/useTranslation";
+import { capitalizeFirstLetters } from "@/utils/helpers";
 
 interface DataType {
   id: number;
@@ -68,7 +69,7 @@ const CommonPropertyOverview = ({ property }: any) => {
             )}
           </div>
           <span className="d-flex align-items-center justify-content-center fs-20 color-dark">
-            {item.content}
+            {capitalizeFirstLetters(item.content)}
           </span>
         </div>
       ))}

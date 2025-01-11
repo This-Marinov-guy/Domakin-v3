@@ -16,7 +16,6 @@ const PropertiesPage = () => {
 
   const details = {
     title: t("renting.find_the_perfect_place_for_you"),
-    description: [t("renting.platform_description")],
     steps: [
       {
         icon: "fa-solid fa-magnifying-glass-location",

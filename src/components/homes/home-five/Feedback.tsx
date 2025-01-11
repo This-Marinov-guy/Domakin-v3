@@ -82,34 +82,38 @@ const Feedback = ({ style }: any) => {
       }`}
     >
       <div className={`container ${style ? "" : "container-large"}`}>
-        <div className="title-one text-center mb-80 xl-mb-50 md-mb-30">
+        <div className="title-one text-center mb-60 xl-mb-50 md-mb-30">
           <h3>{t("feedbacks.feedbacks")}</h3>
         </div>
-        {feedbacks?.length > 0 ? <Slider {...setting}>
-          {feedbacks.map((item: any) => (
-            <div
-              key={item.id}
-              className={`feedback-block-six ${style ? "rounded-4" : ""}`}
-            >
-              <div className="d-flex justify-content-between align-items-center">
-                <ul className="rating style-none d-flex">
-                  <li>
-                    <Rating initialValue={5} size={25} readonly={true} />
-                  </li>
-                </ul>
-                <Image src={quoteIcon} alt="" className="icon" />
+        {feedbacks?.length > 0 ? (
+          <Slider {...setting}>
+            {feedbacks.map((item: any) => (
+              <div
+                key={item.id}
+                className={`feedback-block-six ${style ? "rounded-4" : ""}`}
+              >
+                <div className="d-flex justify-content-between align-items-center">
+                  <ul className="rating style-none d-flex">
+                    <li>
+                      <Rating initialValue={5} size={25} readonly={true} />
+                    </li>
+                  </ul>
+                  <Image src={quoteIcon} alt="" className="icon" />
+                </div>
+                <blockquote className="feedback-content">
+                 {item.content}
+                </blockquote>
+                <div className="d-flex align-items-center justify-content-between">
+                  <h6 className="fs-20 m0">{item.name}</h6>
+                </div>
               </div>
-              <blockquote>{item.content}</blockquote>
-              <div className="d-flex align-items-center justify-content-between">
-                <h6 className="fs-20 m0">{item.name}</h6>
-              </div>
-            </div>
-          ))}
-        </Slider>
-        :
-        <h6 className="text-center d-flex flex-column">
-          {t("feedbacks.no_feedbacks")}
-        </h6>}
+            ))}
+          </Slider>
+        ) : (
+          <h6 className="text-center d-flex flex-column">
+            {t("feedbacks.no_feedbacks")}
+          </h6>
+        )}
         {!style && (
           <>
             <Image

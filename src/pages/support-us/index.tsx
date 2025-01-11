@@ -24,9 +24,9 @@ const index = () => {
         title={t("feedbacks.help_the_organization")}
         sub_title={t("feedbacks.feedbacks_and_donations")}
       />
-      <CreateDonation />
-      <Feedback style={true} />
+      {/* <CreateDonation /> */}
       <CreateFeedback />
+      <Feedback style={true} />
       <Brand />
       <FancyBanner style={false} />
       <FooterFour />

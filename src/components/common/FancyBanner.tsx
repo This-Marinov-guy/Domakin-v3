@@ -1,41 +1,64 @@
-"use client"
+"use client";
 
-import useTranslation from "next-translate/useTranslation"
-import { underlineWordElement } from "@/utils/reactHelpers"
+import useTranslation from "next-translate/useTranslation";
+import { underlineWordElement } from "@/utils/reactHelpers";
+import NiceSelect from "@/ui/NiceSelect";
+import { capitalizeFirstLetters } from "@/utils/helpers";
 
 const FancyBanner = ({ style }: any) => {
-   const {t} = useTranslation('translations');
+  const { t } = useTranslation("translations");
 
-   return (
-     <div className="fancy-banner-two position-relative z-1 pt-90 lg-pt-50 pb-90 lg-pb-50">
-       <div className="container">
-         <div className="row align-items-center">
-           <div className="col-lg-6">
-             <div className="title-one text-center text-lg-start md-mb-40 pe-xl-5">
-               <h4 className="text-white m0">
-                 {underlineWordElement(t("subscribe_email.description"), 3)}
-               </h4>
-             </div>
-           </div>
-           <div className="col-lg-6">
-             <div className="form-wrapper me-auto ms-auto me-lg-0">
-               <form onSubmit={(e) => e.preventDefault()}>
-                 <input
-                   type="email"
-                   placeholder={t("subscribe_email.email")}
-                   className={style ? "rounded-0" : ""}
-                 />
-                 <button className={style ? "rounded-0" : ""}>
-                   {t("subscribe_email.send")}
-                 </button>
-               </form>
-               {/* <div className="fs-16 mt-10 text-white">Already a Agent? <Link href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Sign in.</Link></div> */}
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   );
-}
+  const locationsList = Object.keys(
+    t("locations", {}, { returnObjects: true }) ?? []
+  ).map((key) => key.toLowerCase());
+  const locations = [t("filter.select_city"), ...locationsList];
 
-export default FancyBanner
+  return (
+    <div className="fancy-banner-two position-relative z-1 pt-90 lg-pt-50 pb-90 lg-pb-50">
+      <div className="container">
+        <div className="row align-items-center">
+          <div className="col-lg-6">
+            <div className="title-one text-center text-lg-start md-mb-40 pe-xl-5">
+              <h4 className="text-white m0">
+                {underlineWordElement(t("subscribe_email.description"), 3)}
+              </h4>
+            </div>
+          </div>
+          <div className="col-lg-6">
+            <div className="form-wrapper me-auto ms-auto me-lg-0">
+              <NiceSelect
+                className="nice-select mb-10"
+                options={locations.map((location) => {
+                  return {
+                    value: location,
+                    text: capitalizeFirstLetters(location),
+                  };
+                })}
+                defaultCurrent={0}
+                onChange={(e) => {
+                  const city = e.target.value.toLowerCase();
+                }}
+                name=""
+                placeholder=""
+              />
+
+              <form onSubmit={(e) => e.preventDefault()}>
+                <input
+                  type="email"
+                  placeholder={t("subscribe_email.email")}
+                  className={style ? "rounded-0" : ""}
+                />
+                <button className={style ? "rounded-0" : ""}>
+                  {t("subscribe_email.send")}
+                </button>
+              </form>
+              {/* <div className="fs-16 mt-10 text-white">Already a Agent? <Link href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Sign in.</Link></div> */}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default FancyBanner;

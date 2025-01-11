@@ -3,7 +3,7 @@ import React from "react";
 interface StepDetailsProps {
   details: {
     title: string;
-    description: string[];
+    description?: string[];
     steps: {
       icon: string;
       text: string;
@@ -21,11 +21,13 @@ const StepDescriptionOne = (props: StepDetailsProps) => {
           <div className=" mt-40 wow fadeInUp">
             <div className="bg-wrapper">
               <h4 className="mb-20 text-center">{details.title}</h4>
-              {details.description.map((d: string, i: number) => (
-                <React.Fragment key={i}>
-                  <p className="text-left mb-5">{d}</p>
-                </React.Fragment>
-              ))}
+              {details?.description && details.description.map(
+                (d: string, i: number) => (
+                  <React.Fragment key={i}>
+                    <p className="text-left mb-5">{d}</p>
+                  </React.Fragment>
+                )
+              )}
             </div>
           </div>
         </div>
