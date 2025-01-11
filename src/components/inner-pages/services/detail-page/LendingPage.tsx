@@ -17,16 +17,19 @@ const LendingPage = () => {
     ],
     steps: [
       {
-        icon: "fa-solid fa-building",
-        text: "1. Fill your contacts and register your room",
+        image: "/assets/img/icons/1.png",
+        title: "Upload a property",
+        text: "Add a description and photos to of the room and common areas",
       },
       {
-        icon: "fa-solid fa-handshake",
-        text: "2. Once we have a prospective tenant we will contact you to arrange details and viewing",
+        image: "/assets/img/icons/2.png",
+        title: "Choose a tenant",
+        text: "Receive a list of candidates and choose the new tenant",
       },
       {
-        icon: "fa-regular fa-credit-card",
-        text: "3. Once the tenant settles a contract you will receive a one time commission of 200 euro",
+        image: "/assets/img/icons/3.png",
+        title: "Receive your commission",
+        text: "Once the new tenant signs the contract you will receive 200 euro",
       },
     ],
   };

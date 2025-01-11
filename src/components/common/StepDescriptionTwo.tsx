@@ -5,7 +5,8 @@ interface StepDetailsProps {
     title: string;
     description?: string[];
     steps: {
-      icon: string;
+      title: string;
+      image: string;
       text: string;
     }[];
   };
@@ -21,13 +22,12 @@ const StepDescriptionTwo = (props: StepDetailsProps) => {
           <div className=" mt-40 wow fadeInUp">
             <div className="bg-wrapper">
               <h4 className="mb-20 text-center">{details.title}</h4>
-              {details?.description && details.description.map(
-                (d: string, i: number) => (
-                  <React.Fragment key={i}>
-                    <p className="text-left mb-5">{d}</p>
-                  </React.Fragment>
-                )
-              )}
+              {details?.description &&
+                details.description.map((d: string, i: number) => (
+                  <p key={i} className="text-center mb-5">
+                    {d}
+                  </p>
+                ))}
             </div>
           </div>
         </div>
@@ -35,15 +35,13 @@ const StepDescriptionTwo = (props: StepDetailsProps) => {
         <div className="col-lg-12">
           <div className="row gx-xl-5">
             {details.steps.map((d, i) => (
-              <div key={i} className="m-a col-md-4 ">
-                <div className="card-style-four mt-40 wow fadeInUp">
-                  <div className="d-flex align-items-start justify-content-start gap-3">
-                    <div className="icon rounded-circle d-flex align-items-center justify-content-center position-relative style-two">
-                      <i className={`${d.icon}`} />
-                    </div>
-                    <h6 style={{ maxWidth: "15em" }}>{d.text}</h6>
-                  </div>
-                </div>
+              <div
+                key={i}
+                className="col-md-4 d-flex flex-column align-items-center justify-content-center"
+              >
+                <img className="img-5" src={d.image} />
+                <h5 style={{ maxWidth: "15em" }}>{d.title}</h5>
+                <p style={{ textAlign: 'center' }}>{d.text}</p>
               </div>
             ))}
           </div>
