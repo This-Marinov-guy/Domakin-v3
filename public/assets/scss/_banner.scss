@@ -337,6 +337,7 @@
 .hero-banner-six {
   background: url(../images/media/img_47.jpg) no-repeat center top;
   background-size: cover;
+  height: 100vh !important;
   &:before {
     content: "";
     position: absolute;

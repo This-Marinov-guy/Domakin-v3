@@ -2,7 +2,7 @@ import BreadcrumbThree from "@/components/common/breadcrumb/BreadcrumbThree";
 import FooterFour from "@/layouts/footers/FooterFour";
 import HeaderOne from "@/layouts/headers/HeaderOne";
 import FancyBanner from "@/components/common/FancyBanner";
-import StepDescriptionOne from "@/components/common/StepDescriptionOne";
+import StepDescriptionTwo from "@/components/common/StepDescriptionTwo";
 import useTranslation from "next-translate/useTranslation";
 import AddListingForm from "@/components/forms/AddListingForm";
 
@@ -39,7 +39,7 @@ const LendingPage = () => {
         link_title="Lending"
         style={false}
       />
-      <StepDescriptionOne details={details} />
+      <StepDescriptionTwo details={details} />
       <AddListingForm/>
       <FancyBanner />
       <FooterFour />
