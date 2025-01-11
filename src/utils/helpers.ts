@@ -157,9 +157,9 @@ export const getCookie = (name: any) => {
   return null;
 };
 
-export const csrf = () => {
+export const csrf = async () => {
   try {
-    axios.get(SERVER_ENDPOINT + "/sanctum/csrf-cookie")
+    await axios.get(SERVER_ENDPOINT + "/sanctum/csrf-cookie")
   } catch (err) {
     //do nothing;
   }

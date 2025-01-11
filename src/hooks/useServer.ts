@@ -40,7 +40,7 @@ export const useServer = () => {
 
     const sessionCookie = getCookie(process.env.NEXT_PUBLIC_SESSION_ID);
 
-    if (!sessionCookie) {
+    if (ENV_PROD && !sessionCookie) {
       await csrf();
     }
 
@@ -72,7 +72,7 @@ export const useServer = () => {
       };
     }
 
-    try {
+    try {      
       const response = await axios.request(requestData);
 
       if (options?.withError && !response.data.status) {

@@ -41,11 +41,10 @@ export const CustomNextArrow = (props: any) => {
 
 const setting = {
   arrows: true,
-  dots: true,
   slidesToShow: 3,
   slidesToScroll: 1,
-  autoplay: true,
-  autoplaySpeed: 3000,
+  autoplay: false,
+  // autoplaySpeed: 3000,
   prevArrow: <CustomPrevArrow />,
   nextArrow: <CustomNextArrow />,
   responsive: [
@@ -77,7 +76,7 @@ const Feedback = ({ style }: any) => {
 
   return (
     <div
-      className={`center-dots bg-pink-two position-relative z-1 pt-60 xl-pt-40 pb-60 xl-pb-40 ${
+      className={`center-dots bg-pink-two position-relative z-1 mt-20 pt-40 pb-40 ${
         style ? "" : "mt-170 xl-mt-120"
       }`}
     >
