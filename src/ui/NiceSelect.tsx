@@ -124,7 +124,6 @@ const NiceSelect: FC<NiceSelectProps> = ({
       </span>
       <ul
         className="list"
-        role="menubar"
         onClick={(e) => e.stopPropagation()}
         onKeyDown={(e) => e.stopPropagation()}
       >

@@ -55,7 +55,7 @@ const FancyBanner = ({ style }: any) => {
   ).map((key) => key.toLowerCase());
 
   return (
-    <div className="fancy-banner-two position-relative z-1 pt-90 lg-pt-50 pb-90 lg-pb-50">
+    <div className="fancy-banner-two position-relative z-3 pt-90 lg-pt-50 pb-90 lg-pb-50">
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-6">
