@@ -62,7 +62,7 @@ const ServicesList = ({ style, withPricing = false }: any) => {
     <div
       className={`block-feature-seventeen ${
         style ? "dark-bg" : "bg-pink-three"
-      } position-relative z-1 pt-120 xl-pt-80 pb-140 xl-pb-80`}
+      } position-relative z-1 pt-40 pb-40`}
     >
       <div className="container">
         <div className="row">

@@ -20,7 +20,7 @@ const BLockFeatureOne = () => {
   const { sub_title, desc_1, desc_2, desc_3, desc_4, desc_5 } = feature_content;
 
   return (
-    <div className="block-feature-two mt-150 xl-mt-100">
+    <div className="block-feature-two mt-40 mb-40">
       <div className="container">
         <div className="row gx-xl-5">
           <div className="col-lg-6 wow fadeInLeft">
