@@ -100,9 +100,9 @@ const Feedback = ({ style }: any) => {
                   </ul>
                   <Image src={quoteIcon} alt="" className="icon" />
                 </div>
-                <blockquote className="feedback-content">
+                <p className="feedback-content">
                  {item.content}
-                </blockquote>
+                </p>
                 <div className="d-flex align-items-center justify-content-between">
                   <h6 className="fs-20 m0">{item.name}</h6>
                 </div>
