@@ -8,7 +8,9 @@ import { useServer } from "@/hooks/useServer";
 import useTranslation from "next-translate/useTranslation";
 import axios from "axios";
 import { SERVER_ENDPOINT } from "@/utils/config";
-import { csrf, getCookie } from "@/utils/helpers";
+import { csrf, getCookie, getGeoInfo } from "@/utils/helpers";
+import setLanguage from "next-translate/setLanguage";
+import { LANGUAGES } from "@/utils/defines";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
@@ -57,10 +59,39 @@ const MainLayout = ({ children }: any) => {
     // togglePropertiesLoading();
   };
 
+  const fetchLanguage = async () => {
+    let locale = window.location.pathname.split("/")[1];
+    let storedLanguage = LANGUAGES.includes(locale) ? locale : null;
+
+    if (storedLanguage) {
+      localStorage.setItem("language", locale);
+      return await setLanguage(storedLanguage);
+    }
+
+    if (localStorage.getItem("language")) {
+      storedLanguage = localStorage.getItem("language");
+    } else {
+      const geoLocation = await getGeoInfo();
+
+      if (geoLocation) {
+        const country = geoLocation.country.toLowerCase();
+
+        if (LANGUAGES.includes(country)) {
+          storedLanguage = country;
+          localStorage.setItem("language", country);
+        }
+      }
+    }
+
+    if (storedLanguage) {
+      await setLanguage(storedLanguage);
+    }
+  };
 
   useEffect(() => {
     loadProperties();
     loadFeedback();
+    fetchLanguage();
     csrf();
   }, []);
 

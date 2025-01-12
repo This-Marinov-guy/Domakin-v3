@@ -43,6 +43,12 @@ export const LANGUAGES = ['en', 'bg', 'gr']
 
 // prices
 export const REFERRAL_BONUS = 50;
+export const VIEWING_STANDARD_PRICE = 30;
+export const VIEWING_EXPRESS_PRICE = 50;
+export const VIEWING_PREMIUM_PRICE = 50;
+export const RENTING_PRICE = 400;
+export const RENTING_COMMISSION = 200;
+
 
 // KVK
 export const KVK = '90831268'

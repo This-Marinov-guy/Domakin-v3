@@ -118,6 +118,7 @@ const footer_data: DataType[] = [
       { link: "/services/viewing", link_title: "footer.viewings" },
       { link: "/services/renting", link_title: "footer.renting" },
       { link: "/services/add-listing", link_title: "footer.lending" },
+      { link: "/pricing", link_title: "header.pricing" },
     ],
   },
   {

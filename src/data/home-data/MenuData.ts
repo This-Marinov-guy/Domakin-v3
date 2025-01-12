@@ -55,6 +55,12 @@ const menu_data: MenuItem[] = [
   {
     id: 6,
     has_dropdown: false,
+    title: "header.pricing",
+    link: "/pricing",
+  },
+  {
+    id: 7,
+    has_dropdown: false,
     title: "header.contact",
     link: "/contact",
   },

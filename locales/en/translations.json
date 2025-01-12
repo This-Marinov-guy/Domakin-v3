@@ -12,7 +12,8 @@
     "agents": "Our Team",
     "our_services": "Our Services",
     "recommendations": "Recommendations",
-    "add_listing": "Add listing"
+    "add_listing": "Add listing",
+    "pricing": "Pricing"
   },
   "footer": {
     "all_rights_reserved": "All Rights Reserved @ Domakin",
@@ -64,6 +65,91 @@
     "enter_your_message": "Enter your message",
     "send": "Send"
   },
+
+  "pricing": {
+    "pricing": "Pricing",
+    "page_title": "Our Services & Pricing",
+    "introduction": {
+      "part_1": "Finding a home in the Netherlands can be challenging, especially for students and expats.",
+      "part_2": "At Domakin, we aim to make your search simpler, faster, and more secure.",
+      "part_3": "Below is a breakdown of our services designed to support you at every step of the rental process."
+    },
+    "viewing_assistance": {
+      "section_title": "🔍 Viewing Assistance Services",
+      "intro": "We understand that attending property viewings in person isn’t always possible. That’s why we offer Viewing Assistance Services, allowing you to have a trusted representative from Domakin attend the viewing on your behalf and provide detailed feedback.",
+      "types": {
+        "standard": {
+          "title": "Standard Viewing Assistance – €<b>{{price}}</b>",
+          "description": "Schedule a viewing in advance, and one of our agents will attend on your behalf."
+        },
+        "same_day": {
+          "title": "Same-Day Viewing Assistance – €<b>{{price}}</b>",
+          "description": "For urgent requests, we offer priority scheduling for same-day viewings."
+        }
+      },
+      "included": {
+        "title": "What’s included in both services:",
+        "items": {
+          "1": "Full attendance at the property viewing.",
+          "2": "Photos and videos of the property.",
+          "3": "Answers to any questions you may have about the property."
+        }
+      },
+      "audience": {
+        "title": "Who is this service for?",
+        "description": "This service is ideal for students, expats, or anyone unable to attend viewings in person. Whether you're abroad, have a busy schedule, or need someone to act on short notice, we’re here to ensure you don’t miss out on housing opportunities."
+      }
+    },
+    "viewing_by_agent": {
+      "section_title": "📅 Viewing Booked by Our Agent – €<b>{{price}}</b>",
+      "intro": "Finding time to arrange property viewings can be challenging. With our Viewing Booked by Our Agent service, we handle the entire scheduling process for you, making your housing search smoother and more efficient.",
+      "how_it_works": {
+        "title": "How it works:",
+        "steps": {
+          "1": "You provide your personal details, rental preferences, and CV.",
+          "2": "Our agent contacts landlords or property managers on your behalf.",
+          "3": "We schedule a viewing and provide you with all the necessary details."
+        }
+      },
+      "included": {
+        "title": "What’s included:",
+        "items": {
+          "1": "Direct communication with landlords or property managers.",
+          "2": "A scheduled viewing tailored to your preferences.",
+          "3": "Personalized support throughout the process."
+        }
+      },
+      "audience": {
+        "title": "Who is this service for?",
+        "description": "This service is ideal for busy individuals or those unfamiliar with the Dutch rental market. Whether you're a student, expat, or working professional, we take the hassle out of scheduling viewings so you can focus on finding the perfect home."
+      }
+    },
+    "renting_room": {
+      "section_title": "🏡 Renting a Room Through Our Platform – €<b>{{price}}</b>",
+      "intro": "Looking for a student-friendly room without the stress of endless searches? Our Renting a Room Through Domakin service connects you with verified listings on our platform, providing a secure and reliable way to find accommodation.",
+      "how_it_works": {
+        "title": "How it works:",
+        "steps": {
+          "1": "Browse available rooms on our website.",
+          "2": "Apply for rooms that meet your preferences.",
+          "3": "If you sign a rental contract through Domakin, a one-time fee of €<b>{{price}}</b> applies."
+        }
+      },
+      "why_choose_us": {
+        "title": "Why choose this service?",
+        "points": {
+          "1": "We work directly with trusted landlords to provide safe, reliable housing options.",
+          "2": "Our listings are verified to minimize the risk of scams.",
+          "3": "We make it easier to secure accommodation tailored to students and expats."
+        }
+      },
+      "audience": {
+        "title": "Who is this service for?",
+        "description": "This service is perfect for students and expats seeking a reliable, hassle-free way to find housing in the Netherlands. By using our platform, you’ll gain access to trusted listings and reduce the risks commonly associated with house hunting."
+      }
+    }
+  },
+
   "viewing": {
     "viewing_service": "Viewing service",
     "viewing": "Viewing",
@@ -1212,7 +1298,6 @@
     "content": "To guarantee a smooth experience we need our clients to accept the mandatory cookies before using the website - you can read more in the legal section after."
   },
 
-  
   "subscribe_email": {
     "description": "Subscribe to our newsletter and receive updates for new properties and services!",
     "email": "Email Address",
@@ -1227,7 +1312,7 @@
     "permission_contact": "I give my permission to be contacted by the organization for the purposes of the service",
     "permission_terms": "I have read and agree to the <link>Terms & Conditions</link>"
   },
-  
+
   "common": {
     "agree": "Agree",
     "continue": "Continue",
