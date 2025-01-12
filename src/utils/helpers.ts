@@ -2,7 +2,6 @@ import axios from "axios";
 // import { clarity } from "react-microsoft-clarity";
 import Resizer from "react-image-file-resizer";
 import { ENV_PROD, LANGUAGES } from "./defines";
-import setLanguage from "next-translate/setLanguage";
 import { LOCAL_STORAGE_LOCATION } from "./localstorage";
 import { SERVER_ENDPOINT } from "./config";
 
