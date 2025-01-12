@@ -21,12 +21,10 @@ export const getGeoInfo = async () => {
 };
 
 export function capitalizeFirstLetters(str: string) {
-  return str
-    .split(" ")
-    .map((word) => {
-      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-    })
-    .join(" ");
+  const words = str.split(" ");
+  words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1).toLowerCase();
+
+  return words.join(" ");
 }
 
 export const handleShare = (
@@ -159,7 +157,7 @@ export const getCookie = (name: any) => {
 
 export const csrf = async () => {
   try {
-    await axios.get(SERVER_ENDPOINT + "/sanctum/csrf-cookie")
+    await axios.get(SERVER_ENDPOINT + "/sanctum/csrf-cookie");
   } catch (err) {
     //do nothing;
   }
@@ -167,4 +165,4 @@ export const csrf = async () => {
 
 export const replaceSpacesWithNewlines = (inputString: string) => {
   return inputString.replace(/\n/g, " ");
-}
+};

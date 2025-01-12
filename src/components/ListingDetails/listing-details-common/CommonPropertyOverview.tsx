@@ -68,7 +68,7 @@ const CommonPropertyOverview = ({ property }: any) => {
               <span className="fs-20 color-dark fw-bold">{item.title}</span>
             )}
           </div>
-          <span className="d-flex align-items-center justify-content-center fs-20 color-dark">
+          <span className="d-flex text-center align-items-center justify-content-center fs-20 color-dark">
             {capitalizeFirstLetters(item.content)}
           </span>
         </div>
