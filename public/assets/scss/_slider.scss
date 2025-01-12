@@ -304,3 +304,9 @@
   max-height: 350px;
   overflow-y: scroll;
 }
+
+.image-preview {
+  max-height: 450px !important;
+  object-fit: contain !important;
+  border-radius: 20px;
+}

@@ -74,7 +74,7 @@ const MediaGallery = ({ style, images }: any) => {
                     width={1000}
                     height={1000}
                     alt="gallery"
-                    className="w-50 border-20"
+                    className="w-50 image-preview"
                   />
                 </div>
               ))}

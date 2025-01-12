@@ -140,7 +140,7 @@ const RentingForm = ({ refElement, property }: any) => {
         <div className="col-lg-6col-md-12 col-12 mb-40 d-flex align-items-center gap-3">
           <label htmlFor="">{t("files.motivational_letter_example")}</label>
           <a
-            href="/img/templates/motivational_letter_template.pdf"
+            href="/assets/img/templates/cover_letter_template.pdf"
             className="btn-eleven text-uppercase"
             target="_blank"
           >

@@ -3,7 +3,7 @@
 import useTranslation from "next-translate/useTranslation";
 import { underlineWordElement } from "@/utils/reactHelpers";
 import NiceSelect from "@/ui/NiceSelect";
-import { capitalizeFirstLetters } from "@/utils/helpers";
+import { capitalizeFirstLetter } from "@/utils/helpers";
 import Form from "react-bootstrap/Form";
 import { useServer } from "@/hooks/useServer";
 import { useState } from "react";
@@ -75,7 +75,7 @@ const FancyBanner = ({ style }: any) => {
                   options={locations.map((location) => {
                     return {
                       value: location,
-                      text: capitalizeFirstLetters(location),
+                      text: capitalizeFirstLetter(location),
                     };
                   })}
                   defaultCurrent={0}

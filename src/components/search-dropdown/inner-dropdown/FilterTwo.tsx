@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NiceSelect from "@/ui/NiceSelect";
-import { capitalizeFirstLetters } from "@/utils/helpers";
+import { capitalizeFirstLetter } from "@/utils/helpers";
 import useTranslation from "next-translate/useTranslation";
 import RangesSelect from "@/ui/RangesSelect";
 import SearchQuery from "@/components/ui/inputs/SearchQuery";
@@ -73,7 +73,7 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
                 options={locations.map((location) => {
                   return {
                     value: location,
-                    text: capitalizeFirstLetters(location),
+                    text: capitalizeFirstLetter(location),
                   };
                 })}
                 defaultCurrent={0}
