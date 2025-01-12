@@ -86,6 +86,7 @@ const ContactArea = () => {
             {address_data.map((item) => (
               <Link
                 href={item.link ?? "#"}
+                target="_blank"
                 key={item.id}
                 className={`col-lg-2 col-md-3 col-6 mt-10 hover-blue`}
               >
