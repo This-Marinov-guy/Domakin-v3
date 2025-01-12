@@ -22,7 +22,7 @@ const service_data: DataType[] = [
   {
     id: 1,
     page: "service_1",
-    icon: "/assets/img/icons/icon-img/22.png",
+    icon: "/assets/img/icons/10.png",
     title: "features.viewings",
     desc: "features.agents_service",
     link: "/services/viewing",
@@ -30,7 +30,7 @@ const service_data: DataType[] = [
   {
     id: 2,
     page: "service_1",
-    icon: "/assets/img/icons/icon-img/23.png",
+    icon: "/assets/img/icons/11.png",
     title: "features.rent_an_apartment",
     desc: "features.property_inquiry",
     link: "/services/renting",
@@ -38,7 +38,7 @@ const service_data: DataType[] = [
   {
     id: 3,
     page: "service_1",
-    icon: "/assets/img/icons/icon-img/21.png",
+    icon: "/assets/img/icons/12.png",
     title: "features.list_a_room",
     desc: "features.search_for_new_flatmate_or_transfer_contract",
     link: "/services/add-listing",
