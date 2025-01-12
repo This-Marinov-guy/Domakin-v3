@@ -3,7 +3,7 @@ import NiceSelect from "@/ui/NiceSelect";
 import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
 
-const BreadcrumbThree = ({ title, link, link_title, sub_title, style }: any) => {
+const BreadcrumbThree = ({ title, link, link_title, sub_title, style, background = 6}: any) => {
 
    const selectHandler = (e: any) => { };
 
@@ -16,11 +16,13 @@ const BreadcrumbThree = ({ title, link, link_title, sub_title, style }: any) => 
            ? "z-1 pt-170 xl-pt-150 md-pt-130 pb-100 xl-pb-80 md-pb-50"
            : "pt-160 lg-pt-130 pb-160 xl-pb-120 md-pb-80"
        }`}
-       style={{ backgroundImage: `url(/assets/images/media/img_49.jpg)` }}
+       style={{
+         backgroundImage: `url(/assets/img/bg/${background}.webp)`,
+       }}
      >
        <div className="container">
          <div className="row">
-           <div className="col-lg-6">
+           <div className="col-12 d-flex flex-column align-items-center justify-content-center">
              <h3
                className={`${
                  style ? "xl-mb-30 md-mb-20" : "xl-mb-20 pt-15"
@@ -33,15 +35,13 @@ const BreadcrumbThree = ({ title, link, link_title, sub_title, style }: any) => 
                  <Link href="/">{t("header.home")}</Link>
                </li>
                <li>/</li>
-               <li>
-                 {link_title}
-               </li>
-               {sub_title &&
+               <li>{link_title}</li>
+               {sub_title && (
                  <>
                    <li>/</li>
                    <li>{sub_title}</li>
                  </>
-               }
+               )}
              </ul>
            </div>
          </div>
