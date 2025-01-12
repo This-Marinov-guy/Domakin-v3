@@ -7,7 +7,7 @@ import phoneIcon from "@/assets/img/icons/11.png";
 
 import ContactForm from "@/components/forms/ContactForm";
 import useTranslation from "next-translate/useTranslation";
-import { ADDRESS, EMAIL, INSTAGRAM, PHONE } from "@/utils/defines";
+import { ADDRESS, EMAIL, FACEBOOK, INSTAGRAM, LINKEDIN, PHONE } from "@/utils/defines";
 import { logoByTheme } from "@/utils/config";
 
 interface DataType {
@@ -30,11 +30,25 @@ const address_data: DataType[] = [
     link: "mailto:" + EMAIL,
   },
   {
-    id: 1,
+    id: 2,
     forceIcon: "fa-brands fa-instagram",
     title: "Instagram",
     address_1: "domakin.nl",
     link: INSTAGRAM,
+  },
+  {
+    id: 3,
+    forceIcon: "fa-brands fa-linkedin",
+    title: "LinkedIn",
+    address_1: "Domakin",
+    link: LINKEDIN,
+  },
+  {
+    id: 4,
+    forceIcon: "fa-brands fa-facebook",
+    title: "Facebook",
+    address_1: "Domakin",
+    link: FACEBOOK,
   },
   // {
   //   id: 2,
@@ -55,8 +69,8 @@ const ContactArea = () => {
   const { t } = useTranslation("translations");
 
   return (
-    <div className="contact-us border-top pt-200">
-      <div className="container">
+    <div className="contact-us border-top pt-60">
+      {/* <div className="container">
         <div className="row">
           <div className="col-xxl-9 col-xl-8 col-lg-10 m-auto">
             <div className="title-one text-center wow fadeInUp">
@@ -64,36 +78,48 @@ const ContactArea = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="address-banner wow fadeInUp mt-60 lg-mt-40">
         <div className="container">
-          <div className="d-flex flex-wrap justify-content-center gap-5">
+          <div className="row d-flex justify-content-center">
             {address_data.map((item) => (
-              <div
+              <Link
+                href={item.link ?? "#"}
                 key={item.id}
-                className={`block position-relative ${item.class_name} z-1 mt-25`}
+                className={`col-lg-2 col-md-3 col-6 mt-10 hover-blue`}
               >
                 <div className="d-xl-flex align-items-center">
                   <div className="icon rounded-circle d-flex align-items-center justify-content-center">
-                    {item.forceIcon ? <i style={{color: 'white', fontSize: '1.8em'}} className={item.forceIcon}/>  : <Image src={item.icon ?? ""} alt="" className="lazy-img" />}
+                    {item.forceIcon ? (
+                      <i
+                        style={{ color: "white", fontSize: "1.8em" }}
+                        className={item.forceIcon}
+                      />
+                    ) : (
+                      <Image
+                        src={item.icon ?? ""}
+                        alt=""
+                        className="lazy-img"
+                      />
+                    )}
                   </div>
                   <div className="text">
                     <p className="fs-22">{t(item.title)}</p>
-                    <Link href={item.link ?? "#"} className="tran3s">
+                    <p className="tran3s">
                       {item.address_1}
-                    </Link>
+                    </p>
                     {item.address_2 && (
                       <>
                         {" "}
-                        <Link href={item.link ?? "#"} className="tran3s">
+                        <p className="tran3s">
                           {item.address_2}
-                        </Link>
+                        </p>
                       </>
                     )}
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

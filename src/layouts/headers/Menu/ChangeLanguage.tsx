@@ -6,13 +6,19 @@ import useTranslation from "next-translate/useTranslation";
 const ChangeLanguage = () => {
   const { t, lang } = useTranslation("translations");
 
+  // const options = [
+  //   { value: "en", text: "English" },
+  //   { value: "bg", text: "Български" },
+  //   { value: "gr", text: "Ελληνικά" },
+  // ];
+
   const options = [
-    { value: "en", text: "English" },
-    { value: "bg", text: "Български" },
-    { value: "gr", text: "Ελληνικά" },
+    { value: "en", text: "EN" },
+    { value: "bg", text: "BG" },
+    { value: "gr", text: "GR" },
   ];
 
-  const defOption = options.findIndex((l) => l.value === lang)
+  const defOption = options.findIndex((l) => l.value === lang);
 
   const changeLanguage = async (lang: string) => {
     if (!lang) {
@@ -29,7 +35,7 @@ const ChangeLanguage = () => {
 
   return (
     <NiceSelect
-      style={{ height: "50px", minWidth: "130px" }}
+      style={{ height: "50px", minWidth: "80px" }}
       className="nice-select fw-normal"
       options={options}
       defaultCurrent={defOption}

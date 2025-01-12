@@ -72,9 +72,9 @@ const AgencyDetailsArea = ({ style, id }: any) => {
                       {Object.entries(TEAM_SOCIALS[id]).map(
                         ([icon, href], i) => (
                           <li key={i}>
-                            <Link href={href}>
+                            <a href={href} target="_blank">
                               <i className={`fa-brands fa-${icon}`}></i>
-                            </Link>
+                            </a>
                           </li>
                         )
                       )}
