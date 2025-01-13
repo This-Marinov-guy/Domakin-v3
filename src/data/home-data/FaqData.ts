@@ -54,6 +54,13 @@ const faq_data: DataType[] = [
     title: "privacy_policy_content.contracting",
     content: "privacy_policy_content.contract_policy",
   },
+  {
+    id: 8,
+    page: "1",
+
+    title: "privacy_policy_content.cookies",
+    content: "privacy_policy_content.cookies_policy",
+  },
 ];
 
 export default faq_data;
