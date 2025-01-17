@@ -2,6 +2,7 @@ import useSWR from "swr";
 import axios from "axios";
 import { useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { getCookie } from "@/utils/helpers";
 
 export const useAuth = ({ middleware, redirectIfAuthenticated }: any = {}) => {
   const router = useRouter();
@@ -22,7 +23,15 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: any = {}) => {
       })
   );
 
-  const csrf = () => axios.get("http://localhost:8000/sanctum/csrf-cookie");
+  const csrf = () => {
+    const sessionCookie = getCookie(process.env.NEXT_PUBLIC_SESSION_ID);
+
+    if (sessionCookie) {
+      return;
+    }
+
+    axios.get("http://localhost:8000/sanctum/csrf-cookie");
+  };
 
   const register = async ({ setErrors, ...props }: any) => {
     await csrf();
@@ -34,7 +43,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: any = {}) => {
       .then(() => mutate())
       .catch((error) => {
         console.log(error);
-        
+
         if (error.response.status !== 422) throw error;
 
         setErrors(error.response.data.errors);

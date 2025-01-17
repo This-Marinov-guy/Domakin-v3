@@ -6,9 +6,7 @@ import { StoreProvider, useStore } from "@/stores/storeContext";
 import ModalsLayout from "./ModalsLayout";
 import { useServer } from "@/hooks/useServer";
 import useTranslation from "next-translate/useTranslation";
-import axios from "axios";
-import { SERVER_ENDPOINT } from "@/utils/config";
-import { csrf, getCookie, getGeoInfo } from "@/utils/helpers";
+import { getGeoInfo } from "@/utils/helpers";
 import setLanguage from "next-translate/setLanguage";
 import { LANGUAGES } from "@/utils/defines";
 
@@ -92,7 +90,6 @@ const MainLayout = ({ children }: any) => {
     loadProperties();
     loadFeedback();
     fetchLanguage();
-    csrf();
   }, []);
 
   return (
