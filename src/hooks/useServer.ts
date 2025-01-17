@@ -40,7 +40,7 @@ export const useServer = () => {
 
     const sessionCookie = getCookie(process.env.NEXT_PUBLIC_SESSION_ID);
 
-    if (ENV_PROD) {
+    if (ENV_PROD && !sessionCookie) {
       await csrf();
     }
 
