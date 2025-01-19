@@ -4,13 +4,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import UseSticky from "@/hooks/UseSticky";
-import LoginModal from "@/modals/LoginModal";
+import AuthModal from "@/modals/AuthModal";
 
 import ChangeLanguage from "./Menu/ChangeLanguage";
 import useTranslation from "next-translate/useTranslation";
 import { logoByTheme } from "@/utils/config";
 import { useStore } from "@/stores/storeContext";
 import { ENV_PROD, LOGIN_MODAL } from "@/utils/defines";
+import { useRouter } from "next/router";
 
 const HeaderOne = ({ style }: any) => {
   const { sticky } = UseSticky();
@@ -18,6 +19,19 @@ const HeaderOne = ({ style }: any) => {
   const { modalStore } = useStore();
 
   const { t } = useTranslation("translations");
+
+  const router = useRouter();
+
+const handleOpenLogin = () => {
+    router.push({
+      pathname: router.pathname,
+      query: {
+        login: 1
+      },
+    });
+
+    modalStore.setActiveModal(LOGIN_MODAL);
+  };
 
   return (
     <header
@@ -50,24 +64,20 @@ const HeaderOne = ({ style }: any) => {
                   <ChangeLanguage />
                 </li>
                 <li className="d-none d-lg-inline-block ms-3">
-                  <Link
-                    href="/services/add-listing"
-                    className="btn-two"
-                  >
+                  <Link href="/services/add-listing" className="btn-two">
                     <span>{t("header.add_listing")}</span>
                     <i className="fa-thin fa-arrow-up-right"></i>
                   </Link>
                 </li>
 
-                {!ENV_PROD && <li className="d-none d-lg-inline-block ms-3">
-                  <button
-                    onClick={() => modalStore.setActiveModal(LOGIN_MODAL)}
-                    className="btn-fourteen"
-                  >
-                    <i className="fa-regular fa-lock"></i>{" "}
-                    <span>{t("account:authentication.login")}</span>
-                  </button>
-                </li>}
+                {!ENV_PROD && (
+                  <li className="d-none d-lg-inline-block ms-3">
+                    <button onClick={handleOpenLogin} className="btn-fourteen">
+                      <i className="fa-regular fa-lock"></i>{" "}
+                      <span>{t("account:authentication.login")}</span>
+                    </button>
+                  </li>
+                )}
               </ul>
             </div>
             <nav className="navbar navbar-expand-lg p0 order-lg-2">

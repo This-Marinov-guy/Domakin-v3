@@ -58,7 +58,7 @@ const LoginForm = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    sendRequest("/authenticate/login", "POST", form).then((res) => {
+    sendRequest("/login", "POST", form).then((res) => {
       if (res?.status) {
         setForm(defaultData);
 

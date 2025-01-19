@@ -13,7 +13,7 @@ const ReviewFormArea = () => {
          <div id="collapseTwelveA" className="accordion-collapse collapse">
             <div className="accordion-body">
                <div className="review-form">
-                  <p className="fs-20 lh-lg pb-15"><Link href="#" data-bs-toggle="modal" data-bs-target="#loginModal" className="color-dark fw-500 text-decoration-underline">Sign in</Link> to post your comment or signup if you don&apos;t have any account.</p>
+                  <p className="fs-20 lh-lg pb-15"><Link href="#" data-bs-toggle="modal" data-bs-target="#AuthModal" className="color-dark fw-500 text-decoration-underline">Sign in</Link> to post your comment or signup if you don&apos;t have any account.</p>
                   <AgencyFormOne />
                </div>
             </div>

@@ -108,7 +108,7 @@ const FancyBanner = ({ style }: any) => {
                     {t("subscribe_email.send")}
                   </button>
                 </form>
-                {/* <div className="fs-16 mt-10 text-white">Already a Agent? <Link href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Sign in.</Link></div> */}
+                {/* <div className="fs-16 mt-10 text-white">Already a Agent? <Link href="#" data-bs-toggle="modal" data-bs-target="#AuthModal">Sign in.</Link></div> */}
               </div>
             </div>
           )}

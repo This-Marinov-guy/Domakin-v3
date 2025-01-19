@@ -1,5 +1,5 @@
 "use client"
-import LoginModal from "@/modals/LoginModal";
+import AuthModal from "@/modals/AuthModal";
 import { toast } from 'react-toastify';
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -29,13 +29,13 @@ const BlogForm = () => {
       reset();
    };
 
-   const [loginModal, setLoginModal] = useState<boolean>(false);
+   const [AuthModal, setAuthModal] = useState<boolean>(false);
 
    return (
       <>
          <div className="blog-comment-form">
             <h3 className="blog-inner-title">Leave A Comment</h3>
-            <p><a onClick={() => setLoginModal(true)} style={{ cursor: "pointer" }} className="text-decoration-underline fw-500">Sign in</a> Sign-in to post your comment or signup
+            <p><a onClick={() => setAuthModal(true)} style={{ cursor: "pointer" }} className="text-decoration-underline fw-500">Sign in</a> Sign-in to post your comment or signup
                if you don’t have any account.</p>
             <form onSubmit={handleSubmit(onSubmit)} className="mt-30">
                <div className="input-wrapper mb-30">
@@ -55,7 +55,7 @@ const BlogForm = () => {
                <button className="btn-five rounded-0">Post Comment</button>
             </form>
          </div>
-         <LoginModal  />
+         <AuthModal  />
       </>
    )
 }

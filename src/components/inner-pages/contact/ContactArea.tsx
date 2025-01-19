@@ -7,7 +7,14 @@ import phoneIcon from "@/assets/img/icons/11.png";
 
 import ContactForm from "@/components/forms/ContactForm";
 import useTranslation from "next-translate/useTranslation";
-import { ADDRESS, EMAIL, FACEBOOK, INSTAGRAM, LINKEDIN, PHONE } from "@/utils/defines";
+import {
+  ADDRESS,
+  EMAIL,
+  FACEBOOK,
+  INSTAGRAM,
+  LINKEDIN,
+  PHONE,
+} from "@/utils/defines";
 import { logoByTheme } from "@/utils/config";
 
 interface DataType {
@@ -16,7 +23,7 @@ interface DataType {
   forceIcon?: string;
   class_name?: string;
   title: string;
-  link?: string,
+  link?: string;
   address_1: string;
   address_2?: string;
 }
@@ -81,48 +88,38 @@ const ContactArea = () => {
       </div> */}
 
       <div className="address-banner wow fadeInUp mt-60 lg-mt-40">
-        <div className="container">
-          <div className="row d-flex justify-content-center">
-            {address_data.map((item) => (
-              <Link
-                href={item.link ?? "#"}
-                target="_blank"
-                key={item.id}
-                className={`col-lg-2 col-md-3 col-6 mt-10 hover-blue`}
-              >
-                <div className="d-xl-flex align-items-center">
-                  <div className="icon rounded-circle d-flex align-items-center justify-content-center">
-                    {item.forceIcon ? (
-                      <i
-                        style={{ color: "white", fontSize: "1.8em" }}
-                        className={item.forceIcon}
-                      />
-                    ) : (
-                      <Image
-                        src={item.icon ?? ""}
-                        alt=""
-                        className="lazy-img"
-                      />
-                    )}
-                  </div>
-                  <div className="text">
-                    <p className="fs-22">{t(item.title)}</p>
-                    <p className="tran3s">
-                      {item.address_1}
-                    </p>
-                    {item.address_2 && (
-                      <>
-                        {" "}
-                        <p className="tran3s">
-                          {item.address_2}
-                        </p>
-                      </>
-                    )}
-                  </div>
+        <div className="row d-flex justify-content-center">
+          {address_data.map((item) => (
+            <Link
+              href={item.link ?? "#"}
+              target="_blank"
+              key={item.id}
+              className={`col-lg-2 col-md-3 col-6 mt-10 hover-blue`}
+            >
+              <div className="d-xl-flex align-items-center">
+                <div className="icon rounded-circle d-flex align-items-center justify-content-center">
+                  {item.forceIcon ? (
+                    <i
+                      style={{ color: "white", fontSize: "1.8em" }}
+                      className={item.forceIcon}
+                    />
+                  ) : (
+                    <Image src={item.icon ?? ""} alt="" className="lazy-img" />
+                  )}
                 </div>
-              </Link>
-            ))}
-          </div>
+                <div className="text">
+                  <p className="fs-22">{t(item.title)}</p>
+                  <p className="tran3s">{item.address_1}</p>
+                  {item.address_2 && (
+                    <>
+                      {" "}
+                      <p className="tran3s">{item.address_2}</p>
+                    </>
+                  )}
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
 

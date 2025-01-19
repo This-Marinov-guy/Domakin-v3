@@ -12,7 +12,7 @@ import CommonPropertyFloorPlan from "../listing-details-common/CommonPropertyFlo
 import CommonPropertyVideoTour from "../listing-details-common/CommonPropertyVideoTour"
 import Sidebar from "../listing-details-1/Sidebar"
 import Review from "@/components/inner-pages/agency/agency-details/Review"
-import LoginModal from "@/modals/LoginModal"
+import AuthModal from "@/modals/AuthModal"
 import { useState } from "react"
 import NiceSelect from "@/ui/NiceSelect"
 
@@ -20,7 +20,7 @@ const ListingDetailsSixArea = () => {
 
    const selectHandler = (e: any) => { };
 
-   const [loginModal, setLoginModal] = useState<boolean>(false);
+   const [AuthModal, setAuthModal] = useState<boolean>(false);
 
    return (
       <>
@@ -97,7 +97,7 @@ const ListingDetailsSixArea = () => {
                      <div className="review-form">
                         <h4 className="mb-20">Leave A Reply</h4>
                         <p className="fs-20 lh-lg pb-15">
-                           <a onClick={() => setLoginModal(true)} style={{ cursor: "pointer" }}
+                           <a onClick={() => setAuthModal(true)} style={{ cursor: "pointer" }}
                               className="color-dark fw-500 text-decoration-underline">Sign in</a>
                            to post your comment or signup if you don&apos;t have any account.</p>
 
@@ -111,7 +111,7 @@ const ListingDetailsSixArea = () => {
             </div>
          </div>
 
-         <LoginModal  />
+         <AuthModal  />
       </>
    )
 }

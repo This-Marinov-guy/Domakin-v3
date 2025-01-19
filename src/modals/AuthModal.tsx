@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import useTranslation from "next-translate/useTranslation";
 
-const LoginModal = () => {
+const AuthModal = () => {
   const [activeTab, setActiveTab] = useState(LOGIN_IN);
 
   const { t } = useTranslation("account");
@@ -25,13 +25,26 @@ const LoginModal = () => {
   const router = useRouter();
   const { query } = router;
 
-  const tab_title: string[] = [
-    t("authentication.login"),
-    t("authentication.register"),
+  const tab_title: { id: number; text: string }[] = [
+    { id: LOGIN_IN, text: t("authentication.login") },
+    { id: SIGN_UP, text: t("authentication.register") },
   ];
 
-  const handleTabClick = (index: any) => {
-    setActiveTab(index);
+  const handleTabClick = (tab: number) => {
+    const newQuery: any = { ...router.query };
+
+    if (tab === LOGIN_IN) {
+      delete newQuery.signup;
+      newQuery.login = 1;
+    } else {
+      delete newQuery.login;
+      newQuery.signup = 1;
+    }
+
+    router.push({
+      pathname: router.pathname,
+      query: newQuery,
+    });
   };
 
   const handleClose = () => {
@@ -79,10 +92,10 @@ const LoginModal = () => {
             ></button>
             <div className="form-wrapper m-auto">
               <ul className="nav nav-tabs w-100">
-                {tab_title.map((tab, index) => (
+                {tab_title.map((tab: any, index) => (
                   <li
                     key={index}
-                    onClick={() => handleTabClick(index)}
+                    onClick={() => handleTabClick(tab.id)}
                     className="nav-item"
                   >
                     <button
@@ -90,7 +103,7 @@ const LoginModal = () => {
                         activeTab === index ? "active" : ""
                       }`}
                     >
-                      {tab}
+                      {tab.text}
                     </button>
                   </li>
                 ))}
@@ -105,7 +118,13 @@ const LoginModal = () => {
                     <h2>{t("authentication.welcome_back")}</h2>
                     <p className="fs-20 color-dark">
                       {t("authentication.no_account")}
-                      <Link className="ml-5" href="#" onClick={() => handleTabClick(SIGN_UP)}>{t("authentication.sign_up")}</Link>
+                      <Link
+                        className="ml-5"
+                        href="#"
+                        onClick={() => handleTabClick(SIGN_UP)}
+                      >
+                        {t("authentication.sign_up")}
+                      </Link>
                     </p>
                   </div>
                   <LoginForm />
@@ -120,7 +139,13 @@ const LoginModal = () => {
                     <h2>{t("authentication.register")}</h2>
                     <p className="fs-20 color-dark">
                       {t("authentication.already_registered")}
-                      <Link className="ml-5" href="#" onClick={() => handleTabClick(LOGIN_IN)}>{t("authentication.log_in")}</Link>
+                      <Link
+                        className="ml-5"
+                        href="#"
+                        onClick={() => handleTabClick(LOGIN_IN)}
+                      >
+                        {t("authentication.log_in")}
+                      </Link>
                     </p>
                   </div>
                   <RegisterForm />
@@ -160,4 +185,4 @@ const LoginModal = () => {
   );
 };
 
-export default observer(LoginModal);
+export default observer(AuthModal);

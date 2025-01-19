@@ -155,8 +155,14 @@ export const getCookie = (name: any) => {
 };
 
 export const csrf = async () => {
+  const sessionCookie = getCookie(process.env.NEXT_PUBLIC_SESSION_ID);  
+
+  if (sessionCookie) {
+    return;
+  }
+  
   try {
-    await axios.get(SERVER_ENDPOINT + "/sanctum/csrf-cookie");
+    // await axios.get(SERVER_ENDPOINT + "/sanctum/csrf-cookie");
   } catch (err) {
     //do nothing;
   }

@@ -12,30 +12,24 @@ import Trans from "next-translate/Trans";
 import { toast } from "react-toastify";
 import { useStore } from "@/stores/storeContext";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/hooks/useAuth";
 
 const defaultData = {
   name: "",
   phone: "",
   email: "",
   password: "",
-  confirmPassword: "",
+  password_confirmation: "",
   terms: false,
 };
 
 const RegisterForm = () => {
   const { t } = useTranslation("account");
 
-  const {modalStore} = useStore();
+  const { modalStore } = useStore();
 
   const router = useRouter();
 
   const { loading, sendRequest } = useServer();
-
-   const { register } = useAuth({
-     middleware: "guest",
-     redirectIfAuthenticated: "/account",
-   });
 
   const [form, setForm] = useState(defaultData);
   const [errors, setErrors] = useState<string[]>([]);
@@ -54,13 +48,28 @@ const RegisterForm = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    register({
-      name:form.name,
-      email: form.email,
-      password: form.password,
-      password_confirmation: form.confirmPassword,
-      setErrors,
-    });
+    const responseData = await sendRequest("/register", "POST", form);
+
+    if (responseData?.status) {
+      setForm(defaultData);
+
+      modalStore.closeAll();
+
+      router.push("/account");
+
+      toast.success("The property was uploaded successfully for approval", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    } else if (responseData?.invalid_fields) {
+      setErrors(responseData.invalid_fields);
+    }
   };
 
   return (
@@ -142,12 +151,12 @@ const RegisterForm = () => {
             <label htmlFor="">{t("authentication.confirm_password")}</label>
             <Form.Control
               type={isPasswordVisible ? "text" : "password"}
-              name="confirmPassword"
-              value={form.confirmPassword}
+              name="password_confirmation"
+              value={form.password_confirmation}
               onChange={(e) => {
                 handleChange(e);
               }}
-              isInvalid={errors.includes("confirmPassword")}
+              isInvalid={errors.includes("password_confirmation")}
             />
             <span className="placeholder_icon">
               <span
@@ -194,7 +203,7 @@ const RegisterForm = () => {
             onClick={handleSubmit}
             className="btn-two w-100 text-uppercase d-block mt-20"
           >
-            {loading ? <Spinner/> : t("authentication.sign_up")}
+            {loading ? <Spinner /> : t("authentication.sign_up")}
           </button>
         </div>
       </div>

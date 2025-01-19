@@ -1,12 +1,12 @@
 import React from "react";
 import CookiesModal from "@/components/ui/modals/CookiesModal";
-import LoginModal from "@/modals/LoginModal";
+import AuthModal from "@/modals/AuthModal";
 
 function ModalsLayout() {
   return (
     <>
       <CookiesModal />
-      <LoginModal/>
+      <AuthModal/>
     </>
   );
 }

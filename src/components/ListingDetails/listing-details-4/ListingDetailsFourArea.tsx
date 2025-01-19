@@ -14,7 +14,7 @@ import NiceSelect from '@/ui/NiceSelect'
 import Review from '@/components/inner-pages/agency/agency-details/Review'
 import AgencyFormOne from '@/components/forms/AgencyFormOne'
 import { useState } from 'react'
-import LoginModal from '@/modals/LoginModal'
+import AuthModal from '@/modals/AuthModal'
 import Sidebar from '../listing-details-1/Sidebar'
 import Link from 'next/link'
 
@@ -22,7 +22,7 @@ const ListingDetailsFourArea = () => {
 
    const selectHandler = (e: any) => { };
 
-   const [loginModal, setLoginModal] = useState<boolean>(false);
+   const [AuthModal, setAuthModal] = useState<boolean>(false);
 
    return (
       <>
@@ -85,7 +85,7 @@ const ListingDetailsFourArea = () => {
                      </div>
                      <div className="review-form">
                         <h4 className="mb-20">Leave A Reply</h4>
-                        <p className="fs-20 lh-lg pb-15"><Link href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
+                        <p className="fs-20 lh-lg pb-15"><Link href="#" data-bs-toggle="modal" data-bs-target="#AuthModal"
 									className="color-dark fw-500 text-decoration-underline">Sign in</Link> to post your comment or
 								signup if you don&apos;t have any account.</p>
 
@@ -99,7 +99,7 @@ const ListingDetailsFourArea = () => {
             </div>
          </div>
 
-         <LoginModal  />
+         <AuthModal  />
       </>
    )
 }
