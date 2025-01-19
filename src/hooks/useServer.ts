@@ -94,14 +94,14 @@ export const useServer = () => {
 
       return response.data;
     } catch (err: any) {
-      !ENV_PROD && console.log(err.response?.data ?? err);
+      !ENV_PROD && console.log(err.response?.data ?? err);    
 
       if (options?.withError) {
         let errorMessage = err.response?.data.tag
           ? t(err.response?.data.tag)
           : err.response?.data.message ?? t("api.general_error");
 
-        if (GENERAL_ERROR_RESPONSE_CODES.includes(err.response.data.code)) {
+        if (GENERAL_ERROR_RESPONSE_CODES.includes(err.status)) {
           errorMessage = t("api.general_error");
         }
 

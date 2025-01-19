@@ -39,4 +39,4 @@ export const logoByTheme = () => {
 };
 
 // server
-export const GENERAL_ERROR_RESPONSE_CODES = [419];
+export const GENERAL_ERROR_RESPONSE_CODES = [419, 500];
