@@ -21,7 +21,6 @@ const ReviewForm = () => {
             </div>
          </div>
 
-         <AuthModal  />
       </>
    )
 }

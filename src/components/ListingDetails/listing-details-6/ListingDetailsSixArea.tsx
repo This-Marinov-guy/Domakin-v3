@@ -111,7 +111,6 @@ const ListingDetailsSixArea = () => {
             </div>
          </div>
 
-         <AuthModal  />
       </>
    )
 }

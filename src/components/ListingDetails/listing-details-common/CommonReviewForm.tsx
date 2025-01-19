@@ -17,7 +17,6 @@ const CommonReviewForm = () => {
 
          <AgencyFormOne style={true} />
 
-         <AuthModal  />
       </>
    )
 }
