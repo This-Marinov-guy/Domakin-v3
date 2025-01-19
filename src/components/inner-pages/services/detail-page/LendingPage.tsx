@@ -5,6 +5,7 @@ import FancyBanner from "@/components/common/FancyBanner";
 import StepDescriptionTwo from "@/components/common/StepDescriptionTwo";
 import useTranslation from "next-translate/useTranslation";
 import AddListingForm from "@/components/forms/AddListingForm";
+import { RENTING_COMMISSION } from "@/utils/defines";
 
 const LendingPage = () => {
   // English only
@@ -29,7 +30,7 @@ const LendingPage = () => {
       {
         image: "/assets/img/icons/3.png",
         title: "Receive your commission",
-        text: "Once the new tenant signs the contract you will receive 200 euro",
+        text: `Once the new tenant signs the contract you will receive €${RENTING_COMMISSION}`,
       },
     ],
   };
