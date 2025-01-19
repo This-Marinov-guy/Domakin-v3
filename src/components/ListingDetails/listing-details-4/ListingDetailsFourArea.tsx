@@ -22,8 +22,6 @@ const ListingDetailsFourArea = () => {
 
    const selectHandler = (e: any) => { };
 
-   const [AuthModal, setAuthModal] = useState<boolean>(false);
-
    return (
       <>
          <div className="listing-details-one theme-details-one border-top mt-130 lg-mt-100 pt-70 pb-150 xl-pb-120">
@@ -99,7 +97,6 @@ const ListingDetailsFourArea = () => {
             </div>
          </div>
 
-         <AuthModal  />
       </>
    )
 }
