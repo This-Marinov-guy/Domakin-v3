@@ -31,6 +31,8 @@ const AuthModal = () => {
   ];
 
   const handleTabClick = (tab: number) => {
+    setActiveTab(tab);
+
     const newQuery: any = { ...router.query };
 
     if (tab === LOGIN_IN) {
