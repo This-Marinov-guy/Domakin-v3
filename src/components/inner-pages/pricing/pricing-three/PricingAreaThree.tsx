@@ -2,7 +2,12 @@ import useTranslation from "next-translate/useTranslation";
 import Trans from "next-translate/Trans";
 import React from "react";
 import Link from "next/link";
-import { RENTING_PRICE, VIEWING_EXPRESS_PRICE, VIEWING_PREMIUM_PRICE, VIEWING_STANDARD_PRICE } from "@/utils/defines";
+import {
+  RENTING_PRICE,
+  VIEWING_EXPRESS_PRICE,
+  VIEWING_PREMIUM_PRICE,
+  VIEWING_STANDARD_PRICE,
+} from "@/utils/defines";
 
 const PricingAreaThree = () => {
   const { t } = useTranslation("translations");
@@ -31,7 +36,13 @@ const PricingAreaThree = () => {
                 <Trans i18nKey="translations:pricing.viewing_assistance.section_title" />
               </h4>
 
-              <p>{t("pricing.viewing_assistance.intro")} </p>
+              <p>
+                {t("pricing.viewing_assistance.intro")}{" "}
+                <Link
+                  href="/services/viewing"
+                  className="ml-20 btn-eleven"
+                >{`${t("common.go_to")} ${t("viewing.viewing")}`}</Link>
+              </p>
 
               <h6>
                 <Trans
@@ -112,7 +123,15 @@ const PricingAreaThree = () => {
               </p>
 
               <ul>
-                <li>{t("pricing.renting_room.how_it_works.steps.1")}</li>
+                <li>
+                  {t("pricing.renting_room.how_it_works.steps.1")}{" "}
+                  <Link
+                    href="/services/renting"
+                    className="ml-20 btn-eleven"
+                  >{`${t("common.go_to")} ${t(
+                    "features.rent_an_apartment"
+                  )}`}</Link>
+                </li>
                 <li>{t("pricing.renting_room.how_it_works.steps.2")}</li>
 
                 <li>
@@ -124,12 +143,35 @@ const PricingAreaThree = () => {
                 </li>
               </ul>
 
+              <p>{t("common.or").toUpperCase()}</p>
+
+              <ul>
+                <li>
+                  {t("pricing.renting_room.how_it_works.steps2.1")}{" "}
+                  <Link
+                    href="/services/room-searching"
+                    className="ml-20 btn-eleven"
+                  >{`${t("common.go_to")} ${t(
+                    "features.room_searching"
+                  )}`}</Link>
+                </li>
+                <li>{t("pricing.renting_room.how_it_works.steps2.2")}</li>
+                <li>
+                  <Trans
+                    i18nKey="translations:pricing.renting_room.how_it_works.steps.3"
+                    values={{ price: RENTING_PRICE }}
+                    components={{ b: <b /> }}
+                  />
+                </li>{" "}
+              </ul>
+
               <p>{t("pricing.renting_room.why_choose_us.title")}</p>
 
               <ul>
                 <li>{t("pricing.renting_room.why_choose_us.points.1")}</li>
                 <li>{t("pricing.renting_room.why_choose_us.points.2")}</li>
                 <li>{t("pricing.renting_room.why_choose_us.points.3")}</li>
+                <li>{t("pricing.renting_room.why_choose_us.points.4")}</li>
               </ul>
 
               <p>{t("pricing.renting_room.audience.title")}</p>

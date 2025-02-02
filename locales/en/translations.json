@@ -133,6 +133,10 @@
           "1": "Browse available rooms on our website.",
           "2": "Apply for rooms that meet your preferences.",
           "3": "If you sign a rental contract through Domakin, a one-time fee of €<b>{{price}}</b> applies."
+        },
+        "steps2": {
+          "1": "Tell us your accommodation preferences.",
+          "2": "An agent contacts you and starts the searching."
         }
       },
       "why_choose_us": {
@@ -140,7 +144,8 @@
         "points": {
           "1": "We work directly with trusted landlords to provide safe, reliable housing options.",
           "2": "Our listings are verified to minimize the risk of scams.",
-          "3": "We make it easier to secure accommodation tailored to students and expats."
+          "3": "Our agents aim to bring options of your preferences straight to you.",
+          "4": "We make it easier to secure accommodation tailored to students and expats."
         }
       },
       "audience": {
@@ -1345,7 +1350,12 @@
     "field": "Field",
     "less_than": "less than",
     "unlimited": "unlimited",
-    "click_here": "Click here"
+    "click_here": "Click here",
+    "go_to": "Go to",
+    "or": "or",
+    "and": "and",
+    "from": "from",
+    "to": "to"
   },
 
   "date_time": {
