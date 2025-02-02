@@ -1,5 +1,6 @@
 import { action, makeAutoObservable, observable } from "mobx";
 
+
 const defaultViewingData = {
   name: "",
   surname: "",
@@ -9,6 +10,26 @@ const defaultViewingData = {
   address: "",
   date: "",
   time: "",
+  note: "",
+
+  terms: {
+    contact: false,
+    legals: false,
+  },
+};
+
+const defaultSearchingData = {
+  name: "",
+  surname: "",
+  email: "",
+  phone: "",
+  city: "",
+  registration: true,
+  budget: '',
+  people: '',
+  moveIn: '',
+  period: '',
+  letter: null,
   note: "",
 
   terms: {
@@ -61,6 +82,29 @@ export default class ServiceStore {
   @action
   resetViewingData = () => {
     this.viewingData = { ...defaultViewingData };
+  };
+
+  // room searching
+  @observable searchingData: any = { ...defaultSearchingData };
+  @observable searchingErrorFields: string[] = [];
+
+  @action
+  updateSearchingData = (key: string, nestedKey: string, value: any) => {
+    if (nestedKey) {
+      this.searchingData[key][nestedKey] = value;
+    } else {
+      this.searchingData[key] = value;
+    }
+  };
+
+  @action
+  addSearchingErrorFields = (fields: string[]) => {
+    this.searchingErrorFields = fields;
+  };
+
+  @action
+  resetSearchingData = () => {
+    this.searchingData = { ...defaultSearchingData };
   };
 
   // renting

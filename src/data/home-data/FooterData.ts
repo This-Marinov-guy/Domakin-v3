@@ -1,14 +1,13 @@
 interface DataType {
-   id: number;
-   page: string;
-   widget_title: string;
-   widget_class?: string;
-   widget_class2?: string;
-   footer_link: {
-      link: string;
-      link_title: string;
-   }[];
-
+  id: number;
+  page: string;
+  widget_title: string;
+  widget_class?: string;
+  widget_class2?: string;
+  footer_link: {
+    link: string;
+    link_title: string;
+  }[];
 }
 
 const footer_data: DataType[] = [
@@ -116,7 +115,11 @@ const footer_data: DataType[] = [
     widget_title: "footer.services",
     footer_link: [
       { link: "/services/viewing", link_title: "footer.viewings" },
-      { link: "/services/renting", link_title: "footer.renting" },
+      { link: "/services/renting", link_title: "features.rent_an_apartment" },
+      {
+        link: "/services/room-searching",
+        link_title: "features.room_searching",
+      },
       { link: "/services/add-listing", link_title: "footer.lending" },
       { link: "/pricing", link_title: "header.pricing" },
     ],

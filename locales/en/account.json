@@ -20,6 +20,7 @@
         "errors" : {
             "email": "Please enter a valid email address",
             "email_exists": "This email is already registered",
+            "phone_exists": "This phone number is already registered",
             "password": "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number and one special character",
             "password_confirmation": "Passwords do not match",
             "login_failed": "Invalid email and/or password"

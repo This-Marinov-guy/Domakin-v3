@@ -122,8 +122,7 @@ const AuthModal = () => {
                       {t("authentication.no_account")}
                       <Link
                         className="ml-5"
-                        href="#"
-                        onClick={() => handleTabClick(SIGN_UP)}
+                        href={window.location.pathname + "?signup=1"}
                       >
                         {t("authentication.sign_up")}
                       </Link>
@@ -143,8 +142,7 @@ const AuthModal = () => {
                       {t("authentication.already_registered")}
                       <Link
                         className="ml-5"
-                        href="#"
-                        onClick={() => handleTabClick(LOGIN_IN)}
+                        href={window.location.pathname + "?login=1"}
                       >
                         {t("authentication.log_in")}
                       </Link>

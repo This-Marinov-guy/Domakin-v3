@@ -67,7 +67,7 @@ const PricingAreaThree = () => {
               <p>{t("pricing.viewing_assistance.audience.description")}</p>
 
               {/* Viewing by us */}
-              <h4 className="mt-40">
+              {/* <h4 className="mt-40">
                 <Trans
                   i18nKey="translations:pricing.viewing_by_agent.section_title"
                   values={{ price: VIEWING_EXPRESS_PRICE }}
@@ -92,7 +92,7 @@ const PricingAreaThree = () => {
                 <li>{t("pricing.viewing_by_agent.included.items.1")}</li>
                 <li>{t("pricing.viewing_by_agent.included.items.2")}</li>
                 <li>{t("pricing.viewing_by_agent.included.items.3")}</li>
-              </ul>
+              </ul> */}
 
               <p>{t("pricing.viewing_by_agent.audience.title")}</p>
               <p>{t("pricing.viewing_by_agent.audience.description")}</p>

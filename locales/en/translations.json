@@ -186,6 +186,18 @@
     "time": "Time:",
     "address_of_viewing_optional": "Address of viewing (optional)"
   },
+  "room_searching" : {
+    "room_searching_service": "Room searching",
+    "tell_us_what_are_you_looking_for": "Tell us what you are looking for and we will find it!",
+    "step_1": "1) Fill out the form",
+    "step_2": "2) Wait for one of our agents to contact you",
+    "step_3": "3) Our agent finds the place for you",
+    "registration": "Is Registration required",
+    "budget": "Budget",
+    "move_in_date": "Move in date",
+    "period": "Period of stay",
+    "people": "People to be accommodated"
+  },
   "renting": {
     "renting_accommodations": "Renting accommodations",
     "renting": "Renting",
@@ -294,7 +306,8 @@
     "viewings": "Viewings",
     "agents_service": "Our agent will represent you at a viewing ensuring your questions and concerns are addressed.",
     "check_it_out": "Check it out",
-    "rent_an_apartment": "Rent a room",
+    "rent_an_apartment": "Our listings",
+    "room_searching": "Room searching",
     "property_inquiry": "Check the properties in our Listings section, apply directly, or send us a request with your accommodation needs.",
     "list_a_room": "List a room",
     "services": "Services",
@@ -1329,7 +1342,32 @@
     "mandatory": "Mandatory",
     "optional": "Optional",
     "fields": "Fields",
-    "field": "Field"
+    "field": "Field",
+    "less_than": "less than",
+    "unlimited": "unlimited",
+    "click_here": "Click here"
+  },
+
+  "date_time": {
+    "years": "years",
+    "months" : "months",
+    "weeks": "weeks",
+    "days": "days",
+    "hours": "hours",
+    "minutes": "minutes",
+    "01": "January",
+    "02": "February",
+    "03": "March",
+    "04": "April",
+    "05": "May",
+    "06": "June",
+    "07": "July",
+    "08": "August",
+    "09": "September",
+    "10": "October",
+    "11": "November",
+    "12": "December",
+    "today": "Today"
   },
 
   "files": {
