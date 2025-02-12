@@ -3,7 +3,7 @@ import Script from "next/script";
 import { ENV_PROD } from "@/utils/defines";
 
 const Clarity = () => {
-  if (!ENV_PROD || process.env.NEXT_PUBLIC_CLARITY_ENABLE !== "1") {
+  if (!ENV_PROD || process.env.NEXT_PUBLIC_CLARITY_ENABLE != "1") {
     return null;
   } 
 

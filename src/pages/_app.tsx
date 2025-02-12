@@ -20,7 +20,7 @@ const MyApp = ({ Component, pageProps }: any) => {
       <SEO />
       <MainLayout>
         <Component {...pageProps} recaptchaRef={recaptchaRef} />
-        {process.env.NEXT_PUBLIC_RECAPTCHA_ENABLE === '1' && <div className="rc-anchor">
+        {process.env.NEXT_PUBLIC_RECAPTCHA_ENABLE == '1' && <div className="rc-anchor">
           <ReCAPTCHA
             size="invisible"
             badge="bottomleft"
