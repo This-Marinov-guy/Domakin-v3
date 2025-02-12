@@ -13,21 +13,21 @@ const MyApp = ({ Component, pageProps }: any) => {
 
   const onChange = () => {
     // on captcha change
-  };
+  };  
 
   return (
     <Suspense fallback={<PageLoader />}>
       <SEO />
       <MainLayout>
         <Component {...pageProps} recaptchaRef={recaptchaRef} />
-        <div className="rc-anchor">
+        {process.env.NEXT_PUBLIC_RECAPTCHA_ENABLE === '1' && <div className="rc-anchor">
           <ReCAPTCHA
             size="invisible"
             badge="bottomleft"
             sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ""}
             onChange={onChange}
           />
-        </div>
+        </div>}
       </MainLayout>
     </Suspense>
   );

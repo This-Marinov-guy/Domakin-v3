@@ -2,7 +2,7 @@ import { ENV_PROD } from "@/utils/defines";
 import Script from "next/script";
 
 const GoogleAnalytics = () => {
-  if (!ENV_PROD || !process.env.NEXT_PUBLIC_GA_ENABLE) {
+  if (!ENV_PROD || process.env.NEXT_PUBLIC_GA_ENABLE !== '1') {
     return null;
   }
 
