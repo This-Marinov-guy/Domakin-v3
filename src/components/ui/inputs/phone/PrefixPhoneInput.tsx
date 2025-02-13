@@ -28,7 +28,7 @@ const PrefixPhoneInput = (props: any) => {
 
   useEffect(() => {
     if (onChange && selectedCode && mainPart) {
-      onChange(selectedCode + mainPart);
+      onChange(selectedCode + ' ' + mainPart);
     }
   }, [selectedCode, mainPart]);
 
