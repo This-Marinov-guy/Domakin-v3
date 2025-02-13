@@ -154,7 +154,9 @@ const ViewingForm = () => {
 
         <div className="col-6">
           <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.time")}</label>
+            <label htmlFor="">{`${t("viewing.time")} (${t(
+              "date_time.timezone_nl"
+            )})`}</label>
             <TimePickerInput
               showSecond={false}
               minuteStep={15}
