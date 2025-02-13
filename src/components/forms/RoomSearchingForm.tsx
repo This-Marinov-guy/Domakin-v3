@@ -35,6 +35,12 @@ const RoomSearchingForm = () => {
     { value: "unlimited", text: t("common.unlimited") },
   ];
 
+  const typeOptions = [
+    // { value: "any", text: t("room_searching.type_options.any") },
+    { value: "shared", text: t("room_searching.type_options.shared") },
+    { value: "private", text: t("room_searching.type_options.private") },
+  ];
+
   const {
     serviceStore: {
       searchingData,
@@ -49,26 +55,28 @@ const RoomSearchingForm = () => {
     e.preventDefault();
     addSearchingErrorFields([]);
 
-    sendRequest("/renting/searching/create", "POST", transformToFormData(searchingData)).then(
-      (res) => {
-        if (res?.status) {
-          resetSearchingData();
+    sendRequest(
+      "/renting/searching/create",
+      "POST",
+      transformToFormData(searchingData)
+    ).then((res) => {
+      if (res?.status) {
+        resetSearchingData();
 
-          toast.success(t("viewing.confirmation_message") as ToastContent, {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
-        } else if (res?.invalid_fields) {
-          addSearchingErrorFields(res.invalid_fields);
-        }
+        toast.success(t("viewing.confirmation_message") as ToastContent, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      } else if (res?.invalid_fields) {
+        addSearchingErrorFields(res.invalid_fields);
       }
-    );
+    });
   };
 
   return (
@@ -76,7 +84,7 @@ const RoomSearchingForm = () => {
       <div className="container m-a row controls">
         <h4 className="mb-20">{t("viewing.fill_your_details")}</h4>
 
-        <div className="col-6">
+        <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta form-group mb-30">
             <label htmlFor="">{t("viewing.name")}</label>
             <Form.Control
@@ -90,7 +98,7 @@ const RoomSearchingForm = () => {
           </div>
         </div>
 
-        <div className="col-6">
+        <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta form-group mb-30">
             <label htmlFor="">{t("viewing.surname")}</label>
             <Form.Control
@@ -131,7 +139,7 @@ const RoomSearchingForm = () => {
           </div>
         </div>
 
-        <div className="col-6">
+        <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta form-group mb-30">
             <label htmlFor="">{t("emergency_housing.city")}</label>
             <Form.Control
@@ -141,26 +149,6 @@ const RoomSearchingForm = () => {
                 updateSearchingData("city", "", e.target.value);
               }}
               isInvalid={searchingErrorFields.includes("city")}
-            />
-          </div>
-        </div>
-
-        <div className="col-md-6">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("room_searching.registration")}</label>
-            <NiceSelect
-              className="nice-select border-one d-flex align-items-center"
-              options={[
-                { value: "yes", text: t("common.yes") },
-                { value: "no", text: t("common.no") },
-              ]}
-              defaultCurrent={0}
-              onChange={(e) => {
-                updateSearchingData("registration", "", e.target.value);
-              }}
-              isInvalid={searchingErrorFields.includes("registration")}
-              name=""
-              placeholder=""
             />
           </div>
         </div>
@@ -181,24 +169,7 @@ const RoomSearchingForm = () => {
           </div>
         </div>
 
-        <div className="col-md-6">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("room_searching.people")}</label>
-            <NiceSelect
-              className="nice-select border-one d-flex align-items-center"
-              options={peopleOptions}
-              defaultCurrent={0}
-              onChange={(e) => {
-                updateSearchingData("people", "", e.target.value);
-              }}
-              isInvalid={searchingErrorFields.includes("people")}
-              name=""
-              placeholder=""
-            />
-          </div>
-        </div>
-
-        <div className="col-6">
+        <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta form-group mb-30">
             <label htmlFor="">{t("room_searching.move_in_date")}</label>
             <SingleDatePicker
@@ -212,7 +183,7 @@ const RoomSearchingForm = () => {
           </div>
         </div>
 
-        <div className="col-md-6">
+        <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta form-group mb-30">
             <label htmlFor="">{t("room_searching.period")}</label>
             <NiceSelect
@@ -229,7 +200,61 @@ const RoomSearchingForm = () => {
           </div>
         </div>
 
-        <div className="col-lg-6col-md-12 col-12 mb-40">
+        <div className="col-lg-4 col-md-4 col-6">
+          <div className="input-group-meta form-group mb-30">
+            <label htmlFor="">{t("room_searching.registration")}</label>
+            <NiceSelect
+              className="nice-select border-one d-flex align-items-center"
+              options={[
+                { value: "yes", text: t("common.yes") },
+                { value: "no", text: t("common.no") },
+              ]}
+              defaultCurrent={0}
+              onChange={(e) => {
+                updateSearchingData("registration", "", e.target.value);
+              }}
+              isInvalid={searchingErrorFields.includes("registration")}
+              name=""
+              placeholder=""
+            />
+          </div>
+        </div>
+
+        <div className="col-lg-4 col-md-4 col-6">
+          <div className="input-group-meta form-group mb-30">
+            <label htmlFor="">{t("room_searching.type")}</label>
+            <NiceSelect
+              className="nice-select border-one d-flex align-items-center"
+              options={typeOptions}
+              defaultCurrent={0}
+              onChange={(e) => {
+                updateSearchingData("type", "", e.target.value);
+              }}
+              isInvalid={searchingErrorFields.includes("type")}
+              name=""
+              placeholder=""
+            />
+          </div>
+        </div>
+
+        <div className="col-lg-4 col-md-4 col-6">
+          <div className="input-group-meta form-group mb-30">
+            <label htmlFor="">{t("room_searching.people")}</label>
+            <NiceSelect
+              className="nice-select border-one d-flex align-items-center"
+              options={peopleOptions}
+              defaultCurrent={0}
+              onChange={(e) => {
+                updateSearchingData("people", "", e.target.value);
+              }}
+              isInvalid={searchingErrorFields.includes("people")}
+              name=""
+              placeholder=""
+            />
+          </div>
+        </div>
+
+        <div className="col-lg-6 col-md-12 col-12 mb-40">
           <div className="input-item input-item-name">
             <label htmlFor="">{t("files.motivational_letter_input")}</label>
             <Form.Control
@@ -246,7 +271,7 @@ const RoomSearchingForm = () => {
           </div>
         </div>
 
-        <div className="col-lg-6col-md-12 col-12 mb-40 d-flex align-items-center gap-3">
+        <div className="col-lg-6 col-md-12 col-12 mb-40 d-flex align-items-center gap-3">
           <label htmlFor="">{t("files.motivational_letter_example")}</label>
           <a
             href="/assets/img/templates/cover_letter_template.pdf"

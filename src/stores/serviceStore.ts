@@ -26,6 +26,7 @@ const defaultSearchingData = {
   city: "",
   registration: true,
   budget: '',
+  type: '',
   people: '',
   moveIn: '',
   period: '',

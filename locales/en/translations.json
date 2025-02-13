@@ -201,7 +201,13 @@
     "budget": "Budget",
     "move_in_date": "Move in date",
     "period": "Period of stay",
-    "people": "People to be accommodated"
+    "people": "People to be accommodated",
+    "type": "Type of accommodation",
+    "type_options": {
+      "shared": "Shared",
+      "private": "Private",
+      "any": "Any"
+    }
   },
   "renting": {
     "renting_accommodations": "Renting accommodations",
