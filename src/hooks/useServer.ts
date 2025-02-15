@@ -4,7 +4,7 @@ import { ENV_PROD } from "@/utils/defines";
 import { useStore } from "@/stores/storeContext";
 import { toast } from "react-toastify";
 import useTranslation from "next-translate/useTranslation";
-import { csrf, getCookie } from "@/utils/helpers";
+import { csrf, getCookie, showStandardNotification } from "@/utils/helpers";
 
 interface Options {
   withLoading?: boolean;
@@ -42,7 +42,7 @@ export const useServer = () => {
 
     if (!sessionCookie) {
       await csrf();
-    }    
+    }
 
     axios.defaults.headers.common["X-CSRF-TOKEN"] = decodeURIComponent(
       sessionCookie ?? ""
@@ -72,7 +72,7 @@ export const useServer = () => {
       };
     }
 
-    try {      
+    try {
       const response = await axios.request(requestData);
 
       if (options?.withError && !response.data.status) {
@@ -94,27 +94,16 @@ export const useServer = () => {
 
       return response.data;
     } catch (err: any) {
-      !ENV_PROD && console.log(err.response?.data ?? err);    
+      !ENV_PROD && console.log(err.response?.data ?? err);
 
       if (options?.withError) {
-        let errorMessage = err.response?.data.tag
-          ? t(err.response?.data.tag)
-          : err.response?.data.message ?? t("api.general_error");
+        let errorMessage = getErrorMessage(err);
 
         if (GENERAL_ERROR_RESPONSE_CODES.includes(err.status)) {
           errorMessage = t("api.general_error");
         }
 
-        toast.error(errorMessage, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        showStandardNotification('error', errorMessage);
       }
     } finally {
       stopLoading();
@@ -122,4 +111,24 @@ export const useServer = () => {
   };
 
   return { loading, sendRequest };
+};
+
+export const getErrorMessage = (err: any) => {
+  const { t } = useTranslation("translations");
+
+  if (err.response?.data?.tag) {
+    let errorMessage = err.response.data.tag;
+
+    if (Array.isArray(errorMessage)) {
+      return errorMessage.map((error) => `- ${t(error)}`).join("\n");
+    }
+
+    return t(errorMessage);
+  }
+
+  if (err.response?.data?.message) {
+    return err.response.data.message;
+  }
+
+  return t("api.general_error");
 };

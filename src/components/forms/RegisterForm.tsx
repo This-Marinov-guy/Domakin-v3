@@ -52,9 +52,7 @@ const RegisterForm = () => {
     try {
       const responseData = await sendRequest("/register", "POST", {
         isSSO: false,
-        email: form.email,
-        password: form.password,
-        phone: form.phone,
+        ...form,
       });
 
       if (responseData?.invalid_fields) {

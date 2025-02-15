@@ -44,8 +44,8 @@ const AccountSettingBody = () => {
 
                            <div className="info-text d-sm-flex align-items-center justify-content-between mt-5">
                               <p className="m0">Want to change the password?
-                                 <Link href="/dashboard/account-settings/password-change">Click here</Link></p>
-                              <Link href="/dashboard/account-settings/password-change" className="chng-pass">Change Password</Link>
+                                 <Link href="/account/account-settings/password-change">Click here</Link></p>
+                              <Link href="/account/account-settings/password-change" className="chng-pass">Change Password</Link>
                            </div>
                         </div>
                      </div>
