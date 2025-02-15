@@ -3,7 +3,7 @@ import axios from "axios";
 import Resizer from "react-image-file-resizer";
 import { ENV_PROD, LANGUAGES } from "./defines";
 import { LOCAL_STORAGE_LOCATION } from "./localstorage";
-import { SERVER_ENDPOINT } from "./config";
+import { toast, ToastContent, ToastOptions } from "react-toastify";
 
 export const getGeoInfo = async () => {
   if (!ENV_PROD) {
@@ -155,12 +155,12 @@ export const getCookie = (name: any) => {
 };
 
 export const csrf = async () => {
-  const sessionCookie = getCookie(process.env.NEXT_PUBLIC_SESSION_ID);  
+  const sessionCookie = getCookie(process.env.NEXT_PUBLIC_SESSION_ID);
 
   if (sessionCookie) {
     return;
   }
-  
+
   try {
     // await axios.get(SERVER_ENDPOINT + "/sanctum/csrf-cookie");
   } catch (err) {
@@ -198,3 +198,36 @@ export function isTodayInRange(start: string, end: string) {
   // Check if today's date is within the range
   return adjustedToday >= startDate && adjustedToday <= endDate;
 }
+
+export const showGeneralError = (error = "Something went wrong!") => {
+  toast.error(error as ToastContent, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
+};
+
+type ToastType = "info" | "success" | "warning" | "error" | "default";
+
+export const showStandardNotification = (
+  type: ToastType,
+  message: ToastContent,
+  options: ToastOptions = {}
+) => {
+  (toast as any)[type](message, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    ...options
+  } as ToastOptions);
+};

@@ -3,6 +3,7 @@ import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Spinner from "react-bootstrap/Spinner";
 import Image from "next/image";
+import supabase from "@/utils/supabase";
 
 import OpenEye from "@/assets/images/icon/icon_68.svg";
 import { useServer } from "@/hooks/useServer";
@@ -11,6 +12,7 @@ import { toast } from "react-toastify";
 import { useStore } from "@/stores/storeContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { showGeneralError, showStandardNotification } from "@/utils/helpers";
 
 const defaultData = {
   email: "",
@@ -25,7 +27,10 @@ const LoginForm = () => {
 
   const router = useRouter();
 
-  const { loading, sendRequest } = useServer();
+  const {
+    commonStore: { loading, startLoading, stopLoading },
+  } = useStore();
+  const { sendRequest } = useServer();
 
   const [form, setForm] = useState(defaultData);
   const [errors, setErrors] = useState<string[]>([]);
@@ -43,43 +48,45 @@ const LoginForm = () => {
 
   // TODO: Implement the Forgotten Password function
   const handleChangePass = (e: any) => {
-    toast.warning("Changing password is currently not available - please contact support for help!", {
-      position: "top-center",
-      autoClose: 10000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
+    toast.warning(
+      "Changing password is currently not available - please contact support for help!",
+      {
+        position: "top-center",
+        autoClose: 10000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      }
+    );
   };
 
-  const handleSubmit = async (e: any) => {
+  const signInWithPassword = async (e: any) => {
     e.preventDefault();
 
-    sendRequest("/login", "POST", form).then((res) => {
-      if (res?.status) {
-        setForm(defaultData);
+    startLoading();
+    setErrors([]);
 
-        modalStore.closeAll();
+    try {
+      const { error } = await supabase.auth.signInWithPassword(form);
 
-        router.push("/account");
-
-        toast.success("The property was uploaded successfully for approval", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-      } else if (res?.invalid_fields) {
-        setErrors(res.invalid_fields);
+      if (error) {
+        showStandardNotification(
+          "error",
+          t("authentication.errors.login_failed")
+        );
+        return setErrors(["email", "password"]);
       }
-    });
+
+      modalStore.closeAll();
+      router.push("/dashboard");
+    } catch (error) {
+      showGeneralError(t("api.general_error"));
+    } finally {
+      stopLoading();
+    }
   };
 
   return (
@@ -139,14 +146,16 @@ const LoginForm = () => {
               />
               <label>{t("authentication.keep_logged_in")}</label>
             </div>
-            <Link href="#" onClick={handleChangePass}>{t("authentication.forgot_password")}</Link>
+            <Link href="#" onClick={handleChangePass}>
+              {t("authentication.forgot_password")}
+            </Link>
           </div>
         </div>
         <div className="col-12">
           <button
             type="submit"
             disabled={loading}
-            onClick={handleSubmit}
+            onClick={signInWithPassword}
             className="btn-two w-100 text-uppercase d-block mt-20"
           >
             {loading ? <Spinner /> : t("authentication.log_in")}

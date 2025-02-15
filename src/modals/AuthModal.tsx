@@ -13,7 +13,12 @@ import { useStore } from "@/stores/storeContext";
 import { LOGIN_IN, LOGIN_MODAL, SIGN_UP } from "@/utils/defines";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
+import { toast, ToastContent } from "react-toastify";
+import { Provider } from "@supabase/supabase-js";
+import supabase from "@/utils/supabase";
 import useTranslation from "next-translate/useTranslation";
+import { useServer } from "@/hooks/useServer";
+import { showGeneralError } from "@/utils/helpers";
 
 const AuthModal = () => {
   const [activeTab, setActiveTab] = useState(LOGIN_IN);
@@ -21,6 +26,9 @@ const AuthModal = () => {
   const { t } = useTranslation("account");
 
   const { modalStore } = useStore();
+
+  const { commonStore: {loading} } = useStore();
+  const { sendRequest } = useServer();
 
   const router = useRouter();
   const { query } = router;
@@ -61,6 +69,73 @@ const AuthModal = () => {
     });
 
     modalStore.closeAll();
+  };
+
+  const signInWithSSO = async (provider: Provider) => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+        skipBrowserRedirect: true,
+      },
+    });
+
+    let popup: Window | null = null;
+
+    if (!error && data?.url) {
+      popup = window.open(
+        data?.url ?? "",
+        "Login",
+        "width=600,height=700,scrollbars=yes"
+      );
+    } else {
+      showGeneralError(t("api.general_error"));
+    }
+
+    try {
+      const checkAuth = setInterval(async () => {
+        if (!popup || popup.closed) {
+          clearInterval(checkAuth);
+
+          // Get the session in the main window
+          const {
+            data: { session },
+          } = await supabase.auth.getSession();
+
+          if (session) {
+            const responseData = await sendRequest("/register", "POST", {
+              isSSO: true,
+              name: session.user.user_metadata.full_name,
+              email: session.user.user_metadata.email,
+              phone: session.user.phone,
+            });
+
+            if (responseData?.status) {
+              modalStore.closeAll();
+
+              router.push("/account");
+
+              toast.success("Welcome back", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+              });
+            }
+          }
+        }
+      }, 500);
+    } catch (error) {
+      showGeneralError(t("api.general_error"));
+    }
   };
 
   useEffect(() => {
@@ -154,27 +229,31 @@ const AuthModal = () => {
 
               <div className="d-flex align-items-center mt-30 mb-10">
                 <div className="line"></div>
-                <span className="pe-3 ps-3 fs-6">OR</span>
+                <span className="pe-3 ps-3 fs-6">
+                  {t("translations:common.or").toUpperCase()}
+                </span>
                 <div className="line"></div>
               </div>
               <div className="row">
                 <div className="col-sm-6">
-                  <Link
-                    href="#"
+                  <button
+                    onClick={() => signInWithSSO("google")}
+                    disabled={loading}
                     className="social-use-btn d-flex align-items-center justify-content-center tran3s w-100 mt-10"
                   >
                     <Image src={loginIcon_1} alt="" />
-                    <span className="ps-3">Signup with Google</span>
-                  </Link>
+                    <span className="ps-3">Google</span>
+                  </button>
                 </div>
                 <div className="col-sm-6">
-                  <Link
-                    href="#"
+                  <button
+                    onClick={() => signInWithSSO("facebook")}
+                    disabled={loading}
                     className="social-use-btn d-flex align-items-center justify-content-center tran3s w-100 mt-10"
                   >
                     <Image src={loginIcon_2} alt="" />
-                    <span className="ps-3">Signup with Facebook</span>
-                  </Link>
+                    <span className="ps-3">Facebook</span>
+                  </button>
                 </div>
               </div>
             </div>

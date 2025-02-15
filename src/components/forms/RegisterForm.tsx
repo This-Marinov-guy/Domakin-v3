@@ -9,9 +9,10 @@ import { useServer } from "@/hooks/useServer";
 import useTranslation from "next-translate/useTranslation";
 import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
 import Trans from "next-translate/Trans";
-import { toast } from "react-toastify";
 import { useStore } from "@/stores/storeContext";
 import { useRouter } from "next/navigation";
+import supabase from "@/utils/supabase";
+import { showGeneralError, showStandardNotification } from "@/utils/helpers";
 
 const defaultData = {
   name: "",
@@ -45,30 +46,45 @@ const RegisterForm = () => {
     });
   };
 
-  const handleSubmit = async (e: any) => {
+  const signUpWithPassword = async (e: any) => {
     e.preventDefault();
 
-    const responseData = await sendRequest("/register", "POST", form);
-
-    if (responseData?.status) {
-      setForm(defaultData);
-
-      modalStore.closeAll();
-
-      router.push("/account");
-
-      toast.success("The property was uploaded successfully for approval", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
+    try {
+      const responseData = await sendRequest("/register", "POST", {
+        isSSO: false,
+        email: form.email,
+        password: form.password,
+        phone: form.phone,
       });
-    } else if (responseData?.invalid_fields) {
-      setErrors(responseData.invalid_fields);
+
+      if (responseData?.invalid_fields) {
+        setErrors(responseData.invalid_fields);
+      }
+
+      if (!responseData?.status) {
+        return;
+      }
+
+      const { error } = await supabase.auth.signUp({
+        email: form.email,
+        password: form.password,
+        phone: form.phone,
+        options: {
+          data: { display_name: form.name },
+        },
+      });
+
+      if (error) {
+        return showGeneralError(t("api.general_error"));
+      }
+
+      if (responseData?.status) {
+        modalStore.closeAll();
+
+        router.push("/account");
+      }
+    } catch (error) {
+      showGeneralError(t("api.general_error"));
     }
   };
 
@@ -200,7 +216,7 @@ const RegisterForm = () => {
           <button
             type="submit"
             disabled={loading}
-            onClick={handleSubmit}
+            onClick={signUpWithPassword}
             className="btn-two w-100 text-uppercase d-block mt-20"
           >
             {loading ? <Spinner /> : t("authentication.sign_up")}
