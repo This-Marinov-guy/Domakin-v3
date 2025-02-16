@@ -15,11 +15,9 @@ import { observer } from "mobx-react-lite";
 import { Provider } from "@supabase/supabase-js";
 import supabase from "@/utils/supabase";
 import useTranslation from "next-translate/useTranslation";
-import { useServer } from "@/hooks/useServer";
 import { showGeneralError, showStandardNotification } from "@/utils/helpers";
 
 const AuthModal = () => {
-  const mountedRef = useRef(true);
   const [isClient, setIsClient] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [activeTab, setActiveTab] = useState(LOGIN_IN);
@@ -28,7 +26,6 @@ const AuthModal = () => {
   const {
     commonStore: { loading, startLoading, stopLoading },
   } = useStore();
-  const { sendRequest } = useServer();
   const router = useRouter();
 
   useEffect(() => {
@@ -91,9 +88,6 @@ const AuthModal = () => {
   };
 
   const signInWithSSO = async (provider: Provider) => {
-    const TIMEOUT_DURATION = 120000;
-    const POLL_INTERVAL = 1000;
-
     try {
       startLoading();
 
@@ -104,88 +98,14 @@ const AuthModal = () => {
             "/auth/callback",
             process.env.NEXT_PUBLIC_URL
           ).toString(),
-          queryParams: { access_type: "offline", prompt: "consent" },
-          skipBrowserRedirect: true,
         },
       });
 
       if (error) throw error;
       if (!data?.url) throw new Error("No OAuth URL returned");
-
-      const popup = window.open(
-        data.url,
-        "Login",
-        "width=600,height=700,scrollbars=yes"
-      );
-      if (!popup) throw new Error("Popup blocked");
-
-      const authPromise = new Promise((resolve, reject) => {
-        const startTime = Date.now();
-
-        const checkAuth = async () => {
-          try {
-            if (Date.now() - startTime > TIMEOUT_DURATION) {
-              throw new Error("Authentication timeout");
-            }
-
-            if (!popup || popup.closed) {
-              const {
-                data: { session },
-              } = await supabase.auth.getSession();
-              if (session) {
-                resolve(session);
-              } else {
-                throw new Error("Authentication cancelled");
-              }
-              return;
-            }
-
-            if (mountedRef.current) {
-              setTimeout(checkAuth, POLL_INTERVAL);
-            }
-          } catch (error) {            
-            reject(error);
-          }
-        };
-
-        checkAuth();
-      });
-
-      const session: any = await authPromise;
-
-      if (mountedRef.current && session) {
-        const responseData = await sendRequest("/register", "POST", {
-          isSSO: true,
-          name: session.user.user_metadata.full_name,
-          email: session.user.user_metadata.email,
-          phone: session.user.phone,
-          profile_picture: session.user.user_metadata.avatar_url,
-        });
-
-        if (responseData?.status) {
-          modalStore.closeAll();
-          router.push("/account");
-        } else {
-          throw new Error("registration_failed");
-        }
-      }
     } catch (error) {
-      if (error instanceof Error) {
-        const errorKey =
-          error.message.includes("auth_") ||
-          error.message.includes("popup_") ||
-          error.message.includes("registration_")
-            ? error.message
-            : "general_error";
-
-        showGeneralError(error.message ?? t("api.general_error"));
-      } else {
-        showGeneralError(t("api.general_error"));
-      }
-    } finally {
-      if (mountedRef.current) {
-        stopLoading();
-      }
+      // TODO: add critical error
+      showGeneralError(t("api.general_error"));
     }
   };
 
