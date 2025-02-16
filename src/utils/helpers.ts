@@ -108,7 +108,7 @@ export const getGeoLocation = () => {
     return location;
   }
 
-  fetch(`https://ipinfo.io/json?token=${process.env.REACT_APP_GEO_TOKEN}`)
+  fetch(`https://ipinfo.io/json?token=${process.env.NEXT_PUBLIC_GEO_TOKEN}`)
     .then((response) => response.json())
     .then((data) => {
       location = data.country;
