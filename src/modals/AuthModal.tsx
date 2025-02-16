@@ -146,6 +146,16 @@ const AuthModal = () => {
                 </li>
               ))}
             </ul>
+            {activeTab === LOGIN_IN && (
+              <div className="text-center mt-20 mb-20">
+                <h2>{t("authentication.login")}</h2>
+              </div>
+            )}
+            {activeTab === SIGN_UP && (
+              <div className="text-center mt-20 mb-20">
+                <h2>{t("authentication.sign_up")}</h2>
+              </div>
+            )}
             <div className="tab-content mt-30">
               {activeTab === LOGIN_IN && <LoginForm />}
               {activeTab === SIGN_UP && <RegisterForm />}
