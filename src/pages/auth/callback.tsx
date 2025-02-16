@@ -28,7 +28,7 @@ export default function AuthCallback() {
           name: session.user.user_metadata.full_name,
           email: session.user.user_metadata.email,
           phone: session.user.phone,
-          profile_picture: session.user.user_metadata.avatar_url,
+          profile_image: session.user.user_metadata.avatar_url,
         });
 
         if (responseData?.status) {
