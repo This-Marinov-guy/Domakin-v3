@@ -100,7 +100,10 @@ const AuthModal = () => {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-          redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
+          redirectTo: new URL(
+            "/auth/callback",
+            process.env.NEXT_PUBLIC_URL
+          ).toString(),
           queryParams: { access_type: "offline", prompt: "consent" },
           skipBrowserRedirect: true,
         },
@@ -140,7 +143,7 @@ const AuthModal = () => {
             if (mountedRef.current) {
               setTimeout(checkAuth, POLL_INTERVAL);
             }
-          } catch (error) {
+          } catch (error) {            
             reject(error);
           }
         };
