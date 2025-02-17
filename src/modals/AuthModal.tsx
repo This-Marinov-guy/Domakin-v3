@@ -95,7 +95,7 @@ const AuthModal = () => {
         provider,
         options: {
           redirectTo: new URL(
-            "/auth/callback",
+            "/callbacks/auth",
             process.env.NEXT_PUBLIC_URL
           ).toString(),
         },
