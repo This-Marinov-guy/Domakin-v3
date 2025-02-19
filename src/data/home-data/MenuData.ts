@@ -50,7 +50,7 @@ const menu_data: MenuItem[] = [
         id: 3,
         mega_title: "footer.lending",
         mega_menus: [
-          { link: "/services/add-listing", title: "footer.lending" },
+          { link: "/services/add-listing", title: "features.list_a_room" },
           // {
           //   link: "/services/emergency-housing",
           //   title: "features.emergency_housing",

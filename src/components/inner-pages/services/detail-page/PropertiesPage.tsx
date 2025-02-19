@@ -53,7 +53,7 @@ const PropertiesPage = () => {
     <>
       <HeaderOne />
       <BreadcrumbThree
-        title={t("renting.renting_accommodations")}
+        title={t("features.rent_an_apartment")}
         link_title={t("renting.renting")}
         style={false}
       />
