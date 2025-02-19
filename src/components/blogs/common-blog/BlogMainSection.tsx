@@ -12,11 +12,12 @@ import { useStore } from "@/stores/storeContext";
 import BlogCardSmall from "./BlogCardSmall";
 import { observer } from "mobx-react-lite";
 import BlogCardBig from "./BlogCardBig";
+import BlogLoadingSection from "@/components/ui/loading/BlogLoadingSection";
 
 const BlogMainSection = () => {
   const { t } = useTranslation("translations");
   const {
-    blogStore: { posts },
+    blogStore: { posts, loading },
   } = useStore();
 
   const itemsPerPage = 6;
@@ -32,6 +33,14 @@ const BlogMainSection = () => {
 
   const hasPosts = posts?.length > 0;
   const [mainPost, ...otherPosts] = posts;
+
+  if (loading) {
+    return (
+      <>
+        <BlogLoadingSection title={t("blog.description")} />
+      </>
+    );
+  }
 
   if (!hasPosts) {
     return (
