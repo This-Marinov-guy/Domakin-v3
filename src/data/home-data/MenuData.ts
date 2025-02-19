@@ -36,7 +36,10 @@ const menu_data: MenuItem[] = [
         mega_title: "footer.renting",
         mega_menus: [
           { link: "/services/renting", title: "features.rent_an_apartment" },
-          { link: "/services/room-searching", title: "features.room_searching" },
+          {
+            link: "/services/room-searching",
+            title: "features.room_searching",
+          },
           // {
           //   link: "/services/emergency-housing",
           //   title: "features.emergency_housing",
@@ -86,6 +89,12 @@ const menu_data: MenuItem[] = [
   },
   {
     id: 7,
+    has_dropdown: false,
+    title: "blog.title",
+    link: "/blog",
+  },
+  {
+    id: 8,
     has_dropdown: false,
     title: "header.contact",
     link: "/contact",

@@ -11,6 +11,15 @@ const nextConfig = nextTranslate({
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "domakin0.wordpress.com",
+        pathname: "/wp-content/uploads/**",
+      },
+    ],
+  },
 });
 
 module.exports = nextConfig;

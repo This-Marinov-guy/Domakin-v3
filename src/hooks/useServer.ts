@@ -26,7 +26,7 @@ export const useServer = () => {
   const sendRequest = async (
     url: string,
     method: string = "GET",
-    data: any,
+    data: any = {},
     headers: object = {},
     options: Options = {
       withLoading: true,

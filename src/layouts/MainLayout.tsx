@@ -21,6 +21,7 @@ const MainLayout = ({ children }: any) => {
 
   const {
     commonStore: { toggleFeedbackLoading, setFeedbacks },
+    blogStore: { toggleBlogLoading, setBlogPosts },
     propertyStore: { togglePropertiesLoading, setProperties },
   } = useStore();
 
@@ -86,9 +87,31 @@ const MainLayout = ({ children }: any) => {
     }
   };
 
+  const loadBlog = async () => {
+    toggleBlogLoading();
+
+    const responseData = await sendRequest(
+      "/blog/posts",
+      "GET",
+      {},
+      {},
+      {
+        withError: false,
+        withLoading: false,
+      }
+    );
+
+    if (responseData?.status) {
+      setBlogPosts(responseData.data);
+    }
+
+    toggleBlogLoading();
+  };
+
   useEffect(() => {
     loadProperties();
     loadFeedback();
+    loadBlog();
     fetchLanguage();
   }, []);
 
