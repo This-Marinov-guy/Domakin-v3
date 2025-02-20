@@ -9,7 +9,7 @@ const PageLoader = () => {
     <div className="page-loader">
       <div className="loading-div">
         <Image src={logoByTheme()} alt="logo" />
-        <h1>Loading...</h1>
+        <h4>Loading...</h4>
       </div>
     </div>
   );

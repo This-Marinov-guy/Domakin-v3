@@ -50,7 +50,7 @@ export default function AuthCallback() {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="text-center">
-        <h2>Completing authentication...</h2>
+        <h3>Completing authentication...</h3>
         <p>Please wait while we finish setting up your account.</p>
       </div>
     </div>

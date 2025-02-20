@@ -1330,6 +1330,11 @@
     "send": "Send"
   },
 
+  "unsubscribe_email": {
+    "title": "Unsubscribing from our newsletter was successful!",
+    "description": "You will no longer receive updates or newsletters from us. If you have unsubscribed by mistake, you can subscribe again at any time!"
+  },
+
   "legals": {
     "title": "Legal Documents",
     "cookies": "Cookies",
