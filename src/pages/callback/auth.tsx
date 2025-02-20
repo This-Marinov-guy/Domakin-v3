@@ -18,6 +18,8 @@ export default function AuthCallback() {
           error,
         } = await supabase.auth.getSession();
 
+        return console.log(session);
+
         if (error) throw error;
         if (!session) {
           return router.push("/");
@@ -48,7 +50,7 @@ export default function AuthCallback() {
   }, [router]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="mt-80 flex items-center justify-center min-h-screen">
       <div className="text-center">
         <h3>Completing authentication...</h3>
         <p>Please wait while we finish setting up your account.</p>
