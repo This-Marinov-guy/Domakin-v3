@@ -18,8 +18,6 @@ export default function AuthCallback() {
           error,
         } = await supabase.auth.getSession();
 
-        localStorage.setItem("session", JSON.stringify(session));
-
         if (error) throw error;
         // if (!session) {
         //   return router.push("/");
@@ -27,7 +25,7 @@ export default function AuthCallback() {
 
         const responseData = await sendRequest("/register", "POST", {
           isSSO: true,
-          supabase_id: session!.user.user_metadata.sub,
+          supabase_id: session!.user.id,
           name: session!.user.user_metadata.full_name,
           email: session!.user.user_metadata.email,
           phone: session!.user.phone,
