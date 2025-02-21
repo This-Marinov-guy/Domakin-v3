@@ -18,8 +18,9 @@ export default function AuthCallback() {
           error,
         } = await supabase.auth.getSession();
 
+        localStorage.setItem("session", JSON.stringify(session));
+        localStorage.setItem("error", JSON.stringify(error));
         if (!session) {
-          console.log("Error in auth callback:", error);
           showGeneralError(t("api.general_error"));
           return router.push("/");
         }
@@ -41,7 +42,7 @@ export default function AuthCallback() {
         }
         router.push("/account");
       } catch (error) {
-        console.error("Error in auth callback:", error);
+        localStorage.setItem("error", JSON.stringify(error));
         router.push("/?error=auth");
       }
     };
