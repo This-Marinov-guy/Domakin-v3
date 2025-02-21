@@ -21,28 +21,30 @@ export default function AuthCallback() {
         console.log("session", error, session);
 
         if (error) throw error;
-        if (!session) {
-          return router.push("/");
-        }
+        // if (!session) {
+        //   return router.push("/");
+        // }
 
         const responseData = await sendRequest("/register", "POST", {
           isSSO: true,
-          name: session.user.user_metadata.full_name,
-          email: session.user.user_metadata.email,
-          phone: session.user.phone,
-          profile_image: session.user.user_metadata.avatar_url,
+          name: session!.user.user_metadata.full_name,
+          email: session!.user.user_metadata.email,
+          phone: session!.user.phone,
+          profile_image: session!.user.user_metadata.avatar_url,
         });
 
-        if (responseData?.status) {
-          router.push("/account");
-        } else {
-          showGeneralError(t("api.general_error"));
-          return router.push("/");
-        }
-        router.push("/account");
+        // if (responseData?.status) {
+        //   router.push("/account");
+        // } else {
+        //   showGeneralError(t("api.general_error"));
+        //   return router.push("/");
+        // }
+        // router.push("/account");
       } catch (error) {
+        console.log("error", error);
+        
         console.error("Error in auth callback:", error);
-        router.push("/?error=auth");
+        // router.push("/?error=auth");
       }
     };
 
