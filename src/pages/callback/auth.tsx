@@ -18,8 +18,6 @@ export default function AuthCallback() {
           error,
         } = await supabase.auth.getSession();
 
-        localStorage.setItem("session", JSON.stringify(session));
-        localStorage.setItem("error", JSON.stringify(error));
         if (!session) {
           showGeneralError(t("api.general_error"));
           return router.push("/");
@@ -42,13 +40,12 @@ export default function AuthCallback() {
         }
         router.push("/account");
       } catch (error) {
-        localStorage.setItem("error", JSON.stringify(error));
         router.push("/?error=auth");
       }
     };
 
     handleCallback();
-  }, [router]);
+  }, []);
 
   return (
     <div className="mt-80 flex items-center justify-center min-h-screen">
