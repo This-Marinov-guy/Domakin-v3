@@ -18,8 +18,8 @@ export default function AuthCallback() {
           error,
         } = await supabase.auth.getSession();
 
-        if (error) throw error;
         if (!session) {
+          console.log("Error in auth callback:", error);
           showGeneralError(t("api.general_error"));
           return router.push("/");
         }
