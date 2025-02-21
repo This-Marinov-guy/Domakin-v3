@@ -25,14 +25,14 @@ export default function AuthCallback() {
         //   return router.push("/");
         // }
 
-        // const responseData = await sendRequest("/register", "POST", {
-        //   isSSO: true,
-        //   supabase_id: session!.user.id,
-        //   name: session!.user.user_metadata.full_name,
-        //   email: session!.user.user_metadata.email,
-        //   phone: session!.user.phone,
-        //   profile_image: session!.user.user_metadata.avatar_url,
-        // });
+        const responseData = await sendRequest("/register", "POST", {
+          isSSO: true,
+          supabase_id: session!.user.id,
+          name: session!.user.user_metadata.full_name,
+          email: session!.user.user_metadata.email,
+          phone: session!.user.phone,
+          profile_image: session!.user.user_metadata.avatar_url,
+        });
 
         // if (responseData?.status) {
         //   router.push("/account");
