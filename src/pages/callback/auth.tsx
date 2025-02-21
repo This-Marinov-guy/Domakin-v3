@@ -19,9 +19,10 @@ export default function AuthCallback() {
         } = await supabase.auth.getSession();
 
         if (error) throw error;
-        // if (!session) {
-        //   return router.push("/");
-        // }
+        if (!session) {
+          showGeneralError(t("api.general_error"));
+          return router.push("/");
+        }
 
         const responseData = await sendRequest("/register", "POST", {
           isSSO: true,
@@ -32,18 +33,16 @@ export default function AuthCallback() {
           profile_image: session!.user.user_metadata.avatar_url,
         });
 
-        // if (responseData?.status) {
-        //   router.push("/account");
-        // } else {
-        //   showGeneralError(t("api.general_error"));
-        //   return router.push("/");
-        // }
-        // router.push("/account");
+        if (responseData?.status) {
+          router.push("/account");
+        } else {
+          showGeneralError(t("api.general_error"));
+          return router.push("/");
+        }
+        router.push("/account");
       } catch (error) {
-        console.log("error", error);
-        
         console.error("Error in auth callback:", error);
-        // router.push("/?error=auth");
+        router.push("/?error=auth");
       }
     };
 
