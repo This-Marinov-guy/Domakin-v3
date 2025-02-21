@@ -27,6 +27,7 @@ export default function AuthCallback() {
 
         const responseData = await sendRequest("/register", "POST", {
           isSSO: true,
+          supabase_id: session!.user.id,
           name: session!.user.user_metadata.full_name,
           email: session!.user.user_metadata.email,
           phone: session!.user.phone,
