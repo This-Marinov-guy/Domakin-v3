@@ -18,7 +18,7 @@ export default function AuthCallback() {
           error,
         } = await supabase.auth.getSession();
 
-        console.log("session", error, session);
+        localStorage.setItem("session", JSON.stringify(session));
 
         if (error) throw error;
         // if (!session) {
