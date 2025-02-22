@@ -81,7 +81,7 @@ const LoginForm = () => {
       }
 
       modalStore.closeAll();
-      router.push("/dashboard");
+      router.push("/account");
     } catch (error) {
       showGeneralError(t("api.general_error"));
     } finally {

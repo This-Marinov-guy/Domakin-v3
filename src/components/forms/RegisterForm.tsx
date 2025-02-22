@@ -50,20 +50,21 @@ const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const responseData = await sendRequest("/register", "POST", {
-        isSSO: false,
-        ...form,
-      });
+      const validateResponse = await sendRequest(
+        "/validate-credentials",
+        "POST",
+        form
+      );
 
-      if (responseData?.invalid_fields) {
-        setErrors(responseData.invalid_fields);
+      if (validateResponse?.invalid_fields) {
+        setErrors(validateResponse.invalid_fields);
       }
 
-      if (!responseData?.status) {
+      if (!validateResponse?.status) {
         return;
       }
 
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email: form.email,
         password: form.password,
         phone: form.phone,
@@ -76,10 +77,17 @@ const RegisterForm = () => {
         return showGeneralError(t("api.general_error"));
       }
 
+      const responseData = await sendRequest("/register", "POST", {
+        isSSO: false,
+        id: data.user!.id ?? null,
+        ...form,
+      });
+
       if (responseData?.status) {
         modalStore.closeAll();
-
         router.push("/account");
+      } else if (responseData?.invalid_fields) {
+        setErrors(responseData.invalid_fields);
       }
     } catch (error) {
       showGeneralError(t("api.general_error"));
