@@ -497,7 +497,7 @@
       "hidden": false,
       "status": "RENT",
       "price": 258,
-      "statusCode": 2,
+      "statusCode": 0,
       "title": "Small room in shared house",
       "city": "Groningen",
       "location": "Abeelstraat, Groningen",
