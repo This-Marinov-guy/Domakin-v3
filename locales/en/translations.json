@@ -493,11 +493,29 @@
   },
   "FOR_RENT": [
     {
-      "id": "37",
+      "id": "38",
       "hidden": false,
       "status": "RENT",
+      "price": 258,
+      "statusCode": 2,
+      "title": "Small room in shared house",
+      "city": "Groningen",
+      "location": "Abeelstraat, Groningen",
+      "description": {
+        "property": "The room is 8 m², and you'll be sharing the kitchen and bathroom with three other roommates( two guys and one girl).  All of them are friendly, respectful and quite. They are all towards the end of their bachelor so quite focused on their studies. There's a common balcony, but no shared living room.The apartment is on the second floor of the building, located in Selwerd, just a 10-minute bike ride from both the city center and Zernike campus. Registration is possible!",
+        "period": "From April onwards",
+        "bills": "TBD",
+        "flatmates": "2 boys and 1 girl"
+      },
+      "main_image": "1.png",
+      "images": ["2.png", "3.png", "4.png"]
+    },
+    {
+      "id": "37",
+      "hidden": false,
+      "status": "Тaken",
       "price": 540,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Small room in a shared house",
       "city": "Leeuwarden",
       "location": "Lenteklokje, Leeuwarden",
@@ -513,9 +531,9 @@
     {
       "id": "36",
       "hidden": false,
-      "status": "RENT",
+      "status": "Тaken",
       "price": 899,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Bright Room",
       "city": "Rotterdam",
       "location": "Rotterdam",
