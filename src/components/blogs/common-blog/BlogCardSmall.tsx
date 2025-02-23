@@ -15,7 +15,7 @@ const BlogCardSmall = (props: any) => {
       <div
         className={`location-card-two position-relative z-1 d-flex align-items-center justify-content-center mt-30`}
         style={{
-          backgroundImage: `url(${post.thumbnail})`,
+          backgroundImage: `url(${post.thumbnail || "/assets/img/blog/default-thumbnail.jpg"})`,
         }}
       >
         <div className="content">

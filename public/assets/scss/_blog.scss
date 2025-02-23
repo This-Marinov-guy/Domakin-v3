@@ -4,6 +4,12 @@
   flex-direction: column;
   justify-content: center;
   padding: 10px 5%;
+
+  img {
+    object-fit: contain;
+    max-height: 400px;
+    width: auto;
+  }
 }
 
 .iframe-container {
