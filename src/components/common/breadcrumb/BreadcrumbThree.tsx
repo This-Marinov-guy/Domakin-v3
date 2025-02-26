@@ -3,6 +3,7 @@ import NiceSelect from "@/ui/NiceSelect";
 import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import BreadcrumbNav from "./BreadcrumbNav";
 
 const BreadcrumbThree = ({
   title,
@@ -38,23 +39,7 @@ const BreadcrumbThree = ({
             >
               {title}
             </h3>
-            <ul className="theme-breadcrumb style-none d-inline-flex align-items-center justify-content-center position-relative z-1 bg-white p-2 rounded-3">
-              <li onClick={() => router.back()} style={{ color: "black" }}>
-                <i className="hover-orange fa-solid fa-arrow-left"></i>
-              </li>
-              <li>/</li>
-              <li>
-                <Link href="/">{t("header.home")}</Link>
-              </li>
-              <li>/</li>
-              <li>{link_title}</li>
-              {sub_title && (
-                <>
-                  <li>/</li>
-                  <li>{sub_title}</li>
-                </>
-              )}
-            </ul>
+            <BreadcrumbNav link_title={link_title} sub_title={sub_title} />
           </div>
         </div>
 

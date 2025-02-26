@@ -136,7 +136,7 @@ const MediaGallery = ({ style, images }: any) => {
             )}
 
             <div className="thumbnails-container p-3">
-              <div className="thumbnails-column d-flex flex-row flex-sm-column gap-2">
+              <div className="thumbnails-column d-flex flex-row flex-lg-column gap-2" style={{minHeight: '7em'}}>
                 {getCurrentThumbnails().map((image: any, i: number) => {
                   const currentIndex = thumbGroup * IMAGES_PER_GROUP + i;
                   return (

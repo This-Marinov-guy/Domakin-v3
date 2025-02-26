@@ -1,3 +1,4 @@
+import BreadcrumbNav from "@/components/common/breadcrumb/BreadcrumbNav";
 import BreadcrumbThree from "@/components/common/breadcrumb/BreadcrumbThree";
 import FancyBanner from "@/components/common/FancyBanner";
 import PageLoader from "@/components/ui/loading/PageLoader";
@@ -38,17 +39,18 @@ const BlogPost = () => {
     <>
       <style>{post.styles}</style>
       <HeaderOne />
-      <BreadcrumbThree
+      {/* <BreadcrumbThree
         title={post.title}
         link_title={t("blog.title")}
         background={5}
         style={false}
-      />
+      /> */}
       <div className="wordpress-embedded-container">
-        {/* <h1
+        <h1
           className="mb--20"
           dangerouslySetInnerHTML={{ __html: post.title }}
-        /> */}
+        />
+        <BreadcrumbNav link_title={t("blog.title")} />
         <div
           dangerouslySetInnerHTML={{
             __html: post.content,
