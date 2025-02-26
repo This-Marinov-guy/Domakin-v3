@@ -39,12 +39,6 @@ const BlogPost = () => {
     <>
       <style>{post.styles}</style>
       <HeaderOne />
-      {/* <BreadcrumbThree
-        title={post.title}
-        link_title={t("blog.title")}
-        background={5}
-        style={false}
-      /> */}
       <div className="wordpress-embedded-container">
         <h1
           className="mb--20"
