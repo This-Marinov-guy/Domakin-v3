@@ -27,7 +27,7 @@ const ContactForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormData>({ resolver: yupResolver(schema) });
+  } = useForm<FormData>();
 
   const { t } = useTranslation("translations");
 
