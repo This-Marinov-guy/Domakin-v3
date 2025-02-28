@@ -10,7 +10,7 @@ export default class UserStore {
     this.rootStore = root;
   }
 
-  @observable user = null;
+  @observable user: any = null;
 
   @action login = async (withError = false) => {
     const {
@@ -21,11 +21,11 @@ export default class UserStore {
     if (session) {
       this.user = session.user;
     } else if (withError) {
-      showGeneralError(error.message);
+      showGeneralError(error?.message);
     }
   };
 
-  @action setUser = (user) => {
+  @action setUser = (user: any) => {
     this.user = user;
   };
 
