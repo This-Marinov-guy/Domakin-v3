@@ -7,4 +7,14 @@ export default class UserStore {
     makeAutoObservable(this);
     this.rootStore = root;
   }
+
+  @observable user = null;
+
+  @action login = (user: any) => {
+    this.user = user;
+  };
+
+  @action logout = () => {
+    this.user = null;
+  };
 }

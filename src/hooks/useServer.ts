@@ -15,13 +15,10 @@ interface Options {
 export const useServer = () => {
   const {
     commonStore: { loading, startLoading, stopLoading },
+    userStore: { user },
   } = useStore();
 
   const { t } = useTranslation("translations");
-
-  const user = {
-    token: "",
-  };
 
   const sendRequest = async (
     url: string,
@@ -48,7 +45,7 @@ export const useServer = () => {
       sessionCookie ?? ""
     );
 
-    if (user && !!user.token) {
+    if (user && !!(user.token ?? null)) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
     }
 

@@ -9,6 +9,7 @@ import useTranslation from "next-translate/useTranslation";
 import { getGeoInfo } from "@/utils/helpers";
 import setLanguage from "next-translate/setLanguage";
 import { LANGUAGES } from "@/utils/defines";
+import supabase from "@/utils/supabase";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
@@ -23,6 +24,7 @@ const MainLayout = ({ children }: any) => {
     commonStore: { toggleFeedbackLoading, setFeedbacks },
     blogStore: { toggleBlogLoading, setBlogPosts },
     propertyStore: { togglePropertiesLoading, setProperties },
+    userStore: { login },
   } = useStore();
 
   const loadFeedback = async () => {
@@ -108,7 +110,22 @@ const MainLayout = ({ children }: any) => {
     toggleBlogLoading();
   };
 
+  const loadUser = async () => {
+    try {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (session) {
+        console.log(session);
+
+        login(session.user);
+      }
+    } catch (error) {}
+  };
+
   useEffect(() => {
+    loadUser();
     loadProperties();
     loadFeedback();
     loadBlog();
