@@ -1,4 +1,10 @@
-import {action, computed, makeAutoObservable, observable, runInAction} from "mobx"
+import { showGeneralError } from "@/utils/helpers";
+import supabase from "@/utils/supabase";
+import {
+  action,
+  makeAutoObservable,
+  observable,
+} from "mobx";
 
 export default class UserStore {
   rootStore;
@@ -10,11 +16,26 @@ export default class UserStore {
 
   @observable user = null;
 
-  @action login = (user: any) => {
-    this.user = user;
+  @action login = async (withError = false) => {
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.getSession();
+
+    if (session) {
+      this.user = session.user;
+    } else if (withError) {
+      showGeneralError(error.message);
+    }
   };
 
-  @action logout = () => {
-    this.user = null;
+  @action logout = async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      showGeneralError(error.message);
+    } else {
+      this.user = null;
+    }
   };
 }

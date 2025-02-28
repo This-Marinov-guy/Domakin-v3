@@ -24,7 +24,7 @@ const AuthLayout = ({ children }) => {
     } else {
       setLoading(false);
     }
-  }, []);
+  }, [user]);
 
   if (loading) {
     return <PageLoader />;

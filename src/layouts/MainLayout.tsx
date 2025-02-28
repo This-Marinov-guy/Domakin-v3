@@ -112,15 +112,7 @@ const MainLayout = ({ children }: any) => {
 
   const loadUser = async () => {
     try {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      if (session) {
-        console.log(session);
-
-        login(session.user);
-      }
+      login();
     } catch (error) {}
   };
 

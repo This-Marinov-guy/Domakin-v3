@@ -1,5 +1,4 @@
 import { action, makeAutoObservable, observable } from "mobx"
-import axios from "axios";
 
 export default class BlogStore {
   rootStore;
