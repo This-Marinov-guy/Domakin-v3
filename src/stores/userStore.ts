@@ -1,10 +1,6 @@
 import { showGeneralError } from "@/utils/helpers";
 import supabase from "@/utils/supabase";
-import {
-  action,
-  makeAutoObservable,
-  observable,
-} from "mobx";
+import { action, makeAutoObservable, observable } from "mobx";
 
 export default class UserStore {
   rootStore;
@@ -27,6 +23,10 @@ export default class UserStore {
     } else if (withError) {
       showGeneralError(error.message);
     }
+  };
+
+  @action setUser = (user) => {
+    this.user = user;
   };
 
   @action logout = async () => {

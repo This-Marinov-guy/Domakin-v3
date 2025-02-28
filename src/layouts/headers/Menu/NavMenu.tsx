@@ -10,6 +10,7 @@ import useTranslation from "next-translate/useTranslation";
 import ChangeLanguage from "./ChangeLanguage";
 import { useStore } from "@/stores/storeContext";
 import { ENV_PROD, LOGIN_MODAL } from "@/utils/defines";
+import { useRouter } from "next/router";
 
 const NavMenu = () => {
   const pathname = usePathname();
@@ -17,7 +18,12 @@ const NavMenu = () => {
 
   const { t } = useTranslation("translations");
 
-  const {modalStore} = useStore();  
+  const router = useRouter();
+
+  const {
+    modalStore,
+    userStore: { user, logout },
+  } = useStore();
 
   //openMobileMenu
   const openMobileMenu = (menu: any) => {
@@ -114,15 +120,24 @@ const NavMenu = () => {
         </Link>
       </li>
 
-      {!ENV_PROD && <li className="d-block d-lg-none d-md-inline-block ms-3 mt-10">
-        <button
-          onClick={() => modalStore.setActiveModal(LOGIN_MODAL)}
-          className="btn-fourteen"
-        >
-          <i className="fa-regular fa-lock"></i>{" "}
-          <span>{t("account:authentication.login")}</span>
-        </button>
-      </li>}
+      {!ENV_PROD && (
+        <li className="d-block d-lg-none d-md-inline-block ms-3 mt-10">
+          {user ? (
+            <div>
+              <p onClick={() => router.push("/account")}>P</p>
+              <i onClick={logout} className="fa-solid fa-door-open"></i>
+            </div>
+          ) : (
+            <button
+              onClick={() => modalStore.setActiveModal(LOGIN_MODAL)}
+              className="btn-fourteen"
+            >
+              <i className="fa-regular fa-lock"></i>{" "}
+              <span>{t("account:authentication.login")}</span>
+            </button>
+          )}
+        </li>
+      )}
     </ul>
   );
 };
