@@ -39,7 +39,7 @@ const LendingPage = () => {
     <>
       <HeaderOne />
       <BreadcrumbThree
-        title="Give out your room"
+        title="List a Room"
         link_title="Lending"
         style={false}
       />

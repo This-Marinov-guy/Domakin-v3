@@ -34,7 +34,7 @@ const RoomSearching = () => {
     <>
       <HeaderOne />
       <BreadcrumbThree
-        title={t("room_searching.room_searching_service")}
+        title={t("features.room_searching")}
         link_title={t("renting.renting")}
         style={false}
       />
