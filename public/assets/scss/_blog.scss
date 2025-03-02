@@ -1,5 +1,7 @@
 .wordpress-embedded-container {
   display: flex;
+  max-width: 50em;
+  margin: auto;
   margin-top: 120px;
   align-items: center;
   flex-direction: column;
@@ -8,33 +10,34 @@
 
   img {
     object-fit: contain;
+    margin: auto;
     max-height: 400px;
     width: auto;
   }
 
   h1 {
-  font-size: 2.4rem; /* 48px */
-}
+    font-size: 2.4rem; /* 48px */
+  }
 
-h2 {
-  font-size: 2rem; /* 36px */
-}
+  h2 {
+    font-size: 2rem; /* 36px */
+  }
 
-h3 {
-  font-size: 1.6rem; /* 30px */
-}
+  h3 {
+    font-size: 1.6rem; /* 30px */
+  }
 
-h4 {
-  font-size: 1.4rem; /* 24px */
-}
+  h4 {
+    font-size: 1.4rem; /* 24px */
+  }
 
-h5 {
-  font-size: 1.2rem; /* 20px */
-}
+  h5 {
+    font-size: 1.2rem; /* 20px */
+  }
 
-h6 {
-  font-size: 1rem; /* 16px */
-}
+  h6 {
+    font-size: 1rem; /* 16px */
+  }
 }
 
 .iframe-container {
@@ -277,8 +280,25 @@ h6 {
   }
 }
 .blog-meta-three {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  img {
+    max-width: 50%;
+  }
+
+  @media (max-width: 575px) {
+    flex-direction: column;
+    img {
+      max-width: 90%;
+    }
+  }
+
   background: #fff;
   .post-data {
+    max-width: 40em;
     padding: 32px 0 0;
     &.bg-grey {
       background: #f5f5f5;
@@ -318,7 +338,6 @@ h6 {
   }
   .post-img {
     height: 250px;
-    padding: 25px 0 0 25px;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;

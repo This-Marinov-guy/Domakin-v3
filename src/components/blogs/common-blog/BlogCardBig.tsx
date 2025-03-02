@@ -15,17 +15,7 @@ const BlogCardBig = (props: any) => {
       className="blog-meta-three mb-70 lg-mb-40 wow fadeInUp"
     >
       {post.thumbnail && (
-        <figure
-          className={`post-img position-relative m0 `}
-          style={{ backgroundImage: `url(${post.thumbnail})` }}
-        >
-          {/* <Link
-            href="/blog_details"
-            className="stretched-link fw-500 date tran3s"
-          >
-            {item.date}
-          </Link> */}
-        </figure>
+        <Image src={post.thumbnail} alt={post.title} width={1000} height={1000}/>       
       )}
       <div className={`post-data`}>
         {/* <div className="post-info">
