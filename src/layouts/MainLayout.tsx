@@ -15,7 +15,7 @@ if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
 }
 
-const MainLayout = ({ children }: any) => {
+const MainLayout = ({ children }: any) => {  
   const { sendRequest } = useServer();
 
   const { t, lang } = useTranslation();
@@ -112,7 +112,7 @@ const MainLayout = ({ children }: any) => {
 
   const loadUser = async () => {
     try {
-      login();
+      await login();
     } catch (error) {}
   };
 

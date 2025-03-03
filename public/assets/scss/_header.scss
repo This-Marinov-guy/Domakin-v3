@@ -523,3 +523,31 @@
   color: #b70903;
   font-size: 1.5em;
 }
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.avatar-container {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%); /* Move badge slightly outside */
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white; /* Optional: Adds a border for better visibility */
+}

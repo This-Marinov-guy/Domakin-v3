@@ -26,12 +26,13 @@ const defaultData = {
 const RegisterForm = () => {
   const { t } = useTranslation("account");
 
-  const { modalStore } = useStore();
+  const { modalStore, userStore } = useStore();
 
   const router = useRouter();
 
-  const { loading, sendRequest } = useServer();
+  const { sendRequest } = useServer();
 
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState(defaultData);
   const [errors, setErrors] = useState<string[]>([]);
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
@@ -48,6 +49,7 @@ const RegisterForm = () => {
 
   const signUpWithPassword = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const validateResponse = await sendRequest(
@@ -79,11 +81,12 @@ const RegisterForm = () => {
 
       const responseData = await sendRequest("/register", "POST", {
         isSSO: false,
-        id: data.user!.id ?? null,
+        id: `${data.user!.id ?? null}`,
         ...form,
       });
 
       if (responseData?.status) {
+        userStore.setUser(data.user);
         modalStore.closeAll();
         router.push("/account");
       } else if (responseData?.invalid_fields) {
@@ -91,6 +94,8 @@ const RegisterForm = () => {
       }
     } catch (error) {
       showGeneralError(t("api.general_error"));
+    } finally {
+      setLoading(false);
     }
   };
 

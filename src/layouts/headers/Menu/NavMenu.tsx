@@ -8,22 +8,15 @@ import { useState } from "react";
 import logo from "@/assets/img/logo-3.png";
 import useTranslation from "next-translate/useTranslation";
 import ChangeLanguage from "./ChangeLanguage";
-import { useStore } from "@/stores/storeContext";
-import { ENV_PROD, LOGIN_MODAL } from "@/utils/defines";
-import { useRouter } from "next/router";
+
+import { observer } from "mobx-react-lite";
+import AuthButton from "./AuthButton";
 
 const NavMenu = () => {
   const pathname = usePathname();
   const [navTitle, setNavTitle] = useState("");
 
   const { t } = useTranslation("translations");
-
-  const router = useRouter();
-
-  const {
-    modalStore,
-    userStore: { user, logout },
-  } = useStore();
 
   //openMobileMenu
   const openMobileMenu = (menu: any) => {
@@ -120,26 +113,9 @@ const NavMenu = () => {
         </Link>
       </li>
 
-      {!ENV_PROD && (
-        <li className="d-block d-lg-none d-md-inline-block ms-3 mt-10">
-          {user ? (
-            <div>
-              <p onClick={() => router.push("/account")}>P</p>
-              <i onClick={logout} className="fa-solid fa-door-open"></i>
-            </div>
-          ) : (
-            <button
-              onClick={() => modalStore.setActiveModal(LOGIN_MODAL)}
-              className="btn-fourteen"
-            >
-              <i className="fa-regular fa-lock"></i>{" "}
-              <span>{t("account:authentication.login")}</span>
-            </button>
-          )}
-        </li>
-      )}
+      <AuthButton/>
     </ul>
   );
 };
 
-export default NavMenu;
+export default observer(NavMenu);

@@ -13,7 +13,8 @@
     "our_services": "Our Services",
     "recommendations": "Recommendations",
     "add_listing": "Add listing",
-    "pricing": "Pricing"
+    "pricing": "Pricing",
+    "logout": "Logout"
   },
   "footer": {
     "all_rights_reserved": "All Rights Reserved @ Domakin",

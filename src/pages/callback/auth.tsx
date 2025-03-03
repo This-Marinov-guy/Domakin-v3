@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import supabase from "@/utils/supabase";
 import { showGeneralError } from "@/utils/helpers";
 import { useServer } from "@/hooks/useServer";
 import useTranslation from "next-translate/useTranslation";
+import { useStore } from "@/stores/storeContext";
 
 export default function AuthCallback() {
+  const {
+    userStore: { user, login },
+  } = useStore();
   const router = useRouter();
   const { sendRequest } = useServer();
   const { t } = useTranslation("account");
@@ -13,23 +16,19 @@ export default function AuthCallback() {
   useEffect(() => {
     const handleCallback = async () => {
       try {
-        const {
-          data: { session },
-          error,
-        } = await supabase.auth.getSession();
+        await login();
 
-        if (!session) {
-          showGeneralError(t("api.general_error"));
-          return router.push("/");
+        if (!user) {
+          return;
         }
 
         const responseData = await sendRequest("/register", "POST", {
           isSSO: true,
-          id: session.user.id,
-          name: session.user.user_metadata.full_name,
-          email: session.user.user_metadata.email,
-          phone: session.user.phone,
-          profile_image: session.user.user_metadata.avatar_url,
+          id: user.id,
+          name: user.user_metadata.full_name,
+          email: user.user_metadata.email,
+          phone: user.phone,
+          profile_image: user.user_metadata.avatar_url,
         });
 
         if (responseData?.status) {

@@ -12,6 +12,7 @@ import { logoByTheme } from "@/utils/config";
 import { useStore } from "@/stores/storeContext";
 import { ENV_PROD, LOGIN_MODAL } from "@/utils/defines";
 import { useRouter } from "next/router";
+import AuthButton from "./Menu/AuthButton";
 
 const HeaderOne = ({ style }: any) => {
   const { sticky } = UseSticky();
@@ -22,11 +23,11 @@ const HeaderOne = ({ style }: any) => {
 
   const router = useRouter();
 
-const handleOpenLogin = () => {
+  const handleOpenLogin = () => {
     router.push({
       pathname: router.pathname,
       query: {
-        login: 1
+        login: 1,
       },
     });
 
@@ -70,14 +71,7 @@ const handleOpenLogin = () => {
                   </Link>
                 </li>
 
-                {!ENV_PROD && (
-                  <li className="d-none d-lg-inline-block ms-3">
-                    <button onClick={handleOpenLogin} className="btn-fourteen">
-                      <i className="fa-regular fa-lock"></i>{" "}
-                      <span>{t("account:authentication.login")}</span>
-                    </button>
-                  </li>
-                )}
+                <AuthButton mobile/>
               </ul>
             </div>
             <nav className="navbar navbar-expand-lg p0 order-lg-2">

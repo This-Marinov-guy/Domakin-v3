@@ -283,7 +283,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 50px;
 
   img {
     max-width: 50%;
@@ -291,6 +291,8 @@
 
   @media (max-width: 575px) {
     flex-direction: column;
+    gap: 20px;
+
     img {
       max-width: 90%;
     }

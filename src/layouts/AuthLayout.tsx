@@ -1,18 +1,19 @@
 import PageLoader from "@/components/ui/loading/PageLoader";
 import { useStore } from "@/stores/storeContext";
+import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-const AuthLayout = ({ children }: any) => {
+const AuthLayout = ({ children }: any) => {  
   const {
-    userStore: { user },
+    userStore: { user, userLoading },
   } = useStore();
 
   const router = useRouter();
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (!user) {
+  useEffect(() => {            
+    if (!userLoading && user === null) {
       router.push(
         {
           pathname: "/",
@@ -33,4 +34,4 @@ const AuthLayout = ({ children }: any) => {
   return <>{children}</>;
 };
 
-export default AuthLayout;
+export default observer(AuthLayout);
