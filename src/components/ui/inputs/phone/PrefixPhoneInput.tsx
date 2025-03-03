@@ -8,35 +8,40 @@ import { LOCAL_STORAGE_LOCATION } from "@/utils/localstorage";
 import Prefix from "./Prefix";
 
 const PrefixPhoneInput = (props: any) => {
-  const { className, style, value, onChange, isInvalid } = props;
+  const { className, style, value = "", onChange, isInvalid } = props;
 
   const [selectedCode, setSelectedCode] = useState("");
-
   const [mainPart, setMainPart] = useState("");
 
+  // Split initial value when component mounts
   useEffect(() => {
-    if (typeof window !== "undefined" && window.localStorage) {
+    if (value) {
+      const parts = value.split(" ");
+      setSelectedCode(parts[0] || ""); // First part as prefix
+      setMainPart(parts.slice(1).join(" ") || ""); // Rest as number
+    }
+  }, [value]);
+
+  // Set default country code from geolocation
+  useEffect(() => {
+    if (!selectedCode && typeof window !== "undefined" && window.localStorage) {
       const country = EUROPEAN_COUNTRIES.find(
         (c) => c.iso2.toUpperCase() === getGeoLocation()
       );
 
       if (country) {
         setSelectedCode(country.phoneCode);
+        onChange(`${country.phoneCode} ${mainPart}`);
       }
     }
-  }, []);
+  }, [selectedCode]);
 
+  // Update parent when values change
   useEffect(() => {
-    if (onChange && selectedCode && mainPart) {
-      onChange(selectedCode + ' ' + mainPart);
+    if (onChange && selectedCode && mainPart !== undefined) {
+      onChange(`${selectedCode} ${mainPart}`);
     }
   }, [selectedCode, mainPart]);
-
-  useEffect(() => {
-    if (!value) {
-      setMainPart("");
-    }
-  }, [value]);
 
   return (
     <div className="phone-input">
@@ -56,7 +61,7 @@ const PrefixPhoneInput = (props: any) => {
         type="number"
         className="phone-content form-control"
         value={mainPart}
-        onChange={(e: any) => setMainPart(e.target.value)}
+        onChange={(e) => setMainPart(e.target.value)}
         isInvalid={isInvalid}
       />
     </div>

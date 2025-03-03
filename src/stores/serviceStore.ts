@@ -1,6 +1,5 @@
 import { action, makeAutoObservable, observable } from "mobx";
 
-
 const defaultViewingData = {
   name: "",
   surname: "",

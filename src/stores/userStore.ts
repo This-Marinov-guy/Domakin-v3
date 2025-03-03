@@ -25,8 +25,9 @@ export default class UserStore {
       this.user = {
         id: session.user.id,
         email: session.user.email,
+        phone: session.user.phone,
         token: session.access_token,
-        displayName: session.user.user_metadata.display_name,
+        name: session.user.user_metadata.display_name,
         profileImage:
           session.user.user_metadata.profile_image ||
           "/assets/img/dashboard/avatar_01.jpg",

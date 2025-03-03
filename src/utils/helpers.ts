@@ -228,6 +228,21 @@ export const showStandardNotification = (
     draggable: true,
     progress: undefined,
     theme: "colored",
-    ...options
+    ...options,
   } as ToastOptions);
+};
+
+export const prefillUserInfo = (callback: Function, user: any | null) => {
+  if (!user) {
+    return;
+  }
+
+  callback("name", "", user.name.split(" ")[0] ?? "");
+  callback("surname", "", user.name.split(" ")[1] ?? "");
+  callback("email", "", user.email ?? "");
+
+  // or else we will set the code to null
+  if (user.phone) {
+    callback("phone", "", user.phone ?? "");
+  }
 };

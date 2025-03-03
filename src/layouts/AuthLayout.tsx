@@ -12,7 +12,7 @@ const AuthLayout = ({ children }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {            
+  useEffect(() => {                
     if (!userLoading && user === null) {
       router.push(
         {

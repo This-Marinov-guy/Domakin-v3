@@ -10,7 +10,6 @@ import avatar_1 from "@/assets/images/dashboard/avatar_02.jpg"
 
 const ProfileBody = () => {
    return (
-      <div className="dashboard-body">
          <div className="position-relative">
             <DashboardHeaderOne title="Profile" />
             <h2 className="main-title d-block d-lg-none">Profile</h2>
@@ -34,7 +33,6 @@ const ProfileBody = () => {
                <Link href="#" className="dash-cancel-btn tran3s">Cancel</Link>
             </div>
          </div>
-      </div>
    )
 }
 

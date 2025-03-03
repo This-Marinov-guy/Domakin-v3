@@ -10,6 +10,7 @@ import { toast, ToastContent } from "react-toastify";
 import SingleDatePicker from "../ui/inputs/dates/SingleDatePicker";
 import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
 import TimePickerInput from "../ui/inputs/dates/TimePickerInput";
+import { prefillUserInfo } from "@/utils/helpers";
 
 const ViewingForm = () => {
   const { t } = useTranslation("translations");
@@ -24,6 +25,7 @@ const ViewingForm = () => {
       addViewingErrorFields,
       resetViewingData,
     },
+    userStore: { user },
   } = useStore();
 
   const handleSubmit = async (e: any) => {
@@ -49,6 +51,10 @@ const ViewingForm = () => {
       }
     });
   };
+
+  useEffect(() => {
+    prefillUserInfo(updateViewingData, user);
+  }, [user]);  
 
   return (
     <form className="form-style-one wow fadeInUp pt-40 pb-40">
