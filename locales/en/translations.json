@@ -494,6 +494,24 @@
   },
   "FOR_RENT": [
     {
+      "id": "39",
+      "hidden": false,
+      "status": "RENT",
+      "price": 400,
+      "statusCode": 0,
+      "title": "Room in shared house",
+      "city": "Groningen",
+      "location": "Marowijnestraat, Groningen",
+      "description": {
+        "property": "The room is located on the third floor of a house. The property is 10 minutes away by bike from Zernike campus and 10 minutes away from the city centre.  There are several supermarkets in the area and a major brand gym.  There is also a lovely park right next to the house. Currently the flatmates are 3 girls with whom bathroom and kitchen are shared.  Once a week a cleaning lady comes to clean the common areas in the house. The room also comes with furniture that is sold separately and includes: office desk and chair, bed, clothing rack, movable storage rack, 2 coffee tables and 2 chairs and an extendable couch that can also be turned into an extra bed. Registration is possible!",
+        "period": "From April onwards",
+        "bills": "included",
+        "flatmates": "3 people"
+      },
+      "main_image": "1.png",
+      "images": ["2.png", "3.png"]
+    },
+    {
       "id": "38",
       "hidden": false,
       "status": "RENT",

@@ -71,7 +71,18 @@ const AuthButton = ({ responsive = false, mobile = false }: any) => {
         </div>
       ) : (
         <button
-          onClick={() => modalStore.setActiveModal(LOGIN_MODAL)}
+          onClick={() =>
+            router.push(
+              {
+                pathname: router.pathname,
+                query: {
+                  login: 1,
+                },
+              },
+              undefined,
+              { shallow: true }
+            )
+          }
           className="btn-fourteen"
         >
           <i className="fa-regular fa-lock"></i>{" "}
