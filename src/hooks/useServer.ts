@@ -20,6 +20,24 @@ export const useServer = () => {
 
   const { t } = useTranslation("translations");
 
+  const getErrorMessage = (err: any) => {
+    if (err.response?.data?.tag) {
+      let errorMessage = err.response.data.tag;
+
+      if (Array.isArray(errorMessage)) {
+        return errorMessage.map((error) => `- ${t(error)}`).join("\n");
+      }
+
+      return t(errorMessage);
+    }
+
+    if (err.response?.data?.message) {
+      return err.response.data.message;
+    }
+
+    return t("api.general_error");
+  };
+
   const sendRequest = async (
     url: string,
     method: string = "GET",
@@ -100,7 +118,7 @@ export const useServer = () => {
           errorMessage = t("api.general_error");
         }
 
-        showStandardNotification('error', errorMessage);
+        showStandardNotification("error", errorMessage);
       }
     } finally {
       stopLoading();
@@ -108,24 +126,4 @@ export const useServer = () => {
   };
 
   return { loading, sendRequest };
-};
-
-export const getErrorMessage = (err: any) => {
-  const { t } = useTranslation("translations");
-
-  if (err.response?.data?.tag) {
-    let errorMessage = err.response.data.tag;
-
-    if (Array.isArray(errorMessage)) {
-      return errorMessage.map((error) => `- ${t(error)}`).join("\n");
-    }
-
-    return t(errorMessage);
-  }
-
-  if (err.response?.data?.message) {
-    return err.response.data.message;
-  }
-
-  return t("api.general_error");
 };
