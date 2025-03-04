@@ -28,9 +28,8 @@ const LoginForm = () => {
   const router = useRouter();
 
   const {
-    commonStore: { loading, startLoading, stopLoading },
+    commonStore: { loading, startLoading, stopLoading }, userStore
   } = useStore();
-  const { sendRequest } = useServer();
 
   const [form, setForm] = useState(defaultData);
   const [errors, setErrors] = useState<string[]>([]);
@@ -70,7 +69,7 @@ const LoginForm = () => {
     setErrors([]);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword(form);
+      const { error, data: {session} } = await supabase.auth.signInWithPassword(form);
 
       if (error) {
         showStandardNotification(
@@ -80,6 +79,7 @@ const LoginForm = () => {
         return setErrors(["email", "password"]);
       }
 
+      userStore.setUser(session);
       modalStore.closeAll();
       router.push("/account");
     } catch (error) {

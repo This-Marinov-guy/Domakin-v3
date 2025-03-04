@@ -81,27 +81,7 @@
             color: rgba($color: #244034, $alpha: 0.5);
         }
     }
-    .logout-btn {
-        font-size: 16px;
-        font-weight: 500;
-        letter-spacing: -0.16px;
-        color: #000;
-        @include transition(0.25s);
-        .icon {
-            width: 42px;
-            height: 42px;
-            background: #000;
-        }
-        span {
-            padding-left: 10px;
-        }
-        &:hover {
-            color: $color-two;
-            .icon {
-                background: $color-two;
-            }
-        }
-    }
+    
     .close-btn {
         font-size: 28px;
         color: #000;

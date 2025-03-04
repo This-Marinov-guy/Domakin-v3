@@ -1,7 +1,7 @@
-"use client"
-import Image from "next/image"
+"use client";
+import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 
 import footerLogo_1 from "@/assets/images/logo/logo_01.svg";
 import footerLogo_2 from "@/assets/images/logo/logo_03.svg";
@@ -28,27 +28,28 @@ import dashboardIconActive_10 from "@/assets/images/dashboard/icon/icon_10_activ
 import dashboardIcon_10 from "@/assets/images/dashboard/icon/icon_10.svg";
 import dashboardIcon_11 from "@/assets/images/dashboard/icon/icon_41.svg";
 import footerLogo from "@/assets/img/logo-transparent.png";
+import LogoutButton from "../Menu/LogoutButton";
 
 const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
-   const pathname = usePathname();
+  const pathname = usePathname();
 
-   return (
-     <aside className={`dash-aside-navbar ${isActive ? "show" : ""}`}>
-       <div className="position-relative">
-         <div className="logo d-md-block d-flex align-items-center justify-content-between plr bottom-line pb-30">
-           <Link href="/">
-             <Image width={100} height={100} src={footerLogo} alt="" />
-           </Link>
-           <button
-             onClick={() => setIsActive(false)}
-             className="close-btn d-block d-md-none"
-           >
-             <i className="fa-light fa-circle-xmark"></i>
-           </button>
-         </div>
-         <nav className="dasboard-main-nav pt-30 pb-30 bottom-line">
-           <ul className="style-none">
-             {/* <li className="plr"><Link href="/account/dashboard-index" className={`d-flex w-100 align-items-center ${pathname === '/dashboard/dashboard-index' ? 'active' : ''}`}>
+  return (
+    <aside className={`dash-aside-navbar ${isActive ? "show" : ""}`}>
+      <div className="position-relative">
+        <div className="logo d-md-block d-flex align-items-center justify-content-between plr bottom-line pb-30">
+          <Link href="/">
+            <Image width={100} height={100} src={footerLogo} alt="" />
+          </Link>
+          <button
+            onClick={() => setIsActive(false)}
+            className="close-btn d-block d-md-none"
+          >
+            <i className="fa-light fa-circle-xmark"></i>
+          </button>
+        </div>
+        <nav className="dasboard-main-nav pt-30 pb-30 bottom-line">
+          <ul className="style-none">
+            {/* <li className="plr"><Link href="/account/dashboard-index" className={`d-flex w-100 align-items-center ${pathname === '/dashboard/dashboard-index' ? 'active' : ''}`}>
                      <Image src={pathname === '/dashboard/dashboard-index' ? dashboardIconActive_1 : dashboardIcon_1} alt="" />
                      <span>Dashboard</span>
                   </Link></li>
@@ -56,29 +57,29 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
                      <Image src={pathname === '/dashboard/message' ? dashboardIconActive_2 : dashboardIcon_2} alt="" />
                      <span>Message</span>
                   </Link></li> */}
-             {/* <li className="bottom-line pt-30 lg-pt-20 mb-40 lg-mb-30"></li> */}
-             <li>
-               <div className="nav-title">Profile</div>
-             </li>
-             <li className="plr">
-               <Link
-                 href="/account"
-                 className={`d-flex w-100 align-items-center ${
-                   pathname === "/dashboard/profile" ? "active" : ""
-                 }`}
-               >
-                 <Image
-                   src={
-                     pathname === "/dashboard/profile"
-                       ? dashboardIconActive_3
-                       : dashboardIcon_3
-                   }
-                   alt=""
-                 />
-                 <span>Profile</span>
-               </Link>
-             </li>
-             {/* <li className="plr"><Link href="/account/account-settings" className={`d-flex w-100 align-items-center ${pathname === '/dashboard/account-settings' ? 'active' : ''}`}>
+            {/* <li className="bottom-line pt-30 lg-pt-20 mb-40 lg-mb-30"></li> */}
+            <li>
+              <div className="nav-title">Profile</div>
+            </li>
+            <li className="plr">
+              <Link
+                href="/account"
+                className={`d-flex w-100 align-items-center ${
+                  pathname === "/dashboard/profile" ? "active" : ""
+                }`}
+              >
+                <Image
+                  src={
+                    pathname === "/dashboard/profile"
+                      ? dashboardIconActive_3
+                      : dashboardIcon_3
+                  }
+                  alt=""
+                />
+                <span>Profile</span>
+              </Link>
+            </li>
+            {/* <li className="plr"><Link href="/account/account-settings" className={`d-flex w-100 align-items-center ${pathname === '/dashboard/account-settings' ? 'active' : ''}`}>
                      <Image src={pathname === '/dashboard/account-settings' ? dashboardIconActive_4 : dashboardIcon_4} alt="" />
                      <span>Account Settings</span>
                   </Link></li>
@@ -86,47 +87,47 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
                      <Image src={pathname === '/dashboard/membership' ? dashboardIconActive_5 : dashboardIcon_5} alt="" />
                      <span>Membership</span>
                   </Link></li> */}
-             <li className="bottom-line pt-30 lg-pt-20 mb-40 lg-mb-30"></li>
-             <li>
-               <div className="nav-title">Listing</div>
-             </li>
-             <li className="plr">
-               <Link
-                 href="/account/properties-list"
-                 className={`d-flex w-100 align-items-center ${
-                   pathname === "/dashboard/properties-list" ? "active" : ""
-                 }`}
-               >
-                 <Image
-                   src={
-                     pathname === "/dashboard/properties-list"
-                       ? dashboardIconActive_6
-                       : dashboardIcon_6
-                   }
-                   alt=""
-                 />
-                 <span>My Properties</span>
-               </Link>
-             </li>
-             <li className="plr">
-               <Link
-                 href="/account/add-property"
-                 className={`d-flex w-100 align-items-center ${
-                   pathname === "/dashboard/add-property" ? "active" : ""
-                 }`}
-               >
-                 <Image
-                   src={
-                     pathname === "/dashboard/add-property"
-                       ? dashboardIconActive_7
-                       : dashboardIcon_7
-                   }
-                   alt=""
-                 />
-                 <span>Add New Property</span>
-               </Link>
-             </li>
-             {/* <li className="plr"><Link href="/account/favourites" className={`d-flex w-100 align-items-center ${pathname === '/dashboard/favourites' ? 'active' : ''}`}>
+            <li className="bottom-line pt-30 lg-pt-20 mb-40 lg-mb-30"></li>
+            <li>
+              <div className="nav-title">Listing</div>
+            </li>
+            <li className="plr">
+              <Link
+                href="/account/properties-list"
+                className={`d-flex w-100 align-items-center ${
+                  pathname === "/dashboard/properties-list" ? "active" : ""
+                }`}
+              >
+                <Image
+                  src={
+                    pathname === "/dashboard/properties-list"
+                      ? dashboardIconActive_6
+                      : dashboardIcon_6
+                  }
+                  alt=""
+                />
+                <span>My Properties</span>
+              </Link>
+            </li>
+            <li className="plr">
+              <Link
+                href="/account/add-property"
+                className={`d-flex w-100 align-items-center ${
+                  pathname === "/dashboard/add-property" ? "active" : ""
+                }`}
+              >
+                <Image
+                  src={
+                    pathname === "/dashboard/add-property"
+                      ? dashboardIconActive_7
+                      : dashboardIcon_7
+                  }
+                  alt=""
+                />
+                <span>Add New Property</span>
+              </Link>
+            </li>
+            {/* <li className="plr"><Link href="/account/favourites" className={`d-flex w-100 align-items-center ${pathname === '/dashboard/favourites' ? 'active' : ''}`}>
                      <Image src={pathname === '/dashboard/favourites' ? dashboardIconActive_8 : dashboardIcon_8} alt="" />
                      <span>Favourites</span>
                   </Link></li>
@@ -134,27 +135,27 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
                      <Image src={pathname === '/dashboard/saved-search' ? dashboardIconActive_9 : dashboardIcon_9} alt="" />
                      <span>Saved Search</span>
                   </Link></li> */}
-             <li className="plr">
-               <Link
-                 href="/account/review"
-                 className={`d-flex w-100 align-items-center ${
-                   pathname === "/dashboard/review" ? "active" : ""
-                 }`}
-               >
-                 <Image
-                   src={
-                     pathname === "/dashboard/review"
-                       ? dashboardIconActive_10
-                       : dashboardIcon_10
-                   }
-                   alt=""
-                 />
-                 <span>Reviews</span>
-               </Link>
-             </li>
-           </ul>
-         </nav>
-         {/* <div className="profile-complete-status bottom-line pb-35 plr">
+            <li className="plr">
+              <Link
+                href="/account/review"
+                className={`d-flex w-100 align-items-center ${
+                  pathname === "/dashboard/review" ? "active" : ""
+                }`}
+              >
+                <Image
+                  src={
+                    pathname === "/dashboard/review"
+                      ? dashboardIconActive_10
+                      : dashboardIcon_10
+                  }
+                  alt=""
+                />
+                <span>Reviews</span>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        {/* <div className="profile-complete-status bottom-line pb-35 plr">
                <div className="progress-value fw-500">82%</div>
                <div className="progress-line position-relative">
                   <div className="inner-line" style={{ width: "80%" }}></div>
@@ -162,20 +163,12 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
                <p>Profile Complete</p>
             </div> */}
 
-         <div className="plr mt-20">
-           <Link
-             href="#"
-             className="d-flex w-100 align-items-center logout-btn"
-           >
-             <div className="icon tran3s d-flex align-items-center justify-content-center rounded-circle">
-               <Image src={dashboardIcon_11} alt="" />
-             </div>
-             <span>Logout</span>
-           </Link>
-         </div>
-       </div>
-     </aside>
-   );
-}
+        <div className="plr mt-20">
+          <LogoutButton withText />
+        </div>
+      </div>
+    </aside>
+  );
+};
 
 export default DashboardHeaderOne;

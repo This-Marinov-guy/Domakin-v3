@@ -8,6 +8,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Spinner from "react-bootstrap/Spinner";
 import Badge from "react-bootstrap/Badge";
 import useTranslation from "next-translate/useTranslation";
+import LogoutButton from "./LogoutButton";
 
 const AuthButton = ({ responsive = false, mobile = false }: any) => {
   const {
@@ -62,12 +63,7 @@ const AuthButton = ({ responsive = false, mobile = false }: any) => {
               className="avatar"
             />
           </div>
-          <OverlayTrigger overlay={<Tooltip>{t("header.logout")}</Tooltip>}>
-            <i
-              onClick={logout}
-              className="fa-solid fa-door-open logout-icon"
-            ></i>
-          </OverlayTrigger>
+          <LogoutButton />
         </div>
       ) : (
         <button

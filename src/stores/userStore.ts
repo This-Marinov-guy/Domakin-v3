@@ -22,16 +22,7 @@ export default class UserStore {
     } = await supabase.auth.getSession();
 
     if (session) {
-      this.user = {
-        id: session.user.id,
-        email: session.user.email,
-        phone: session.user.phone,
-        token: session.access_token,
-        name: session.user.user_metadata.display_name,
-        profileImage:
-          session.user.user_metadata.profile_image ||
-          "/assets/img/dashboard/avatar_01.jpg",
-      };
+      this.setUser(session);
     } else if (withError) {
       showGeneralError(error?.message);
     }
@@ -43,8 +34,17 @@ export default class UserStore {
     this.userLoading = loading;
   };
 
-  @action setUser = (user: any) => {
-    this.user = user;
+  @action setUser = (session: any) => {
+    this.user = {
+      id: session.user.id,
+      email: session.user.email,
+      phone: session.user.phone,
+      token: session.access_token,
+      name: session.user.user_metadata.display_name,
+      profileImage:
+        session.user.user_metadata.profile_image ||
+        "/assets/img/dashboard/avatar_01.jpg",
+    };
   };
 
   @action logout = async () => {

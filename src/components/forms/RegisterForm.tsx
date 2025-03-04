@@ -66,7 +66,7 @@ const RegisterForm = () => {
         return;
       }
 
-      const { data, error } = await supabase.auth.signUp({
+      const { data: {session, user}, error } = await supabase.auth.signUp({
         email: form.email,
         password: form.password,
         phone: form.phone,
@@ -81,12 +81,12 @@ const RegisterForm = () => {
 
       const responseData = await sendRequest("/register", "POST", {
         isSSO: false,
-        id: `${data.user!.id ?? null}`,
+        id: `${user!.id ?? null}`,
         ...form,
       });
 
       if (responseData?.status) {
-        userStore.setUser(data.user);
+        userStore.setUser(session);
         modalStore.closeAll();
         router.push("/account");
       } else if (responseData?.invalid_fields) {
