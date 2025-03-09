@@ -510,9 +510,9 @@
     {
       "id": "38",
       "hidden": false,
-      "status": "RENT",
+      "status": "TAKEN",
       "price": 258,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Μικρό δωμάτιο σε κοινόχρηστο σπίτι",
       "city": "Groningen",
       "location": "Abeelstraat, Groningen",

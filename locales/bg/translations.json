@@ -512,9 +512,9 @@
     {
       "id": "38",
       "hidden": false,
-      "status": "Свободна",
+      "status": "Заета",
       "price": 258,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Малка стая в споделена къща",
       "city": "Groningen",
       "location": "Abeelstraat, Groningen",
