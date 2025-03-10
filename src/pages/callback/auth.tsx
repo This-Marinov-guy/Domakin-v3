@@ -24,7 +24,7 @@ export default function AuthCallback() {
 
         if (session) {
           setUser(session);
-          
+
           const responseData = await sendRequest("/register", "POST", {
             isSSO: true,
             id: session.user.id,
@@ -40,7 +40,6 @@ export default function AuthCallback() {
             showGeneralError(t("api.general_error"));
             return router.push("/");
           }
-          router.push("/account");
         } else if (error) {
           return showGeneralError(error?.message);
         }
