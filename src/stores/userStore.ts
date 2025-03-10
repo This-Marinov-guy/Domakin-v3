@@ -42,7 +42,7 @@ export default class UserStore {
       token: session.access_token,
       name: session.user.user_metadata.display_name,
       profileImage:
-        session.user.user_metadata.profile_image ||
+        session.user.user_metadata.avatar_url ||
         "/assets/img/dashboard/avatar_01.jpg",
     };
   };
