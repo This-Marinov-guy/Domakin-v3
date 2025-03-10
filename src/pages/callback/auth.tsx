@@ -4,10 +4,11 @@ import { showGeneralError } from "@/utils/helpers";
 import { useServer } from "@/hooks/useServer";
 import useTranslation from "next-translate/useTranslation";
 import { useStore } from "@/stores/storeContext";
+import supabase from "@/utils/supabase";
 
 export default function AuthCallback() {
   const {
-    userStore: { user, login },
+    userStore: { user, setUser },
   } = useStore();
   const router = useRouter();
   const { sendRequest } = useServer();
@@ -16,28 +17,34 @@ export default function AuthCallback() {
   useEffect(() => {
     const handleCallback = async () => {
       try {
-        await login();
+        const {
+          data: { session },
+          error,
+        } = await supabase.auth.getSession();
 
-        if (!user) {
-          return;
-        }
-
-        const responseData = await sendRequest("/register", "POST", {
-          isSSO: true,
-          id: user.id,
-          name: user.user_metadata.full_name,
-          email: user.user_metadata.email,
-          phone: user.phone,
-          profile_image: user.user_metadata.avatar_url,
-        });
-
-        if (responseData?.status) {
+        if (session) {
+          setUser(session);
+          
+          const responseData = await sendRequest("/register", "POST", {
+            isSSO: true,
+            id: session.user.id,
+            name: session.user.user_metadata.full_name,
+            email: session.user.user_metadata.email,
+            phone: session.user.phone,
+            profile_image: session.user.user_metadata.avatar_url,
+          });
+  
+          if (responseData?.status) {
+            router.push("/account");
+          } else {
+            showGeneralError(t("api.general_error"));
+            return router.push("/");
+          }
           router.push("/account");
-        } else {
-          showGeneralError(t("api.general_error"));
-          return router.push("/");
+        } else if (error) {
+          return showGeneralError(error?.message);
         }
-        router.push("/account");
+
       } catch (error) {
         router.push("/?error=auth");
       }
