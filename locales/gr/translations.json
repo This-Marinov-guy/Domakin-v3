@@ -492,9 +492,9 @@
     {
       "id": "39",
       "hidden": false,
-      "status": "RENT",
+      "status": "TAKEN",
       "price": 400,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Δωμάτιο σε κοινόχρηστο σπίτι",
       "city": "Groningen",
       "location": "Marowijnestraat, Groningen",
