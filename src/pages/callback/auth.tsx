@@ -23,7 +23,7 @@ export default function AuthCallback() {
         } = await supabase.auth.getSession();
 
         if (session) {
-          setUser(session);
+          await setUser(session);
 
           const responseData = await sendRequest("/register", "POST", {
             isSSO: true,

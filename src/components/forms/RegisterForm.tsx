@@ -86,7 +86,7 @@ const RegisterForm = () => {
       });
 
       if (responseData?.status) {
-        userStore.setUser(session);
+        await userStore.setUser(session);
         modalStore.closeAll();
         router.push("/account");
       } else if (responseData?.invalid_fields) {

@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import OpenEye from "@/assets/images/icon/icon_68.svg";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
 
 const UserAvatarSetting = () => {
   const { userStore } = useStore();
@@ -18,7 +19,7 @@ const UserAvatarSetting = () => {
   };
 
   useEffect(() => {
-    loadUserEditDetails();    
+    loadUserEditDetails();
   }, [user]);
 
   return (
@@ -126,4 +127,4 @@ const UserAvatarSetting = () => {
   );
 };
 
-export default UserAvatarSetting;
+export default observer(UserAvatarSetting);

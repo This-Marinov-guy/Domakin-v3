@@ -79,7 +79,7 @@ const LoginForm = () => {
         return setErrors(["email", "password"]);
       }
 
-      userStore.setUser(session);
+      await userStore.setUser(session);
       modalStore.closeAll();
       router.push("/account");
     } catch (error) {

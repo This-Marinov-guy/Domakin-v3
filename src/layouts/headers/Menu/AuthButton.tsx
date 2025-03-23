@@ -15,7 +15,7 @@ const AuthButton = ({ responsive = false, mobile = false }: any) => {
     modalStore,
     userStore: { user, logout, userLoading },
   } = useStore();
-
+  
   const router = useRouter();
 
   const { t } = useTranslation("translations");

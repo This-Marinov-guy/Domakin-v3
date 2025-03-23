@@ -1,6 +1,6 @@
 import UserAvatarSetting from "@/components/dashboard/profile/UserAvatarSetting";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { StaticImageData } from "next/image";
 import avatar_1 from "@/assets/images/dashboard/avatar_02.jpg";
@@ -13,7 +13,7 @@ const ProfileEditForm = () => {
   const { user, updateUserDetails, updateProfile, editUserLoading } = userStore;
 
   const [imagePreview, setImagePreview] = useState<StaticImageData | string>(
-    user.profileImage || avatar_1
+    avatar_1
   );
 
   const handleImageChange = (event: any) => {
@@ -52,7 +52,7 @@ const ProfileEditForm = () => {
             onClick={updateProfile}
             className="dash-btn-two tran3s me-3"
           >
-            {editUserLoading ? <Spinner/> : 'Save'}
+            {editUserLoading ? <Spinner /> : "Save"}
           </button>
         </div>
         <UserAvatarSetting />

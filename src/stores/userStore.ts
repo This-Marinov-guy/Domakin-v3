@@ -34,7 +34,7 @@ export default class UserStore {
     } = await supabase.auth.getSession();
 
     if (session) {
-      this.setUser(session);
+      await this.setUser(session);
     } else if (withError) {
       showGeneralError(error?.message);
     }
@@ -46,17 +46,24 @@ export default class UserStore {
     this.userLoading = loading;
   };
 
-  @action setUser = (session: any) => {
+  @action setUser = async (session: any) => {
+    const { data } =
+      (await supabase
+        .from("users")
+        .select("phone")
+        .eq("id", session.user.id)
+        .single()) ?? {};
+
     this.user = {
+      ...data,
       id: session.user.id,
       email: session.user.email,
-      phone: session.user.phone,
       token: session.access_token,
-      name: session.user.user_metadata.display_name,
+      name: session.user.user_metadata.display_name ?? '-',
       profileImage:
         session.user.user_metadata.avatar_url ||
         "/assets/img/dashboard/avatar_01.jpg",
-    };
+    };    
   };
 
   @action updateUserDetails = (
@@ -67,6 +74,8 @@ export default class UserStore {
   };
 
   @action loadUserEditDetails = () => {
+    if (!this.user) return;    
+
     this.editUser = {
       ...this.editUser,
       name: this.user.name,
