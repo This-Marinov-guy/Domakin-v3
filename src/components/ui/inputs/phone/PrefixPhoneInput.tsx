@@ -15,7 +15,7 @@ const PrefixPhoneInput = (props: any) => {
 
   // Split initial value when component mounts
   useEffect(() => {
-    if (value) {
+    if (value) {      
       const parts = value.split(" ");
       setSelectedCode(parts[0] || ""); // First part as prefix
       setMainPart(parts.slice(1).join(" ") || ""); // Rest as number

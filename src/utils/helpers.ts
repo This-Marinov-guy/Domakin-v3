@@ -212,6 +212,19 @@ export const showGeneralError = (error = "Something went wrong!") => {
   });
 };
 
+export const showGeneralSuccess = (message = 'Operation was successful') => {
+  toast.success(message as ToastContent, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
+};
+
 type ToastType = "info" | "success" | "warning" | "error" | "default";
 
 export const showStandardNotification = (
