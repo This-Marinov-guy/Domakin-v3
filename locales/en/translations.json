@@ -496,9 +496,9 @@
     {
       "id": "39",
       "hidden": false,
-      "status": "RENT",
+      "status": "TAKEN",
       "price": 400,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Room in shared house",
       "city": "Groningen",
       "location": "Marowijnestraat, Groningen",

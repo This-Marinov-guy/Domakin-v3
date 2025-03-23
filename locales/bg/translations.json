@@ -494,9 +494,9 @@
     {
       "id": "39",
       "hidden": false,
-      "status": "НАЕМ",
+      "status": "Заета",
       "price": 400,
-      "statusCode": 0,
+      "statusCode": 2,
       "title": "Стая в споделена къща",
       "city": "Groningen",
       "location": "Marowijnestraat, Groningen",
