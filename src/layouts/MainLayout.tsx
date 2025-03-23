@@ -10,12 +10,13 @@ import { getGeoInfo } from "@/utils/helpers";
 import setLanguage from "next-translate/setLanguage";
 import { LANGUAGES } from "@/utils/defines";
 import supabase from "@/utils/supabase";
+import ErrorLayout from "@/pages/_error";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
 }
 
-const MainLayout = ({ children }: any) => {  
+const MainLayout = ({ children }: any) => {
   const { sendRequest } = useServer();
 
   const { t, lang } = useTranslation();
@@ -125,25 +126,27 @@ const MainLayout = ({ children }: any) => {
   }, []);
 
   return (
-    <StoreProvider>
-      <TrackingLayout>
-        {children}
-        <ModalsLayout />
-        <ScrollToTop />
-        <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={true}
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />{" "}
-      </TrackingLayout>
-    </StoreProvider>
+    <ErrorLayout>
+      <StoreProvider>
+        <TrackingLayout>
+          {children}
+          <ModalsLayout />
+          <ScrollToTop />
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={true}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />{" "}
+        </TrackingLayout>
+      </StoreProvider>
+    </ErrorLayout>
   );
 };
 
