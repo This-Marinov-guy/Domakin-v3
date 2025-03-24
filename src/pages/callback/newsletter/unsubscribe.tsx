@@ -24,7 +24,7 @@ const NewsletterUnsubscribe = () => {
         // showGeneralError(t("api.general_error"));
     }
 
-    sendRequest("/common/newsletter/unsubscribe", "POST", {
+    sendRequest("/common/newsletter/unsubscribe", "DELETE", {
       email: router.query.email,
       id: router.query.id,
     })
