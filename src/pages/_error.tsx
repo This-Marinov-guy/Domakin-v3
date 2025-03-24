@@ -13,29 +13,33 @@ const ErrorFallback = ({ resetErrorBoundary }: any) => {
   const { t } = useTranslation("translations");
 
   return (
-    <div
-      style={{ marginTop: "20vh" }}
-      className="flex flex-col items-center justify-center text-center"
-    >
-      <h4 className="font-semibold mb-4">
-        {t("react_error.something_went_wrong")}
-      </h4>
-      <div
-        style={{
-          display: "flex",
-          gap: "1rem",
-          justifyContent: "center",
-          margin: "auto",
-        }}
-      >
-        <button onClick={resetErrorBoundary} className="btn-fourteen">
-          {t("react_error.try_again")}
-        </button>
-        <button onClick={() => router.push("/")} className="btn-fourteen">
-          {t("react_error.go_home")}
-        </button>
-      </div>
-    </div>
+    <>
+      <HeaderOne />
+        <div
+          style={{ marginTop: "20vh" }}
+          className="flex flex-col items-center justify-center text-center"
+        >
+          <h4 className="font-semibold mb-4">
+            {t("react_error.something_went_wrong")}
+          </h4>
+          <div
+            style={{
+              display: "flex",
+              gap: "1rem",
+              justifyContent: "center",
+              margin: "auto",
+            }}
+          >
+            <button onClick={resetErrorBoundary} className="btn-fourteen">
+              {t("react_error.try_again")}
+            </button>
+            <button onClick={() => router.push("/")} className="btn-fourteen">
+              {t("react_error.go_home")}
+            </button>
+          </div>
+        </div>
+      <FooterFour />
+    </>
   );
 };
 
@@ -48,11 +52,10 @@ const ErrorLayout = ({ children }: any) => {
         FallbackComponent={ErrorFallback}
         key={router.asPath} // Force remount on route change
       >
-        <HeaderOne />
+       
         <main className="flex-1 flex flex-col items-center justify-center">
           {children}
         </main>
-        <FooterFour />
       </ErrorBoundary>
     </div>
   );
