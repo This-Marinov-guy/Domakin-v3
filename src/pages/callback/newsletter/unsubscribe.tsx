@@ -35,7 +35,7 @@ const NewsletterUnsubscribe = () => {
       .catch((error) => {
         showGeneralError(t("api.general_error"));
       });
-  }, []);
+  }, [router]);
 
   if (isLoading) {
     return <PageLoader />;
