@@ -44,16 +44,16 @@ const ErrorLayout = ({ children }: any) => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <HeaderOne />
       <ErrorBoundary
         FallbackComponent={ErrorFallback}
         key={router.asPath} // Force remount on route change
       >
+        <HeaderOne />
         <main className="flex-1 flex flex-col items-center justify-center">
           {children}
         </main>
+        <FooterFour />
       </ErrorBoundary>
-      <FooterFour />
     </div>
   );
 };
