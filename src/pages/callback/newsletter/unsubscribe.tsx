@@ -20,10 +20,11 @@ const NewsletterUnsubscribe = () => {
 
   useEffect(() => {
     if (!router.query.email || !router.query.id) {
-      return showGeneralError(t("api.general_error"));
+      return
+        // showGeneralError(t("api.general_error"));
     }
 
-    sendRequest("/newsletter/unsubscribe", "POST", {
+    sendRequest("/common/newsletter/unsubscribe", "POST", {
       email: router.query.email,
       id: router.query.id,
     })
@@ -35,7 +36,7 @@ const NewsletterUnsubscribe = () => {
       .catch((error) => {
         showGeneralError(t("api.general_error"));
       });
-  }, [router]);
+  }, [router.query.email, router.query.id]);
 
   if (isLoading) {
     return <PageLoader />;
