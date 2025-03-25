@@ -26,15 +26,15 @@ const SEO = () => {
         lang="en"
         content="Platform for helping with apartment searching the town of Groningen (the Netherlands) and the area surrounding it. We offer doing the viewings for you, directly contacting you with a landlord or finding someone to take your room/apartment. Our young agents offer fast and efficient work to all our customers!"
       />
-      
-      <meta name="twitter:title" content="Domakin" />
+
+      <meta name="twitter:title" content="Housing from students to students" />
       <meta
         property="twitter:description"
         content="Check out Domakin for the best housing solutions!"
       />
       <meta name="twitter:image" content="./assets/img/logo-2.png" />
 
-      <meta name="og:title" content="Domakin" />
+      <meta name="og:title" content="Housing from students to students" />
       <meta
         property="og:description"
         content="Check out Domakin for the best housing solutions!"
