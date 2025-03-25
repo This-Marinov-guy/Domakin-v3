@@ -4,6 +4,15 @@ import React from "react";
 const SEO = () => {
   // TODO: make it localized
 
+  const jsonLdData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    url: "https://www.domakin.nl",
+    name: "Housing from students to students",
+    description: "Check out Domakin for the best housing solutions!",
+    image: "https://www.domakin.nl/assets/img/logo-2.png",
+  };
+
   return (
     <Head>
       <title>Domakin</title>
@@ -11,6 +20,7 @@ const SEO = () => {
         name="keywords"
         content="Real estate, Accommodations, Properties, Netherlands, Viewings, Students"
       />
+      <meta name="author" content="Domakin Team" />
       <meta
         name="description"
         lang="bg"
@@ -26,6 +36,10 @@ const SEO = () => {
         lang="en"
         content="Platform for helping with apartment searching the town of Groningen (the Netherlands) and the area surrounding it. We offer doing the viewings for you, directly contacting you with a landlord or finding someone to take your room/apartment. Our young agents offer fast and efficient work to all our customers!"
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+      />
 
       <meta name="twitter:title" content="Housing from students to students" />
       <meta
@@ -33,6 +47,7 @@ const SEO = () => {
         content="Check out Domakin for the best housing solutions!"
       />
       <meta name="twitter:image" content="./assets/img/logo-2.png" />
+      <meta name="twitter:card" content="./assets/img/logo-2.png" />
 
       <meta name="og:title" content="Housing from students to students" />
       <meta
@@ -40,9 +55,16 @@ const SEO = () => {
         content="Check out Domakin for the best housing solutions!"
       />
       <meta property="og:image" content="./assets/img/logo-2.png" />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://www.domakin.nl" />
+
+      <meta property="al:ios:url" content="https://www.domakin.nl" />
+      <meta property="al:ios:app_name" content="Domakin" />
+      <meta name="apple-mobile-web-app-title" content="Domakin" />
+      <link rel="apple-touch-icon" href="./assets/img/logo-2.png"></link>
 
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link rel="icon" href="./favicon.ico" />
+      <link rel="icon" href="./favicon.ico" type="image/x-icon" />
       <link rel="manifest" href="./manifest.json" />
       <link rel="robots" href="./robots.txt" />
       {/* For IE  */}
