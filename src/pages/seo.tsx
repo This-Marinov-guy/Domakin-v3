@@ -3,7 +3,7 @@ import React from "react";
 
 const SEO = () => {
   // TODO: make it localized
-  
+
   return (
     <Head>
       <title>Domakin</title>
@@ -26,11 +26,25 @@ const SEO = () => {
         lang="en"
         content="Platform for helping with apartment searching the town of Groningen (the Netherlands) and the area surrounding it. We offer doing the viewings for you, directly contacting you with a landlord or finding someone to take your room/apartment. Our young agents offer fast and efficient work to all our customers!"
       />
-      <meta property="og:image" content="/img/logo-2.png" />
+      
+      <meta name="twitter:title" content="Domakin" />
+      <meta
+        property="twitter:description"
+        content="Check out Domakin for the best housing solutions!"
+      />
+      <meta name="twitter:image" content="./assets/img/logo-2.png" />
+
+      <meta name="og:title" content="Domakin" />
+      <meta
+        property="og:description"
+        content="Check out Domakin for the best housing solutions!"
+      />
+      <meta property="og:image" content="./assets/img/logo-2.png" />
+
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link rel="icon" href="/favicon.ico" />
-      <link rel="manifest" href="/manifest.json" />
-      <link rel="robots" href="/robots.txt" />
+      <link rel="icon" href="./favicon.ico" />
+      <link rel="manifest" href="./manifest.json" />
+      <link rel="robots" href="./robots.txt" />
       {/* For IE  */}
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       {/* Chrome, Firefox OS and Opera */}
