@@ -1,3 +1,4 @@
+import { SERVER_ENDPOINT } from "@/utils/config";
 import { showGeneralError, showGeneralSuccess } from "@/utils/helpers";
 import supabase from "@/utils/supabase";
 import axios from "axios";
@@ -66,6 +67,13 @@ export default class UserStore {
     };    
   };
 
+  @action updateUser = (data: any) => {
+    this.user = {
+      ...this.user,
+      ...data,
+    };
+  };
+
   @action updateUserDetails = (
     name: keyof typeof this.editUser,
     value: any
@@ -84,47 +92,6 @@ export default class UserStore {
       password: "",
       password_confirmation: "",
     };
-  };
-
-  @action updateProfile = async () => {
-    this.editUserLoading = true;
-    this.editUserErrors = [];
-
-    try {
-      const formData = new FormData();
-      for (const key in this.editUser) {
-        if (this.editUser[key as keyof typeof this.editUser]) {
-          formData.append(
-            key,
-            this.editUser[key as keyof typeof this.editUser]
-          );
-        }
-
-        const responseData = await axios.post("/api/user/update", formData);
-
-        if (responseData?.data.message) {
-          showGeneralError(responseData.data.message);
-        }
-
-        if (responseData?.data.status) {
-          this.user = {
-            ...this.user,
-            profileImage: responseData.data.profileImage,
-            name: responseData.data.name,
-            email: responseData.data.email,
-            phone: responseData.data.phone,
-          };
-
-          showGeneralSuccess();
-        } else if (responseData?.data.errors) {
-          this.editUserErrors = responseData.data.errors;
-        }
-      }
-    } catch (error: any) {
-      showGeneralError(error.message);
-    } finally {
-      this.editUserLoading = false;
-    }
   };
 
   @action logout = async () => {

@@ -25,7 +25,7 @@ export default function AuthCallback() {
         if (session) {
           await setUser(session);
 
-          const responseData = await sendRequest("/register", "POST", {
+          const responseData = await sendRequest("/authentication/register", "POST", {
             isSSO: true,
             id: session.user.id,
             name: session.user.user_metadata.full_name,

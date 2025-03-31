@@ -53,7 +53,7 @@ const RegisterForm = () => {
 
     try {
       const validateResponse = await sendRequest(
-        "/validate-credentials",
+        "/authentication/validate-credentials",
         "POST",
         form
       );
@@ -79,7 +79,7 @@ const RegisterForm = () => {
         return showGeneralError(t("api.general_error"));
       }
 
-      const responseData = await sendRequest("/register", "POST", {
+      const responseData = await sendRequest("/authentication/register", "POST", {
         isSSO: false,
         id: `${user!.id ?? null}`,
         ...form,

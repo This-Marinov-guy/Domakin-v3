@@ -43,7 +43,7 @@ const UserAvatarSetting = () => {
           <Form.Control
             value={editUser.email}
             onChange={(e) => {
-              updateUserDetails("password", e.target.value);
+              updateUserDetails("email", e.target.value);
             }}
             type="email"
             placeholder="companyinc@mail.com"

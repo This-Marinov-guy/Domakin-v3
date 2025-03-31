@@ -7,14 +7,22 @@ import avatar_1 from "@/assets/images/dashboard/avatar_02.jpg";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import Spinner from "react-bootstrap/esm/Spinner";
+import { showGeneralError, showGeneralSuccess } from "@/utils/helpers";
+import { useServer } from "@/hooks/useServer";
 
 const ProfileEditForm = () => {
   const { userStore } = useStore();
-  const { user, updateUserDetails, updateProfile, editUserLoading } = userStore;
+  const { user, editUser, updateUserDetails, updateUser } = userStore;
 
-  const [imagePreview, setImagePreview] = useState<StaticImageData | string>(
-    avatar_1
-  );
+  const { sendRequest } = useServer();
+
+  const [imagePreview, setImagePreview] = useState<StaticImageData | string>();
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<string[]>([]);
+
+  useEffect(() => {
+    setImagePreview(user?.profileImage);
+  }, [user]);
 
   const handleImageChange = (event: any) => {
     const file = event.target.files[0];
@@ -25,13 +33,54 @@ const ProfileEditForm = () => {
     }
   };
 
+  const handleSubmit = async (e: any) => {
+    setLoading(true);
+    setErrors([]);
+
+    try {
+      const formData = new FormData();
+      for (const key in editUser) {
+        if (editUser[key as keyof typeof editUser]) {
+          formData.append(key, editUser[key as keyof typeof editUser]);
+        }
+      }
+
+      const responseData = await sendRequest(
+        "/user/edit-details",
+        "POST",
+        formData
+      );
+
+      if (responseData?.message) {
+        showGeneralError(responseData.data.message);
+      }
+
+      if (responseData?.status) {
+        updateUser({
+          profileImage: responseData.profileImage,
+          name: responseData.name,
+          email: responseData.email,
+          phone: responseData.phone,
+        });
+
+        showGeneralSuccess();
+      } else if (responseData?.errors) {
+        setErrors(responseData.errors);
+      }
+    } catch (error: any) {
+      showGeneralError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <h2 className="main-title d-block d-lg-none">Profile</h2>
       <div className="bg-white card-box border-20">
         <div className="user-avatar-setting d-flex align-items-center mb-30">
           <Image
-            src={imagePreview}
+            src={imagePreview ?? avatar_1}
             alt="User Avatar"
             className="lazy-img user-img"
             width={100}
@@ -48,11 +97,11 @@ const ProfileEditForm = () => {
             />
           </div>
           <button
-            disabled={editUserLoading}
-            onClick={updateProfile}
+            disabled={loading}
+            onClick={handleSubmit}
             className="dash-btn-two tran3s me-3"
           >
-            {editUserLoading ? <Spinner /> : "Save"}
+            {loading ? <Spinner /> : "Save"}
           </button>
         </div>
         <UserAvatarSetting />
