@@ -8,10 +8,8 @@ import { observer } from "mobx-react-lite";
 
 const UserAvatarSetting = () => {
   const { userStore } = useStore();
-  const { user, editUser, updateUserDetails, loadUserEditDetails } = userStore;
+  const { user, editUser, editUserErrors, updateUserDetails, loadUserEditDetails } = userStore;
 
-  const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<string[]>([]);
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -30,10 +28,10 @@ const UserAvatarSetting = () => {
           <Form.Control
             value={editUser.name}
             onChange={(e) => {
-              updateUserDetails("password", e.target.value);
+              updateUserDetails("name", e.target.value);
             }}
             type="text"
-            placeholder="Mr Johny"
+            isInvalid={editUserErrors.includes("name")}
           />
         </div>
       </div>
@@ -46,7 +44,7 @@ const UserAvatarSetting = () => {
               updateUserDetails("email", e.target.value);
             }}
             type="email"
-            placeholder="companyinc@mail.com"
+            isInvalid={editUserErrors.includes("email")}
           />
         </div>
       </div>
@@ -70,9 +68,9 @@ const UserAvatarSetting = () => {
           <PrefixPhoneInput
             value={editUser.phone}
             onChange={(value: string) => {
-               updateUserDetails("phone", value);
+              updateUserDetails("phone", value);
             }}
-            // isInvalid={errors.includes("phone")}
+            isInvalid={editUserErrors.includes("phone")}
           />{" "}
         </div>
       </div>
@@ -88,7 +86,7 @@ const UserAvatarSetting = () => {
           onChange={(e) => {
             updateUserDetails("password", e.target.value);
           }}
-          isInvalid={errors.includes("password")}
+          isInvalid={editUserErrors.includes("password")}
         />
         <span className="placeholder_icon">
           <span className={`passVicon ${isPasswordVisible ? "eye-slash" : ""}`}>
@@ -106,7 +104,7 @@ const UserAvatarSetting = () => {
           //  onChange={(e) => {
           //    handleChange(e);
           //  }}
-          isInvalid={errors.includes("password_confirmation")}
+          isInvalid={editUserErrors.includes("password_confirmation")}
         />
         <span className="placeholder_icon">
           <span className={`passVicon ${isPasswordVisible ? "eye-slash" : ""}`}>

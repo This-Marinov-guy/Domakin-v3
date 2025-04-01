@@ -12,13 +12,13 @@ import { useServer } from "@/hooks/useServer";
 
 const ProfileEditForm = () => {
   const { userStore } = useStore();
-  const { user, editUser, updateUserDetails, updateUser } = userStore;
+  const { user, editUser, updateUserDetails, updateUser, setUpdateErrors } =
+    userStore;
 
   const { sendRequest } = useServer();
 
   const [imagePreview, setImagePreview] = useState<StaticImageData | string>();
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<string[]>([]);
 
   useEffect(() => {
     setImagePreview(user?.profileImage);
@@ -35,7 +35,7 @@ const ProfileEditForm = () => {
 
   const handleSubmit = async (e: any) => {
     setLoading(true);
-    setErrors([]);
+    setUpdateErrors([]);
 
     try {
       const formData = new FormData();
@@ -51,21 +51,17 @@ const ProfileEditForm = () => {
         formData
       );
 
-      if (responseData?.message) {
-        showGeneralError(responseData.data.message);
-      }
-
       if (responseData?.status) {
         updateUser({
-          profileImage: responseData.profileImage,
-          name: responseData.name,
-          email: responseData.email,
-          phone: responseData.phone,
+          profileImage: responseData.data.user.profile_image,
+          name: responseData.data.user.name,
+          email: responseData.data.user.email,
+          phone: responseData.data.user.phone,
         });
 
         showGeneralSuccess();
-      } else if (responseData?.errors) {
-        setErrors(responseData.errors);
+      } else if (responseData?.invalid_fields) {
+        setUpdateErrors(responseData.invalid_fields);
       }
     } catch (error: any) {
       showGeneralError(error.message);

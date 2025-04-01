@@ -24,7 +24,7 @@ export default class UserStore {
     password_confirmation: "",
   };
   @observable editUserLoading = false;
-  @observable editUserErrors = [];
+  @observable editUserErrors: string[] = [];
 
   @action login = async (withError = false) => {
     this.setUserLoading(true);
@@ -80,6 +80,10 @@ export default class UserStore {
   ) => {
     this.editUser[name] = value;
   };
+
+  @action setUpdateErrors = (errors: any) => {
+    this.editUserErrors = errors;
+  }
 
   @action loadUserEditDetails = () => {
     if (!this.user) return;    
