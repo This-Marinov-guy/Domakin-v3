@@ -36,7 +36,7 @@ const RoomSearchingForm = () => {
   ];
 
   const typeOptions = [
-    // { value: "any", text: t("room_searching.type_options.any") },
+    { value: "any", text: t("room_searching.type_options.any") },
     { value: "shared", text: t("room_searching.type_options.shared") },
     { value: "private", text: t("room_searching.type_options.private") },
   ];
