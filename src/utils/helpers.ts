@@ -212,7 +212,7 @@ export const showGeneralError = (error = "Something went wrong!") => {
   });
 };
 
-export const showGeneralSuccess = (message = 'Operation was successful') => {
+export const showGeneralSuccess = (message = "Operation was successful") => {
   toast.success(message as ToastContent, {
     position: "top-center",
     autoClose: 5000,
@@ -259,3 +259,22 @@ export const prefillUserInfo = (callback: Function, user: any | null) => {
     callback("phone", "", user.phone ?? "");
   }
 };
+
+export const snakeToCamelCase = (str: string) => {
+  return str
+    .toLowerCase() // Convert the string to lowercase
+    .replace(/_./g, (match) => match.charAt(1).toUpperCase()); // Capitalize characters after underscores
+};
+
+export const convertKeysToCamelCase = (obj: any) => {
+    const newObj: { [key: string]: any } = {};
+
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        const camelKey = snakeToCamelCase(key);
+        newObj[camelKey] = obj[key];
+      }
+    }
+
+    return newObj;
+}

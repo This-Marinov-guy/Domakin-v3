@@ -1,5 +1,5 @@
 import { SERVER_ENDPOINT } from "@/utils/config";
-import { showGeneralError, showGeneralSuccess } from "@/utils/helpers";
+import { convertKeysToCamelCase, showGeneralError, showGeneralSuccess, snakeToCamelCase } from "@/utils/helpers";
 import supabase from "@/utils/supabase";
 import axios from "axios";
 import { profile } from "console";
@@ -48,22 +48,21 @@ export default class UserStore {
   };
 
   @action setUser = async (session: any) => {
-    const { data } =
-      (await supabase
-        .from("users")
-        .select("phone")
-        .eq("id", session.user.id)
-        .single()) ?? {};
+    const { data } = (await supabase
+      .from("users")
+      .select("phone, profile_image")
+      .eq("id", session.user.id)
+      .single()) ?? {
+      phone: "",
+      profileImage: session.user.user_metadata.avatar_url
+    };
 
     this.user = {
-      ...data,
+      ...convertKeysToCamelCase(data),
       id: session.user.id,
       email: session.user.email,
       token: session.access_token,
-      name: session.user.user_metadata.display_name ?? '-',
-      profileImage:
-        session.user.user_metadata.avatar_url ||
-        "/assets/img/dashboard/avatar_01.jpg",
+      name: session.user.user_metadata.display_name ?? "-",
     };    
   };
 
