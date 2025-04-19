@@ -135,7 +135,7 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
                      <Image src={pathname === '/dashboard/saved-search' ? dashboardIconActive_9 : dashboardIcon_9} alt="" />
                      <span>Saved Search</span>
                   </Link></li> */}
-            <li className="plr">
+            {/* <li className="plr">
               <Link
                 href="/account/review"
                 className={`d-flex w-100 align-items-center ${
@@ -152,7 +152,7 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
                 />
                 <span>Reviews</span>
               </Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
         {/* <div className="profile-complete-status bottom-line pb-35 plr">

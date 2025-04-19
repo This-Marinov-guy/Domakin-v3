@@ -20,8 +20,6 @@ const AuthButton = ({ responsive = false, mobile = false, withLogout = true }: a
 
   const { t } = useTranslation("translations");
 
-  if (ENV_PROD) return;
-
   if (userLoading) {
     return (
       <li
