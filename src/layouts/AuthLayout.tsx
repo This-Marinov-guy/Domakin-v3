@@ -13,7 +13,7 @@ const AuthLayout = ({ children }: any) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {                
-    if (!userLoading && user === null) {
+    if (!userLoading && !user) {
       router.push(
         {
           pathname: "/",

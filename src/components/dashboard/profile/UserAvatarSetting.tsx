@@ -8,7 +8,13 @@ import { observer } from "mobx-react-lite";
 
 const UserAvatarSetting = () => {
   const { userStore } = useStore();
-  const { user, editUser, editUserErrors, updateUserDetails, loadUserEditDetails } = userStore;
+  const {
+    user,
+    editUser,
+    editUserErrors,
+    updateUserDetails,
+    loadUserEditDetails,
+  } = userStore;
 
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
 
@@ -100,10 +106,10 @@ const UserAvatarSetting = () => {
         <Form.Control
           type={isPasswordVisible ? "text" : "password"}
           name="password_confirmation"
-          //  value={form.password_confirmation}
-          //  onChange={(e) => {
-          //    handleChange(e);
-          //  }}
+          value={editUser.password_confirmation}
+          onChange={(e) => {
+            updateUserDetails("password_confirmation", e.target.value);
+          }}
           isInvalid={editUserErrors.includes("password_confirmation")}
         />
         <span className="placeholder_icon">

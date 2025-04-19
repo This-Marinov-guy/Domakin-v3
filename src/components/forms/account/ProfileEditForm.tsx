@@ -7,13 +7,23 @@ import avatar_1 from "@/assets/images/dashboard/avatar_02.jpg";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import Spinner from "react-bootstrap/esm/Spinner";
-import { resizeFile, showGeneralError, showGeneralSuccess } from "@/utils/helpers";
+import {
+  resizeFile,
+  showGeneralError,
+  showGeneralSuccess,
+} from "@/utils/helpers";
 import { useServer } from "@/hooks/useServer";
 
 const ProfileEditForm = () => {
   const { userStore } = useStore();
-  const { user, editUser, updateUserDetails, updateUser, setUpdateErrors } =
-    userStore;
+  const {
+    user,
+    editUser,
+    updateUserDetails,
+    updateUser,
+    setUpdateErrors,
+    refreshSession,
+  } = userStore;
 
   const { sendRequest } = useServer();
 
@@ -25,7 +35,7 @@ const ProfileEditForm = () => {
   }, [user]);
 
   const handleImageChange = async (event: any) => {
-    const file = await resizeFile(event.target.files[0], 300, 300); 
+    const file = await resizeFile(event.target.files[0], 300, 300);
 
     if (file && file instanceof Blob) {
       const imageUrl = URL.createObjectURL(file);
