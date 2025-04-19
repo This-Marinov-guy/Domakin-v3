@@ -63,10 +63,6 @@ export const useServer = () => {
       sessionCookie ?? ""
     );
 
-    if (user && !!(user.token ?? null)) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
-    }
-
     let requestData = {};
 
     if (["GET", "DELETE"].includes(method)) {

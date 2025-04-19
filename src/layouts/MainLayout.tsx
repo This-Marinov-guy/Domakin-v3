@@ -11,6 +11,7 @@ import setLanguage from "next-translate/setLanguage";
 import { LANGUAGES } from "@/utils/defines";
 import supabase from "@/utils/supabase";
 import ErrorLayout from "@/pages/_error";
+import { SESSION_REFRESH_INTERVAL } from "@/utils/config";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
@@ -25,7 +26,7 @@ const MainLayout = ({ children }: any) => {
     commonStore: { toggleFeedbackLoading, setFeedbacks },
     blogStore: { toggleBlogLoading, setBlogPosts },
     propertyStore: { togglePropertiesLoading, setProperties },
-    userStore: { login },
+    userStore: { login, refreshSession, user },
   } = useStore();
 
   const loadFeedback = async () => {
@@ -114,6 +115,10 @@ const MainLayout = ({ children }: any) => {
   const loadUser = async () => {
     try {
       await login();
+
+      setInterval(async () => {
+        await refreshSession();
+      }, SESSION_REFRESH_INTERVAL);
     } catch (error) {}
   };
 

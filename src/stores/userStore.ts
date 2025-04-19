@@ -1,5 +1,10 @@
 import { SERVER_ENDPOINT } from "@/utils/config";
-import { convertKeysToCamelCase, showGeneralError, showGeneralSuccess, snakeToCamelCase } from "@/utils/helpers";
+import {
+  convertKeysToCamelCase,
+  showGeneralError,
+  showGeneralSuccess,
+  snakeToCamelCase,
+} from "@/utils/helpers";
 import supabase from "@/utils/supabase";
 import axios from "axios";
 import { profile } from "console";
@@ -41,10 +46,32 @@ export default class UserStore {
     }
 
     this.setUserLoading(false);
+
+    return !!session;
   };
 
   setUserLoading = (loading: boolean) => {
     this.userLoading = loading;
+  };
+
+  @action refreshSession = async () => {
+    if (!this.user) return;
+
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.refreshSession();
+
+    if (!error && session) {
+      this.user = {
+        ...this.user,
+        token: session.access_token,
+      };
+
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${session.access_token}`;
+    }
   };
 
   @action setUser = async (session: any) => {
@@ -54,7 +81,7 @@ export default class UserStore {
       .eq("id", session.user.id)
       .single()) ?? {
       phone: "",
-      profileImage: session.user.user_metadata.avatar_url
+      profileImage: session.user.user_metadata.avatar_url,
     };
 
     this.user = {
@@ -63,7 +90,11 @@ export default class UserStore {
       email: session.user.email,
       token: session.access_token,
       name: session.user.user_metadata.display_name ?? "-",
-    };    
+    };
+
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${session.access_token}`;
   };
 
   @action updateUser = (data: any) => {
@@ -82,10 +113,10 @@ export default class UserStore {
 
   @action setUpdateErrors = (errors: any) => {
     this.editUserErrors = errors;
-  }
+  };
 
   @action loadUserEditDetails = () => {
-    if (!this.user) return;    
+    if (!this.user) return;
 
     this.editUser = {
       ...this.editUser,
