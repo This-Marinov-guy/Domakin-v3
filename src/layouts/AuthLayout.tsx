@@ -2,7 +2,7 @@ import PageLoader from "@/components/ui/loading/PageLoader";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const AuthLayout = ({ children }: any) => {
   const {
@@ -11,9 +11,11 @@ const AuthLayout = ({ children }: any) => {
 
   const router = useRouter();
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     if (userLoading) return;
-    
+
     if (!user) {
       router.push(
         {
@@ -23,10 +25,12 @@ const AuthLayout = ({ children }: any) => {
         undefined,
         { shallow: true }
       );
+    } else {
+      setLoading(false);
     }
   }, [user, router]);
 
-  if (userLoading) {
+  if (userLoading || loading) {
     return <PageLoader />;
   }
 
