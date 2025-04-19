@@ -10,7 +10,7 @@ import Badge from "react-bootstrap/Badge";
 import useTranslation from "next-translate/useTranslation";
 import LogoutButton from "./LogoutButton";
 
-const AuthButton = ({ responsive = false, mobile = false }: any) => {
+const AuthButton = ({ responsive = false, mobile = false, withLogout = true }: any) => {
   const {
     modalStore,
     userStore: { user, logout, userLoading },
@@ -29,8 +29,8 @@ const AuthButton = ({ responsive = false, mobile = false }: any) => {
           responsive
             ? "d-inline-block ms-3"
             : mobile
-            ? "d-none d-lg-inline-block ms-3"
-            : "d-block d-lg-none d-md-inline-block ms-3 mt-10"
+            ? "d-block d-lg-none d-md-inline-block ms-3 mt-10"
+            : "d-none d-lg-inline-block ms-3"
         }
       >
         <Spinner />
@@ -44,8 +44,8 @@ const AuthButton = ({ responsive = false, mobile = false }: any) => {
         responsive
           ? "d-inline-block ms-3"
           : mobile
-          ? "d-none d-lg-inline-block ms-3"
-          : "d-block d-lg-none d-md-inline-block ms-3 mt-10"
+          ? "d-block d-lg-none d-md-inline-block ms-3 mt-10"
+          : "d-none d-lg-inline-block ms-3"
       }
     >
       {user !== null ? (
@@ -63,7 +63,7 @@ const AuthButton = ({ responsive = false, mobile = false }: any) => {
               className="avatar"
             />
           </div>
-          <LogoutButton />
+          {withLogout && <LogoutButton />}
         </div>
       ) : (
         <button

@@ -60,7 +60,7 @@ const HeaderOne = ({ style }: any) => {
               </Link>
             </div>
             <div className="right-widget ms-auto ms-lg-0 me-3 me-lg-0 order-lg-3">
-              <ul className="d-flex align-items-center style-none">
+              <ul className="d-flex align-items-center style-none mr-10">
                 <li className="d-none d-lg-inline-block ms-3">
                   <ChangeLanguage />
                 </li>
@@ -71,7 +71,7 @@ const HeaderOne = ({ style }: any) => {
                   </Link>
                 </li>
 
-                <AuthButton mobile/>
+                <AuthButton withLogout={false} />
               </ul>
             </div>
             <nav className="navbar navbar-expand-lg p0 order-lg-2">
