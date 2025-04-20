@@ -65,12 +65,12 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
               <Link
                 href="/account"
                 className={`d-flex w-100 align-items-center ${
-                  pathname === "/dashboard/profile" ? "active" : ""
+                  pathname === "/account" ? "active" : ""
                 }`}
               >
                 <Image
                   src={
-                    pathname === "/dashboard/profile"
+                    pathname === "/account"
                       ? dashboardIconActive_3
                       : dashboardIcon_3
                   }
@@ -95,12 +95,12 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
               <Link
                 href="/account/properties-list"
                 className={`d-flex w-100 align-items-center ${
-                  pathname === "/dashboard/properties-list" ? "active" : ""
+                  pathname === "/account/my-listings" ? "active" : ""
                 }`}
               >
                 <Image
                   src={
-                    pathname === "/dashboard/properties-list"
+                    pathname === "/account/my-listings"
                       ? dashboardIconActive_6
                       : dashboardIcon_6
                   }
@@ -111,20 +111,20 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
             </li>
             <li className="plr">
               <Link
-                href="/account/add-property"
+                href="/account/add-listing"
                 className={`d-flex w-100 align-items-center ${
-                  pathname === "/dashboard/add-property" ? "active" : ""
+                  pathname === "/account/add-listing" ? "active" : ""
                 }`}
               >
                 <Image
                   src={
-                    pathname === "/dashboard/add-property"
+                    pathname === "/account/add-listing"
                       ? dashboardIconActive_7
                       : dashboardIcon_7
                   }
                   alt=""
                 />
-                <span>Add New Property</span>
+                <span>Add New Listing</span>
               </Link>
             </li>
             {/* <li className="plr"><Link href="/account/favourites" className={`d-flex w-100 align-items-center ${pathname === '/dashboard/favourites' ? 'active' : ''}`}>
