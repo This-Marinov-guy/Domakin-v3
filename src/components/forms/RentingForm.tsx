@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Spinner from "react-bootstrap/Spinner";
 import useTranslation from "next-translate/useTranslation";
@@ -9,7 +9,7 @@ import { observer } from "mobx-react-lite";
 import { useServer } from "@/hooks/useServer";
 import { toast, ToastContent } from "react-toastify";
 import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
-import { transformToFormData } from "@/utils/helpers";
+import { prefillUserInfo, transformToFormData } from "@/utils/helpers";
 import Trans from "next-translate/Trans";
 
 const RentingForm = ({ refElement, property }: any) => {
@@ -27,6 +27,7 @@ const RentingForm = ({ refElement, property }: any) => {
       addRentingErrorFields,
       resetRentingData,
     },
+    userStore: { user },
   } = useStore();
 
   const handleSubmit = async (e: any) => {
@@ -38,7 +39,7 @@ const RentingForm = ({ refElement, property }: any) => {
       "POST",
       transformToFormData({
         ...rentingData,
-        property: `${property.  id} | ${property.title} | ${property.location}`,
+        property: `${property.id} | ${property.title} | ${property.location}`,
       })
     ).then((res) => {
       if (res?.status) {
@@ -49,6 +50,10 @@ const RentingForm = ({ refElement, property }: any) => {
       }
     });
   };
+
+  useEffect(() => {
+    prefillUserInfo(updateRentingData, user);
+  }, [user]);
 
   if (success) {
     refElement.current = null;

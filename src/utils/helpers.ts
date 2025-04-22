@@ -260,6 +260,25 @@ export const prefillUserInfo = (callback: Function, user: any | null) => {
   }
 };
 
+export const prefillNestedUserInfo = (
+  key: string,
+  callback: Function,
+  user: any | null
+) => {
+  if (!user) {
+    return;
+  }
+
+  callback(key, "name", user.name.split(" ")[0] ?? "");
+  callback(key, "surname", user.name.split(" ")[1] ?? "");
+  callback(key, "email", user.email ?? "");
+
+  // or else we will set the code to null
+  if (user.phone) {
+    callback(key, "phone", user.phone ?? "");
+  }
+};
+
 export const snakeToCamelCase = (str: string) => {
   return str
     .toLowerCase() // Convert the string to lowercase
@@ -267,14 +286,14 @@ export const snakeToCamelCase = (str: string) => {
 };
 
 export const convertKeysToCamelCase = (obj: any) => {
-    const newObj: { [key: string]: any } = {};
+  const newObj: { [key: string]: any } = {};
 
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        const camelKey = snakeToCamelCase(key);
-        newObj[camelKey] = obj[key];
-      }
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const camelKey = snakeToCamelCase(key);
+      newObj[camelKey] = obj[key];
     }
+  }
 
-    return newObj;
-}
+  return newObj;
+};

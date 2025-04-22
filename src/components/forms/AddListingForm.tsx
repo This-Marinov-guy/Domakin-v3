@@ -9,7 +9,11 @@ import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import { useServer } from "@/hooks/useServer";
-import { transformToFormData } from "@/utils/helpers";
+import {
+  prefillNestedUserInfo,
+  prefillUserInfo,
+  transformToFormData,
+} from "@/utils/helpers";
 import { toast } from "react-toastify";
 
 const AddListingForm = () => {
@@ -25,6 +29,7 @@ const AddListingForm = () => {
       addErrorFields,
       errorFields,
     },
+    userStore: { user },
   } = useStore();
 
   const handleSubmit = async (e: any) => {
@@ -58,6 +63,10 @@ const AddListingForm = () => {
   useEffect(() => {
     propertyStore.loadListingData();
   }, []);
+
+  useEffect(() => {
+    prefillNestedUserInfo("personalData", updateListingData, user);
+  }, [user]);
 
   return (
     <form className="form-style-one wow fadeInUp pt-40 pb-40">

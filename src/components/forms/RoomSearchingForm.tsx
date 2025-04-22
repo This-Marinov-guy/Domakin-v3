@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Trans from "next-translate/Trans";
 import Spinner from "react-bootstrap/Spinner";
@@ -10,7 +10,7 @@ import { toast, ToastContent } from "react-toastify";
 import SingleDatePicker from "../ui/inputs/dates/SingleDatePicker";
 import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
 import NiceSelect from "@/ui/NiceSelect";
-import { transformToFormData } from "@/utils/helpers";
+import { prefillUserInfo, transformToFormData } from "@/utils/helpers";
 
 const RoomSearchingForm = () => {
   const { t } = useTranslation("translations");
@@ -49,6 +49,7 @@ const RoomSearchingForm = () => {
       addSearchingErrorFields,
       resetSearchingData,
     },
+    userStore: { user },
   } = useStore();
 
   const handleSubmit = async (e: any) => {
@@ -78,6 +79,10 @@ const RoomSearchingForm = () => {
       }
     });
   };
+
+    useEffect(() => {
+      prefillUserInfo(updateSearchingData, user);
+    }, [user]);
 
   return (
     <form className="form-style-one wow fadeInUp pt-40 pb-40">
