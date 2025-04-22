@@ -91,7 +91,7 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
             <li>
               <div className="nav-title">Listing</div>
             </li>
-            <li className="plr">
+            {/* <li className="plr">
               <Link
                 href="/account/properties-list"
                 className={`d-flex w-100 align-items-center ${
@@ -108,7 +108,7 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
                 />
                 <span>My Properties</span>
               </Link>
-            </li>
+            </li> */}
             <li className="plr">
               <Link
                 href="/account/add-listing"
