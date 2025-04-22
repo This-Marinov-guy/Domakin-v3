@@ -28,7 +28,8 @@ const LoginForm = () => {
   const router = useRouter();
 
   const {
-    commonStore: { loading, startLoading, stopLoading }, userStore
+    commonStore: { loading, startLoading, stopLoading },
+    userStore,
   } = useStore();
 
   const [form, setForm] = useState(defaultData);
@@ -69,7 +70,10 @@ const LoginForm = () => {
     setErrors([]);
 
     try {
-      const { error, data: {session} } = await supabase.auth.signInWithPassword(form);
+      const {
+        error,
+        data: { session },
+      } = await supabase.auth.signInWithPassword(form);
 
       if (error) {
         showStandardNotification(
@@ -81,7 +85,13 @@ const LoginForm = () => {
 
       await userStore.setUser(session);
       modalStore.closeAll();
-      router.push("/account");
+
+      if (sessionStorage.getItem("redirect")) {
+        router.push(sessionStorage.getItem("redirect") as string);
+        sessionStorage.removeItem("redirect");
+      } else {
+        router.push("/account");
+      }
     } catch (error) {
       showGeneralError(t("api.general_error"));
     } finally {

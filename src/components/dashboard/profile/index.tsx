@@ -1,12 +1,10 @@
-import DashboardHeaderOne from "@/layouts/headers/dashboard/DashboardHeaderOne";
-import ProfileBody from "./ProfileBody";
-import DashboardHeaderTwo from "@/layouts/headers/dashboard/DashboardHeaderTwo";
+import ProfileEditForm from "@/components/forms/account/ProfileEditForm";
 import DashboardFrame from "@/layouts/frames/DashboardFrame";
 
 const DashboardProfile = () => {
   return (
     <DashboardFrame title="Profile">
-      <ProfileBody />
+      <ProfileEditForm />
     </DashboardFrame>
   );
 };

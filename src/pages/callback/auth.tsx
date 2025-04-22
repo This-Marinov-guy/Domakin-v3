@@ -25,16 +25,23 @@ export default function AuthCallback() {
         if (session) {
           await setUser(session);
 
-          const responseData = await sendRequest("/authentication/register", "POST", {
-            isSSO: true,
-            id: session.user.id,
-            name: session.user.user_metadata.full_name,
-            email: session.user.user_metadata.email,
-            phone: session.user.phone,
-            profile_image: session.user.user_metadata.avatar_url,
-          });
-  
-          if (responseData?.status) {
+          const responseData = await sendRequest(
+            "/authentication/register",
+            "POST",
+            {
+              isSSO: true,
+              id: session.user.id,
+              name: session.user.user_metadata.full_name,
+              email: session.user.user_metadata.email,
+              phone: session.user.phone,
+              profile_image: session.user.user_metadata.avatar_url,
+            }
+          );
+
+          if (responseData?.status && sessionStorage.getItem("redirect")) {
+            router.push(sessionStorage.getItem("redirect") as string);
+            sessionStorage.removeItem("redirect");
+          } else if (responseData?.status) {
             router.push("/account");
           } else {
             showGeneralError(t("api.general_error"));
@@ -43,7 +50,6 @@ export default function AuthCallback() {
         } else if (error) {
           return showGeneralError(error?.message);
         }
-
       } catch (error) {
         router.push("/?error=auth");
       }

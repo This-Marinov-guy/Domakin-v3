@@ -17,6 +17,7 @@ const AuthLayout = ({ children }: any) => {
     if (userLoading) return;
 
     if (!user) {
+      sessionStorage.setItem("redirect", router.asPath);
       router.push(
         {
           pathname: "/",

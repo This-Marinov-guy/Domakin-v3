@@ -27,6 +27,7 @@ import dashboardIcon_9 from "@/assets/images/dashboard/icon/icon_9.svg";
 import dashboardIconActive_10 from "@/assets/images/dashboard/icon/icon_10_active.svg";
 import dashboardIcon_10 from "@/assets/images/dashboard/icon/icon_10.svg";
 import dashboardIcon_11 from "@/assets/images/dashboard/icon/icon_41.svg";
+import dashboardIcon_12 from "@/assets/images/dashboard/icon/icon_32.svg";
 import footerLogo from "@/assets/img/logo-transparent.png";
 import LogoutButton from "../Menu/LogoutButton";
 
@@ -77,6 +78,24 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
                   alt=""
                 />
                 <span>Profile</span>
+              </Link>
+            </li>
+            <li className="plr">
+              <Link
+                href="/account/referral-code"
+                className={`d-flex w-100 align-items-center ${
+                  pathname === "/account/referral-code" ? "active" : ""
+                }`}
+              >
+                <Image
+                  src={
+                    pathname === "/account/referral-code"
+                      ? dashboardIcon_12
+                      : dashboardIcon_12
+                  }
+                  alt=""
+                />
+                <span>Referral Code</span>
               </Link>
             </li>
             {/* <li className="plr"><Link href="/account/account-settings" className={`d-flex w-100 align-items-center ${pathname === '/dashboard/account-settings' ? 'active' : ''}`}>
