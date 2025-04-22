@@ -24,7 +24,7 @@ const AddListingForm = () => {
   const {
     propertyStore,
     propertyStore: {
-      addListingData: { personalData, propertyData, terms },
+      addListingData: { personalData, propertyData, terms, referralCode },
       updateListingData,
       addErrorFields,
       errorFields,
@@ -280,6 +280,20 @@ const AddListingForm = () => {
                 isInvalid={errorFields.includes("propertyData.description")}
               />
               <small>* {t("emergency_housing.description_disclaimer")}</small>
+            </div>
+          </div>
+
+          <div className="col-6">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("emergency_housing.referral_code")}</label>
+              <Form.Control
+                type="text"
+                value={referralCode}
+                onChange={(e) => {
+                  updateListingData("referralCode", "", e.target.value);
+                }}
+                isInvalid={errorFields.includes("referralCode")}
+              />
             </div>
           </div>
 

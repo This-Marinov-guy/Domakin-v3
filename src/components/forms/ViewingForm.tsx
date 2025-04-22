@@ -175,6 +175,20 @@ const ViewingForm = () => {
           </div>
         </div>
 
+        <div className="col-6">
+          <div className="input-group-meta form-group mb-30">
+            <label htmlFor="">{t("emergency_housing.referral_code")}</label>
+            <Form.Control
+              type="text"
+              value={viewingData.referralCode}
+              onChange={(e) => {
+                updateViewingData("referralCode", "", e.target.value);
+              }}
+              isInvalid={viewingErrorFields.includes("referralCode")}
+            />
+          </div>
+        </div>
+
         <div className="col-12">
           <div className="input-group-meta form-group mb-40">
             <Form.Control

@@ -80,9 +80,9 @@ const RoomSearchingForm = () => {
     });
   };
 
-    useEffect(() => {
-      prefillUserInfo(updateSearchingData, user);
-    }, [user]);
+  useEffect(() => {
+    prefillUserInfo(updateSearchingData, user);
+  }, [user]);
 
   return (
     <form className="form-style-one wow fadeInUp pt-40 pb-40">
@@ -285,6 +285,20 @@ const RoomSearchingForm = () => {
           >
             {t("files.download")}
           </a>
+        </div>
+
+        <div className="col-6">
+          <div className="input-group-meta form-group mb-30">
+            <label htmlFor="">{t("emergency_housing.referral_code")}</label>
+            <Form.Control
+              type="text"
+              value={searchingData.referralCode}
+              onChange={(e) => {
+                updateSearchingData("referralCode", "", e.target.value);
+              }}
+              isInvalid={searchingErrorFields.includes("referralCode")}
+            />
+          </div>
         </div>
 
         <div className="col-12">

@@ -259,6 +259,7 @@
     "surname": "Surname",
     "phone": "Phone (+ and country code)",
     "email": "Email",
+    "referral_code": "Referral code (optional)",
     "brief_description": "Briefly describe yourself",
     "property_information": "Property information",
     "location": "Location",

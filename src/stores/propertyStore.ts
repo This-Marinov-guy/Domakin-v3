@@ -20,6 +20,8 @@ const defaultFormData = {
     description: "",
   },
 
+  referralCode: "",
+
   terms: {
     contact: false,
     legals: false,
@@ -96,5 +98,10 @@ export default class PropertyStore {
   @action
   togglePropertiesLoading = () => {
     this.propertiesLoading = !this.propertiesLoading;
+  };
+
+  @action
+  setReferralCode = (code: string) => {
+    this.addListingData.referralCode = code;
   };
 }

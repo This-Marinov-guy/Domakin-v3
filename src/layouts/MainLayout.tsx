@@ -12,6 +12,7 @@ import { LANGUAGES } from "@/utils/defines";
 import supabase from "@/utils/supabase";
 import ErrorLayout from "@/pages/_error";
 import { SESSION_REFRESH_INTERVAL } from "@/utils/config";
+import { useRouter } from "next/router";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
@@ -22,11 +23,14 @@ const MainLayout = ({ children }: any) => {
 
   const { t, lang } = useTranslation();
 
+  const router = useRouter();
+
   const {
     commonStore: { toggleFeedbackLoading, setFeedbacks },
     blogStore: { toggleBlogLoading, setBlogPosts },
-    propertyStore: { togglePropertiesLoading, setProperties },
+    propertyStore: { togglePropertiesLoading, setProperties, setReferralCode },
     userStore: { login, refreshSession, user },
+    serviceStore,
   } = useStore();
 
   const loadFeedback = async () => {
@@ -129,6 +133,13 @@ const MainLayout = ({ children }: any) => {
     loadBlog();
     fetchLanguage();
   }, []);
+
+  useEffect(() => {
+    if (router.query.ref) {
+      serviceStore.setReferralCode(router.query.ref as string);
+      setReferralCode(router.query.ref as string);
+    }
+  }, [router.query.ref]);
 
   return (
     <ErrorLayout>

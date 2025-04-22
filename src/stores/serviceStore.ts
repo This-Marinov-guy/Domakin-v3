@@ -10,6 +10,7 @@ const defaultViewingData = {
   date: "",
   time: "",
   note: "",
+  referralCode: "",
 
   terms: {
     contact: false,
@@ -24,13 +25,14 @@ const defaultSearchingData = {
   phone: "",
   city: "",
   registration: true,
-  budget: '',
-  type: '',
-  people: '',
-  moveIn: '',
-  period: '',
+  budget: "",
+  type: "",
+  people: "",
+  moveIn: "",
+  period: "",
   letter: null,
   note: "",
+  referralCode: "",
 
   terms: {
     contact: false,
@@ -46,6 +48,7 @@ const defaultRentingData = {
   phone: "",
   letter: null,
   note: "",
+  referralCode: '',
 
   terms: {
     contact: false,
@@ -129,4 +132,11 @@ export default class ServiceStore {
   resetRentingData = () => {
     this.rentingData = { ...defaultRentingData };
   };
+
+  @action
+  setReferralCode = (code: string) => {
+    this.viewingData.referralCode = code;
+    this.searchingData.referralCode = code;
+    this.rentingData.referralCode = code;
+  }
 }
