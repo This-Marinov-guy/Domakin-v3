@@ -16,7 +16,7 @@ const defaultFormData = {
     rent: "",
     bills: "",
     flatmates: "",
-    registration: "",
+    registration: "yes",
     description: "",
   },
 
