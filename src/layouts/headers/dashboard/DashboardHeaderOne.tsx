@@ -113,12 +113,12 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
               <Link
                 href="/account/properties-list"
                 className={`d-flex w-100 align-items-center ${
-                  pathname === "/account/my-listings" ? "active" : ""
+                  pathname === "/account/properties-list" ? "active" : ""
                 }`}
               >
                 <Image
                   src={
-                    pathname === "/account/my-listings"
+                    pathname === "/account/properties-list"
                       ? dashboardIconActive_6
                       : dashboardIcon_6
                   }

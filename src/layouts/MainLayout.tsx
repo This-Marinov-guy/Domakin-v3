@@ -28,7 +28,7 @@ const MainLayout = ({ children }: any) => {
   const {
     commonStore: { toggleFeedbackLoading, setFeedbacks },
     blogStore: { toggleBlogLoading, setBlogPosts },
-    propertyStore: { togglePropertiesLoading, setProperties, setReferralCode },
+    propertyStore: { setListingLoading, setProperties, setReferralCode },
     userStore: { login, refreshSession, user },
     serviceStore,
   } = useStore();
@@ -57,13 +57,19 @@ const MainLayout = ({ children }: any) => {
   };
 
   const loadProperties = async () => {
-    // togglePropertiesLoading();
-    // const forRentList: any[] = t("FOR_RENT", {}, { returnObjects: true }) ?? [];
-    // const properties = forRentList.filter(
-    //   (p: any) => p.hidden == false || p.hidden === undefined
-    // );
-    // setProperties(properties);
-    // togglePropertiesLoading();
+    setListingLoading(true);
+
+    try {
+      const response = await sendRequest("/property/listing");
+
+      if (response?.status) {
+        setProperties(response.data);
+      }
+    } catch (error) {
+      console.error("Error loading listing:", error);
+    }
+
+    setListingLoading(false);
   };
 
   const fetchLanguage = async () => {

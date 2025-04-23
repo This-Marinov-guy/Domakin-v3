@@ -100,8 +100,8 @@ export default class PropertyStore {
   };
 
   @action
-  togglePropertiesLoading = () => {
-    this.propertiesLoading = !this.propertiesLoading;
+  setListingLoading = (loading: boolean) => {
+    this.propertiesLoading = loading;
   };
 
   @action
