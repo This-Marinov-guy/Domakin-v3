@@ -26,6 +26,7 @@ const SingleDatePicker = (props: any) => {
           captionLayout="dropdown"
           selected={props.value}
           onSelect={(date: any) => handleDateSelect(date)}
+          {...props}
         />
       </div>
     </div>

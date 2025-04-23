@@ -84,7 +84,9 @@ export default class ServiceStore {
 
   @action
   resetViewingData = () => {
-    this.viewingData = { ...defaultViewingData };
+    const referralCode = this.viewingData.referralCode;
+
+    this.viewingData = { ...defaultViewingData, referralCode };
   };
 
   // room searching
@@ -107,7 +109,9 @@ export default class ServiceStore {
 
   @action
   resetSearchingData = () => {
-    this.searchingData = { ...defaultSearchingData };
+    const referralCode = this.searchingData.referralCode;
+
+    this.searchingData = { ...defaultSearchingData, referralCode };
   };
 
   // renting
@@ -130,7 +134,9 @@ export default class ServiceStore {
 
   @action
   resetRentingData = () => {
-    this.rentingData = { ...defaultRentingData };
+    const referralCode = this.rentingData.referralCode;
+
+    this.rentingData = { ...defaultRentingData, referralCode };
   };
 
   @action
