@@ -94,7 +94,7 @@ const ProfileEditForm = () => {
             height={100}
           />
           <div className="upload-btn position-relative tran3s ms-4 me-3">
-            Upload new photo
+            Photo
             <input
               type="file"
               id="uploadImg"
