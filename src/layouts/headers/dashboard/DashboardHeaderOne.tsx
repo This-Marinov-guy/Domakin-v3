@@ -3,31 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import footerLogo_1 from "@/assets/images/logo/logo_01.svg";
-import footerLogo_2 from "@/assets/images/logo/logo_03.svg";
-import dashboardLogo from "@/assets/images/logo/logo_01.svg";
-import dashboardIconActive_1 from "@/assets/images/dashboard/icon/icon_1_active.svg";
-import dashboardIcon_1 from "@/assets/images/dashboard/icon/icon_1.svg";
-import dashboardIconActive_2 from "@/assets/images/dashboard/icon/icon_2_active.svg";
-import dashboardIcon_2 from "@/assets/images/dashboard/icon/icon_2.svg";
 import dashboardIconActive_3 from "@/assets/images/dashboard/icon/icon_3_active.svg";
 import dashboardIcon_3 from "@/assets/images/dashboard/icon/icon_3.svg";
-import dashboardIconActive_4 from "@/assets/images/dashboard/icon/icon_4_active.svg";
-import dashboardIcon_4 from "@/assets/images/dashboard/icon/icon_4.svg";
-import dashboardIconActive_5 from "@/assets/images/dashboard/icon/icon_5_active.svg";
-import dashboardIcon_5 from "@/assets/images/dashboard/icon/icon_5.svg";
-import dashboardIconActive_6 from "@/assets/images/dashboard/icon/icon_6_active.svg";
-import dashboardIcon_6 from "@/assets/images/dashboard/icon/icon_6.svg";
 import dashboardIconActive_7 from "@/assets/images/dashboard/icon/icon_7_active.svg";
 import dashboardIcon_7 from "@/assets/images/dashboard/icon/icon_7.svg";
-import dashboardIconActive_8 from "@/assets/images/dashboard/icon/icon_8_active.svg";
-import dashboardIcon_8 from "@/assets/images/dashboard/icon/icon_8.svg";
-import dashboardIconActive_9 from "@/assets/images/dashboard/icon/icon_9_active.svg";
-import dashboardIcon_9 from "@/assets/images/dashboard/icon/icon_9.svg";
-import dashboardIconActive_10 from "@/assets/images/dashboard/icon/icon_10_active.svg";
-import dashboardIcon_10 from "@/assets/images/dashboard/icon/icon_10.svg";
-import dashboardIcon_11 from "@/assets/images/dashboard/icon/icon_41.svg";
 import dashboardIcon_12 from "@/assets/images/dashboard/icon/icon_32.svg";
+import dashboardIconActive_12 from "@/assets/images/dashboard/icon/icon_32_active.svg";
 import footerLogo from "@/assets/img/logo-transparent.png";
 import LogoutButton from "../Menu/LogoutButton";
 
@@ -90,7 +71,7 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
                 <Image
                   src={
                     pathname === "/account/referral-code"
-                      ? dashboardIcon_12
+                      ? dashboardIconActive_12
                       : dashboardIcon_12
                   }
                   alt=""
