@@ -277,6 +277,29 @@ iframe {
   padding-right: 10px;
 }
 
+@for $i from 0 through 100 {
+  .mx-#{$i} {
+    margin-left: #{$i}px;
+    margin-right: #{$i}px;
+  }
+
+  .my-#{$i} {
+    margin-top: #{$i}px;
+    margin-bottom: #{$i}px;
+  }
+
+  .px-#{$i} {
+    padding-left: #{$i}px;
+    padding-right: #{$i}px;
+  }
+
+  .py-#{$i} {
+     padding-top: #{$i}px;
+    padding-bottom: #{$i}px;
+  }
+}
+
+
 .m-a {
   margin-left: auto;
   margin-right: auto;

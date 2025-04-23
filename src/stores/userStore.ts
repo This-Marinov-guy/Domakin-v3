@@ -18,6 +18,8 @@ export default class UserStore {
     this.rootStore = root;
   }
 
+  @observable referralCode = "";
+
   @observable userLoading = true;
   @observable user: any = null;
   @observable editUser = {
@@ -95,6 +97,18 @@ export default class UserStore {
     axios.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${session.access_token}`;
+  };
+
+  @action loadReferralCode = async () => {
+    const { data } = (await supabase
+      .from("users")
+      .select("referral_code")
+      .eq("id", this.user.id)
+      .single()) ?? {
+      data: { referral_code: "" }
+    };
+
+    this.referralCode = data?.referral_code || "";
   };
 
   @action updateUser = (data: any) => {
