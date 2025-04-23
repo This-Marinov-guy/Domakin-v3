@@ -1,8 +1,9 @@
 export const ENV_PROD = process.env.NODE_ENV === "production";
 
 // social
-export const EMAIL = 'info@domakin.nl';
-export const FACEBOOK = "https://www.facebook.com/profile.php?id=100093230497851";
+export const EMAIL = "info@domakin.nl";
+export const FACEBOOK =
+  "https://www.facebook.com/profile.php?id=100093230497851";
 export const INSTAGRAM = "https://www.instagram.com/domakin.nl/";
 export const LINKEDIN = "https://www.linkedin.com/company/domakin/";
 
@@ -30,16 +31,16 @@ export const TEAM_SOCIALS = [
   },
 ];
 
-export const ADDRESS = '';
-export const PHONE = '';
+export const ADDRESS = "";
+export const PHONE = "";
 
 // status
 export const STATUS_COLORS = {
-    0: 'bg-green',
-    1: 'bg-orange',
-    2: 'bg-red'
-}
-export const LANGUAGES = ['en', 'bg', 'gr']
+  0: "bg-green",
+  1: "bg-orange",
+  2: "bg-red",
+};
+export const LANGUAGES = ["en", "bg", "gr"];
 
 // prices
 export const REFERRAL_BONUS = 50;
@@ -57,17 +58,25 @@ export const DISCOUNTS = {
 };
 
 // KVK
-export const KVK = '90831268'
+export const KVK = "90831268";
 
 //views
-export const LIST = '1';
-export const GRID = '2';
+export const LIST = "1";
+export const GRID = "2";
 
 //modals
-export const COOKIE_MODAL = 'COOKIE_MODAL';
-export const LOGIN_MODAL = 'LOGIN_MODAL';
+export const COOKIE_MODAL = "COOKIE_MODAL";
+export const LOGIN_MODAL = "LOGIN_MODAL";
 
 // tabs
 export const FORGOTTEN_PASS = 2;
 export const SIGN_UP = 1;
 export const LOGIN_IN = 0;
+
+//links
+export const VIEWING_URL = (process.env.NEXT_PUBLIC_URL + "/services/viewing").slice(7);
+export const RENTING_URL = (process.env.NEXT_PUBLIC_URL + "/services/renting").slice(7);
+export const ADD_LISTING_URL =
+  (process.env.NEXT_PUBLIC_URL + "/services/add-listing").slice(7);
+export const SEARCH_RENTING =
+  (process.env.NEXT_PUBLIC_URL + "/services/room-searching").slice(7);

@@ -5,6 +5,12 @@ import { toast } from "react-toastify";
 import { Form, InputGroup, Button } from "react-bootstrap";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
+import {
+  VIEWING_URL,
+  RENTING_URL,
+  ADD_LISTING_URL,
+  SEARCH_RENTING,
+} from "@/utils/defines";
 
 const ReferralCode = () => {
   const [copied, setCopied] = useState(false);
@@ -17,8 +23,8 @@ const ReferralCode = () => {
     loadReferralCode();
   }, []);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(referralCode);
+  const handleCopy = (link = "") => {
+    navigator.clipboard.writeText(link || referralCode);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
 
@@ -47,11 +53,63 @@ const ReferralCode = () => {
           <h6 className="text-lg font-semibold">Your Referral Code</h6>
           <InputGroup style={{ maxWidth: "14em" }}>
             <Form.Control type="text" readOnly value={referralCode} />
-            <Button variant="outline-dark" onClick={handleCopy}>
+            <Button variant="outline-dark" onClick={() => handleCopy()}>
               <i className="fa-regular fa-clone"></i>
             </Button>
           </InputGroup>
         </div>
+
+        <h5 className="mt-40">Quick links of our services - click to copy</h5>
+        <ul className="mt-20">
+          <li>
+            <p>
+              Add Listing:{" "}
+              <strong
+                style={{ cursor: "pointer" }}
+                onClick={() =>
+                  handleCopy(ADD_LISTING_URL + `?ref=${referralCode}`)
+                }
+              >
+                <u>{ADD_LISTING_URL + `?ref=${referralCode}`}</u>
+              </strong>
+            </p>
+          </li>
+          <li>
+            <p>
+              Viewing:{" "}
+              <strong
+                style={{ cursor: "pointer" }}
+                onClick={() => handleCopy(VIEWING_URL + `?ref=${referralCode}`)}
+              >
+                <u>{VIEWING_URL + `?ref=${referralCode}`}</u>
+              </strong>
+            </p>
+          </li>
+          <li>
+            <p>
+              Renting a room:{" "}
+              <strong
+                style={{ cursor: "pointer" }}
+                onClick={() => handleCopy(RENTING_URL + `?ref=${referralCode}`)}
+              >
+                <u>{RENTING_URL + `?ref=${referralCode}`}</u>
+              </strong>
+            </p>
+          </li>
+          <li>
+            <p>
+              Room searching:{" "}
+              <strong
+                style={{ cursor: "pointer" }}
+                onClick={() =>
+                  handleCopy(SEARCH_RENTING + `?ref=${referralCode}`)
+                }
+              >
+                <u>{SEARCH_RENTING + `?ref=${referralCode}`}</u>
+              </strong>
+            </p>
+          </li>
+        </ul>
       </div>
     </DashboardFrame>
   );
