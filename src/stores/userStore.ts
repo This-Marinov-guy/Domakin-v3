@@ -8,7 +8,7 @@ import {
 import supabase from "@/utils/supabase";
 import axios from "axios";
 import { profile } from "console";
-import { action, makeAutoObservable, observable } from "mobx";
+import { action, computed, makeAutoObservable, observable } from "mobx";
 
 export default class UserStore {
   rootStore;
@@ -79,7 +79,7 @@ export default class UserStore {
   @action setUser = async (session: any) => {
     const { data } = (await supabase
       .from("users")
-      .select("phone, profile_image")
+      .select("phone, profile_image, status, roles")
       .eq("id", session.user.id)
       .single()) ?? {
       phone: "",
@@ -105,7 +105,7 @@ export default class UserStore {
       .select("referral_code")
       .eq("id", this.user.id)
       .single()) ?? {
-      data: { referral_code: "" }
+      data: { referral_code: "" },
     };
 
     this.referralCode = data?.referral_code || "";
@@ -151,4 +151,8 @@ export default class UserStore {
       this.user = null;
     }
   };
+
+  @computed get isAdmin() {
+    return this.user?.roles?.includes("admin") || false;
+  }
 }

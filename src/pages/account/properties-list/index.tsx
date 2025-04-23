@@ -1,15 +1,15 @@
-import PropertyList from "@/components/dashboard/properties-list";
-import Wrapper from "@/layouts/Wrapper";
+import PropertyListBody from "@/components/dashboard/properties-list/PropertyListBody";
+import DashboardFrame from "@/layouts/frames/DashboardFrame";
 
 export const metadata = {
-   title: "Dashboard Property List Homy - Real Estate React Next js Template",
+   title: "Dashboard Property List",
 };
 const index = () => {
    return (
-      <Wrapper>
-         <PropertyList />
-      </Wrapper>
-   )
+     <DashboardFrame title="Property List">
+       <PropertyListBody />
+     </DashboardFrame>
+   );
 }
 
 export default index

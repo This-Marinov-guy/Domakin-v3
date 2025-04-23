@@ -3,6 +3,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import dashboardLogo from "@/assets/images/logo/logo_01.svg";
+import dashboardIconActive_1 from "@/assets/images/dashboard/icon/icon_1_active.svg";
+import dashboardIcon_1 from "@/assets/images/dashboard/icon/icon_1.svg";
+import dashboardIconActive_2 from "@/assets/images/dashboard/icon/icon_2_active.svg";
+import dashboardIcon_2 from "@/assets/images/dashboard/icon/icon_2.svg";
+import dashboardIconActive_4 from "@/assets/images/dashboard/icon/icon_4_active.svg";
+import dashboardIcon_4 from "@/assets/images/dashboard/icon/icon_4.svg";
+import dashboardIconActive_5 from "@/assets/images/dashboard/icon/icon_5_active.svg";
+import dashboardIcon_5 from "@/assets/images/dashboard/icon/icon_5.svg";
+import dashboardIconActive_6 from "@/assets/images/dashboard/icon/icon_6_active.svg";
+import dashboardIcon_6 from "@/assets/images/dashboard/icon/icon_6.svg";
+import dashboardIconActive_8 from "@/assets/images/dashboard/icon/icon_8_active.svg";
+import dashboardIcon_8 from "@/assets/images/dashboard/icon/icon_8.svg";
+import dashboardIconActive_9 from "@/assets/images/dashboard/icon/icon_9_active.svg";
+import dashboardIcon_9 from "@/assets/images/dashboard/icon/icon_9.svg";
+import dashboardIconActive_10 from "@/assets/images/dashboard/icon/icon_10_active.svg";
+import dashboardIcon_10 from "@/assets/images/dashboard/icon/icon_10.svg";
+import dashboardIcon_11 from "@/assets/images/dashboard/icon/icon_41.svg";
 import dashboardIconActive_3 from "@/assets/images/dashboard/icon/icon_3_active.svg";
 import dashboardIcon_3 from "@/assets/images/dashboard/icon/icon_3.svg";
 import dashboardIconActive_7 from "@/assets/images/dashboard/icon/icon_7_active.svg";
@@ -91,7 +109,7 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
             <li>
               <div className="nav-title">Listing</div>
             </li>
-            {/* <li className="plr">
+            <li className="plr">
               <Link
                 href="/account/properties-list"
                 className={`d-flex w-100 align-items-center ${
@@ -108,7 +126,7 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
                 />
                 <span>My Properties</span>
               </Link>
-            </li> */}
+            </li>
             <li className="plr">
               <Link
                 href="/account/add-listing"

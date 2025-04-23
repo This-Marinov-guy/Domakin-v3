@@ -34,8 +34,10 @@ export default class PropertyStore {
   rootStore;
 
   @observable properties: any[] = [];
+  @observable userProperties: any[] = [];
 
   @observable propertiesLoading: boolean = false;
+  @observable userPropertiesLoading: boolean = false;
 
   @observable addListingData: any = { ...defaultFormData };
   @observable errorFields: string[] = [];
@@ -105,5 +107,30 @@ export default class PropertyStore {
   @action
   setReferralCode = (code: string) => {
     this.addListingData.referralCode = code;
+  };
+
+  @action
+  setUserProperties = (properties: any[]) => {
+    this.userProperties = properties;
+  };
+
+  @action
+  setUserPropertiesLoading = (loading: boolean) => {
+    this.userPropertiesLoading = loading;
+  };
+
+  @action
+  statusLabel = (statusCode: Number) => {
+    switch (statusCode) {
+      case 1:
+        return "Pending";
+      case 2:
+        return "Active";
+      case 3:
+        return "Declined";
+      // TODO: think of better name for this status
+      default:
+        return "Pending";
+    }
   };
 }
