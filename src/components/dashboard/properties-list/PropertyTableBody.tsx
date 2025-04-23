@@ -30,12 +30,16 @@ const PropertyTableBody = () => {
   const loadProperties = async () => {
     setUserPropertiesLoading(true);
 
-    const response = await sendRequest(
-      isAdmin ? "/property/list-extended" : "/property/list"
-    );
+    try {
+      const response = await sendRequest(
+        isAdmin ? "/property/list-extended" : "/property/list"
+      );
 
-    if (response?.status) {
-      setUserProperties(response.data);
+      if (response?.status) {
+        setUserProperties(response.data);
+      }
+    } catch (error) {
+      console.error("Error loading properties:", error);
     }
 
     setUserPropertiesLoading(false);
