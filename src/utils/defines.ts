@@ -43,7 +43,8 @@ export const STATUS_COLORS = {
 export const LANGUAGES = ["en", "bg", "gr"];
 
 // prices
-export const REFERRAL_BONUS = 50;
+export const REFERRAL_BONUS_LISTING = 50;
+export const REFERRAL_BONUS_OTHERS = 5;
 
 export const VIEWING_STANDARD_PRICE = 35;
 export const VIEWING_EXPRESS_PRICE = 50;

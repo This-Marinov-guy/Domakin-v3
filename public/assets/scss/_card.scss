@@ -469,3 +469,10 @@
   background-color: $color-one !important;
   color: $color-four !important;
 }
+
+.gradient-blue-card {
+  background: linear-gradient(to right, #004aad, #003b8a);
+  color: white;
+  padding: 1rem; 
+  border-radius: 0.5rem; 
+}
