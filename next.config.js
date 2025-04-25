@@ -12,12 +12,15 @@ const nextConfig = nextTranslate({
     removeConsole: process.env.NODE_ENV === "production",
   },
   images: {
-    domains: ["res.cloudinary.com"],
+    domains: [
+      "res.cloudinary.com",
+      "lh3.googleusercontent.com",
+      "domakin0.wordpress.com",
+    ],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "domakin0.wordpress.com",
-        pathname: "/wp-content/uploads/**",
+        hostname: "**",
       },
     ],
   },

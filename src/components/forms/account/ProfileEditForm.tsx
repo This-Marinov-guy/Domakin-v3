@@ -83,7 +83,6 @@ const ProfileEditForm = () => {
 
   return (
     <>
-      <h2 className="main-title d-block d-lg-none">Profile</h2>
       <div className="bg-white card-box border-20">
         <div className="user-avatar-setting d-flex align-items-center mb-30">
           <Image
