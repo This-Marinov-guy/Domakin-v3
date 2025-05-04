@@ -76,10 +76,10 @@ export default class UserStore {
     }
   };
 
-  @action setUser = async (session: any) => {
+  @action setUser = async (session: any) => {    
     const { data } = (await supabase
       .from("users")
-      .select("phone, profile_image, status, roles")
+      .select("phone, profile_image, status, roles, name, email")
       .eq("id", session.user.id)
       .single()) ?? {
       phone: "",
@@ -89,9 +89,7 @@ export default class UserStore {
     this.user = {
       ...convertKeysToCamelCase(data),
       id: session.user.id,
-      email: session.user.email,
       token: session.access_token,
-      name: session.user.user_metadata.display_name ?? "-",
     };
 
     axios.defaults.headers.common[
