@@ -10,12 +10,16 @@ import Badge from "react-bootstrap/Badge";
 import useTranslation from "next-translate/useTranslation";
 import LogoutButton from "./LogoutButton";
 
-const AuthButton = ({ responsive = false, mobile = false, withLogout = true }: any) => {
+const AuthButton = ({
+  responsive = false,
+  mobile = false,
+  withLogout = true,
+}: any) => {
   const {
     modalStore,
     userStore: { user, logout, userLoading },
   } = useStore();
-  
+
   const router = useRouter();
 
   const { t } = useTranslation("translations");
@@ -28,7 +32,7 @@ const AuthButton = ({ responsive = false, mobile = false, withLogout = true }: a
             ? "d-inline-block ms-3"
             : mobile
             ? "d-block d-lg-none d-md-inline-block ms-3 mt-10"
-            : "d-none d-lg-inline-block ms-3"
+            : "d-lg-inline-block ms-3"
         }
       >
         <Spinner />
@@ -43,7 +47,7 @@ const AuthButton = ({ responsive = false, mobile = false, withLogout = true }: a
           ? "d-inline-block ms-3"
           : mobile
           ? "d-block d-lg-none d-md-inline-block ms-3 mt-10"
-          : "d-none d-lg-inline-block ms-3"
+          : "d-lg-inline-block ms-3"
       }
     >
       {user !== null ? (
@@ -79,8 +83,10 @@ const AuthButton = ({ responsive = false, mobile = false, withLogout = true }: a
           }
           className="btn-fourteen"
         >
-          <i className="fa-regular fa-lock"></i>{" "}
-          <span>{t("account:authentication.login")}</span>
+          <>
+            <i className="fa-regular fa-lock"></i>{" "}
+            <span>{t("account:authentication.login")}</span>
+          </>
         </button>
       )}
     </li>
