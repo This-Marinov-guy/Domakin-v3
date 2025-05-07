@@ -32,7 +32,13 @@ const ViewingForm = () => {
     e.preventDefault();
     addViewingErrorFields([]);
 
-    sendRequest("/viewing/create", "POST", viewingData).then((res) => {
+    // modify time
+    const data = {
+      ...viewingData,
+      time: viewingData.time.format("HH:mm"),
+    };
+
+    sendRequest("/viewing/create", "POST", data).then((res) => {
       if (res?.status) {
         resetViewingData();
 
@@ -168,7 +174,7 @@ const ViewingForm = () => {
               minuteStep={15}
               value={viewingData.time}
               onChange={(value: any) => {                
-                updateViewingData("time", "", value.format("HH:mm"));
+                updateViewingData("time", "", value);
               }}
               isInvalid={viewingErrorFields.includes("time")}
             />
