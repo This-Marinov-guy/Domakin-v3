@@ -19,7 +19,10 @@ const LogoutButton = ({ withText = false }) => {
       onClick={logout}
       className="d-flex align-items-center logout-btn"
     >
-      <OverlayTrigger overlay={<Tooltip>{t("header.logout")}</Tooltip>}>
+      <OverlayTrigger
+        placement="bottom"
+        overlay={<Tooltip>{t("header.logout")}</Tooltip>}
+      >
         <div className="icon tran3s d-flex align-items-center justify-content-center rounded-circle">
           <Image src={logout_icon} alt="" />
         </div>
