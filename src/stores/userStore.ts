@@ -146,6 +146,7 @@ export default class UserStore {
     if (error) {
       showGeneralError(error.message);
     } else {
+      delete axios.defaults.headers.common["Authorization"];
       this.user = null;
     }
   };
