@@ -167,8 +167,8 @@ const ViewingForm = () => {
               showSecond={false}
               minuteStep={15}
               value={viewingData.time}
-              onChange={(value: any) => {
-                updateViewingData("time", "", value);
+              onChange={(value: any) => {                
+                updateViewingData("time", "", value.format("HH:mm"));
               }}
               isInvalid={viewingErrorFields.includes("time")}
             />
