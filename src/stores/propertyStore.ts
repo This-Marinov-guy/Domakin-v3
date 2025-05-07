@@ -90,9 +90,15 @@ export default class PropertyStore {
 
   @action
   resetListingData = () => {
-    const referralCode = this.addListingData.referralCode;
+    const globalData = {
+      name: this.addListingData.referralCode,
+      surname: this.addListingData.referralCode,
+      email: this.addListingData.referralCode,
+      phone: this.addListingData.referralCode,
+      referralCode: this.addListingData.referralCode,
+    };
 
-    this.addListingData = { ...defaultFormData, referralCode };
+    this.addListingData = { ...defaultFormData, ...globalData };
 
     if (typeof window !== "undefined" && window.localStorage) {
       localStorage.removeItem("addListingData");

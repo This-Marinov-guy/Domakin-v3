@@ -48,7 +48,7 @@ const defaultRentingData = {
   phone: "",
   letter: null,
   note: "",
-  referralCode: '',
+  referralCode: "",
 
   terms: {
     contact: false,
@@ -84,9 +84,15 @@ export default class ServiceStore {
 
   @action
   resetViewingData = () => {
-    const referralCode = this.viewingData.referralCode;
+     const globalData = {
+       name: this.viewingData.referralCode,
+       surname: this.viewingData.referralCode,
+       email: this.viewingData.referralCode,
+       phone: this.viewingData.referralCode,
+       referralCode: this.viewingData.referralCode,
+     };
 
-    this.viewingData = { ...defaultViewingData, referralCode };
+    this.viewingData = { ...defaultViewingData, ...globalData };
   };
 
   // room searching
@@ -109,9 +115,15 @@ export default class ServiceStore {
 
   @action
   resetSearchingData = () => {
-    const referralCode = this.searchingData.referralCode;
+    const globalData = {
+      name: this.searchingData.referralCode,
+      surname: this.searchingData.referralCode,
+      email: this.searchingData.referralCode,
+      phone: this.searchingData.referralCode,
+      referralCode: this.searchingData.referralCode,
+    };
 
-    this.searchingData = { ...defaultSearchingData, referralCode };
+    this.searchingData = { ...defaultSearchingData, ...globalData };
   };
 
   // renting
@@ -134,9 +146,15 @@ export default class ServiceStore {
 
   @action
   resetRentingData = () => {
-    const referralCode = this.rentingData.referralCode;
+    const globalData = {
+      name: this.rentingData.referralCode,
+      surname: this.rentingData.referralCode,
+      email: this.rentingData.referralCode,
+      phone: this.rentingData.referralCode,
+      referralCode: this.rentingData.referralCode,
+    };
 
-    this.rentingData = { ...defaultRentingData, referralCode };
+    this.rentingData = { ...defaultRentingData, ...globalData };
   };
 
   @action
@@ -144,5 +162,5 @@ export default class ServiceStore {
     this.viewingData.referralCode = code;
     this.searchingData.referralCode = code;
     this.rentingData.referralCode = code;
-  }
+  };
 }
