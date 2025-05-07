@@ -166,18 +166,17 @@ const ViewingForm = () => {
 
         <div className="col-6">
           <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{`${t("viewing.time")} (${t(
-              "date_time.timezone_nl"
-            )})`}</label>
+            <label htmlFor="">{`${t("viewing.time")}`}</label>
             <TimePickerInput
               showSecond={false}
               minuteStep={15}
               value={viewingData.time}
-              onChange={(value: any) => {                
+              onChange={(value: any) => {
                 updateViewingData("time", "", value);
               }}
               isInvalid={viewingErrorFields.includes("time")}
             />
+            <small>{t("date_time.timezone_nl" )}</small>
           </div>
         </div>
 
