@@ -5,18 +5,18 @@ export default function RouteLoader() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    const handleStart = (url: string) => setLoading(true);
-    const handleComplete = (url: string) => setLoading(false);
+  // useEffect(() => {
+  //   const handleStart = (url: string) => setLoading(true);
+  //   const handleComplete = (url: string) => setLoading(false);
 
-    router.events.on("routeChangeStart", handleStart);
-    router.events.on("routeChangeComplete", handleComplete);
+  //   router.events.on("routeChangeStart", handleStart);
+  //   router.events.on("routeChangeComplete", handleComplete);
 
-    return () => {
-      router.events.off("routeChangeStart", handleStart);
-      router.events.off("routeChangeComplete", handleComplete);
-    };
-  }, []);
+  //   return () => {
+  //     router.events.off("routeChangeStart", handleStart);
+  //     router.events.off("routeChangeComplete", handleComplete);
+  //   };
+  // }, []);
 
   return loading && <div className="page-loader-bar" />;
 }
