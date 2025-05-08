@@ -40,9 +40,7 @@ const MainLayout = ({ children }: any) => {
     const responseData = await sendRequest(
       "/feedback/list",
       "GET",
-      {
-        language: lang,
-      },
+      {},
       {},
       {
         withError: false,
@@ -146,11 +144,15 @@ const MainLayout = ({ children }: any) => {
 
   useEffect(() => {
     loadUser();
-    loadProperties();
-    loadFeedback();
     loadBlog();
     fetchLanguage();
   }, []);
+
+  // Language dependent data loading
+  useEffect(() => {
+    loadFeedback();
+    loadProperties();
+  }, [lang]);
 
   useEffect(() => {
     if (router.query.ref) {
