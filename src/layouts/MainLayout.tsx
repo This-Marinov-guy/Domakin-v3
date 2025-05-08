@@ -60,7 +60,16 @@ const MainLayout = ({ children }: any) => {
     setListingLoading(true);
 
     try {
-      const response = await sendRequest("/property/listing");
+      const response = await sendRequest(
+        "/property/listing",
+        "GET",
+        {},
+        {},
+        {
+          withError: false,
+          withLoading: true,
+        }
+      );
 
       if (response?.status) {
         setProperties(response.data);
