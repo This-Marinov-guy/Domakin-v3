@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-export default function GlobalLoaderBar() {
+export default function RouteLoader() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -11,6 +11,11 @@ export default function GlobalLoaderBar() {
 
     router.events.on("routeChangeStart", handleStart);
     router.events.on("routeChangeComplete", handleComplete);
+
+    return () => {
+      router.events.off("routeChangeStart", handleStart);
+      router.events.off("routeChangeComplete", handleComplete);
+    };
   }, []);
 
   return loading && <div className="page-loader-bar" />;
