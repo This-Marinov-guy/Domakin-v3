@@ -9,7 +9,9 @@ const PropertyCardList = (props: {
   style?: boolean;
 }) => {
   const { property, style } = props;
-    
+
+  const allImages = [...property.images, property.main_image];
+
   return (
     <div
       key={property.id}
@@ -19,9 +21,12 @@ const PropertyCardList = (props: {
         <Link
           href={`/services/renting/property/${property.id}`}
           style={{
-            backgroundImage: `url(/assets/img/properties/${
-              property.folder ?? "property_" + property.id
-            }/${property.main_image})`,
+            backgroundImage:
+              Number(property.id) > 1000
+                ? `url(${property.main_image})`
+                : `url(/assets/img/properties/${
+                    property.folder ?? "property_" + property.id
+                  }/${property.main_image})`,
           }}
           className={`img-gallery position-relative z-1 border-20 overflow-hidden`}
         >
@@ -34,7 +39,7 @@ const PropertyCardList = (props: {
             {property.status}
           </div>
           <div className="img-slider-btn">
-            {property.images.length} <i className="fa-regular fa-image"></i>
+            {allImages.length} <i className="fa-regular fa-image"></i>
             <Fancybox
               options={{
                 Carousel: {
@@ -42,14 +47,18 @@ const PropertyCardList = (props: {
                 },
               }}
             >
-              {property.images.slice(0, 3).map((thumb: any, index: any) => (
+              {allImages.map((thumb: any, index: any) => (
                 <a
                   key={index}
                   className="d-block"
                   data-fancybox="gallery2"
-                  href={`/assets/img/properties/${
-                    property.folder ?? "property_" + property.id
-                  }/${thumb}`}
+                  href={
+                    Number(property.id) > 1000
+                      ? thumb
+                      : `/assets/img/properties/${
+                          property.folder ?? "property_" + property.id
+                        }/${thumb}`
+                  }
                 ></a>
               ))}
             </Fancybox>

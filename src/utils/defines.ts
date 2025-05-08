@@ -36,9 +36,9 @@ export const PHONE = "";
 
 // status
 export const STATUS_COLORS = {
-  0: "bg-green",
   1: "bg-orange",
-  2: "bg-red",
+  2: "bg-green",
+  3: "bg-red",
 };
 export const LANGUAGES = ["en", "bg", "gr"];
 

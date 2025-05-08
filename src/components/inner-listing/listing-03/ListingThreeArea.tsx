@@ -52,7 +52,7 @@ const ListingThreeArea = ({ style, properties }: any) => {
   const [filterProperties, setFilterProperties] = useState(properties);
   const [paginatedProperties, setPaginatedProperties] = useState(
     properties.slice(offset, endOffset)
-  );
+  );  
 
   const pageCount = Math.ceil(filterProperties.length / pageLimit);
 
@@ -77,7 +77,7 @@ const ListingThreeArea = ({ style, properties }: any) => {
   useEffect(() => {
     const newData = properties.filter((item: any) =>
       keys.some((key) => item[key].toLowerCase().includes(query))
-    );
+    );    
 
     setFilterProperties(newData);
     setOffset(0);
@@ -88,12 +88,14 @@ const ListingThreeArea = ({ style, properties }: any) => {
     setPaginatedProperties(
       handleSort(filterProperties.slice(offset, endOffset), sortIndex)
     );
+    
   }, [filterProperties, offset, endOffset, sortIndex]);
 
   useEffect(() => {
     const newPaginatedProperties = properties.filter((item1: any) =>
       filterProperties.some((item2: any) => item2.id === item1.id)
     );
+    
     setPaginatedProperties(newPaginatedProperties.slice(offset, endOffset));
   }, [lang]);
 

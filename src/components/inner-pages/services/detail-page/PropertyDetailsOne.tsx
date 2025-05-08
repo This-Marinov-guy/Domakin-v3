@@ -14,7 +14,7 @@ import ScreenButton from "@/components/ui/buttons/ScreenButton";
 
 const PropertyDetailsOne = () => {
   const {
-    propertyStore: { propertiesLoading },
+    propertyStore: { propertiesLoading, properties },
   } = useStore();
 
   const { t } = useTranslation("translations");
@@ -24,14 +24,15 @@ const PropertyDetailsOne = () => {
   const { slug } = useParams();
 
   const forRentList: any[] = t("FOR_RENT", {}, { returnObjects: true }) ?? [];
-  
-  const property = forRentList.find((p: any) => p.id == slug);
+  const allProperties = [...properties, ...forRentList];
 
-  const relatedProperties = forRentList
-    .filter((p) => p.city == property.city && p.id != property.id)
+  const property = allProperties.find((p: any) => p.id == slug);
+
+  const relatedProperties = allProperties
+    .filter((p) => p.city == property?.city && p.id != property?.id)
     .slice(0, 3);
 
-  if (propertiesLoading || !property.id) {
+  if (propertiesLoading || !property?.id) {
     return <PageLoader />;
   }
 

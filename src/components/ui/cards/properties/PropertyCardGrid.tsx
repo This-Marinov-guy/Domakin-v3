@@ -62,9 +62,13 @@ const PropertyCardGrid = (props: {property: PropertyCard, style?: boolean}) => {
                       className="d-block"
                     >
                       <Image
-                        src={`/assets/img/properties/${
-                          property.folder ?? "property_" + property.id
-                        }/${image}`}
+                        src={
+                          Number(property.id) > 1000
+                            ? image
+                            : `/assets/img/properties/${
+                                property.folder ?? "property_" + property.id
+                              }/${image}`
+                        }
                         height={500}
                         width={500}
                         style={{ height: "20em", objectFit: "cover" }}

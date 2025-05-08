@@ -22,13 +22,17 @@ import useTranslation from "next-translate/useTranslation";
 const ListingDetailsOneArea = ({ property, style_3 }: any) => {
   const { t } = useTranslation("translations");
 
-    const folder = `/assets/img/properties/${
-      property.folder ?? "property_" + property.id
-    }/`;
-    const allImages = [
-      folder + property.main_image,
-      ...property.images.map((img: any) => folder + img),
-    ];
+  const folder = `/assets/img/properties/${
+    property.folder ?? "property_" + property.id
+  }/`;
+
+  const allImages =
+    Number(property.id) > 1000
+      ? [property.main_image, ...property.images]
+      : [
+          folder + property.main_image,
+          ...property.images.map((img: any) => folder + img),
+        ];
 
   return (
     <div className="listing-details-one theme-details-one bg-pink pt-180 lg-pt-150 pb-50 xl-pb-50">

@@ -1,4 +1,5 @@
 import React from "react";
+import { toJS } from "mobx";
 import BreadcrumbThree from "@/components/common/breadcrumb/BreadcrumbThree";
 import FooterFour from "@/layouts/footers/FooterFour";
 import HeaderOne from "@/layouts/headers/HeaderOne";
@@ -13,6 +14,8 @@ import { observer } from "mobx-react-lite";
 
 const PropertiesPage = () => {
   const { t } = useTranslation("translations");
+
+  const { propertyStore } = useStore();
 
   const details = {
     title: t("renting.find_the_perfect_place_for_you"),
@@ -37,15 +40,9 @@ const PropertiesPage = () => {
   };
 
   const forRentList: any[] = t("FOR_RENT", {}, { returnObjects: true }) ?? [];
+  const allProperties = [...toJS(propertyStore.properties), ...forRentList];
 
-  const properties = forRentList.filter(
-    (p: any) => p.hidden == false || p.hidden === undefined
-  );
-
-  if (
-    // propertiesLoading ||
-    !properties
-  ) {
+  if (propertyStore.propertiesLoading || !allProperties) {
     return <PageLoader />;
   }
 
@@ -58,7 +55,7 @@ const PropertiesPage = () => {
         style={false}
       />
       <StepDescriptionOne details={details} />
-      <ListingThreeArea properties={properties} />
+      <ListingThreeArea properties={allProperties} />
       <FancyBanner />
       <FooterFour />
     </>
