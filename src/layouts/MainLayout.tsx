@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import axios from "axios";
 import TrackingLayout from "./TrackingLayout";
 import { ToastContainer } from "react-toastify";
 import ScrollToTop from "@/components/common/ScrollToTop";
@@ -87,6 +88,7 @@ const MainLayout = ({ children }: any) => {
 
     if (storedLanguage) {
       localStorage.setItem("language", locale);
+      axios.defaults.headers.common["Accept-Language"] = lang || "en";
       return await setLanguage(storedLanguage);
     }
 
@@ -106,6 +108,7 @@ const MainLayout = ({ children }: any) => {
     }
 
     if (storedLanguage) {
+      axios.defaults.headers.common["Accept-Language"] = lang || "en";
       await setLanguage(storedLanguage);
     }
   };

@@ -1,5 +1,6 @@
 import NiceSelect from "@/ui/NiceSelect";
 import React from "react";
+import axios from "axios";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 
@@ -26,6 +27,7 @@ const ChangeLanguage = () => {
     }
 
     await setLanguage(lang);
+    axios.defaults.headers.common["Accept-Language"] = lang || "en";
     localStorage.setItem("language", lang);
   };
 
