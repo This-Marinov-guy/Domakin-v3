@@ -822,3 +822,29 @@
   border-radius: 50%;
   width: 30%;
 }
+
+.page-loader-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100vw;
+  background-color: $color-one;
+  z-index: 9999;
+  animation: loading-bar 1s linear infinite;
+}
+
+@keyframes loading-bar {
+  0% {
+    left: -100%;
+    width: 100%;
+  }
+  50% {
+    left: 0;
+    width: 100%;
+  }
+  100% {
+    left: 100%;
+    width: 0;
+  }
+}

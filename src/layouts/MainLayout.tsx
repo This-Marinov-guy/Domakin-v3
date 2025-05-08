@@ -14,6 +14,7 @@ import supabase from "@/utils/supabase";
 import ErrorLayout from "@/pages/_error";
 import { SESSION_REFRESH_INTERVAL } from "@/utils/config";
 import { useRouter } from "next/router";
+import GlobalLoaderBar from "@/components/ui/loading/GlobalLoaderBar";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
@@ -165,6 +166,7 @@ const MainLayout = ({ children }: any) => {
     <ErrorLayout>
       <StoreProvider>
         <TrackingLayout>
+          <GlobalLoaderBar />
           {children}
           <ModalsLayout />
           <ScrollToTop />
