@@ -51,29 +51,35 @@ const CommonPropertyOverview = ({ property }: any) => {
   const itemCount = property_overview_data.length;
 
   return (
-    <div className="row">
-      {property_overview_data.map((item) => (
-        <div
-          className={`mb-10 col-lg-4 col-md-6 col-12`}
-          key={item.id}
-        >
-          <Image
-            height={30}
-            src={item.icon}
-            alt=""
-            className="m-a lazy-img icon w-10"
-          />
-          <div className="d-flex align-items-center justify-content-center gap-3 mt-10">
-            {item.title && (
-              <span className="fs-20 color-dark fw-bold">{item.title}</span>
-            )}
+    <>
+      <div className="row">
+        {property_overview_data.map((item) => (
+          <div className={`mb-10 col-lg-4 col-md-6 col-12`} key={item.id}>
+            <Image
+              height={30}
+              src={item.icon}
+              alt=""
+              className="m-a lazy-img icon w-10"
+            />
+            <div className="d-flex align-items-center justify-content-center gap-3 mt-10">
+              {item.title && (
+                <span className="fs-20 color-dark fw-bold">{item.title}</span>
+              )}
+            </div>
+            <span className="d-flex text-center align-items-center justify-content-center fs-20 color-dark">
+              {capitalizeFirstLetter(item.content)}
+            </span>
           </div>
-          <span className="d-flex text-center align-items-center justify-content-center fs-20 color-dark">
-            {capitalizeFirstLetter(item.content)}
-          </span>
+        ))}
+      </div>
+      {property.description.property && (
+        <div className="mt-20 row">
+          <div className="text-center col-lg-12 col-md-12 col-12">
+            {property.description.property}
+          </div>
         </div>
-      ))}
-    </div>
+      )}
+    </>
   );
 };
 
