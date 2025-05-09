@@ -44,7 +44,7 @@ const NavMenu = () => {
       {menu_data.map((menu: any) => (
         <li key={menu.id} className={`nav-item dropdown ${menu.class_name}`}>
           <Link
-            href={menu.link}
+            href={menu.has_dropdown ? "" : menu.link}
             className={`nav-link ${menu.has_dropdown && "dropdown-toggle"} ${
               pathname === menu.link ? "active" : ""
             }
