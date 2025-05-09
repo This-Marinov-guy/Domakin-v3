@@ -27,11 +27,9 @@ const AuthLayout = ({ children }: any) => {
         { shallow: true }
       );
     } else {
-      console.log('stop');
-      
       setLoading(false);
     }
-  }, [user, router]);
+  }, [user, router, userLoading]);
 
   if (userLoading || loading) {
     return <PageLoader />;
