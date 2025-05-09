@@ -16,7 +16,7 @@ const AuthLayout = ({ children }: any) => {
   useEffect(() => {
     if (userLoading) return;
 
-    if (!user) {
+    if (user == null) {
       sessionStorage.setItem("redirect", router.asPath);
       router.push(
         {
@@ -27,6 +27,8 @@ const AuthLayout = ({ children }: any) => {
         { shallow: true }
       );
     } else {
+      console.log('stop');
+      
       setLoading(false);
     }
   }, [user, router]);
