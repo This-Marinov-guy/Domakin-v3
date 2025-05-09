@@ -11,6 +11,7 @@ import SingleDatePicker from "../ui/inputs/dates/SingleDatePicker";
 import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
 import TimePickerInput from "../ui/inputs/dates/TimePickerInput";
 import { prefillUserInfo } from "@/utils/helpers";
+import moment from "moment";
 
 const ViewingForm = () => {
   const { t } = useTranslation("translations");
@@ -32,10 +33,15 @@ const ViewingForm = () => {
     e.preventDefault();
     addViewingErrorFields([]);
 
-    // modify time
+    // modify time & date format as they will never be changed
     const data = {
       ...viewingData,
-      time: viewingData.time.format("HH:mm"),
+      date: viewingData.date
+        ? moment(viewingData.date).format("DD-MM-YYYY")
+        : viewingData.date,
+      time: viewingData.time
+        ? viewingData.time.format("HH:mm")
+        : viewingData.time,
     };
 
     sendRequest("/viewing/create", "POST", data).then((res) => {
@@ -60,7 +66,7 @@ const ViewingForm = () => {
 
   useEffect(() => {
     prefillUserInfo(updateViewingData, user);
-  }, [user]);  
+  }, [user]);
 
   return (
     <form className="form-style-one wow fadeInUp pt-40 pb-40">
@@ -176,7 +182,7 @@ const ViewingForm = () => {
               }}
               isInvalid={viewingErrorFields.includes("time")}
             />
-            <small>{t("date_time.timezone_nl" )}</small>
+            <small>{t("date_time.timezone_nl")}</small>
           </div>
         </div>
 

@@ -3,6 +3,7 @@ import { GENERAL_ERROR_RESPONSE_CODES, SERVER_ENDPOINT } from "@/utils/config";
 import { ENV_PROD } from "@/utils/defines";
 import { useStore } from "@/stores/storeContext";
 import { toast } from "react-toastify";
+import { isEmpty } from "lodash";
 import useTranslation from "next-translate/useTranslation";
 import { csrf, getCookie, showStandardNotification } from "@/utils/helpers";
 
@@ -20,19 +21,23 @@ export const useServer = () => {
 
   const { t } = useTranslation("translations");
 
-  const getErrorMessage = (err: any) => {
-    if (err.response?.data?.tag) {
-      let errorMessage = err.response.data.tag;
+  const getErrorMessage = (response: any) => {
+    if (!isEmpty(response?.data?.tag)) {
+      let errorMessage = response.data.tag;
 
       if (Array.isArray(errorMessage)) {
+        if (errorMessage.length === 1) {
+          return t(errorMessage[0]);
+        }
+
         return errorMessage.map((error) => `- ${t(error)}`).join("\n");
       }
 
       return t(errorMessage);
     }
 
-    if (err.response?.data?.message) {
-      return err.response.data.message;
+    if (response?.data?.message) {
+      return response.data.message;
     }
 
     return t("api.general_error");
@@ -86,21 +91,10 @@ export const useServer = () => {
     try {
       const response = await axios.request(requestData);
 
-      if (options?.withError && !response.data.status) {
-        const errorMessage = response?.data.tag
-          ? t(response?.data.tag)
-          : response?.data.message ?? t("api.general_error");
+      if (options.withError && !response.data.status) {
+        const errorMessage = getErrorMessage(response);
 
-        toast.error(errorMessage, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        showStandardNotification("error", errorMessage);
       }
 
       return response.data;
@@ -108,7 +102,7 @@ export const useServer = () => {
       !ENV_PROD && console.log(err.response?.data ?? err);
 
       if (options?.withError) {
-        let errorMessage = getErrorMessage(err);
+        let errorMessage = getErrorMessage(err.response);
 
         if (GENERAL_ERROR_RESPONSE_CODES.includes(err.status)) {
           errorMessage = t("api.general_error");

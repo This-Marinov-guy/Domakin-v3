@@ -23,6 +23,7 @@
     "bootstrap": "^5.3.3",
     "framer-motion": "^11.15.0",
     "isotope-layout": "^3.0.6",
+    "lodash": "^4.17.21",
     "mobx": "^6.13.5",
     "mobx-react-lite": "^4.0.7",
     "moment": "^2.30.1",
