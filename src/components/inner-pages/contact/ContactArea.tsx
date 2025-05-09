@@ -76,7 +76,7 @@ const ContactArea = () => {
   const { t } = useTranslation("translations");
 
   return (
-    <div className="contact-us border-top pt-60">
+    <div style={{width: '97vw'}} className="contact-us border-top pt-60">
       {/* <div className="container">
         <div className="row">
           <div className="col-xxl-9 col-xl-8 col-lg-10 m-auto">
