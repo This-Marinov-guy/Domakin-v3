@@ -14,6 +14,7 @@ import {
   REFERRAL_BONUS_LISTING,
 } from "@/utils/defines";
 import Modal from "react-bootstrap/Modal";
+import { removeProtocolFromLink } from "@/utils/helpers";
 
 const ReferralCode = () => {
   const [copied, setCopied] = useState(false);
@@ -79,7 +80,10 @@ const ReferralCode = () => {
                     handleCopy(ADD_LISTING_URL + `?ref=${referralCode}`)
                   }
                 >
-                  <u>{ADD_LISTING_URL + `?ref=${referralCode}`}</u>
+                  <u>
+                    {removeProtocolFromLink(ADD_LISTING_URL) +
+                      `?ref=${referralCode}`}
+                  </u>
                 </strong>
               </p>
             </li>
@@ -92,7 +96,10 @@ const ReferralCode = () => {
                     handleCopy(VIEWING_URL + `?ref=${referralCode}`)
                   }
                 >
-                  <u>{VIEWING_URL + `?ref=${referralCode}`}</u>
+                  <u>
+                    {removeProtocolFromLink(VIEWING_URL) +
+                      `?ref=${referralCode}`}
+                  </u>
                 </strong>
               </p>
             </li>
@@ -105,7 +112,10 @@ const ReferralCode = () => {
                     handleCopy(RENTING_URL + `?ref=${referralCode}`)
                   }
                 >
-                  <u>{RENTING_URL + `?ref=${referralCode}`}</u>
+                  <u>
+                    {removeProtocolFromLink(RENTING_URL) +
+                      `?ref=${referralCode}`}
+                  </u>
                 </strong>
               </p>
             </li>
@@ -118,7 +128,10 @@ const ReferralCode = () => {
                     handleCopy(SEARCH_RENTING + `?ref=${referralCode}`)
                   }
                 >
-                  <u>{SEARCH_RENTING + `?ref=${referralCode}`}</u>
+                  <u>
+                    {removeProtocolFromLink(SEARCH_RENTING) +
+                      `?ref=${referralCode}`}
+                  </u>
                 </strong>
               </p>
             </li>

@@ -75,9 +75,9 @@ export const SIGN_UP = 1;
 export const LOGIN_IN = 0;
 
 //links
-export const VIEWING_URL = (process.env.NEXT_PUBLIC_URL + "/services/viewing").slice(7);
-export const RENTING_URL = (process.env.NEXT_PUBLIC_URL + "/services/renting").slice(7);
+export const VIEWING_URL = process.env.NEXT_PUBLIC_URL + "/services/viewing";
+export const RENTING_URL = process.env.NEXT_PUBLIC_URL + "/services/renting";
 export const ADD_LISTING_URL =
-  (process.env.NEXT_PUBLIC_URL + "/services/add-listing").slice(7);
+  process.env.NEXT_PUBLIC_URL + "/services/add-listing";
 export const SEARCH_RENTING =
-  (process.env.NEXT_PUBLIC_URL + "/services/room-searching").slice(7);
+  process.env.NEXT_PUBLIC_URL + "/services/room-searching";

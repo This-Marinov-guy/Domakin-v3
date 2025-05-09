@@ -297,3 +297,7 @@ export const convertKeysToCamelCase = (obj: any) => {
 
   return newObj;
 };
+
+export const removeProtocolFromLink = (link: string) => {
+  return link.replace(/^https?:\/\//, "");
+};
