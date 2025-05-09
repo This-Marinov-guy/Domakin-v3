@@ -1069,23 +1069,6 @@
       "images": ["2.jpg", "3.jpg"]
     },
     {
-      "id": "12",
-      "status": "Taken",
-      "price": 600,
-      "statusCode": 3,
-      "title": "2 rooms",
-      "city": "Rotterdam",
-      "location": "Maasdamweg Rotterdam",
-      "description": {
-        "property": "2 separate bedroooms in a beautiful shared house",
-        "period": "available now",
-        "bills": "bills included but might vary",
-        "flatmates": "1х boy and 1х girl"
-      },
-      "main_image": "1.jpg",
-      "images": ["2.mp4"]
-    },
-    {
       "id": "11",
       "status": "Taken",
       "price": 385,

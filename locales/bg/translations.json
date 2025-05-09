@@ -1071,23 +1071,6 @@
       "images": ["2.jpg", "3.jpg"]
     },
     {
-      "id": "12",
-      "status": "Заета",
-      "price": 600,
-      "statusCode": 3,
-      "title": "2 стаи в споделена къща",
-      "city": "Rotterdam",
-      "location": "Maasdamweg Rotterdam",
-      "description": {
-        "property": "2 отделни спални, всяка по 600 евро. Къщата е напълно обзаведена",
-        "period": "свободна веднага",
-        "bills": "сметките са включени, но може да варират",
-        "flatmates": "1х момиче и 1х момче"
-      },
-      "main_image": "1.jpg",
-      "images": ["2.mp4"]
-    },
-    {
       "id": "11",
       "status": "Заета",
       "price": 385,
