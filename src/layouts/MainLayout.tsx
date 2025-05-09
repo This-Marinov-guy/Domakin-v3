@@ -14,7 +14,7 @@ import supabase from "@/utils/supabase";
 import ErrorLayout from "@/pages/_error";
 import { SESSION_REFRESH_INTERVAL } from "@/utils/config";
 import { useRouter } from "next/router";
-import RouteLoader from "@/components/ui/loading/GlobalLoaderBar";
+import RouteLoader from "@/components/ui/loading/RouteLoader";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
