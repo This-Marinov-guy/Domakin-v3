@@ -69,18 +69,23 @@ const AuthButton = ({
         </div>
       ) : (
         <button
-          onClick={() =>
+          onClick={() => {
+            const query: Record<string, any> = { login: 1 };
+
+            // Include 'slug' if it exists in the current route
+            if (router.query.slug) {
+              query.slug = router.query.slug;
+            }
+
             router.push(
               {
                 pathname: router.pathname,
-                query: {
-                  login: 1,
-                },
+                query,
               },
               undefined,
               { shallow: true }
-            )
-          }
+            );
+          }}
           className="btn-fourteen"
         >
           <>
