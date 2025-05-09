@@ -257,7 +257,7 @@
     "personal_information": "Personal information",
     "name": "Name",
     "surname": "Surname",
-    "phone": "Phone (+ and country code)",
+    "phone": "Phone",
     "email": "Email",
     "referral_code": "Referral code (optional)",
     "brief_description": "Briefly describe yourself",
