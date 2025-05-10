@@ -69,8 +69,8 @@ const PropertyTableBody = () => {
     <tbody className="border-0">
       {userProperties.map((item) => (
         <tr className="listing-table" key={item.id}>
-          <td className="col-center">
-            <div className="d-lg-flex align-items-center position-relative">
+          <td className="center">
+            <div className="d-lg-flex align-items-center justify-content-center position-relative">
               <Image
                 src={item.property_data.images.split(", ")[0]}
                 width={200}
