@@ -112,11 +112,18 @@ const PropertyTableBody = () => {
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
-                    <Link className="dropdown-item" href="#">
+                    <button className="dropdown-item">
                       <Image src={icon_1} alt="" className="lazy-img" /> View
-                    </Link>
+                      Property
+                    </button>
                   </li>
                   <li>
+                    <button className="dropdown-item">
+                      <i className="fa-solid fa-user lazy-img" />
+                      View User
+                    </button>
+                  </li>
+                  {/* <li>
                     <Link className="dropdown-item" href="#">
                       <Image src={icon_2} alt="" className="lazy-img" /> Share
                     </Link>
@@ -130,7 +137,7 @@ const PropertyTableBody = () => {
                     <Link className="dropdown-item" href="#">
                       <Image src={icon_4} alt="" className="lazy-img" /> Delete
                     </Link>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </td>

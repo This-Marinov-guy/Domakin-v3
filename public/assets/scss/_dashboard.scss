@@ -996,7 +996,9 @@
         font-size: 14px;
         color: #6a6a6a;
         background: #fff;
-        img {
+        img, i {
+          min-width: 18px;
+          text-align: center;
           display: inline-block;
           vertical-align: -1px;
           margin-right: 5px;
