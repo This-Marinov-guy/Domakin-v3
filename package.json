@@ -9,9 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^3.17.0",
     "@emailjs/browser": "^4.1.0",
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@fancyapps/ui": "^5.0.33",
     "@hookform/resolvers": "^3.3.2",
     "@popperjs/core": "^2.11.8",
@@ -21,7 +22,7 @@
     "@types/react-google-recaptcha": "^2.1.9",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
-    "framer-motion": "^11.15.0",
+    "framer-motion": "^11.18.2",
     "isotope-layout": "^3.0.6",
     "lodash": "^4.17.21",
     "mobx": "^6.13.5",

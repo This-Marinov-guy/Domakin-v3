@@ -301,3 +301,15 @@ export const convertKeysToCamelCase = (obj: any) => {
 export const removeProtocolFromLink = (link: string) => {
   return link.replace(/^https?:\/\//, "");
 };
+
+export const formatJsonKeyValuePairs = (jsonString: any) => {
+  if (!jsonString) {
+    return "-";
+  }
+
+  const json = JSON.parse(jsonString);
+
+  return Object.entries(json)
+    .map(([key, value]) => `${key}: ${value}`)
+    .join(" | ");
+};

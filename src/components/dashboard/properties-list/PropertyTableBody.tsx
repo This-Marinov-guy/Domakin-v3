@@ -10,8 +10,10 @@ import listImg_5 from "@/assets/images/dashboard/img_05.jpg";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import ListingLoadingTable from "@/components/ui/loading/ListingLoadingTable";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useServer } from "@/hooks/useServer";
+import PropertyUserPreview from "@/components/ui/modals/PropertyUserPreview";
+import PropertyDataPreview from "@/components/ui/modals/PropertyDataPreview";
 
 const PropertyTableBody = () => {
   const {
@@ -24,6 +26,9 @@ const PropertyTableBody = () => {
     },
     userStore: { isAdmin },
   } = useStore();
+
+  const [userPreview, setUserPreview] = useState(null);
+  const [propertyPreview, setPropertyPreview] = useState(null);
 
   const { sendRequest } = useServer();
 
@@ -66,64 +71,79 @@ const PropertyTableBody = () => {
   }
 
   return (
-    <tbody className="border-0">
-      {userProperties.map((item) => (
-        <tr className="listing-table" key={item.id}>
-          <td className="center">
-            <div className="d-lg-flex align-items-center justify-content-center position-relative">
-              <Image
-                src={item.property_data.images.split(", ")[0]}
-                width={200}
-                height={200}
-                alt="property-image"
-                className="p-img"
-              />
-            </div>
-          </td>
-          <td className="center">
-            {" "}
-            <strong className="price color-dark">
-              {item.property_data.city}
-            </strong>
-            <p className="price color-dark">{item.property_data.address}</p>
-          </td>
-          <td className="center">
-            <p className="price color-dark">€{item.property_data.rent}</p>
-          </td>
-          <td className="center">
-            <div
-              className={`property-status ${statusLabel(
-                item.status
-              ).toLowerCase()}`}
-            >
-              {statusLabel(item.status)}
-            </div>
-          </td>
-          {isAdmin ? (
+    <>
+      <PropertyUserPreview
+        data={userPreview}
+        onHide={() => setUserPreview(null)}
+      />
+      <PropertyDataPreview
+        data={propertyPreview}
+        onHide={() => setPropertyPreview(null)}
+      />
+      <tbody className="border-0">
+        {userProperties.map((item) => (
+          <tr className="listing-table" key={item.id}>
             <td className="center">
-              <div className="action-dots float-end">
-                <button
-                  className="action-btn dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <span></span>
-                </button>
-                <ul className="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <button className="dropdown-item">
-                      <Image src={icon_1} alt="" className="lazy-img" /> View
-                      Property
-                    </button>
-                  </li>
-                  <li>
-                    <button className="dropdown-item">
-                      <i className="fa-solid fa-user lazy-img" />
-                      View User
-                    </button>
-                  </li>
-                  {/* <li>
+              <div className="d-lg-flex align-items-center justify-content-center position-relative">
+                <Image
+                  src={item.property_data.images[0]}
+                  width={200}
+                  height={200}
+                  alt="property-image"
+                  className="p-img"
+                />
+              </div>
+            </td>
+            <td className="center">
+              {" "}
+              <strong className="price color-dark">
+                {item.property_data.city}
+              </strong>
+              <p className="price color-dark">{item.property_data.address}</p>
+            </td>
+            <td className="center">
+              <p className="price color-dark">€{item.property_data.rent}</p>
+            </td>
+            <td className="center">
+              <div
+                className={`property-status ${statusLabel(
+                  item.status
+                ).toLowerCase()}`}
+              >
+                {statusLabel(item.status)}
+              </div>
+            </td>
+            {isAdmin ? (
+              <td className="center">
+                <div className="action-dots float-end">
+                  <button
+                    className="action-btn dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <span></span>
+                  </button>
+                  <ul className="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <button
+                        className="dropdown-item"
+                        onClick={() => setPropertyPreview(item.property_data)}
+                      >
+                        <Image src={icon_1} alt="" className="lazy-img" />
+                        View Property
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        className="dropdown-item"
+                        onClick={() => setUserPreview(item.personal_data)}
+                      >
+                        <i className="fa-solid fa-user lazy-img" />
+                        View User
+                      </button>
+                    </li>
+                    {/* <li>
                     <Link className="dropdown-item" href="#">
                       <Image src={icon_2} alt="" className="lazy-img" /> Share
                     </Link>
@@ -138,15 +158,16 @@ const PropertyTableBody = () => {
                       <Image src={icon_4} alt="" className="lazy-img" /> Delete
                     </Link>
                   </li> */}
-                </ul>
-              </div>
-            </td>
-          ) : (
-            <td className="center"></td>
-          )}
-        </tr>
-      ))}
-    </tbody>
+                  </ul>
+                </div>
+              </td>
+            ) : (
+              <td className="center"></td>
+            )}
+          </tr>
+        ))}
+      </tbody>
+    </>
   );
 };
 
