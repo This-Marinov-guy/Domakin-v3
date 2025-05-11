@@ -12,7 +12,6 @@ import { observer } from "mobx-react-lite";
 import ListingLoadingTable from "@/components/ui/loading/ListingLoadingTable";
 import { useEffect, useState } from "react";
 import { useServer } from "@/hooks/useServer";
-import PropertyUserPreview from "@/components/ui/modals/PropertyUserPreview";
 import PropertyDataPreview from "@/components/ui/modals/PropertyDataPreview";
 
 const PropertyTableBody = () => {
@@ -27,7 +26,6 @@ const PropertyTableBody = () => {
     userStore: { isAdmin },
   } = useStore();
 
-  const [userPreview, setUserPreview] = useState(null);
   const [propertyPreview, setPropertyPreview] = useState(null);
 
   const { sendRequest } = useServer();
@@ -72,10 +70,6 @@ const PropertyTableBody = () => {
 
   return (
     <>
-      <PropertyUserPreview
-        data={userPreview}
-        onHide={() => setUserPreview(null)}
-      />
       <PropertyDataPreview
         data={propertyPreview}
         onHide={() => setPropertyPreview(null)}
@@ -128,19 +122,15 @@ const PropertyTableBody = () => {
                     <li>
                       <button
                         className="dropdown-item"
-                        onClick={() => setPropertyPreview(item.property_data)}
+                        onClick={() =>
+                          setPropertyPreview({
+                            ...item.personal_data,
+                            ...item.property_data,
+                          })
+                        }
                       >
                         <Image src={icon_1} alt="" className="lazy-img" />
-                        View Property
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        onClick={() => setUserPreview(item.personal_data)}
-                      >
-                        <i className="fa-solid fa-user lazy-img" />
-                        View User
+                        View Details
                       </button>
                     </li>
                     {/* <li>

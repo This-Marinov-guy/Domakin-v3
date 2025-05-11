@@ -6,10 +6,18 @@ const PropertyDataPreview = ({ onHide, data }: any) => {
   return (
     <Modal show={!!data} onHide={onHide} size="lg" centered>
       <Modal.Header closeButton>
-        <h6>Property Data</h6>
+        <h6>Details</h6>
       </Modal.Header>
 
       <Modal.Body>
+        <h6>Personal Details</h6>
+        <ul>
+          <li>Name: {data?.name ?? "-" + " " + data?.surname ?? "-"}</li>
+          <li>Phone: {data?.phone ?? "-"}</li>
+          <li>Email: {data?.email ?? "-"}</li>
+        </ul>
+
+        <h6>Property Details</h6>
         <ul>
           <li>Title: {data?.title || "None"}</li>
           <li>City: {data?.city ?? "-"}</li>
