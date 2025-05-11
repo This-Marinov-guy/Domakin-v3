@@ -81,20 +81,30 @@ const PropertyTableBody = () => {
           <tr className="listing-table" key={item.id}>
             <td className="center">
               <div className="d-lg-flex align-items-center justify-content-center position-relative">
-                <OverlayTrigger
-                  placement="top"
-                  overlay={<Tooltip>Go to the listing</Tooltip>}
-                >
-                  <Link href={`/services/renting/property/${item.id}`}>
-                    <Image
-                      src={item.property_data.images[0]}
-                      width={200}
-                      height={200}
-                      alt="property-image"
-                      className="p-img"
-                    />
-                  </Link>
-                </OverlayTrigger>
+                {item.status === 2 ? (
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>Go to the listing</Tooltip>}
+                  >
+                    <Link href={`/services/renting/property/${item.id}`}>
+                      <Image
+                        src={item.property_data.images[0]}
+                        width={200}
+                        height={200}
+                        alt="property-image"
+                        className="p-img"
+                      />
+                    </Link>
+                  </OverlayTrigger>
+                ) : (
+                  <Image
+                    src={item.property_data.images[0]}
+                    width={200}
+                    height={200}
+                    alt="property-image"
+                    className="p-img"
+                  />
+                )}
               </div>
             </td>
             <td className="center">
@@ -143,7 +153,10 @@ const PropertyTableBody = () => {
                       </button>
                     </li>
                     {/* <li>
-                      <Link className="dropdown-item" href={`/account/properties/edit/${item.id}`}>
+                      <Link
+                        className="dropdown-item"
+                        href={`/account/properties/edit/${item.id}`}
+                      >
                         <Image src={icon_3} alt="" className="lazy-img" /> Edit
                       </Link>
                     </li> */}
