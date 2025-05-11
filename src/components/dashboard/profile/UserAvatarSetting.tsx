@@ -81,7 +81,8 @@ const UserAvatarSetting = () => {
         </div>
       </div>
 
-      <div className="col-sm-6"></div>
+      <hr />
+      <h6 className="mb-30">Change your password</h6>
 
       <div className="col-sm-6 dash-input-wrapper position-relative mb-20">
         <label htmlFor="">Password*</label>
