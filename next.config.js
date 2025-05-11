@@ -16,6 +16,7 @@ const nextConfig = nextTranslate({
       "res.cloudinary.com",
       "lh3.googleusercontent.com",
       "domakin0.wordpress.com",
+      "platform-lookaside.fbsbx.com",
     ],
     remotePatterns: [
       {
