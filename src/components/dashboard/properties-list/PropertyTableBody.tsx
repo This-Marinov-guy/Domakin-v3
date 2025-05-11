@@ -1,5 +1,7 @@
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
+import Tooltip from "react-bootstrap/Tooltip";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
 import icon_1 from "@/assets/images/dashboard/icon/icon_18.svg";
 import icon_2 from "@/assets/images/dashboard/icon/icon_19.svg";
@@ -79,13 +81,20 @@ const PropertyTableBody = () => {
           <tr className="listing-table" key={item.id}>
             <td className="center">
               <div className="d-lg-flex align-items-center justify-content-center position-relative">
-                <Image
-                  src={item.property_data.images[0]}
-                  width={200}
-                  height={200}
-                  alt="property-image"
-                  className="p-img"
-                />
+                <OverlayTrigger
+                  placement="top"
+                  overlay={<Tooltip>Go to the listing</Tooltip>}
+                >
+                  <Link href={`/services/renting/property/${item.id}`}>
+                    <Image
+                      src={item.property_data.images[0]}
+                      width={200}
+                      height={200}
+                      alt="property-image"
+                      className="p-img"
+                    />
+                  </Link>
+                </OverlayTrigger>
               </div>
             </td>
             <td className="center">
@@ -134,13 +143,13 @@ const PropertyTableBody = () => {
                       </button>
                     </li>
                     {/* <li>
+                      <Link className="dropdown-item" href={`/account/properties/edit/${item.id}`}>
+                        <Image src={icon_3} alt="" className="lazy-img" /> Edit
+                      </Link>
+                    </li> */}
+                    {/* <li>
                     <Link className="dropdown-item" href="#">
                       <Image src={icon_2} alt="" className="lazy-img" /> Share
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" href="#">
-                      <Image src={icon_3} alt="" className="lazy-img" /> Edit
                     </Link>
                   </li>
                   <li>
