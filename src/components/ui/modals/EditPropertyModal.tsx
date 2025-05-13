@@ -8,6 +8,7 @@ import useTranslation from "next-translate/useTranslation";
 import Image from "next/image";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
+import SingleDatePicker from "@/components/ui/inputs/dates/SingleDatePicker";
 import { useServer } from "@/hooks/useServer";
 import {
   prefillNestedUserInfo,
@@ -67,6 +68,52 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
         <form className="form-style-one wow fadeInUp">
           <div className="container m-a controls">
             <div className="row mt-20 mb-20">
+              <div className="col-md-6">
+                <div className="input-group-meta form-group mb-30">
+                  <label htmlFor="">Status</label>
+                  <NiceSelect
+                    className="nice-select border-one d-flex align-items-center"
+                    options={[
+                      { value: 1, text: "Pending" },
+                      { value: 2, text: "Active" },
+                      { value: 3, text: "Taken" },
+                    ]}
+                    defaultCurrent={0}
+                    onChange={(e) => {
+                      if (
+                        !editPropertyData.releaseTimestamp &&
+                        e.target.value == "2"
+                      ) {
+                        updateEditListingData(
+                          "releaseTimestamp",
+                          "",
+                          new Date()
+                        );
+                      }
+
+                      updateEditListingData("status", "", e.target.value);
+                    }}
+                    isInvalid={editErrorFields.includes("propertyData.status")}
+                    name=""
+                    placeholder=""
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6">
+                <div className="input-group-meta form-group mb-30">
+                  <label htmlFor="">Release Date</label>
+                  <SingleDatePicker
+                    placeholder=""
+                    value={editPropertyData.releaseTimestamp}
+                    onChange={(value: string) => {
+                      updateEditListingData("releaseTimestamp", "", value);
+                    }}
+                    isInvalid={editErrorFields.includes("release_timestamp")}
+                  />
+                </div>
+              </div>
+
               <div className="col-6">
                 <div className="input-group-meta form-group mb-30">
                   <label htmlFor="">{t("emergency_housing.city")}</label>

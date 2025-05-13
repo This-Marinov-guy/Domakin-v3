@@ -9,7 +9,7 @@ import React, {
 import { useClickAway } from "react-use";
 
 interface Option {
-  value: string;
+  value: string|number;
   text: string;
 }
 
