@@ -126,13 +126,23 @@ const PropertyTableBody = () => {
               <p className="price color-dark">€{item.property_data.rent}</p>
             </td>
             <td className="center">
-              <div
-                className={`property-status ${statusLabel(
-                  item.status
-                ).toLowerCase()}`}
+              <OverlayTrigger
+                placement="top"
+                overlay={<Tooltip>Click to change status</Tooltip>}
               >
-                {statusLabel(item.status)}
-              </div>
+                <div
+                  className={`property-status ${statusLabel(
+                    item.status
+                  ).toLowerCase()}`}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setPropertyDataForEdit(item);
+                    setEditProperty(true);
+                  }}
+                >
+                  {statusLabel(item.status)}
+                </div>
+              </OverlayTrigger>
             </td>
             {isAdmin ? (
               <td className="center">
