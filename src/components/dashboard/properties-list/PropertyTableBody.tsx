@@ -15,12 +15,14 @@ import ListingLoadingTable from "@/components/ui/loading/ListingLoadingTable";
 import { useEffect, useState } from "react";
 import { useServer } from "@/hooks/useServer";
 import PropertyDataPreview from "@/components/ui/modals/PropertyDataPreview";
+import EditPropertyModal from "@/components/ui/modals/EditPropertyModal";
 
 const PropertyTableBody = () => {
   const {
     propertyStore: {
       userPropertiesLoading,
       userProperties,
+      setPropertyDataForEdit,
       setUserProperties,
       setUserPropertiesLoading,
       statusLabel,
@@ -29,6 +31,7 @@ const PropertyTableBody = () => {
   } = useStore();
 
   const [propertyPreview, setPropertyPreview] = useState(null);
+  const [editProperty, setEditProperty] = useState(false);
 
   const { sendRequest } = useServer();
 
@@ -75,6 +78,11 @@ const PropertyTableBody = () => {
       <PropertyDataPreview
         data={propertyPreview}
         onHide={() => setPropertyPreview(null)}
+      />
+      <EditPropertyModal
+        show={editProperty}
+        setShow={setEditProperty}
+        reloadProperties={loadProperties}
       />
       <tbody className="border-0">
         {userProperties.map((item) => (
@@ -152,14 +160,17 @@ const PropertyTableBody = () => {
                         View Details
                       </button>
                     </li>
-                    {/* <li>
-                      <Link
+                    <li>
+                      <button
                         className="dropdown-item"
-                        href={`/account/properties/edit/${item.id}`}
+                        onClick={() => {
+                          setPropertyDataForEdit(item);
+                          setEditProperty(true);
+                        }}
                       >
                         <Image src={icon_3} alt="" className="lazy-img" /> Edit
-                      </Link>
-                    </li> */}
+                      </button>
+                    </li>
                     {/* <li>
                     <Link className="dropdown-item" href="#">
                       <Image src={icon_2} alt="" className="lazy-img" /> Share

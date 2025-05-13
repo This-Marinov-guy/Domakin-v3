@@ -35,7 +35,7 @@ const AuthButton = ({
             : "d-lg-inline-block ms-3"
         }
       >
-        <Spinner />
+        <Spinner size='sm' animation="border"/>
       </li>
     );
   }

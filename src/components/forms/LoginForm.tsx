@@ -168,7 +168,7 @@ const LoginForm = () => {
             onClick={signInWithPassword}
             className="btn-two w-100 text-uppercase d-block mt-20"
           >
-            {loading ? <Spinner /> : t("authentication.log_in")}
+            {loading ? <Spinner size='sm' animation="border"/> : t("authentication.log_in")}
           </button>
         </div>
       </div>

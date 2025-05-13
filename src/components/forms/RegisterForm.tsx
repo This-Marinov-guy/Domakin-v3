@@ -230,7 +230,7 @@ const RegisterForm = () => {
             onClick={signUpWithPassword}
             className="btn-two w-100 text-uppercase d-block mt-20"
           >
-            {loading ? <Spinner /> : t("authentication.sign_up")}
+            {loading ? <Spinner size='sm' animation="border"/> : t("authentication.sign_up")}
           </button>
         </div>
       </div>

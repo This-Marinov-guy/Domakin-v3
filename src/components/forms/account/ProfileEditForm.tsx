@@ -107,7 +107,7 @@ const ProfileEditForm = () => {
             onClick={handleSubmit}
             className="dash-btn-two tran3s me-3"
           >
-            {loading ? <Spinner /> : "Save"}
+            {loading ? <Spinner size='sm' animation="border"/> : "Save"}
           </button>
         </div>
         <UserAvatarSetting />

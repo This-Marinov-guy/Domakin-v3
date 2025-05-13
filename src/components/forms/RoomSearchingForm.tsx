@@ -359,7 +359,7 @@ const RoomSearchingForm = () => {
             onClick={handleSubmit}
             className="btn-nine text-uppercase rounded-3 fw-normal w-100"
           >
-            {loading ? <Spinner animation="border" /> : t("contact.send")}
+            {loading ? <Spinner size='sm' animation="border" /> : t("contact.send")}
           </button>
         </div>
       </div>

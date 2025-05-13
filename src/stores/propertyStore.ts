@@ -1,3 +1,5 @@
+import { stat } from "fs";
+import { isEmpty } from "lodash";
 import { action, makeAutoObservable, observable } from "mobx";
 
 const defaultFormData = {
@@ -19,7 +21,6 @@ const defaultFormData = {
     registration: "yes",
     description: "",
   },
-
   referralCode: "",
 
   terms: {
@@ -42,6 +43,9 @@ export default class PropertyStore {
   @observable addListingData: any = { ...defaultFormData };
   @observable errorFields: string[] = [];
 
+  @observable editPropertyData: any = { ...defaultFormData };
+  @observable editErrorFields: string[] = [];
+
   constructor(root: any) {
     makeAutoObservable(this);
     this.rootStore = root;
@@ -50,6 +54,38 @@ export default class PropertyStore {
       this.loadListingData();
     }
   }
+
+  @action
+  loadPropertyDataForEdit = (id: any) => {
+    const property = this.properties.find((property) => property.id === id);
+
+    if (!property) return;
+
+    this.editPropertyData = property;
+  };
+
+  @action
+  setPropertyDataForEdit = (property: any) => {
+    if (isEmpty(property)) return;
+
+    this.editPropertyData = {
+      id: property.id,
+      approved: property.approved,
+      status: property.status,
+      releaseTimestamp: property.release_timestamp,
+      propertyData: {
+        ...property.property_data,
+        bills: JSON.parse(property.property_data.bills),
+        flatmates: JSON.parse(property.property_data.flatmates),
+        description: JSON.parse(property.property_data.description),
+        period: JSON.parse(property.property_data.period),
+        title: property?.property_data?.title
+          ? JSON.parse(property.property_data.title ?? "")
+          : property.property_data.title,
+        image: property?.property_data?.image,
+      },
+    };
+  };
 
   @action
   loadListingData = () => {
@@ -64,7 +100,7 @@ export default class PropertyStore {
 
   @action
   setProperties = (properties: any[]) => {
-    this.properties = properties;
+    this.properties = { ...properties };
   };
 
   @action
@@ -84,8 +120,32 @@ export default class PropertyStore {
   };
 
   @action
+  updateEditListingData = (key: string, nestedKey: string, value: any) => {
+    if (nestedKey) {
+      // if (!this.editPropertyData[key]) {
+      //   this.editPropertyData[key] = {};
+      // }
+
+      this.editPropertyData[key][nestedKey] = value;
+    } else {
+      this.editPropertyData[key] = value;
+    }
+  };
+
+  @action
+  updateMainImage = (index: number) => {
+    const mainImage = this.editPropertyData.propertyData.images[index];
+    this.editPropertyData.propertyData.images = [mainImage, ...this.editPropertyData.propertyData.images.slice(0, index), ...this.editPropertyData.propertyData.images.slice(index + 1)];
+  };
+
+  @action
   addErrorFields = (fields: string[]) => {
     this.errorFields = fields;
+  };
+
+  @action
+  addEditErrorFields = (fields: string[]) => {
+    this.editErrorFields = fields;
   };
 
   @action

@@ -92,7 +92,7 @@ const CreateFeedback = () => {
               onClick={handleSubmit}
               className="btn-nine text-uppercase rounded-3 fw-normal w-100"
             >
-              {loading ? <Spinner /> : t("feedbacks.send")}
+              {loading ? <Spinner size='sm' animation="border"/> : t("feedbacks.send")}
             </button>
           </div>
         </div>
