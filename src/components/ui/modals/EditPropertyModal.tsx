@@ -100,7 +100,6 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
                     }}
                     isInvalid={editErrorFields.includes("propertyData.address")}
                   />
-                  <small>* {t("emergency_housing.precise_address")}</small>
                 </div>
               </div>
 
