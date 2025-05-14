@@ -59,6 +59,12 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
     });
   };
 
+  const statusOptions = [
+    { value: 1, text: "Pending" },
+    { value: 2, text: "Active" },
+    { value: 3, text: "Taken" },
+  ];
+
   return (
     <Modal show={show} fullscreen onHide={() => setShow(false)}>
       <Modal.Header closeButton>
@@ -73,12 +79,10 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
                   <label htmlFor="">Status</label>
                   <NiceSelect
                     className="nice-select border-one d-flex align-items-center"
-                    options={[
-                      { value: 1, text: "Pending" },
-                      { value: 2, text: "Active" },
-                      { value: 3, text: "Taken" },
-                    ]}
-                    defaultCurrent={0}
+                    options={statusOptions}
+                    defaultCurrent={statusOptions.findIndex((item) => {
+                      return item.value == editPropertyData.status;
+                    })}
                     onChange={(e) => {
                       if (
                         !editPropertyData.releaseTimestamp &&
