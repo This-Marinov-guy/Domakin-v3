@@ -40,7 +40,7 @@ const PropertiesPage = () => {
   };
 
   const forRentList: any[] = t("FOR_RENT", {}, { returnObjects: true }) ?? [];
-  const allProperties = [...toJS(propertyStore.properties), ...forRentList];
+  const allProperties = [...propertyStore.properties, ...forRentList];
 
   if (propertyStore.propertiesLoading || !allProperties) {
     return <PageLoader />;

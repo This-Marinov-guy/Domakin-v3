@@ -1,6 +1,6 @@
 import { stat } from "fs";
 import { isEmpty } from "lodash";
-import { action, makeAutoObservable, observable } from "mobx";
+import { action, makeAutoObservable, observable, toJS } from "mobx";
 
 const defaultFormData = {
   personalData: {
@@ -100,7 +100,7 @@ export default class PropertyStore {
 
   @action
   setProperties = (properties: any[]) => {
-    this.properties = { ...properties };
+    this.properties = toJS(properties);
   };
 
   @action
@@ -135,7 +135,11 @@ export default class PropertyStore {
   @action
   updateMainImage = (index: number) => {
     const mainImage = this.editPropertyData.propertyData.images[index];
-    this.editPropertyData.propertyData.images = [mainImage, ...this.editPropertyData.propertyData.images.slice(0, index), ...this.editPropertyData.propertyData.images.slice(index + 1)];
+    this.editPropertyData.propertyData.images = [
+      mainImage,
+      ...this.editPropertyData.propertyData.images.slice(0, index),
+      ...this.editPropertyData.propertyData.images.slice(index + 1),
+    ];
   };
 
   @action
