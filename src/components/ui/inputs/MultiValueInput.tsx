@@ -31,32 +31,33 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
   }
 
   return (
-    <div className="input-group-meta form-group mb-30">
-      <label
-        htmlFor={`main-label`}
-        className={`block text-sm font-medium mb-1`}
-      >
-        {label}
-      </label>
-      {Object.entries(data).map(([key, value], index) => (
-        <div key={key} className="mb-4">
-          <label
-            htmlFor={`input-${key}`}
-            className={`block text-sm font-medium mb-1`}
-          >
-            {key}
-          </label>
-          <Form.Control
-            as={textarea ? "textarea" : "input"}
-            id={`input-${key}`}
-            type={typeof value === "number" ? "number" : "text"}
-            value={value}
-            onChange={(e) => handleInputChange(key, e.target.value)}
-            className={`w-full px-3 py-2 border rounded-md`}
-            isInvalid={isInvalid && index === 0}
-          />
-        </div>
-      ))}
+    <div className="form-style-one">
+      <div className="input-group-meta form-group mb-30">
+        <label
+          htmlFor={`main-label`}
+          className="block text-sm font-medium mb-1"
+        >
+          {label}
+        </label>
+        {Object.entries(data).map(([key, value], index) => (
+          <div key={key} className="mb-4">
+            <label
+              htmlFor={`input-${key}`}
+              className="block text-sm font-medium mb-1"
+            >
+              {key}
+            </label>
+            <Form.Control
+              as={textarea ? "textarea" : "input"}
+              id={`input-${key}`}
+              type={typeof value === "number" ? "number" : "text"}
+              value={value}
+              onChange={(e) => handleInputChange(key, e.target.value)}
+              isInvalid={isInvalid && index === 0}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
