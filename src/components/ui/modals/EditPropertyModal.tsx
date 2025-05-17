@@ -118,7 +118,7 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
                 </div>
               </div>
 
-              <div className="col-6">
+              <div className="col-lg-6 col-md-6 col-12">
                 <div className="input-group-meta form-group mb-30">
                   <label htmlFor="">{t("emergency_housing.city")}</label>
                   <Form.Control
@@ -154,7 +154,7 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
                 </div>
               </div>
 
-              <div className="col-6">
+              <div className="col-lg-6 col-md-6 col-12">
                 <div className="input-group-meta form-group mb-30">
                   <label htmlFor="">{t("emergency_housing.size")}</label>
                   <Form.Control
@@ -200,7 +200,7 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
                 </div>
               </div>
 
-              <div className="col-6">
+              <div className="col-lg-6 col-md-6 col-12">
                 <div className="input-group-meta form-group mb-30">
                   <label htmlFor="">{t("emergency_housing.rent")}</label>
                   <Form.Control
@@ -218,11 +218,11 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
                 </div>
               </div>
 
-              <div className="col-6" />
+              <div className="col-lg-6 col-md-6 col-12"/>
 
               <div className="col-6">
                 <MultiValueInput
-                  label={t("emergency_housing.bills")}
+                  label="Bills"
                   data={editPropertyData.propertyData.bills}
                   onChange={(updatedData) =>
                     updateEditListingData("propertyData", "bills", updatedData)
@@ -244,7 +244,7 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
 
               <div className="col-6">
                 <MultiValueInput
-                  label={t("emergency_housing.flatmates")}
+                  label="Flatmates number"
                   data={editPropertyData.propertyData.flatmates}
                   onChange={(updatedData) =>
                     updateEditListingData(
@@ -259,7 +259,7 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
 
               <div className="col-6">
                 <MultiValueInput
-                  label={t("emergency_housing.period")}
+                  label="Period of availability"
                   data={editPropertyData.propertyData.period}
                   onChange={(updatedData) =>
                     updateEditListingData("propertyData", "period", updatedData)
@@ -271,7 +271,7 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
               <div className="col-12">
                 <MultiValueInput
                   textarea
-                  label={t("emergency_housing.description")}
+                  label="Description"
                   data={editPropertyData.propertyData.description}
                   onChange={(updatedData) =>
                     updateEditListingData(
