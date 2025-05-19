@@ -55,6 +55,9 @@ export const EUROPEAN_COUNTRIES = [
   { country: "Ukraine", iso2: "UA", iso3: "UKR", phoneCode: "+380" },
   { country: "United Kingdom", iso2: "GB", iso3: "GBR", phoneCode: "+44" },
   { country: "Vatican City", iso2: "VA", iso3: "VAT", phoneCode: "+379" },
+
+  // special countries
+  { country: "India", iso2: "IN", iso3: "IND", phoneCode: "+91" },
 ];
 
 export const PHONE_CODES = [
