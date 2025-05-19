@@ -94,7 +94,8 @@ const PropertyTableBody = () => {
                     placement="top"
                     overlay={<Tooltip>Go to the listing</Tooltip>}
                   >
-                    <Link href={`/services/renting/property/${item.id}`}>
+                    {/* Increment id by 1000 to not overlap with the hardcoded ones (needs fix) */}
+                    <Link href={`/services/renting/property/${1000 + item.id}`}>
                       <Image
                         src={item.property_data.images[0]}
                         width={200}
