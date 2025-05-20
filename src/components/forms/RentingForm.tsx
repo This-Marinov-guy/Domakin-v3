@@ -220,13 +220,14 @@ const RentingForm = ({ refElement, property }: any) => {
 
         <div className="col-12">
           <button
-            disabled={loading}
+            disabled={loading || property.statusCode === 3}
             type="submit"
             onClick={handleSubmit}
             className="btn-nine text-uppercase rounded-3 fw-normal w-100"
           >
             {loading ? <Spinner size='sm' animation="border" /> : t("contact.send")}
           </button>
+          <small className="d-flex justify-content-center text-danger">{t('renting.the_property_is_taken')}</small>
         </div>
       </div>
     </form>

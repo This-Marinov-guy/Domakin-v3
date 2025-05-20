@@ -39,7 +39,7 @@ const PropertyDetailsOne = () => {
   return (
     <>
       <HeaderOne />
-      <ScreenButton refElement={formRef} />
+      {property.statusCode !== 3 && <ScreenButton refElement={formRef} />}
       <ListingDetailsOneArea property={property} />
       <RentingForm refElement={formRef} property={property} />
       <RelatedProperties properties={relatedProperties} />

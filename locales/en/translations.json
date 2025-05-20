@@ -226,7 +226,8 @@
     "no_properties_message": "No properties at the moment - please check again later!",
     "free_of_charge": "FREE OF CHARGE",
     "per_night": "per night",
-    "apply_now": "Apply now"
+    "apply_now": "Apply now",
+    "the_property_is_taken": "The property is taken"
   },
   "lending": {
     "transfer_and_old_contract": "Transfer and old contract",

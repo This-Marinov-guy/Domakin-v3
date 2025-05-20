@@ -224,7 +224,8 @@
     "no_properties_message": "В момента нямаме налични имоти - моля проверявайте сайта редовно или се свържете с нас!",
     "free_of_charge": "НЕ СЕ ЗАПЛАЩА",
     "per_night": "на вечер",
-    "apply_now": "Кандидатствай"
+    "apply_now": "Кандидатствай",
+    "the_property_is_taken": "Имотът е зает"
   },
   "lending": {
     "transfer_and_old_contract": "Прехвърли стар договор",

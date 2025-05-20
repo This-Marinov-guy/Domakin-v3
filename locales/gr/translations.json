@@ -222,7 +222,8 @@
     "no_properties_message": "Δεν υπάρχουν ιδιοκτησίες αυτή τη στιγμή - ελέγξτε ξανά αργότερα!",
     "free_of_charge": "ΧΩΡΙΣ ΧΡΕΩΣΗ",
     "per_night": "ανα βράδυ",
-    "apply_now": "Κάνε αίτηση"
+    "apply_now": "Κάνε αίτηση",
+    "the_property_is_taken": "Το ακίνητο έχει ήδη κρατηθεί"
   },
   "lending": {
     "transfer_and_old_contract": "Μεταγραφή και παλιό συμβόλαιο",
