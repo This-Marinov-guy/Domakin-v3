@@ -255,7 +255,7 @@ export const prefillUserInfo = (callback: Function, user: any | null) => {
   }
 
   callback("name", "", user.name.split(" ")[0] ?? "");
-  callback("surname", "", user.name.split(" ")[1] ?? "");
+  callback("surname", "", user.name.split(" ")[1] ?? "-");
   callback("email", "", user.email ?? "");
 
   // or else we will set the code to null
