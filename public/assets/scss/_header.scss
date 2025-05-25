@@ -525,17 +525,24 @@
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
   border-radius: 50%;
   border: 2px solid #000;
   object-fit: cover;
   cursor: pointer;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
 }
 
 .avatar-container {
   position: relative;
   display: inline-block;
+  z-index: 1;
+  flex-shrink: 0;
 }
 
 .avatar-badge {
@@ -550,6 +557,9 @@
   align-items: center;
   justify-content: center;
   border: 2px solid white; /* Optional: Adds a border for better visibility */
+  z-index: 2;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .logout-btn {

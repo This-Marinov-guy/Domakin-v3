@@ -113,7 +113,9 @@ const NavMenu = () => {
         </Link>
       </li>
 
-      <AuthButton mobile />
+      <li className="mt-3">
+        <AuthButton mobile />
+      </li>
     </ul>
   );
 };
