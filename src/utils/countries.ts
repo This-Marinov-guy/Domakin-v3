@@ -58,6 +58,7 @@ export const EUROPEAN_COUNTRIES = [
 
   // special countries
   { country: "India", iso2: "IN", iso3: "IND", phoneCode: "+91" },
+  { country: "Australia", iso2: "AU", iso3: "AUS", phoneCode: "+61" },
 ];
 
 export const PHONE_CODES = [
@@ -113,4 +114,5 @@ export const PHONE_CODES = [
   "+44",
   "+379",
   "+91",
+  "+61",
 ];
