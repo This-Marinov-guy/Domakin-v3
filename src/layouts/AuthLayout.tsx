@@ -13,6 +13,12 @@ const AuthLayout = ({ children }: any) => {
 
   const [loading, setLoading] = useState(true);
 
+  const dependencyArray = [user, userLoading];
+
+  if (user) {
+    dependencyArray.push(user);
+  }
+
   useEffect(() => {
     if (userLoading) return;
 
@@ -29,7 +35,7 @@ const AuthLayout = ({ children }: any) => {
     } else {
       setLoading(false);
     }
-  }, [user, router, userLoading]);
+  }, dependencyArray);
 
   if (userLoading || loading) {
     return <PageLoader />;
