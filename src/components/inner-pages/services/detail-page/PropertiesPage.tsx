@@ -11,6 +11,7 @@ import ListingThreeArea from "@/components/inner-listing/listing-03/ListingThree
 import { useStore } from "@/stores/storeContext";
 import PageLoader from "@/components/ui/loading/PageLoader";
 import { observer } from "mobx-react-lite";
+import { PROPERTY_STATUS } from "@/utils/enum";
 
 const PropertiesPage = () => {
   const { t } = useTranslation("translations");
@@ -40,7 +41,9 @@ const PropertiesPage = () => {
   };
 
   const forRentList: any[] = t("FOR_RENT", {}, { returnObjects: true }) ?? [];
-  const allProperties = [...propertyStore.properties, ...forRentList];
+  const allProperties = [...propertyStore.properties, ...forRentList].filter(
+    (property) => property.statusCode !== PROPERTY_STATUS.PENDING
+  );
 
   if (propertyStore.propertiesLoading || !allProperties) {
     return <PageLoader />;

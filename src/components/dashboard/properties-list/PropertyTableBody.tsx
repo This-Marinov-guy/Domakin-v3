@@ -3,7 +3,7 @@ import Link from "next/link";
 import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import ReactPaginate from "react-paginate";
-import PaginatedTableWrapper from "./PaginatedTableWrapper";
+import PaginatedTableWrapper, { PaginatedTableWrapperHandle } from "./PaginatedTableWrapper";
 
 import icon_1 from "@/assets/images/dashboard/icon/icon_18.svg";
 import icon_2 from "@/assets/images/dashboard/icon/icon_19.svg";
@@ -14,10 +14,11 @@ import listImg_5 from "@/assets/images/dashboard/img_05.jpg";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import ListingLoadingTable from "@/components/ui/loading/ListingLoadingTable";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useServer } from "@/hooks/useServer";
 import PropertyDataPreview from "@/components/ui/modals/PropertyDataPreview";
 import EditPropertyModal from "@/components/ui/modals/EditPropertyModal";
+import { PROPERTY_STATUS } from "@/utils/enum";
 
 const PropertyTableBody = () => {
   const {
@@ -41,6 +42,9 @@ const PropertyTableBody = () => {
   const [totalPages, setTotalPages] = useState(1);
 
   const { sendRequest } = useServer();
+
+  // Ref for PaginatedTableWrapper
+  const paginationRef = useRef<PaginatedTableWrapperHandle>(null);
 
   // Fetch function for PaginatedTableWrapper
   const fetchData = async (page: number, perPage: number) => {
@@ -71,13 +75,13 @@ const PropertyTableBody = () => {
       <EditPropertyModal
         show={editProperty}
         setShow={setEditProperty}
-        reloadProperties={() => {}}
+        reloadProperties={() => paginationRef.current?.reload()}
       />
       {userProperties.map((item) => (
         <tr className="listing-table" key={item.id}>
           <td className="center">
             <div className="d-lg-flex align-items-center justify-content-center position-relative">
-              {item.status === 2 ? (
+              {item.status < PROPERTY_STATUS.EXPIRED ? (
                 <OverlayTrigger
                   placement="top"
                   overlay={<Tooltip>Go to the listing</Tooltip>}
@@ -181,7 +185,12 @@ const PropertyTableBody = () => {
 
   return (
     <tbody className="border-0">
-      <PaginatedTableWrapper fetchData={fetchData} renderRows={renderRows} initialPerPage={5} />
+      <PaginatedTableWrapper
+        ref={paginationRef}
+        fetchData={fetchData}
+        renderRows={renderRows}
+        initialPerPage={5}
+      />
     </tbody>
   );
 };

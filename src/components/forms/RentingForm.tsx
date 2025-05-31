@@ -11,6 +11,7 @@ import { toast, ToastContent } from "react-toastify";
 import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
 import { prefillUserInfo, transformToFormData } from "@/utils/helpers";
 import Trans from "next-translate/Trans";
+import { PROPERTY_STATUS } from "@/utils/enum";
 
 const RentingForm = ({ refElement, property }: any) => {
   const { t } = useTranslation("translations");
@@ -29,6 +30,8 @@ const RentingForm = ({ refElement, property }: any) => {
     },
     userStore: { user },
   } = useStore();
+
+  const isApplyDisabled = property.statusCode !== PROPERTY_STATUS.APPROVED;
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -220,14 +223,22 @@ const RentingForm = ({ refElement, property }: any) => {
 
         <div className="col-12">
           <button
-            disabled={loading || property.statusCode === 3}
+            disabled={loading || isApplyDisabled}
             type="submit"
             onClick={handleSubmit}
             className="btn-nine text-uppercase rounded-3 fw-normal w-100"
           >
-            {loading ? <Spinner size='sm' animation="border" /> : t("contact.send")}
+            {loading ? (
+              <Spinner size="sm" animation="border" />
+            ) : (
+              t("contact.send")
+            )}
           </button>
-          <small className="d-flex justify-content-center text-danger">{t('renting.the_property_is_taken')}</small>
+          {isApplyDisabled && (
+            <small className="d-flex justify-content-center text-danger">
+              {t("renting.the_property_is_taken")}
+            </small>
+          )}
         </div>
       </div>
     </form>

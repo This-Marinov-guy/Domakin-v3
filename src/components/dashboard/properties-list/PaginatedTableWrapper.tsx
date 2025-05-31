@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useImperativeHandle, forwardRef } from "react";
 import ReactPaginate from "react-paginate";
 import styles from "./PaginatedTableWrapper.module.css";
 import { PAGINATION_PER_PAGE_OPTIONS_1, PAGINATION_PER_PAGE_OPTIONS_2 } from "@/utils/config";
@@ -13,6 +13,10 @@ interface PaginationInfo {
   total: number;
 }
 
+export interface PaginatedTableWrapperHandle {
+  reload: () => void;
+}
+
 interface PaginatedTableWrapperProps<T> {
   fetchData: (
     page: number,
@@ -24,14 +28,16 @@ interface PaginatedTableWrapperProps<T> {
   perPageOptions?: number[];
 }
 
-function PaginatedTableWrapper<T>({
-  fetchData,
-  renderRows,
-  initialPerPage = 10,
-  perPageOptionsType = 'default',
-  perPageOptions,
-}: PaginatedTableWrapperProps<T>) {
-
+const PaginatedTableWrapper = forwardRef(function PaginatedTableWrapper<T>(
+  {
+    fetchData,
+    renderRows,
+    initialPerPage = 10,
+    perPageOptionsType = 'default',
+    perPageOptions,
+  }: PaginatedTableWrapperProps<T>,
+  ref: React.Ref<PaginatedTableWrapperHandle>
+) {
   const options =
     perPageOptions ||
     (perPageOptionsType === "extended"
@@ -56,7 +62,7 @@ function PaginatedTableWrapper<T>({
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const load = async (page = 0, perPageValue = perPage) => {
+  const load = async (page = currentPage, perPageValue = perPage) => {
     setLoading(true);
     try {
       const result = await fetchData(page + 1, perPageValue); // API is 1-based
@@ -70,6 +76,13 @@ function PaginatedTableWrapper<T>({
     }
     setLoading(false);
   };
+
+  // Expose reload method to parent
+  useImperativeHandle(ref, () => ({
+    reload: () => {
+      load();
+    },
+  }));
 
   useEffect(() => {
     load(currentPage, perPage);
@@ -113,7 +126,6 @@ function PaginatedTableWrapper<T>({
       ) : (
         renderRows(data)
       )}
-
       {!loading && <td colSpan={10} className="pt-50 gap-3 m-auto d-flex justify-content-center text-center align-items-center">
         <ReactPaginate
           breakLabel="..."
@@ -127,7 +139,6 @@ function PaginatedTableWrapper<T>({
           nextLabel={<i className="fa-regular fa-chevron-right"></i>}
           forcePage={currentPage}
         />
-
         <select
           className={styles.perPageSelect}
           value={perPage}
@@ -142,6 +153,6 @@ function PaginatedTableWrapper<T>({
       </td>}
     </>
   );
-}
+});
 
 export default PaginatedTableWrapper;
