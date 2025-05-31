@@ -40,3 +40,6 @@ export const logoByTheme = () => {
 
 // server
 export const GENERAL_ERROR_RESPONSE_CODES = [419, 500];
+
+export const PAGINATION_PER_PAGE_OPTIONS_1 = [2, 5, 10];
+export const PAGINATION_PER_PAGE_OPTIONS_2 = [2, 5, 10, 20, 50];
