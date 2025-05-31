@@ -2,6 +2,8 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import ReactPaginate from "react-paginate";
+import PaginatedTableWrapper from "./PaginatedTableWrapper";
 
 import icon_1 from "@/assets/images/dashboard/icon/icon_18.svg";
 import icon_2 from "@/assets/images/dashboard/icon/icon_19.svg";
@@ -33,47 +35,34 @@ const PropertyTableBody = () => {
   const [propertyPreview, setPropertyPreview] = useState(null);
   const [editProperty, setEditProperty] = useState(false);
 
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(0); // 0-based for ReactPaginate
+  const [perPage, setPerPage] = useState(2);
+  const [totalPages, setTotalPages] = useState(1);
+
   const { sendRequest } = useServer();
 
-  const loadProperties = async () => {
-    setUserPropertiesLoading(true);
-
-    try {
-      const response = await sendRequest(
-        isAdmin ? "/property/list-extended" : "/property/list"
-      );
-
-      if (response?.status) {
-        setUserProperties(response.data);
-      }
-    } catch (error) {
-      console.error("Error loading properties:", error);
+  // Fetch function for PaginatedTableWrapper
+  const fetchData = async (page: number, perPage: number) => {
+    const response = await sendRequest(
+      `${isAdmin ? "/property/list-extended" : "/property/list"}?page=${page}&per_page=${perPage}`
+    );
+    if (response?.status) {
+      return {
+        data: response.data.properties,
+        pagination: {
+          current_page: response.data.current_page,
+          last_page: response.data.last_page,
+          per_page: response.data.per_page,
+          total: response.data.total,
+        },
+      };
     }
-
-    setUserPropertiesLoading(false);
+    return { data: [], pagination: { current_page: 1, last_page: 1, per_page: perPage, total: 0 } };
   };
 
-  useEffect(() => {
-    loadProperties();
-  }, []);
-
-  if (userPropertiesLoading) {
-    return <ListingLoadingTable />;
-  }
-
-  if (userProperties.length === 0) {
-    return (
-      <tbody>
-        <tr className="w-100 text-center">
-          <td colSpan={5}>
-            <h6>No properties found</h6>
-          </td>
-        </tr>
-      </tbody>
-    );
-  }
-
-  return (
+  // Table row renderer
+  const renderRows = (userProperties: any[]) => (
     <>
       <PropertyDataPreview
         data={propertyPreview}
@@ -82,126 +71,118 @@ const PropertyTableBody = () => {
       <EditPropertyModal
         show={editProperty}
         setShow={setEditProperty}
-        reloadProperties={loadProperties}
+        reloadProperties={() => {}}
       />
-      <tbody className="border-0">
-        {userProperties.map((item) => (
-          <tr className="listing-table" key={item.id}>
-            <td className="center">
-              <div className="d-lg-flex align-items-center justify-content-center position-relative">
-                {item.status === 2 ? (
-                  <OverlayTrigger
-                    placement="top"
-                    overlay={<Tooltip>Go to the listing</Tooltip>}
-                  >
-                    {/* Increment id by 1000 to not overlap with the hardcoded ones (needs fix) */}
-                    <Link href={`/services/renting/property/${1000 + item.id}`}>
-                      <Image
-                        src={item.property_data.images[0]}
-                        width={200}
-                        height={200}
-                        alt="property-image"
-                        className="p-img"
-                      />
-                    </Link>
-                  </OverlayTrigger>
-                ) : (
-                  <Image
-                    src={item.property_data.images[0]}
-                    width={200}
-                    height={200}
-                    alt="property-image"
-                    className="p-img"
-                  />
-                )}
-              </div>
-            </td>
-            <td className="center">
-              {" "}
-              <strong className="price color-dark">
-                {item.property_data.city}
-              </strong>
-              <p className="price color-dark">{item.property_data.address}</p>
-            </td>
-            <td className="center">
-              <p className="price color-dark">€{item.property_data.rent}</p>
-            </td>
-            <td className="center">
-              <OverlayTrigger
-                placement="top"
-                overlay={<Tooltip>Click to change status</Tooltip>}
-              >
-                <div
-                  className={`property-status ${statusLabel(
-                    item.status
-                  ).toLowerCase()}`}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    setPropertyDataForEdit(item);
-                    setEditProperty(true);
-                  }}
+      {userProperties.map((item) => (
+        <tr className="listing-table" key={item.id}>
+          <td className="center">
+            <div className="d-lg-flex align-items-center justify-content-center position-relative">
+              {item.status === 2 ? (
+                <OverlayTrigger
+                  placement="top"
+                  overlay={<Tooltip>Go to the listing</Tooltip>}
                 >
-                  {statusLabel(item.status)}
-                </div>
-              </OverlayTrigger>
-            </td>
-            {isAdmin ? (
-              <td className="center">
-                <div className="action-dots float-end">
-                  <button
-                    className="action-btn dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <span></span>
-                  </button>
-                  <ul className="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        onClick={() =>
-                          setPropertyPreview({
-                            ...item.personal_data,
-                            ...item.property_data,
-                          })
-                        }
-                      >
-                        <Image src={icon_1} alt="" className="lazy-img" />
-                        View Details
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        onClick={() => {
-                          setPropertyDataForEdit(item);
-                          setEditProperty(true);
-                        }}
-                      >
-                        <Image src={icon_3} alt="" className="lazy-img" /> Edit
-                      </button>
-                    </li>
-                    {/* <li>
-                    <Link className="dropdown-item" href="#">
-                      <Image src={icon_2} alt="" className="lazy-img" /> Share
-                    </Link>
+                  <Link href={`/services/renting/property/${1000 + item.id}`}>
+                    <Image
+                      src={item.property_data.images[0]}
+                      width={200}
+                      height={200}
+                      alt="property-image"
+                      className="p-img"
+                    />
+                  </Link>
+                </OverlayTrigger>
+              ) : (
+                <Image
+                  src={item.property_data.images[0]}
+                  width={200}
+                  height={200}
+                  alt="property-image"
+                  className="p-img"
+                />
+              )}
+            </div>
+          </td>
+          <td className="center">
+            <strong className="price color-dark">
+              {item.property_data.city}
+            </strong>
+            <p className="price color-dark">{item.property_data.address}</p>
+          </td>
+          <td className="center">
+            <p className="price color-dark">€{item.property_data.rent}</p>
+          </td>
+          <td className="center">
+            <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip>Click to change status</Tooltip>}
+            >
+              <div
+                className={`property-status ${statusLabel(
+                  item.status
+                ).toLowerCase()}`}
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setPropertyDataForEdit(item);
+                  setEditProperty(true);
+                }}
+              >
+                {statusLabel(item.status)}
+              </div>
+            </OverlayTrigger>
+          </td>
+          {isAdmin ? (
+            <td className="center">
+              <div className="action-dots float-end">
+                <button
+                  className="action-btn dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <span></span>
+                </button>
+                <ul className="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <button
+                      className="dropdown-item"
+                      onClick={() =>
+                        setPropertyPreview({
+                          ...item.personal_data,
+                          ...item.property_data,
+                        })
+                      }
+                    >
+                      <Image src={icon_1} alt="" className="lazy-img" />
+                      View Details
+                    </button>
                   </li>
                   <li>
-                    <Link className="dropdown-item" href="#">
-                      <Image src={icon_4} alt="" className="lazy-img" /> Delete
-                    </Link>
-                  </li> */}
-                  </ul>
-                </div>
-              </td>
-            ) : (
-              <td className="center"></td>
-            )}
-          </tr>
-        ))}
-      </tbody>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => {
+                        setPropertyDataForEdit(item);
+                        setEditProperty(true);
+                      }}
+                    >
+                      <Image src={icon_3} alt="" className="lazy-img" /> Edit
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          ) : (
+            <td className="center"></td>
+          )}
+        </tr>
+      ))}
     </>
+  );
+
+  return (
+    <tbody className="border-0">
+      <PaginatedTableWrapper fetchData={fetchData} renderRows={renderRows} initialPerPage={5} />
+    </tbody>
   );
 };
 
