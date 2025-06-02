@@ -77,7 +77,7 @@
     },
     "viewing_assistance": {
       "section_title": "🔍 Viewing Assistance Services",
-      "intro": "We understand that attending property viewings in person isn’t always possible. That’s why we offer Viewing Assistance Services, allowing you to have a trusted representative from Domakin attend the viewing on your behalf and provide detailed feedback.",
+      "intro": "We understand that attending property viewings in person isn't always possible. That's why we offer Viewing Assistance Services, allowing you to have a trusted representative from Domakin attend the viewing on your behalf and provide detailed feedback.",
       "types": {
         "standard": {
           "title": "Standard Viewing Assistance – €<b>{{price}}</b>",
@@ -89,7 +89,7 @@
         }
       },
       "included": {
-        "title": "What’s included in both services:",
+        "title": "What's included in both services:",
         "items": {
           "1": "Full attendance at the property viewing.",
           "2": "Photos and videos of the property.",
@@ -98,7 +98,7 @@
       },
       "audience": {
         "title": "Who is this service for?",
-        "description": "This service is ideal for students, expats, or anyone unable to attend viewings in person. Whether you're abroad, have a busy schedule, or need someone to act on short notice, we’re here to ensure you don’t miss out on housing opportunities."
+        "description": "This service is ideal for students, expats, or anyone unable to attend viewings in person. Whether you're abroad, have a busy schedule, or need someone to act on short notice, we're here to ensure you don't miss out on housing opportunities."
       }
     },
     "viewing_by_agent": {
@@ -113,7 +113,7 @@
         }
       },
       "included": {
-        "title": "What’s included:",
+        "title": "What's included:",
         "items": {
           "1": "Direct communication with landlords or property managers.",
           "2": "A scheduled viewing tailored to your preferences.",
@@ -126,32 +126,35 @@
       }
     },
     "renting_room": {
-      "section_title": "🏡 Renting a Room Through Our Platform – €<b>{{price}}</b>",
-      "intro": "Looking for a student-friendly room without the stress of endless searches? Our Renting a Room Through Domakin service connects you with verified listings on our platform, providing a secure and reliable way to find accommodation.",
+      "section_title": "🏡 Renting a Room Through Our Platform – €<b>{{price}}</b> per Tenant",
+      "intro": "Looking for a student-friendly room without the stress of endless searches? Our Renting a Room Through Domakin service connects you with verified listings, offering a secure and reliable way to find accommodation.",
       "how_it_works": {
         "title": "How it works:",
+        "option_1": "Option 1 – Self-Service:",
         "steps": {
           "1": "Browse available rooms on our website.",
-          "2": "Apply for rooms that meet your preferences.",
-          "3": "If you sign a rental contract through Domakin, a one-time fee of €<b>{{price}}</b> applies."
+          "2": "Apply for options that match your preferences.",
+          "3": "If you sign a rental contract through Domakin, a one-time service fee of €600 per person applies."
         },
+        "option_2": "Option 2 – We Search for You:",
         "steps2": {
           "1": "Tell us your accommodation preferences.",
-          "2": "An agent contacts you and starts the searching."
+          "2": "An agent will contact you and begin the search.",
+          "3": "If you sign a rental contract through Domakin, a one-time service fee of €600 per person applies."
         }
       },
       "why_choose_us": {
         "title": "Why choose this service?",
         "points": {
-          "1": "We work directly with trusted landlords to provide safe, reliable housing options.",
-          "2": "Our listings are verified to minimize the risk of scams.",
-          "3": "Our agents aim to bring options of your preferences straight to you.",
-          "4": "We make it easier to secure accommodation tailored to students and expats."
+          "1": "We work directly with trusted landlords to ensure safe and reliable housing options.",
+          "2": "All listings are verified to reduce the risk of scams.",
+          "3": "Our agents aim to present listings that match your exact preferences.",
+          "4": "Designed specifically for the needs of students and expats in the Netherlands."
         }
       },
       "audience": {
         "title": "Who is this service for?",
-        "description": "This service is perfect for students and expats seeking a reliable, hassle-free way to find housing in the Netherlands. By using our platform, you’ll gain access to trusted listings and reduce the risks commonly associated with house hunting."
+        "description": "Ideal for students and expats looking for a trustworthy and stress-free way to secure housing. Whether you're arriving alone or with a friend or partner, each tenant receives personalized support—and pays only upon successful contract signing."
       }
     }
   },
@@ -350,7 +353,7 @@
         "name": "Paolina Gocheva",
         "position": "Rotterdam Manager",
         "about": "Bachelor in Micro and Macro Economics",
-        "about_extra": "Hello, my name is Paolina. I’m originally from Varna, Bulgaria, and I’ve been living in Rotterdam for nearly three years now. I am currently finishing my studies in Economics and have also taken various business and management courses to strengthen my expertise. I’m passionate about staying active through sports and enjoy traveling to explore different cultures. Alongside being the Regional Manager for Domakin in Rotterdam, I have held several leadership positions in non-profit student organisations. I’m familiar with the rental market in Rotterdam and would be delighted to help you find your perfect home!"
+        "about_extra": "Hello, my name is Paolina. I'm originally from Varna, Bulgaria, and I've been living in Rotterdam for nearly three years now. I am currently finishing my studies in Economics and have also taken various business and management courses to strengthen my expertise. I'm passionate about staying active through sports and enjoy traveling to explore different cultures. Alongside being the Regional Manager for Domakin in Rotterdam, I have held several leadership positions in non-profit student organisations. I'm familiar with the rental market in Rotterdam and would be delighted to help you find your perfect home!"
       },
       {
         "name": "Radost Lozanova",
@@ -659,7 +662,7 @@
       "city": "Amsterdam",
       "location": "Nadezjda Mandelstamstraat",
       "description": {
-        "property": "Enjoy a well-equipped home with convenient amenities, including a laundry area, washing machine, and dishwasher. The property also features two bathrooms, a large terrace, and a garden—perfect for relaxation and social gatherings. A reliable heating system ensures comfort throughout the seasons. Located in a vibrant neighborhood, you’ll be just moments away from Amsterdam Bijlmer Arena, nearby stations, gyms, supermarkets, and several universities. This room offers a convenient and welcoming living experience with easy access to all the essentials for a balanced lifestyle. Registration is possible!",
+        "property": "Enjoy a well-equipped home with convenient amenities, including a laundry area, washing machine, and dishwasher. The property also features two bathrooms, a large terrace, and a garden—perfect for relaxation and social gatherings. A reliable heating system ensures comfort throughout the seasons. Located in a vibrant neighborhood, you'll be just moments away from Amsterdam Bijlmer Arena, nearby stations, gyms, supermarkets, and several universities. This room offers a convenient and welcoming living experience with easy access to all the essentials for a balanced lifestyle. Registration is possible!",
         "period": "1 March - 1 September 2025",
         "bills": "all included",
         "flatmates": "2 males"
@@ -749,7 +752,7 @@
       "city": "Leeuwarden",
       "location": "Marijkestraat, Leeuwarden",
       "description": {
-        "property": "Basically, the house has 2 floors and a basement. On the 2nd floor there are 3 rooms and a bathroom. On the main floor there's the living room, kitchen, and toilet. And in the basement there's 2 rooms where we keep the washing machine. The offered room is on the 2nd floor. New tenants will need to purchase the existing furniture for €160. Additionally, the new tenant will take over as head tenant, meaning they will be responsible for collecting rent from other housemates. The house is situated in a quiet neighbourhood, just a 3-minute walk from Lidl and 15 minutes from the train station. There’s also a bus stop right in front of the house. A security deposit of 320 euro is also required. Contract must be at least 1 year.",
+        "property": "Basically, the house has 2 floors and a basement. On the 2nd floor there are 3 rooms and a bathroom. On the main floor there's the living room, kitchen, and toilet. And in the basement there's 2 rooms where we keep the washing machine. The offered room is on the 2nd floor. New tenants will need to purchase the existing furniture for €160. Additionally, the new tenant will take over as head tenant, meaning they will be responsible for collecting rent from other housemates. The house is situated in a quiet neighbourhood, just a 3-minute walk from Lidl and 15 minutes from the train station. There's also a bus stop right in front of the house. A security deposit of 320 euro is also required. Contract must be at least 1 year.",
         "period": "From mid December earliest or start of January the latest",
         "bills": "around 100 euro",
         "flatmates": "2-3"
@@ -1278,7 +1281,7 @@
       "statusCode": 3,
       "title": "Studio",
       "city": "Groningen",
-      "location": "Hoogeweg 1, Groningen",
+      "location": "Hoogeweg 1, Groningen",
       "description": {
         "property": "Small studio for a short period.As registration of living is not possible at the place, it is NOT suitable for first year students who have not yet been registered. ",
         "period": "Available until February 2024",

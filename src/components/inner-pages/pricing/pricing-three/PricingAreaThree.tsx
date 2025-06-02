@@ -117,56 +117,41 @@ const PricingAreaThree = () => {
                 />
               </h4>
 
-              <p>
-                {t("pricing.renting_room.intro")}{" "}
-                {t("pricing.renting_room.how_it_works.title")}
-              </p>
+              <p>{t("pricing.renting_room.intro")}</p>
 
+              <h6 className="mt-30">{t("pricing.renting_room.how_it_works.title")}</h6>
+
+              <p className="fw-bold mt-20">{t("pricing.renting_room.how_it_works.option_1")}</p>
               <ul>
                 <li>
-                  {t("pricing.renting_room.how_it_works.steps.1")}{" "}
+                  {t("pricing.renting_room.how_it_works.steps.1")} {" "}
                   <Link
                     href="/services/renting"
                     className="ml-20 btn-eleven"
-                  >{`${t("common.go_to")} ${t(
-                    "features.rent_an_apartment"
-                  )}`}</Link>
+                  >
+                    {`${t("common.go_to")} ${t("features.rent_an_apartment")}`}
+                  </Link>
                 </li>
                 <li>{t("pricing.renting_room.how_it_works.steps.2")}</li>
-
-                <li>
-                  <Trans
-                    i18nKey="translations:pricing.renting_room.how_it_works.steps.3"
-                    values={{ price: RENTING_PRICE }}
-                    components={{ b: <b /> }}
-                  />
-                </li>
+                <li>{t("pricing.renting_room.how_it_works.steps.3")}</li>
               </ul>
 
-              <p>{t("common.or").toUpperCase()}</p>
-
+              <p className="fw-bold mt-20">{t("pricing.renting_room.how_it_works.option_2")}</p>
               <ul>
                 <li>
-                  {t("pricing.renting_room.how_it_works.steps2.1")}{" "}
+                  {t("pricing.renting_room.how_it_works.steps2.1")} {" "}
                   <Link
                     href="/services/room-searching"
                     className="ml-20 btn-eleven"
-                  >{`${t("common.go_to")} ${t(
-                    "features.room_searching"
-                  )}`}</Link>
+                  >
+                    {`${t("common.go_to")} ${t("features.room_searching")}`}
+                  </Link>
                 </li>
                 <li>{t("pricing.renting_room.how_it_works.steps2.2")}</li>
-                <li>
-                  <Trans
-                    i18nKey="translations:pricing.renting_room.how_it_works.steps.3"
-                    values={{ price: RENTING_PRICE }}
-                    components={{ b: <b /> }}
-                  />
-                </li>{" "}
+                <li>{t("pricing.renting_room.how_it_works.steps2.3")}</li>
               </ul>
 
-              <p>{t("pricing.renting_room.why_choose_us.title")}</p>
-
+              <h6 className="mt-30">{t("pricing.renting_room.why_choose_us.title")}</h6>
               <ul>
                 <li>{t("pricing.renting_room.why_choose_us.points.1")}</li>
                 <li>{t("pricing.renting_room.why_choose_us.points.2")}</li>
@@ -174,7 +159,7 @@ const PricingAreaThree = () => {
                 <li>{t("pricing.renting_room.why_choose_us.points.4")}</li>
               </ul>
 
-              <p>{t("pricing.renting_room.audience.title")}</p>
+              <h6 className="mt-30">{t("pricing.renting_room.audience.title")}</h6>
               <p>{t("pricing.renting_room.audience.description")}</p>
             </article>
           </div>
