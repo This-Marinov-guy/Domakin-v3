@@ -133,7 +133,7 @@ const RentingForm = ({ refElement, property }: any) => {
             <label htmlFor="">{t("files.motivational_letter_input")}</label>
             <Form.Control
               type="file"
-              accept=".docx,.pdf"
+              accept=".docx,.doc,.odt,.rft,.pdf"
               onChange={(event: any) => {
                 const file = event.target.files[0];
 
