@@ -264,7 +264,7 @@ const RoomSearchingForm = () => {
             <label htmlFor="">{t("files.motivational_letter_input")}</label>
             <Form.Control
               type="file"
-              accept=".docx,.doc,.odt,.rft,.pdf"
+              accept=".docx,.doc,.pdf"
               onChange={(event: any) => {
                 const file = event.target.files[0];
 
