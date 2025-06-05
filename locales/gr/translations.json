@@ -493,8 +493,8 @@
     "select_city": "Επιλέξτε μια συγκεκριμένη πόλη"
   },
   "statusCodeMapping": {
-    "free": "Διαθέσιμο",
     "in_process": "Κρατημένο",
+    "free": "Διαθέσιμο",
     "taken": "Κατειλημμένο"
   },
   "FOR_RENT": [

@@ -493,8 +493,8 @@
     "select_city": "Select a specific city"
   },
   "statusCodeMapping": {
-    "free": "Available",
     "in_process": "Reserved",
+    "free": "Available",
     "taken": "Taken"
   },
   "FOR_RENT": [

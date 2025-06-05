@@ -495,8 +495,8 @@
     "select_city": "Изберете град"
   },
   "statusCodeMapping": {
-    "free": "Налично",
     "in_process": "Резервирано",
+    "free": "Налично",
     "taken": "Заето"
   },
   "FOR_RENT": [
