@@ -108,8 +108,6 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
                 defaultCurrent={0}
                 onChange={(e) => {
                   const value = e.target.value;
-
-                  console.log(value);
                   
                   if (value === 'all') {
                     setAvailFilter(['all']);
