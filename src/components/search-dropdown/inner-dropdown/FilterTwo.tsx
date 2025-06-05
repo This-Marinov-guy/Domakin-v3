@@ -16,21 +16,18 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
     value: 'all',
   }
 
-  const statusCodeMapping =
-    t("statusCodeMapping", {}, { returnObjects: true }) ?? [];
+  const statusCodeMapping: Record<string, string> =
+    t("statusCodeMapping", {}, { returnObjects: true }) ?? {};
   const statusKeys: any = Object.keys(statusCodeMapping);
-  const availabilities = [t('filter.all'), ...Object.keys(statusCodeMapping).map(
-    (item, index) => index
-  )];
 
   const locationsList = Object.keys(
-    t("locations", {}, { returnObjects: true }) ?? []
+    t("locations", {}, { returnObjects: true }) ?? {}
   ).map((key) => key.toLowerCase());
-  const locations = [t("filter.all"), ...locationsList];
+  const locations = ['all', ...locationsList];
 
   const [priceFilter, setPriceFilter] = useState([min, max]);
   const [cityFilter, setCityFilter] = useState(locations);
-  const [availFilter, setAvailFilter] = useState(availabilities);
+  const [availFilter, setAvailFilter] = useState(['all']);
 
   useEffect(() => {
     let data = properties;
@@ -46,9 +43,11 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
   useEffect(() => {
     let data = properties;
 
-    data = data.filter((item: any) =>
-      cityFilter.includes(item?.city?.toLowerCase())
-    );
+    if (!cityFilter.includes('all')) {
+      data = data.filter((item: any) =>
+        cityFilter.includes(item?.city?.toLowerCase())
+      );
+    }
 
     setFilterProperties(data);
   }, [cityFilter]);
@@ -56,7 +55,11 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
   useEffect(() => {
     let data = properties;
 
-    data = data.filter((item: any) => availFilter.includes(item.statusCode));
+    if (!availFilter.includes('all')) {
+      data = data.filter((item: any) => {
+        return availFilter.map(Number).includes(Number(item.statusCode));
+      });
+    }
 
     setFilterProperties(data);
   }, [availFilter]);
@@ -73,17 +76,16 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
                 options={locations.map((location) => {
                   return {
                     value: location,
-                    text: capitalizeFirstLetter(location),
+                    text: location === 'all' ? t('filter.all') : capitalizeFirstLetter(location),
                   };
                 })}
                 defaultCurrent={0}
                 onChange={(e) => {
                   const city = e.target.value.toLowerCase();
-
-                  if (locations.includes(city)) {
-                    setCityFilter([city]);
-                  } else {
+                  if (city === 'all') {
                     setCityFilter(locations);
+                  } else {
+                    setCityFilter([city]);
                   }
                 }}
                 name=""
@@ -97,22 +99,22 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
               <NiceSelect
                 className="nice-select"
                 options={[
-                  initValue,
-                  ...availabilities.map((item: any) => {
-                    return {
-                      value: item,
-                      text: statusCodeMapping[statusKeys[item]],
-                    };
-                  }),
+                  { value: 'all', text: t('filter.all') },
+                  ...statusKeys.map((key: string, index: number) => ({
+                    value: index + 1,
+                    text: statusCodeMapping[key],
+                  })),
                 ]}
                 defaultCurrent={0}
                 onChange={(e) => {
-                  const availability = +e.target.value;
+                  const value = e.target.value;
 
-                  if (availabilities.includes(availability)) {
-                    setAvailFilter([availability]);
+                  console.log(value);
+                  
+                  if (value === 'all') {
+                    setAvailFilter(['all']);
                   } else {
-                    setAvailFilter(availabilities);
+                    setAvailFilter([value]);
                   }
                 }}
                 name=""
