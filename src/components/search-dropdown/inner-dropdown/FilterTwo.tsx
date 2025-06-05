@@ -32,37 +32,28 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
   useEffect(() => {
     let data = properties;
 
+    // Price filter
     data = data.filter(
       (item: any) =>
         item.price >= priceFilter[0] && item.price <= priceFilter[1]
     );
 
-    setFilterProperties(data);
-  }, [priceFilter]);
-
-  useEffect(() => {
-    let data = properties;
-
+    // City filter
     if (!cityFilter.includes('all')) {
       data = data.filter((item: any) =>
         cityFilter.includes(item?.city?.toLowerCase())
       );
     }
 
-    setFilterProperties(data);
-  }, [cityFilter]);
-
-  useEffect(() => {
-    let data = properties;
-
+    // Availability filter
     if (!availFilter.includes('all')) {
-      data = data.filter((item: any) => {
-        return availFilter.map(Number).includes(Number(item.statusCode));
-      });
+      data = data.filter((item: any) =>
+        availFilter.map(Number).includes(Number(item.statusCode))
+      );
     }
 
     setFilterProperties(data);
-  }, [availFilter]);
+  }, [priceFilter, cityFilter, availFilter, properties]);
 
   return (
     <>
