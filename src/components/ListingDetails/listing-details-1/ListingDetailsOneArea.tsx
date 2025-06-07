@@ -75,7 +75,7 @@ const ListingDetailsOneArea = ({ property, style_3 }: any) => {
 
   return (
     <>
-      <EditPropertyModal callback={window.location.reload} />
+      <EditPropertyModal callback={location.reload} />
 
       <div className="listing-details-one theme-details-one bg-pink pt-180 lg-pt-150 pb-50 xl-pb-50">
         <div className="container">

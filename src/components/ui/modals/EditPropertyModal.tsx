@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import MultiValueInput from "../inputs/MultiValueInput";
 import ImageWithBadge from "../borders/ImageBadgeBorder";
 import { EDIT_PROPERTY_MODAL } from "@/utils/defines";
+import { showGeneralError } from "@/utils/helpers";
 
 const EditPropertyModal = ({ callback = () => {} }: any) => {
   const {
@@ -51,6 +52,8 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
         });
       } else if (res?.invalid_fields) {
         addEditErrorFields(res.invalid_fields);
+      } else {
+        showGeneralError('Failed to update property');
       }
     });
   };
