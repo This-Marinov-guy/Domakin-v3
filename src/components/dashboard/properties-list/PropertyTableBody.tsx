@@ -3,7 +3,9 @@ import Link from "next/link";
 import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import ReactPaginate from "react-paginate";
-import PaginatedTableWrapper, { PaginatedTableWrapperHandle } from "./PaginatedTableWrapper";
+import PaginatedTableWrapper, {
+  PaginatedTableWrapperHandle,
+} from "./PaginatedTableWrapper";
 
 import icon_1 from "@/assets/images/dashboard/icon/icon_18.svg";
 import icon_2 from "@/assets/images/dashboard/icon/icon_19.svg";
@@ -13,33 +15,24 @@ import icon_4 from "@/assets/images/dashboard/icon/icon_21.svg";
 import listImg_5 from "@/assets/images/dashboard/img_05.jpg";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
-import ListingLoadingTable from "@/components/ui/loading/ListingLoadingTable";
 import { useEffect, useState, useRef } from "react";
 import { useServer } from "@/hooks/useServer";
 import PropertyDataPreview from "@/components/ui/modals/PropertyDataPreview";
 import EditPropertyModal from "@/components/ui/modals/EditPropertyModal";
 import { PROPERTY_STATUS } from "@/utils/enum";
+import { EDIT_PROPERTY_MODAL, PROPERTY_ID_OFFSET } from "@/utils/defines";
 
 const PropertyTableBody = () => {
   const {
     propertyStore: {
-      userPropertiesLoading,
-      userProperties,
       setPropertyDataForEdit,
-      setUserProperties,
-      setUserPropertiesLoading,
       statusLabel,
     },
+    modalStore,
     userStore: { isAdmin },
   } = useStore();
 
   const [propertyPreview, setPropertyPreview] = useState(null);
-  const [editProperty, setEditProperty] = useState(false);
-
-  // Pagination states
-  const [currentPage, setCurrentPage] = useState(0); // 0-based for ReactPaginate
-  const [perPage, setPerPage] = useState(2);
-  const [totalPages, setTotalPages] = useState(1);
 
   const { sendRequest } = useServer();
 
@@ -49,7 +42,9 @@ const PropertyTableBody = () => {
   // Fetch function for PaginatedTableWrapper
   const fetchData = async (page: number, perPage: number) => {
     const response = await sendRequest(
-      `${isAdmin ? "/property/list-extended" : "/property/list"}?page=${page}&per_page=${perPage}`
+      `${
+        isAdmin ? "/property/list-extended" : "/property/list"
+      }?page=${page}&per_page=${perPage}`
     );
     if (response?.status) {
       return {
@@ -62,7 +57,15 @@ const PropertyTableBody = () => {
         },
       };
     }
-    return { data: [], pagination: { current_page: 1, last_page: 1, per_page: perPage, total: 0 } };
+    return {
+      data: [],
+      pagination: {
+        current_page: 1,
+        last_page: 1,
+        per_page: perPage,
+        total: 0,
+      },
+    };
   };
 
   // Table row renderer
@@ -72,11 +75,7 @@ const PropertyTableBody = () => {
         data={propertyPreview}
         onHide={() => setPropertyPreview(null)}
       />
-      <EditPropertyModal
-        show={editProperty}
-        setShow={setEditProperty}
-        reloadProperties={() => paginationRef.current?.reload()}
-      />
+      <EditPropertyModal callback={() => paginationRef.current?.reload()} />
       {userProperties.map((item) => (
         <tr className="listing-table" key={item.id}>
           <td className="center">
@@ -86,7 +85,11 @@ const PropertyTableBody = () => {
                   placement="top"
                   overlay={<Tooltip>Go to the listing</Tooltip>}
                 >
-                  <Link href={`/services/renting/property/${1000 + item.id}`}>
+                  <Link
+                    href={`/services/renting/property/${
+                      PROPERTY_ID_OFFSET + item.id
+                    }`}
+                  >
                     <Image
                       src={item.property_data.images[0]}
                       width={200}
@@ -128,7 +131,7 @@ const PropertyTableBody = () => {
                 style={{ cursor: "pointer" }}
                 onClick={() => {
                   setPropertyDataForEdit(item);
-                  setEditProperty(true);
+                  modalStore.setActiveModal(EDIT_PROPERTY_MODAL);
                 }}
               >
                 {statusLabel(item.status)}
@@ -166,7 +169,7 @@ const PropertyTableBody = () => {
                       className="dropdown-item"
                       onClick={() => {
                         setPropertyDataForEdit(item);
-                        setEditProperty(true);
+                        modalStore.setActiveModal(EDIT_PROPERTY_MODAL);
                       }}
                     >
                       <Image src={icon_3} alt="" className="lazy-img" /> Edit

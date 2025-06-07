@@ -1,4 +1,3 @@
-import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import NiceSelect from "@/ui/NiceSelect";
@@ -10,16 +9,12 @@ import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import SingleDatePicker from "@/components/ui/inputs/dates/SingleDatePicker";
 import { useServer } from "@/hooks/useServer";
-import {
-  prefillNestedUserInfo,
-  prefillUserInfo,
-  transformToFormData,
-} from "@/utils/helpers";
 import { toast } from "react-toastify";
 import MultiValueInput from "../inputs/MultiValueInput";
 import ImageWithBadge from "../borders/ImageBadgeBorder";
+import { EDIT_PROPERTY_MODAL } from "@/utils/defines";
 
-const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
+const EditPropertyModal = ({ callback = () => {} }: any) => {
   const {
     propertyStore: {
       updateEditListingData,
@@ -28,6 +23,7 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
       updateMainImage,
       addEditErrorFields,
     },
+    modalStore,
   } = useStore();
 
   const { sendRequest, loading } = useServer();
@@ -40,8 +36,8 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
 
     sendRequest("/property/edit", "PUT", editPropertyData).then((res) => {
       if (res?.status) {
-        setShow(false);
-        reloadProperties();
+        modalStore.closeAll();
+        callback();
 
         toast.success("The property was successfully updated", {
           position: "top-center",
@@ -66,7 +62,11 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
   ];
 
   return (
-    <Modal show={show} fullscreen onHide={() => setShow(false)}>
+    <Modal
+      show={modalStore.modals[EDIT_PROPERTY_MODAL]}
+      fullscreen
+      onHide={modalStore.closeAll}
+    >
       <Modal.Header closeButton>
         <h5>Edit Property Details</h5>
       </Modal.Header>
@@ -218,7 +218,7 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
                 </div>
               </div>
 
-              <div className="col-lg-6 col-md-6 col-12"/>
+              <div className="col-lg-6 col-md-6 col-12" />
 
               <div className="col-6">
                 <MultiValueInput
@@ -338,7 +338,7 @@ const EditPropertyModal = ({ show, setShow, reloadProperties }: any) => {
           <button
             disabled={loading}
             type="submit"
-            onClick={() => setShow(false)}
+            onClick={modalStore.closeAll}
             className="btn-seven text-uppercase rounded-3 fw-normal w-100"
           >
             back

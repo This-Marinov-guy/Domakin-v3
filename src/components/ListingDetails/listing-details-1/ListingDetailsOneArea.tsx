@@ -18,13 +18,52 @@ import PageLoader from "@/components/ui/loading/PageLoader";
 import { useStore } from "@/stores/storeContext";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
+import { EDIT_PROPERTY_MODAL, PROPERTY_ID_OFFSET } from "@/utils/defines";
+import EditPropertyModal from "@/components/ui/modals/EditPropertyModal";
+import { useServer } from "@/hooks/useServer";
+import { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
 
 const ListingDetailsOneArea = ({ property, style_3 }: any) => {
   const { t } = useTranslation("translations");
+  const {
+    userStore: { isAdmin },
+    modalStore,
+    propertyStore: { setPropertyDataForEdit, userProperties },
+  } = useStore();
+
+  const [extendedPropertyDetails, setExtendedPropertyDetails] = useState(null);
+  const [isEditLoading, setIsEditLoading] = useState(true);
+
+  const { sendRequest } = useServer();
 
   const folder = `/assets/img/properties/${
     property.folder ?? "property_" + property.id
   }/`;
+
+  const loadExtendedPropertyDetails = async () => {
+    if (Number(property.id) < PROPERTY_ID_OFFSET) return;
+
+    const response = await sendRequest(
+      `/property/details/${property.id - PROPERTY_ID_OFFSET}`
+    );
+
+    if (response?.status) {
+      setExtendedPropertyDetails(response.data);
+      setIsEditLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadExtendedPropertyDetails();
+  }, []);
+
+  const openEditModal = () => {
+    if (!extendedPropertyDetails) return;
+
+    setPropertyDataForEdit(extendedPropertyDetails);
+    modalStore.setActiveModal(EDIT_PROPERTY_MODAL);
+  };
 
   const allImages =
     Number(property.id) > 1000
@@ -35,13 +74,28 @@ const ListingDetailsOneArea = ({ property, style_3 }: any) => {
         ];
 
   return (
-    <div className="listing-details-one theme-details-one bg-pink pt-180 lg-pt-150 pb-50 xl-pb-50">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-6">
-            <h4 className="property-titlee">{property.title}</h4>
-            <div className="d-flex flex-wrap mt-10">
-              {/* <div
+    <>
+      <EditPropertyModal callback={window.location.reload} />
+
+      <div className="listing-details-one theme-details-one bg-pink pt-180 lg-pt-150 pb-50 xl-pb-50">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-6">
+              <h4 className="property-titlee">
+                {property.title}{" "}
+                {isAdmin &&
+                  (isEditLoading ? (
+                    <small>| Loading Edit...</small>
+                  ) : (
+                    <i
+                      onClick={openEditModal}
+                      style={{ cursor: "pointer" }}
+                      className="fa-regular ml-10 fa-edit cursor-pointer"
+                    ></i>
+                  ))}
+              </h4>
+              <div className="d-flex flex-wrap mt-10">
+                {/* <div
                 className={`list-type text-uppercase mt-15 me-3 ${
                   style_3
                     ? "bg-white text-dark fw-500"
@@ -50,20 +104,20 @@ const ListingDetailsOneArea = ({ property, style_3 }: any) => {
               >
                 FOR SELL
               </div> */}
-              <div className="address mt-15">
-                <i className="bi bi-geo-alt"></i> {property.location}
+                <div className="address mt-15">
+                  <i className="bi bi-geo-alt"></i> {property.location}
+                </div>
               </div>
             </div>
-          </div>
-          <div className="col-lg-6 text-lg-end">
-            <div className="d-inline-block md-mt-40">
-              <div className="price color-dark fw-500">
-                <h4>
-                  {property.price} € / {t("renting.per_month")}
-                </h4>
-              </div>
+            <div className="col-lg-6 text-lg-end">
+              <div className="d-inline-block md-mt-40">
+                <div className="price color-dark fw-500">
+                  <h4>
+                    {property.price} € / {t("renting.per_month")}
+                  </h4>
+                </div>
 
-              {/* <ul className="style-none d-flex align-items-center action-btns">
+                {/* <ul className="style-none d-flex align-items-center action-btns">
                 <li className="me-auto fw-500 color-dark">
                   <i className="fa-sharp fa-regular fa-share-nodes me-2"></i>
                   Share
@@ -99,17 +153,17 @@ const ListingDetailsOneArea = ({ property, style_3 }: any) => {
                   </Link>
                 </li>
               </ul> */}
+              </div>
             </div>
+          </div>{" "}
+          <MediaGallery images={allImages} />
+          <div className="property-feature-list bg-white shadow4 border-20 p-40 mt-20 mb-10">
+            <h4 className="sub-title-one mb-40 lg-mb-20 text-center">
+              {t("property.property_details")}
+            </h4>
+            <CommonPropertyOverview property={property} />
           </div>
-        </div>{" "}
-        <MediaGallery images={allImages} />
-        <div className="property-feature-list bg-white shadow4 border-20 p-40 mt-20 mb-10">
-          <h4 className="sub-title-one mb-40 lg-mb-20 text-center">
-            {t("property.property_details")}
-          </h4>
-          <CommonPropertyOverview property={property} />
-        </div>
-        {/* <div className="row">
+          {/* <div className="row">
                <div className="col-xl-8">
                   <div className="property-overview mb-50 bg-white shadow4 border-20 p-40">
                      <h4 className="mb-20">Overview</h4>
@@ -166,8 +220,9 @@ const ListingDetailsOneArea = ({ property, style_3 }: any) => {
                </div>
                <Sidebar />
             </div> */}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

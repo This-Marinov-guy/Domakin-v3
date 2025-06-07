@@ -68,6 +68,7 @@ export const GRID = "2";
 //modals
 export const COOKIE_MODAL = "COOKIE_MODAL";
 export const LOGIN_MODAL = "LOGIN_MODAL";
+export const EDIT_PROPERTY_MODAL = "EDIT_PROPERTY_MODAL";
 
 // tabs
 export const FORGOTTEN_PASS = 2;
@@ -81,3 +82,5 @@ export const ADD_LISTING_URL =
   process.env.NEXT_PUBLIC_URL + "/services/add-listing";
 export const SEARCH_RENTING =
   process.env.NEXT_PUBLIC_URL + "/services/room-searching";
+
+export const PROPERTY_ID_OFFSET = 1000;
