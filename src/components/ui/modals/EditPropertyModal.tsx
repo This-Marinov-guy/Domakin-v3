@@ -23,6 +23,7 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
       editErrorFields,
       updateMainImage,
       addEditErrorFields,
+      setProperties,
     },
     modalStore,
   } = useStore();
@@ -31,12 +32,34 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
 
   const { t } = useTranslation("translations");
 
+  const reloadProperties = async () => {
+    try {
+      const response = await sendRequest(
+        "/property/listing",
+        "GET",
+        {},
+        {},
+        {
+          withError: false,
+          withLoading: true,
+        }
+      );
+
+      if (response?.status) {
+        setProperties(response.data);
+      }
+    } catch (error) {
+      console.error("Error loading listing:", error);
+    }
+  };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     addEditErrorFields([]);
 
     sendRequest("/property/edit", "PUT", editPropertyData).then((res) => {
       if (res?.status) {
+        reloadProperties();
         modalStore.closeAll();
         callback();
 
@@ -53,7 +76,7 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
       } else if (res?.invalid_fields) {
         addEditErrorFields(res.invalid_fields);
       } else {
-        showGeneralError('Failed to update property');
+        showGeneralError("Failed to update property");
       }
     });
   };
