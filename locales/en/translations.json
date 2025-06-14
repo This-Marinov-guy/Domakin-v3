@@ -1438,7 +1438,7 @@
     "motivational_letter_input": "Cover letter that we will send to the landlord/roommate",
     "motivational_letter_example": "You can use our ready-made cover letter template",
     "download": "Download",
-    "file_corrupted": "The file might be corrupted, please try again or use another file"
+    "file_corrupted": "The file/s {{file}} might be corrupted, please try again or use another file"
   },
 
   "react_error": {

@@ -27,29 +27,33 @@ const PrefixMultiFilePreviewInput = (props: any) => {
 
   const onDrop = async (acceptedFiles: File[]) => {
     setImageLoading(true);
+    const corruptedFiles: string[] = [];
     try {
       const resizedImages = await Promise.all(
         acceptedFiles.map(async (file: File) => {
           try {
             return await resizeFile(file);
           } catch (err) {
-            toast.error(
-              t("files.file_corrupted") as unknown as ToastContent<unknown>,
-              {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: false,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-              }
-            );
+            corruptedFiles.push(file?.name ?? "-");
+            return null;
           }
         })
       );
-      onChange([...value, ...resizedImages]);
+      if (corruptedFiles.length > 0) {
+        toast.error(
+          t("files.file_corrupted", { file: corruptedFiles.join(", ") }) as unknown as ToastContent<unknown>,
+          {
+            position: "top-center",
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          }
+        );
+      }
+      onChange([...value, ...resizedImages.filter(Boolean)]);
     } catch (error) {
       console.error("Error processing files:", error);
     } finally {
@@ -71,7 +75,7 @@ const PrefixMultiFilePreviewInput = (props: any) => {
           "image/heic": [".heif", ".heic"],
           "video/mp4": [".mp4"],
         }}
-        maxFiles={5}
+        maxFiles={10}
         onDropRejected={onReject}
       >
         {({ getRootProps, getInputProps, isDragActive }) => (
@@ -93,13 +97,15 @@ const PrefixMultiFilePreviewInput = (props: any) => {
                   <p>{t("files.drag_files")}</p>
                   {value.length > 0 &&
                     value.map((file: any, index: number) => (
-                      <div key={index} className="file-preview">
-                        <p>{file.name}</p>
-                        <i
-                          onClick={(e) => handleRemove(e, index)}
-                          className="fa-solid fa-xmark error z-100 cursor-pointer"
-                        ></i>
-                      </div>
+                      file ? (
+                        <div key={index} className="file-preview">
+                          <p>{file.name ?? file.filename ?? '-'}</p>
+                          <i
+                            onClick={(e) => handleRemove(e, index)}
+                            className="fa-solid fa-xmark error z-100 cursor-pointer"
+                          ></i>
+                        </div>
+                      ) : null
                     ))}
 
                   {!!maxSizeNote && <small>{maxSizeNote}</small>}

@@ -68,14 +68,50 @@ export const createFileName = (index: Number) => {
   return `${index}.jpg`;
 };
 
-export const resizeFile = (
+export const resizeFile = async (
   file: File,
   width = 800,
   height = 800,
   format = "JPG",
   withOriginalName = true
-) =>
-  new Promise((resolve) => {
+): Promise<File> => {
+  // Only run in the browser
+  if (typeof window === "undefined") {
+    return file;
+  }
+
+  // Normalize extension and mimetype for detection
+  const fileType = file.type.toLowerCase();
+  const fileName = file.name.toLowerCase();
+  const isHeicOrHeif =
+    fileType === "image/heic" ||
+    fileType === "image/heif" ||
+    fileName.endsWith(".heic") ||
+    fileName.endsWith(".heif") ||
+    fileName.endsWith(".HEIF") ||
+    fileName.endsWith(".HEIC");
+
+  if (isHeicOrHeif) {
+    try {
+      const heic2any = (await import("heic2any")).default;
+      const convertedBlob = await heic2any({
+        blob: file,
+        toType: "image/jpeg",
+        quality: 0.9,
+      });
+      const jpegBlob = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob;
+      const jpegFile = new File(
+        [jpegBlob],
+        (file.name.replace(/\.(heic|heif)$/i, "") || "converted") + ".jpg",
+        { type: "image/jpeg" }
+      );
+      return await resizeFile(jpegFile, width, height, format, withOriginalName);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  return new Promise((resolve) => {
     if (file.type.startsWith("image/")) {
       Resizer.imageFileResizer(
         file,
@@ -100,6 +136,7 @@ export const resizeFile = (
       resolve(file);
     }
   });
+};
 
 export const getGeoLocation = () => {
   let location = "";
