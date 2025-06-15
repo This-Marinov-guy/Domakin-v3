@@ -18,7 +18,8 @@ const PropertyCardList = (props: {
       className="listing-card-seven border-20 p-20 mb-50 wow fadeInUp"
     >
       <div className="d-flex flex-wrap layout-one">
-        <Link
+        <a
+          target="_blank"
           href={`/services/renting/property/${property.id}`}
           style={{
             backgroundImage:
@@ -63,14 +64,15 @@ const PropertyCardList = (props: {
               ))}
             </Fancybox>
           </div>
-        </Link>
+        </a>
         <div className="property-info">
-          <Link
+          <a
+            target="_blank"
             href={`/services/renting/property/${property.id}`}
             className="title tran3s mb-15"
           >
             {property.title}
-          </Link>
+          </a>
           <div className="address">{property.location}</div>
 
           <div className="pl-footer d-flex flex-wrap align-items-center justify-content-between">
@@ -94,12 +96,13 @@ const PropertyCardList = (props: {
                       </Link>
                     </li>
                   </ul> */}
-            <Link
+            <a
+              target="_blank"
               href={`/services/renting/property/${property.id}`}
               className="btn-four rounded-circle"
             >
               <i className="bi bi-arrow-up-right"></i>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

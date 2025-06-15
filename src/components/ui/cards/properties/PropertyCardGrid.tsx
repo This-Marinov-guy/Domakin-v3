@@ -57,7 +57,8 @@ const PropertyCardGrid = (props: {property: PropertyCard, style?: boolean}) => {
                     className={`carousel-item ${i === 0 && "active"}`}
                     data-bs-interval="1000000"
                   >
-                    <Link
+                    <a
+                      target="_blank"
                       href={`/services/renting/property/${property.id}`}
                       className="d-block"
                     >
@@ -74,7 +75,7 @@ const PropertyCardGrid = (props: {property: PropertyCard, style?: boolean}) => {
                         style={{ height: "20em", objectFit: "cover" }}
                         alt="Preview"
                       />
-                    </Link>
+                    </a>
                   </div>
                 ))}
               </div>
@@ -82,12 +83,13 @@ const PropertyCardGrid = (props: {property: PropertyCard, style?: boolean}) => {
           </div>
         </div>
         <div className="property-info p-25">
-          <Link
+          <a
+            target="_blank"
             href={`/services/renting/property/${property.id}`}
             className="title tran3s"
           >
             {property.title}
-          </Link>
+          </a>
           <div className="address">{property.location}</div>
           {/* <ul className="style-none feature d-flex flex-wrap align-items-center justify-content-between">
                               <li className="d-flex align-items-center">
@@ -110,12 +112,13 @@ const PropertyCardGrid = (props: {property: PropertyCard, style?: boolean}) => {
             <strong className="price fw-500 color-dark">
               {property.price} <sub>euro / m</sub>
             </strong>
-            <Link
+            <a
+              target="_blank"
               href={`/services/renting/property/${property.id}`}
               className="btn-four rounded-circle"
             >
               <i className="bi bi-arrow-up-right"></i>
-            </Link>
+            </a>
           </div>
         </div>
       </div>
