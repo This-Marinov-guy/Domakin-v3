@@ -41,10 +41,8 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
     property.folder ?? "property_" + property.id
   }/`;
 
-  const loadExtendedPropertyDetails = async () => {
-    console.log(property);
-    
-    if (property || Number(property.id) < PROPERTY_ID_OFFSET) return;
+  const loadExtendedPropertyDetails = async () => {            
+    if (Number(slug) < PROPERTY_ID_OFFSET) return;
 
     const response = await sendRequest(
       `/property/details/${Number(slug) - PROPERTY_ID_OFFSET}`

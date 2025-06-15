@@ -26,7 +26,7 @@ const PropertyDetailsOne = () => {
   const forRentList: any[] = t("FOR_RENT", {}, { returnObjects: true }) ?? [];
   const allProperties = [...properties, ...forRentList];
 
-  const property = allProperties.find((p: any) => p.id == slug) ?? null;
+  const property = allProperties.find((p: any) => p.id == slug);
 
   const relatedProperties = allProperties
     .filter((p) => p.city == property?.city && p.id != property?.id)

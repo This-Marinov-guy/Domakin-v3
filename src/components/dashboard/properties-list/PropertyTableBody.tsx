@@ -83,7 +83,7 @@ const PropertyTableBody = () => {
               {item.status < PROPERTY_STATUS.EXPIRED ? (
                 <OverlayTrigger
                   placement="top"
-                  overlay={<Tooltip>Go to the listing</Tooltip>}
+                  overlay={item.status === PROPERTY_STATUS.PENDING ? <Tooltip>Add Release date and go to listing</Tooltip> : <Tooltip>Go to the listing</Tooltip>}
                 >
                   <Link
                     href={`/services/renting/property/${
