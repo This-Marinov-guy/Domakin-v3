@@ -79,7 +79,7 @@ const PropertyTableBody = () => {
       {userProperties.map((item) => (
         <tr className="listing-table" key={item.id}>
           <td className="center">
-            <div className="d-lg-flex align-items-center justify-content-center position-relative">
+            <div className="d-lg-flex align-items-center justify-content-center position-relative responsive-title-col">
               {item.status < PROPERTY_STATUS.EXPIRED ? (
                 <OverlayTrigger
                   placement="top"
@@ -110,7 +110,7 @@ const PropertyTableBody = () => {
               )}
             </div>
           </td>
-          <td className="center">
+          <td className="center w-25 responsive-title-col">
             <strong className="price color-dark">
               {item.property_data.city}
             </strong>

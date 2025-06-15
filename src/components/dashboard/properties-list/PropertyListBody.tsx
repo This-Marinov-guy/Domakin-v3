@@ -43,7 +43,7 @@ const PropertyListBody = () => {
           <table className="table property-list-table">
             <thead>
               <tr>
-                <th className="text-center" scope="col">Title</th>
+                <th className="text-center w-25 responsive-title-col" style={{width: '25%'}} scope="col">Title</th>
                 <th className="text-center" scope="col">Location</th>
                 <th className="text-center" scope="col">Rent</th>
                 <th className="text-center" scope="col">Status</th>

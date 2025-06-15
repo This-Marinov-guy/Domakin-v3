@@ -2197,10 +2197,25 @@
     font-size: 45px;
   }
   .dashboard-body .property-list-table td .p-img {
-    width: 80px;
+    width: 100px;
   }
   .dashboard-body .property-list-table td .address {
     margin: 5px 0 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .property-list-table th,
+  .property-list-table td {
+    width: 10em;
+  }
+  .property-list-table img {
+    width: 100px !important;
+    height: auto !important;
+  }
+
+  .responsive-title-col {
+    width: 150px;
   }
 }
 

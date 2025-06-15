@@ -26,7 +26,7 @@ const PropertyDetailsOne = () => {
   const forRentList: any[] = t("FOR_RENT", {}, { returnObjects: true }) ?? [];
   const allProperties = [...properties, ...forRentList];
 
-  const property = allProperties.find((p: any) => p.id == slug);
+  const property = allProperties.find((p: any) => p.id == slug) ?? null;
 
   const relatedProperties = allProperties
     .filter((p) => p.city == property?.city && p.id != property?.id)
@@ -40,7 +40,7 @@ const PropertyDetailsOne = () => {
     <>
       <HeaderOne />
       {property.statusCode !== 3 && <ScreenButton refElement={formRef} />}
-      <ListingDetailsOneArea property={property} />
+      <ListingDetailsOneArea property={property} slug={slug} />
       <RentingForm refElement={formRef} property={property} />
       <RelatedProperties properties={relatedProperties} />
       <FancyBanner />

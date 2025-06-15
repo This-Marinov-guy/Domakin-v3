@@ -126,31 +126,37 @@ const PaginatedTableWrapper = forwardRef(function PaginatedTableWrapper<T>(
       ) : (
         renderRows(data)
       )}
-      {!loading && <td colSpan={10} className="pt-50 gap-3 m-auto d-flex justify-content-center text-center align-items-center">
-        <ReactPaginate
-          breakLabel="..."
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={2}
-          pageCount={totalPages}
-          renderOnZeroPageCount={null}
-          className="pagination-two d-inline-flex align-items-center justify-content-center style-none"
-          previousLabel={<i className="fa-regular fa-chevron-left"></i>}
-          nextLabel={<i className="fa-regular fa-chevron-right"></i>}
-          forcePage={currentPage}
-        />
-        <select
-          className={styles.perPageSelect}
-          value={perPage}
-          onChange={handlePerPageChange}
-        >
-          {options.map((num) => (
-            <option key={num} value={num}>
-              {num} per page
-            </option>
-          ))}
-        </select>
-      </td>}
+      {!loading && (
+        <tr>
+          <td colSpan={10}>
+            <div className="d-flex flex-column flex-sm-row align-items-center justify-content-center gap-3 mt-4">
+              <ReactPaginate
+                breakLabel="..."
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={3}
+                marginPagesDisplayed={2}
+                pageCount={totalPages}
+                renderOnZeroPageCount={null}
+                className="pagination-two d-inline-flex align-items-center justify-content-center style-none"
+                previousLabel={<i className="fa-regular fa-chevron-left"></i>}
+                nextLabel={<i className="fa-regular fa-chevron-right"></i>}
+                forcePage={currentPage}
+              />
+              <select
+                className={styles.perPageSelect + " mt-2"}
+                value={perPage}
+                onChange={handlePerPageChange}
+              >
+                {options.map((num) => (
+                  <option key={num} value={num}>
+                    {num} per page
+                  </option>
+                ))}
+              </select>
+            </div>
+          </td>
+        </tr>
+      )}
     </>
   );
 });

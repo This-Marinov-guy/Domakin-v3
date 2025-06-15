@@ -24,7 +24,7 @@ import { useServer } from "@/hooks/useServer";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 
-const ListingDetailsOneArea = ({ property, style_3 }: any) => {
+const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
   const { t } = useTranslation("translations");
   const {
     userStore: { isAdmin },
@@ -42,10 +42,12 @@ const ListingDetailsOneArea = ({ property, style_3 }: any) => {
   }/`;
 
   const loadExtendedPropertyDetails = async () => {
-    if (Number(property.id) < PROPERTY_ID_OFFSET) return;
+    console.log(property);
+    
+    if (property || Number(property.id) < PROPERTY_ID_OFFSET) return;
 
     const response = await sendRequest(
-      `/property/details/${property.id - PROPERTY_ID_OFFSET}`
+      `/property/details/${Number(slug) - PROPERTY_ID_OFFSET}`
     );
 
     if (response?.status) {
