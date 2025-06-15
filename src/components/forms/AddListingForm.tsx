@@ -15,6 +15,7 @@ import {
   transformToFormData,
 } from "@/utils/helpers";
 import { toast } from "react-toastify";
+import { LONG_LOADING_MODAL } from "@/utils/defines";
 
 const AddListingForm = () => {
   const { t } = useTranslation("translations");
@@ -30,17 +31,24 @@ const AddListingForm = () => {
       errorFields,
     },
     userStore: { user },
+    modalStore,
   } = useStore();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     addErrorFields([]);
 
+    // Open the loading modal
+    modalStore.setActiveModal(LONG_LOADING_MODAL);
+
     sendRequest(
       "/property/create",
       "POST",
       transformToFormData(propertyStore.addListingData)
     ).then((res) => {
+      // Close the loading modal
+      modalStore.closeModal();
+
       if (res?.status) {
         propertyStore.resetListingData();
 

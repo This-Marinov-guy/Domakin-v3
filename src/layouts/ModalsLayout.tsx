@@ -8,12 +8,14 @@ const AuthModal = dynamic(() => import("@/modals/AuthModal"), {
 });
 
 import CookiesModal from "@/components/ui/modals/CookiesModal";
+import LongLoadingModal from "@/components/ui/modals/LongLoadingModal";
 
 function ModalsLayout() {
   return (
     <>
       <CookiesModal />
       <AuthModal/>
+      <LongLoadingModal/>
     </>
   );
 }

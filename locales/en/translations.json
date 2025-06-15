@@ -1457,5 +1457,12 @@
     "forbidden_access": "Forbidden: Access is denied",
     "not_enough_pictures": "Not enough pictures, please submit at least 3",
     "failed_fetching_feedbacks": "We could not get the feedbacks - please try again!"
+  },
+
+  "modal": {
+    "long_loading": {
+      "title": "Loading...",
+      "description": "Please wait while we are processing your request"
+    }
   }
 }

@@ -69,6 +69,7 @@ export const GRID = "2";
 export const COOKIE_MODAL = "COOKIE_MODAL";
 export const LOGIN_MODAL = "LOGIN_MODAL";
 export const EDIT_PROPERTY_MODAL = "EDIT_PROPERTY_MODAL";
+export const LONG_LOADING_MODAL = "LONG_LOADING_MODAL";
 
 // tabs
 export const FORGOTTEN_PASS = 2;
