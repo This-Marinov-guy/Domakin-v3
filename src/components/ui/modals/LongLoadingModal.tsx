@@ -33,7 +33,7 @@ const LongLoadingModal = () => {
             return prev;
           }
         });
-      }, 80); // Even slower speed
+      }, 120); // Even slower speed
     } else if (wasOpenRef.current && !modalStore.modals[LONG_LOADING_MODAL]) {
       // Modal is closing
       closingRef.current = true;
