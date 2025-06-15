@@ -85,7 +85,8 @@ const PropertyTableBody = () => {
                   placement="top"
                   overlay={item.status === PROPERTY_STATUS.PENDING ? <Tooltip>Add Release date and go to listing</Tooltip> : <Tooltip>Go to the listing</Tooltip>}
                 >
-                  <Link
+                  <a
+                    target="_blank"
                     href={`/services/renting/property/${
                       PROPERTY_ID_OFFSET + item.id
                     }`}
@@ -97,7 +98,7 @@ const PropertyTableBody = () => {
                       alt="property-image"
                       className="p-img"
                     />
-                  </Link>
+                  </a>
                 </OverlayTrigger>
               ) : (
                 <Image
