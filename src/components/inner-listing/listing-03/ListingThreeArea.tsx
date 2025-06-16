@@ -67,37 +67,35 @@ const ListingThreeArea = ({ style, properties }: any) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("query", query);
     params.set("sort", sortIndex);
-    params.set("page", String(currentPage));
+    // params.set("page", String(currentPage));
     params.set("city", cityFilter);
     params.set("price", priceFilter);
     params.set("avail", availFilter);
     router.replace(`?${params.toString()}`, { scroll: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, sortIndex, currentPage, cityFilter, priceFilter, availFilter]);
+  }, [query, sortIndex, cityFilter, priceFilter, availFilter]);
 
-  // When URL changes (e.g. back/forward), update state
-  useEffect(() => {
-    setQuery(searchParams.get("query") || "");
-    setSortIndex(searchParams.get("sort") || SORT_NEWEST);
-    setCurrentPage(Number(searchParams.get("page") || 0));
-    setCityFilter(searchParams.get("city") || "all");
-    setPriceFilter(searchParams.get("price") || "200-2000");
-    setAvailFilter(searchParams.get("avail") || "all");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
-
-  useEffect(() => {
-    setCurrentPage(0);
-  }, [query]);
+  // // When URL changes (e.g. back/forward), update state
+  // useEffect(() => {
+  //   setQuery(searchParams.get("query") || "");
+  //   setSortIndex(searchParams.get("sort") || SORT_NEWEST);
+  //   setCurrentPage(Number(searchParams.get("page") || 0));
+  //   setCityFilter(searchParams.get("city") || "all");
+  //   setPriceFilter(searchParams.get("price") || "200-2000");
+  //   setAvailFilter(searchParams.get("avail") || "all");
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [searchParams]);
 
   // Filtering and sorting logic
   const keys = ["title", "location", "city"];
   const [minPrice, maxPrice] = priceFilter.split("-").map(Number);
-  const filtered = properties.filter((item: any) =>
-    keys.some((key) => item[key]?.toLowerCase().includes(query)) &&
-    (cityFilter === "all" || item.city?.toLowerCase() === cityFilter) &&
-    (item.price >= minPrice && item.price <= maxPrice) &&
-    (availFilter === "all" || String(item.statusCode) === String(availFilter))
+  const filtered = properties.filter(
+    (item: any) =>
+      keys.some((key) => item[key]?.toLowerCase().includes(query)) &&
+      (cityFilter === "all" || item.city?.toLowerCase() === cityFilter) &&
+      item.price >= minPrice &&
+      item.price <= maxPrice &&
+      (availFilter === "all" || String(item.statusCode) === String(availFilter))
   );
   const sorted = (() => {
     switch (sortIndex) {
