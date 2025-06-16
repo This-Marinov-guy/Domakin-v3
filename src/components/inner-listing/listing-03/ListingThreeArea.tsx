@@ -17,9 +17,12 @@ import {
 } from "@/utils/enum";
 import { useStore } from "@/stores/storeContext";
 import PageLoader from "@/components/ui/loading/PageLoader";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const ListingThreeArea = ({ style, properties }: any) => {
   const { t, lang } = useTranslation("translations");
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const [listStyle, setListStyle] = useState(GRID);
 
@@ -41,69 +44,83 @@ const ListingThreeArea = ({ style, properties }: any) => {
     localStorage.setItem(LOCAL_STORAGE_PROPERTY_VIEW, newView);
   };
 
+  // Query params for all filters
+  const initialQuery = searchParams.get("query") || "";
+  const initialSort = searchParams.get("sort") || SORT_NEWEST;
+  const initialPage = Number(searchParams.get("page") || 0);
+  const initialCity = searchParams.get("city") || "all";
+  const initialPrice = searchParams.get("price") || "200-2000";
+  const initialAvail = searchParams.get("avail") || "all";
+
+  const [query, setQuery] = useState(initialQuery);
+  const [sortIndex, setSortIndex] = useState(initialSort);
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [cityFilter, setCityFilter] = useState(initialCity);
+  const [priceFilter, setPriceFilter] = useState(initialPrice);
+  const [availFilter, setAvailFilter] = useState(initialAvail);
+
+  const pageLimit = 6;
   const startRef = useRef<HTMLDivElement>(null);
 
-  const [offset, setOffset] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
-  const pageLimit = 6;
-  const endOffset = offset + pageLimit;
+  // Update URL when any filter/sort/page changes
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("query", query);
+    params.set("sort", sortIndex);
+    params.set("page", String(currentPage));
+    params.set("city", cityFilter);
+    params.set("price", priceFilter);
+    params.set("avail", availFilter);
+    router.replace(`?${params.toString()}`, { scroll: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, sortIndex, currentPage, cityFilter, priceFilter, availFilter]);
 
-  const [sortIndex, setSortIndex] = useState(SORT_NEWEST);
-  const [filterProperties, setFilterProperties] = useState(properties);
-  const [paginatedProperties, setPaginatedProperties] = useState(
-    properties.slice(offset, endOffset)
-  );  
-
-  const pageCount = Math.ceil(filterProperties.length / pageLimit);
-
-  const [query, setQuery] = useState("");
-  const keys = ["title", "location", "city"];
-
-  const handleSort = (values: any[], sorting: string) => {
-    switch (sorting) {
-      case SORT_NEWEST:
-        return values.sort((a: any, b: any) => b.id - a.id);
-      case SORT_OLDEST:
-        return values.sort((a: any, b: any) => a.id - b.id);
-      case SORT_PRICE_LOW:
-        return values.sort((a: any, b: any) => a.price - b.price);
-      case SORT_PRICE_HIGH:
-        return values.sort((a: any, b: any) => b.price - a.price);
-      default:
-        return values;
-    }
-  };
+  // When URL changes (e.g. back/forward), update state
+  useEffect(() => {
+    setQuery(searchParams.get("query") || "");
+    setSortIndex(searchParams.get("sort") || SORT_NEWEST);
+    setCurrentPage(Number(searchParams.get("page") || 0));
+    setCityFilter(searchParams.get("city") || "all");
+    setPriceFilter(searchParams.get("price") || "200-2000");
+    setAvailFilter(searchParams.get("avail") || "all");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
 
   useEffect(() => {
-    const newData = properties.filter((item: any) =>
-      keys.some((key) => item[key].toLowerCase().includes(query))
-    );    
-
-    setFilterProperties(newData);
-    setOffset(0);
     setCurrentPage(0);
-  }, [lang, query]);
+  }, [query]);
 
-  useEffect(() => {
-    setPaginatedProperties(
-      handleSort(filterProperties.slice(offset, endOffset), sortIndex)
-    );
-    
-  }, [filterProperties, offset, endOffset, sortIndex]);
-
-  useEffect(() => {
-    const newPaginatedProperties = properties.filter((item1: any) =>
-      filterProperties.some((item2: any) => item2.id === item1.id)
-    );
-    
-    setPaginatedProperties(newPaginatedProperties.slice(offset, endOffset));
-  }, [lang]);
+  // Filtering and sorting logic
+  const keys = ["title", "location", "city"];
+  const [minPrice, maxPrice] = priceFilter.split("-").map(Number);
+  const filtered = properties.filter((item: any) =>
+    keys.some((key) => item[key]?.toLowerCase().includes(query)) &&
+    (cityFilter === "all" || item.city?.toLowerCase() === cityFilter) &&
+    (item.price >= minPrice && item.price <= maxPrice) &&
+    (availFilter === "all" || String(item.statusCode) === String(availFilter))
+  );
+  const sorted = (() => {
+    switch (sortIndex) {
+      case SORT_NEWEST:
+        return [...filtered].sort((a: any, b: any) => b.id - a.id);
+      case SORT_OLDEST:
+        return [...filtered].sort((a: any, b: any) => a.id - b.id);
+      case SORT_PRICE_LOW:
+        return [...filtered].sort((a: any, b: any) => a.price - b.price);
+      case SORT_PRICE_HIGH:
+        return [...filtered].sort((a: any, b: any) => b.price - a.price);
+      default:
+        return filtered;
+    }
+  })();
+  const start = currentPage * pageLimit;
+  const end = start + pageLimit;
+  const paginatedProperties = sorted.slice(start, end);
+  const pageCount = Math.ceil(filtered.length / pageLimit);
 
   const handlePageClick = (event: any) => {
-    const newOffset = (event.selected * pageLimit) % filterProperties.length;
-    setOffset(newOffset);
     setCurrentPage(event.selected);
-    startRef.current!.scrollIntoView();
+    startRef.current?.scrollIntoView();
   };
 
   return (
@@ -118,9 +135,14 @@ const ListingThreeArea = ({ style, properties }: any) => {
             <div className="bg-wrapper border-layout">
               <FilterTwo
                 properties={properties}
-                setFilterProperties={setFilterProperties}
                 query={query}
                 setQuery={setQuery}
+                cityFilter={cityFilter}
+                setCityFilter={setCityFilter}
+                priceFilter={priceFilter}
+                setPriceFilter={setPriceFilter}
+                availFilter={availFilter}
+                setAvailFilter={setAvailFilter}
               />
             </div>
           </div>
@@ -130,9 +152,9 @@ const ListingThreeArea = ({ style, properties }: any) => {
           <div
             dangerouslySetInnerHTML={{
               __html: t("filter.showing", {
-                start: paginatedProperties.length ? offset + 1 : 0,
-                end: offset + paginatedProperties.length,
-                total: filterProperties.length,
+                start: paginatedProperties.length ? start + 1 : 0,
+                end: start + paginatedProperties.length,
+                total: filtered.length,
               }),
             }}
           />
@@ -147,11 +169,15 @@ const ListingThreeArea = ({ style, properties }: any) => {
                   { value: SORT_PRICE_LOW, text: t("filter.price_low_high") },
                   { value: SORT_PRICE_HIGH, text: t("filter.price_high_low") },
                 ]}
-                defaultCurrent={0}
+                defaultCurrent={[
+                  SORT_NEWEST,
+                  SORT_OLDEST,
+                  SORT_PRICE_LOW,
+                  SORT_PRICE_HIGH,
+                ].indexOf(sortIndex)}
                 onChange={(e) => {
-                  const index = e.target.value;
-
-                  setSortIndex(index);
+                  setSortIndex(e.target.value);
+                  setCurrentPage(0);
                 }}
                 name=""
                 placeholder=""

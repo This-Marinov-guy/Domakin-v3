@@ -5,7 +5,7 @@ import useTranslation from "next-translate/useTranslation";
 import RangesSelect from "@/ui/RangesSelect";
 import SearchQuery from "@/components/ui/inputs/SearchQuery";
 
-const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) => {
+const FilterTwo = ({ properties, query, setQuery, cityFilter, setCityFilter, priceFilter, setPriceFilter, availFilter, setAvailFilter }: any) => {
   const min = 200;
   const max = 2000;
 
@@ -25,36 +25,6 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
   ).map((key) => key.toLowerCase());
   const locations = ['all', ...locationsList];
 
-  const [priceFilter, setPriceFilter] = useState([min, max]);
-  const [cityFilter, setCityFilter] = useState(locations);
-  const [availFilter, setAvailFilter] = useState(['all']);
-
-  useEffect(() => {
-    let data = properties;
-
-    // Price filter
-    data = data.filter(
-      (item: any) =>
-        item.price >= priceFilter[0] && item.price <= priceFilter[1]
-    );
-
-    // City filter
-    if (!cityFilter.includes('all')) {
-      data = data.filter((item: any) =>
-        cityFilter.includes(item?.city?.toLowerCase())
-      );
-    }
-
-    // Availability filter
-    if (!availFilter.includes('all')) {
-      data = data.filter((item: any) =>
-        availFilter.map(Number).includes(Number(item.statusCode))
-      );
-    }
-
-    setFilterProperties(data);
-  }, [priceFilter, cityFilter, availFilter, properties]);
-
   return (
     <>
       <form onSubmit={(e) => e.preventDefault()}>
@@ -70,14 +40,9 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
                     text: location === 'all' ? t('filter.all') : capitalizeFirstLetter(location),
                   };
                 })}
-                defaultCurrent={0}
+                defaultCurrent={Math.max(0, locations.indexOf(cityFilter))}
                 onChange={(e) => {
-                  const city = e.target.value.toLowerCase();
-                  if (city === 'all') {
-                    setCityFilter(locations);
-                  } else {
-                    setCityFilter([city]);
-                  }
+                  setCityFilter(e.target.value.toLowerCase());
                 }}
                 name=""
                 placeholder=""
@@ -91,20 +56,18 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
                 className="nice-select"
                 options={[
                   { value: 'all', text: t('filter.all') },
-                  ...statusKeys.map((key: string, index: number) => ({
-                    value: index + 1,
+                  ...statusKeys.map((key: string, i: number) => ({
+                    value: String(i + 1),
                     text: statusCodeMapping[key],
                   })),
                 ]}
-                defaultCurrent={0}
+                defaultCurrent={(() => {
+                  if (availFilter === 'all') return 0;
+                  const idx = statusKeys.findIndex((key: string, i: number) => String(i + 1) === availFilter);
+                  return idx >= 0 ? idx + 1 : 0;
+                })()}
                 onChange={(e) => {
-                  const value = e.target.value;
-                  
-                  if (value === 'all') {
-                    setAvailFilter(['all']);
-                  } else {
-                    setAvailFilter([value]);
-                  }
+                  setAvailFilter(e.target.value);
                 }}
                 name=""
                 placeholder=""
@@ -115,8 +78,8 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
             <div className="input-box-one border-left border-lg-0">
               <div className="label">{t("filter.filter_by_price")}</div>
               <RangesSelect
-                values={priceFilter}
-                onChange={setPriceFilter}
+                values={priceFilter.split('-').map(Number)}
+                onChange={(values: number[]) => setPriceFilter(values.join('-'))}
                 min={min}
                 max={max}
                 symbol="€"
@@ -126,33 +89,12 @@ const FilterTwo = ({ properties, setFilterProperties, query, setQuery }: any) =>
           <div className="col-xl-3">
             <div className="input-box-one lg-mt-20">
               <div className="d-flex align-items-center">
-                {/* <Link
-                  href="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#advanceFilterModal"
-                  className="search-modal-btn sm tran3s text-uppercase fw-500 d-inline-flex align-items-center me-3"
-                >
-                  <i className="fa-light fa-sliders-up"></i>
-                </Link> */}
                 <SearchQuery query={query} setQuery={setQuery} />
               </div>
             </div>
           </div>
         </div>
       </form>
-      {/* <ListingDropdownModal
-            handleSearchChange={handleSearchChange}
-            handleBedroomChange={handleBedroomChange}
-            handleBathroomChange={handleBathroomChange}
-            handlePriceChange={handlePriceChange}
-            maxPrice={maxPrice}
-            priceValue={priceValue}
-            handleResetFilter={handleResetFilter}
-            selectedAmenities={selectedAmenities}
-            handleAmenityChange={handleAmenityChange}
-            handleLocationChange={handleLocationChange}
-            handleStatusChange={handleStatusChange}
-         /> */}
     </>
   );
 };
