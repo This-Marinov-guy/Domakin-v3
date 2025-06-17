@@ -34,6 +34,8 @@ const defaultFormData = {
 export default class PropertyStore {
   rootStore;
 
+  @observable propertiesListFilters: any = {};
+
   @observable properties: any[] = [];
   @observable userProperties: any[] = [];
 
@@ -54,6 +56,11 @@ export default class PropertyStore {
       this.loadListingData();
     }
   }
+
+  @action
+  setPropertiesListFilters = (filters: any) => {
+    this.propertiesListFilters = filters;
+  };
 
   @action
   loadPropertyDataForEdit = (id: any) => {

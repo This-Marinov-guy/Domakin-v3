@@ -18,6 +18,7 @@ import {
 import { useStore } from "@/stores/storeContext";
 import PageLoader from "@/components/ui/loading/PageLoader";
 import { useRouter, useSearchParams } from "next/navigation";
+import { observer } from "mobx-react-lite";
 
 const ListingThreeArea = ({ style, properties }: any) => {
   const { t, lang } = useTranslation("translations");
@@ -27,7 +28,7 @@ const ListingThreeArea = ({ style, properties }: any) => {
   const [listStyle, setListStyle] = useState(GRID);
 
   const {
-    // propertyStore: { properties },
+    propertyStore: { propertiesListFilters, setPropertiesListFilters },
   } = useStore();
 
   useEffect(() => {
@@ -45,12 +46,19 @@ const ListingThreeArea = ({ style, properties }: any) => {
   };
 
   // Query params for all filters
-  const initialQuery = searchParams.get("query") || "";
-  const initialSort = searchParams.get("sort") || SORT_NEWEST;
-  const initialPage = Number(searchParams.get("page") || 0);
-  const initialCity = searchParams.get("city") || "all";
-  const initialPrice = searchParams.get("price") || "200-2000";
-  const initialAvail = searchParams.get("avail") || "all";
+  const initialQuery =
+    (searchParams.get("query") || propertiesListFilters.query) ?? "";
+  const initialSort =
+    (searchParams.get("sort") || propertiesListFilters.sort) ?? SORT_NEWEST;
+  const initialPage = Number(
+    (searchParams.get("page") || propertiesListFilters.page) ?? 0
+  );
+  const initialCity =
+    (searchParams.get("city") || propertiesListFilters.city) ?? "all";
+  const initialPrice =
+    (searchParams.get("price") || propertiesListFilters.price) ?? "200-2000";
+  const initialAvail =
+    (searchParams.get("avail") || propertiesListFilters.avail) ?? "all";
 
   const [query, setQuery] = useState(initialQuery);
   const [sortIndex, setSortIndex] = useState(initialSort);
@@ -62,29 +70,56 @@ const ListingThreeArea = ({ style, properties }: any) => {
   const pageLimit = 6;
   const startRef = useRef<HTMLDivElement>(null);
 
-  // Update URL when any filter/sort/page changes
+  // Track previous filter values (initialize with current state)
+  const prevFilters = useRef({
+    query,
+    city: cityFilter,
+    price: priceFilter,
+    avail: availFilter,
+  });
+
+  // Single effect to handle URL updates and page reset on filter change
   useEffect(() => {
+    const filtersChanged =
+      prevFilters.current.query !== query ||
+      prevFilters.current.city !== cityFilter ||
+      prevFilters.current.price !== priceFilter ||
+      prevFilters.current.avail !== availFilter;
+
+    let nextPage = currentPage;
+    if (filtersChanged) {
+      nextPage = 0;
+      if (currentPage !== 0) {
+        setCurrentPage(0);
+      }
+    }
+
     const params = new URLSearchParams(searchParams.toString());
     params.set("query", query);
-    params.set("sort", sortIndex);
-    // params.set("page", String(currentPage));
     params.set("city", cityFilter);
     params.set("price", priceFilter);
     params.set("avail", availFilter);
+    params.set("sort", sortIndex);
+    params.set("page", String(nextPage));
     router.replace(`?${params.toString()}`, { scroll: false });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, sortIndex, cityFilter, priceFilter, availFilter]);
 
-  // // When URL changes (e.g. back/forward), update state
-  // useEffect(() => {
-  //   setQuery(searchParams.get("query") || "");
-  //   setSortIndex(searchParams.get("sort") || SORT_NEWEST);
-  //   setCurrentPage(Number(searchParams.get("page") || 0));
-  //   setCityFilter(searchParams.get("city") || "all");
-  //   setPriceFilter(searchParams.get("price") || "200-2000");
-  //   setAvailFilter(searchParams.get("avail") || "all");
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [searchParams]);
+    prevFilters.current = {
+      query,
+      city: cityFilter,
+      price: priceFilter,
+      avail: availFilter,
+    };
+
+    setPropertiesListFilters({
+      query,
+      city: cityFilter,
+      price: priceFilter,
+      avail: availFilter,
+      sort: sortIndex,
+      page: currentPage,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, cityFilter, priceFilter, availFilter, sortIndex, currentPage]);
 
   // Filtering and sorting logic
   const keys = ["title", "location", "city"];
@@ -175,7 +210,6 @@ const ListingThreeArea = ({ style, properties }: any) => {
                 ].indexOf(sortIndex)}
                 onChange={(e) => {
                   setSortIndex(e.target.value);
-                  setCurrentPage(0);
                 }}
                 name=""
                 placeholder=""
@@ -232,4 +266,4 @@ const ListingThreeArea = ({ style, properties }: any) => {
   );
 };
 
-export default ListingThreeArea;
+export default observer(ListingThreeArea);
