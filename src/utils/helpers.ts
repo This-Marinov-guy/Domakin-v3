@@ -354,3 +354,10 @@ export const formatJsonKeyValuePairs = (jsonString: any) => {
     .map(([key, value]) => `${key}: ${value}`)
     .join(" | ");
 };
+
+export const parsePropertyPreviewData = (property: any) => {
+  return {
+    ...property.personal_data,
+    ...property.property_data,
+  };
+};

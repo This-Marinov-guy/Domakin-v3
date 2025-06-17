@@ -16,13 +16,16 @@ import CommonLocation from "../listing-details-common/CommonLocation";
 import CommonReviewForm from "../listing-details-common/CommonReviewForm";
 import PageLoader from "@/components/ui/loading/PageLoader";
 import { useStore } from "@/stores/storeContext";
-import Link from "next/link";
+import Tooltip from "react-bootstrap/Tooltip";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import useTranslation from "next-translate/useTranslation";
 import { EDIT_PROPERTY_MODAL, PROPERTY_ID_OFFSET } from "@/utils/defines";
 import EditPropertyModal from "@/components/ui/modals/EditPropertyModal";
 import { useServer } from "@/hooks/useServer";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
+import PropertyDataPreview from "@/components/ui/modals/PropertyDataPreview";
+import { parsePropertyPreviewData } from "@/utils/helpers";
 
 const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
   const { t } = useTranslation("translations");
@@ -34,6 +37,7 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
 
   const [extendedPropertyDetails, setExtendedPropertyDetails] = useState(null);
   const [isEditLoading, setIsEditLoading] = useState(true);
+  const [isPreviewOpened, setIsPreviewOpened] = useState(false);
 
   const { sendRequest } = useServer();
 
@@ -41,7 +45,7 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
     property.folder ?? "property_" + property.id
   }/`;
 
-  const loadExtendedPropertyDetails = async () => {            
+  const loadExtendedPropertyDetails = async () => {
     if (Number(slug) < PROPERTY_ID_OFFSET) return;
 
     const response = await sendRequest(
@@ -76,24 +80,47 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
   return (
     <>
       <EditPropertyModal callback={location.reload} />
+      {isPreviewOpened && (
+        <PropertyDataPreview
+          data={parsePropertyPreviewData(extendedPropertyDetails)}
+          onHide={() => setIsPreviewOpened(false)}
+        />
+      )}
 
       <div className="listing-details-one theme-details-one bg-pink pt-180 lg-pt-150 pb-50 xl-pb-50">
         <div className="container">
           <div className="row">
             <div className="col-lg-6">
-              <h4 className="property-titlee">
-                {property.title}{" "}
-                {isAdmin &&
-                  (isEditLoading ? (
-                    <small>| Loading Edit...</small>
-                  ) : (
-                    <i
-                      onClick={openEditModal}
-                      style={{ cursor: "pointer" }}
-                      className="fa-regular ml-10 fa-edit cursor-pointer"
-                    ></i>
-                  ))}
-              </h4>
+              <h4 className="property-title">{property.title} </h4>
+              {isAdmin &&
+                (isEditLoading ? (
+                  <small>| Loading Edit...</small>
+                ) : (
+                  <div className="d-flex align-items-center gap-2 fs-5">
+                    <span>Quick Actions:</span>
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip>Edit Property</Tooltip>}
+                    >
+                      <i
+                        onClick={openEditModal}
+                        style={{ cursor: "pointer" }}
+                        className="fa-regular ml-10 fa-edit cursor-pointer"
+                      ></i>
+                    </OverlayTrigger>
+
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip>Preview Property</Tooltip>}
+                    >
+                      <i
+                        onClick={() => setIsPreviewOpened(true)}
+                        style={{ cursor: "pointer" }}
+                        className="fa-regular ml-10 fa-eye cursor-pointer"
+                      ></i>
+                    </OverlayTrigger>
+                  </div>
+                ))}
               <div className="d-flex flex-wrap mt-10">
                 {/* <div
                 className={`list-type text-uppercase mt-15 me-3 ${

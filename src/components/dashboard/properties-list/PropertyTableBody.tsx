@@ -21,13 +21,11 @@ import PropertyDataPreview from "@/components/ui/modals/PropertyDataPreview";
 import EditPropertyModal from "@/components/ui/modals/EditPropertyModal";
 import { PROPERTY_STATUS } from "@/utils/enum";
 import { EDIT_PROPERTY_MODAL, PROPERTY_ID_OFFSET } from "@/utils/defines";
+import { parsePropertyPreviewData } from "@/utils/helpers";
 
 const PropertyTableBody = () => {
   const {
-    propertyStore: {
-      setPropertyDataForEdit,
-      statusLabel,
-    },
+    propertyStore: { setPropertyDataForEdit, statusLabel },
     modalStore,
     userStore: { isAdmin },
   } = useStore();
@@ -83,7 +81,13 @@ const PropertyTableBody = () => {
               {item.status < PROPERTY_STATUS.EXPIRED ? (
                 <OverlayTrigger
                   placement="top"
-                  overlay={item.status === PROPERTY_STATUS.PENDING ? <Tooltip>Add Release date and go to listing</Tooltip> : <Tooltip>Go to the listing</Tooltip>}
+                  overlay={
+                    item.status === PROPERTY_STATUS.PENDING ? (
+                      <Tooltip>Add Release date and go to listing</Tooltip>
+                    ) : (
+                      <Tooltip>Go to the listing</Tooltip>
+                    )
+                  }
                 >
                   <a
                     target="_blank"
@@ -155,10 +159,7 @@ const PropertyTableBody = () => {
                     <button
                       className="dropdown-item"
                       onClick={() =>
-                        setPropertyPreview({
-                          ...item.personal_data,
-                          ...item.property_data,
-                        })
+                        setPropertyPreview(parsePropertyPreviewData(item))
                       }
                     >
                       <Image src={icon_1} alt="" className="lazy-img" />
