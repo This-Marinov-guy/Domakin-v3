@@ -94,7 +94,7 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
               <h4 className="property-title">{property.title} </h4>
               {isAdmin &&
                 (isEditLoading ? (
-                  <small>| Loading Edit...</small>
+                  <small>Loading Actions...</small>
                 ) : (
                   <div className="d-flex align-items-center gap-2 fs-5">
                     <span>Quick Actions:</span>
