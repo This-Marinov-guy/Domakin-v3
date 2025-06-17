@@ -1,10 +1,16 @@
-import React from 'react'
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { STATUS_COLORS } from '@/utils/defines';
+import { STATUS_COLORS } from "@/utils/defines";
 
-const PropertyCardGrid = (props: {property: PropertyCard, style?: boolean}) => {
-  const {property, style} = props;
+const PropertyCardGrid = (props: {
+  property: PropertyCard;
+  style?: boolean;
+}) => {
+  const { property, style } = props;
+
+  const allImages = [property.main_image, ...property.images];
+
   return (
     <div
       key={property.id}
@@ -51,7 +57,7 @@ const PropertyCardGrid = (props: {property: PropertyCard, style?: boolean}) => {
                 ></button>
               </div>
               <div className="carousel-inner">
-                {property.images.slice(0, 3).map((image: any, i: any) => (
+                {allImages.slice(0, 3).map((image: any, i: any) => (
                   <div
                     key={i}
                     className={`carousel-item ${i === 0 && "active"}`}
@@ -124,6 +130,6 @@ const PropertyCardGrid = (props: {property: PropertyCard, style?: boolean}) => {
       </div>
     </div>
   );
-}
+};
 
-export default PropertyCardGrid
+export default PropertyCardGrid;

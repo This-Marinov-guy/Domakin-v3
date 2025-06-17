@@ -10,7 +10,7 @@ const PropertyCardList = (props: {
 }) => {
   const { property, style } = props;
 
-  const allImages = [...property.images, property.main_image];
+  const allImages = [property.main_image, ...property.images];
 
   return (
     <div
