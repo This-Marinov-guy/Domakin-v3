@@ -208,14 +208,15 @@ const AddListingForm = () => {
               <Form.Control
                 type="number"
                 min={0}
+                step={1}
                 value={propertyData.rent}
                 onKeyDown={(e) => {
-                  if (e.key === '-' || e.key === 'e') {
+                  if (e.key === '-' || e.key === 'e' || e.key === '.') {
                     e.preventDefault();
                   }
                 }}
                 onChange={(e) => {
-                  const value = Math.max(0, Number(e.target.value));
+                  const value = Math.max(0, Math.floor(Number(e.target.value)));
                   updateListingData("propertyData", "rent", value.toString());
                 }}
                 isInvalid={errorFields.includes("propertyData.rent")}
