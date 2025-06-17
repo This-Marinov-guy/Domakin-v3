@@ -356,6 +356,29 @@ button:disabled,
   }
 }
 
+.btn-danger {
+  font-weight: 500;
+  background: #000;
+  border-color: #000;
+  color: #fff;
+  padding: 10px 25px;
+  min-width: 130px;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background: transparent;
+  border-color: #dc3545;
+  color: #dc3545;
+  @include transition(0.3s);
+
+  &:hover,
+  &:focus {
+    background: #bb2d3b;
+    border-color: #b02a37;
+    color: #fff;
+  }
+}
+
 .centered-btn {
   position: fixed;
   z-index: 100;

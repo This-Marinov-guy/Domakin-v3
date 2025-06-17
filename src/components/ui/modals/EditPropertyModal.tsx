@@ -30,6 +30,10 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
 
   const { sendRequest, loading } = useServer();
 
+  const [showHideFromPublic, setShowHideFromPublic] = useState(
+    editPropertyData.releaseTimestamp
+  );
+
   const { t } = useTranslation("translations");
 
   const reloadProperties = async () => {
@@ -100,6 +104,27 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
         <form className="form-style-one wow fadeInUp">
           <div className="container m-a controls">
             <div className="row mt-20 mb-20">
+              {showHideFromPublic && (
+                <div className="col-12 d-flex justify-content-start align-items-center gap-2 py-3">
+                  <p className="mb-0">Hide property from the public</p>
+                  <button
+                    disabled={loading}
+                    type="submit"
+                    onClick={(e) => {
+                      updateEditListingData("status", "", 1);
+                      updateEditListingData("releaseTimestamp", "", null);
+                      handleSubmit(e);
+                    }}
+                    className="btn-danger text-uppercase rounded-3 fw-normal"
+                  >
+                    {loading ? (
+                      <Spinner size="sm" animation="border" />
+                    ) : (
+                      "Hide from public"
+                    )}
+                  </button>
+                </div>
+              )}
               <div className="col-md-6">
                 <div className="input-group-meta form-group mb-30">
                   <label htmlFor="">Status</label>
