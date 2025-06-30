@@ -31,7 +31,10 @@ const RentingForm = ({ refElement, property }: any) => {
     userStore: { user },
   } = useStore();
 
-  const isApplyDisabled = property.statusCode !== PROPERTY_STATUS.APPROVED;
+  const isApplyDisabled = ![
+    PROPERTY_STATUS.APPROVED,
+    PROPERTY_STATUS.PENDING,
+  ].includes(property.statusCode);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
