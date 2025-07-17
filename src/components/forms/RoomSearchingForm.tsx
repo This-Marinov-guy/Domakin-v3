@@ -89,60 +89,68 @@ const RoomSearchingForm = () => {
       <div className="container m-a row controls">
         <h4 className="mb-20">{t("viewing.fill_your_details")}</h4>
 
-        <div className="col-lg-6 col-md-6 col-12">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.name")}</label>
-            <Form.Control
-              type="text"
-              value={searchingData.name}
-              onChange={(e) => {
-                updateSearchingData("name", "", e.target.value);
-              }}
-              isInvalid={searchingErrorFields.includes("name")}
-            />
+        {(!user?.name || !searchingData.name) && (
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("viewing.name")}</label>
+              <Form.Control
+                type="text"
+                value={searchingData.name}
+                onChange={(e) => {
+                  updateSearchingData("name", "", e.target.value);
+                }}
+                isInvalid={searchingErrorFields.includes("name")}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="col-lg-6 col-md-6 col-12">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.surname")}</label>
-            <Form.Control
-              type="text"
-              value={searchingData.surname}
-              onChange={(e) => {
-                updateSearchingData("surname", "", e.target.value);
-              }}
-              isInvalid={searchingErrorFields.includes("surname")}
-            />
+        {(!user?.name || !searchingData.surname) && (
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("viewing.surname")}</label>
+              <Form.Control
+                type="text"
+                value={searchingData.surname}
+                onChange={(e) => {
+                  updateSearchingData("surname", "", e.target.value);
+                }}
+                isInvalid={searchingErrorFields.includes("surname")}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="col-lg-6 col-md-6 col-12">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.phone")}</label>
-            <PrefixPhoneInput
-              value={searchingData.phone}
-              onChange={(value: string) => {
-                updateSearchingData("phone", "", value);
-              }}
-              isInvalid={searchingErrorFields.includes("phone")}
-            />
+        {(!user?.phone || !searchingData.phone) && (
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("viewing.phone")}</label>
+              <PrefixPhoneInput
+                value={searchingData.phone}
+                onChange={(value: string) => {
+                  updateSearchingData("phone", "", value);
+                }}
+                isInvalid={searchingErrorFields.includes("phone")}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="col-lg-6 col-md-6 col-12">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.email")}</label>
-            <Form.Control
-              type="text"
-              value={searchingData.email}
-              onChange={(e) => {
-                updateSearchingData("email", "", e.target.value);
-              }}
-              isInvalid={searchingErrorFields.includes("email")}
-            />
+        {(!user?.email || !searchingData.email) && (
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("viewing.email")}</label>
+              <Form.Control
+                type="text"
+                value={searchingData.email}
+                onChange={(e) => {
+                  updateSearchingData("email", "", e.target.value);
+                }}
+                isInvalid={searchingErrorFields.includes("email")}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta form-group mb-30">
@@ -305,7 +313,7 @@ const RoomSearchingForm = () => {
           <div className="input-group-meta form-group mb-40">
             <Form.Control
               as="textarea"
-              placeholder={t("viewing.comments")}
+              placeholder={t("viewing.comments_optional")}
               value={searchingData.note}
               onChange={(e) => {
                 updateSearchingData("note", "", e.target.value);
@@ -359,7 +367,11 @@ const RoomSearchingForm = () => {
             onClick={handleSubmit}
             className="btn-nine text-uppercase rounded-3 fw-normal w-100"
           >
-            {loading ? <Spinner size='sm' animation="border" /> : t("contact.send")}
+            {loading ? (
+              <Spinner size="sm" animation="border" />
+            ) : (
+              t("contact.send")
+            )}
           </button>
         </div>
       </div>

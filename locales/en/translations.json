@@ -176,6 +176,7 @@
     "phone": "Phone",
     "email": "Email",
     "comments": "Any comments you would like to be sent to our agent\n\nAny questions that you want our agent to ask on your behalf?\n\n- How many tenants is the bathroom shared with\n- Is there a storage room\n- Do I need to buy kitchen utensils",
+    "comments_optional": "Any comments you would like to be sent to our agent (optional)",
     "consent": "I give my consent to be contacted by the company via phone or email and for them to store my information for service purposes only",
     "submit_request": "Submit Request",
     "errors": {

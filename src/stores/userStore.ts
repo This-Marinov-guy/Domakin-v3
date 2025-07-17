@@ -76,8 +76,8 @@ export default class UserStore {
     }
   };
 
-  @action setUser = async (session: any) => {    
-    const { data } = (await supabase 
+  @action setUser = async (session: any) => {
+    const { data } = (await supabase
       .from("users")
       .select("phone, profile_image, status, roles, name, email")
       .eq("id", session.user.id)
@@ -153,5 +153,14 @@ export default class UserStore {
 
   @computed get isAdmin() {
     return this.user?.roles?.includes("admin") || false;
+  }
+
+  @computed get isUserFullySet() {
+    return (
+      !!this.user?.name &&
+      !!this.user?.surname &&
+      !!this.user?.phone &&
+      !!this.user?.email
+    );
   }
 }

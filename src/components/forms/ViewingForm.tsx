@@ -26,7 +26,7 @@ const ViewingForm = () => {
       addViewingErrorFields,
       resetViewingData,
     },
-    userStore: { user },
+    userStore: { user, isUserFullySet },
   } = useStore();
 
   const handleSubmit = async (e: any) => {
@@ -71,7 +71,7 @@ const ViewingForm = () => {
   return (
     <form className="form-style-one wow fadeInUp pt-40 pb-40">
       <div className="container m-a row controls">
-        {(!user?.name || !user?.surname || !user?.phone || !user?.email) && (
+        {isUserFullySet && (
           <h4 className="mb-20">{t("viewing.fill_your_details")}</h4>
         )}
 
@@ -156,9 +156,7 @@ const ViewingForm = () => {
 
         <div className="col-6">
           <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">
-              {t("viewing.address_of_viewing")}
-            </label>
+            <label htmlFor="">{t("viewing.address_of_viewing")}</label>
             <Form.Control
               type="text"
               value={viewingData.address}
@@ -226,11 +224,11 @@ const ViewingForm = () => {
               }}
               isInvalid={viewingErrorFields.includes("note")}
               rows={12}
-              style={{ 
-                fontFamily: 'inherit',
-                lineHeight: '1.5',
-                resize: 'vertical',
-                minHeight: '220px'
+              style={{
+                fontFamily: "inherit",
+                lineHeight: "1.5",
+                resize: "vertical",
+                minHeight: "220px",
               }}
             />
           </div>

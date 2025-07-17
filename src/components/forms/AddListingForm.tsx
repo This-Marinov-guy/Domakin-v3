@@ -30,7 +30,7 @@ const AddListingForm = () => {
       addErrorFields,
       errorFields,
     },
-    userStore: { user },
+    userStore: { user, isUserFullySet },
     modalStore,
   } = useStore();
 
@@ -80,64 +80,78 @@ const AddListingForm = () => {
     <form className="form-style-one wow fadeInUp pt-40 pb-40">
       <div className="container m-a controls">
         <div className="row mt-20 mb-20">
-          <h4 className="mb-20">
-            {t("emergency_housing.personal_information")}
-          </h4>
+          {isUserFullySet && (
+            <h4 className="mb-20">
+              {t("emergency_housing.personal_information")}
+            </h4>
+          )}
 
-          <div className="col-6">
-            <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">{t("emergency_housing.name")}</label>
-              <Form.Control
-                type="text"
-                value={personalData.name}
-                onChange={(e) => {
-                  updateListingData("personalData", "name", e.target.value);
-                }}
-                isInvalid={errorFields.includes("personalData.name")}
-              />
+          {(!user?.name || !personalData.name) && (
+            <div className="col-6">
+              <div className="input-group-meta form-group mb-30">
+                <label htmlFor="">{t("emergency_housing.name")}</label>
+                <Form.Control
+                  type="text"
+                  value={personalData.name}
+                  onChange={(e) => {
+                    updateListingData("personalData", "name", e.target.value);
+                  }}
+                  isInvalid={errorFields.includes("personalData.name")}
+                />
+              </div>
             </div>
-          </div>
+          )}
 
-          <div className="col-6">
-            <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">{t("emergency_housing.surname")}</label>
-              <Form.Control
-                type="text"
-                value={personalData.surname}
-                onChange={(e) => {
-                  updateListingData("personalData", "surname", e.target.value);
-                }}
-                isInvalid={errorFields.includes("personalData.surname")}
-              />
+          {(!user?.name || !personalData.surname) && (
+            <div className="col-6">
+              <div className="input-group-meta form-group mb-30">
+                <label htmlFor="">{t("emergency_housing.surname")}</label>
+                <Form.Control
+                  type="text"
+                  value={personalData.surname}
+                  onChange={(e) => {
+                    updateListingData(
+                      "personalData",
+                      "surname",
+                      e.target.value
+                    );
+                  }}
+                  isInvalid={errorFields.includes("personalData.surname")}
+                />
+              </div>
             </div>
-          </div>
+          )}
 
-          <div className="col-lg-6 col-md-6 col-12">
-            <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">{t("viewing.phone")}</label>
-              <PrefixPhoneInput
-                value={personalData.phone}
-                onChange={(value: string) => {
-                  updateListingData("personalData", "phone", value);
-                }}
-                isInvalid={errorFields.includes("personalData.phone")}
-              />
+          {(!user?.phone || !personalData.phone) && (
+            <div className="col-lg-6 col-md-6 col-12">
+              <div className="input-group-meta form-group mb-30">
+                <label htmlFor="">{t("viewing.phone")}</label>
+                <PrefixPhoneInput
+                  value={personalData.phone}
+                  onChange={(value: string) => {
+                    updateListingData("personalData", "phone", value);
+                  }}
+                  isInvalid={errorFields.includes("personalData.phone")}
+                />
+              </div>
             </div>
-          </div>
+          )}
 
-          <div className="col-lg-6 col-md-6 col-12">
-            <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">{t("emergency_housing.email")}</label>
-              <Form.Control
-                type="email"
-                value={personalData.email}
-                onChange={(e) => {
-                  updateListingData("personalData", "email", e.target.value);
-                }}
-                isInvalid={errorFields.includes("personalData.email")}
-              />
+          {(!user?.email || !personalData.email) && (
+            <div className="col-lg-6 col-md-6 col-12">
+              <div className="input-group-meta form-group mb-30">
+                <label htmlFor="">{t("emergency_housing.email")}</label>
+                <Form.Control
+                  type="email"
+                  value={personalData.email}
+                  onChange={(e) => {
+                    updateListingData("personalData", "email", e.target.value);
+                  }}
+                  isInvalid={errorFields.includes("personalData.email")}
+                />
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="row mt-20 mb-20">
@@ -211,7 +225,7 @@ const AddListingForm = () => {
                 step={1}
                 value={propertyData.rent}
                 onKeyDown={(e) => {
-                  if (e.key === '-' || e.key === 'e' || e.key === '.') {
+                  if (e.key === "-" || e.key === "e" || e.key === ".") {
                     e.preventDefault();
                   }
                 }}
@@ -391,7 +405,11 @@ const AddListingForm = () => {
             onClick={handleSubmit}
             className="btn-nine text-uppercase rounded-3 fw-normal w-100"
           >
-            {loading ? <Spinner size='sm' animation="border" /> : t("contact.send")}
+            {loading ? (
+              <Spinner size="sm" animation="border" />
+            ) : (
+              t("contact.send")
+            )}
           </button>
         </div>
       </div>

@@ -76,60 +76,68 @@ const RentingForm = ({ refElement, property }: any) => {
       <div className="container m-a row controls">
         <h4 className="mb-20">{t("viewing.fill_your_details")}</h4>
 
-        <div className="col-6">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.name")}</label>
-            <Form.Control
-              type="text"
-              value={rentingData.name}
-              onChange={(e) => {
-                updateRentingData("name", "", e.target.value);
-              }}
-              isInvalid={rentingErrorFields.includes("name")}
-            />
+        {(!user?.name || !rentingData.name) && (
+          <div className="col-6">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("viewing.name")}</label>
+              <Form.Control
+                type="text"
+                value={rentingData.name}
+                onChange={(e) => {
+                  updateRentingData("name", "", e.target.value);
+                }}
+                isInvalid={rentingErrorFields.includes("name")}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="col-6">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.surname")}</label>
-            <Form.Control
-              type="text"
-              value={rentingData.surname}
-              onChange={(e) => {
-                updateRentingData("surname", "", e.target.value);
-              }}
-              isInvalid={rentingErrorFields.includes("surname")}
-            />
+        {(!user?.name || !rentingData.surname) && (
+          <div className="col-6">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("viewing.surname")}</label>
+              <Form.Control
+                type="text"
+                value={rentingData.surname}
+                onChange={(e) => {
+                  updateRentingData("surname", "", e.target.value);
+                }}
+                isInvalid={rentingErrorFields.includes("surname")}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="col-lg-6 col-md-6 col-12">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.phone")}</label>
-            <PrefixPhoneInput
-              value={rentingData.phone}
-              onChange={(value: string) => {
-                updateRentingData("phone", "", value);
-              }}
-              isInvalid={rentingErrorFields.includes("phone")}
-            />
+        {(!user?.phone || !rentingData.phone) && (
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("viewing.phone")}</label>
+              <PrefixPhoneInput
+                value={rentingData.phone}
+                onChange={(value: string) => {
+                  updateRentingData("phone", "", value);
+                }}
+                isInvalid={rentingErrorFields.includes("phone")}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="col-lg-6 col-md-6 col-12">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.email")}</label>
-            <Form.Control
-              type="text"
-              value={rentingData.email}
-              onChange={(e) => {
-                updateRentingData("email", "", e.target.value);
-              }}
-              isInvalid={rentingErrorFields.includes("email")}
-            />
+        {(!user?.email || !rentingData.email) && (
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("viewing.email")}</label>
+              <Form.Control
+                type="text"
+                value={rentingData.email}
+                onChange={(e) => {
+                  updateRentingData("email", "", e.target.value);
+                }}
+                isInvalid={rentingErrorFields.includes("email")}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="col-lg-6col-md-12 col-12 mb-40">
           <div className="input-item input-item-name">
