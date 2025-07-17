@@ -169,11 +169,13 @@
     "step_2": "2) Wait for one of our agents to contact you",
     "step_3": "3) Arrange the viewing/s and leave the rest to us",
     "fill_your_details": "Fill your details",
+    "viewing_details": "Viewing details",
+    "address_of_viewing": "Address of viewing",
     "name": "Name",
     "surname": "Surname",
     "phone": "Phone",
     "email": "Email",
-    "comments": "Any comments you would like to be sent to our agent",
+    "comments": "Any comments you would like to be sent to our agent\n\nAny questions that you want our agent to ask on your behalf?\n\n- How many tenants is the bathroom shared with\n- Is there a storage room\n- Do I need to buy kitchen utensils",
     "consent": "I give my consent to be contacted by the company via phone or email and for them to store my information for service purposes only",
     "submit_request": "Submit Request",
     "errors": {
@@ -191,8 +193,8 @@
     "successful_request": "Successful Request",
     "confirmation_message": "Your information has been sent so expect soon to be contacted by one of our agents!",
     "city_of_viewing": "City of viewing",
-    "date": "Date:",
-    "time": "Time:",
+    "date": "Date of viewing",
+    "time": "Time of viewing",
     "address_of_viewing_optional": "Address of viewing (optional)"
   },
   "room_searching" : {

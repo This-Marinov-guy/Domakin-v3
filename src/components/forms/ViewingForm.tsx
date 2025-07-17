@@ -71,62 +71,74 @@ const ViewingForm = () => {
   return (
     <form className="form-style-one wow fadeInUp pt-40 pb-40">
       <div className="container m-a row controls">
-        <h4 className="mb-20">{t("viewing.fill_your_details")}</h4>
+        {(!user?.name || !user?.surname || !user?.phone || !user?.email) && (
+          <h4 className="mb-20">{t("viewing.fill_your_details")}</h4>
+        )}
 
-        <div className="col-6">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.name")}</label>
-            <Form.Control
-              type="text"
-              value={viewingData.name}
-              onChange={(e) => {
-                updateViewingData("name", "", e.target.value);
-              }}
-              isInvalid={viewingErrorFields.includes("name")}
-            />
+        {(!user?.name || !viewingData.name) && (
+          <div className="col-6">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("viewing.name")}</label>
+              <Form.Control
+                type="text"
+                value={viewingData.name}
+                onChange={(e) => {
+                  updateViewingData("name", "", e.target.value);
+                }}
+                isInvalid={viewingErrorFields.includes("name")}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="col-6">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.surname")}</label>
-            <Form.Control
-              type="text"
-              value={viewingData.surname}
-              onChange={(e) => {
-                updateViewingData("surname", "", e.target.value);
-              }}
-              isInvalid={viewingErrorFields.includes("surname")}
-            />
+        {(!user?.name || !viewingData.surname) && (
+          <div className="col-6">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("viewing.surname")}</label>
+              <Form.Control
+                type="text"
+                value={viewingData.surname}
+                onChange={(e) => {
+                  updateViewingData("surname", "", e.target.value);
+                }}
+                isInvalid={viewingErrorFields.includes("surname")}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="col-lg-6 col-md-6 col-12">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.phone")}</label>
-            <PrefixPhoneInput
-              value={viewingData.phone}
-              onChange={(value: string) => {
-                updateViewingData("phone", "", value);
-              }}
-              isInvalid={viewingErrorFields.includes("phone")}
-            />
+        {(!user?.phone || !viewingData.phone) && (
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("viewing.phone")}</label>
+              <PrefixPhoneInput
+                value={viewingData.phone}
+                onChange={(value: string) => {
+                  updateViewingData("phone", "", value);
+                }}
+                isInvalid={viewingErrorFields.includes("phone")}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="col-lg-6 col-md-6 col-12">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.email")}</label>
-            <Form.Control
-              type="text"
-              value={viewingData.email}
-              onChange={(e) => {
-                updateViewingData("email", "", e.target.value);
-              }}
-              isInvalid={viewingErrorFields.includes("email")}
-            />
+        {(!user?.email || !viewingData.email) && (
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("viewing.email")}</label>
+              <Form.Control
+                type="text"
+                value={viewingData.email}
+                onChange={(e) => {
+                  updateViewingData("email", "", e.target.value);
+                }}
+                isInvalid={viewingErrorFields.includes("email")}
+              />
+            </div>
           </div>
-        </div>
+        )}
+
+        <h4 className="mb-20 mt-20">{t("viewing.viewing_details")}</h4>
 
         <div className="col-6">
           <div className="input-group-meta form-group mb-30">
@@ -144,7 +156,9 @@ const ViewingForm = () => {
 
         <div className="col-6">
           <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("emergency_housing.address")}</label>
+            <label htmlFor="">
+              {t("viewing.address_of_viewing")}
+            </label>
             <Form.Control
               type="text"
               value={viewingData.address}
@@ -186,7 +200,8 @@ const ViewingForm = () => {
           </div>
         </div>
 
-        <div className="col-6">
+        {/* Note 17.07.25 : remove referral code */}
+        {/* <div className="col-6">
           <div className="input-group-meta form-group mb-30">
             <label htmlFor="">{t("emergency_housing.referral_code")}</label>
             <Form.Control
@@ -198,7 +213,7 @@ const ViewingForm = () => {
               isInvalid={viewingErrorFields.includes("referralCode")}
             />
           </div>
-        </div>
+        </div> */}
 
         <div className="col-12">
           <div className="input-group-meta form-group mb-40">
@@ -210,6 +225,13 @@ const ViewingForm = () => {
                 updateViewingData("note", "", e.target.value);
               }}
               isInvalid={viewingErrorFields.includes("note")}
+              rows={12}
+              style={{ 
+                fontFamily: 'inherit',
+                lineHeight: '1.5',
+                resize: 'vertical',
+                minHeight: '220px'
+              }}
             />
           </div>
         </div>
@@ -258,7 +280,11 @@ const ViewingForm = () => {
             onClick={handleSubmit}
             className="btn-nine text-uppercase rounded-3 fw-normal w-100"
           >
-            {loading ? <Spinner size='sm' animation="border" /> : t("contact.send")}
+            {loading ? (
+              <Spinner size="sm" animation="border" />
+            ) : (
+              t("contact.send")
+            )}
           </button>
         </div>
       </div>
