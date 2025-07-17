@@ -162,10 +162,10 @@ export default class PropertyStore {
   @action
   resetListingData = () => {
     const globalData = {
-      name: this.addListingData.referralCode,
-      surname: this.addListingData.referralCode,
-      email: this.addListingData.referralCode,
-      phone: this.addListingData.referralCode,
+      name: this.addListingData.personalData.name,
+      surname: this.addListingData.personalData.surname,
+      email: this.addListingData.personalData.email,
+      phone: this.addListingData.personalData.phone,
       referralCode: this.addListingData.referralCode,
     };
 

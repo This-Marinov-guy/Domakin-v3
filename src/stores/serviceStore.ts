@@ -85,10 +85,10 @@ export default class ServiceStore {
   @action
   resetViewingData = () => {
      const globalData = {
-       name: this.viewingData.referralCode,
-       surname: this.viewingData.referralCode,
-       email: this.viewingData.referralCode,
-       phone: this.viewingData.referralCode,
+       name: this.viewingData.name,
+       surname: this.viewingData.surname,
+       email: this.viewingData.email,
+       phone: this.viewingData.phone,
        referralCode: this.viewingData.referralCode,
      };
 
@@ -116,10 +116,10 @@ export default class ServiceStore {
   @action
   resetSearchingData = () => {
     const globalData = {
-      name: this.searchingData.referralCode,
-      surname: this.searchingData.referralCode,
-      email: this.searchingData.referralCode,
-      phone: this.searchingData.referralCode,
+      name: this.searchingData.name,
+      surname: this.searchingData.surname,
+      email: this.searchingData.email,
+      phone: this.searchingData.phone,
       referralCode: this.searchingData.referralCode,
     };
 
@@ -147,10 +147,10 @@ export default class ServiceStore {
   @action
   resetRentingData = () => {
     const globalData = {
-      name: this.rentingData.referralCode,
-      surname: this.rentingData.referralCode,
-      email: this.rentingData.referralCode,
-      phone: this.rentingData.referralCode,
+      name: this.rentingData.name,
+      surname: this.rentingData.surname,
+      email: this.rentingData.email,
+      phone: this.rentingData.phone,
       referralCode: this.rentingData.referralCode,
     };
 
