@@ -46,6 +46,7 @@ const RentingForm = ({ refElement, property }: any) => {
       transformToFormData({
         ...rentingData,
         property: `${property.id} | ${property.title} | ${property.location}`,
+        address: `${property.location}, ${property.city}`,
       })
     ).then((res) => {
       if (res?.status) {
