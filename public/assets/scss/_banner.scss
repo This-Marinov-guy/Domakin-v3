@@ -517,6 +517,10 @@
   background: url(../images/media/img_12.jpg) no-repeat center;
   background-size: cover;
   background-attachment: fixed;
+  
+  @media (max-width: 768px) {
+    background-attachment: scroll;
+  }
   &:before {
     content: "";
     position: absolute;
