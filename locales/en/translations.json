@@ -84,8 +84,8 @@
           "description": "Schedule a viewing in advance, and one of our agents will attend on your behalf."
         },
         "same_day": {
-          "title": "Same-Day Viewing Assistance – €<b>{{price}}</b>",
-          "description": "For urgent requests, we offer priority scheduling for same-day viewings."
+          "title": "Express Viewing Assistance – €<b>{{price}}</b>",
+          "description": "For urgent requests, we offer priority scheduling for viewings within 24 hours."
         }
       },
       "included": {
