@@ -36,10 +36,10 @@ const brand_data: any[] = [
     logo: brandLogo_6,
     link: "https://www.integral.bg/",
   },
-  {
-    logo: brandLogo_7,
-    link: "https://rentbird.nl/nl?awc=69422_1753473177_c3306255d6ee00504907264fad72346f&sv1=affiliate&sv_campaign_id=220921&utm_id=220921",
-  },
+  // {
+  //   logo: brandLogo_7,
+  //   link: "https://rentbird.nl/nl?awc=69422_1753473177_c3306255d6ee00504907264fad72346f&sv1=affiliate&sv_campaign_id=220921&utm_id=220921",
+  // },
 ];
 
 const BrandTwo = () => {
