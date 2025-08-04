@@ -3,7 +3,6 @@ import Trans from "next-translate/Trans";
 import React from "react";
 import Link from "next/link";
 import {
-  RENTING_PRICE,
   VIEWING_EXPRESS_PRICE,
   VIEWING_PREMIUM_PRICE,
   VIEWING_STANDARD_PRICE,
@@ -109,12 +108,7 @@ const PricingAreaThree = () => {
               <p>{t("pricing.viewing_by_agent.audience.description")}</p>
 
               {/* Renting */}
-              <h4 className="mt-40">
-                <Trans
-                  i18nKey="translations:pricing.renting_room.section_title"
-                  values={{ price: RENTING_PRICE }}
-                  components={{ b: <b /> }}
-                />
+              <h4 className="mt-40" dangerouslySetInnerHTML={{ __html: t("pricing.renting_room.section_title") }}>
               </h4>
 
               <p>{t("pricing.renting_room.intro")}</p>

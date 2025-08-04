@@ -50,7 +50,7 @@ export const VIEWING_STANDARD_PRICE = 50;
 export const VIEWING_EXPRESS_PRICE = 100;
 export const VIEWING_PREMIUM_PRICE = 100;
 
-export const RENTING_PRICE = 600;
+
 export const RENTING_COMMISSION = 200;
 
 export const RENTING_PRICE_SUBRENT_DISCOUNT = 200;

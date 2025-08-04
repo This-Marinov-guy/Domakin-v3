@@ -126,7 +126,7 @@
       }
     },
     "renting_room": {
-      "section_title": "🏡 Renting a Room Through Our Platform – €<b>{{price}}</b> per Tenant",
+      "section_title": "🏡 Renting a Room Through Our Platform – <b>1-month rent</b>",
       "intro": "Looking for a student-friendly room without the stress of endless searches? Our Renting a Room Through Domakin service connects you with verified listings, offering a secure and reliable way to find accommodation.",
       "how_it_works": {
         "title": "How it works:",
@@ -134,13 +134,13 @@
         "steps": {
           "1": "Browse available rooms on our website.",
           "2": "Apply for options that match your preferences.",
-          "3": "If you sign a rental contract through Domakin, a one-time service fee of €600 per person applies."
+          "3": "If you sign a rental contract through Domakin, a one-time service fee of 1-month rent per person applies."
         },
         "option_2": "Option 2 – We Search for You:",
         "steps2": {
           "1": "Tell us your accommodation preferences.",
           "2": "An agent will contact you and begin the search.",
-          "3": "If you sign a rental contract through Domakin, a one-time service fee of €600 per person applies."
+          "3": "If you sign a rental contract through Domakin, a one-time service fee of 1-month rent per person applies."
         }
       },
       "why_choose_us": {
