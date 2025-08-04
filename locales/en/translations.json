@@ -1462,6 +1462,21 @@
     "failed_fetching_feedbacks": "We could not get the feedbacks - please try again!"
   },
 
+  "payment": {
+    "success": {
+      "title": "Payment Successful!",
+      "message": "Your payment has been processed successfully.",
+      "description": "Thank you for your payment. Your transaction has been completed and a confirmation email has been sent to you.",
+      "view_membership": "View Membership"
+    },
+    "failure": {
+      "title": "Payment Failed",
+      "message": "We couldn't process your payment.",
+      "description": "There was an issue processing your payment. Please check your payment details and try again, or contact our support team for assistance.",
+      "try_again": "Try Again",
+      "contact_support": "Contact Support"
+    }
+  },
   "modal": {
     "long_loading": {
       "title": "Loading...",
