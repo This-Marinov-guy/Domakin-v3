@@ -12,6 +12,7 @@ import { useStore } from "@/stores/storeContext";
 
 import quoteIcon from "@/assets/images/icon/icon_29.svg";
 import ListingLoadingOne from "@/components/ui/loading/ListingLoadingOne";
+import moment from "moment";
 
 export const CustomPrevArrow = (props: any) => {
   const { onClick } = props;
@@ -104,6 +105,11 @@ const Feedback = ({ style }: any) => {
                 </p>
                 <div className="d-flex align-items-center justify-content-between">
                   <h6 className="fs-20 m0">{item.name}</h6>
+                  {item?.created_at && (
+                    <small className="text-muted">
+                      {moment(item.created_at).format("DD MMM YYYY")}
+                    </small>
+                  )}
                 </div>
               </div>
             ))}
