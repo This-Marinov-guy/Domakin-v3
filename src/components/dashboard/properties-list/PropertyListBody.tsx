@@ -47,6 +47,7 @@ const PropertyListBody = () => {
                 <th className="text-center" scope="col">Location</th>
                 <th className="text-center" scope="col">Rent</th>
                 <th className="text-center" scope="col">Status</th>
+                <th className="text-center" scope="col">Payment link</th>
                 <th className="text-center" scope="col">Action</th>
               </tr>
             </thead>

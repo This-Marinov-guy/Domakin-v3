@@ -255,14 +255,20 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
                 <div className="input-group-meta form-group mb-30">
                   <label htmlFor="">{t("emergency_housing.rent")}</label>
                   <Form.Control
-                    type="text"
+                    type="number"
                     value={editPropertyData.propertyData.rent}
+                    onKeyDown={(e) => {
+                      if (e.key === "-" || e.key === "e" || e.key === ".") {
+                        e.preventDefault();
+                      }
+                    }}
                     onChange={(e) => {
-                      updateEditListingData(
-                        "propertyData",
-                        "rent",
-                        e.target.value
+                      const value = Math.max(
+                        0,
+                        Math.floor(Number(e.target.value))
                       );
+
+                      updateEditListingData("propertyData", "rent", value);
                     }}
                     isInvalid={editErrorFields.includes("propertyData.rent")}
                   />

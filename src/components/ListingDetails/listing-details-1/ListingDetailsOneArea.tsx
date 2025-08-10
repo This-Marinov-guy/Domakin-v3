@@ -26,6 +26,7 @@ import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import PropertyDataPreview from "@/components/ui/modals/PropertyDataPreview";
 import { parsePropertyPreviewData } from "@/utils/helpers";
+import StripePaymentLinkButton from "@/components/ui/buttons/StripePaymentLinkButton";
 
 const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
   const { t } = useTranslation("translations");
@@ -35,7 +36,7 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
     propertyStore: { setPropertyDataForEdit, userProperties },
   } = useStore();
 
-  const [extendedPropertyDetails, setExtendedPropertyDetails] = useState(null);
+  const [extendedPropertyDetails, setExtendedPropertyDetails] = useState<any>(null);
   const [isEditLoading, setIsEditLoading] = useState(true);
   const [isPreviewOpened, setIsPreviewOpened] = useState(false);
 
@@ -98,6 +99,13 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
                 ) : (
                   <div className="d-flex align-items-center gap-2 fs-5">
                     <span>Quick Actions:</span>
+                    {extendedPropertyDetails?.property_data?.payment_link && (
+                      <StripePaymentLinkButton
+                        paymentLink={
+                          extendedPropertyDetails.property_data.payment_link
+                        }
+                      />
+                    )}
                     <OverlayTrigger
                       placement="top"
                       overlay={<Tooltip>Edit Property</Tooltip>}

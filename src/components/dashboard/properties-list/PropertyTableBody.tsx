@@ -22,6 +22,7 @@ import EditPropertyModal from "@/components/ui/modals/EditPropertyModal";
 import { PROPERTY_STATUS } from "@/utils/enum";
 import { EDIT_PROPERTY_MODAL, PROPERTY_ID_OFFSET } from "@/utils/defines";
 import { parsePropertyPreviewData } from "@/utils/helpers";
+import StripePaymentLinkButton from "@/components/ui/buttons/StripePaymentLinkButton";
 
 const PropertyTableBody = () => {
   const {
@@ -143,6 +144,15 @@ const PropertyTableBody = () => {
               </div>
             </OverlayTrigger>
           </td>
+          {/* Payment link column */}
+          <td className="center">
+            {isAdmin && item?.property_data?.payment_link && (
+              <StripePaymentLinkButton
+                paymentLink={item.property_data.payment_link}
+              />
+            )}
+          </td>
+          {/* Action column */}
           {isAdmin ? (
             <td className="center">
               <div className="action-dots float-end">
