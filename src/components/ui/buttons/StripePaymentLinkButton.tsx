@@ -1,38 +1,44 @@
 "use client";
 import React from "react";
-import { showStandardNotification } from "@/utils/helpers";
+import { useStore } from "@/stores/storeContext";
+import PaymentLinkModal from "../modals/PaymentLinkModal";
+import { PAYMENT_LINK_MODAL } from "@/utils/defines";
 
 interface StripePaymentLinkButtonProps {
-  paymentLink: string;
+  propertyId: number | string;
   className?: string;
+  buttonText?: string;
 }
 
 const StripePaymentLinkButton: React.FC<StripePaymentLinkButtonProps> = ({
-  paymentLink,
+  propertyId,
   className = "btn btn-sm",
+  buttonText = "Create Payment Link"
 }) => {
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(paymentLink);
-      showStandardNotification("info", "Payment link copied to clipboard");
-    } catch (error) {
-      showStandardNotification("error", "Failed to copy payment link");
-    }
+  const { modalStore } = useStore();
+
+  const handleClick = () => {
+    modalStore.setActiveModal(PAYMENT_LINK_MODAL);
   };
 
   return (
-    <button
-      className={className}
-      style={{ backgroundColor: "#635BFF", color: "#fff" }}
-      onClick={handleCopy}
-      title="Copy Stripe payment link"
-    >
-      <i className="bi bi-stripe me-1"></i>
-      Stripe
-    </button>
+    <>
+      <button
+        className={className}
+        style={{ backgroundColor: "#635BFF", color: "#fff" }}
+        onClick={handleClick}
+        title="Generate Stripe payment link"
+        type="button"
+      >
+        <i className="bi bi-stripe me-1"></i>
+        {buttonText}
+      </button>
+
+      {/* Render the modal component */}
+      <PaymentLinkModal propertyId={propertyId} />
+    </>
   );
 };
 
 export default StripePaymentLinkButton;
-
 

@@ -101,9 +101,8 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
                     <span>Quick Actions:</span>
                     {extendedPropertyDetails?.property_data?.payment_link && (
                       <StripePaymentLinkButton
-                        paymentLink={
-                          extendedPropertyDetails.property_data.payment_link
-                        }
+                        propertyId={property.id}
+                        
                       />
                     )}
                     <OverlayTrigger

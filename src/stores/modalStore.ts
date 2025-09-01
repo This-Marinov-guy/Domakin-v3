@@ -1,4 +1,4 @@
-import { COOKIE_MODAL, EDIT_PROPERTY_MODAL, LOGIN_MODAL, LONG_LOADING_MODAL } from "@/utils/defines";
+import { COOKIE_MODAL, EDIT_PROPERTY_MODAL, LOGIN_MODAL, LONG_LOADING_MODAL, PAYMENT_LINK_MODAL } from "@/utils/defines";
 import { makeAutoObservable, toJS } from "mobx";
 
 const defaultModalSettings = {
@@ -12,6 +12,7 @@ const initialValues = {
   [LOGIN_MODAL]: false,
   [EDIT_PROPERTY_MODAL]: false,
   [LONG_LOADING_MODAL]: false,
+  [PAYMENT_LINK_MODAL]: false,
 };
 
 export default class ModalStore {

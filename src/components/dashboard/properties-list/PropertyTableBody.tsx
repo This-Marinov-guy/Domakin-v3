@@ -148,7 +148,7 @@ const PropertyTableBody = () => {
           <td className="center">
             {isAdmin && item?.property_data?.payment_link && (
               <StripePaymentLinkButton
-                paymentLink={item.property_data.payment_link}
+                propertyId={item.id}
               />
             )}
           </td>
