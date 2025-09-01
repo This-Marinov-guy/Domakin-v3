@@ -13,7 +13,9 @@ import { toast } from "react-toastify";
 import MultiValueInput from "../inputs/MultiValueInput";
 import ImageWithBadge from "../borders/ImageBadgeBorder";
 import { EDIT_PROPERTY_MODAL } from "@/utils/defines";
-import { showGeneralError } from "@/utils/helpers";
+import { showGeneralError, transformToFormData } from "@/utils/helpers";
+import { MdClose } from "react-icons/md";
+import MultiFilePreviewInput from "../inputs/files/MultiFilePreviewInput";
 
 const EditPropertyModal = ({ callback = () => {} }: any) => {
   const {
@@ -22,6 +24,7 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
       editPropertyData,
       editErrorFields,
       updateMainImage,
+      removeImage,
       addEditErrorFields,
       setProperties,
     },
@@ -61,7 +64,11 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
     e.preventDefault();
     addEditErrorFields([]);
 
-    sendRequest("/property/edit", "PUT", editPropertyData).then((res) => {
+    sendRequest(
+      "/property/edit",
+      "POST",
+      transformToFormData(editPropertyData)
+    ).then((res) => {
       if (res?.status) {
         reloadProperties();
         modalStore.closeAll();
@@ -275,7 +282,19 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
                 </div>
               </div>
 
-              <div className="col-lg-6 col-md-6 col-12" />
+              <div className="col-lg-6 col-md-6 col-12">
+                <div className="input-group-meta form-group mb-30">
+                  <label htmlFor="">Referral Code</label>
+                  <Form.Control
+                    type="text"
+                    value={editPropertyData.referralCode || ""}
+                    onChange={(e) => {
+                      updateEditListingData("referralCode", "", e.target.value);
+                    }}
+                    isInvalid={editErrorFields.includes("referralCode")}
+                  />
+                </div>
+              </div>
 
               <div className="col-6">
                 <MultiValueInput
@@ -351,31 +370,107 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
                       (image: string, index: number) => (
                         <div
                           key={index}
-                          className="col-6 col-sm-4 col-md-3 col-lg-2 mb-4"
+                          className="col-6 col-sm-4 col-md-3 col-lg-2 mb-4 position-relative"
                         >
                           {index === 0 ? (
-                            <ImageWithBadge
-                              src={image}
-                              alt={`Property Image ${index + 1}`}
-                              label="Main"
-                              width={200}
-                              height={200}
-                            />
+                            <div className="position-relative">
+                              <ImageWithBadge
+                                src={image}
+                                alt={`Property Image ${index + 1}`}
+                                label="Main"
+                                width={200}
+                                height={200}
+                              />
+                              {editPropertyData.propertyData.images.length >
+                                1 && (
+                                <button
+                                  type="button"
+                                  className="position-absolute top-0 end-0"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    removeImage(index);
+                                  }}
+                                  style={{
+                                    zIndex: 100,
+                                    borderRadius: "50%",
+                                    width: "30px",
+                                    height: "30px",
+                                    background: "rgba(255, 0, 0, 0.8)",
+                                    border: "2px solid white",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    color: "white",
+                                    padding: "0",
+                                    margin: "5px",
+                                    boxShadow: "0 0 5px rgba(0,0,0,0.5)",
+                                  }}
+                                >
+                                  <MdClose size={18} />
+                                </button>
+                              )}
+                            </div>
                           ) : (
-                            <Image
-                              src={image}
-                              alt={`Property Image ${index + 1}`}
-                              width={200}
-                              height={200}
-                              onClick={() => {
-                                updateMainImage(index);
-                              }}
-                              className="img-fluid rounded border"
-                            />
+                            <div className="position-relative">
+                              <Image
+                                src={image}
+                                alt={`Property Image ${index + 1}`}
+                                width={200}
+                                height={200}
+                                onClick={() => {
+                                  updateMainImage(index);
+                                }}
+                                className="img-fluid rounded border"
+                              />
+                              <button
+                                type="button"
+                                className="position-absolute top-0 end-0"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  removeImage(index);
+                                }}
+                                style={{
+                                  zIndex: 100,
+                                  borderRadius: "50%",
+                                  width: "30px",
+                                  height: "30px",
+                                  background: "rgba(255, 0, 0, 0.8)",
+                                  border: "2px solid white",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  color: "white",
+                                  padding: "0",
+                                  margin: "5px",
+                                  boxShadow: "0 0 5px rgba(0,0,0,0.5)",
+                                }}
+                              >
+                                <MdClose size={18} />
+                              </button>
+                            </div>
                           )}
                         </div>
                       )
                     )}
+                </div>
+
+                <div className="mt-4">
+                  <h5>Add New Images</h5>
+                  <MultiFilePreviewInput
+                    onChange={(files: any) =>
+                      updateEditListingData("newImages", "", files)
+                    }
+                    value={editPropertyData.newImages}
+                    maxSizeNote="Max file size: 5MB"
+                    allowedFormatsNotes="Allowed formats: JPG, PNG, WEBP, SVG, HEIC"
+                    onReject={(rejectedFiles: any[]) => {
+                      showGeneralError(
+                        "File upload rejected. Please check file size and format."
+                      );
+                    }}
+                  />
                 </div>
               </div>
             </div>

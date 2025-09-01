@@ -95,7 +95,7 @@ const PrefixMultiFilePreviewInput = (props: any) => {
                     style={{ color: "purple", fontSize: "30px" }}
                   ></i>
                   <p>{t("files.drag_files")}</p>
-                  {value.length > 0 &&
+                  {value?.length > 0 &&
                     value.map((file: any, index: number) => (
                       file ? (
                         <div key={index} className="file-preview">

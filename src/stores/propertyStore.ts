@@ -80,6 +80,7 @@ export default class PropertyStore {
       approved: property.approved,
       status: property.status,
       releaseTimestamp: property.release_timestamp,
+      referralCode: property.referral_code,
       propertyData: {
         ...property.property_data,
         bills: JSON.parse(property.property_data.bills),
@@ -89,8 +90,9 @@ export default class PropertyStore {
         title: property?.property_data?.title
           ? JSON.parse(property.property_data.title ?? "")
           : property.property_data.title,
-        image: property?.property_data?.image,
+        images: property?.property_data?.images,
       },
+      newImages: [],
     };
   };
 
@@ -144,6 +146,14 @@ export default class PropertyStore {
     const mainImage = this.editPropertyData.propertyData.images[index];
     this.editPropertyData.propertyData.images = [
       mainImage,
+      ...this.editPropertyData.propertyData.images.slice(0, index),
+      ...this.editPropertyData.propertyData.images.slice(index + 1),
+    ];
+  };
+
+  @action
+  removeImage = (index: number) => {
+    this.editPropertyData.propertyData.images = [
       ...this.editPropertyData.propertyData.images.slice(0, index),
       ...this.editPropertyData.propertyData.images.slice(index + 1),
     ];
