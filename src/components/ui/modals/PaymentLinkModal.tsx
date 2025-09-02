@@ -30,7 +30,7 @@ const PaymentLinkModal: React.FC<PaymentLinkModalProps> = ({ propertyId }) => {
         "POST",
         {
           id: propertyId,
-          customerName: customerName.trim() || undefined,
+          name: customerName.trim() || undefined,
         },
         {},
         {
@@ -161,3 +161,4 @@ const PaymentLinkModal: React.FC<PaymentLinkModalProps> = ({ propertyId }) => {
 };
 
 export default observer(PaymentLinkModal);
+
