@@ -6,7 +6,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         {/* Google tag (gtag.js) */}
-        {process.env.NEXT_PUBLIC_GTM_ENABLE == "1" && (
+        {process.env.NEXT_PUBLIC_GTM_ENABLE === "1" && (
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
@@ -28,7 +28,7 @@ export default function Document() {
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="0GB4Vkq+KdR17/QhsU/78Q"
           async
-        ></script>
+        />
       </Head>
       <body>
         <Main />
