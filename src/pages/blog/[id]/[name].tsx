@@ -6,50 +6,43 @@ import HeaderOne from "@/layouts/headers/HeaderOne";
 import Head from "next/head";
 import { GetServerSideProps } from "next";
 
-type BlogPostData = {
-  id: string | number;
-  title: string;          // HTML string from WP
-  content: string;        // HTML string from WP
-  styles?: string;
-  slug?: string;
-  publishedAt?: string;
-  description?: string;
-  featuredImageUrl?: string;
+type WpPost = {
+  id: number;
+  slug: string;
+  date: string;
+  link: string;                  // original WP URL
+  title: { rendered: string };
+  content: { rendered: string };
+  excerpt?: { rendered: string };
+  yoast_head_json?: { description?: string; title?: string };
 };
 
-type BlogPostProps = {
-  post: BlogPostData | null;
-  canonicalUrl?: string;
+type Props = {
+  post: WpPost | null;
   error?: string | null;
+  canonicalUrl?: string;
 };
 
-export const getServerSideProps: GetServerSideProps<BlogPostProps> = async (ctx) => {
+export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   const { id } = ctx.params as { id: string };
 
   try {
+    const WP_BASE = "https://domakin0.wordpress.com";
+    // Fetch the post by numeric id; restrict fields to what we need
+    const res = await fetch(
+      `${WP_BASE}/wp-json/wp/v2/posts/${id}?_fields=id,slug,date,link,title,content,excerpt,yoast_head_json`,
+      { headers: { Accept: "application/json" } }
+    );
+
+    if (!res.ok) return { props: { post: null, error: `WP fetch failed: ${res.status}` } };
+
+    const post: WpPost = await res.json();
+
     const proto =
       (ctx.req.headers["x-forwarded-proto"] as string) ||
       (process.env.NODE_ENV === "development" ? "http" : "https");
     const host = ctx.req.headers.host;
-    const fallbackBase = `${proto}://${host}`;
-
-    const API_BASE =
-      process.env.NEXT_PUBLIC_API_BASE_URL ||
-      process.env.API_BASE_URL ||
-      fallbackBase;
-
-    const res = await fetch(`${API_BASE}/blog/post/${id}`, {
-      headers: { Accept: "application/json" },
-    });
-
-    if (!res.ok) {
-      return { props: { post: null, error: `Fetch failed: ${res.status}` } };
-    }
-
-    const json = await res.json();
-    const post: BlogPostData | null = json?.status ? json?.data : null;
-
-    const canonicalUrl = `${fallbackBase}${ctx.resolvedUrl}`;
+    const canonicalUrl = `${proto}://${host}${ctx.resolvedUrl}`;
 
     return { props: { post, canonicalUrl, error: null } };
   } catch (e: any) {
@@ -59,7 +52,7 @@ export const getServerSideProps: GetServerSideProps<BlogPostProps> = async (ctx)
 
 const stripHtml = (s?: string) => (s ? s.replace(/<[^>]*>?/gm, "") : "");
 
-const BlogPost = ({ post, canonicalUrl, error }: BlogPostProps) => {
+const BlogPost = ({ post, error, canonicalUrl }: Props) => {
   if (error) {
     return (
       <>
@@ -93,37 +86,39 @@ const BlogPost = ({ post, canonicalUrl, error }: BlogPostProps) => {
     );
   }
 
-  const plainTitle = stripHtml(post.title) || "Blog post";
+  const plainTitle = stripHtml(post.title.rendered) || "Blog post";
+  const metaDescription =
+    post.yoast_head_json?.description || stripHtml(post.excerpt?.rendered || "") || undefined;
 
-  const articleLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: plainTitle,
-    datePublished: post.publishedAt || undefined,
-    image: post.featuredImageUrl ? [post.featuredImageUrl] : undefined,
-    mainEntityOfPage: canonicalUrl ? { "@type": "WebPage", "@id": canonicalUrl } : undefined,
-  };
+  // Optional: set canonical to YOUR site (to consolidate) or to WordPress (to avoid duplicate content).
+  // If you prefer to keep WordPress as canonical, replace `canonicalUrl` with `post.link` below.
+  const canonical = canonicalUrl;
 
   return (
     <>
-      {post.styles ? <style dangerouslySetInnerHTML={{ __html: post.styles }} /> : null}
-
       <Head>
         <title>{plainTitle}</title>
-        {post.description ? <meta name="description" content={post.description} /> : null}
-        {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
-        />
+        {metaDescription ? <meta name="description" content={metaDescription} /> : null}
+        {canonical ? <link rel="canonical" href={canonical} /> : null}
+        <meta property="og:title" content={plainTitle} />
+        {metaDescription ? <meta property="og:description" content={metaDescription} /> : null}
       </Head>
 
       <HeaderOne />
 
       <div className="wordpress-embedded-container container mx-auto px-4 py-10">
-        <h1 className="mb--20" dangerouslySetInnerHTML={{ __html: post.title }} />
+        <h1 className="mb--20" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
         <BreadcrumbNav link_title="Blog" />
-        <article className="prose max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
+
+        <article className="prose max-w-none" dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
+
+        <p className="mt-10 text-sm opacity-70">
+          Originally published on{" "}
+          <a className="underline" href={post.link} rel="noopener noreferrer" target="_blank">
+            WordPress
+          </a>
+          .
+        </p>
       </div>
 
       <FancyBanner />
