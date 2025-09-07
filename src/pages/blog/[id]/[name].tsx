@@ -1,4 +1,4 @@
-mport BreadcrumbNav from "@/components/common/breadcrumb/BreadcrumbNav";
+import BreadcrumbNav from "@/components/common/breadcrumb/BreadcrumbNav";
 import FancyBanner from "@/components/common/FancyBanner";
 import FooterFour from "@/layouts/footers/FooterFour";
 import HeaderOne from "@/layouts/headers/HeaderOne";
@@ -108,3 +108,4 @@ const BlogPost = ({ post }: BlogPostProps) => {
 };
 
 export default BlogPost;
+
