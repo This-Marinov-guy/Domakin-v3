@@ -11,7 +11,7 @@ type WpPost = {
   id: number;
   slug: string;
   date: string;
-  link: string; // original WP URL
+  link: string;
   title: { rendered: string };
 };
 
@@ -22,14 +22,18 @@ type Props = {
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
   try {
-    // Fetch directly from your WordPress site
-    const WP_BASE = "https://domakin0.wordpress.com";
+    // ABSOLUTE WordPress REST API URL (your WP works at domakin0.wordpress.com)
+    const WP_API = "https://domakin0.wordpress.com/wp-json/wp/v2";
+
+    // Pull latest posts; restrict fields for speed
     const res = await fetch(
-      `${WP_BASE}/wp-json/wp/v2/posts?per_page=20&_fields=id,slug,date,link,title`,
+      `${WP_API}/posts?per_page=20&_fields=id,slug,date,link,title`,
       { headers: { Accept: "application/json" } }
     );
 
-    if (!res.ok) return { props: { posts: [], error: `WP fetch failed: ${res.status}` } };
+    if (!res.ok) {
+      return { props: { posts: [], error: `WP fetch failed: ${res.status}` } };
+    }
 
     const posts: WpPost[] = await res.json();
     return { props: { posts, error: null } };
@@ -55,11 +59,14 @@ const Blog = ({ posts, error }: Props) => {
 
       <main className="container mx-auto px-4 py-10">
         {error && (
-          <div className="mb-8 rounded-xl border p-4 text-red-600">Couldn’t load posts: {error}</div>
+          <div className="mb-8 rounded-xl border p-4 text-red-600">
+            Couldn’t load posts: {error}
+          </div>
         )}
 
         <ul className="grid md:grid-cols-2 gap-8">
           {posts.map((p) => {
+            // Keep your route shape: /blog/[id]/[name]
             const href = `/blog/${p.id}/${encodeURIComponent(p.slug)}`;
             return (
               <li key={p.id} className="border rounded-2xl p-6">
