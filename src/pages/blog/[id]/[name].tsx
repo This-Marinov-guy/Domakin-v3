@@ -10,31 +10,33 @@ type WpPost = {
   id: number;
   slug: string;
   date: string;
-  link: string;                  // original WP URL
+  link: string;
   title: { rendered: string };
   content: { rendered: string };
   excerpt?: { rendered: string };
-  yoast_head_json?: { description?: string; title?: string };
 };
 
 type Props = {
   post: WpPost | null;
-  error?: string | null;
   canonicalUrl?: string;
+  error?: string | null;
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   const { id } = ctx.params as { id: string };
 
   try {
-    const WP_BASE = "https://domakin0.wordpress.com";
-    // Fetch the post by numeric id; restrict fields to what we need
+    const WP_API = "https://domakin0.wordpress.com/wp-json/wp/v2";
+
+    // Fetch by numeric ID because your route includes it
     const res = await fetch(
-      `${WP_BASE}/wp-json/wp/v2/posts/${id}?_fields=id,slug,date,link,title,content,excerpt,yoast_head_json`,
+      `${WP_API}/posts/${encodeURIComponent(id)}?_fields=id,slug,date,link,title,content,excerpt`,
       { headers: { Accept: "application/json" } }
     );
 
-    if (!res.ok) return { props: { post: null, error: `WP fetch failed: ${res.status}` } };
+    if (!res.ok) {
+      return { props: { post: null, error: `WP fetch failed: ${res.status}` } };
+    }
 
     const post: WpPost = await res.json();
 
@@ -52,7 +54,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
 
 const stripHtml = (s?: string) => (s ? s.replace(/<[^>]*>?/gm, "") : "");
 
-const BlogPost = ({ post, error, canonicalUrl }: Props) => {
+const BlogPost = ({ post, canonicalUrl, error }: Props) => {
   if (error) {
     return (
       <>
@@ -87,21 +89,15 @@ const BlogPost = ({ post, error, canonicalUrl }: Props) => {
   }
 
   const plainTitle = stripHtml(post.title.rendered) || "Blog post";
-  const metaDescription =
-    post.yoast_head_json?.description || stripHtml(post.excerpt?.rendered || "") || undefined;
-
-  // Optional: set canonical to YOUR site (to consolidate) or to WordPress (to avoid duplicate content).
-  // If you prefer to keep WordPress as canonical, replace `canonicalUrl` with `post.link` below.
-  const canonical = canonicalUrl;
 
   return (
     <>
       <Head>
         <title>{plainTitle}</title>
-        {metaDescription ? <meta name="description" content={metaDescription} /> : null}
-        {canonical ? <link rel="canonical" href={canonical} /> : null}
-        <meta property="og:title" content={plainTitle} />
-        {metaDescription ? <meta property="og:description" content={metaDescription} /> : null}
+        {post.excerpt?.rendered ? (
+          <meta name="description" content={stripHtml(post.excerpt.rendered)} />
+        ) : null}
+        {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
       </Head>
 
       <HeaderOne />
@@ -109,12 +105,13 @@ const BlogPost = ({ post, error, canonicalUrl }: Props) => {
       <div className="wordpress-embedded-container container mx-auto px-4 py-10">
         <h1 className="mb--20" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
         <BreadcrumbNav link_title="Blog" />
-
-        <article className="prose max-w-none" dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
-
+        <article
+          className="prose max-w-none"
+          dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+        />
         <p className="mt-10 text-sm opacity-70">
           Originally published on{" "}
-          <a className="underline" href={post.link} rel="noopener noreferrer" target="_blank">
+          <a className="underline" href={post.link} target="_blank" rel="noopener noreferrer">
             WordPress
           </a>
           .
