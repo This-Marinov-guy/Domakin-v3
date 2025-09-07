@@ -7,57 +7,40 @@ import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
 import { GetServerSideProps } from "next";
 
-type PostListItem = {
-  id: string | number;
-  title: string;
-  slug?: string;
+type WpPost = {
+  id: number;
+  slug: string;
+  date: string;
+  link: string; // original WP URL
+  title: { rendered: string };
 };
 
-type BlogIndexProps = {
-  posts: PostListItem[];
+type Props = {
+  posts: WpPost[];
   error?: string | null;
 };
 
-export const getServerSideProps: GetServerSideProps<BlogIndexProps> = async (ctx) => {
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
   try {
-    // IMPORTANT: Node's fetch requires an ABSOLUTE URL.
-    const proto =
-      (ctx.req.headers["x-forwarded-proto"] as string) ||
-      (process.env.NODE_ENV === "development" ? "http" : "https");
-    const host = ctx.req.headers.host;
-    const fallbackBase = `${proto}://${host}`;
+    // Fetch directly from your WordPress site
+    const WP_BASE = "https://domakin0.wordpress.com";
+    const res = await fetch(
+      `${WP_BASE}/wp-json/wp/v2/posts?per_page=20&_fields=id,slug,date,link,title`,
+      { headers: { Accept: "application/json" } }
+    );
 
-    const API_BASE =
-      process.env.NEXT_PUBLIC_API_BASE_URL ||
-      process.env.API_BASE_URL ||
-      fallbackBase; // last resort
+    if (!res.ok) return { props: { posts: [], error: `WP fetch failed: ${res.status}` } };
 
-    const res = await fetch(`${API_BASE}/blog/posts`, {
-      headers: { Accept: "application/json" },
-    });
-
-    if (!res.ok) {
-      return { props: { posts: [], error: `Fetch failed: ${res.status}` } };
-    }
-
-    const json = await res.json();
-    const posts: PostListItem[] = json?.data ?? [];
-
+    const posts: WpPost[] = await res.json();
     return { props: { posts, error: null } };
   } catch (e: any) {
     return { props: { posts: [], error: e?.message || "Unknown error" } };
   }
 };
 
-const slugify = (s: string) =>
-  s
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)+/g, "");
+const stripHtml = (s: string) => s.replace(/<[^>]*>?/gm, "");
 
-const Blog = ({ posts, error }: BlogIndexProps) => {
+const Blog = ({ posts, error }: Props) => {
   const { t } = useTranslation("translations");
 
   return (
@@ -71,22 +54,24 @@ const Blog = ({ posts, error }: BlogIndexProps) => {
       />
 
       <main className="container mx-auto px-4 py-10">
-        {error ? (
-          <div className="mb-8 rounded-xl border p-4 text-red-600">
-            Couldn’t load posts: {error}
-          </div>
-        ) : null}
+        {error && (
+          <div className="mb-8 rounded-xl border p-4 text-red-600">Couldn’t load posts: {error}</div>
+        )}
 
         <ul className="grid md:grid-cols-2 gap-8">
-          {posts.map((post) => {
-            const safeSlug = post.slug || slugify(post.title || String(post.id));
-            const href = `/blog/${post.id}/${safeSlug}`;
+          {posts.map((p) => {
+            const href = `/blog/${p.id}/${encodeURIComponent(p.slug)}`;
             return (
-              <li key={post.id} className="border rounded-2xl p-6">
+              <li key={p.id} className="border rounded-2xl p-6">
                 <h2 className="text-xl font-semibold mb-3">
-                  <Link href={href}>{post.title}</Link>
+                  <Link href={href} prefetch={false} title={stripHtml(p.title.rendered)}>
+                    <span dangerouslySetInnerHTML={{ __html: p.title.rendered }} />
+                  </Link>
                 </h2>
-                <Link href={href} className="underline">
+                <p className="text-sm opacity-70 mb-3">
+                  {new Date(p.date).toLocaleDateString()}
+                </p>
+                <Link href={href} className="underline" prefetch={false}>
                   Read more
                 </Link>
               </li>
@@ -94,10 +79,8 @@ const Blog = ({ posts, error }: BlogIndexProps) => {
           })}
         </ul>
 
-        {posts.length === 0 && !error && (
-          <p className="text-center text-gray-500 mt-10">
-            {t("common.no_results") || "No posts yet."}
-          </p>
+        {!error && posts.length === 0 && (
+          <p className="text-center text-gray-500 mt-10">No posts yet.</p>
         )}
       </main>
 
