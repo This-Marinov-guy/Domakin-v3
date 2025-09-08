@@ -2,8 +2,8 @@ import BreadcrumbThree from "@/components/common/breadcrumb/BreadcrumbThree";
 import FooterFour from "@/layouts/footers/FooterFour";
 import HeaderOne from "@/layouts/headers/HeaderOne";
 import FancyBanner from "@/components/common/FancyBanner";
-import BlogMainSection from "@/components/blog/BlogMainSection";
 import useTranslation from "next-translate/useTranslation";
+import BlogMainSection from "@/components/blogs/common-blog/BlogMainSection";
 
 const Blog = () => {
   const { t } = useTranslation("translations");
