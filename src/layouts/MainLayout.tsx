@@ -115,22 +115,30 @@ const MainLayout = ({ children }: any) => {
   const loadBlog = async () => {
     toggleBlogLoading();
 
-    const responseData = await sendRequest(
-      "/blog/posts",
-      "GET",
-      {},
-      {},
-      {
-        withError: false,
-        withLoading: false,
+    try {
+      const responseData = await sendRequest(
+        "/blog/posts",
+        "GET",
+        {},
+        {},
+        {
+          withError: true, // Enable error handling
+          withLoading: false,
+        }
+      );
+
+      if (responseData?.status) {
+        setBlogPosts(responseData.data);
+      } else {
+        // Set empty array in case of error
+        setBlogPosts([]);
       }
-    );
-
-    if (responseData?.status) {
-      setBlogPosts(responseData.data);
+    } catch (error) {
+      // Set empty array in case of exception
+      setBlogPosts([]);
+    } finally {
+      toggleBlogLoading();
     }
-
-    toggleBlogLoading();
   };
 
   const loadUser = async () => {

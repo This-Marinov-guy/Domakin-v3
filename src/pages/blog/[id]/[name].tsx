@@ -7,7 +7,7 @@ import FancyBanner from "@/components/common/FancyBanner";
 
 const BlogPost = () => {
   const { id } = useParams();
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

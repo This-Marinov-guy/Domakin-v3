@@ -4,7 +4,7 @@ import { ENV_PROD } from "./defines";
 import { isTodayInRange } from "./helpers";
 
 // server
-export const SERVER_ENDPOINT = process.env.NEXT_PUBLIC_SERVER_URL
+export const SERVER_ENDPOINT = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export const SESSION_REFRESH_INTERVAL = 15 * 60 * 1000; // 15 minutes
 
