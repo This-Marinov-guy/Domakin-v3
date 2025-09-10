@@ -10,7 +10,16 @@ export const fetchBlogPosts = async (lang = "en") => {
       },
       timeout: 15000 // 15 second timeout
     });
-    return response.data?.status ? response.data.data : [];
+    const data = response.data?.status ? response.data.data : [];
+    // If localized fetch returns empty, retry with English as a safe default
+    if ((!Array.isArray(data) || data.length === 0) && lang !== "en") {
+      const fallback = await axios.get(`${SERVER_ENDPOINT}/api/blog/posts`, {
+        headers: { "Accept-Language": "en" },
+        timeout: 15000,
+      });
+      return fallback.data?.status ? fallback.data.data : [];
+    }
+    return data;
   } catch (error: any) {
     return [];
   }
@@ -36,9 +45,22 @@ export const fetchBlogPostById = async (id: string, lang = "en") => {
     if (response.data?.status && response.data.data) {
       return { post: response.data.data, found: true };
     }
+    // Retry direct fetch in English if localized fetch failed
+    if (lang !== "en") {
+      const enResponse = await axios.get(directEndpoint, {
+        headers: { "Accept-Language": "en" },
+        timeout: 15000,
+      });
+      if (enResponse.data?.status && enResponse.data.data) {
+        return { post: enResponse.data.data, found: true };
+      }
+    }
     
     // If the specific endpoint fails, fallback to fetching all posts and filtering
-    const allPosts = await fetchBlogPosts(lang);
+    let allPosts = await fetchBlogPosts(lang);
+    if ((!Array.isArray(allPosts) || allPosts.length === 0) && lang !== "en") {
+      allPosts = await fetchBlogPosts("en");
+    }
     
     if (!Array.isArray(allPosts) || allPosts.length === 0) {
       return {
@@ -73,7 +95,10 @@ export const fetchBlogPostById = async (id: string, lang = "en") => {
   } catch (error: any) {
     // Fallback to fetching all posts and filtering
     try {
-      const allPosts = await fetchBlogPosts(lang);
+      let allPosts = await fetchBlogPosts(lang);
+      if ((!Array.isArray(allPosts) || allPosts.length === 0) && lang !== "en") {
+        allPosts = await fetchBlogPosts("en");
+      }
       
       if (!Array.isArray(allPosts) || allPosts.length === 0) {
         return {
