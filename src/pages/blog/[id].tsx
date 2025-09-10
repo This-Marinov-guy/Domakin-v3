@@ -19,24 +19,25 @@ const BlogDetails = ({ serverBlogPost, serverBlogPosts, blogId }: BlogDetailsPro
   const { t } = useTranslation("translations");
   const { blogStore } = useStore();
 
-  // Initialize store with server-side data
+  // Initialize store with server-side data only once on component mount
   useEffect(() => {
     if (serverBlogPosts && serverBlogPosts.length > 0) {
-      blogStore.setBlogPosts(serverBlogPosts as []);
+      blogStore.setSSRBlogPosts(serverBlogPosts as []);
     }
     
     if (serverBlogPost) {
       blogStore.setSSRCurrentPost(serverBlogPost);
     }
-  }, [serverBlogPosts, serverBlogPost]);
+  }, []);
 
-  const post = serverBlogPost || {};
+  // Always use the server-provided post directly to avoid client/server mismatch
+  const post = serverBlogPost;
   
   // Handle both direct title and WordPress API title.rendered format
-  const postTitle = post.title?.rendered || post.title || t("blog.details");
+  const postTitle = post?.title?.rendered || post?.title || t("blog.details");
   
   // Handle both direct content and WordPress API content.rendered format
-  const postContent = post.content?.rendered || post.content || '';
+  const postContent = post?.content?.rendered || post?.content || '';
 
   return (
     <>
@@ -114,54 +115,31 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     actualId = actualId.trim();
     
     console.log(`[Blog Detail] Fetching blog post with ID: ${actualId}, language: ${lang}`);
-    console.log(`[Blog Detail] API Endpoint: ${process.env.NEXT_PUBLIC_SERVER_URL}/api/blog/post/${actualId}`);
     
-    // Special case: if the ID is "test-1" or "test-error", return a test post
-    // But only in development mode or if explicitly requested
-    if ((process.env.NODE_ENV === 'development' || actualId.startsWith('test-')) && 
-        (actualId === "test-1" || actualId === "test-error")) {
-      console.log("[Blog Detail] Returning test post for ID:", actualId);
-      const testPost = {
-        id: actualId,
-        title: `Test Post Details (${actualId})`,
-        content: `<p>This is a test post with ID ${actualId} to verify rendering of individual blog posts.</p>
-                 <p>If you see this, it means the blog detail page is working but couldn't fetch real content.</p>`,
-        image: "/assets/img/blog/default-thumbnail.jpg",
-        created_at: new Date().toISOString(),
-        author: "System"
-      };
-      
-      return {
-        props: {
-          serverBlogPost: testPost,
-          serverBlogPosts: [testPost],
-          blogId: actualId,
-        }
-      };
-    }
+    // Get all blog posts (for related content and as fallback if direct fetch fails)
+    const blogPosts = await fetchBlogPosts(lang);
     
-    // Add timeout to prevent hanging requests
-    const blogPostsPromise = fetchBlogPosts(lang);
-    const postPromise = fetchBlogPostById(actualId, lang);
-    const timeoutPromise = new Promise((_, reject) => 
-      setTimeout(() => reject(new Error('Blog detail fetch timed out')), 10000)
-    );
-    
-    // Race the API calls with timeout
-    const [blogPosts, postResult] = await Promise.all([
-      Promise.race([blogPostsPromise, timeoutPromise]),
-      Promise.race([postPromise, timeoutPromise]),
-    ]);
-    
-    // TypeScript fix - ensure postResult has the correct shape
-    const { post, found } = postResult as { post: any, found: boolean };
+    // Try to get the specific post by ID
+    const { post, found } = await fetchBlogPostById(actualId, lang);
     
     // Log the results
     console.log(`[Blog Detail] All posts fetch complete. Found ${blogPosts?.length || 0} posts.`);
     console.log(`[Blog Detail] Specific post found: ${found ? "Yes" : "No"}`);
     
+    // If post found directly, use it
+    if (found && post) {
+      console.log("[Blog Detail] Post found directly:", post.title || "No title");
+      return {
+        props: {
+          serverBlogPost: post,
+          serverBlogPosts: Array.isArray(blogPosts) ? blogPosts : [],
+          blogId: actualId,
+        },
+      };
+    }
+    
     // If post not found through direct API, try to find it in the fetched posts
-    if (!found && blogPosts && blogPosts.length > 0) {
+    if (Array.isArray(blogPosts) && blogPosts.length > 0) {
       console.log("[Blog Detail] Post not found via direct API, searching in all posts...");
       
       // Check with both string and number comparisons
@@ -179,80 +157,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           props: {
             serverBlogPost: fallbackPost,
             serverBlogPosts: blogPosts,
-            blogId: actualId || null,
+            blogId: actualId,
           }
         };
       }
     }
 
-    // If post found directly, use it
-    if (found && post) {
-      console.log("[Blog Detail] Post found directly:", post.title || "No title");
-      return {
-        props: {
-          serverBlogPost: post,
-          serverBlogPosts: blogPosts || [],
-          blogId: actualId || null,
-        },
-      };
-    }
-    
-    // In production, return 404 if post not found
-    // In development, return fallback post for debugging
-    if (process.env.NODE_ENV === 'production') {
-      console.log("[Blog Detail] No post found in production, returning 404");
-      return { notFound: true };
-    } else {
-      // Only show fallback post in development
-      console.log("[Blog Detail] No post found in development, using fallback post");
-      const fallbackPost = {
-        id: actualId,
-        title: `Fallback Post for ID ${actualId}`,
-        content: `<p>This is a fallback post. The actual post with ID ${actualId} was not found.</p>
-                 <p>This indicates an issue with fetching the post data from the API.</p>`,
-        image: "/assets/img/blog/default-thumbnail.jpg",
-        created_at: new Date().toISOString(),
-        author: "System"
-      };
-      
-      return {
-        props: {
-          serverBlogPost: fallbackPost,
-          serverBlogPosts: blogPosts || [],
-          blogId: actualId,
-        }
-      };
-    }
+    // If post not found by any method, return 404
+    console.log("[Blog Detail] No post found, returning 404");
+    return { notFound: true };
   } catch (error) {
     console.error("[Blog Detail] Error in getServerSideProps:", error);
-    
-    // Return 404 in production, error post in development
-    if (process.env.NODE_ENV === 'production') {
-      console.log("[Blog Detail] Error in production, returning 404");
-      return { notFound: true };
-    } else {
-      // Only show error post in development
-      const { id } = context.params || {};
-      const actualId = Array.isArray(id) ? id[0] : id;
-      
-      const errorPost = {
-        id: actualId,
-        title: `Error Loading Post ${actualId}`,
-        content: `<p>An error occurred while loading this post.</p>
-                 <p>Please try again later or contact support if the issue persists.</p>`,
-        image: "/assets/img/blog/default-thumbnail.jpg",
-        created_at: new Date().toISOString(),
-        author: "System"
-      };
-      
-      return {
-        props: {
-          serverBlogPost: errorPost,
-          serverBlogPosts: [],
-          blogId: actualId || null,
-        }
-      };
-    }
+    // Return 404 if anything fails
+    return { notFound: true };
   }
 };
 

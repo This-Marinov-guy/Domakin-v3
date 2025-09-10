@@ -21,11 +21,16 @@ const MyApp = ({ Component, pageProps }: any) => {
     console.log(`[App] Locale: ${router.locale}`);
     console.log(`[App] Translation lang: ${lang}`);
     
-    // Force Bulgarian language if path starts with /bg
+    // Detect path language prefixes and fix locale if needed
     if (router.asPath.startsWith('/bg') && router.locale !== 'bg') {
       console.log('[App] Fixing Bulgarian locale detection');
       const newPath = router.asPath.replace('/bg', '');
-      router.push(newPath, newPath, { locale: 'bg' });
+      router.push(newPath, newPath, { locale: 'bg', shallow: true });
+    } 
+    else if (router.asPath.startsWith('/gr') && router.locale !== 'gr') {
+      console.log('[App] Fixing Greek locale detection');
+      const newPath = router.asPath.replace('/gr', '');
+      router.push(newPath, newPath, { locale: 'gr', shallow: true });
     }
   }, [router.asPath]);
 

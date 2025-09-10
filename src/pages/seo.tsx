@@ -14,14 +14,29 @@ const SEO = () => {
   console.log(`[SEO] Current path: ${router.asPath}`);
   console.log(`[SEO] Current router locale: ${router.locale}`);
   
-  // Use a fallback approach if Next.js translation isn't working
+  // Use a fallback approach based on path if Next.js translation isn't working
   let currentLang = lang || "en";
   
-  // Manual override for Bulgarian path
-  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/bg')) {
-    console.log('[SEO] Manual Bulgarian path detection');
+  // Manual override for language paths
+  if (typeof window !== 'undefined') {
+    const path = window.location.pathname;
+    if (path.startsWith('/bg')) {
+      console.log('[SEO] Manual Bulgarian path detection');
+      currentLang = "bg";
+    } else if (path.startsWith('/gr')) {
+      console.log('[SEO] Manual Greek path detection');
+      currentLang = "gr";
+    }
+  }
+  
+  // Server-side path check as well using router
+  if (router.asPath.startsWith('/bg')) {
+    console.log('[SEO] Router-based Bulgarian path detection');
     currentLang = "bg";
-  } 
+  } else if (router.asPath.startsWith('/gr')) {
+    console.log('[SEO] Router-based Greek path detection');
+    currentLang = "gr";
+  }
   
   console.log(`[SEO] Final selected language: ${currentLang}`);
   // Localized structured data
