@@ -9,7 +9,7 @@ const nextConfig = nextTranslate({
     ignoreDuringBuilds: true,
   },
   compiler: {
-    removeConsole: process.env.NODE_ENV === "production",
+    // removeConsole: process.env.NODE_ENV === "production",
   },
   images: {
     domains: [

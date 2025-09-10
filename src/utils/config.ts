@@ -6,6 +6,12 @@ import { isTodayInRange } from "./helpers";
 // server
 export const SERVER_ENDPOINT = process.env.NEXT_PUBLIC_SERVER_URL;
 
+// Enhanced debugging for server endpoint
+console.log(`[Config] Environment: ${typeof window !== 'undefined' ? 'Client' : 'Server'}`);
+console.log(`[Config] SERVER_ENDPOINT: ${SERVER_ENDPOINT}`);
+console.log(`[Config] NODE_ENV: ${process.env.NODE_ENV}`);
+console.log(`[Config] All NEXT_PUBLIC env vars:`, Object.keys(process.env).filter(key => key.startsWith('NEXT_PUBLIC')));
+
 export const SESSION_REFRESH_INTERVAL = 15 * 60 * 1000; // 15 minutes
 
 // apis

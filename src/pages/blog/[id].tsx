@@ -1,4 +1,4 @@
-import { GetServerSideProps, GetStaticProps, GetStaticPaths } from "next";
+import { GetServerSideProps } from "next";
 import { fetchBlogPostById, fetchBlogPosts } from "@/services/api";
 import { useStore } from "@/stores/storeContext";
 import { useEffect } from "react";
@@ -110,57 +110,22 @@ const BlogDetails = ({
   );
 };
 
-// Add getStaticPaths for production builds
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  console.log(`[Blog Detail SSR] Starting getServerSideProps`);
+  console.log(`[Blog Detail SSR] Context params:`, context.params);
+  console.log(`[Blog Detail SSR] Context locale:`, context.locale);
+  console.log(`[Blog Detail SSR] Context req url:`, context.req.url);
+  
   try {
-    const paths: Array<{ params: { id: string }; locale?: string }> = [];
-
-    // Generate paths for each locale
-    const supportedLocales = locales || ["en"];
-
-    for (const locale of supportedLocales) {
-      try {
-        const blogPosts = await fetchBlogPosts(locale);
-
-        if (Array.isArray(blogPosts)) {
-          const localePaths = blogPosts
-            .map((post: any) => ({
-              params: {
-                id: (post.id || post.wordpress_id || post.slug)?.toString(),
-              },
-              locale,
-            }))
-            .filter((path) => path.params.id); // Filter out any undefined IDs
-
-          paths.push(...localePaths);
-        }
-      } catch (error) {
-        console.error(`Error fetching blog posts for locale ${locale}:`, error);
-      }
-    }
-
-    return {
-      paths,
-      fallback: "blocking", // Enable ISR for new posts
-    };
-  } catch (error) {
-    console.error("Error in getStaticPaths:", error);
-    return {
-      paths: [],
-      fallback: "blocking",
-    };
-  }
-};
-
-// Switch to getStaticProps for better performance
-export const getStaticProps: GetStaticProps = async (context) => {
-  try {
-    const { params, locale } = context;
-    const id = params?.id;
-    const lang = locale || "en";
-
+    const { id } = context.params || {};
+    const lang = context.locale || "en";
+    
+    console.log(`[Blog Detail SSR] ID parameter:`, id);
+    console.log(`[Blog Detail SSR] Language:`, lang);
+    
     // Make sure we have a valid ID parameter
     if (!id) {
+      console.log(`[Blog Detail SSR] No ID parameter, returning 404`);
       return { notFound: true };
     }
 
@@ -169,35 +134,41 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     if (Array.isArray(id)) {
       actualId = id[0];
+      console.log(`[Blog Detail SSR] ID is array, using first: ${actualId}`);
     } else {
       actualId = (id as string).split("/")[0];
+      console.log(`[Blog Detail SSR] ID is string, extracted: ${actualId}`);
     }
 
     actualId = actualId.trim();
+    console.log(`[Blog Detail SSR] Final normalized ID: ${actualId}`);
 
     // Fetch blog posts and specific post in parallel
+    console.log(`[Blog Detail SSR] Starting parallel fetch`);
     const [blogPosts, postResult] = await Promise.all([
-      fetchBlogPosts(lang).catch(() => []),
-      fetchBlogPostById(actualId, lang).catch(() => ({
-        found: false,
-        post: null,
-      })),
+      fetchBlogPosts(lang),
+      fetchBlogPostById(actualId, lang),
     ]);
+
+    console.log(`[Blog Detail SSR] Parallel fetch complete`);
+    console.log(`[Blog Detail SSR] Blog posts count: ${blogPosts?.length || 0}`);
+    console.log(`[Blog Detail SSR] Post result found: ${postResult.found}`);
 
     // If post found directly via the API, use it
     if (postResult.found && postResult.post) {
+      console.log(`[Blog Detail SSR] Using direct post result: ${postResult.post.title || 'No title'}`);
       return {
         props: {
           serverBlogPost: postResult.post,
           serverBlogPosts: Array.isArray(blogPosts) ? blogPosts : [],
           blogId: actualId,
         },
-        revalidate: 3600, // Revalidate every hour
       };
     }
 
     // If post not found through direct API, try to find it in the fetched posts
     if (Array.isArray(blogPosts) && blogPosts.length > 0) {
+      console.log(`[Blog Detail SSR] Searching in ${blogPosts.length} fetched posts`);
       const fallbackPost = blogPosts.find((p: any) => {
         if (!p || !p.id) return false;
 
@@ -206,9 +177,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
         const slug = p.slug || "";
         const wordpressId = p.wordpress_id?.toString() || "";
 
-        return (
-          postId === targetId || slug === targetId || wordpressId === targetId
-        );
+        const matches = postId === targetId || slug === targetId || wordpressId === targetId;
+        if (matches) {
+          console.log(`[Blog Detail SSR] Found fallback post: ${p.title || 'No title'}`);
+        }
+        return matches;
       });
 
       if (fallbackPost) {
@@ -218,15 +191,16 @@ export const getStaticProps: GetStaticProps = async (context) => {
             serverBlogPosts: blogPosts,
             blogId: actualId,
           },
-          revalidate: 3600,
         };
       }
     }
 
     // If post not found by any method, return 404
+    console.log(`[Blog Detail SSR] No post found, returning 404`);
     return { notFound: true };
   } catch (error: any) {
-    console.error("Error in getStaticProps:", error);
+    console.error(`[Blog Detail SSR] Error in getServerSideProps:`, error.message);
+    console.error(`[Blog Detail SSR] Error stack:`, error.stack);
     return { notFound: true };
   }
 };
