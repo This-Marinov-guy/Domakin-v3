@@ -19,10 +19,20 @@ const Blog = ({ serverBlogPosts }: BlogProps) => {
 
   // Initialize store with server-side data immediately, without loading state
   useEffect(() => {
+    // When the blog page mounts, ensure we're using SSR data and not loading
     if (serverBlogPosts && serverBlogPosts.length > 0) {
       // Set loading to false and update posts in a single operation
       blogStore.setSSRBlogPosts(serverBlogPosts as []);
+    } else {
+      // If no server posts, ensure loading is false to prevent redirect loops
+      blogStore.loading = false;
     }
+
+    // Cleanup function to prevent state conflicts when navigating away
+    return () => {
+      // Reset the loading state when component unmounts to prevent conflicts
+      blogStore.loading = false;
+    };
   }, [serverBlogPosts]);
 
   return (

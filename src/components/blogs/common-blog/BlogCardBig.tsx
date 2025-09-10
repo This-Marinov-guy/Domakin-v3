@@ -7,7 +7,8 @@ const BlogCardBig = (props: any) => {
   const { post } = props;
   const {t} = useTranslation("translations"); 
 
-  const link = `/blog/${post.id}/${post.title}`;
+  // Include title in URL for SEO benefits (redirection will handle it)
+  const link = `/blog/${post.id}/${encodeURIComponent(post.title || '')}`;
 
   return (
     <article

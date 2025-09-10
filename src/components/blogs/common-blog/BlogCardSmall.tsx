@@ -4,7 +4,8 @@ import React from "react";
 const BlogCardSmall = (props: any) => {
   const { post } = props;  
 
-  const link = `/blog/${post.id}/${post.title}`;
+  // Include title in URL for SEO benefits (redirection will handle it)
+  const link = `/blog/${post.id}/${encodeURIComponent(post.title || '')}`;
 
   return (
     <div

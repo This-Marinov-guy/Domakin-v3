@@ -155,8 +155,11 @@ const MainLayout = ({ children }: any) => {
     loadUser();
     fetchLanguage();
     
-    // Check if data hasn't been loaded through SSR
-    if (!posts || posts.length === 0) {
+    // Only load blog posts if we're not on the blog page
+    const path = window.location.pathname;
+    const isBlogPage = path.includes('/blog');
+    
+    if (!isBlogPage && (!posts || posts.length === 0)) {
       loadBlog();
     }
   }, []);

@@ -1,7 +1,25 @@
 import Head from "next/head";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { LANGUAGES } from "@/utils/defines";
 
 const SEO = () => {
+  const router = useRouter();
+  const [currentLang, setCurrentLang] = useState("en"); // Default to English
+  
+  useEffect(() => {
+    // Detect language from URL path
+    const path = window.location.pathname;
+    const pathSegments = path.split('/').filter(segment => segment);
+    
+    // Check if first segment is a language code
+    if (pathSegments.length > 0 && LANGUAGES.includes(pathSegments[0])) {
+      setCurrentLang(pathSegments[0]);
+    } else {
+      // Default to English
+      setCurrentLang("en");
+    }
+  }, [router.asPath]);
   // Localized structured data
   const jsonLdData = {
     "@context": "https://schema.org",
@@ -41,41 +59,50 @@ const SEO = () => {
   return (
     <Head>
       <title>Domakin</title>
-      {/* Bulgarian language metadata */}
-      <meta
-        name="keywords"
-        lang="bg"
-        content="Недвижими имоти, Квартири, Имоти, Нидерландия, Огледи, Студенти, Гронинген, Настаняване"
-      />
-      <meta
-        name="description"
-        lang="bg"
-        content="Платформа за подпомагане при търсенето на квартири в Гронинген (Нидерландия) и околността. Ние можем да ви предложим да поемем огледите вместо вас, да ви свържем с наемател или да намерим човек, който да вземе вашата квартира. Нашият млад екип гарантира бърза и коректна работа с всеки клиент!"
-      />
-
-      {/* Greek language metadata */}
-      <meta
-        name="keywords"
-        lang="gr"
-        content="Ακίνητα, Διαμονή, Ακίνητη περιουσία, Ολλανδία, Προβολές, Φοιτητές, Γκρόνινγκεν, Στέγαση"
-      />
-      <meta
-        name="description"
-        lang="gr"
-        content="Πλατφόρμα για βοήθεια στην αναζήτηση διαμερισμάτων στην πόλη του Γκρόνινγκεν (Ολλανδία) και την ευρύτερη περιοχή. Προσφέρουμε τη δυνατότητα να κάνουμε τις προβολές για εσάς, να επικοινωνούμε απευθείας με τον ιδιοκτήτη ή να βρίσκουμε κάποιον για να αναλάβει το δωμάτιο/διαμέρισμά σας. Οι νέοι μας πράκτορες προσφέρουν γρήγορη και αποτελεσματική εξυπηρέτηση σε όλους τους πελάτες μας!"
-      />
-
-      {/* English language metadata */}
-      <meta
-        name="keywords"
-        lang="en"
-        content="Real estate, Accommodations, Properties, Netherlands, Viewings, Students, Groningen, Housing"
-      />
-      <meta
-        name="description"
-        lang="en"
-        content="Platform for helping with apartment searching the town of Groningen (the Netherlands) and the area surrounding it. We offer doing the viewings for you, directly contacting you with a landlord or finding someone to take your room/apartment. Our young agents offer fast and efficient work to all our customers!"
-      />
+      {/* Primary description and keywords based on current language */}
+      {currentLang === "en" && (
+        <>
+          <meta
+            name="keywords"
+            content="Real estate, Accommodations, Properties, Netherlands, Viewings, Students, Groningen, Housing"
+          />
+          <meta
+            name="description"
+            content="Platform for helping with apartment searching the town of Groningen (the Netherlands) and the area surrounding it. We offer doing the viewings for you, directly contacting you with a landlord or finding someone to take your room/apartment. Our young agents offer fast and efficient work to all our customers!"
+          />
+        </>
+      )}
+      
+      {currentLang === "bg" && (
+        <>
+          <meta
+            name="keywords"
+            content="Недвижими имоти, Квартири, Имоти, Нидерландия, Огледи, Студенти, Гронинген, Настаняване"
+          />
+          <meta
+            name="description"
+            content="Платформа за подпомагане при търсенето на квартири в Гронинген (Нидерландия) и околността. Ние можем да ви предложим да поемем огледите вместо вас, да ви свържем с наемател или да намерим човек, който да вземе вашата квартира. Нашият млад екип гарантира бърза и коректна работа с всеки клиент!"
+          />
+        </>
+      )}
+      
+      {currentLang === "gr" && (
+        <>
+          <meta
+            name="keywords"
+            content="Ακίνητα, Διαμονή, Ακίνητη περιουσία, Ολλανδία, Προβολές, Φοιτητές, Γκρόνινγκεν, Στέγαση"
+          />
+          <meta
+            name="description"
+            content="Πλατφόρμα για βοήθεια στην αναζήτηση διαμερισμάτων στην πόλη του Γκρόνινγκεν (Ολλανδία) και την ευρύτερη περιοχή. Προσφέρουμε τη δυνατότητα να κάνουμε τις προβολές για εσάς, να επικοινωνούμε απευθείας με τον ιδιοκτήτη ή να βρίσκουμε κάποιον για να αναλάβει το δωμάτιο/διαμέρισμά σας. Οι νέοι μας πράκτορες προσφέρουν γρήγορη και αποτελεσματική εξυπηρέτηση σε όλους τους πελάτες μας!"
+          />
+        </>
+      )}
+      
+      {/* Alternative language versions for SEO (hidden from most user agents) */}
+      <meta name="description:en" content="Platform for helping with apartment searching the town of Groningen (the Netherlands) and the area surrounding it. We offer doing the viewings for you, directly contacting you with a landlord or finding someone to take your room/apartment." />
+      <meta name="description:bg" content="Платформа за подпомагане при търсенето на квартири в Гронинген (Нидерландия) и околността. Ние можем да ви предложим да поемем огледите вместо вас, да ви свържем с наемател или да намерим човек, който да вземе вашата квартира." />
+      <meta name="description:gr" content="Πλατφόρμα για βοήθεια στην αναζήτηση διαμερισμάτων στην πόλη του Γκρόνινγκεν (Ολλανδία) και την ευρύτερη περιοχή. Προσφέρουμε τη δυνατότητα να κάνουμε τις προβολές για εσάς, να επικοινωνούμε απευθείας με τον ιδιοκτήτη." />
 
       <meta name="author" content="Domakin Team" />
       <script
@@ -83,72 +110,75 @@ const SEO = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
       />
 
-      {/* English social media metadata */}
-      <meta
-        name="twitter:title"
-        lang="en"
-        content="Domakin - Housing from students to students"
-      />
-      <meta
-        property="twitter:description"
-        lang="en"
-        content="Platform for helping with apartment searching in Groningen. We offer viewings, landlord connections, and room takeovers."
-      />
-      <meta
-        name="og:title"
-        lang="en"
-        content="Domakin - Housing from students to students"
-      />
-      <meta
-        property="og:description"
-        lang="en"
-        content="Platform for helping with apartment searching in Groningen. We offer viewings, landlord connections, and room takeovers."
-      />
+      {/* Primary social media metadata based on current language */}
+      {currentLang === "en" && (
+        <>
+          <meta
+            name="twitter:title"
+            content="Domakin - Housing from students to students"
+          />
+          <meta
+            property="twitter:description" 
+            content="Platform for helping with apartment searching in Groningen. We offer viewings, landlord connections, and room takeovers."
+          />
+          <meta
+            name="og:title"
+            content="Domakin - Housing from students to students"
+          />
+          <meta
+            property="og:description"
+            content="Platform for helping with apartment searching in Groningen. We offer viewings, landlord connections, and room takeovers."
+          />
+        </>
+      )}
+      
+      {currentLang === "bg" && (
+        <>
+          <meta
+            name="twitter:title"
+            content="Domakin - Жилища от студенти за студенти"
+          />
+          <meta
+            property="twitter:description"
+            content="Платформа за подпомагане при търсенето на квартири в Гронинген. Предлагаме огледи, връзка с наемодател и поемане на стаи."
+          />
+          <meta
+            name="og:title"
+            content="Domakin - Жилища от студенти за студенти"
+          />
+          <meta
+            property="og:description"
+            content="Платформа за подпомагане при търсенето на квартири в Гронинген. Предлагаме огледи, връзка с наемодател и поемане на стаи."
+          />
+        </>
+      )}
+      
+      {currentLang === "gr" && (
+        <>
+          <meta
+            name="twitter:title"
+            content="Domakin - Στέγαση από φοιτητές σε φοιτητές"
+          />
+          <meta
+            property="twitter:description"
+            content="Πλατφόρμα για βοήθεια στην αναζήτηση διαμερισμάτων στο Γκρόνινγκεν. Προσφέρουμε προβολές, επαφή με ιδιοκτήτες και ανάληψη δωματίων."
+          />
+          <meta
+            name="og:title"
+            content="Domakin - Στέγαση από φοιτητές σε φοιτητές"
+          />
+          <meta
+            property="og:description"
+            content="Πλατφόρμα για βοήθεια στην αναζήτηση διαμερισμάτων στο Γκρόνινγκεν. Προσφέρουμε προβολές, επαφή με ιδιοκτήτες και ανάληψη δωματίων."
+          />
+        </>
+      )}
 
-      {/* Bulgarian social media metadata */}
-      <meta
-        name="twitter:title"
-        lang="bg"
-        content="Domakin - Жилища от студенти за студенти"
-      />
-      <meta
-        property="twitter:description"
-        lang="bg"
-        content="Платформа за подпомагане при търсенето на квартири в Гронинген. Предлагаме огледи, връзка с наемодател и поемане на стаи."
-      />
-      <meta
-        name="og:title"
-        lang="bg"
-        content="Domakin - Жилища от студенти за студенти"
-      />
-      <meta
-        property="og:description"
-        lang="bg"
-        content="Платформа за подпомагане при търсенето на квартири в Гронинген. Предлагаме огледи, връзка с наемодател и поемане на стаи."
-      />
-
-      {/* Greek social media metadata */}
-      <meta
-        name="twitter:title"
-        lang="gr"
-        content="Domakin - Στέγαση από φοιτητές σε φοιτητές"
-      />
-      <meta
-        property="twitter:description"
-        lang="gr"
-        content="Πλατφόρμα για βοήθεια στην αναζήτηση διαμερισμάτων στο Γκρόνινγκεν. Προσφέρουμε προβολές, επαφή με ιδιοκτήτες και ανάληψη δωματίων."
-      />
-      <meta
-        name="og:title"
-        lang="gr"
-        content="Domakin - Στέγαση από φοιτητές σε φοιτητές"
-      />
-      <meta
-        property="og:description"
-        lang="gr"
-        content="Πλατφόρμα για βοήθεια στην αναζήτηση διαμερισμάτων στο Γκρόνινγκεν. Προσφέρουμε προβολές, επαφή με ιδιοκτήτες και ανάληψη δωματίων."
-      />
-
+      {/* Alternative language versions (hidden from most user agents but helpful for SEO) */}
+      <meta name="twitter:title:en" content="Domakin - Housing from students to students" />
+      <meta name="twitter:title:bg" content="Domakin - Жилища от студенти за студенти" />
+      <meta name="twitter:title:gr" content="Domakin - Στέγαση από φοιτητές σε φοιτητές" />
+      
       {/* Common social media properties */}
       <meta name="twitter:image" content="./assets/img/logo-2.png" />
       <meta name="twitter:card" content="./assets/img/logo-2.png" />
@@ -177,6 +207,12 @@ const SEO = () => {
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap"
       />
+
+      {/* Language alternate links */}
+      <link rel="alternate" href="https://www.domakin.nl/" hrefLang="x-default" />
+      <link rel="alternate" href="https://www.domakin.nl/" hrefLang="en" />
+      <link rel="alternate" href="https://www.domakin.nl/bg" hrefLang="bg" />
+      <link rel="alternate" href="https://www.domakin.nl/gr" hrefLang="el" />
 
       {/* Ahrefs Analytics */}
       <script
