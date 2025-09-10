@@ -88,37 +88,78 @@ const BlogDetails = ({ serverBlogPost, serverBlogPosts, blogId }: BlogDetailsPro
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.params || {};
-  const lang = context.locale || "en";
-  
-  // Extract the actual ID from the parameter (which might be in format "123/post-title")
-  const actualId = (id as string).split('/')[0];
-  
-  console.log("Fetching blog post with ID:", actualId);
-  
-  // Fetch the specific blog post
-  const { post, found } = await fetchBlogPostById(actualId, lang);
-  
-  // Also fetch all blog posts for related content
-  const blogPosts = await fetchBlogPosts(lang);
+  try {
+    const { id } = context.params || {};
+    const lang = context.locale || "en";
+    
+    // Make sure we have a valid ID parameter
+    if (!id) {
+      console.log("No ID parameter provided");
+      return { notFound: true };
+    }
+    
+    // Extract the actual ID from the parameter (which might be in format "123/post-title")
+    // Handle both string and array formats that Next.js might provide
+    let actualId;
+    
+    if (Array.isArray(id)) {
+      // If it's an array (catch-all route), take the first segment
+      actualId = id[0];
+    } else {
+      // If it's a string, split by "/" and take the first segment
+      actualId = (id as string).split('/')[0];
+    }
+    
+    // Ensure the ID is trimmed of any extra whitespace
+    actualId = actualId.trim();
+    
+    console.log("Fetching blog post with ID:", actualId);
+    
+    // First fetch all blog posts for both related content and fallback
+    const blogPosts = await fetchBlogPosts(lang);
+    
+    // Then fetch the specific blog post
+    const { post, found } = await fetchBlogPostById(actualId, lang);
+    
+    // If post not found through direct API, try to find it in the fetched posts
+    if (!found && blogPosts.length > 0) {
+      console.log("Post not found via direct API, searching in all posts...");
+      const fallbackPost = blogPosts.find((p: any) => 
+        p.id?.toString() === actualId.toString() || 
+        p.slug === actualId
+      );
+      
+      if (fallbackPost) {
+        console.log("Found post in all posts collection:", fallbackPost.title || "No title");
+        return {
+          props: {
+            serverBlogPost: fallbackPost,
+            serverBlogPosts: blogPosts,
+            blogId: actualId || null,
+          }
+        };
+      }
+    }
 
-  // If post not found, return 404
-  if (!found) {
-    console.log("Post not found for ID:", actualId);
+    // If post still not found, return 404
+    if (!found) {
+      console.log("Post not found for ID:", actualId);
+      return { notFound: true };
+    }
+    
+    console.log("Post found:", post ? post.title : "No title");
+
     return {
-      notFound: true
+      props: {
+        serverBlogPost: post,
+        serverBlogPosts: blogPosts,
+        blogId: actualId || null,
+      },
     };
+  } catch (error) {
+    console.error("Error in getServerSideProps:", error);
+    return { notFound: true };
   }
-  
-  console.log("Post found:", post ? post.title : "No title");
-
-  return {
-    props: {
-      serverBlogPost: post,
-      serverBlogPosts: blogPosts,
-      blogId: actualId || null,
-    },
-  };
 };
 
 export default BlogDetails;

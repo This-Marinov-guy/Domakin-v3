@@ -1,25 +1,16 @@
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import { LANGUAGES } from "@/utils/defines";
+import useTranslation from "next-translate/useTranslation";
 
 const SEO = () => {
   const router = useRouter();
-  const [currentLang, setCurrentLang] = useState("en"); // Default to English
+  // Use Next.js' built-in locale detection which works on both server and client side
+  const { lang } = useTranslation();
   
-  useEffect(() => {
-    // Detect language from URL path
-    const path = window.location.pathname;
-    const pathSegments = path.split('/').filter(segment => segment);
-    
-    // Check if first segment is a language code
-    if (pathSegments.length > 0 && LANGUAGES.includes(pathSegments[0])) {
-      setCurrentLang(pathSegments[0]);
-    } else {
-      // Default to English
-      setCurrentLang("en");
-    }
-  }, [router.asPath]);
+  // This ensures the language is available during server-side rendering
+  const currentLang = lang || "en";
   // Localized structured data
   const jsonLdData = {
     "@context": "https://schema.org",
@@ -208,11 +199,22 @@ const SEO = () => {
         href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap"
       />
 
-      {/* Language alternate links */}
-      <link rel="alternate" href="https://www.domakin.nl/" hrefLang="x-default" />
-      <link rel="alternate" href="https://www.domakin.nl/" hrefLang="en" />
-      <link rel="alternate" href="https://www.domakin.nl/bg" hrefLang="bg" />
-      <link rel="alternate" href="https://www.domakin.nl/gr" hrefLang="el" />
+      {/* Language alternate links - dynamically generated based on current path */}
+      {(() => {
+        // Get current path without language prefix
+        const path = router.asPath;
+        const pathWithoutLang = path.replace(/^\/[a-z]{2}($|\/)/, '/');
+        const canonicalPath = pathWithoutLang === '/' ? '' : pathWithoutLang;
+        
+        return (
+          <>
+            <link rel="alternate" href={`https://www.domakin.nl${canonicalPath}`} hrefLang="x-default" />
+            <link rel="alternate" href={`https://www.domakin.nl${canonicalPath}`} hrefLang="en" />
+            <link rel="alternate" href={`https://www.domakin.nl/bg${canonicalPath}`} hrefLang="bg" />
+            <link rel="alternate" href={`https://www.domakin.nl/gr${canonicalPath}`} hrefLang="el" />
+          </>
+        );
+      })()}
 
       {/* Ahrefs Analytics */}
       <script
