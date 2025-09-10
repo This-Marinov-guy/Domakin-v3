@@ -184,6 +184,7 @@ const SEO = () => {
         data-key="WeRz+ni4+V2fhLpfI8NdUA"
         async
       ></script>
+      <meta name="ahrefs-site-verification" content="d74b891ea3ca805b070203db1f5e5ae1af10dfc42b5c611039bc4c6a0508a12b"/>
     </Head>
   );
 };
