@@ -7,7 +7,7 @@ import BlogMainSection from "@/components/blogs/common-blog/BlogMainSection";
 import { GetServerSideProps } from "next";
 import { fetchBlogPosts } from "@/services/api";
 import { useStore } from "@/stores/storeContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface BlogProps {
   serverBlogPosts: any[];
@@ -16,24 +16,55 @@ interface BlogProps {
 const Blog = ({ serverBlogPosts }: BlogProps) => {
   const { t } = useTranslation("translations");
   const { blogStore } = useStore();
+  const [isHydrated, setIsHydrated] = useState(false);
 
-  // Initialize store with server-side data immediately, without loading state
+  // Handle hydration properly
   useEffect(() => {
-    // When the blog page mounts, ensure we're using SSR data and not loading
+    // Ensure we're on the client side
+    setIsHydrated(true);
+
+    // Initialize store with server-side data immediately
     if (serverBlogPosts && serverBlogPosts.length > 0) {
-      // Set loading to false and update posts in a single operation
+      // Force set the SSR data and ensure loading is false
       blogStore.setSSRBlogPosts(serverBlogPosts as []);
+      blogStore.loading = false;
     } else {
-      // If no server posts, ensure loading is false to prevent redirect loops
+      // If no server posts, ensure loading is false
       blogStore.loading = false;
     }
 
-    // Cleanup function to prevent state conflicts when navigating away
+    // Cleanup function to prevent state conflicts
     return () => {
-      // Reset the loading state when component unmounts to prevent conflicts
       blogStore.loading = false;
     };
-  }, [serverBlogPosts]);
+  }, [serverBlogPosts, blogStore]);
+
+  // Prevent hydration mismatch by not rendering until hydrated
+  if (!isHydrated) {
+    return (
+      <>
+        <HeaderOne />
+        <BreadcrumbThree
+          title={t("blog.title")}
+          link_title={t("blog.title")}
+          background={8}
+          style={false}
+        />
+        {/* Show a loading state that matches server-side render */}
+        <div className="container mt-80 mb-150">
+          <div className="row">
+            <div className="col-12">
+              <div className="text-center py-5">
+                <p>Loading...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <FancyBanner />
+        <FooterFour />
+      </>
+    );
+  }
 
   return (
     <>
@@ -54,18 +85,27 @@ const Blog = ({ serverBlogPosts }: BlogProps) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const lang = context.locale || "en";
-    
-    // Fetch blog posts with a reasonable timeout
+
+    console.log(`[Blog SSR] Fetching posts for locale: ${lang}`);
+
+    // Fetch blog posts with error handling
     const blogPosts = await fetchBlogPosts(lang);
-    
+
+    console.log(
+      `[Blog SSR] Fetched ${
+        Array.isArray(blogPosts) ? blogPosts.length : 0
+      } posts`
+    );
+
     return {
       props: {
         serverBlogPosts: Array.isArray(blogPosts) ? blogPosts : [],
       },
     };
   } catch (error) {
-    
-    // Return empty array instead of test posts
+    console.error("[Blog SSR] Error fetching blog posts:", error);
+
+    // Return empty array instead of failing
     return {
       props: {
         serverBlogPosts: [],
