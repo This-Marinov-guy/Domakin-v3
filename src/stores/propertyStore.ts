@@ -111,6 +111,13 @@ export default class PropertyStore {
   setProperties = (properties: any[]) => {
     this.properties = toJS(properties);
   };
+  
+  @action
+  setSSRProperties = (properties: any[]) => {
+    // For SSR data, set properties and ensure loading state is false
+    this.properties = toJS(properties);
+    this.propertiesLoading = false;
+  };
 
   @action
   updateListingData = (key: string, nestedKey: string, value: any) => {

@@ -17,10 +17,11 @@ const Blog = ({ serverBlogPosts }: BlogProps) => {
   const { t } = useTranslation("translations");
   const { blogStore } = useStore();
 
-  // Initialize store with server-side data
+  // Initialize store with server-side data immediately, without loading state
   useEffect(() => {
     if (serverBlogPosts && serverBlogPosts.length > 0) {
-      blogStore.setBlogPosts(serverBlogPosts as []);
+      // Set loading to false and update posts in a single operation
+      blogStore.setSSRBlogPosts(serverBlogPosts as []);
     }
   }, [serverBlogPosts]);
 

@@ -72,7 +72,9 @@ const Feedback = ({ style }: any) => {
     commonStore: { feedbackLoading, feedbacks },
   } = useStore();
 
-  if (feedbackLoading)
+  // Only show loading if we're actually loading AND don't have any data
+  // This ensures SSR data displays immediately without a loading state
+  if (feedbackLoading && (!feedbacks || feedbacks.length === 0))
     return <ListingLoadingOne title={t("feedbacks.feedbacks")} />;
 
   return (

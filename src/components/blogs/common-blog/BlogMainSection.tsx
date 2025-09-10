@@ -34,7 +34,9 @@ const BlogMainSection = () => {
   const hasPosts = posts?.length > 0;
   const [mainPost, ...otherPosts] = posts;
 
-  if (loading) {
+  // Only show loading if we're actually loading AND don't have any data
+  // This ensures SSR data displays immediately without a loading state
+  if (loading && (!posts || posts.length === 0)) {
     return (
       <>
         <BlogLoadingSection title={t("blog.description")} />

@@ -18,4 +18,10 @@ export default class BlogStore {
   @action setBlogPosts = (posts: []) => {
     this.posts = posts;
   };
+  
+  @action setSSRBlogPosts = (posts: []) => {
+    // For SSR data, we set the posts and ensure loading is false
+    this.posts = posts;
+    this.loading = false;
+  };
 }

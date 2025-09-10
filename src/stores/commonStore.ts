@@ -30,4 +30,11 @@ export default class CommonStore {
   @action setFeedbacks = (feedbacks: []) => {
     this.feedbacks = feedbacks;
   }
+  
+  @action setSSRFeedbacks = (feedbacks: []) => {
+    // For SSR data, set the feedbacks and ensure loading states are false
+    this.feedbacks = feedbacks;
+    this.feedbackLoading = false;
+    this.loading = false;
+  }
 }

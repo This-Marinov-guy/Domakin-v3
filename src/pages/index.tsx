@@ -17,14 +17,14 @@ interface HomeProps {
 const Index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
   const { commonStore, propertyStore } = useStore();
 
-  // Initialize store with server-side data
+  // Initialize store with server-side data and ensure no loading state
   useEffect(() => {
     if (serverFeedbacks && serverFeedbacks.length > 0) {
-      commonStore.setFeedbacks(serverFeedbacks as []);
+      commonStore.setSSRFeedbacks(serverFeedbacks as []);
     }
 
     if (serverProperties && serverProperties.length > 0) {
-      propertyStore.setProperties(serverProperties);
+      propertyStore.setSSRProperties(serverProperties);
     }
   }, [serverFeedbacks, serverProperties]);
 
