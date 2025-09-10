@@ -117,7 +117,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     console.log(`[Blog Detail] API Endpoint: ${process.env.NEXT_PUBLIC_SERVER_URL}/api/blog/post/${actualId}`);
     
     // Special case: if the ID is "test-1" or "test-error", return a test post
-    if (actualId === "test-1" || actualId === "test-error") {
+    // But only in development mode or if explicitly requested
+    if ((process.env.NODE_ENV === 'development' || actualId.startsWith('test-')) && 
+        (actualId === "test-1" || actualId === "test-error")) {
       console.log("[Blog Detail] Returning test post for ID:", actualId);
       const testPost = {
         id: actualId,
@@ -195,50 +197,62 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       };
     }
     
-    // If we still don't have a post, return a fallback post instead of 404
-    // This helps diagnose issues in production
-    console.log("[Blog Detail] No post found, using fallback post");
-    const fallbackPost = {
-      id: actualId,
-      title: `Fallback Post for ID ${actualId}`,
-      content: `<p>This is a fallback post. The actual post with ID ${actualId} was not found.</p>
-               <p>This indicates an issue with fetching the post data from the API.</p>`,
-      image: "/assets/img/blog/default-thumbnail.jpg",
-      created_at: new Date().toISOString(),
-      author: "System"
-    };
-    
-    return {
-      props: {
-        serverBlogPost: fallbackPost,
-        serverBlogPosts: blogPosts || [],
-        blogId: actualId,
-      }
-    };
+    // In production, return 404 if post not found
+    // In development, return fallback post for debugging
+    if (process.env.NODE_ENV === 'production') {
+      console.log("[Blog Detail] No post found in production, returning 404");
+      return { notFound: true };
+    } else {
+      // Only show fallback post in development
+      console.log("[Blog Detail] No post found in development, using fallback post");
+      const fallbackPost = {
+        id: actualId,
+        title: `Fallback Post for ID ${actualId}`,
+        content: `<p>This is a fallback post. The actual post with ID ${actualId} was not found.</p>
+                 <p>This indicates an issue with fetching the post data from the API.</p>`,
+        image: "/assets/img/blog/default-thumbnail.jpg",
+        created_at: new Date().toISOString(),
+        author: "System"
+      };
+      
+      return {
+        props: {
+          serverBlogPost: fallbackPost,
+          serverBlogPosts: blogPosts || [],
+          blogId: actualId,
+        }
+      };
+    }
   } catch (error) {
     console.error("[Blog Detail] Error in getServerSideProps:", error);
     
-    // Instead of returning 404, return a fallback post
-    const { id } = context.params || {};
-    const actualId = Array.isArray(id) ? id[0] : id;
-    
-    const errorPost = {
-      id: actualId,
-      title: `Error Loading Post ${actualId}`,
-      content: `<p>An error occurred while loading this post.</p>
-               <p>Please try again later or contact support if the issue persists.</p>`,
-      image: "/assets/img/blog/default-thumbnail.jpg",
-      created_at: new Date().toISOString(),
-      author: "System"
-    };
-    
-    return {
-      props: {
-        serverBlogPost: errorPost,
-        serverBlogPosts: [],
-        blogId: actualId || null,
-      }
-    };
+    // Return 404 in production, error post in development
+    if (process.env.NODE_ENV === 'production') {
+      console.log("[Blog Detail] Error in production, returning 404");
+      return { notFound: true };
+    } else {
+      // Only show error post in development
+      const { id } = context.params || {};
+      const actualId = Array.isArray(id) ? id[0] : id;
+      
+      const errorPost = {
+        id: actualId,
+        title: `Error Loading Post ${actualId}`,
+        content: `<p>An error occurred while loading this post.</p>
+                 <p>Please try again later or contact support if the issue persists.</p>`,
+        image: "/assets/img/blog/default-thumbnail.jpg",
+        created_at: new Date().toISOString(),
+        author: "System"
+      };
+      
+      return {
+        props: {
+          serverBlogPost: errorPost,
+          serverBlogPosts: [],
+          blogId: actualId || null,
+        }
+      };
+    }
   }
 };
 

@@ -9,8 +9,21 @@ const SEO = () => {
   // Use Next.js' built-in locale detection which works on both server and client side
   const { lang } = useTranslation();
   
-  // This ensures the language is available during server-side rendering
-  const currentLang = lang || "en";
+  // Add debugging for language detection
+  console.log(`[SEO] Current locale from useTranslation: ${lang}`);
+  console.log(`[SEO] Current path: ${router.asPath}`);
+  console.log(`[SEO] Current router locale: ${router.locale}`);
+  
+  // Use a fallback approach if Next.js translation isn't working
+  let currentLang = lang || "en";
+  
+  // Manual override for Bulgarian path
+  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/bg')) {
+    console.log('[SEO] Manual Bulgarian path detection');
+    currentLang = "bg";
+  } 
+  
+  console.log(`[SEO] Final selected language: ${currentLang}`);
   // Localized structured data
   const jsonLdData = {
     "@context": "https://schema.org",
