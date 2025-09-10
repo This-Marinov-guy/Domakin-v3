@@ -219,14 +219,6 @@ const SEO = () => {
           </>
         );
       })()}
-
-      {/* Ahrefs Analytics */}
-      <script
-        src="https://analytics.ahrefs.com/analytics.js"
-        data-key="WeRz+ni4+V2fhLpfI8NdUA"
-        async
-      ></script>
-      <meta name="ahrefs-site-verification" content="5bb9c9b954a6dcbe124f256875661b8543d910643c63a6209a7064ec74b56183"/>
     </Head>
   );
 };
