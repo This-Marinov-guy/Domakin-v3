@@ -15,20 +15,12 @@ const MyApp = ({ Component, pageProps }: any) => {
   const router = useRouter();
   const { lang } = useTranslation();
   
-  // Log language information on page load and route changes
+  // Normalize locale based on path prefix without logging
   useEffect(() => {
-    console.log(`[App] Path: ${router.asPath}`);
-    console.log(`[App] Locale: ${router.locale}`);
-    console.log(`[App] Translation lang: ${lang}`);
-    
-    // Detect path language prefixes and fix locale if needed
     if (router.asPath.startsWith('/bg') && router.locale !== 'bg') {
-      console.log('[App] Fixing Bulgarian locale detection');
       const newPath = router.asPath.replace('/bg', '');
       router.push(newPath, newPath, { locale: 'bg', shallow: true });
-    } 
-    else if (router.asPath.startsWith('/gr') && router.locale !== 'gr') {
-      console.log('[App] Fixing Greek locale detection');
+    } else if (router.asPath.startsWith('/gr') && router.locale !== 'gr') {
       const newPath = router.asPath.replace('/gr', '');
       router.push(newPath, newPath, { locale: 'gr', shallow: true });
     }

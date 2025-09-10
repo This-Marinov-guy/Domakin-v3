@@ -93,12 +93,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const { id } = context.params || {};
     const lang = context.locale || "en";
     
-    console.log(`[Blog Detail] Starting getServerSideProps with params:`, context.params);
-    console.log(`[Blog Detail] Current language: ${lang}`);
+    
     
     // Make sure we have a valid ID parameter
     if (!id) {
-      console.log("[Blog Detail] No ID parameter provided");
       return { notFound: true };
     }
     
@@ -109,24 +107,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (Array.isArray(id)) {
       // If it's an array (catch-all route), take the first segment
       actualId = id[0];
-      console.log(`[Blog Detail] ID is an array, using first element: ${actualId}`);
     } else {
       // If it's a string, split by "/" and take the first segment
       actualId = (id as string).split('/')[0];
-      console.log(`[Blog Detail] ID is a string, extracted: ${actualId}`);
     }
     
     // Ensure the ID is trimmed of any extra whitespace
     actualId = actualId.trim();
-    console.log(`[Blog Detail] Final normalized ID: ${actualId}`);
     
     // First, try to fetch all blog posts - this ensures we have a complete list
     // even if the individual post fetch fails
-    console.log(`[Blog Detail] Fetching all blog posts first for language: ${lang}`);
     const blogPostsPromise = fetchBlogPosts(lang);
     
     // Then try to get the specific post by ID
-    console.log(`[Blog Detail] Fetching specific blog post with ID: ${actualId}`);
     const postPromise = fetchBlogPostById(actualId, lang);
     
     // Run both requests in parallel
@@ -136,12 +129,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     ]);
     
     // Log the results
-    console.log(`[Blog Detail] All posts fetch complete. Found ${blogPosts?.length || 0} posts.`);
-    console.log(`[Blog Detail] Specific post found: ${postResult.found ? "Yes" : "No"}`);
+    
     
     // If post found directly via the API, use it
     if (postResult.found && postResult.post) {
-      console.log("[Blog Detail] Post found directly via API:", postResult.post.title || "No title");
       return {
         props: {
           serverBlogPost: postResult.post,
@@ -153,7 +144,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     
     // If post not found through direct API, try to find it in the fetched posts
     if (Array.isArray(blogPosts) && blogPosts.length > 0) {
-      console.log("[Blog Detail] Post not found via direct API, searching in all posts...");
       
       // Try multiple matching strategies
       const fallbackPost = blogPosts.find((p: any) => {
@@ -171,17 +161,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         
         const matches = exactMatch || slugMatch || wpIdMatch;
         
-        if (matches) {
-          console.log(`[Blog Detail] Found matching post by ${
-            exactMatch ? 'exact ID' : slugMatch ? 'slug' : 'wordpress_id'
-          }: ${p.title || 'No title'}`);
-        }
-        
         return matches;
       });
       
       if (fallbackPost) {
-        console.log("[Blog Detail] Found post in all posts collection:", fallbackPost.title || "No title");
         return {
           props: {
             serverBlogPost: fallbackPost,
@@ -193,17 +176,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 
     // If post not found by any method, return 404
-    console.log("[Blog Detail] No post found, returning 404");
     return { notFound: true };
   } catch (error: any) {
-    console.error("[Blog Detail] Error in getServerSideProps:", error);
-    console.log(`[Blog Detail] Error details: ${error.message || 'No error message'}`);
-    
-    if (error.response) {
-      console.log(`[Blog Detail] Response status: ${error.response.status}`);
-      console.log(`[Blog Detail] Response data:`, error.response.data);
-    }
-    
     // Return 404 if anything fails
     return { notFound: true };
   }

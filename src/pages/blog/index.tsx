@@ -54,17 +54,9 @@ const Blog = ({ serverBlogPosts }: BlogProps) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const lang = context.locale || "en";
-    console.log(`[Blog Index] Fetching blog posts with language: ${lang}`);
     
     // Fetch blog posts with a reasonable timeout
     const blogPosts = await fetchBlogPosts(lang);
-    
-    console.log(`[Blog Index] Fetch complete. Found ${blogPosts?.length || 0} posts.`);
-    if (blogPosts && blogPosts.length > 0) {
-      console.log(`[Blog Index] First post title: ${blogPosts[0].title || 'No title'}`);
-    } else {
-      console.log('[Blog Index] No posts found or empty response');
-    }
     
     return {
       props: {
@@ -72,7 +64,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (error) {
-    console.error('[Blog Index] Error fetching blog posts:', error);
     
     // Return empty array instead of test posts
     return {

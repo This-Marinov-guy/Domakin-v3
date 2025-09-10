@@ -6,39 +6,15 @@ import useTranslation from "next-translate/useTranslation";
 
 const SEO = () => {
   const router = useRouter();
-  // Use Next.js' built-in locale detection which works on both server and client side
+  // Use Next.js' built-in locale first; fall back to path prefix
   const { lang } = useTranslation();
-  
-  // Add debugging for language detection
-  console.log(`[SEO] Current locale from useTranslation: ${lang}`);
-  console.log(`[SEO] Current path: ${router.asPath}`);
-  console.log(`[SEO] Current router locale: ${router.locale}`);
-  
-  // Use a fallback approach based on path if Next.js translation isn't working
-  let currentLang = lang || "en";
-  
-  // Manual override for language paths
-  if (typeof window !== 'undefined') {
-    const path = window.location.pathname;
-    if (path.startsWith('/bg')) {
-      console.log('[SEO] Manual Bulgarian path detection');
-      currentLang = "bg";
-    } else if (path.startsWith('/gr')) {
-      console.log('[SEO] Manual Greek path detection');
-      currentLang = "gr";
-    }
-  }
-  
-  // Server-side path check as well using router
-  if (router.asPath.startsWith('/bg')) {
-    console.log('[SEO] Router-based Bulgarian path detection');
-    currentLang = "bg";
-  } else if (router.asPath.startsWith('/gr')) {
-    console.log('[SEO] Router-based Greek path detection');
-    currentLang = "gr";
-  }
-  
-  console.log(`[SEO] Final selected language: ${currentLang}`);
+
+  let currentLang = router.locale || lang || "en";
+
+  // Ensure Bulgarian/Greek are respected both on server and client
+  const path = router.asPath || "";
+  if (path.startsWith('/bg')) currentLang = 'bg';
+  if (path.startsWith('/gr')) currentLang = 'gr';
   // Localized structured data
   const jsonLdData = {
     "@context": "https://schema.org",
