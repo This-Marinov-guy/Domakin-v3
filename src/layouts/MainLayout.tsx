@@ -28,9 +28,9 @@ const MainLayout = ({ children }: any) => {
   const router = useRouter();
 
   const {
-    commonStore: { toggleFeedbackLoading, setFeedbacks },
-    blogStore: { toggleBlogLoading, setBlogPosts },
-    propertyStore: { setListingLoading, setProperties, setReferralCode },
+    commonStore: { toggleFeedbackLoading, setFeedbacks, feedbacks },
+    blogStore: { toggleBlogLoading, setBlogPosts, posts },
+    propertyStore: { setListingLoading, setProperties, setReferralCode, properties },
     userStore: { login, refreshSession, user },
     serviceStore,
   } = useStore();
@@ -153,14 +153,24 @@ const MainLayout = ({ children }: any) => {
 
   useEffect(() => {
     loadUser();
-    loadBlog();
     fetchLanguage();
+    
+    // Check if data hasn't been loaded through SSR
+    if (!posts || posts.length === 0) {
+      loadBlog();
+    }
   }, []);
 
   // Language dependent data loading
   useEffect(() => {
-    loadFeedback();
-    loadProperties();
+    // Check if data hasn't been loaded through SSR before fetching
+    if (!feedbacks || feedbacks.length === 0) {
+      loadFeedback();
+    }
+    
+    if (!properties || properties.length === 0) {
+      loadProperties();
+    }
   }, [lang]);
 
   useEffect(() => {

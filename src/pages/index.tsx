@@ -1,11 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Wrapper from "@/layouts/Wrapper";
 import HomeSix from "@/components/homes/home-six";
+import { GetServerSideProps } from "next";
+import { fetchFeedbacks, fetchProperties } from "@/services/api";
+import { useStore } from "@/stores/storeContext";
 
 export const metadata = {
   title: "Domakin",
 };
-const index = () => {
+
+interface HomeProps {
+  serverFeedbacks: any[];
+  serverProperties: any[];
+}
+
+const Index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
+  const { commonStore, propertyStore } = useStore();
+
+  // Initialize store with server-side data
+  useEffect(() => {
+    if (serverFeedbacks && serverFeedbacks.length > 0) {
+      commonStore.setFeedbacks(serverFeedbacks as []);
+    }
+
+    if (serverProperties && serverProperties.length > 0) {
+      propertyStore.setProperties(serverProperties);
+    }
+  }, [serverFeedbacks, serverProperties]);
+
   return (
     <Wrapper>
       <HomeSix />
@@ -13,4 +35,17 @@ const index = () => {
   );
 };
 
-export default index;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const lang = context.locale || "en";
+  const feedbacks = await fetchFeedbacks(lang);
+  const properties = await fetchProperties(lang);
+
+  return {
+    props: {
+      serverFeedbacks: feedbacks,
+      serverProperties: properties,
+    },
+  };
+};
+
+export default Index;

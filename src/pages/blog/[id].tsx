@@ -1,19 +1,20 @@
-import BreadcrumbThree from "@/components/common/breadcrumb/BreadcrumbThree";
-import FooterFour from "@/layouts/footers/FooterFour";
-import HeaderOne from "@/layouts/headers/HeaderOne";
-import FancyBanner from "@/components/common/FancyBanner";
-import useTranslation from "next-translate/useTranslation";
-import BlogMainSection from "@/components/blogs/common-blog/BlogMainSection";
 import { GetServerSideProps } from "next";
 import { fetchBlogPosts } from "@/services/api";
 import { useStore } from "@/stores/storeContext";
 import { useEffect } from "react";
+import BreadcrumbThree from "@/components/common/breadcrumb/BreadcrumbThree";
+import FooterFour from "@/layouts/footers/FooterFour";
+import HeaderOne from "@/layouts/headers/HeaderOne";
+import FancyBanner from "@/components/common/FancyBanner";
+import BlogDetailsArea from "@/components/blogs/blog-details/BlogDetailsArea";
+import useTranslation from "next-translate/useTranslation";
 
-interface BlogProps {
+interface BlogDetailsProps {
   serverBlogPosts: any[];
+  blogId: string;
 }
 
-const Blog = ({ serverBlogPosts }: BlogProps) => {
+const BlogDetails = ({ serverBlogPosts, blogId }: BlogDetailsProps) => {
   const { t } = useTranslation("translations");
   const { blogStore } = useStore();
 
@@ -28,12 +29,12 @@ const Blog = ({ serverBlogPosts }: BlogProps) => {
     <>
       <HeaderOne />
       <BreadcrumbThree
-        title={t("blog.title")}
-        link_title={t("blog.title")}
+        title={t("blog.details")}
+        link_title={t("blog.details")}
         background={8}
         style={false}
       />
-      <BlogMainSection />
+      <BlogDetailsArea />
       <FancyBanner />
       <FooterFour />
     </>
@@ -41,14 +42,16 @@ const Blog = ({ serverBlogPosts }: BlogProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { id } = context.params || {};
   const lang = context.locale || "en";
   const blogPosts = await fetchBlogPosts(lang);
 
   return {
     props: {
       serverBlogPosts: blogPosts,
+      blogId: id || null,
     },
   };
 };
 
-export default Blog;
+export default BlogDetails;
