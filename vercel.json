@@ -1,0 +1,16 @@
+{
+  "headers": [
+    { "source": "/blog", "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
+    { "source": "/blog/(.*)", "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
+    { "source": "/bg/blog", "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
+    { "source": "/bg/blog/(.*)", "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
+    { "source": "/gr/blog", "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
+    { "source": "/gr/blog/(.*)", "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
+    { "source": "/_next/data/(.*)/blog(.*).json", "headers": [{ "key": "Cache-Control", "value": "no-store" }] }
+  ],
+  "redirects": [
+    { "source": "/blog/:id/:name", "destination": "/blog/:id", "permanent": false },
+    { "source": "/bg/blog/:id/:name", "destination": "/bg/blog/:id", "permanent": false },
+    { "source": "/gr/blog/:id/:name", "destination": "/gr/blog/:id", "permanent": false }
+  ]
+}
