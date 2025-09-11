@@ -86,16 +86,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const lang = context.locale || "en";
 
-    console.log(`[Blog SSR] Fetching posts for locale: ${lang}`);
-
     // Fetch blog posts with error handling
     const blogPosts = await fetchBlogPosts(lang);
-
-    console.log(
-      `[Blog SSR] Fetched ${
-        Array.isArray(blogPosts) ? blogPosts.length : 0
-      } posts`
-    );
 
     return {
       props: {
@@ -103,8 +95,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (error) {
-    console.error("[Blog SSR] Error fetching blog posts:", error);
-
     // Return empty array instead of failing
     return {
       props: {
