@@ -28,58 +28,11 @@ const MainLayout = ({ children }: any) => {
   const router = useRouter();
 
   const {
-    commonStore: { toggleFeedbackLoading, setFeedbacks, feedbacks },
-    blogStore: { toggleBlogLoading, setBlogPosts, posts },
-    propertyStore: { setListingLoading, setProperties, setReferralCode, properties },
+    propertyStore: { setReferralCode },
     userStore: { login, refreshSession, user },
     serviceStore,
   } = useStore();
 
-  const loadFeedback = async () => {
-    toggleFeedbackLoading();
-
-    const responseData = await sendRequest(
-      "/feedback/list",
-      "GET",
-      {},
-      {},
-      {
-        withError: false,
-        withLoading: false,
-      }
-    );
-
-    if (responseData?.status) {
-      setFeedbacks(responseData.data);
-    }
-
-    toggleFeedbackLoading();
-  };
-
-  const loadProperties = async () => {
-    setListingLoading(true);
-
-    try {
-      const response = await sendRequest(
-        "/property/listing",
-        "GET",
-        {},
-        {},
-        {
-          withError: false,
-          withLoading: true,
-        }
-      );
-
-      if (response?.status) {
-        setProperties(response.data);
-      }
-    } catch (error) {
-      console.error("Error loading listing:", error);
-    }
-
-    setListingLoading(false);
-  };
 
   const fetchLanguage = async () => {
     let locale = window.location.pathname.split("/")[1];
@@ -112,34 +65,6 @@ const MainLayout = ({ children }: any) => {
     }
   };
 
-  const loadBlog = async () => {
-    toggleBlogLoading();
-
-    try {
-      const responseData = await sendRequest(
-        "/blog/posts",
-        "GET",
-        {},
-        {},
-        {
-          withError: true, // Enable error handling
-          withLoading: false,
-        }
-      );
-
-      if (responseData?.status) {
-        setBlogPosts(responseData.data);
-      } else {
-        // Set empty array in case of error
-        setBlogPosts([]);
-      }
-    } catch (error) {
-      // Set empty array in case of exception
-      setBlogPosts([]);
-    } finally {
-      toggleBlogLoading();
-    }
-  };
 
   const loadUser = async () => {
     try {
@@ -154,27 +79,7 @@ const MainLayout = ({ children }: any) => {
   useEffect(() => {
     loadUser();
     fetchLanguage();
-    
-    // Only load blog posts if we're not on the blog page
-    const path = window.location.pathname;
-    const isBlogPage = path.includes('/blog');
-    
-    if (!isBlogPage && (!posts || posts.length === 0)) {
-      loadBlog();
-    }
   }, []);
-
-  // Language dependent data loading
-  useEffect(() => {
-    // Check if data hasn't been loaded through SSR before fetching
-    if (!feedbacks || feedbacks.length === 0) {
-      loadFeedback();
-    }
-    
-    if (!properties || properties.length === 0) {
-      loadProperties();
-    }
-  }, [lang]);
 
   useEffect(() => {
     if (router.query.ref) {

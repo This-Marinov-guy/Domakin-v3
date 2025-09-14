@@ -8,12 +8,29 @@ import FancyBanner from "@/components/common/FancyBanner";
 import useTranslation from "next-translate/useTranslation";
 import Brand from "@/components/inner-pages/about-us/about-us-one/Brand";
 import BreadcrumbOne from "@/components/common/breadcrumb/BreadcrumbOne";
+import { GetServerSideProps } from "next";
+import { fetchFeedbacks } from "@/services/api";
+import { useStore } from "@/stores/storeContext";
+import { useEffect } from "react";
 
 export const metadata = {
   title: "Agents",
 };
-const index = () => {
+
+interface AgentsProps {
+  serverFeedbacks: any[];
+}
+
+const index = ({ serverFeedbacks }: AgentsProps) => {
   const { t } = useTranslation("translations");
+  const { commonStore } = useStore();
+
+  // Initialize store with server-side data
+  useEffect(() => {
+    if (serverFeedbacks && serverFeedbacks.length > 0) {
+      commonStore.setSSRFeedbacks(serverFeedbacks as []);
+    }
+  }, [serverFeedbacks, commonStore]);
 
   return (
     <Wrapper>
@@ -29,6 +46,17 @@ const index = () => {
       <FooterFour />
     </Wrapper>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const lang = context.locale || "en";
+  const feedbacks = await fetchFeedbacks(lang);
+
+  return {
+    props: {
+      serverFeedbacks: feedbacks,
+    },
+  };
 };
 
 export default index;

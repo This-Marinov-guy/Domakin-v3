@@ -10,12 +10,29 @@ import Brand from "@/components/inner-pages/about-us/about-us-one/Brand";
 import BreadcrumbOne from "@/components/common/breadcrumb/BreadcrumbOne";
 import CreateFeedback from "@/components/forms/CreateFeedback";
 import CreateDonation from "@/components/forms/CreateDonation";
+import { GetServerSideProps } from "next";
+import { fetchFeedbacks } from "@/services/api";
+import { useStore } from "@/stores/storeContext";
+import { useEffect } from "react";
 
 export const metadata = {
   title: "Support",
 };
-const index = () => {
+
+interface SupportProps {
+  serverFeedbacks: any[];
+}
+
+const index = ({ serverFeedbacks }: SupportProps) => {
   const { t } = useTranslation("translations");
+  const { commonStore } = useStore();
+
+  // Initialize store with server-side data
+  useEffect(() => {
+    if (serverFeedbacks && serverFeedbacks.length > 0) {
+      commonStore.setSSRFeedbacks(serverFeedbacks as []);
+    }
+  }, [serverFeedbacks, commonStore]);
 
   return (
     <Wrapper>
@@ -32,6 +49,17 @@ const index = () => {
       <FooterFour />
     </Wrapper>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const lang = context.locale || "en";
+  const feedbacks = await fetchFeedbacks(lang);
+
+  return {
+    props: {
+      serverFeedbacks: feedbacks,
+    },
+  };
 };
 
 export default index;
