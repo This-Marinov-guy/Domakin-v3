@@ -31,7 +31,7 @@ const NavMenu = () => {
     <ul className="navbar-nav align-items-lg-center">
       <li className="d-block d-lg-none">
         <div className="logo">
-          <Link href="/" className="d-block">
+          <Link href="/" scroll={false} className="d-block">
             <Image src={logo} alt="" />
           </Link>
         </div>
@@ -107,7 +107,7 @@ const NavMenu = () => {
       ))}
 
       <li className="d-block d-lg-none d-md-inline-block ms-3 mt-20">
-        <Link href="/services/add-listing" className="btn-two">
+        <Link href="/services/add-listing" scroll={false} className="btn-two">
           <span>{t("header.add_listing")}</span>{" "}
           <i className="fa-thin fa-arrow-up-right"></i>
         </Link>

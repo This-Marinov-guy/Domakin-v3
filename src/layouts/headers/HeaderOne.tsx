@@ -55,7 +55,7 @@ const HeaderOne = ({ style }: any) => {
         <div className="top-header position-relative">
           <div className="d-flex align-items-center justify-content-between">
             <div className="logo order-lg-0">
-              <Link href="/" className="mt-5 d-flex align-items-center">
+              <Link href="/" className="mt-5 d-flex align-items-center" scroll={false}>
                 <Image className="round-logo" src={logoByTheme()} alt="" />
               </Link>
             </div>
@@ -65,7 +65,7 @@ const HeaderOne = ({ style }: any) => {
                   <ChangeLanguage />
                 </li>
                 <li className="d-none d-lg-inline-block ms-3">
-                  <Link href="/services/add-listing" className="btn-two">
+                  <Link href="/services/add-listing" className="btn-two" scroll={false}>
                     <span>{t("header.add_listing")}</span>
                     <i className="fa-thin fa-arrow-up-right"></i>
                   </Link>
