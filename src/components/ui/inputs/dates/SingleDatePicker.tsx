@@ -25,6 +25,8 @@ const SingleDatePicker = (props: any) => {
           mode="single"
           captionLayout="dropdown"
           selected={props.value}
+          startMonth={new Date(2024, 0)} 
+          endMonth={new Date(2055, 11)}
           onSelect={(date: any) => handleDateSelect(date)}
           {...props}
         />
