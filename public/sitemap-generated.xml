@@ -61,7 +61,7 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.domakin.nl/terms&policy</loc>
+    <loc>https://www.domakin.nl/terms&amp;policy</loc>
     <lastmod>2025-09-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

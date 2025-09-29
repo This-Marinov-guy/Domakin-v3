@@ -104,7 +104,7 @@ const staticPages = [
     lastmod: new Date().toISOString().split('T')[0]
   },
   {
-    url: '/terms&policy',
+    url: '/terms&amp;policy',
     priority: '0.3',
     changefreq: 'yearly',
     lastmod: new Date().toISOString().split('T')[0]
