@@ -8,12 +8,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.setHeader('Content-Type', 'application/xml');
     
     // Paths to sitemap files
-    const generatedSitemapPath = path.join(process.cwd(), 'public', 'sitemap-generated.xml');
+    const generatedSitemapPath = path.join(process.cwd(), 'public', 'sitemap.xml');
     const fallbackSitemapPath = path.join(process.cwd(), 'public', 'sitemap.xml');
     
     // Check if generated sitemap exists
     if (fs.existsSync(generatedSitemapPath)) {
-      console.log('📋 Serving sitemap-generated.xml');
+      console.log('📋 Serving sitemap.xml');
       const sitemap = fs.readFileSync(generatedSitemapPath, 'utf8');
       res.status(200).send(sitemap);
       return;

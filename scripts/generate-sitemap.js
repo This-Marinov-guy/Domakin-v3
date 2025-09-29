@@ -270,7 +270,7 @@ async function main() {
     
     console.log('✅ Sitemap generated successfully!');
     console.log(`📁 Location: ${OUTPUT_FILE}`);
-    console.log(`🌐 URL: ${BASE_URL}/sitemap-generated.xml`);
+    console.log(`🌐 URL: ${BASE_URL}/sitemap.xml`);
     console.log(`📊 Total URLs: ${totalUrls}`);
     console.log(`   - Static pages: ${staticPages.length}`);
     console.log(`   - Blog posts: ${blogPosts.length}`);
@@ -285,14 +285,14 @@ async function main() {
       robotsContent = fs.readFileSync(robotsPath, 'utf8');
     }
     
-    if (!robotsContent.includes('sitemap-generated.xml')) {
-      robotsContent += '\nSitemap: https://www.domakin.nl/sitemap-generated.xml\n';
+    if (!robotsContent.includes('sitemap.xml')) {
+      robotsContent += '\nSitemap: https://www.domakin.nl/sitemap.xml\n';
       fs.writeFileSync(robotsPath, robotsContent, 'utf8');
       console.log('✅ Updated robots.txt with sitemap reference');
     }
     
     console.log('\n🎉 Ready to submit to Google Search Console!');
-    console.log(`📋 Submit this URL: ${BASE_URL}/sitemap-generated.xml`);
+    console.log(`📋 Submit this URL: ${BASE_URL}/sitemap.xml`);
     
   } catch (error) {
     console.error('❌ Error generating sitemap:', error.message);

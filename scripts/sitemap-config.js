@@ -22,7 +22,7 @@ module.exports = {
   // Sitemap configuration
   sitemap: {
     baseUrl: "https://www.domakin.nl",
-    outputFile: "sitemap-generated.xml",
+    outputFile: "sitemap.xml",
     maxUrls: 50000, // Google's limit
     maxFileSize: "50MB", // Google's limit
   },
