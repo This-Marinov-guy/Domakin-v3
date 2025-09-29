@@ -11,7 +11,8 @@ This script generates a comprehensive XML sitemap for your Domakin website, incl
    ```
 3. **Submit to Google Search Console**:
    - Go to [Google Search Console](https://search.google.com/search-console)
-   - Add sitemap: `https://www.domakin.nl/sitemap-generated.xml`
+   - Add sitemap: `https://www.domakin.nl/api/sitemap` (auto-serves best available)
+   - Or directly: `https://www.domakin.nl/sitemap-generated.xml`
 
 ## ⚙️ Configuration
 
@@ -107,9 +108,10 @@ This ensures consistent URLs that match your existing property routing system.
 
 ## 📁 Output Files
 
-- **`sitemap-generated.xml`**: Main sitemap with all URLs
-- **`sitemap.xml`**: Static sitemap (fallback)
-- **`sitemap-index.xml`**: Sitemap index referencing both
+- **`sitemap-generated.xml`**: Primary sitemap with all URLs (static + dynamic + API data)
+- **`sitemap.xml`**: Fallback static sitemap
+- **`sitemap-index.xml`**: Sitemap index referencing all sitemaps
+- **`/api/sitemap`**: Smart API endpoint that serves the best available sitemap
 
 ## 🐛 Troubleshooting
 
@@ -190,11 +192,24 @@ jobs:
 
 ## 🎯 Next Steps
 
-1. **Submit to Google Search Console**
+1. **Submit to Google Search Console**:
+   - Primary: `https://www.domakin.nl/api/sitemap` (smart fallback)
+   - Direct: `https://www.domakin.nl/sitemap-generated.xml`
 2. **Monitor indexing status**
 3. **Set up automated generation**
 4. **Track search performance**
 5. **Optimize based on data**
+
+## 🔄 Sitemap Priority System
+
+The project uses a smart sitemap serving system:
+
+1. **Primary**: `sitemap-generated.xml` (includes all content)
+2. **Fallback**: `sitemap.xml` (static content only)
+3. **API Route**: `/api/sitemap` (automatically serves the best available)
+4. **Index**: `sitemap-index.xml` (references all sitemaps)
+
+This ensures Google always gets the most comprehensive sitemap available.
 
 ---
 
