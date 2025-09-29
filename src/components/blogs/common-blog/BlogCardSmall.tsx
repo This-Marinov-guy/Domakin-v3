@@ -4,8 +4,8 @@ import React from "react";
 const BlogCardSmall = (props: any) => {
   const { post } = props;  
 
-  // Use direct ID format to avoid redirect issues
-  const link = `/blog/${post.id}`;
+  // Use the slug from the API response
+  const link = `/blog/${post.slug}`;
 
   return (
     <div

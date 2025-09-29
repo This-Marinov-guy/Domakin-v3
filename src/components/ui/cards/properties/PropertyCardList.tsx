@@ -3,6 +3,7 @@ import Link from "next/link";
 import Fancybox from "@/components/common/Fancybox";
 import Image from "next/image";
 import { STATUS_COLORS } from "@/utils/defines";
+import { getPropertyUrl } from "@/utils/seoHelpers";
 
 const PropertyCardList = (props: {
   property: PropertyCard;
@@ -11,6 +12,13 @@ const PropertyCardList = (props: {
   const { property, style } = props;
 
   const allImages = [property.main_image, ...property.images];
+  
+  // Generate SEO-friendly URL
+  const seoSlug = property.city && property.title 
+    ? `${property.city.toLowerCase()}-${property.title.toLowerCase()?.replace(/[^\w\s-]/g, '')?.replace(/\s+/g, '-')?.trim()}`.replace(/--+/g, '-')
+    : property.id.toString();
+  
+  const propertyUrl = `/services/renting/property/${seoSlug}`;
 
   return (
     <div
@@ -18,9 +26,8 @@ const PropertyCardList = (props: {
       className="listing-card-seven border-20 p-20 mb-50 wow fadeInUp"
     >
       <div className="d-flex flex-wrap layout-one">
-        <a
-          target="_blank"
-          href={`/services/renting/property/${property.id}`}
+        <Link
+          href={propertyUrl}
           style={{
             backgroundImage:
               Number(property.id) > 1000
@@ -64,15 +71,14 @@ const PropertyCardList = (props: {
               ))}
             </Fancybox>
           </div>
-        </a>
+        </Link>
         <div className="property-info">
-          <a
-            target="_blank"
-            href={`/services/renting/property/${property.id}`}
+          <Link
+            href={propertyUrl}
             className="title tran3s mb-15"
           >
             {property.title}
-          </a>
+          </Link>
           <div className="address">{property.location}</div>
 
           <div className="pl-footer d-flex flex-wrap align-items-center justify-content-between">

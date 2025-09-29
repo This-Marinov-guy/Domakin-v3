@@ -47,6 +47,68 @@ export const fetchBlogPosts = async (lang = "en") => {
 };
 
 // Fetch individual blog post by ID
+// Fetch individual blog post by slug
+export const fetchBlogPostBySlug = async (slug: string, lang = "en") => {
+  console.log(`[API] fetchBlogPostBySlug called with slug: ${slug}, lang: ${lang}`);
+  
+  // Normalize the slug
+  const normalizedSlug = slug.toString().trim();
+  console.log(`[API] Normalized slug: ${normalizedSlug}`);
+  
+  try {
+    const endpoint = `${SERVER_ENDPOINT}/api/blog/post-by-slug/${normalizedSlug}`;
+    console.log(`[API] Making request to: ${endpoint}`);
+    
+    const response = await axios.get(endpoint, {
+      headers: {
+        "Accept-Language": lang
+      },
+      timeout: 15000 // 15 second timeout
+    });
+    
+    console.log(`[API] Response status: ${response.status}`);
+    console.log(`[API] Response data status: ${response.data?.status}`);
+    console.log(`[API] Response has data: ${!!response.data?.data}`);
+    
+    // If successful, return the post data
+    if (response.data?.status && response.data.data) {
+      console.log(`[API] Found post by slug: ${response.data.data.title || 'No title'}`);
+      return { post: response.data.data, found: true };
+    }
+    
+    // Retry in English if localized fetch failed
+    if (lang !== "en") {
+      console.log(`[API] Trying slug fetch in English`);
+      const enResponse = await axios.get(endpoint, {
+        headers: { "Accept-Language": "en" },
+        timeout: 15000,
+      });
+      console.log(`[API] English response status: ${enResponse.status}`);
+      console.log(`[API] English response data status: ${enResponse.data?.status}`);
+      
+      if (enResponse.data?.status && enResponse.data.data) {
+        console.log(`[API] Found post in English: ${enResponse.data.data.title || 'No title'}`);
+        return { post: enResponse.data.data, found: true };
+      }
+    }
+    
+    console.log(`[API] No post found for slug: ${normalizedSlug}`);
+    return {
+      post: null,
+      found: false
+    };
+  } catch (error: any) {
+    console.error(`[API] Error in fetchBlogPostBySlug:`, error.message);
+    console.error(`[API] Error response:`, error.response?.data);
+    console.error(`[API] Error status:`, error.response?.status);
+    
+    return {
+      post: null,
+      found: false
+    };
+  }
+};
+
 export const fetchBlogPostById = async (id: string, lang = "en") => {
   console.log(`[API] fetchBlogPostById called with id: ${id}, lang: ${lang}`);
   

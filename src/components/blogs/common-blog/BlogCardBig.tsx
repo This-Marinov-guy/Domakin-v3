@@ -7,8 +7,8 @@ const BlogCardBig = (props: any) => {
   const { post } = props;
   const {t} = useTranslation("translations"); 
 
-  // Use direct ID format to avoid redirect issues
-  const link = `/blog/${post.id}`;
+  // Use the slug from the API response
+  const link = `/blog/${post.slug}`;
 
   return (
     <article

@@ -1,2 +1,7 @@
 User-agent: *
 Disallow: /user/
+Disallow: /account/
+Disallow: /api/
+Allow: /api/sitemap.xml
+
+Sitemap: https://www.domakin.nl/api/sitemap.xml
