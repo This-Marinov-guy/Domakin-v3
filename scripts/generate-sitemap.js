@@ -44,71 +44,89 @@ function loadStaticProperties() {
 // Static pages configuration
 const staticPages = [
   {
-    url: '',
-    priority: '1.0',
-    changefreq: 'daily',
-    lastmod: new Date().toISOString().split('T')[0]
+    url: "",
+    priority: "1.0",
+    changefreq: "daily",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    url: '/about',
-    priority: '0.8',
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
+    url: "/about",
+    priority: "0.8",
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    url: '/services',
-    priority: '0.8',
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
+    url: "/services",
+    priority: "0.8",
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    url: '/services/renting',
-    priority: '0.9',
-    changefreq: 'daily',
-    lastmod: new Date().toISOString().split('T')[0]
+    url: "/services/renting",
+    priority: "0.9",
+    changefreq: "daily",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    url: '/contact',
-    priority: '0.7',
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
+    url: "/services/room-searching",
+    priority: "0.8",
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    url: '/pricing',
-    priority: '0.7',
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
+    url: "/services/viewing",
+    priority: "0.8",
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    url: '/blog',
-    priority: '0.9',
-    changefreq: 'daily',
-    lastmod: new Date().toISOString().split('T')[0]
+    url: "/services/add-listing",
+    priority: "0.7",
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    url: '/agents',
-    priority: '0.6',
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
+    url: "/contact",
+    priority: "0.7",
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    url: '/our-recommendations',
-    priority: '0.6',
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
+    url: "/pricing",
+    priority: "0.7",
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    url: '/support-us',
-    priority: '0.5',
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
+    url: "/blog",
+    priority: "0.9",
+    changefreq: "daily",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    url: '/terms&amp;policy',
-    priority: '0.3',
-    changefreq: 'yearly',
-    lastmod: new Date().toISOString().split('T')[0]
-  }
+    url: "/agents",
+    priority: "0.6",
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
+  },
+  {
+    url: "/our-recommendations",
+    priority: "0.6",
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
+  },
+  {
+    url: "/support-us",
+    priority: "0.5",
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
+  },
+  {
+    url: "/terms&amp;policy",
+    priority: "0.3",
+    changefreq: "yearly",
+    lastmod: new Date().toISOString().split("T")[0],
+  },
 ];
 
 
