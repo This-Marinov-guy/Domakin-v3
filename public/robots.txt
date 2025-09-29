@@ -4,4 +4,8 @@ Disallow: /account/
 Disallow: /api/
 Allow: /api/sitemap.xml
 
+Sitemap: https://www.domakin.nl/sitemap.xml
+Sitemap: https://www.domakin.nl/sitemap-index.xml
 Sitemap: https://www.domakin.nl/api/sitemap.xml
+
+Sitemap: https://www.domakin.nl/sitemap-generated.xml
