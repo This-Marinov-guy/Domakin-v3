@@ -225,15 +225,24 @@ function generateSitemap(blogPosts = [], properties = [], staticProperties = [])
 
   // Add dynamic properties (only real data from API)
   properties.forEach(property => {
-    // Use property ID for URLs
+    // Generate SEO-friendly URL: id-location-title
     const propertyId = property.id.toString();
+    const location = property.city || property.location || '';
+    const title = property.title || '';
+    
+    // Create URL parts, omitting missing parts
+    const urlParts = [propertyId];
+    if (location) urlParts.push(location.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim());
+    if (title) urlParts.push(title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim());
+    
+    const propertySlug = urlParts.join('-').replace(/--+/g, '-');
     
     const lastmod = property.updated_at || property.created_at || new Date().toISOString().split('T')[0];
     const priority = config.priorities.properties;
     const changefreq = config.changeFrequencies.properties;
     
     sitemap += `  <url>
-    <loc>${BASE_URL}/services/renting/property/${propertyId}</loc>
+    <loc>${BASE_URL}/services/renting/property/${propertySlug}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
@@ -243,15 +252,24 @@ function generateSitemap(blogPosts = [], properties = [], staticProperties = [])
 
   // Add static properties from translations
   staticProperties.forEach(property => {
-    // Use property ID for URLs
+    // Generate SEO-friendly URL: id-location-title
     const propertyId = property.id.toString();
+    const location = property.city || property.location || '';
+    const title = property.title || '';
+    
+    // Create URL parts, omitting missing parts
+    const urlParts = [propertyId];
+    if (location) urlParts.push(location.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim());
+    if (title) urlParts.push(title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim());
+    
+    const propertySlug = urlParts.join('-').replace(/--+/g, '-');
     
     const lastmod = new Date().toISOString().split('T')[0]; // Use current date for static properties
     const priority = config.priorities.properties;
     const changefreq = config.changeFrequencies.properties;
     
     sitemap += `  <url>
-    <loc>${BASE_URL}/services/renting/property/${propertyId}</loc>
+    <loc>${BASE_URL}/services/renting/property/${propertySlug}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>

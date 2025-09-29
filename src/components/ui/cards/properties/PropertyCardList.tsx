@@ -12,13 +12,7 @@ const PropertyCardList = (props: {
   const { property, style } = props;
 
   const allImages = [property.main_image, ...property.images];
-  
-  // Generate SEO-friendly URL
-  const seoSlug = property.city && property.title 
-    ? `${property.city.toLowerCase()}-${property.title.toLowerCase()?.replace(/[^\w\s-]/g, '')?.replace(/\s+/g, '-')?.trim()}`.replace(/--+/g, '-')
-    : property.id.toString();
-  
-  const propertyUrl = `/services/renting/property/${seoSlug}`;
+  const propertyUrl = getPropertyUrl(property);
 
   return (
     <div
@@ -104,7 +98,7 @@ const PropertyCardList = (props: {
                   </ul> */}
             <a
               target="_blank"
-              href={`/services/renting/property/${property.id}`}
+              href={propertyUrl}
               className="btn-four rounded-circle"
             >
               <i className="bi bi-arrow-up-right"></i>

@@ -23,6 +23,7 @@ import { PROPERTY_STATUS } from "@/utils/enum";
 import { EDIT_PROPERTY_MODAL, PROPERTY_ID_OFFSET } from "@/utils/defines";
 import { parsePropertyPreviewData } from "@/utils/helpers";
 import StripePaymentLinkButton from "@/components/ui/buttons/StripePaymentLinkButton";
+import { getPropertyUrl } from "@/utils/seoHelpers";
 
 const PropertyTableBody = () => {
   const {
@@ -92,9 +93,7 @@ const PropertyTableBody = () => {
                 >
                   <a
                     target="_blank"
-                    href={`/services/renting/property/${
-                      PROPERTY_ID_OFFSET + item.id
-                    }`}
+                    href={getPropertyUrl({ id: PROPERTY_ID_OFFSET + item.id, ...item.property_data })}
                   >
                     <Image
                       src={item.property_data.images[0]}

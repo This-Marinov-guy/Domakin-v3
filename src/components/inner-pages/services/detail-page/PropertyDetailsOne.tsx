@@ -26,7 +26,20 @@ const PropertyDetailsOne = () => {
   const forRentList: any[] = t("FOR_RENT", {}, { returnObjects: true }) ?? [];
   const allProperties = [...properties, ...forRentList];
 
-  const property = allProperties.find((p: any) => p.id == slug);
+  // Extract property ID from slug (format: id-location-title)
+  const extractPropertyId = (slug: string): string | null => {
+    const parts = slug.split('-');
+    const id = parts[0];
+    
+    if (/^\d+$/.test(id)) {
+      return id;
+    }
+    
+    return null;
+  };
+
+  const propertyId = extractPropertyId(slug as string);
+  const property = propertyId ? allProperties.find((p: any) => p?.id?.toString() === propertyId) : null;
 
   const relatedProperties = allProperties
     .filter((p) => p.city == property?.city && p.id != property?.id)
@@ -40,7 +53,7 @@ const PropertyDetailsOne = () => {
     <>
       <HeaderOne />
       {property.statusCode !== 3 && <ScreenButton refElement={formRef} />}
-      <ListingDetailsOneArea property={property} slug={slug} />
+      <ListingDetailsOneArea property={property} slug={propertyId} />
       <RentingForm refElement={formRef} property={property} />
       <RelatedProperties properties={relatedProperties} />
       <FancyBanner />

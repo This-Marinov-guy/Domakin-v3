@@ -30,20 +30,34 @@ const index = ({ serverProperties }: PropertyDetailsProps) => {
   const forRentList: any[] = t("FOR_RENT", {}, { returnObjects: true }) ?? [];
   const allProperties = [...serverProperties, ...forRentList];
   
-  const property = allProperties.find((p: any) => {
-    if (!p?.id) return false;
+  // Extract property ID from slug (format: id-location-title)
+  const extractPropertyId = (slug: string): string | null => {
+    // Split by dash and take the first part as ID
+    const parts = slug.split('-');
+    const id = parts[0];
     
-    // Check direct ID match
-    if (p.id.toString() === slug) return true;
-    
-    // Check if slug matches a generated SEO slug
-    if (p.city && p.title) {
-      const seoSlug = `${p.city.toLowerCase()}-${p.title.toLowerCase()?.replace(/[^\w\s-]/g, '')?.replace(/\s+/g, '-')?.trim()}`.replace(/--+/g, '-');
-      if (seoSlug === slug) return true;
+    // Validate that the first part is a number (property ID)
+    if (/^\d+$/.test(id)) {
+      return id;
     }
     
-    return false;
+    return null;
+  };
+
+  const propertyId = extractPropertyId(slug as string);
+  
+  // Debug logging
+  console.log('Property Details Debug:', {
+    slug,
+    propertyId,
+    serverPropertiesCount: serverProperties.length,
+    forRentListCount: forRentList.length,
+    allPropertiesCount: allProperties.length,
+    availableIds: allProperties.map(p => p.id).slice(0, 10) // Show first 10 IDs
   });
+  
+  // Find the property by ID
+  const property = propertyId ? allProperties.find((p: any) => p?.id?.toString() === propertyId) : null;
 
   if (!property) {
     return (
@@ -63,9 +77,21 @@ const index = ({ serverProperties }: PropertyDetailsProps) => {
     : `https://www.domakin.nl/assets/img/properties/${property.folder ?? "property_" + property.id}/${property.main_image}`;
 
   // Generate SEO-friendly slug for URLs
-  const seoSlug = property.city && property.title 
-    ? `${property.city.toLowerCase()}-${property.title.toLowerCase()?.replace(/[^\w\s-]/g, '')?.replace(/\s+/g, '-')?.trim()}`.replace(/--+/g, '-')
-    : property.id.toString();
+  // Generate SEO-friendly slug: id-location-title
+  const generatePropertySlug = (property: any): string => {
+    const propertyId = property.id.toString();
+    const location = property.city || property.location || '';
+    const title = property.title || '';
+    
+    // Create URL parts, omitting missing parts
+    const urlParts = [propertyId];
+    if (location) urlParts.push(location.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim());
+    if (title) urlParts.push(title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim());
+    
+    return urlParts.join('-').replace(/--+/g, '-');
+  };
+
+  const seoSlug = generatePropertySlug(property);
 
   // Real Estate specific structured data
   const jsonLd = {
@@ -177,45 +203,79 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       return { notFound: true };
     }
 
-    const properties = await fetchProperties(lang);
+    // Fetch properties from API
+    const apiProperties = await fetchProperties(lang);
     
-    // Try to find property by various identifiers
-    const property = properties.find((p: any) => {
-      if (!p?.id) return false;
+    // Load static properties from translations
+    const fs = require('fs');
+    const path = require('path');
+    const translationsPath = path.join(process.cwd(), 'locales', lang, 'translations.json');
+    let staticProperties: any[] = [];
+    
+    try {
+      const translations = JSON.parse(fs.readFileSync(translationsPath, 'utf8'));
+      staticProperties = translations.FOR_RENT || [];
+    } catch (error) {
+      console.warn('Could not load static properties from translations:', error);
+    }
+    
+    // Combine all properties
+    const allProperties = [...apiProperties, ...staticProperties];
+    
+    // Extract property ID from slug (format: id-location-title)
+    const extractPropertyId = (slug: string): string | null => {
+      const parts = slug.split('-');
+      const id = parts[0];
       
-      // Check direct ID match
-      if (p.id.toString() === slug) return true;
-      
-      // Check if slug matches a generated SEO slug
-      if (p.city && p.title) {
-        const seoSlug = `${p.city.toLowerCase()}-${p.title.toLowerCase()?.replace(/[^\w\s-]/g, '')?.replace(/\s+/g, '-')?.trim()}`.replace(/--+/g, '-');
-        if (seoSlug === slug) return true;
+      if (/^\d+$/.test(id)) {
+        return id;
       }
       
-      // Check if there's a slug property that matches
-      if (p.slug === slug) return true;
-      
-      return false;
-    });
+      return null;
+    };
 
-    // If property found but accessed via old ID, redirect to SEO-friendly URL
-    if (property && property.city && property.title && slug === property.id.toString()) {
-      const seoSlug = `${property.city.toLowerCase()}-${property.title.toLowerCase()?.replace(/[^\w\s-]/g, '')?.replace(/\s+/g, '-')?.trim()}`.replace(/--+/g, '-');
+    const propertyId = extractPropertyId(slug as string);
+    
+    if (!propertyId) {
+      return { notFound: true };
+    }
+
+    // Find property by ID in all properties
+    const property = allProperties.find((p: any) => p?.id?.toString() === propertyId);
+    
+    if (!property) {
+      console.log(`Property with ID ${propertyId} not found in ${allProperties.length} properties`);
+      return { notFound: true };
+    }
+
+    // Generate the correct SEO slug
+    const generatePropertySlug = (property: any): string => {
+      const propertyId = property.id.toString();
+      const location = property.city || property.location || '';
+      const title = property.title || '';
       
-      // Only redirect if we can create a proper SEO slug
-      if (seoSlug !== property.id.toString()) {
-        return {
-          redirect: {
-            destination: `/services/renting/property/${seoSlug}`,
-            permanent: true, // 301 redirect for SEO
-          },
-        };
-      }
+      const urlParts = [propertyId];
+      if (location) urlParts.push(location.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim());
+      if (title) urlParts.push(title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim());
+      
+      return urlParts.join('-').replace(/--+/g, '-');
+    };
+
+    const correctSlug = generatePropertySlug(property);
+    
+    // If accessed with old format or incorrect slug, redirect to correct SEO-friendly URL
+    if (slug !== correctSlug) {
+      return {
+        redirect: {
+          destination: `/services/renting/property/${correctSlug}`,
+          permanent: true, // 301 redirect for SEO
+        },
+      };
     }
 
     return {
       props: {
-        serverProperties: properties,
+        serverProperties: allProperties,
       },
     };
   } catch (error) {

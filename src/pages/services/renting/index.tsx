@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import Head from "next/head";
 import useTranslation from "next-translate/useTranslation";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import { getPropertyUrl } from "@/utils/seoHelpers";
 
 interface PropertiesIndexProps {
   serverProperties: any[];
@@ -36,10 +37,10 @@ const index = ({ serverProperties }: PropertiesIndexProps) => {
       position: index + 1,
       item: {
         "@type": "Accommodation",
-        "@id": `https://www.domakin.nl/services/renting/property/${property.id}`,
+        "@id": `https://www.domakin.nl${getPropertyUrl(property)}`,
         name: property.title || `${property.city} Property`,
         description: property.description?.property || property.description,
-        url: `https://www.domakin.nl/services/renting/property/${property.id}`,
+        url: `https://www.domakin.nl${getPropertyUrl(property)}`,
         address: {
           "@type": "PostalAddress",
           addressLocality: property.city,

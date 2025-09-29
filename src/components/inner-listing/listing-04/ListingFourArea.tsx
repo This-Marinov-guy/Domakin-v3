@@ -7,6 +7,7 @@ import ReactPaginate from "react-paginate";
 import Fancybox from "@/components/common/Fancybox";
 import useTranslation from "next-translate/useTranslation";
 import { STATUS_COLORS } from "@/utils/defines";
+import { getPropertyUrl } from "@/utils/seoHelpers";
 
 const ListingFourArea = () => {
   const { t } = useTranslation("translations");
@@ -147,7 +148,7 @@ const ListingFourArea = () => {
               </div>
               <div className="property-info">
                 <Link
-                  href={`/services/renting/property/${item.id}`}
+                  href={getPropertyUrl(item)}
                   className="title tran3s mb-15"
                 >
                   {item.title}
@@ -207,7 +208,7 @@ const ListingFourArea = () => {
                     </li>
                   </ul> */}
                   <Link
-                    href={`/services/renting/property/${item.id}`}
+                    href={getPropertyUrl(item)}
                     className="btn-four rounded-circle"
                   >
                     <i className="bi bi-arrow-up-right"></i>

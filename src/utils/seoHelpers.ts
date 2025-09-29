@@ -1,25 +1,22 @@
 // SEO utility functions for URL generation and optimization
 
 export function createPropertySlug(property: any): string {
-  if (!property?.city || !property?.title) {
-    return property?.id?.toString() || 'property';
-  }
-
-  const citySlug = property.city.toLowerCase().trim();
-  const titleSlug = property.title
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '') // Remove special characters
-    .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .trim();
-
-  return `${citySlug}-${titleSlug}`.replace(/--+/g, '-'); // Remove multiple consecutive hyphens
+  const propertyId = property.id.toString();
+  const location = property.city || property.location || '';
+  const title = property.title || '';
+  
+  // Create URL parts, omitting missing parts
+  const urlParts = [propertyId];
+  if (location) urlParts.push(location.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim());
+  if (title) urlParts.push(title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim());
+  
+  return urlParts.join('-').replace(/--+/g, '-');
 }
 
 export function getPropertyUrl(property: any, useNewFormat: boolean = true): string {
   if (useNewFormat) {
-    const citySlug = property.city?.toLowerCase() || 'city';
-    const propertySlug = createPropertySlug(property);
-    return `/services/renting/property/${citySlug}/${propertySlug}`;
+    const slug = createPropertySlug(property);
+    return `/services/renting/property/${slug}`;
   }
   
   // Fallback to old format for backward compatibility

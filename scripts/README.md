@@ -62,8 +62,9 @@ node scripts/generate-sitemap.js
 - **Properties**: Fetched from `/api/property/listing`
   - Only visible properties (not hidden)
   - Priority: 0.7, Change frequency: weekly
-  - URLs: `/services/renting/property/{id}`
-  - Uses property IDs for direct linking
+  - URLs: `/services/renting/property/{id}-{location}-{title}`
+  - SEO-friendly format with ID, location, and title
+  - Missing parts are omitted (e.g., `1001-amsterdam` if no title)
 
 ## 🔧 Customization
 
@@ -99,12 +100,17 @@ priorities: {
 
 ### Custom URL Generation
 
-The script uses property IDs for direct linking:
+The script generates SEO-friendly property URLs:
 ```
-/services/renting/property/{id} -> /services/renting/property/1001
+/services/renting/property/{id}-{location}-{title} -> /services/renting/property/1001-amsterdam-modern-apartment
 ```
 
-This ensures consistent URLs that match your existing property routing system.
+Missing parts are omitted:
+- `1001-amsterdam` (no title)
+- `1001-modern-apartment` (no location)
+- `1001` (no location or title)
+
+The property is always fetched by ID (first part of the URL).
 
 ## 📁 Output Files
 

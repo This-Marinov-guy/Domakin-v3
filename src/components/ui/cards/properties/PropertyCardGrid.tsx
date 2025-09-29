@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { STATUS_COLORS } from "@/utils/defines";
+import { getPropertyUrl } from "@/utils/seoHelpers";
 
 const PropertyCardGrid = (props: {
   property: PropertyCard;
@@ -10,6 +11,7 @@ const PropertyCardGrid = (props: {
   const { property, style } = props;
 
   const allImages = [property.main_image, ...property.images];
+  const propertyUrl = getPropertyUrl(property);
 
   return (
     <div
@@ -65,7 +67,7 @@ const PropertyCardGrid = (props: {
                   >
                     <a
                       target="_blank"
-                      href={`/services/renting/property/${property.id}`}
+                      href={propertyUrl}
                       className="d-block"
                     >
                       <Image
@@ -91,7 +93,7 @@ const PropertyCardGrid = (props: {
         <div className="property-info p-25">
           <a
             target="_blank"
-            href={`/services/renting/property/${property.id}`}
+            href={propertyUrl}
             className="title tran3s"
           >
             {property.title}
@@ -120,7 +122,7 @@ const PropertyCardGrid = (props: {
             </strong>
             <a
               target="_blank"
-              href={`/services/renting/property/${property.id}`}
+              href={propertyUrl}
               className="btn-four rounded-circle"
             >
               <i className="bi bi-arrow-up-right"></i>

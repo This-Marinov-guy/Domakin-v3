@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { fetchBlogPosts, fetchProperties } from '@/services/api';
+import { createPropertySlug } from '@/utils/seoHelpers';
 
 function generateSiteMap(blogPosts: any[], properties: any[]) {
   const baseUrl = 'https://www.domakin.nl';
@@ -60,10 +61,8 @@ function generateSiteMap(blogPosts: any[], properties: any[]) {
      ${properties
        .filter(property => property.id && !property.hidden)
        .map((property) => {
-         // Generate SEO-friendly slug for sitemap
-         const seoSlug = property.city && property.title 
-           ? `${property.city.toLowerCase()}-${property.title.toLowerCase()?.replace(/[^\w\s-]/g, '')?.replace(/\s+/g, '-')?.trim()}`.replace(/--+/g, '-')
-           : property.id.toString();
+         // Generate SEO-friendly slug using utility function
+         const seoSlug = createPropertySlug(property);
          
          return `
        <url>

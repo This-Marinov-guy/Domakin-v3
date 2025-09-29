@@ -36,7 +36,8 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
     propertyStore: { setPropertyDataForEdit, userProperties },
   } = useStore();
 
-  const [extendedPropertyDetails, setExtendedPropertyDetails] = useState<any>(null);
+  const [extendedPropertyDetails, setExtendedPropertyDetails] =
+    useState<any>(null);
   const [isEditLoading, setIsEditLoading] = useState(true);
   const [isPreviewOpened, setIsPreviewOpened] = useState(false);
 
@@ -50,7 +51,11 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
     if (Number(slug) < PROPERTY_ID_OFFSET) return;
 
     const response = await sendRequest(
-      `/property/details/${Number(slug) - PROPERTY_ID_OFFSET}`
+      `/property/details/${Number(slug) - PROPERTY_ID_OFFSET}`,
+      "GET",
+      {},
+      {},
+      { withLoading: true, withError: false }
     );
 
     if (response?.status) {
@@ -100,10 +105,7 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
                   <div className="d-flex align-items-center gap-2 fs-5">
                     <span>Quick Actions:</span>
                     {extendedPropertyDetails?.property_data?.payment_link && (
-                      <StripePaymentLinkButton
-                        propertyId={property.id}
-                        
-                      />
+                      <StripePaymentLinkButton propertyId={property.id} />
                     )}
                     <OverlayTrigger
                       placement="top"
