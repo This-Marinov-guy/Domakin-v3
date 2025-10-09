@@ -11,8 +11,7 @@ This script generates a comprehensive XML sitemap for your Domakin website, incl
    ```
 3. **Submit to Google Search Console**:
    - Go to [Google Search Console](https://search.google.com/search-console)
-   - Add sitemap: `https://www.domakin.nl/api/sitemap` (auto-serves best available)
-   - Or directly: `https://www.domakin.nl/sitemap.xml`
+   - Add sitemap: `https://www.domakin.nl/sitemap.xml`
 
 ## ⚙️ Configuration
 
@@ -114,10 +113,8 @@ The property is always fetched by ID (first part of the URL).
 
 ## 📁 Output Files
 
-- **`sitemap.xml`**: Primary sitemap with all URLs (static + dynamic + API data)
-- **`sitemap.xml`**: Fallback static sitemap
-- **`sitemap-index.xml`**: Sitemap index referencing all sitemaps
-- **`/api/sitemap`**: Smart API endpoint that serves the best available sitemap
+- **`sitemap.xml`**: Primary sitemap with all URLs (static pages, blog posts, properties) including all language versions (EN, BG, EL)
+- **`sitemap-index.xml`**: Sitemap index referencing the main sitemap
 
 ## 🐛 Troubleshooting
 
@@ -199,23 +196,23 @@ jobs:
 ## 🎯 Next Steps
 
 1. **Submit to Google Search Console**:
-   - Primary: `https://www.domakin.nl/api/sitemap` (smart fallback)
-   - Direct: `https://www.domakin.nl/sitemap.xml`
+   - Submit: `https://www.domakin.nl/sitemap.xml`
 2. **Monitor indexing status**
-3. **Set up automated generation**
+3. **Set up automated generation** (run the script after content updates)
 4. **Track search performance**
 5. **Optimize based on data**
 
-## 🔄 Sitemap Priority System
+## 🔄 Sitemap System
 
-The project uses a smart sitemap serving system:
+The sitemap includes:
 
-1. **Primary**: `sitemap.xml` (includes all content)
-2. **Fallback**: `sitemap.xml` (static content only)
-3. **API Route**: `/api/sitemap` (automatically serves the best available)
-4. **Index**: `sitemap-index.xml` (references all sitemaps)
+1. **All static pages** (Home, About, Services, Contact, etc.) in 3 languages (EN, BG, EL)
+2. **All blog posts** from the API in 3 languages
+3. **All properties** from the API and static translations in 3 languages
+4. **Proper hreflang annotations** for each URL pointing to language alternatives
+5. **sitemap-index.xml** for organizational purposes
 
-This ensures Google always gets the most comprehensive sitemap available.
+This ensures Google can properly index all language versions of your content.
 
 ---
 
