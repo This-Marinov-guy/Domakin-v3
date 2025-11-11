@@ -13,9 +13,12 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 
 interface BlogProps {
   serverBlogPosts: any[];
+  currentPage: number;
+  totalPages: number;
+  itemsPerPage: number;
 }
 
-const Blog = ({ serverBlogPosts }: BlogProps) => {
+const Blog = ({ serverBlogPosts, currentPage, totalPages, itemsPerPage }: BlogProps) => {
   const { t } = useTranslation("translations");
   const { blogStore } = useStore();
   const [isHydrated, setIsHydrated] = useState(false);
@@ -153,7 +156,11 @@ const Blog = ({ serverBlogPosts }: BlogProps) => {
         background={8}
         style={false}
       />
-      <BlogMainSection />
+      <BlogMainSection 
+        currentPage={currentPage}
+        totalPages={totalPages}
+        itemsPerPage={itemsPerPage}
+      />
       <FancyBanner />
       <FooterFour />
     </>
@@ -163,13 +170,25 @@ const Blog = ({ serverBlogPosts }: BlogProps) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const lang = context.locale || "en";
+    const page = parseInt(context.query.page as string) || 1;
+    const itemsPerPage = 6;
 
     // Fetch blog posts with error handling
     const blogPosts = await fetchBlogPosts(lang);
-
+    const allPosts = Array.isArray(blogPosts) ? blogPosts : [];
+    
+    // Calculate pagination
+    const totalPages = Math.ceil(allPosts.length / itemsPerPage);
+    const currentPage = Math.max(1, Math.min(page, totalPages || 1));
+    
+    // Return all posts (BlogMainSection will handle pagination display)
+    // This ensures we have all posts for proper pagination calculation
     return {
       props: {
-        serverBlogPosts: Array.isArray(blogPosts) ? blogPosts : [],
+        serverBlogPosts: allPosts,
+        currentPage,
+        totalPages: totalPages || 1,
+        itemsPerPage,
       },
     };
   } catch (error) {
@@ -177,6 +196,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: {
         serverBlogPosts: [],
+        currentPage: 1,
+        totalPages: 1,
+        itemsPerPage: 6,
       },
     };
   }
