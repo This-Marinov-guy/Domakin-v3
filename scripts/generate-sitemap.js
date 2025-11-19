@@ -69,6 +69,12 @@ const staticPages = [
     changefreq: "monthly",
     lastmod: new Date().toISOString().split("T")[0],
   },
+  {
+    url: "/careers",
+    priority: "0.8",
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
+  },
   //   {
   //     url: "/services",
   //     priority: "0.8",
