@@ -63,10 +63,6 @@ const CareersForm = () => {
 
   // Prefill user data if logged in
   useEffect(() => {
-    if (!user) {
-      return;
-    }
-
     if (user.name) {
       setValue("name", user.name);
     }
@@ -77,7 +73,6 @@ const CareersForm = () => {
       setValue("email", user.email);
     }
     if (user.phone) {
-      setValue("phone", user.phone);
       setPhoneValue(user.phone);
     }
   }, [user]);
