@@ -4,6 +4,7 @@ import HomeSix from "@/components/homes/home-six";
 import { GetServerSideProps } from "next";
 import { fetchFeedbacks, fetchProperties } from "@/services/api";
 import { useStore } from "@/stores/storeContext";
+import SnowBackground from "@/components/common/backgrounds/SnowBackground";
 
 export const metadata = {
   title: "Domakin",
@@ -30,6 +31,7 @@ const Index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
 
   return (
     <Wrapper>
+      <SnowBackground/>
       <HomeSix />
     </Wrapper>
   );

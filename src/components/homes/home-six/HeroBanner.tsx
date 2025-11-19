@@ -4,12 +4,15 @@ import bannerimg from "@/assets/images/assets/screen_06.png";
 import Link from "next/link";
 import DropdownSix from "@/components/search-dropdown/home-dropdown/DropdownSix";
 import useTranslation from "next-translate/useTranslation";
+import SnowBackground from "@/components/common/backgrounds/SnowBackground";
+import { THEME, WINTER } from "@/utils/config";
 
 const HeroBanner = () => {
   const { t, lang } = useTranslation("translations");
+  const isWinter = THEME === WINTER;
 
   return (
-    <div className="hero-banner-six z-2 pt-120">
+    <div className="hero-banner-six z-2 pt-120" style={isWinter ? { backgroundImage: `url(/assets/img/bg/4.webp)` } : {}}>
       <div className="container">
         <div className="position-relative">
           <div className="row landing">

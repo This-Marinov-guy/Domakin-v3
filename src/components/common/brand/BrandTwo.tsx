@@ -48,7 +48,7 @@ const BrandTwo = () => {
       {brand_data.map((brand, i) => (
         <div
           key={i}
-          className="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mb-3"
+          className="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mb-3 z-2"
         >
           <Link
             href={brand.link}
