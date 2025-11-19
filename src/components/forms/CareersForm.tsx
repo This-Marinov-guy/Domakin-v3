@@ -63,20 +63,22 @@ const CareersForm = () => {
 
   // Prefill user data if logged in
   useEffect(() => {
-    if (user) {
-      if (user.name) {
-        setValue("name", user.name);
-      }
-      if (user.surname) {
-        setValue("surname", user.surname);
-      }
-      if (user.email) {
-        setValue("email", user.email);
-      }
-      if (user.phone) {
-        setValue("phone", user.phone);
-        setPhoneValue(user.phone);
-      }
+    if (!user) {
+      return;
+    }
+
+    if (user.name) {
+      setValue("name", user.name);
+    }
+    if (user.surname) {
+      setValue("surname", user.surname);
+    }
+    if (user.email) {
+      setValue("email", user.email);
+    }
+    if (user.phone) {
+      setValue("phone", user.phone);
+      setPhoneValue(user.phone);
     }
   }, [user]);
 
