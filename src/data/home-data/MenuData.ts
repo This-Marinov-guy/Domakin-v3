@@ -96,6 +96,12 @@ const menu_data: MenuItem[] = [
   {
     id: 8,
     has_dropdown: false,
+    title: "careers.title",
+    link: "/careers",
+  },
+  {
+    id: 9,
+    has_dropdown: false,
     title: "header.contact",
     link: "/contact",
   },

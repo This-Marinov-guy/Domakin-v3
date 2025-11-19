@@ -106,6 +106,7 @@ const footer_data: DataType[] = [
       { link: "/about", link_title: "footer.about_us" },
       { link: "/agents", link_title: "footer.team" },
       { link: "/blog", link_title: "blog.title" },
+      { link: "/careers", link_title: "careers.title" },
       { link: "/support-us", link_title: "footer.support" },
     ],
   },
