@@ -71,7 +71,7 @@ const staticPages = [
   },
   {
     url: "/careers",
-    priority: "0.8",
+    priority: "0.9",
     changefreq: "monthly",
     lastmod: new Date().toISOString().split("T")[0],
   },
