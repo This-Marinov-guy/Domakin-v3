@@ -510,6 +510,17 @@
 
 .floating-apply-btn {
   animation: fadeInUp 0.3s ease-in-out;
+  &:after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    top: 100%;
+    left: 5%;
+    height: 10px;
+    width: 90%;
+    opacity: 1;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 80%);
+  }
 }
 
 .bubble-border {
