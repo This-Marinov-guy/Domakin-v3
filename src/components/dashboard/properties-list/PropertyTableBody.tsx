@@ -93,7 +93,10 @@ const PropertyTableBody = () => {
                 >
                   <a
                     target="_blank"
-                    href={getPropertyUrl({ id: PROPERTY_ID_OFFSET + item.id, ...item.property_data })}
+                    href={getPropertyUrl({
+                      ...item.property_data,
+                      id: PROPERTY_ID_OFFSET + item.id,
+                    })}
                   >
                     <Image
                       src={item.property_data.images[0]}
@@ -146,9 +149,7 @@ const PropertyTableBody = () => {
           {/* Payment link column */}
           <td className="center">
             {isAdmin && item?.property_data?.payment_link && (
-              <StripePaymentLinkButton
-                propertyId={item.id}
-              />
+              <StripePaymentLinkButton propertyId={item.id} />
             )}
           </td>
           {/* Action column */}
