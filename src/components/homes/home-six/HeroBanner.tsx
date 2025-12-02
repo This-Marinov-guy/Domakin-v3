@@ -17,7 +17,7 @@ const HeroBanner = () => {
         <div className="position-relative">
           <div className="row landing">
             <Image
-              className="col-lg-3 col-md-3 col-12 position-relative wow fadeInLeft"
+              className="col-lg-3 col-md-3 col-12 position-relative wow fadeInLeft landing-image"
               src={`/assets/img/landing/1-${lang}.png`}
               height={1000}
               width={1000}
@@ -41,9 +41,9 @@ const HeroBanner = () => {
               </div>
             </div>
           </div>
-          <div className="row">
+          <div className="row landing-spacer">
             <div className="col-12">
-              <div style={{ height: "30em" }} />
+              <div className="spacer-div" style={{ height: "30em" }} />
             </div>
           </div>
           {/* <div className="row">
