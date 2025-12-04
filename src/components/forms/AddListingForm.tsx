@@ -44,7 +44,7 @@ const AddListingForm = () => {
     sendRequest(
       "/property/create",
       "POST",
-      transformToFormData(propertyStore.addListingData)
+      transformToFormData(propertyStore.addListingData, { toSnakeCase: true })
     ).then((res) => {
       // Close the loading modal
       modalStore.closeModal();

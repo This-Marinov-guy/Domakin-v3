@@ -162,20 +162,63 @@ export const getGeoLocation = () => {
   return location;
 };
 
-export const transformToFormData = (data: any) => {
-  const formData = new FormData();
+/**
+ * Converts a camelCase or PascalCase string to snake_case
+ */
+const toSnakeCase = (str: string): string => {
+  return str
+    .replace(/([A-Z])/g, "_$1")
+    .toLowerCase()
+    .replace(/^_/, "");
+};
 
-  for (const key in data) {
-    if (data[key] instanceof File) {
-      formData.append(key, data[key]);
-    } else if (Array.isArray(data[key])) {
-      data[key].forEach((element: any, index) => {
+/**
+ * Recursively converts nested keys in an object to snake_case, but keeps top-level keys unchanged
+ */
+const convertNestedKeysToSnakeCase = (obj: any, isTopLevel: boolean = true): any => {
+  if (obj === null || obj === undefined) {
+    return obj;
+  }
+
+  if (obj instanceof File) {
+    return obj;
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map((item) => convertNestedKeysToSnakeCase(item, false));
+  }
+
+  if (typeof obj === "object") {
+    const converted: any = {};
+    for (const key in obj) {
+      // Only convert keys if we're not at the top level
+      const finalKey = isTopLevel ? key : toSnakeCase(key);
+      converted[finalKey] = convertNestedKeysToSnakeCase(obj[key], false);
+    }
+    return converted;
+  }
+
+  return obj;
+};
+
+export const transformToFormData = (data: any, options?: { toSnakeCase?: boolean }) => {
+  const formData = new FormData();
+  const shouldConvertToSnakeCase = options?.toSnakeCase ?? false;
+
+  // Convert nested keys to snake_case if option is enabled
+  const processedData = shouldConvertToSnakeCase ? convertNestedKeysToSnakeCase(data, true) : data;
+
+  for (const key in processedData) {
+    if (processedData[key] instanceof File) {
+      formData.append(key, processedData[key]);
+    } else if (Array.isArray(processedData[key])) {
+      processedData[key].forEach((element: any, index) => {
         formData.append(`${key}[${index}]`, element);
       });
-    } else if (typeof data[key] === "object" && data[key] !== null) {
-      formData.append(key, JSON.stringify(data[key]));
+    } else if (typeof processedData[key] === "object" && processedData[key] !== null) {
+      formData.append(key, JSON.stringify(processedData[key]));
     } else {
-      formData.append(key, data[key]);
+      formData.append(key, processedData[key]);
     }
   }
 
