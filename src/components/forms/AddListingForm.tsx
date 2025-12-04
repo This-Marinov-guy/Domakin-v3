@@ -202,6 +202,21 @@ const AddListingForm = () => {
             </div>
           </div>
 
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("emergency_housing.postcode")}</label>
+              <Form.Control
+                type="text"
+                value={propertyData.postcode || ""}
+                onChange={(e) => {
+                  updateListingData("propertyData", "postcode", e.target.value);
+                }}
+                isInvalid={errorFields.includes("propertyData.postcode")}
+              />
+              <small>* {t("emergency_housing.postcode_disclaimer")}</small>
+            </div>
+          </div>
+
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("emergency_housing.size")}</label>
@@ -270,27 +285,92 @@ const AddListingForm = () => {
             </div>
           </div>
 
-          <div className="col-md-6">
-            <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">{t("emergency_housing.registration")}</label>
-              <NiceSelect
-                className="nice-select border-one d-flex align-items-center"
-                options={[
-                  { value: "yes", text: t("common.yes") },
-                  { value: "no", text: t("common.no") },
-                ]}
-                defaultCurrent={0}
-                onChange={(e) => {
-                  updateListingData(
-                    "propertyData",
-                    "registration",
-                    e.target.value
-                  );
-                }}
-                isInvalid={errorFields.includes("propertyData.registration")}
-                name=""
-                placeholder=""
-              />
+          <div className="col-12">
+            <div className="switches-row mb-30">
+              <div className="row gx-4">
+                <div className="col-md-4 col-12 mb-20 md-mb-30">
+                  <div className="switch-item">
+                    <label htmlFor="registration-switch" className="switch-label">
+                      {t("emergency_housing.registration")}
+                    </label>
+                    <div className="d-flex gap-3 align-items-center switch-control">
+                      <Form.Check
+                        type="switch"
+                        id="registration-switch"
+                        checked={propertyData.registration === true || propertyData.registration === "yes"}
+                        onChange={(e) => {
+                          updateListingData(
+                            "propertyData",
+                            "registration",
+                            e.target.checked
+                          );
+                        }}
+                        isInvalid={errorFields.includes("propertyData.registration")}
+                        className="custom-switch"
+                      />
+                      <span className="switch-status">
+                        {propertyData.registration === true || propertyData.registration === "yes" 
+                          ? t("common.yes") 
+                          : t("common.no")}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-4 col-12 mb-20 md-mb-30">
+                  <div className="switch-item">
+                    <label htmlFor="pets-allowed-switch" className="switch-label">
+                      {t("emergency_housing.pets_allowed")}
+                    </label>
+                    <div className="d-flex gap-3 align-items-center switch-control">
+                      <Form.Check
+                        type="switch"
+                        id="pets-allowed-switch"
+                        checked={propertyData.petsAllowed === true}
+                        onChange={(e) => {
+                          updateListingData(
+                            "propertyData",
+                            "petsAllowed",
+                            e.target.checked
+                          );
+                        }}
+                        isInvalid={errorFields.includes("propertyData.petsAllowed")}
+                        className="custom-switch"
+                      />
+                      <span className="switch-status">
+                        {propertyData.petsAllowed ? t("common.yes") : t("common.no")}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-4 col-12 mb-20 md-mb-30">
+                  <div className="switch-item">
+                    <label htmlFor="smoking-allowed-switch" className="switch-label">
+                      {t("emergency_housing.smoking_allowed")}
+                    </label>
+                    <div className="d-flex gap-3 align-items-center switch-control">
+                      <Form.Check
+                        type="switch"
+                        id="smoking-allowed-switch"
+                        checked={propertyData.smokingAllowed === true}
+                        onChange={(e) => {
+                          updateListingData(
+                            "propertyData",
+                            "smokingAllowed",
+                            e.target.checked
+                          );
+                        }}
+                        isInvalid={errorFields.includes("propertyData.smokingAllowed")}
+                        className="custom-switch"
+                      />
+                      <span className="switch-status">
+                        {propertyData.smokingAllowed ? t("common.yes") : t("common.no")}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -413,6 +493,75 @@ const AddListingForm = () => {
           </button>
         </div>
       </div>
+      <style jsx>{`
+        .switches-row {
+          padding: 20px;
+          background: rgba(0, 0, 0, 0.02);
+          border-radius: 12px;
+          border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .switch-item {
+          padding: 15px;
+          background: #fff;
+          border-radius: 8px;
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          transition: all 0.3s ease;
+          height: 100%;
+        }
+
+        .switch-item:hover {
+          border-color: rgba(255, 145, 77, 0.3);
+          box-shadow: 0 2px 8px rgba(255, 145, 77, 0.1);
+        }
+
+        .switch-label {
+          display: block;
+          font-size: 14px;
+          font-weight: 500;
+          color: rgba(0, 0, 0, 0.7);
+          margin-bottom: 12px;
+          cursor: pointer;
+        }
+
+        .switch-control {
+          margin-top: 8px;
+        }
+
+        .switch-status {
+          font-size: 14px;
+          font-weight: 500;
+          color: rgba(0, 0, 0, 0.6);
+          min-width: 40px;
+        }
+
+        :global(.custom-switch .form-check-input) {
+          width: 3rem;
+          height: 1.5rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        :global(.custom-switch .form-check-input:checked) {
+          background-color: #ff914d;
+          border-color: #ff914d;
+        }
+
+        :global(.custom-switch .form-check-input:focus) {
+          border-color: #ff914d;
+          box-shadow: 0 0 0 0.25rem rgba(255, 145, 77, 0.25);
+        }
+
+        @media (max-width: 767px) {
+          .switches-row {
+            padding: 15px;
+          }
+
+          .switch-item {
+            padding: 12px;
+          }
+        }
+      `}</style>
     </form>
   );
 };

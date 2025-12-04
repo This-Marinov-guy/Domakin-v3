@@ -13,13 +13,16 @@ const defaultFormData = {
   propertyData: {
     city: "",
     address: "",
+    postcode: "",
     size: "",
     period: "",
     rent: "",
     bills: "",
     flatmates: "",
-    registration: "yes",
+    registration: true,
     description: "",
+    petsAllowed: false,
+    smokingAllowed: false,
   },
   referralCode: "",
 
