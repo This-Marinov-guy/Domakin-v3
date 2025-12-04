@@ -6,6 +6,8 @@ import Spinner from "react-bootstrap/Spinner";
 import useTranslation from "next-translate/useTranslation";
 import PrefixMultiFilePreviewInput from "../ui/inputs/files/MultiFilePreviewInput";
 import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
+import SearchableCitySelect from "@/components/ui/SearchableCitySelect";
+import { DUTCH_CITIES } from "@/utils/countries";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import { useServer } from "@/hooks/useServer";
@@ -162,13 +164,14 @@ const AddListingForm = () => {
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("emergency_housing.city")}</label>
-              <Form.Control
-                type="text"
+              <SearchableCitySelect
                 value={propertyData.city}
-                onChange={(e) => {
-                  updateListingData("propertyData", "city", e.target.value);
+                onChange={(value: string) => {
+                  updateListingData("propertyData", "city", value);
                 }}
                 isInvalid={errorFields.includes("propertyData.city")}
+                cities={DUTCH_CITIES}
+                placeholder={t("emergency_housing.city") || "Select city"}
               />
             </div>
           </div>

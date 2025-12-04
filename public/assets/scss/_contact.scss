@@ -145,3 +145,136 @@ input[type="checkbox"] {
     transform: translateY(-15px); /* Move up */
   }
 }
+
+// Searchable City Select
+.searchable-city-select {
+  position: relative;
+  width: 100%;
+
+  .select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 50px;
+    padding: 0 20px;
+    font-size: 17px;
+    font-weight: 400;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: rgba(0, 0, 0, 0.7);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $color-one;
+      box-shadow: 0 0 0 0.25rem rgba(255, 145, 77, 0.25);
+    }
+  }
+
+  &.is-invalid .select-trigger {
+    border-color: #dc3545;
+  }
+
+  .selected-value {
+    color: #000;
+    font-size: 17px;
+  }
+
+  .placeholder {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 17px;
+  }
+
+  .chevron-icon {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  .select-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    max-height: 300px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .search-input-wrapper {
+    position: relative;
+    padding: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    i {
+      position: absolute;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 8px 12px 8px 48px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+
+    &::placeholder {
+      color: transparent;
+    }
+
+    &:focus {
+      border-color: $color-one;
+    }
+  }
+
+  .options-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    max-height: 240px;
+  }
+
+  .option {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: 14px;
+    color: #000;
+
+    &:hover {
+      background-color: rgba(255, 145, 77, 0.1);
+    }
+
+    &.selected {
+      background-color: rgba(255, 145, 77, 0.15);
+      font-weight: 500;
+    }
+  }
+
+  .no-results {
+    padding: 12px 16px;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+    text-align: center;
+  }
+}
