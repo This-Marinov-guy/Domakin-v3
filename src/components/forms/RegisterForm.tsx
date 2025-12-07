@@ -82,7 +82,6 @@ const RegisterForm = () => {
 
       const responseData = await sendRequest("/authentication/register", "POST", {
         isSSO: false,
-        id: `${user!.id ?? null}`,
         ...form,
       });
 
