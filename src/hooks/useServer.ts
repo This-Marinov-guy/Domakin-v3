@@ -11,6 +11,7 @@ import React from "react";
 interface Options {
   withLoading?: boolean;
   withError?: boolean;
+  version?: number;
 }
 
 // for main server calls
@@ -64,6 +65,7 @@ export const useServer = () => {
     options: Options = {
       withLoading: true,
       withError: true,
+      version: 1,
     }
   ) => {
     if (options?.withLoading) startLoading();
@@ -85,7 +87,7 @@ export const useServer = () => {
 
     if (["GET", "DELETE"].includes(method)) {
       requestData = {
-        url: `${SERVER_ENDPOINT}/api${url}?${new URLSearchParams(
+        url: `${SERVER_ENDPOINT}/api/v${options.version}${url}?${new URLSearchParams(
           (data as Record<string, string>) || {}
         ).toString()}`,
         method,
@@ -94,7 +96,7 @@ export const useServer = () => {
       };
     } else {
       requestData = {
-        url: SERVER_ENDPOINT + "/api" + url,
+        url: SERVER_ENDPOINT + "/api" + "/v" + options.version + url,
         method,
         data,
         headers,
