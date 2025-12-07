@@ -38,11 +38,36 @@ export const useApi = () => {
       axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
     }
 
+    // Add interface to request body (handles both objects and FormData)
+    let requestBody: any = data;
+    
+    if (data instanceof FormData) {
+      // For FormData, append the interface field
+      const formData = new FormData();
+      // Copy all existing entries
+      for (const [key, value] of data.entries()) {
+        formData.append(key, value);
+      }
+      formData.append("interface", "web");
+      requestBody = formData;
+    } else if (data !== null) {
+      // For regular objects, spread and add interface
+      requestBody = {
+        ...data,
+        interface: "web",
+      };
+    } else {
+      // If data is null, create object with interface
+      requestBody = {
+        interface: "web",
+      };
+    }
+
     try {
       const response = await axios.request({
         url: getApiUrl(registeredApi),
         method,
-        data,
+        data: requestBody,
         headers,
       });
 

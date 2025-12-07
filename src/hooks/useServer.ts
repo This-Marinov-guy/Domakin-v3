@@ -86,19 +86,42 @@ export const useServer = () => {
     let requestData = {};
 
     if (["GET", "DELETE"].includes(method)) {
+      // Add interface to query params
+      const queryParams = new URLSearchParams(
+        (data as Record<string, string>) || {}
+      );
+      queryParams.set("interface", "web");
+      
       requestData = {
-        url: `${SERVER_ENDPOINT}/api/v${options.version}${url}?${new URLSearchParams(
-          (data as Record<string, string>) || {}
-        ).toString()}`,
+        url: `${SERVER_ENDPOINT}/api/v${options.version}${url}?${queryParams.toString()}`,
         method,
         data: {},
         headers,
       };
     } else {
+      // Add interface to request body (handles both objects and FormData)
+      let requestBody = data;
+      
+      if (data instanceof FormData) {
+        // For FormData, append the interface field
+        requestBody = new FormData();
+        // Copy all existing entries
+        for (const [key, value] of data.entries()) {
+          requestBody.append(key, value);
+        }
+        requestBody.append("interface", "web");
+      } else {
+        // For regular objects, spread and add interface
+        requestBody = {
+          ...(data || {}),
+          interface: "web",
+        };
+      }
+      
       requestData = {
         url: SERVER_ENDPOINT + "/api" + "/v" + options.version + url,
         method,
-        data,
+        data: requestBody,
         headers,
       };
     }
