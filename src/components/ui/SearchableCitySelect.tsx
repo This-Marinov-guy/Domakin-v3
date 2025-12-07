@@ -6,7 +6,7 @@ interface SearchableCitySelectProps {
   onChange: (value: string) => void;
   isInvalid?: boolean;
   cities: string[];
-  placeholder: string;
+  placeholder?: string;
 }
 
 const SearchableCitySelect: React.FC<SearchableCitySelectProps> = ({

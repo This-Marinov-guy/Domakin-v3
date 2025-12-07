@@ -171,7 +171,6 @@ const AddListingForm = () => {
                 }}
                 isInvalid={errorFields.includes("propertyData.city")}
                 cities={DUTCH_CITIES}
-                placeholder={t("emergency_housing.city") || "Select city"}
               />
             </div>
           </div>
