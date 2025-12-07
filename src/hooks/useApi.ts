@@ -83,6 +83,8 @@ export const useApi = () => {
           theme: "colored",
         });
       }
+
+      return err?.response?.data;
     } finally {
       stopLoading();
     }

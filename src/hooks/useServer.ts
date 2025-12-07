@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { isEmpty } from "lodash";
 import useTranslation from "next-translate/useTranslation";
 import { csrf, getCookie, showStandardNotification } from "@/utils/helpers";
+import React from "react";
 
 interface Options {
   withLoading?: boolean;
@@ -30,7 +31,19 @@ export const useServer = () => {
           return t(errorMessage[0]);
         }
 
-        return errorMessage.map((error) => `- ${t(error)}`).join("\n");
+        const errorElements: React.ReactNode[] = [];
+        errorMessage.forEach((error, index) => {
+          errorElements.push(
+            React.createElement(
+              React.Fragment,
+              { key: `error-${index}` },
+              `- ${t(error)}`,
+              index < errorMessage.length - 1 && React.createElement("br", { key: `br-${index}` })
+            )
+          );
+        });
+
+        return React.createElement("div", null, errorElements);
       }
 
       return t(errorMessage);
@@ -109,7 +122,9 @@ export const useServer = () => {
         }
 
         showStandardNotification("error", errorMessage);
-      }
+      }      
+
+      return err?.response?.data;
     } finally {
       stopLoading();
     }
