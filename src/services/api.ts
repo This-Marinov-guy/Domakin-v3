@@ -8,7 +8,7 @@ export const fetchBlogPosts = async (lang = "en") => {
   console.log(`[API] NODE_ENV: ${process.env.NODE_ENV}`);
   
   try {
-    const url = `${SERVER_ENDPOINT}/api/blog/posts`;
+    const url = `${SERVER_ENDPOINT}/api/v1/blog/posts`;
     console.log(`[API] Making request to: ${url}`);
     
     const response = await axios.get(url, {
@@ -56,7 +56,7 @@ export const fetchBlogPostBySlug = async (slug: string, lang = "en") => {
   console.log(`[API] Normalized slug: ${normalizedSlug}`);
   
   try {
-    const endpoint = `${SERVER_ENDPOINT}/api/blog/post-by-slug/${normalizedSlug}`;
+    const endpoint = `${SERVER_ENDPOINT}/api/v1/blog/post-by-slug/${normalizedSlug}`;
     console.log(`[API] Making request to: ${endpoint}`);
     
     const response = await axios.get(endpoint, {
@@ -118,7 +118,7 @@ export const fetchBlogPostById = async (id: string, lang = "en") => {
   
   try {
     // First try to get the specific post by ID
-    const directEndpoint = `${SERVER_ENDPOINT}/api/blog/post/${normalizedId}`;
+    const directEndpoint = `${SERVER_ENDPOINT}/api/v1/blog/post/${normalizedId}`;
     console.log(`[API] Making direct request to: ${directEndpoint}`);
     
     const response = await axios.get(directEndpoint, {
@@ -259,7 +259,7 @@ export const fetchBlogPostById = async (id: string, lang = "en") => {
 
 export const fetchProperties = async (lang = "en") => {
   try {
-    const response = await axios.get(`${SERVER_ENDPOINT}/api/property/listing`, {
+    const response = await axios.get(`${SERVER_ENDPOINT}/api/v1/property/listing`, {
       headers: {
         "Accept-Language": lang
       }
@@ -274,7 +274,7 @@ export const fetchProperties = async (lang = "en") => {
 
 export const fetchFeedbacks = async (lang = "en") => {
   try {
-    const response = await axios.get(`${SERVER_ENDPOINT}/api/feedback/list`, {
+    const response = await axios.get(`${SERVER_ENDPOINT}/api/v1/feedback/list`, {
       headers: {
         "Accept-Language": lang
       }

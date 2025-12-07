@@ -24,7 +24,8 @@ export default class UserStore {
   @observable user: any = null;
   @observable editUser = {
     profileImage: "",
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
     password: "",
@@ -84,7 +85,10 @@ export default class UserStore {
       .single()) ?? {
       phone: "",
       profileImage: session.user.user_metadata.avatar_url,
-    };
+    };    
+
+    console.log(session.user.id);
+    
 
     this.user = {
       ...convertKeysToCamelCase(data),
@@ -132,7 +136,8 @@ export default class UserStore {
 
     this.editUser = {
       ...this.editUser,
-      name: this.user.name,
+      firstName: this.user.name?.split(" ")[0] || "",
+      lastName: this.user.name?.split(" ").slice(1).join(" ") || "",
       email: this.user.email,
       phone: this.user.phone,
       password: "",

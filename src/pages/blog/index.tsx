@@ -119,7 +119,7 @@ const Blog = ({ serverBlogPosts, currentPage, totalPages, itemsPerPage }: BlogPr
         <meta name="description" content={t("blog.description")} />
         <meta name="keywords" content="student housing, blog, accommodation, rental tips, student life, housing advice" />
         <link rel="canonical" href="https://www.domakin.nl/blog" />
-        <link rel="alternate" type="application/rss+xml" title="Domakin Blog RSS Feed" href="https://www.domakin.nl/api/blog/rss.xml" />
+        <link rel="alternate" type="application/rss+xml" title="Domakin Blog RSS Feed" href="https://www.domakin.nl/api/v1/blog/rss.xml" />
         
         {/* Open Graph meta tags */}
         <meta property="og:title" content={`${t("blog.title")} | Domakin`} />

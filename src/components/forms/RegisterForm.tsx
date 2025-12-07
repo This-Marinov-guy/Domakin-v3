@@ -15,7 +15,8 @@ import supabase from "@/utils/supabase";
 import { showGeneralError, showStandardNotification } from "@/utils/helpers";
 
 const defaultData = {
-  name: "",
+  firstName: "",
+  lastName: "",
   phone: "",
   email: "",
   password: "",
@@ -71,7 +72,7 @@ const RegisterForm = () => {
         password: form.password,
         phone: form.phone,
         options: {
-          data: { display_name: form.name },
+          data: { display_name: `${form.firstName} ${form.lastName}`.trim() },
         },
       });
 
@@ -119,15 +120,30 @@ const RegisterForm = () => {
 
         <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta position-relative mb-25">
-            <label htmlFor="">{t("authentication.name")}</label>
+            <label htmlFor="">{t("authentication.first_name")}</label>
             <Form.Control
               type="text"
-              name="name"
-              value={form.name}
+              name="firstName"
+              value={form.firstName}
               onChange={(e) => {
                 handleChange(e);
               }}
-              isInvalid={errors.includes("name")}
+              isInvalid={errors.includes("firstName")}
+            />
+          </div>
+        </div>
+
+        <div className="col-lg-6 col-md-6 col-12">
+          <div className="input-group-meta position-relative mb-25">
+            <label htmlFor="">{t("authentication.last_name")}</label>
+            <Form.Control
+              type="text"
+              name="lastName"
+              value={form.lastName}
+              onChange={(e) => {
+                handleChange(e);
+              }}
+              isInvalid={errors.includes("lastName")}
             />
           </div>
         </div>

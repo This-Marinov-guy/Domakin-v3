@@ -12,6 +12,8 @@
         "email": "Email",
         "password": "Password",
         "name": "Name",
+        "first_name": "First Name",
+        "last_name": "Last Name",
         "phone": "Phone",
         "confirm_password": "Confirm password",
         "already_registered": "Already have an account?",

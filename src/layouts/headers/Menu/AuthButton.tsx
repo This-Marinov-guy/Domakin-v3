@@ -9,6 +9,7 @@ import Spinner from "react-bootstrap/Spinner";
 import Badge from "react-bootstrap/Badge";
 import useTranslation from "next-translate/useTranslation";
 import LogoutButton from "./LogoutButton";
+import { isEmpty } from "lodash";
 
 const AuthButton = ({
   responsive = false,
@@ -22,7 +23,7 @@ const AuthButton = ({
 
   const router = useRouter();
 
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("translations");  
 
   if (userLoading) {
     return (
@@ -50,7 +51,7 @@ const AuthButton = ({
           : "d-lg-inline-block ms-3"
       }
     >
-      {user !== null ? (
+      {!isEmpty(user) ? (
         <div className="d-flex align-items-center justify-center gap-3">
           <div
             className="avatar-container"

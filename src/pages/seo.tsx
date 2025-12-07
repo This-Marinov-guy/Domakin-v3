@@ -190,7 +190,7 @@ const SEO = () => {
       <link rel="icon" href="./favicon.ico" type="image/x-icon" />
       <link rel="manifest" href="./manifest.json" />
       <link rel="robots" href="./robots.txt" />
-      <link rel="alternate" type="application/rss+xml" title="Domakin Blog RSS Feed" href="/api/blog/rss.xml" />
+      <link rel="alternate" type="application/rss+xml" title="Domakin Blog RSS Feed" href="/api/v1/blog/rss.xml" />
       {/* For IE  */}
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       {/* Chrome, Firefox OS and Opera */}

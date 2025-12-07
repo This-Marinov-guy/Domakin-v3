@@ -9,8 +9,8 @@ module.exports = {
 
   // API endpoints - these should match your actual API routes
   endpoints: {
-    blogPosts: "/api/blog/posts",
-    properties: "/api/property/listing",
+    blogPosts: "/api/v1/blog/posts",
+    properties: "/api/v1/property/listing",
   },
 
   // Request configuration

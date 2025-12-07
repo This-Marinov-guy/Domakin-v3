@@ -32,12 +32,25 @@ const UserAvatarSetting = () => {
         <div className="dash-input-wrapper mb-30">
           <label htmlFor="">First Name*</label>
           <Form.Control
-            value={editUser.name}
+            value={editUser.firstName}
             onChange={(e) => {
-              updateUserDetails("name", e.target.value);
+              updateUserDetails("firstName", e.target.value);
             }}
             type="text"
-            isInvalid={editUserErrors.includes("name")}
+            isInvalid={editUserErrors.includes("firstName")}
+          />
+        </div>
+      </div>
+      <div className="col-sm-6">
+        <div className="dash-input-wrapper mb-30">
+          <label htmlFor="">Last Name*</label>
+          <Form.Control
+            value={editUser.lastName}
+            onChange={(e) => {
+              updateUserDetails("lastName", e.target.value);
+            }}
+            type="text"
+            isInvalid={editUserErrors.includes("lastName")}
           />
         </div>
       </div>

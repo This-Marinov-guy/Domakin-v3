@@ -11,7 +11,7 @@ function generateRssXml(blogPosts: any[]) {
         <link>${baseUrl}/blog</link>
         <language>en</language>
         <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-        <atom:link href="${baseUrl}/api/blog/rss.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="${baseUrl}/api/v1/blog/rss.xml" rel="self" type="application/rss+xml"/>
         <image>
           <url>${baseUrl}/assets/img/logo.png</url>
           <title>Domakin Blog</title>
