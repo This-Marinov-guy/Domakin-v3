@@ -109,11 +109,16 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
     { value: 3, text: "Taken" },
   ];
 
+  const closeModal = () => {
+    setIsSignalClicked(false);
+    modalStore.closeAll();
+  };
+
   return (
     <Modal
       show={modalStore.modals[EDIT_PROPERTY_MODAL]}
       fullscreen
-      onHide={modalStore.closeAll}
+      onHide={closeModal}
     >
       <Modal.Header closeButton>
         <h5>Edit Property Details</h5>
@@ -592,7 +597,7 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
               <button
                 disabled={loading}
                 type="button"
-                onClick={modalStore.closeAll}
+                onClick={closeModal}
                 className="btn-seven text-uppercase rounded-3 fw-normal"
                 style={{
                   flex: "1",
