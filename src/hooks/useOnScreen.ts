@@ -5,8 +5,12 @@ export default function useOnScreen(ref: any) {
 
   const observer = useMemo(() => {
     if (typeof window !== "undefined") {
-      return new IntersectionObserver(([entry]) =>
-        setIntersecting(entry.isIntersecting)
+      return new IntersectionObserver(
+        ([entry]) => setIntersecting(entry.isIntersecting),
+        {
+          threshold: 0.1, // Trigger when at least 10% of the element is visible
+          rootMargin: "0px",
+        }
       );
     }
     return null;

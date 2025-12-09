@@ -14,6 +14,12 @@ interface Options {
   version?: number;
 }
 
+const defaultOptions: Options = {
+  withLoading: true,
+  withError: true,
+  version: 1,
+};
+
 // for main server calls
 export const useServer = () => {
   const {
@@ -68,6 +74,8 @@ export const useServer = () => {
       version: 1,
     }
   ) => {
+    options = { ...defaultOptions, ...options };
+    
     if (options?.withLoading) startLoading();
 
     axios.defaults.withCredentials = true;

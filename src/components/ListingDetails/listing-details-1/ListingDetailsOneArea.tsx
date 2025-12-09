@@ -105,7 +105,7 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
                   <div className="d-flex align-items-center gap-2 fs-5">
                     <span>Quick Actions:</span>
                     {extendedPropertyDetails?.property_data?.payment_link && (
-                      <StripePaymentLinkButton propertyId={property.id} />
+                      <StripePaymentLinkButton propertyId={property.id} small/>
                     )}
                     <OverlayTrigger
                       placement="top"

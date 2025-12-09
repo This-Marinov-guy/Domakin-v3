@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import NiceSelect from "@/ui/NiceSelect";
 import Modal from "react-bootstrap/Modal";
@@ -16,6 +16,8 @@ import { EDIT_PROPERTY_MODAL } from "@/utils/defines";
 import { showGeneralError, transformToFormData } from "@/utils/helpers";
 import { MdClose } from "react-icons/md";
 import MultiFilePreviewInput from "../inputs/files/MultiFilePreviewInput";
+import signalIcon from "@/assets/images/icon/signal.avif";
+import useOnScreen from "@/hooks/useOnScreen";
 
 const EditPropertyModal = ({ callback = () => {} }: any) => {
   const {
@@ -36,6 +38,9 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
   const [showHideFromPublic, setShowHideFromPublic] = useState(
     editPropertyData.releaseTimestamp
   );
+  const [isSignalClicked, setIsSignalClicked] = useState(false);
+  const footerRef = useRef<HTMLDivElement>(null);
+  const isFooterVisible = useOnScreen(footerRef);
 
   const { t } = useTranslation("translations");
 
@@ -58,6 +63,12 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
     } catch (error) {
       console.error("Error loading listing:", error);
     }
+  };
+
+  const handleToggleSignal = () => {
+    setIsSignalClicked(true);
+    const isCurrentlyInSignal = editPropertyData.is_signal || false;
+    updateEditListingData("is_signal", "", !isCurrentlyInSignal);
   };
 
   const handleSubmit = async (e: any) => {
@@ -111,6 +122,55 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
         <form className="form-style-one wow fadeInUp">
           <div className="container m-a controls">
             <div className="row mt-20 mb-20">
+              <div className="col-12 mb-4 d-flex flex-column gap-2 align-items-center">
+                <div className="d-flex justify-content-center gap-4 flex-wrap">
+                  <button
+                    disabled={loading}
+                    type="button"
+                    onClick={handleToggleSignal}
+                    className="btn btn-sm"
+                    style={{
+                      backgroundColor: editPropertyData.is_signal
+                        ? "#28a745"
+                        : "#dc3545",
+                      color: "white",
+                      border: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!loading) {
+                        e.currentTarget.style.opacity = "0.9";
+                        e.currentTarget.style.transform = "translateY(-1px)";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.opacity = "1";
+                      e.currentTarget.style.transform = "translateY(0)";
+                    }}
+                  >
+                    <Image
+                      src={signalIcon}
+                      alt="Signal"
+                      width={16}
+                      height={16}
+                      style={{ objectFit: "contain" }}
+                    />
+                    <span>
+                      {editPropertyData.is_signal
+                        ? "Added to Signal"
+                        : "Removed from Signal"}
+                    </span>
+                  </button>
+                </div>
+                {isSignalClicked && (
+                  <small>
+                    *Signal listing will be modified after you submit the edit
+                  </small>
+                )}
+              </div>
               {showHideFromPublic && (
                 <div className="col-12 d-flex justify-content-start align-items-center gap-2 py-3">
                   <p className="mb-0">Hide property from the public</p>
@@ -477,7 +537,7 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
           </div>
         </form>
       </Modal.Body>
-      <Modal.Footer className="m-auto">
+      <Modal.Footer className="m-auto" ref={footerRef}>
         <div className="d-flex justify-content-center align-items-center gap-3">
           <button
             disabled={loading}
@@ -497,6 +557,54 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
           </button>
         </div>
       </Modal.Footer>
+
+      {/* Sticky footer buttons when original footer is not visible */}
+      {!isFooterVisible && (
+        <div
+          className="sticky-modal-footer"
+          style={{
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: "white",
+            padding: "15px 20px",
+            boxShadow: "0 -4px 20px rgba(0, 0, 0, 0.15)",
+            zIndex: 1051,
+            borderTop: "1px solid #e0e0e0",
+            animation: "fadeInUp 0.3s ease-in-out",
+          }}
+        >
+          <div className="container">
+            <div className="d-flex justify-content-center align-items-center gap-3">
+              <button
+                disabled={loading}
+                type="button"
+                onClick={handleSubmit}
+                className="btn-nine text-uppercase rounded-3 fw-normal"
+                style={{
+                  flex: "1",
+                  maxWidth: "300px",
+                }}
+              >
+                {loading ? <Spinner size="sm" animation="border" /> : "Update"}
+              </button>
+              <button
+                disabled={loading}
+                type="button"
+                onClick={modalStore.closeAll}
+                className="btn-seven text-uppercase rounded-3 fw-normal"
+                style={{
+                  flex: "1",
+                  maxWidth: "300px",
+                }}
+              >
+                back
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </Modal>
   );
 };
