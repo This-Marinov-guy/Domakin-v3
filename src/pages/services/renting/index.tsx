@@ -8,6 +8,7 @@ import Head from "next/head";
 import useTranslation from "next-translate/useTranslation";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import { getPropertyUrl } from "@/utils/seoHelpers";
+import { useRouter } from "next/router";
 
 interface PropertiesIndexProps {
   serverProperties: any[];
@@ -15,7 +16,8 @@ interface PropertiesIndexProps {
 
 const index = ({ serverProperties }: PropertiesIndexProps) => {
   const { propertyStore } = useStore();
-  const { t } = useTranslation("translations");
+  const { t, lang } = useTranslation("translations");
+  const router = useRouter();
 
   // Initialize store with server-side data
   useEffect(() => {
@@ -70,29 +72,54 @@ const index = ({ serverProperties }: PropertiesIndexProps) => {
     { name: "Renting", url: "https://www.domakin.nl/services/renting" },
   ];
 
+  const baseUrl = "https://www.domakin.nl";
+  const currentUrl = `${baseUrl}${router.asPath}`;
+  
+  // Get localized content
+  const title = lang === "en" 
+    ? "Student Housing Rentals Netherlands | Domakin - Find Your Perfect Room"
+    : lang === "bg"
+    ? "Студентски жилища в Нидерландия | Domakin - Намерете перфектната стая"
+    : "Φοιτητική Στέγαση στην Ολλανδία | Domakin - Βρείτε το Ιδανικό Δωμάτιο";
+  
+  const description = lang === "en"
+    ? "Find quality student accommodation and rental properties in the Netherlands. Browse verified listings for rooms and apartments with transparent pricing."
+    : lang === "bg"
+    ? "Намерете качествени студентски жилища и наемни имоти в Нидерландия. Разгледайте проверени обяви за стаи и апартаменти с прозрачни цени."
+    : "Βρείτε ποιοτική φοιτητική διαμονή και ακίνητα προς ενοικίαση στην Ολλανδία. Περιηγηθείτε σε επαληθευμένες καταχωρήσεις για δωμάτια και διαμερίσματα με διαφανείς τιμές.";
+  
+  const ogImage = `${baseUrl}/assets/img/icons/12.png`;
+
   return (
     <>
       <Head>
-        <title>Student Housing Rentals Netherlands | Domakin - Find Your Perfect Room</title>
-        <meta name="description" content="Find quality student accommodation and rental properties in the Netherlands. Browse verified listings for rooms and apartments with transparent pricing." />
-        <meta name="keywords" content="student housing Netherlands, rental properties, student accommodation, rooms for rent, apartments, student housing Amsterdam, Rotterdam, Utrecht" />
-        <link rel="canonical" href="https://www.domakin.nl/services/renting" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="keywords" content={lang === "en" 
+          ? "student housing Netherlands, rental properties, student accommodation, rooms for rent, apartments, student housing Amsterdam, Rotterdam, Utrecht"
+          : lang === "bg"
+          ? "студентско жилище Нидерландия, наемни имоти, студентско настаняване, стаи под наем, апартаменти"
+          : "φοιτητική στέγαση Ολλανδία, ακίνητα προς ενοικίαση, φοιτητική διαμονή, δωμάτια προς ενοικίαση"} />
+        <link rel="canonical" href={currentUrl} />
         
         {/* Open Graph meta tags */}
-        <meta property="og:title" content="Student Housing Rentals Netherlands | Domakin" />
-        <meta property="og:description" content="Find quality student accommodation and rental properties in the Netherlands. Browse verified listings for rooms and apartments." />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.domakin.nl/services/renting" />
+        <meta property="og:url" content={currentUrl} />
         <meta property="og:site_name" content="Domakin" />
-        <meta property="og:image" content="https://www.domakin.nl/assets/img/listing/properties-og-image.jpg" />
+        <meta property="og:image" content={ogImage} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={title} />
+        <meta property="og:locale" content={lang === "en" ? "en_US" : lang === "bg" ? "bg_BG" : "el_GR"} />
         
         {/* Twitter Card meta tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Student Housing Rentals Netherlands | Domakin" />
-        <meta name="twitter:description" content="Find quality student accommodation and rental properties in the Netherlands." />
-        <meta name="twitter:image" content="https://www.domakin.nl/assets/img/listing/properties-og-image.jpg" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImage} />
+        <meta name="twitter:image:alt" content={title} />
         
         {/* Location meta tags */}
         <meta name="geo.region" content="NL" />
