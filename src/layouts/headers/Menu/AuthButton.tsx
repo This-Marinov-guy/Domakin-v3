@@ -32,7 +32,7 @@ const AuthButton = ({
           responsive
             ? "d-inline-block ms-3"
             : mobile
-            ? "d-block d-lg-none d-md-inline-block ms-3 mt-10"
+            ? "d-block d-lg-none d-md-inline-block ms-3 mt-3"
             : "d-lg-inline-block ms-3"
         }
       >
@@ -47,7 +47,7 @@ const AuthButton = ({
         responsive
           ? "d-inline-block ms-3"
           : mobile
-          ? "d-block d-lg-none d-md-inline-block ms-3 mt-10"
+          ? "d-block d-lg-none d-md-inline-block ms-3 mt-3"
           : "d-lg-inline-block ms-3"
       }
     >
