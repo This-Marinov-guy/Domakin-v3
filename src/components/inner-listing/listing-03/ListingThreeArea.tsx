@@ -45,20 +45,20 @@ const ListingThreeArea = ({ style, properties }: any) => {
     localStorage.setItem(LOCAL_STORAGE_PROPERTY_VIEW, newView);
   };
 
-  // Query params for all filters
+  // Query params for all filters - prioritize URL params, then store, then defaults
   const initialQuery =
-    (searchParams.get("query") || propertiesListFilters.query) ?? "";
+    searchParams.get("query") ?? propertiesListFilters.query ?? "";
   const initialSort =
-    (searchParams.get("sort") || propertiesListFilters.sort) ?? SORT_NEWEST;
+    searchParams.get("sort") ?? propertiesListFilters.sort ?? SORT_NEWEST;
   const initialPage = Number(
-    (searchParams.get("page") || propertiesListFilters.page) ?? 0
+    searchParams.get("page") ?? propertiesListFilters.page ?? 0
   );
   const initialCity =
-    (searchParams.get("city") || propertiesListFilters.city) ?? "all";
+    searchParams.get("city") ?? propertiesListFilters.city ?? "all";
   const initialPrice =
-    (searchParams.get("price") || propertiesListFilters.price) ?? "200-2000";
+    searchParams.get("price") ?? propertiesListFilters.price ?? "200-2000";
   const initialAvail =
-    (searchParams.get("avail") || propertiesListFilters.avail) ?? "all";
+    searchParams.get("avail") ?? propertiesListFilters.avail ?? "all";
 
   const [query, setQuery] = useState(initialQuery);
   const [sortIndex, setSortIndex] = useState(initialSort);
@@ -69,45 +69,140 @@ const ListingThreeArea = ({ style, properties }: any) => {
 
   const pageLimit = 6;
   const startRef = useRef<HTMLDivElement>(null);
+  const isInitialMount = useRef(true);
 
   // Track previous filter values (initialize with current state)
   const prevFilters = useRef({
-    query,
-    city: cityFilter,
-    price: priceFilter,
-    avail: availFilter,
+    query: initialQuery,
+    city: initialCity,
+    price: initialPrice,
+    avail: initialAvail,
+    sort: initialSort,
+    page: initialPage,
   });
 
   // Single effect to handle URL updates and page reset on filter change
   useEffect(() => {
+    // Handle initial mount
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      
+      const hasURLParams = searchParams.toString().length > 0;
+      const hasStoreFilters = propertiesListFilters.query || 
+                             propertiesListFilters.city !== "all" ||
+                             propertiesListFilters.price !== "200-2000" ||
+                             propertiesListFilters.avail !== "all" ||
+                             propertiesListFilters.sort !== SORT_NEWEST ||
+                             propertiesListFilters.page > 0;
+      
+      // If no URL params but we have store filters, sync URL with store
+      if (!hasURLParams && hasStoreFilters) {
+        const params = new URLSearchParams();
+        
+        if (query && query.trim() !== "") {
+          params.set("query", query);
+        }
+        if (cityFilter !== "all") {
+          params.set("city", cityFilter);
+        }
+        if (priceFilter !== "200-2000") {
+          params.set("price", priceFilter);
+        }
+        if (availFilter !== "all") {
+          params.set("avail", availFilter);
+        }
+        if (sortIndex !== SORT_NEWEST) {
+          params.set("sort", sortIndex);
+        }
+        if (currentPage > 0) {
+          params.set("page", String(currentPage));
+        }
+        
+        const queryString = params.toString();
+        if (queryString) {
+          router.replace(`?${queryString}`, { scroll: false });
+        }
+      }
+      
+      prevFilters.current = {
+        query,
+        city: cityFilter,
+        price: priceFilter,
+        avail: availFilter,
+        sort: sortIndex,
+        page: currentPage,
+      };
+      setPropertiesListFilters({
+        query,
+        city: cityFilter,
+        price: priceFilter,
+        avail: availFilter,
+        sort: sortIndex,
+        page: currentPage,
+      });
+      return;
+    }
+
+    // Check if filters actually changed
     const filtersChanged =
       prevFilters.current.query !== query ||
       prevFilters.current.city !== cityFilter ||
       prevFilters.current.price !== priceFilter ||
-      prevFilters.current.avail !== availFilter;
+      prevFilters.current.avail !== availFilter ||
+      prevFilters.current.sort !== sortIndex;
 
     let nextPage = currentPage;
     if (filtersChanged) {
       nextPage = 0;
       if (currentPage !== 0) {
         setCurrentPage(0);
+        return; // Let the state update trigger this effect again
       }
     }
 
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("query", query);
-    params.set("city", cityFilter);
-    params.set("price", priceFilter);
-    params.set("avail", availFilter);
-    params.set("sort", sortIndex);
-    params.set("page", String(nextPage));
-    router.replace(`?${params.toString()}`, { scroll: false });
+    // Build new params - only include non-default values
+    const params = new URLSearchParams();
+    
+    // Only add params that differ from defaults or are explicitly set
+    if (query && query.trim() !== "") {
+      params.set("query", query);
+    }
+    if (cityFilter !== "all") {
+      params.set("city", cityFilter);
+    }
+    if (priceFilter !== "200-2000") {
+      params.set("price", priceFilter);
+    }
+    if (availFilter !== "all") {
+      params.set("avail", availFilter);
+    }
+    if (sortIndex !== SORT_NEWEST) {
+      params.set("sort", sortIndex);
+    }
+    if (nextPage > 0) {
+      params.set("page", String(nextPage));
+    }
 
+    // Build the new URL query string
+    const newQueryString = params.toString();
+    const currentQueryString = searchParams.toString();
+
+    // Only update URL if it actually changed and we have params, or if we're removing all params
+    const shouldUpdateURL = newQueryString !== currentQueryString;
+    
+    if (shouldUpdateURL) {
+      const newURL = newQueryString ? `?${newQueryString}` : window.location.pathname;
+      router.replace(newURL, { scroll: false });
+    }
+
+    // Update previous filters
     prevFilters.current = {
       query,
       city: cityFilter,
       price: priceFilter,
       avail: availFilter,
+      sort: sortIndex,
+      page: nextPage,
     };
 
     setPropertiesListFilters({
@@ -116,7 +211,7 @@ const ListingThreeArea = ({ style, properties }: any) => {
       price: priceFilter,
       avail: availFilter,
       sort: sortIndex,
-      page: currentPage,
+      page: nextPage,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, cityFilter, priceFilter, availFilter, sortIndex, currentPage]);
