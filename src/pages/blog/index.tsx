@@ -6,9 +6,7 @@ import useTranslation from "next-translate/useTranslation";
 import BlogMainSection from "@/components/blogs/common-blog/BlogMainSection";
 import { GetServerSideProps } from "next";
 import { fetchBlogPosts } from "@/services/api";
-import { useStore } from "@/stores/storeContext";
 import Head from "next/head";
-import { useEffect, useState } from "react";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 
 interface BlogProps {
@@ -20,56 +18,6 @@ interface BlogProps {
 
 const Blog = ({ serverBlogPosts, currentPage, totalPages, itemsPerPage }: BlogProps) => {
   const { t } = useTranslation("translations");
-  const { blogStore } = useStore();
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  // Handle hydration properly
-  useEffect(() => {
-    // Ensure we're on the client side
-    setIsHydrated(true);
-
-    // Initialize store with server-side data immediately
-    if (serverBlogPosts && serverBlogPosts.length > 0) {
-      // Force set the SSR data and ensure loading is false
-      blogStore.setSSRBlogPosts(serverBlogPosts as []);
-      blogStore.loading = false;
-    } else {
-      // If no server posts, ensure loading is false
-      blogStore.loading = false;
-    }
-
-    // Cleanup function to prevent state conflicts
-    return () => {
-      blogStore.loading = false;
-    };
-  }, [serverBlogPosts, blogStore]);
-
-  // Prevent hydration mismatch by not rendering until hydrated
-  if (!isHydrated) {
-    return (
-      <>
-        <HeaderOne />
-        <BreadcrumbThree
-          title={t("blog.title")}
-          link_title={t("blog.title")}
-          background={8}
-          style={false}
-        />
-        {/* Show a loading state that matches server-side render */}
-        <div className="container mt-80 mb-150">
-          <div className="row">
-            <div className="col-12">
-              <div className="text-center py-5">
-                <p>Loading...</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <FancyBanner />
-        <FooterFour />
-      </>
-    );
-  }
 
   // Generate JSON-LD structured data for blog listing
   const jsonLd = {
@@ -157,6 +105,7 @@ const Blog = ({ serverBlogPosts, currentPage, totalPages, itemsPerPage }: BlogPr
         style={false}
       />
       <BlogMainSection 
+        posts={serverBlogPosts}
         currentPage={currentPage}
         totalPages={totalPages}
         itemsPerPage={itemsPerPage}

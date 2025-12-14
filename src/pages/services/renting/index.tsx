@@ -2,8 +2,6 @@ import PropertiesPage from "@/components/inner-pages/services/detail-page/Proper
 import Wrapper from "@/layouts/Wrapper";
 import { GetServerSideProps } from "next";
 import { fetchProperties } from "@/services/api";
-import { useStore } from "@/stores/storeContext";
-import { useEffect } from "react";
 import Head from "next/head";
 import useTranslation from "next-translate/useTranslation";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
@@ -15,16 +13,8 @@ interface PropertiesIndexProps {
 }
 
 const index = ({ serverProperties }: PropertiesIndexProps) => {
-  const { propertyStore } = useStore();
   const { t, lang } = useTranslation("translations");
   const router = useRouter();
-
-  // Initialize store with server-side data
-  useEffect(() => {
-    if (serverProperties && serverProperties.length > 0) {
-      propertyStore.setSSRProperties(serverProperties);
-    }
-  }, [serverProperties, propertyStore]);
 
   // Generate structured data for property listings
   const jsonLd = {
@@ -134,7 +124,7 @@ const index = ({ serverProperties }: PropertiesIndexProps) => {
       </Head>
       <BreadcrumbSchema items={breadcrumbItems} />
       <Wrapper>
-        <PropertiesPage />
+        <PropertiesPage serverProperties={serverProperties} />
       </Wrapper>
     </>
   );

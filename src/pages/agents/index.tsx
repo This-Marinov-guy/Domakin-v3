@@ -10,8 +10,6 @@ import Brand from "@/components/inner-pages/about-us/about-us-one/Brand";
 import BreadcrumbOne from "@/components/common/breadcrumb/BreadcrumbOne";
 import { GetServerSideProps } from "next";
 import { fetchFeedbacks } from "@/services/api";
-import { useStore } from "@/stores/storeContext";
-import { useEffect } from "react";
 
 export const metadata = {
   title: "Agents",
@@ -23,14 +21,6 @@ interface AgentsProps {
 
 const index = ({ serverFeedbacks }: AgentsProps) => {
   const { t } = useTranslation("translations");
-  const { commonStore } = useStore();
-
-  // Initialize store with server-side data
-  useEffect(() => {
-    if (serverFeedbacks && serverFeedbacks.length > 0) {
-      commonStore.setSSRFeedbacks(serverFeedbacks as []);
-    }
-  }, [serverFeedbacks, commonStore]);
 
   return (
     <Wrapper>
@@ -40,7 +30,7 @@ const index = ({ serverFeedbacks }: AgentsProps) => {
         sub_title={t("team.property_agents")}
       />
       <AgentArea withDetails/>
-      <Feedback style={true} />
+      <Feedback style={true} feedbacks={serverFeedbacks} />
       <Brand />
       <FancyBanner style={false} />
       <FooterFour />

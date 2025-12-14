@@ -141,6 +141,16 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.domakin.nl/terms&amp;policy"/>
   </url>
   <url>
+    <loc>https://www.domakin.nl/blog/christmas-in-amsterdam</loc>
+    <lastmod>2025-12-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.domakin.nl/blog/christmas-in-amsterdam"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://www.domakin.nl/bg/blog/christmas-in-amsterdam"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.domakin.nl/gr/blog/christmas-in-amsterdam"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.domakin.nl/blog/christmas-in-amsterdam"/>
+  </url>
+  <url>
     <loc>https://www.domakin.nl/blog/amsterdam-city-guide</loc>
     <lastmod>2025-12-14</lastmod>
     <changefreq>monthly</changefreq>

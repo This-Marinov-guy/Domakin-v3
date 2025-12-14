@@ -29,6 +29,11 @@ const PropertyCardList = (props: {
                 : `url(/assets/img/properties/${
                     property.folder ?? "property_" + property.id
                   }/${property.main_image})`,
+            aspectRatio: '4 / 3',
+            minHeight: '250px',
+            minWidth: '300px',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
           className={`img-gallery position-relative z-1 border-20 overflow-hidden`}
         >

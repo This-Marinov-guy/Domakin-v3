@@ -12,8 +12,6 @@ import CreateFeedback from "@/components/forms/CreateFeedback";
 import CreateDonation from "@/components/forms/CreateDonation";
 import { GetServerSideProps } from "next";
 import { fetchFeedbacks } from "@/services/api";
-import { useStore } from "@/stores/storeContext";
-import { useEffect } from "react";
 
 export const metadata = {
   title: "Support",
@@ -25,14 +23,6 @@ interface SupportProps {
 
 const index = ({ serverFeedbacks }: SupportProps) => {
   const { t } = useTranslation("translations");
-  const { commonStore } = useStore();
-
-  // Initialize store with server-side data
-  useEffect(() => {
-    if (serverFeedbacks && serverFeedbacks.length > 0) {
-      commonStore.setSSRFeedbacks(serverFeedbacks as []);
-    }
-  }, [serverFeedbacks, commonStore]);
 
   return (
     <Wrapper>
@@ -43,7 +33,7 @@ const index = ({ serverFeedbacks }: SupportProps) => {
       />
       {/* <CreateDonation /> */}
       <CreateFeedback />
-      <Feedback style={true} />
+      <Feedback style={true} feedbacks={serverFeedbacks} />
       <Brand />
       <FancyBanner style={false} />
       <FooterFour />

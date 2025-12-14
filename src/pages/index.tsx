@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Wrapper from "@/layouts/Wrapper";
 import HomeSix from "@/components/homes/home-six";
 import { GetServerSideProps } from "next";
 import { fetchFeedbacks, fetchProperties } from "@/services/api";
-import { useStore } from "@/stores/storeContext";
 import SnowBackground from "@/components/common/backgrounds/SnowBackground";
 
 export const metadata = {
@@ -16,23 +15,11 @@ interface HomeProps {
 }
 
 const Index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
-  const { commonStore, propertyStore } = useStore();
-
-  // Initialize store with server-side data and ensure no loading state
-  useEffect(() => {
-    if (serverFeedbacks && serverFeedbacks.length > 0) {
-      commonStore.setSSRFeedbacks(serverFeedbacks as []);
-    }
-
-    if (serverProperties && serverProperties.length > 0) {
-      propertyStore.setSSRProperties(serverProperties);
-    }
-  }, [serverFeedbacks, serverProperties]);
 
   return (
     <Wrapper>
       <SnowBackground/>
-      <HomeSix />
+      <HomeSix serverFeedbacks={serverFeedbacks} serverProperties={serverProperties} />
     </Wrapper>
   );
 };

@@ -10,7 +10,11 @@ import BLockFeatureOne from "./BLockFeatureOne";
 import useTranslation from "next-translate/useTranslation";
 import CreateFeedback from "@/components/forms/CreateFeedback";
 
-const AboutUsOne = () => {
+interface AboutUsOneProps {
+  serverFeedbacks?: any[];
+}
+
+const AboutUsOne = ({ serverFeedbacks = [] }: AboutUsOneProps) => {
   const {t} = useTranslation('translations');
 
   return (
@@ -23,7 +27,7 @@ const AboutUsOne = () => {
       <BLockFeatureOne />
       <VideoBanner />
       <ServicesList />
-      <Feedback style={true} />
+      <Feedback style={true} feedbacks={serverFeedbacks} />
       <CreateFeedback />
       <Brand />
       <FancyBanner style={false} />

@@ -1,22 +1,19 @@
 import React from "react";
-import { toJS } from "mobx";
 import BreadcrumbThree from "@/components/common/breadcrumb/BreadcrumbThree";
 import FooterFour from "@/layouts/footers/FooterFour";
 import HeaderOne from "@/layouts/headers/HeaderOne";
 import FancyBanner from "@/components/common/FancyBanner";
 import StepDescriptionOne from "@/components/common/StepDescriptionOne";
 import useTranslation from "next-translate/useTranslation";
-import AddListingForm from "@/components/forms/AddListingForm";
 import ListingThreeArea from "@/components/inner-listing/listing-03/ListingThreeArea";
-import { useStore } from "@/stores/storeContext";
-import PageLoader from "@/components/ui/loading/PageLoader";
-import { observer } from "mobx-react-lite";
 import { PROPERTY_STATUS } from "@/utils/enum";
 
-const PropertiesPage = () => {
-  const { t } = useTranslation("translations");
+interface PropertiesPageProps {
+  serverProperties: any[];
+}
 
-  const { propertyStore } = useStore();
+const PropertiesPage = ({ serverProperties = [] }: PropertiesPageProps) => {
+  const { t } = useTranslation("translations");
 
   const details = {
     title: t("renting.find_the_perfect_place_for_you"),
@@ -41,13 +38,9 @@ const PropertiesPage = () => {
   };
 
   const forRentList: any[] = t("FOR_RENT", {}, { returnObjects: true }) ?? [];
-  const allProperties = [...propertyStore.properties, ...forRentList].filter(
+  const allProperties = [...serverProperties, ...forRentList].filter(
     (property) => property.statusCode !== PROPERTY_STATUS.PENDING
   );
-
-  if (propertyStore.propertiesLoading || !allProperties) {
-    return <PageLoader />;
-  }
 
   return (
     <>
@@ -65,4 +58,4 @@ const PropertiesPage = () => {
   );
 };
 
-export default observer(PropertiesPage);
+export default PropertiesPage;

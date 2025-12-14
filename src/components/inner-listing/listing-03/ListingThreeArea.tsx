@@ -256,6 +256,7 @@ const ListingThreeArea = ({ style, properties }: any) => {
       className={`property-listing-six pb-170 xl-pb-120 ${
         style ? "pt-80 xl-pt-60" : "pt-80 md-pt-40 mt-80 xl-mt-60 bg-pink-two"
       }`}
+      style={{ minHeight: '800px' }}
     >
       <div className="container">
         {!style && (
@@ -325,7 +326,7 @@ const ListingThreeArea = ({ style, properties }: any) => {
           </div>
         </div>
 
-        <div className="row gx-xxl-5" ref={startRef}>
+        <div className="row gx-xxl-5" ref={startRef} style={{ minHeight: paginatedProperties?.length > 0 ? '600px' : '200px' }}>
           {paginatedProperties?.length > 0 ? (
             paginatedProperties.map((property: any, index: number) =>
               listStyle === LIST ? (

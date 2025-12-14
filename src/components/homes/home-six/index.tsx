@@ -8,14 +8,19 @@ import ServicesList from "@/components/inner-pages/services/service-one/Services
 import CreateFeedback from "@/components/forms/CreateFeedback"
 import BLockFeatureOne from "@/components/inner-pages/about-us/about-us-one/BLockFeatureOne"
 
-const HomeSix = () => {
+interface HomeSixProps {
+  serverFeedbacks?: any[];
+  serverProperties?: any[];
+}
+
+const HomeSix = ({ serverFeedbacks = [] }: HomeSixProps) => {
    return (
      <>
        <HeaderOne />
        <HeroBanner />
        <ServicesList />
        <BLockFeatureOne />
-       <Feedback style={true} />
+       <Feedback style={true} feedbacks={serverFeedbacks} />
        <Brand />
        <FancyBanner style={false} />
        <FooterFour />
