@@ -255,7 +255,11 @@
     "city_of_viewing": "Πόλη της επίσκεψης",
     "date": "Ημερομηνία επίσκεψης",
     "time": "Ώρα επίσκεψης",
-    "address_of_viewing_optional": "Διεύθυνση επίσκεψης (προαιρετικό)"
+    "address_of_viewing_optional": "Διεύθυνση επίσκεψης (προαιρετικό)",
+    "pricing_policy_banner_title": "Δείτε τις Τιμές & την Πολιτική μας \"Χωρίς Αποτέλεσμα, Χωρίς Πληρωμή\"",
+    "pricing_policy_banner_description": "Χρεώνουμε μόνο αν παραστήσουμε επιτυχώς την επίσκεψη για εσάς — χωρίς αποτέλεσμα, χωρίς πληρωμή.",
+    "pricing_link": "Τιμές",
+    "policy_link": "Πολιτική"
   },
   "renting": {
     "renting_accommodations": "Ενοικίαση κατοικίας",

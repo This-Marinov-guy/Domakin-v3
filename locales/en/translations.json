@@ -255,7 +255,11 @@
     "city_of_viewing": "City of viewing",
     "date": "Date of viewing",
     "time": "Time of viewing",
-    "address_of_viewing_optional": "Address of viewing (optional)"
+    "address_of_viewing_optional": "Address of viewing (optional)",
+    "pricing_policy_banner_title": "View Pricing & Our \"No Cure, No Pay\" Policy",
+    "pricing_policy_banner_description": "We only charge if we successfully attend the viewing for you — no cure, no pay.",
+    "pricing_link": "Pricing",
+    "policy_link": "Policy"
   },
   "room_searching" : {
     "room_searching_service": "Room searching",

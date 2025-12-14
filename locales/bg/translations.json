@@ -257,6 +257,11 @@
     "city_of_viewing": "Град на огледа",
     "date": "Дата на огледа",
     "time": "Час на огледа",
+    "address_of_viewing_optional": "Адрес на огледа (по избор)",
+    "pricing_policy_banner_title": "Вижте цените и нашата политика \"Без резултат, без плащане\"",
+    "pricing_policy_banner_description": "Таксуваме само ако успешно присъстваме на огледа вместо вас — без резултат, без плащане.",
+    "pricing_link": "Цени",
+    "policy_link": "Политика",
     "address_of_viewing_optional": "Адрес на огледа (по желание)"
   },
   "room_searching": {
