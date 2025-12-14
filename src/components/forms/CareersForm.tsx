@@ -64,11 +64,10 @@ const CareersForm = () => {
   // Prefill user data if logged in
   useEffect(() => {
     if (user?.name) {
-      setValue("name", user.name);
+      setValue("name", user.name.split(" ")[0] || "");
+      setValue("surname", user.name.split(" ")[1] || "");
     }
-    if (user?.surname) {
-      setValue("surname", user.surname);
-    }
+   
     if (user?.email) {
       setValue("email", user.email);
     }
