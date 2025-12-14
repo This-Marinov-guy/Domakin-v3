@@ -3,6 +3,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { LANGUAGES } from "@/utils/defines";
 import useTranslation from "next-translate/useTranslation";
+import { hasCustomSEO } from "@/utils/seo";
 
 const SEO = () => {
   const router = useRouter();
@@ -15,6 +16,19 @@ const SEO = () => {
   const path = router.asPath || "";
   if (path.startsWith('/bg')) currentLang = 'bg';
   if (path.startsWith('/gr')) currentLang = 'gr';
+
+  // Normalize path (remove language prefix and query params)
+  const normalizedPath = path
+    .replace(/^\/[a-z]{2}(?=\/|$)/, '') // Remove language prefix (/bg, /gr)
+    .replace(/\?.*$/, '') // Remove query params
+    .split('/')
+    .filter(Boolean)
+    .join('/') || '';
+
+  // Skip rendering SEO if page has its own SEO
+  if (hasCustomSEO(normalizedPath)) {
+    return null;
+  }
   // Localized structured data
   const jsonLdData = {
     "@context": "https://schema.org",
