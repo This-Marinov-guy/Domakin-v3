@@ -66,12 +66,19 @@
   .gap-two {
     padding: 24px 40px;
   }
+  .logo-v2 {
+    width: 7.75rem;
+  }
   &.menu-overlay {
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
     background: transparent;
+  }
+  &.header-v2 {
+    background-color: $color-two;
+    padding: 4rem 0 0.5rem;
   }
   &.menu-style-three {
     position: inherit;

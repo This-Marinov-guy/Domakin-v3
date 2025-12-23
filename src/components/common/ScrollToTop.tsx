@@ -1,8 +1,10 @@
 "use client"
 import UseSticky from "@/hooks/UseSticky";
 import { useState, useEffect } from "react";
+import { useRouter } from 'next/router';
 
 const ScrollToTop = () => {
+   const router = useRouter();
    const { sticky }: { sticky: boolean } = UseSticky();
 
    const [showScroll, setShowScroll] = useState(false);
@@ -38,9 +40,15 @@ const ScrollToTop = () => {
 
    return (
       <>
-         <div onClick={scrollTop} className={`scroll-top ${sticky ? "active" : ""}`}>
-            <i className="bi bi-arrow-up-short"></i>
-         </div>
+         {!router.asPath.includes('add-listing-v2') ? (
+            <div onClick={scrollTop} className={`scroll-top ${sticky ? "active" : ""}`}>
+               <i className="bi bi-arrow-up-short"></i>
+            </div>
+         ) : (
+            <button type="button" onClick={scrollTop} className={`scroll-top-v2 ${sticky ? "active" : ""}`}>
+               To the Top <i className="bi bi-arrow-up-circle"></i>
+            </button>
+         )}
       </>
    )
 }
