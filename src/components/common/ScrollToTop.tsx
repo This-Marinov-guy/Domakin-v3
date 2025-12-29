@@ -38,17 +38,30 @@ const ScrollToTop = () => {
       return () => window.removeEventListener("scroll", checkScrollTop);
    }, [checkScrollTop]);
 
+   let scrollButton = null;
+   if (router.asPath.includes('add-listing-v2')) {
+      scrollButton = (
+          <button type="button" onClick={scrollTop} className={`scroll-top-v2 ${sticky ? "active" : ""}`}>
+             To the Top <i className="bi bi-arrow-up-circle"></i>
+          </button>
+      );
+   } else if (router.asPath.includes('add-listing-v3')) {
+      scrollButton = (
+          <button type="button" onClick={scrollTop} className={`scroll-top-v2 scroll-top-v3 ${sticky ? "active" : ""}`}>
+             To the Top <i className="bi bi-arrow-up-circle"></i>
+          </button>
+      );
+   } else {
+      scrollButton = (
+          <div onClick={scrollTop} className={`scroll-top ${sticky ? "active" : ""}`}>
+             <i className="bi bi-arrow-up-short"></i>
+          </div>
+      );
+   }
+
    return (
       <>
-         {!router.asPath.includes('add-listing-v2') ? (
-            <div onClick={scrollTop} className={`scroll-top ${sticky ? "active" : ""}`}>
-               <i className="bi bi-arrow-up-short"></i>
-            </div>
-         ) : (
-            <button type="button" onClick={scrollTop} className={`scroll-top-v2 ${sticky ? "active" : ""}`}>
-               To the Top <i className="bi bi-arrow-up-circle"></i>
-            </button>
-         )}
+         {scrollButton && scrollButton}
       </>
    )
 }

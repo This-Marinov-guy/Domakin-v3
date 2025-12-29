@@ -131,6 +131,14 @@ p {line-height: 1.777em;}
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  &.scroll-top-v3 {
+    background-color: $color-twelve;
+    color: #fff;
+    padding: 0.625rem 1.3125rem;
+    margin: 0 auto 7.3125rem;
+    max-width: 8.75rem;
+    font-weight: bold;
+  }
 }
 // Prefix Classes
 .tran3s {

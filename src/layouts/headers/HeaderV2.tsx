@@ -4,11 +4,11 @@ import Image from "next/image";
 import UseSticky from "@/hooks/UseSticky";
 import logoTransparentWhite from "@/assets/img/logo-transparent-white.png";
 
-export default function HeaderV2 ({ style }: any) {
+export default function HeaderV2 ({ headerClasses }: {headerClasses?: string}) {
   const { sticky } = UseSticky();
 
   return (
-    <header className={`theme-main-menu menu-style-one sticky-menu header-v2 ${sticky && "fixed"}`}>
+    <header className={`theme-main-menu menu-style-one sticky-menu ${headerClasses && headerClasses} ${sticky && "fixed"}`}>
       <div className="inner-content px-10">
         <div className="top-header position-relative">
           <div className="d-flex align-items-center justify-content-center">

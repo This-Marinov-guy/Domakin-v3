@@ -1,6 +1,5 @@
 import HeaderV2 from "@/layouts/headers/HeaderV2";
-import HeroSection from "@/components/hero";
-import FooterFour from "@/layouts/footers/FooterFour";
+import HeroSection from "@/components/hero/index";
 import 'react-multi-carousel/lib/styles.css';
 import AvailableRooms from "@/components/rooms/available-rooms";
 import ReviewsSection from "@/components/reviews";
@@ -9,14 +8,37 @@ import QuestionsSection from "@/components/questions";
 
 export default function LendingPageV2() {
 
+    const questions = [
+        {
+            question: 'Do I choose who gets my room when I move out?',
+            answer: `<strong>This is the first item’s accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.`
+        },
+        {
+            question: 'Can I sublet my room through Domakin?',
+            answer: `<strong>This is the first item’s accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.`
+        },
+        {
+            question: 'Can I list my room if I originally rented it through an agency?',
+            answer: `<strong>This is the first item’s accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.`
+        },
+        {
+            question: 'How do I receive the €200 payout?',
+            answer: `<strong>This is the first item’s accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.`
+        },
+        {
+            question: 'Do I get to decide who becomes my new rommate?',
+            answer: `<strong>This is the first item’s accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.`
+        }
+    ];
+
     return (
         <>
-            <HeaderV2 />
+            <HeaderV2 headerClasses="header-v2" />
             <HeroSection />
             <AvailableRooms />
             <ReviewsSection />
             <HowToWorksSection />
-            <QuestionsSection />
+            <QuestionsSection questions={questions} />
             <footer className="border-footer"></footer>
         </>
     );

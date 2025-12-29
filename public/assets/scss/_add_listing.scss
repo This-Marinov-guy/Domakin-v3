@@ -153,12 +153,34 @@ section {
   background-color: rgba(255, 255, 255, 1);
   box-shadow: 0 2px 20px 0 rgba($text-dark, 0.05);
   border: 0 solid transparent;
-  &.review-card {
-    background-color: #fff;
-  }
+  position: relative;
+  &.review-card {}
   &.simple-card {
     max-width: 100%;
     padding: 1rem;
+    &.simple-card-horizontal {
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.53125rem 1.125rem;
+      box-shadow: 12px 26px 50px 0 #5A6CEA0D;
+    }
+  }
+  &.room-card-v2 {
+    max-width: 100%;
+    padding: 1rem;
+    border: 1px solid $color-eleven;
+    border-radius: 0.75rem;
+    box-shadow: 12px 26px 50px 0 #5A6CEA14;
+  }
+  &.review-card-v2 {
+    max-width: 100%;
+    padding: 1.125rem;
+    border-radius: 0.75rem;
+    border: 1px dashed $color-two;
+    box-shadow: 0 54px 74.9px 0 #0000000D;
   }
   * {
     @extend %font-base;
@@ -181,6 +203,30 @@ section {
       margin: 0.625rem 0 0;
       line-height: 150%;
       word-spacing: 1px;
+      &.review-card-v2__message-text {
+        font-size: 0.875rem;
+        line-height: 1.375rem;
+        color: $color-ten;
+        margin: 0.25rem 0 0;
+      }
+    }
+  }
+  .custom-card__status {
+    @extend %font-base;
+    font-size: 0.6875rem;
+    line-height: 150%;
+    font-weight: 600;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    backdrop-filter: blur(8px);
+    position: absolute;
+    left: 1.625rem;
+    top: 1.625rem;
+    z-index: 9;
+    background-color: rgba($color-six, 70%);
+    &.available {
+      background-color: rgba($green, 70%);
     }
   }
   .custom-card__thumbnail {
@@ -193,9 +239,21 @@ section {
       max-width: 2.5rem;
       max-height: 2.5rem;
       border-radius: 100%;
+      &.review-card-v2__thumbnail {
+        max-width: 2.8125rem;
+        max-height: 2.8125rem;
+      }
     }
     &.simple-card__thumbnail {
       max-height: 8.75rem;
+      &.simple-card-horizontal__thumbnail {
+        max-height: 2.125rem;
+        max-width: 2.125rem;
+      }
+    }
+    &.room-card-v2__thumbnail {
+      max-height: 13.125rem;
+      border-radius: 0.75rem;
     }
   }
   .custom-card__header {
@@ -206,32 +264,6 @@ section {
     margin: 0 0 0.875rem;
     border-bottom: 1px solid rgba(88, 88, 88, 8%);
     background-color: #fff;
-    .custom-card__header__title,
-    .custom-card__header__price {
-      font-size: 0.875rem;
-      letter-spacing: -0.53px;
-      color: #000;
-    }
-    .custom-card__header__title {
-      font-weight: 600;
-    }
-    .custom-card__header__price {
-      color: #585858;
-      span {
-        font-weight: 600;
-        color: #000;
-      }
-    }
-    .custom-card__header__date {
-    }
-    .custom-card__header__sub-title {
-      font-size: 0.75rem;
-      letter-spacing: 0.48px;
-      img {
-        top: -2px;
-        position: relative;
-      }
-    }
     &.review-card__header {
       flex-direction: row;
       align-items: center;
@@ -241,6 +273,10 @@ section {
       border: 0 solid transparent;
       background: url("../images/icon/Quote.svg") no-repeat top 7px right 4px;
       background-size: 27px 18px;
+      &.review-card-v2__header {
+        background: none;
+        position: relative;
+      }
     }
     &.simple-card__header {
       padding: 1rem 0 0.5rem;
@@ -251,7 +287,98 @@ section {
         font-size: 1rem;
         letter-spacing: -0.64px;
       }
+      &.simple-card-horizontal__header {
+        padding: 0;
+        text-align: left;
+        .custom-card__header__title {
+          letter-spacing: 0;
+          color: $color-fifteen;
+        }
+        p {
+          color: $color-ten;
+          font-size: 0.875rem;
+          line-height: 142%;
+          text-align: left;
+        }
+      }
     }
+    &.room-card-v2__header {
+      padding: 1rem 0 0.5rem;
+      margin: 0;
+      border: 0 solid transparent;
+    }
+  }
+  .custom-card__header__title,
+  .custom-card__header__price {
+    font-size: 0.875rem;
+    letter-spacing: -0.53px;
+    color: #000;
+  }
+  .custom-card__header__title {
+    font-weight: 600;
+    &.room-card-v2__header__title {
+      font-size: 1.125rem;
+      line-height: 1.4375rem;
+      font-weight: 500;
+      color: $color-twelve;
+      margin: 0 0 0.6875rem;
+    }
+    &.review-card-v2__header__title {
+      font-size: 1rem;
+      line-height: 100%;
+      color: $color-twelve;
+    }
+  }
+  .custom-card__header__price {
+    color: #585858;
+    span {
+      font-weight: 600;
+      color: #000;
+    }
+    &.room-card-v2__header__price {
+      font-size: 0.75rem;
+      line-height: 1.1875rem;
+      span {
+        font-size: 1.125rem;
+        line-height: 100%;
+        color: $color-two;
+      }
+    }
+  }
+  .custom-card__header__date {
+    &.review-card-v2__header__date {
+      font-size: 0.875rem;
+      letter-spacing: 0.12px;
+    }
+  }
+  .custom-card__header__sub-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.48px;
+    img {
+      top: -2px;
+      position: relative;
+    }
+    &.review-card-v2__header__sub-title {
+      font-size: 1.125rem;
+      line-height: 1.8125rem;
+      font-weight: 600;
+      color: $color-twelve;
+    }
+  }
+  .room-card-v2__header__sub-title {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+  }
+  .review_from-box {
+    display: flex;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto 0;
+    position: absolute;
   }
   .custom-card__content {
     ol, ul {
@@ -270,12 +397,30 @@ section {
         letter-spacing: -0.56px;
       }
     }
+    &.room-card-v2__content {
+      p {
+        font-size: 0.875rem;
+        line-height: 1.125rem;
+      }
+    }
+    &.review-card-v2__content {
+      padding: 2.3125rem 0 1.25rem;
+      margin: 0 0 0.625rem;
+      border: 0 solid transparent;
+      background: url("../images/icon/quote-v2.svg") no-repeat top 5px left 5px;
+      background-size: 1.6875rem 1.25rem;
+    }
   }
   .custom-card__footer {
     border: 0 solid transparent;
     background-color: transparent;
     padding: 0;
     margin: 0 0 0.25rem;
+    &.room-card-v2__footer {
+      padding: 1.0625rem 0 0;
+      margin: 1.0625rem 0 0;
+      border-top: 2px dashed rgba($color-twelve, 30%);
+    }
   }
 }
 .custom-card__footer__btn {
@@ -299,6 +444,13 @@ section {
   }
   &.btn-outline-light {
     border: 1px solid #FF914C33;
+  }
+  &.room-card-v2__footer__btn {
+    &.btn-warning {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 6.25rem;
+    }
   }
 }
 
@@ -351,6 +503,29 @@ section {
   }
 }
 
+.custom-accordion-sec-v2 {
+  .custom-accordion__item {
+    padding: 16px 12px;
+    box-shadow: 5px 5px 20px 0 #0000000D;
+    border: 1px solid #DCD7E7;
+    .custom-accordion__item__button {
+      &:focus,
+      &:not(.collapsed) {
+        color: $color-two;
+      }
+    }
+  }
+  .custom-accordion-collapse {
+    .custom-accordion-body {
+      letter-spacing: 0px;
+      word-spacing: 1px;
+      color: #485367;
+      padding: 0.6875rem 0 0;
+
+    }
+  }
+}
+
 .border-footer {
   display: flex;
   width: 100%;
@@ -361,4 +536,19 @@ section {
   left: 0;
   right: 0;
   z-index: 1;
+  &.border-footer-v2 {
+    flex-direction: column;
+    height: auto;
+    padding: 1.125rem 1.25rem;
+    bottom: -7.3125rem;
+    p {
+      @extend %font-base;
+      max-width: 17.5rem;
+      margin: 0 auto;
+      font-size: 0.875rem;
+      line-height: 145%;
+      color: #fff;
+      text-align: center;
+    }
+  }
 }
