@@ -18,6 +18,7 @@ import { MdClose } from "react-icons/md";
 import MultiFilePreviewInput from "../inputs/files/MultiFilePreviewInput";
 import signalIcon from "@/assets/images/icon/signal.avif";
 import useOnScreen from "@/hooks/useOnScreen";
+import SignalStatusConfirmationModal from "./SignalStatusConfirmationModal";
 
 const EditPropertyModal = ({ callback = () => {} }: any) => {
   const {
@@ -39,6 +40,7 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
     editPropertyData.releaseTimestamp
   );
   const [isSignalClicked, setIsSignalClicked] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const footerRef = useRef<HTMLDivElement>(null);
   const isFooterVisible = useOnScreen(footerRef);
 
@@ -71,8 +73,7 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
     updateEditListingData("is_signal", "", !isCurrentlyInSignal);
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const performSubmit = async () => {
     addEditErrorFields([]);
 
     sendRequest(
@@ -101,6 +102,23 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
         showGeneralError("Failed to update property");
       }
     });
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    
+    // Check if signal was clicked and status is not Active (2)
+    if (isSignalClicked && editPropertyData.is_signal && editPropertyData.status != 2) {
+      setShowConfirmationModal(true);
+      return;
+    }
+
+    performSubmit();
+  };
+
+  const handleConfirmSubmit = () => {
+    setShowConfirmationModal(false);
+    performSubmit();
   };
 
   const statusOptions = [
@@ -610,6 +628,13 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
           </div>
         </div>
       )}
+
+      {/* Confirmation Modal for Non-Active Status with Signal Changes */}
+      <SignalStatusConfirmationModal
+        show={showConfirmationModal}
+        onHide={() => setShowConfirmationModal(false)}
+        onConfirm={handleConfirmSubmit}
+      />
     </Modal>
   );
 };

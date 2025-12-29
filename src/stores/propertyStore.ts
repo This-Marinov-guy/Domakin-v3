@@ -84,7 +84,7 @@ export default class PropertyStore {
       status: property.status,
       releaseTimestamp: property.release_timestamp,
       referralCode: property.referral_code,
-      is_signal: property.is_signal || false,
+      is_signal: property.is_signal,
       propertyData: {
         ...property.property_data,
         bills: JSON.parse(property.property_data.bills),
