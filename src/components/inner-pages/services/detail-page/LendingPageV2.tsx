@@ -5,6 +5,8 @@ import AvailableRooms from "@/components/rooms/available-rooms";
 import ReviewsSection from "@/components/reviews";
 import HowToWorksSection from "@/components/howToWorks";
 import QuestionsSection from "@/components/questions";
+import ListRoomModal from "@/components/list-room-modal";
+import ReminderFormModal from "@/components/list-room-form/reminder-form-modal";
 
 export default function LendingPageV2() {
 
@@ -40,6 +42,8 @@ export default function LendingPageV2() {
             <HowToWorksSection />
             <QuestionsSection questions={questions} />
             <footer className="border-footer"></footer>
+            <ListRoomModal />
+            <ReminderFormModal />
         </>
     );
 };

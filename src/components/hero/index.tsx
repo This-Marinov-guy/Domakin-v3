@@ -43,10 +43,10 @@ export default function HeroSection()
                                 </ul>
 
                                 <div className="d-flex align-items-center justify-content-center gap-2">
-                                    <Link href="#" className="btn btn-lg btn-warning">
+                                    <Link href="#" className="btn btn-lg btn-warning" data-bs-toggle="modal" data-bs-target="#list-room-modal">
                                         List My Room
                                     </Link>
-                                    <button className="btn btn-lg btn-outline-light">
+                                    <button className="btn btn-lg btn-outline-light" data-bs-toggle="modal" data-bs-target="#reminder-modal">
                                         Remind me later
                                     </button>
                                 </div>

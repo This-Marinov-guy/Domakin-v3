@@ -60,7 +60,7 @@ export default function ReviewsSection() {
                     )}
                 </Carousel>
 
-                <Link href="#" className="custom-card__footer__btn btn btn-lg btn-warning w-100 mb-2">
+                <Link href="#" className="custom-card__footer__btn btn btn-lg btn-warning w-100 mb-2" data-bs-toggle="modal" data-bs-target="#list-room-modal">
                     List My Room
                 </Link>
 
