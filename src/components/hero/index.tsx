@@ -1,9 +1,14 @@
+import React from "react";
+import Image from "next/image";
 import ListingHeader from "@/assets/img/bg/listing-header.webp";
 import RatingStars from "@/assets/images/icon/stars.svg";
-import Link from "next/link";
-import Image from "next/image";
 
-export default function HeroSection()
+interface HeroSectionProps {
+    openModal?: () => void;
+    openReminderModal?: () => void;
+}
+
+export default function HeroSection({ openModal, openReminderModal }: HeroSectionProps)
 {
     return (
         <>
@@ -28,7 +33,7 @@ export default function HeroSection()
                                 </div>
 
                                 <p>
-                                    List your room and get <span> €200 </span> when it’s taken.
+                                    List your room and get <span> €200 </span> when it's taken.
                                 </p>
                                 <ul className="">
                                     <li>
@@ -43,10 +48,18 @@ export default function HeroSection()
                                 </ul>
 
                                 <div className="d-flex align-items-center justify-content-center gap-2">
-                                    <Link href="#" className="btn btn-lg btn-warning" data-bs-toggle="modal" data-bs-target="#list-room-modal">
+                                    <button 
+                                        type="button" 
+                                        className="btn btn-lg btn-warning"
+                                        onClick={openModal}
+                                    >
                                         List My Room
-                                    </Link>
-                                    <button className="btn btn-lg btn-outline-light" data-bs-toggle="modal" data-bs-target="#reminder-modal">
+                                    </button>
+                                    <button 
+                                        type="button" 
+                                        className="btn btn-lg btn-outline-light" 
+                                        onClick={openReminderModal}
+                                    >
                                         Remind me later
                                     </button>
                                 </div>

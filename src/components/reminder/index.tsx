@@ -1,8 +1,20 @@
-import ReminderIcon from "@/assets/images/icon/reminder.svg";
-import Link from "next/link";
-import Image from "next/image";
+import React from "react";
 
-export default function ReminderSection({title, isShowListingButton, secClasses}: {title?: string, isShowListingButton: boolean, secClasses?: string}) {
+interface ReminderSectionProps {
+    title?: string;
+    isShowListingButton: boolean;
+    secClasses?: string;
+    openModal?: () => void;
+    openReminderModal?: () => void;
+}
+
+export default function ReminderSection({
+    title, 
+    isShowListingButton, 
+    secClasses,
+    openModal,
+    openReminderModal
+}: ReminderSectionProps) {
     return (
         <section className={`reminder-sec ${secClasses}`}>
             <div className="container">
@@ -13,13 +25,21 @@ export default function ReminderSection({title, isShowListingButton, secClasses}
 
                     <div className="d-flex flex-row justify-content-center align-items-center gap-1">
                         {isShowListingButton && isShowListingButton === true && (
-                            <Link href="#" className="btn btn-lg btn-warning" data-bs-toggle="modal" data-bs-target="#list-room-modal">
+                            <button 
+                                type="button" 
+                                className="btn btn-lg btn-warning" 
+                                onClick={openModal}
+                            >
                                 List my room
-                            </Link>
+                            </button>
                         )}
-                        <Link href="#" className="btn btn-lg btn-secondary" data-bs-toggle="modal" data-bs-target="#reminder-modal">
+                        <button 
+                            type="button" 
+                            className="btn btn-lg btn-secondary" 
+                            onClick={openReminderModal}
+                        >
                             Remind me later
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -1,8 +1,13 @@
-import RatingStars from "@/assets/images/icon/stars.svg";
+import React from "react";
 import Image from "next/image";
+import RatingStars from "@/assets/images/icon/stars.svg";
 import ListIcon from "@/assets/images/icon/list.svg";
 
-export default function HeroSectionV2()
+interface HeroSectionV2Props {
+    openModal?: () => void;
+}
+
+export default function HeroSectionV2({ openModal }: HeroSectionV2Props)
 {
     return (
         <>
@@ -51,10 +56,11 @@ export default function HeroSectionV2()
                                     Listing is Free
                                 </p>
 
-                                {/*<Link href="#" className="btn btn-lg btn-warning">
-                                    <Image src={ListIcon} alt="List room icon" /> List My Room
-                                </Link>*/}
-                                <button type="button" className="btn btn-lg btn-warning" data-bs-toggle="modal" data-bs-target="#list-room-modal">
+                                <button 
+                                    type="button" 
+                                    className="btn btn-lg btn-warning" 
+                                    onClick={openModal}
+                                >
                                     <Image src={ListIcon} alt="List room icon" /> List My Room
                                 </button>
 

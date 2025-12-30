@@ -1,18 +1,27 @@
-
+import React, { useState } from "react";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+import Image from "next/image";
 import logoTransparentWhite from "@/assets/img/logo-transparent-white.png";
 import StarsIcon from "@/assets/images/icon/stars.svg";
-import Image from "next/image";
-import Form from "react-bootstrap/Form";
-import React, {useState} from "react";
-import Link from "next/link";
 
-export default function DraftRequestModal() {
+interface DraftRequestModalProps {
+    show: boolean;
+    onHide: () => void;
+    onKeepEditing: () => void;
+}
+
+export default function DraftRequestModal({ show, onHide, onKeepEditing }: DraftRequestModalProps) {
     const [isSave, setIsSave] = useState(false);
+    
     return (
-        <div class="modal fade list-room-modal" id="draft-request-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
-                    <div class="modal-body p-0 m-0 border-bottom-0">
+        <Modal
+            show={show}
+            onHide={onHide}
+            fullscreen
+            className="list-room-modal draft-request-modal"
+        >
+            <Modal.Body>
 
                         <div className="list-room-modal__first-step pt-25">
                             <div className="list-room-modal__first-step__body d-flex flex-column justify-content-center p-0">
@@ -37,10 +46,10 @@ export default function DraftRequestModal() {
                                         </div>
 
                                         <div className="d-flex flex-row justify-content-center align-items-center mt-20 gap-2">
-                                            <button onClick={() => setIsSave(true)} type="button" class="btn btn-primary border-0">
+                                            <button onClick={() => setIsSave(true)} type="button" className="btn btn-primary border-0">
                                                 Save & exist
                                             </button>
-                                            <button type="button" class="btn btn-primary border-0" data-bs-toggle="modal" data-bs-target="#list-room-modal">
+                                            <button type="button" className="btn btn-primary border-0" onClick={onKeepEditing}>
                                                 Keep editing
                                             </button>
                                         </div>
@@ -63,16 +72,18 @@ export default function DraftRequestModal() {
                                 )}
 
 
-                                <button type="button" data-bs-dismiss="modal" className="d-flex justify-content-center align-items-center position-absolute bottom-0 left-0 right-0 mx-auto mb-3">
+                                <button 
+                                    type="button" 
+                                    onClick={onHide} 
+                                    className="d-flex justify-content-center align-items-center position-absolute bottom-0 left-0 right-0 mx-auto mb-3"
+                                >
                                     <Image src={logoTransparentWhite} alt="Logo Icon" className="w-50" />
                                 </button>
 
                             </div>
                         </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
+            </Modal.Body>
+        </Modal>
+    );
 }

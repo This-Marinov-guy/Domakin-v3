@@ -1,22 +1,17 @@
-
-%font-base {
-  font-family: Inter, 'sans-serif';
-  margin: 0;
-}
-
 %check-list {
   list-style: none;
   position: relative;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     left: -1.5rem;
     top: 50%;
     transform: translateY(-50%);
     width: 1.25rem;
     height: 1.25rem;
-    background: url("../images/icon/check-orange.svg") no-repeat center / contain;
+    background: url("../images/icon/check-orange.svg") no-repeat center /
+      contain;
   }
 }
 
@@ -42,7 +37,7 @@
       z-index: 1;
       position: relative;
       &:after {
-        content: '';
+        content: "";
         background: url("../img/bg/listing-cloud.webp") repeat left top;
         background-size: 569px 181px;
         position: absolute;
@@ -58,7 +53,6 @@
         .hero-header__rating-box {
         }
         .hero-header__title {
-          @extend %font-base;
           font-size: 30px;
           font-weight: 600;
           line-height: 120%;
@@ -70,7 +64,6 @@
       li,
       button,
       a {
-        @extend %font-base;
         font-size: 0.875rem;
         letter-spacing: -0.56px;
         line-height: 100%;
@@ -84,7 +77,8 @@
           font-size: 0.75rem;
         }
       }
-      ul, ol {
+      ul,
+      ol {
         padding: 0 0 0 1.4rem;
         margin: 0;
         li {
@@ -98,14 +92,14 @@
       .btn {
         width: 100%;
         padding: 0.75rem;
-        box-shadow: 0 2px 12px 0 #0000001A;
+        box-shadow: 0 2px 12px 0 #0000001a;
         &.btn-warning {
           background-color: $color-seven;
           color: #fff;
           font-weight: 600;
         }
         &.btn-outline-light {
-          border: 1px solid #FF914C33;
+          border: 1px solid #ff914c33;
         }
       }
     }
@@ -118,7 +112,6 @@ section {
     padding: 0 1.25rem;
   }
   .section__title {
-    @extend %font-base;
     font-size: 1.25rem;
     font-weight: 600;
     line-height: 120%;
@@ -126,7 +119,6 @@ section {
     margin: 0 0 0.75rem;
   }
   p {
-    @extend %font-base;
     line-height: 100%;
     margin: 0;
     font-size: 0.75rem;
@@ -154,7 +146,8 @@ section {
   box-shadow: 0 2px 20px 0 rgba($text-dark, 0.05);
   border: 0 solid transparent;
   position: relative;
-  &.review-card {}
+  &.review-card {
+  }
   &.simple-card {
     max-width: 100%;
     padding: 1rem;
@@ -165,7 +158,7 @@ section {
       align-items: center;
       gap: 0.75rem;
       padding: 1.53125rem 1.125rem;
-      box-shadow: 12px 26px 50px 0 #5A6CEA0D;
+      box-shadow: 12px 26px 50px 0 #5a6cea0d;
     }
   }
   &.room-card-v2 {
@@ -173,17 +166,16 @@ section {
     padding: 1rem;
     border: 1px solid $color-eleven;
     border-radius: 0.75rem;
-    box-shadow: 12px 26px 50px 0 #5A6CEA14;
+    box-shadow: 12px 26px 50px 0 #5a6cea14;
   }
   &.review-card-v2 {
     max-width: 100%;
     padding: 1.125rem;
     border-radius: 0.75rem;
     border: 1px dashed $color-two;
-    box-shadow: 0 54px 74.9px 0 #0000000D;
+    box-shadow: 0 54px 74.9px 0 #0000000d;
   }
   * {
-    @extend %font-base;
     line-height: 100%;
     margin: 0;
   }
@@ -212,7 +204,6 @@ section {
     }
   }
   .custom-card__status {
-    @extend %font-base;
     font-size: 0.6875rem;
     line-height: 150%;
     font-weight: 600;
@@ -381,7 +372,8 @@ section {
     position: absolute;
   }
   .custom-card__content {
-    ol, ul {
+    ol,
+    ul {
       margin-bottom: 0.875rem;
       li {
         @extend %check-list;
@@ -443,7 +435,7 @@ section {
     font-weight: 600;
   }
   &.btn-outline-light {
-    border: 1px solid #FF914C33;
+    border: 1px solid #ff914c33;
   }
   &.room-card-v2__footer__btn {
     &.btn-warning {
@@ -469,7 +461,7 @@ section {
     .custom-accordion__item__button {
       padding: 0;
       margin: 0;
-      @extend %font-base;
+
       font-size: 0.875rem;
       font-weight: 500;
       line-height: 120%;
@@ -491,14 +483,12 @@ section {
   }
   .custom-accordion-collapse {
     .custom-accordion-body {
-      @extend %font-base;
       font-size: 0.75rem;
       line-height: 150%;
       letter-spacing: -0.48px;
       word-spacing: 1px;
       color: #585858;
       padding: 15.5px 12px;
-
     }
   }
 }
@@ -506,8 +496,8 @@ section {
 .custom-accordion-sec-v2 {
   .custom-accordion__item {
     padding: 16px 12px;
-    box-shadow: 5px 5px 20px 0 #0000000D;
-    border: 1px solid #DCD7E7;
+    box-shadow: 5px 5px 20px 0 #0000000d;
+    border: 1px solid #dcd7e7;
     .custom-accordion__item__button {
       &:focus,
       &:not(.collapsed) {
@@ -521,7 +511,6 @@ section {
       word-spacing: 1px;
       color: #485367;
       padding: 0.6875rem 0 0;
-
     }
   }
 }
@@ -542,13 +531,132 @@ section {
     padding: 1.125rem 1.25rem;
     bottom: -7.3125rem;
     p {
-      @extend %font-base;
       max-width: 17.5rem;
       margin: 0 auto;
       font-size: 0.875rem;
       line-height: 145%;
       color: #fff;
       text-align: center;
+    }
+  }
+}
+
+// Responsive styles for larger screens (tablets and up)
+@media (min-width: 768px) {
+  .hero-con {
+    .hero-box {
+      .hero-thumbnail {
+        height: 15rem;
+      }
+      .hero-content {
+        .container {
+          max-width: 600px;
+          padding: 0 2rem;
+        }
+        .hero-header {
+          .hero-header__title {
+            font-size: 38px;
+          }
+        }
+        p,
+        li {
+          font-size: 1rem;
+        }
+        .btn {
+          max-width: 400px;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+
+  section {
+    padding: 3rem 0 2rem;
+    .container {
+      max-width: 768px;
+      padding: 0 2rem;
+    }
+    .section__title {
+      font-size: 1.75rem;
+    }
+    p {
+      font-size: 0.875rem;
+    }
+  }
+
+  .carousel-item-width {
+    max-width: 18rem;
+    margin-right: 1rem;
+  }
+
+  .custom-card {
+    max-width: 18rem;
+  }
+}
+
+// Responsive styles for desktop screens
+@media (min-width: 992px) {
+  .hero-con {
+    .hero-box {
+      .hero-thumbnail {
+        height: 20rem;
+      }
+      .hero-content {
+        .container {
+          max-width: 800px;
+        }
+        .hero-header {
+          .hero-header__title {
+            font-size: 48px;
+          }
+        }
+        p,
+        li {
+          font-size: 1.125rem;
+        }
+      }
+    }
+  }
+
+  section {
+    padding: 4rem 0 2.5rem;
+    .container {
+      max-width: 960px;
+    }
+    .section__title {
+      font-size: 2rem;
+    }
+  }
+
+  .carousel-item-width {
+    max-width: 20rem;
+  }
+
+  .custom-card {
+    max-width: 20rem;
+  }
+}
+
+// Responsive styles for large desktop screens
+@media (min-width: 1200px) {
+  .hero-con {
+    .hero-box {
+      .hero-content {
+        .container {
+          max-width: 900px;
+        }
+        .hero-header {
+          .hero-header__title {
+            font-size: 54px;
+          }
+        }
+      }
+    }
+  }
+
+  section {
+    .container {
+      max-width: 1140px;
     }
   }
 }

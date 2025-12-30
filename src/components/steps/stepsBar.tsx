@@ -11,7 +11,7 @@ export default function StepsBar({ steps, currentStep }: StepsBarProps) {
 
     return (
         <div className="steps">
-            <div className="steps__item">
+            <div className="">
                 Step {current} / {totalSteps}
             </div>
         </div>

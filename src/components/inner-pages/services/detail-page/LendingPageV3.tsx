@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import HeaderV2 from "@/layouts/headers/HeaderV2";
 import HeroSectionV2 from "@/components/hero/hero-section-v2";
 import 'react-multi-carousel/lib/styles.css';
@@ -14,6 +15,8 @@ import ReminderFormModal from "@/components/list-room-form/reminder-form-modal";
 
 export default function LendingPageV2() {
     const {t} = useTranslation('translations');
+    const [showListRoomModal, setShowListRoomModal] = useState(false);
+    const [showReminderModal, setShowReminderModal] = useState(false);
 
     const questions = [
         {
@@ -41,8 +44,12 @@ export default function LendingPageV2() {
     return (
         <div className="lending-page-v2">
             <HeaderV2 headerClasses="header-v3" />
-            <HeroSectionV2 />
-            <ReminderSection title="Not moving soon?" isShowListingButton={false} />
+            <HeroSectionV2 openModal={() => setShowListRoomModal(true)} />
+            <ReminderSection 
+                title="Not moving soon?" 
+                isShowListingButton={false} 
+                openReminderModal={() => setShowReminderModal(true)} 
+            />
             <OffersSection />
             <AvailableRoomsV2 />
             <p className="never-text">
@@ -50,9 +57,19 @@ export default function LendingPageV2() {
                 address is <span>never public</span>.
             </p>
             <ReviewsSectionV2 />
-            <ReminderSection title="List your room in 2–3 minutes." isShowListingButton={true} secClasses="reminder-sec-two" />
+            <ReminderSection 
+                title="List your room in 2–3 minutes." 
+                isShowListingButton={true} 
+                secClasses="reminder-sec-two" 
+                openModal={() => setShowListRoomModal(true)} 
+            />
             <HowToWorksSectionHorizontal />
-            <ReminderSection title="Most rooms get filled in 4 days" isShowListingButton={true} secClasses="reminder-sec-two" />
+            <ReminderSection 
+                title="Most rooms get filled in 4 days" 
+                isShowListingButton={true} 
+                secClasses="reminder-sec-two" 
+                openModal={() => setShowListRoomModal(true)} 
+            />
             <QuestionsSection questions={questions} secClasses="custom-accordion-sec-v2" />
             <footer className="border-footer border-footer-v2">
                 <p>
@@ -62,8 +79,8 @@ export default function LendingPageV2() {
                     {t("footer.all_rights_reserved")} {new Date().getFullYear()}
                 </p>
             </footer>
-            <ListRoomModal />
-            <ReminderFormModal />
+            <ListRoomModal show={showListRoomModal} onHide={() => setShowListRoomModal(false)} />
+            <ReminderFormModal show={showReminderModal} onHide={() => setShowReminderModal(false)} />
         </div>
     );
 };

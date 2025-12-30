@@ -1,21 +1,29 @@
-import React, {useState} from "react";
-import StepsBar from "@/components/steps/stepsBar";
+import React, { useState } from "react";
+import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import Image from "next/image";
 import StarsIcon from "@/assets/images/icon/stars.svg";
 import ReminderImage from "@/assets/images/media/reminder.png";
-import Image from "next/image";
-import {KVK} from "@/utils/defines";
-import useTranslation from "next-translate/useTranslation"
+import { KVK } from "@/utils/defines";
+import useTranslation from "next-translate/useTranslation";
 
-export default function ReminderFormModal() {
-    const {t} = useTranslation('translations');
+interface ReminderFormModalProps {
+    show: boolean;
+    onHide: () => void;
+}
+
+export default function ReminderFormModal({ show, onHide }: ReminderFormModalProps) {
+    const { t } = useTranslation('translations');
     const [isSave, setIsSave] = useState(false);
 
     return (
-        <div class="modal fade list-room-modal" id="reminder-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
-                    <div class="modal-body p-0 m-0 border-bottom-0">
+        <Modal
+            show={show}
+            onHide={onHide}
+            fullscreen
+            className="list-room-modal reminder-modal"
+        >
+            <Modal.Body>
 
                         <div className="list-room-modal__first-step">
                             <div className="list-room-modal__first-step__body d-flex flex-column mt-20">
@@ -77,7 +85,7 @@ export default function ReminderFormModal() {
                                         </div>
 
                                         <div className="d-flex flex-row justify-content-center align-items-center mt-20 gap-2">
-                                            <button onClick={() => setIsSave(true)} type="button" class="btn btn-primary border-0">
+                                            <button onClick={() => setIsSave(true)} type="button" className="btn btn-primary border-0">
                                                 Remind me later
                                             </button>
                                         </div>
@@ -131,9 +139,7 @@ export default function ReminderFormModal() {
                             </div>
                         </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
+            </Modal.Body>
+        </Modal>
+    );
 }

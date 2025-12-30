@@ -72,7 +72,7 @@
   .btn-eight {
     font-size: 16px;
   }
-  .btn-nine, .btn-danger {
+  [class*="btn-"] {
     font-size: 14px;
     padding: 8px 25px;
   }
@@ -773,10 +773,6 @@
   }
   .fs-16 {
     font-size: 15px;
-  }
-  .btn-thirteen {
-    width: 55px;
-    height: 55px;
   }
   .theme-main-menu .gap-one {
     padding: 20px 12px;

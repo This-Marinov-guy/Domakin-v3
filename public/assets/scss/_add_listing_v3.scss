@@ -3,14 +3,15 @@
   position: relative;
   padding: 0;
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0.5rem;
     top: 50%;
     transform: translateY(-50%);
     width: 0.875rem;
     height: 0.875rem;
-    background: url("../images/icon/check-green-circle.svg") no-repeat center / contain;
+    background: url("../images/icon/check-green-circle.svg") no-repeat center /
+      contain;
   }
 }
 
@@ -25,7 +26,6 @@
   li,
   button,
   a {
-    @extend %font-base;
     font-size: 0.875rem;
     letter-spacing: -0.56px;
     line-height: 100%;
@@ -48,7 +48,8 @@
       border-top-right-radius: 1.875rem;
       padding: 1.25rem 0 0;
       background-color: $color-nine;
-      ol, ul {
+      ol,
+      ul {
         display: grid;
         grid-template-columns: auto auto;
         gap: 0.25rem;
@@ -61,7 +62,7 @@
           padding: 0.625rem 0.5rem 0.625rem 1.625rem;
           border-radius: 0.5rem;
           background-color: #fff;
-          box-shadow: 0 4px 20px 0 #3756DF0A;
+          box-shadow: 0 4px 20px 0 #3756df0a;
         }
       }
     }
@@ -74,8 +75,9 @@
       justify-content: center;
       align-items: center;
       margin: 0 0 0.7875rem;
-      p, li, a {
-        @extend %font-base;
+      p,
+      li,
+      a {
         font-size: 1rem;
         line-height: 100%;
         color: #fff;
@@ -87,7 +89,6 @@
       }
     }
     .hero-header__title-v2 {
-      @extend %font-base;
       font-size: 1.5rem;
       line-height: 100%;
       font-weight: 700;
@@ -98,7 +99,6 @@
       }
     }
     .hero-header__sub-title-v2 {
-      @extend %font-base;
       font-size: 1.125rem;
       line-height: 25px;
       color: $color-ten;
@@ -142,17 +142,15 @@
     padding: 1.1875rem 0;
     border: 1px solid $color-eleven;
     background-color: #fff;
-    box-shadow: 12px 26px 50px 0 #5A6CEA14;
+    box-shadow: 12px 26px 50px 0 #5a6cea14;
     border-radius: 0.75rem;
     h2 {
-      @extend %font-base;
       font-size: 1.125rem;
       line-height: 25px;
       font-weight: 600;
       color: $color-twelve;
     }
     .btn {
-      @extend %font-base;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -190,7 +188,7 @@
       padding: 0.625rem 0.5rem;
       background-color: #fff;
       border-radius: 0.75rem;
-      box-shadow: 12px 26px 50px 0 #5A6CEA0D;
+      box-shadow: 12px 26px 50px 0 #5a6cea0d;
       .offer-box__header__icon {
         width: 2rem;
         height: 2rem;
@@ -198,8 +196,9 @@
         background-color: $color-thirteen;
       }
       .offer-box__content {
-        p, a, li {
-          @extend %font-base;
+        p,
+        a,
+        li {
           font-size: 0.875rem;
           line-height: 142%;
           color: $color-twelve;
@@ -207,7 +206,6 @@
         }
       }
     }
-
   }
 }
 
@@ -230,7 +228,6 @@
 }
 
 .never-text {
-  @extend %font-base;
   font-size: 1rem;
   line-height: 1.375rem;
   letter-spacing: 0.8px;
@@ -266,13 +263,12 @@
         border-top: 1px solid $color-seventeen;
       }
       .btn {
-        @extend %font-base;
         font-size: 1rem;
         line-height: 1.375rem;
         border-radius: 0.5rem;
         margin: 0;
         &.btn-outline-secondary {
-          color: #0A0A0A;
+          color: #0a0a0a;
           text-decoration: underline;
           padding: 0;
           &.reminder-btn {
@@ -294,14 +290,14 @@
     }
     .steps {
       .steps__item {
-        @extend %font-base;
         font-size: 0.875rem;
         line-height: 1.5625rem;
         color: $text-dark;
       }
     }
-    h2,h3,h4 {
-      @extend %font-base;
+    h2,
+    h3,
+    h4 {
       font-size: 1.5rem;
       line-height: 100%;
       font-weight: 700;
@@ -310,8 +306,9 @@
         font-size: 1rem;
       }
     }
-    p, li, label {
-      @extend %font-base;
+    p,
+    li,
+    label {
       font-size: 0.875rem;
       line-height: 1.5625rem;
       color: $text-dark;
@@ -375,8 +372,10 @@
       }
     }
 
-    input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), textarea, select, .select-trigger {
-      @extend %font-base;
+    input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+    textarea,
+    select,
+    .select-trigger {
       font-size: 0.875rem;
       line-height: 1.125rem;
       color: $color-eighteen;
@@ -387,7 +386,6 @@
       border: 1px solid $color-seventeen;
       ::placeholder,
       .placeholder {
-        @extend %font-base;
         color: $color-eighteen;
         background-color: transparent;
       }
@@ -400,7 +398,6 @@
         display: none;
       }
       label {
-        @extend %font-base;
         font-size: 0.875rem;
         line-height: 100%;
         font-weight: 600;
@@ -411,6 +408,8 @@
         border: 1px solid $color-sixteen;
         border-radius: 0.75rem;
         position: relative;
+        cursor: pointer;
+        transition: all 0.3s ease;
         span {
           position: absolute;
           left: 0.9375rem;
@@ -419,8 +418,11 @@
           margin: auto 0;
           height: fit-content;
         }
+        &:hover {
+          border-color: $color-two;
+          background-color: rgba($color-two, 0.05);
+        }
       }
-
     }
     .list-room-modal__first-step {
       .list-room-modal__first-step__header {
@@ -465,7 +467,6 @@
   &.list-room-modal {
     .modal-content {
       .btn {
-        @extend %font-base;
         font-size: 1rem;
         line-height: 1.375rem;
 
@@ -484,11 +485,11 @@
   .btn-check:checked + .btn,
   :not(.btn-check) + .btn:active,
   .btn:first-child:active,
-  .btn.active, .btn.show {
+  .btn.active,
+  .btn.show {
     border: 1px solid $color-two;
   }
   label {
-    @extend %font-base;
     font-size: 0.875rem;
     line-height: 100%;
     font-weight: 600;
@@ -511,4 +512,727 @@
 
 .success-msg {
   height: calc(100vh - 100px);
+}
+
+// Fullscreen modal styles for all devices
+.list-room-modal {
+  .modal-content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-header {
+    padding: 1rem 0 1rem;
+    border-bottom: 1px solid #e7e7e7;
+    position: sticky;
+    top: 0;
+    z-index: 1050;
+    background-color: #fff;
+
+    &.sticky-modal-header {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .modal-step-title {
+      font-size: 1.5rem;
+      line-height: 100%;
+      font-weight: 700;
+      margin: 0;
+      color: $text-dark;
+    }
+
+      .reminder-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
+        // Use standard button styles - no custom overrides
+      }
+  }
+
+  .modal-body {
+    padding: 1rem 1rem 1rem;
+    flex: 1;
+    overflow-y: auto;
+
+    // Hide step bars from individual step components
+    // since they're now in the sticky header
+    .steps {
+      display: none;
+    }
+
+    // Hide duplicate titles from step content
+    .list-room-modal__first-step__body,
+    .list-room-modal__second-step__body {
+      > h2,
+      > h3,
+      > h4 {
+        &:first-child {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .modal-footer {
+    padding: 1rem 0;
+    border-top: 1px solid #e7e7e7;
+    position: sticky;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 1050;
+
+    .container {
+      padding: 0 1rem;
+    }
+  }
+
+  // Special styling for draft and reminder modals
+  &.draft-request-modal,
+  &.reminder-modal {
+    .modal-body {
+      padding: 0;
+      background-color: $color-two;
+    }
+
+    .list-room-modal__first-step {
+      padding: 1.25rem 1rem;
+
+      .list-room-modal__first-step__body {
+        padding: 0 0.25rem;
+      }
+    }
+  }
+}
+
+// Responsive styles for larger screens (tablets and up)
+@media (min-width: 768px) {
+  .lending-page-v2 {
+    padding-bottom: 2rem;
+  }
+
+  .hero-con-v2 {
+    .hero-box-v2 {
+      .hero-content-v2 {
+        padding: 2rem 0 0;
+        border-top-left-radius: 2.5rem;
+        border-top-right-radius: 2.5rem;
+
+        .container {
+          max-width: 600px;
+          padding: 0 2rem;
+        }
+
+        ol,
+        ul {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.75rem;
+          margin: 0 0 2rem;
+          li {
+            font-size: 1rem;
+            padding: 0.875rem 0.75rem 0.875rem 2rem;
+          }
+        }
+      }
+
+      .hero-header-v2 {
+        padding: 1.5rem 0 1rem;
+      }
+
+      .hero-header__rating-box-v2 {
+        margin: 0 0 1rem;
+        p,
+        li,
+        a {
+          font-size: 1.125rem;
+        }
+      }
+
+      .hero-header__title-v2 {
+        font-size: 2rem;
+        margin: 0 0 1rem;
+        line-height: 120%;
+        br {
+          display: none;
+        }
+      }
+
+      .hero-header__sub-title-v2 {
+        font-size: 1.375rem;
+        line-height: 1.6rem;
+        margin: 0 0 1.5rem;
+        br {
+          display: none;
+        }
+      }
+
+      .btn.btn-warning {
+        font-size: 1.25rem;
+        padding: 1rem 2rem;
+        max-width: 16rem;
+        margin: 1rem auto 0;
+      }
+    }
+  }
+
+  .reminder-sec {
+    padding: 2.5rem 0 0;
+    &.reminder-sec-two {
+      padding: 2rem 0 0;
+    }
+    .reminder-con {
+      padding: 1.75rem 0;
+      border-radius: 1rem;
+      h2 {
+        font-size: 1.5rem;
+        line-height: 1.8rem;
+      }
+      .btn {
+        font-size: 1.125rem;
+        max-width: 14rem;
+      }
+    }
+  }
+
+  .offer-sec {
+    padding: 2rem 0 0;
+    .offer-con {
+      max-width: 600px;
+      margin: 0 auto;
+      gap: 0.75rem;
+      .offer-box {
+        gap: 1rem;
+        padding: 1rem 1rem;
+        .offer-box__header__icon {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+        .offer-box__content {
+          p,
+          a,
+          li {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .rooms-sec-v2,
+  .review-sec-v2,
+  .how-to-works-sec-h,
+  .custom-accordion-sec-v2 {
+    padding: 2rem 0 0;
+    .container {
+      max-width: 768px;
+    }
+    .section__title {
+      font-size: 1.75rem;
+      margin: 0 0 1.5rem;
+    }
+  }
+
+  .custom-accordion-sec-v2 {
+    padding: 2.5rem 0 0;
+  }
+
+  .never-text {
+    font-size: 1.125rem;
+    line-height: 1.6rem;
+    padding: 2.5rem 0 1rem;
+    br {
+      display: none;
+    }
+  }
+
+  .how-to-works-sec-h {
+    padding: 2.5rem 0 0;
+  }
+
+  .border-footer {
+    &.border-footer-v2 {
+      padding: 1.5rem 1.5rem;
+      bottom: -8rem;
+      p {
+        max-width: 100%;
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+// Responsive styles for desktop screens
+@media (min-width: 992px) {
+  .hero-con-v2 {
+    .hero-box-v2 {
+      .hero-content-v2 {
+        padding: 3rem 0 0;
+
+        .container {
+          max-width: 800px;
+        }
+
+        ol,
+        ul {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1rem;
+          margin: 0 0 2.5rem;
+        }
+      }
+
+      .hero-header-v2 {
+        padding: 2rem 0 1.5rem;
+      }
+
+      .hero-header__title-v2 {
+        font-size: 2.5rem;
+        margin: 0 0 1.25rem;
+      }
+
+      .hero-header__sub-title-v2 {
+        font-size: 1.5rem;
+        line-height: 1.8rem;
+        margin: 0 0 2rem;
+      }
+
+      .btn.btn-warning {
+        font-size: 1.375rem;
+        padding: 1.125rem 2.5rem;
+        max-width: 18rem;
+      }
+    }
+  }
+
+  .reminder-sec {
+    padding: 3rem 0 0;
+    &.reminder-sec-two {
+      padding: 2.5rem 0 0;
+    }
+    .reminder-con {
+      padding: 2rem 0;
+      h2 {
+        font-size: 1.75rem;
+        line-height: 2rem;
+      }
+    }
+  }
+
+  .offer-sec {
+    padding: 2.5rem 0 0;
+    .offer-con {
+      max-width: 800px;
+      gap: 1rem;
+      .offer-box {
+        padding: 1.25rem 1.25rem;
+      }
+    }
+  }
+
+  .rooms-sec-v2,
+  .review-sec-v2,
+  .how-to-works-sec-h,
+  .custom-accordion-sec-v2 {
+    padding: 3rem 0 0;
+    .container {
+      max-width: 960px;
+    }
+    .section__title {
+      font-size: 2rem;
+      margin: 0 0 2rem;
+    }
+  }
+
+  .custom-accordion-sec-v2 {
+    padding: 3.5rem 0 0;
+  }
+
+  .never-text {
+    font-size: 1.25rem;
+    padding: 3rem 0 1.5rem;
+  }
+
+  .how-to-works-sec-h {
+    padding: 3.5rem 0 0;
+  }
+}
+
+// Responsive styles for large desktop screens
+@media (min-width: 1200px) {
+  .hero-con-v2 {
+    .hero-box-v2 {
+      .hero-content-v2 {
+        .container {
+          max-width: 900px;
+        }
+
+        ol,
+        ul {
+          gap: 1.25rem;
+        }
+      }
+
+      .hero-header__title-v2 {
+        font-size: 3rem;
+        margin: 0 0 1.5rem;
+      }
+
+      .hero-header__sub-title-v2 {
+        font-size: 1.75rem;
+        line-height: 2rem;
+      }
+    }
+  }
+
+  .rooms-sec-v2,
+  .review-sec-v2,
+  .how-to-works-sec-h,
+  .custom-accordion-sec-v2 {
+    .container {
+      max-width: 1140px;
+    }
+    .section__title {
+      font-size: 2.25rem;
+    }
+  }
+
+  .offer-sec {
+    .offer-con {
+      max-width: 960px;
+    }
+  }
+}
+
+// Tablet and up - increase spacing and font sizes
+@media (min-width: 768px) {
+  // Hide the old sticky footer (we now have sticky header)
+  .sticky-modal-footer {
+    display: none !important;
+  }
+
+  .list-room-modal {
+    .modal-header {
+      padding: 0.75rem 0 0.75rem;
+
+      .container {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .modal-step-title {
+        font-size: 1.25rem;
+        margin-top: 0.5rem;
+      }
+      
+      .steps {
+        margin-bottom: 0.25rem;
+        
+        .steps__item {
+          font-size: 0.75rem;
+          padding: 0.25rem 0.5rem;
+        }
+      }
+    }
+
+    .modal-body {
+      padding: 1.5rem 2rem;
+
+      .container {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+    }
+
+    .modal-footer {
+      padding: 0.75rem 0;
+
+      .container {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+    }
+  }
+
+  .list-room-modal.reminder-modal,
+  .list-room-modal.draft-request-modal {
+    .modal-body {
+      padding: 2rem 2rem;
+
+      .list-room-modal__first-step {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 0;
+
+        .list-room-modal__first-step__body {
+          padding: 0 1rem;
+        }
+      }
+    }
+  }
+
+  .list-room-modal__first-step,
+  .list-room-modal__second-step {
+    .list-room-modal__first-step__header {
+      margin: 0 0 2rem;
+    }
+
+    .list-room-modal__first-step__body,
+    .list-room-modal__second-step__body {
+      padding: 0;
+      gap: 1rem;
+    }
+  }
+
+  h2,
+  h3,
+  h4 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+
+  p,
+  li,
+  label {
+    font-size: 1rem;
+  }
+
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  textarea,
+  select,
+  .select-trigger {
+    font-size: 1rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .house-room-box {
+    gap: 1rem;
+    .checkbox-card-type {
+      label {
+        padding: 1.25rem;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .gallery-box {
+    .gallery-item {
+      max-height: 12rem;
+    }
+  }
+
+  .form-group-file {
+    label {
+      font-size: 1rem;
+      padding: 1.25rem 1.25rem 1.25rem 3.75rem;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .list-room-modal {
+    .modal-header {
+      padding: 0.875rem 0 0.875rem;
+
+      .container {
+        max-width: 800px;
+        padding: 0 2.5rem;
+      }
+
+      .modal-step-title {
+        font-size: 1.375rem;
+        margin-top: 0.5rem;
+      }
+      
+      .steps {
+        margin-bottom: 0.25rem;
+        
+        .steps__item {
+          font-size: 0.75rem;
+          padding: 0.25rem 0.5rem;
+        }
+      }
+    }
+
+    .modal-body {
+      padding: 2rem 2.5rem;
+
+      .container {
+        max-width: 800px;
+      }
+    }
+
+    .modal-footer {
+      padding: 0.875rem 0;
+
+      .container {
+        max-width: 800px;
+        padding: 0 2.5rem;
+      }
+    }
+  }
+
+  .list-room-modal.reminder-modal,
+  .list-room-modal.draft-request-modal {
+    .modal-body {
+      padding: 3rem 2.5rem;
+
+      .list-room-modal__first-step {
+        max-width: 700px;
+      }
+    }
+  }
+
+  .list-room-modal__first-step,
+  .list-room-modal__second-step {
+    .list-room-modal__first-step__header {
+      margin: 0 0 2.5rem;
+    }
+
+    .list-room-modal__first-step__body,
+    .list-room-modal__second-step__body {
+      gap: 1.25rem;
+    }
+  }
+
+  h2,
+  h3,
+  h4 {
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
+  }
+
+  p,
+  li,
+  label {
+    font-size: 1.0625rem;
+  }
+
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  textarea,
+  select,
+  .select-trigger {
+    font-size: 1.0625rem;
+    padding: 1.125rem 1.5rem;
+  }
+
+  .house-room-box {
+    gap: 1.25rem;
+    .checkbox-card-type {
+      label {
+        padding: 1.5rem;
+        font-size: 1.0625rem;
+      }
+    }
+  }
+
+  .eleven-gap {
+    gap: 1.25rem !important;
+  }
+
+  .gallery-box {
+    .gallery-item {
+      max-height: 14rem;
+    }
+  }
+
+  .form-group-file {
+    label {
+      font-size: 1.0625rem;
+      padding: 1.375rem 1.5rem 1.375rem 4rem;
+      border-radius: 1rem;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .list-room-modal {
+    .modal-header {
+      padding: 1rem 0 1rem;
+
+      .container {
+        max-width: 900px;
+        padding: 0 3rem;
+      }
+
+      .modal-step-title {
+        font-size: 1.5rem;
+        margin-top: 0.5rem;
+      }
+      
+      .steps {
+        margin-bottom: 0.25rem;
+        
+        .steps__item {
+          font-size: 0.75rem;
+          padding: 0.25rem 0.5rem;
+        }
+      }
+    }
+
+    .modal-body {
+      padding: 2.5rem 3rem;
+
+      .container {
+        max-width: 900px;
+      }
+    }
+
+    .modal-footer {
+      padding: 1rem 0;
+
+      .container {
+        max-width: 900px;
+        padding: 0 3rem;
+      }
+    }
+  }
+
+  .list-room-modal.reminder-modal,
+  .list-room-modal.draft-request-modal {
+    .modal-body {
+      padding: 4rem 3rem;
+
+      .list-room-modal__first-step {
+        max-width: 750px;
+      }
+    }
+  }
+
+  h2,
+  h3,
+  h4 {
+    font-size: 2.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  p,
+  li,
+  label {
+    font-size: 1.125rem;
+  }
+
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  textarea,
+  select,
+  .select-trigger {
+    font-size: 1.125rem;
+    padding: 1.25rem 1.75rem;
+  }
+
+  .gallery-box {
+    .gallery-item {
+      max-height: 15rem;
+    }
+  }
+
+  .form-group-file {
+    label {
+      font-size: 1.125rem;
+      padding: 1.5rem 1.75rem 1.5rem 4.25rem;
+    }
+  }
 }
