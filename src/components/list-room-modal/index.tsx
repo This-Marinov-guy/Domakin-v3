@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Modal from "react-bootstrap/Modal";
 import { useMultiStep } from "@/components/steps/useMultiStep";
 import StepsBar from "@/components/steps/stepsBar";
@@ -12,6 +12,7 @@ import SeventhStep from "@/components/list-room-form/seventh-step";
 import EightStep from "@/components/list-room-form/eight-step";
 import SuccessStep from "@/components/list-room-form/success-step";
 import DraftRequestModal from "@/components/list-room-form/draft-request-modal";
+import useStickyFooter from "@/hooks/useStickyFooter";
 
 interface ListRoomModalProps {
     show: boolean;
@@ -32,10 +33,13 @@ export default function ListRoomModal({ show, onHide }: ListRoomModalProps) {
     const { currentStep, step, next, back, goTo, isLast } = useMultiStep(steps);
     const [isCompleteForm, setIsCompleteForm] = useState(false);
     const [showDraftModal, setShowDraftModal] = useState(false);
+    const footerRef = useRef<HTMLDivElement>(null);
+    const isFooterVisible = useStickyFooter(footerRef, { isActive: show && isLast });
     
     const validateStep = () => {
         if (step === "Basic Information") {
-            const name = document.querySelector("#name")?.value;
+            const nameInput = document.querySelector("#name") as HTMLInputElement | null;
+            const name = nameInput?.value;
             if (!name) {
                 // alert("name is required");
                 // return false;

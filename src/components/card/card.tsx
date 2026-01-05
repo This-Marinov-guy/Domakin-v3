@@ -1,7 +1,15 @@
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
-export default function Card({item}) {
+interface CardProps {
+    item: {
+        thumbnail_image: string | StaticImageData;
+        title: string;
+        description?: string;
+    };
+}
+
+export default function Card({item}: CardProps) {
     return (
         <div className="card custom-card simple-card">
             <div className="card-img custom-card__thumbnail simple-card__thumbnail">

@@ -27,7 +27,7 @@ export default function SixthStep({steps, currentStep}: {steps: string[], curren
                     </div>
                 </div>
 
-                <hr class="dropdown-divider" />
+                <hr className="dropdown-divider" />
 
                 <div>
                     <div className="d-flex justify-content-between align-items-center flex-row eleven-gap">
@@ -50,7 +50,7 @@ export default function SixthStep({steps, currentStep}: {steps: string[], curren
                     </div>
                 </div>
 
-                <hr class="dropdown-divider" />
+                <hr className="dropdown-divider" />
 
                 <div>
                     <div className="d-flex gap-3 flex-row align-items-start">
@@ -88,29 +88,29 @@ export default function SixthStep({steps, currentStep}: {steps: string[], curren
                     </div>
                 </div>
 
-                <hr class="dropdown-divider" />
+                <hr className="dropdown-divider" />
 
                 <div>
                     <div className="house-room-box row m-0 gx-0 gap-3">
                         <div className="form-group checkbox-card-type col p-0">
-                            <input type="radio" class="btn-check" name="apartment" id="furnished" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" for="furnished">
+                            <input type="radio" className="btn-check" name="apartment" id="furnished" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" htmlFor="furnished">
                                 <span>
                                     Furnished
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col p-0">
-                            <input type="radio" class="btn-check" name="apartment" id="semi" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" for="semi">
+                            <input type="radio" className="btn-check" name="apartment" id="semi" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" htmlFor="semi">
                                 <span>
                                     semi
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col p-0">
-                            <input type="radio" class="btn-check" name="apartment" id="unfurnished" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" for="unfurnished">
+                            <input type="radio" className="btn-check" name="apartment" id="unfurnished" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" htmlFor="unfurnished">
                                 <span>
                                     unfurnished
                                 </span>
@@ -119,7 +119,7 @@ export default function SixthStep({steps, currentStep}: {steps: string[], curren
                     </div>
                 </div>
 
-                <hr class="dropdown-divider" />
+                <hr className="dropdown-divider" />
 
                 <div>
                     <div className="d-flex justify-content-between align-items-center flex-row eleven-gap">
@@ -135,7 +135,7 @@ export default function SixthStep({steps, currentStep}: {steps: string[], curren
                     </div>
                 </div>
 
-                <hr class="dropdown-divider" />
+                <hr className="dropdown-divider" />
 
                 <div>
                     <div className="d-flex justify-content-between align-items-center flex-row eleven-gap">
@@ -155,27 +155,27 @@ export default function SixthStep({steps, currentStep}: {steps: string[], curren
                     <label>
                         Roommates gender
                     </label>
-                    <hr class="dropdown-divider" />
+                    <hr className="dropdown-divider" />
                     <div className="house-room-box row m-0 gx-0 gap-3 mt-2">
                         <div className="form-group checkbox-card-type col p-0">
-                            <input type="radio" class="btn-check" name="gender" id="male" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" for="male">
+                            <input type="radio" className="btn-check" name="gender" id="male" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" htmlFor="male">
                                 <span>
                                     Male
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col p-0">
-                            <input type="radio" class="btn-check" name="gender" id="female" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" for="female">
+                            <input type="radio" className="btn-check" name="gender" id="female" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" htmlFor="female">
                                 <span>
                                     Female
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col p-0">
-                            <input type="radio" class="btn-check" name="gender" id="mixed" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" for="mixed">
+                            <input type="radio" className="btn-check" name="gender" id="mixed" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" htmlFor="mixed">
                                 <span>
                                     Mixed
                                 </span>
@@ -188,27 +188,27 @@ export default function SixthStep({steps, currentStep}: {steps: string[], curren
                     <label>
                         You prefer
                     </label>
-                    <hr class="dropdown-divider" />
+                    <hr className="dropdown-divider" />
                     <div className="house-room-box row mt-2">
                         <div className="form-group checkbox-card-type col-3">
-                            <input type="radio" class="btn-check" name="prefer" id="prefer-male" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" for="prefer-male">
+                            <input type="radio" className="btn-check" name="prefer" id="prefer-male" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="prefer-male">
                                 <span>
                                     Male
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col-3">
-                            <input type="radio" class="btn-check" name="prefer" id="prefer-female" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" for="prefer-female">
+                            <input type="radio" className="btn-check" name="prefer" id="prefer-female" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="prefer-female">
                                 <span>
                                     Female
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col-6">
-                            <input type="radio" class="btn-check" name="prefer" id="no-preference" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" for="no-preference">
+                            <input type="radio" className="btn-check" name="prefer" id="no-preference" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="no-preference">
                                 <span>
                                     No preference
                                 </span>
@@ -221,35 +221,35 @@ export default function SixthStep({steps, currentStep}: {steps: string[], curren
                     <label>
                         Shared areas
                     </label>
-                    <hr class="dropdown-divider" />
+                    <hr className="dropdown-divider" />
                     <div className="house-room-box row gx-2 mt-2">
                         <div className="form-group checkbox-card-type col">
-                            <input type="radio" class="btn-check" name="prefer" id="kitchen" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" for="kitchen">
+                            <input type="radio" className="btn-check" name="prefer" id="kitchen" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="kitchen">
                                 <span>
                                     kitchen
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col">
-                            <input type="radio" class="btn-check" name="prefer" id="living" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" for="living">
+                            <input type="radio" className="btn-check" name="prefer" id="living" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="living">
                                 <span>
                                     living
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col">
-                            <input type="radio" class="btn-check" name="prefer" id="bathroom" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" for="bathroom">
+                            <input type="radio" className="btn-check" name="prefer" id="bathroom" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="bathroom">
                                 <span>
                                     bathroom
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col">
-                            <input type="radio" class="btn-check" name="prefer" id="toilet" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" for="toilet">
+                            <input type="radio" className="btn-check" name="prefer" id="toilet" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="toilet">
                                 <span>
                                     toilet
                                 </span>
@@ -262,51 +262,51 @@ export default function SixthStep({steps, currentStep}: {steps: string[], curren
                     <label>
                         House rules
                     </label>
-                    <hr class="dropdown-divider" />
+                    <hr className="dropdown-divider" />
                     <div className="house-room-box row gx-2 gy-2 mt-2">
                         <div className="form-group checkbox-card-type col-4">
-                            <input type="checkbox" class="btn-check" name="house-rules[]" id="no-smoking" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" for="no-smoking">
+                            <input type="checkbox" className="btn-check" name="house-rules[]" id="no-smoking" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="no-smoking">
                                 <span>
                                     No smoking
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col-3">
-                            <input type="checkbox" class="btn-check" name="house-rules[]" id="no-pets" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" for="no-pets">
+                            <input type="checkbox" className="btn-check" name="house-rules[]" id="no-pets" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="no-pets">
                                 <span>
                                     No pets
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col-4">
-                            <input type="checkbox" class="btn-check" name="house-rules[]" id="quiet-hours" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" for="quiet-hours">
+                            <input type="checkbox" className="btn-check" name="house-rules[]" id="quiet-hours" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="quiet-hours">
                                 <span>
                                     Quiet hours
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col-4">
-                            <input type="checkbox" class="btn-check" name="house-rules[]" id="parties-ok" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" for="parties-ok">
+                            <input type="checkbox" className="btn-check" name="house-rules[]" id="parties-ok" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="parties-ok">
                                 <span>
                                     Parties ok
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col-6">
-                            <input type="checkbox" class="btn-check" name="house-rules[]" id="cleaning-schedule" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" for="cleaning-schedule">
+                            <input type="checkbox" className="btn-check" name="house-rules[]" id="cleaning-schedule" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="cleaning-schedule">
                                 <span>
                                     Cleaning schedule
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col-3">
-                            <input type="checkbox" class="btn-check" name="house-rules[]" id="kitchen-rule" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" for="kitchen-rule">
+                            <input type="checkbox" className="btn-check" name="house-rules[]" id="kitchen-rule" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="kitchen-rule">
                                 <span>
                                     Kitchen
                                 </span>
@@ -315,7 +315,7 @@ export default function SixthStep({steps, currentStep}: {steps: string[], curren
                     </div>
                 </div>
 
-                <hr class="dropdown-divider" />
+                <hr className="dropdown-divider" />
 
                 <div>
                     <div className="d-flex justify-content-between align-items-center flex-row eleven-gap">
@@ -342,75 +342,75 @@ export default function SixthStep({steps, currentStep}: {steps: string[], curren
                     <label>
                         Amenities
                     </label>
-                    <hr class="dropdown-divider" />
+                    <hr className="dropdown-divider" />
                     <div className="house-room-box row gx-2 gy-2 mt-2 mb-50">
                         <div className="form-group checkbox-card-type col-5">
-                            <input type="checkbox" class="btn-check" name="amenities[]" id="washing-machine" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" for="washing-machine">
+                            <input type="checkbox" className="btn-check" name="amenities[]" id="washing-machine" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="washing-machine">
                                 <span>
                                     Washing machine
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col-3">
-                            <input type="checkbox" class="btn-check" name="amenities[]" id="dryer" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" for="dryer">
+                            <input type="checkbox" className="btn-check" name="amenities[]" id="dryer" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="dryer">
                                 <span>
                                     Dryer
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col-4">
-                            <input type="checkbox" class="btn-check" name="amenities[]" id="dishwasher" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" for="dishwasher">
+                            <input type="checkbox" className="btn-check" name="amenities[]" id="dishwasher" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="dishwasher">
                                 <span>
                                     Dishwasher
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col-4">
-                            <input type="checkbox" class="btn-check" name="amenities[]" id="balcony" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" for="balcony">
+                            <input type="checkbox" className="btn-check" name="amenities[]" id="balcony" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="balcony">
                                 <span>
                                     Balcony
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col-6">
-                            <input type="checkbox" class="btn-check" name="amenities[]" id="bike-storage" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" for="bike-storage">
+                            <input type="checkbox" className="btn-check" name="amenities[]" id="bike-storage" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="bike-storage">
                                 <span>
                                     Bike storage
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col-3">
-                            <input type="checkbox" class="btn-check" name="amenities[]" id="Oven" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" for="Oven">
+                            <input type="checkbox" className="btn-check" name="amenities[]" id="Oven" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="Oven">
                                 <span>
                                     Oven
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col-3">
-                            <input type="checkbox" class="btn-check" name="amenities[]" id="microwave" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" for="microwave">
+                            <input type="checkbox" className="btn-check" name="amenities[]" id="microwave" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="microwave">
                                 <span>
                                     Microwave
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col-4">
-                            <input type="checkbox" class="btn-check" name="amenities[]" id="parking-space" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" for="parking-space">
+                            <input type="checkbox" className="btn-check" name="amenities[]" id="parking-space" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="parking-space">
                                 <span>
                                     Parking space
                                 </span>
                             </label>
                         </div>
                         <div className="form-group checkbox-card-type col-5">
-                            <input type="checkbox" class="btn-check" name="amenities[]" id="study-area" autocomplete="off" />
-                            <label class="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" for="study-area">
+                            <input type="checkbox" className="btn-check" name="amenities[]" id="study-area" autoComplete="off" />
+                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="study-area">
                                 <span>
                                     Study Area
                                 </span>

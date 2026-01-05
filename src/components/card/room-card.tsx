@@ -2,9 +2,21 @@
 import MapMarker from "@/assets/images/map/map-marker.svg";
 import ArrowRightCornerUp from "@/assets/images/icon/arrow-right-corner-up.svg";
 import Link from "next/link";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
-export default function RoomCard({item}) {
+interface RoomCardProps {
+    item: {
+        thumbnail_image: string | StaticImageData;
+        title: string;
+        price?: string;
+        plan_type?: string;
+        location?: string;
+        details?: string[];
+        url: string;
+    };
+}
+
+export default function RoomCard({item}: RoomCardProps) {
     return (
         <div className="card custom-card">
             <div className="card-img custom-card__thumbnail">

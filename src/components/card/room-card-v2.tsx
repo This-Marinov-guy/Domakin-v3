@@ -2,10 +2,23 @@
 import MapMarker from "@/assets/images/map/map-marker.svg";
 import ArrowLeftWhite from "@/assets/images/icon/arrow-left-2.svg";
 import Link from "next/link";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Carousel from 'react-multi-carousel';
 
-export default function RoomCardV2({item}) {
+interface RoomCardV2Props {
+    item: {
+        status?: string;
+        thumbnail_images?: (string | StaticImageData)[];
+        location?: string;
+        title: string;
+        text?: string;
+        price?: string;
+        plan_type?: string;
+        url: string;
+    };
+}
+
+export default function RoomCardV2({item}: RoomCardV2Props) {
     const responsive = {
         superLargeDesktop: {
             breakpoint: { max: 4000, min: 3000 },
@@ -53,7 +66,7 @@ export default function RoomCardV2({item}) {
                 <h3 className="card-title custom-card__header__title room-card-v2__header__title">
                     {item.title}
                 </h3>
-                <p dangerouslySetInnerHTML={{ __html: item && item.text }}></p>
+                <p dangerouslySetInnerHTML={{ __html: item.text || '' }}></p>
             </div>
             <div className="card-footer d-flex flex-row justify-content-between align-items-center custom-card__footer room-card-v2__footer">
                 <h4 className="custom-card__header__price room-card-v2__header__price">

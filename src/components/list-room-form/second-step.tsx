@@ -5,10 +5,11 @@ import HouseIcon from "@/assets/images/icon/house.svg";
 import StudentHouseIcon from "@/assets/images/icon/student-house.svg";
 import SearchableCitySelect from "@/components/ui/SearchableCitySelect";
 import {DUTCH_CITIES} from "@/utils/countries";
-import React from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 
 export default function SecondStep({steps, currentStep}: {steps: string[], currentStep: number}) {
+    const [city, setCity] = useState("");
     return (
         <div className="list-room-modal__second-step">
             <div className="list-room-modal__second-step__body d-flex flex-column">
@@ -17,8 +18,8 @@ export default function SecondStep({steps, currentStep}: {steps: string[], curre
                 </h2>
                 <div className="house-room-box row m-0 gx-0">
                     <div className="form-group checkbox-card-type col p-0">
-                        <input type="radio" class="btn-check" name="apartment" id="apartment" autocomplete="off" />
-                        <label class="btn d-flex flex-column h-100" for="apartment">
+                        <input type="radio" className="btn-check" name="apartment" id="apartment" autoComplete="off" />
+                        <label className="btn d-flex flex-column h-100" htmlFor="apartment">
                             <Image src={MallIcon} alt="property icon" />
                             <span>
                                 Room in a shared apartment
@@ -26,8 +27,8 @@ export default function SecondStep({steps, currentStep}: {steps: string[], curre
                         </label>
                     </div>
                     <div className="form-group checkbox-card-type col p-0">
-                        <input type="radio" class="btn-check" name="apartment" id="studio-house" autocomplete="off" />
-                        <label class="btn d-flex flex-column h-100" for="studio-house">
+                        <input type="radio" className="btn-check" name="apartment" id="studio-house" autoComplete="off" />
+                        <label className="btn d-flex flex-column h-100" htmlFor="studio-house">
                             <Image src={StudioIcon} alt="property icon" />
                             <span>
                                 Studio
@@ -37,8 +38,8 @@ export default function SecondStep({steps, currentStep}: {steps: string[], curre
                 </div>
                 <div className="house-room-box row m-0 gx-0">
                     <div className="form-group checkbox-card-type col p-0">
-                        <input type="radio" class="btn-check" name="apartment" id="single-house" autocomplete="off" />
-                        <label class="btn d-flex flex-column h-100" for="single-house">
+                        <input type="radio" className="btn-check" name="apartment" id="single-house" autoComplete="off" />
+                        <label className="btn d-flex flex-column h-100" htmlFor="single-house">
                             <Image src={HouseIcon} alt="property icon" />
                             <span>
                                 Entire place
@@ -46,8 +47,8 @@ export default function SecondStep({steps, currentStep}: {steps: string[], curre
                         </label>
                     </div>
                     <div className="form-group checkbox-card-type col p-0">
-                        <input type="radio" class="btn-check" name="apartment" id="student-house" autocomplete="off" />
-                        <label class="btn d-flex flex-column h-100" for="student-house">
+                        <input type="radio" className="btn-check" name="apartment" id="student-house" autoComplete="off" />
+                        <label className="btn d-flex flex-column h-100" htmlFor="student-house">
                             <Image src={StudentHouseIcon} alt="property icon" />
                             <span>
                                 Student house
@@ -61,6 +62,8 @@ export default function SecondStep({steps, currentStep}: {steps: string[], curre
                     <SearchableCitySelect
                         cities={DUTCH_CITIES}
                         placeholder="City"
+                        value={city}
+                        onChange={setCity}
                     />
                 </div>
 

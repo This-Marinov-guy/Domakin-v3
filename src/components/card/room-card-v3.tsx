@@ -2,9 +2,21 @@
 import MapMarker from "@/assets/images/map/map-marker.svg";
 import ArrowLeftWhite from "@/assets/images/icon/arrow-left-2.svg";
 import Link from "next/link";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
-export default function RoomCardV3({item}) {
+interface RoomCardV3Props {
+    item: {
+        thumbnail_image: string | StaticImageData;
+        title: string;
+        location?: string;
+        text?: string;
+        price?: string;
+        plan_type?: string;
+        url: string;
+    };
+}
+
+export default function RoomCardV3({item}: RoomCardV3Props) {
 
     return (
         <div className="card custom-card room-card-v2 room-card-v3">
@@ -23,7 +35,7 @@ export default function RoomCardV3({item}) {
                             <Image src={MapMarker} alt="map marker" className="d-inline" /> {item.location && item.location}
                         </p>
                     </div>
-                    <p dangerouslySetInnerHTML={{ __html: item && item.text }}></p>
+                    <p dangerouslySetInnerHTML={{ __html: item.text || '' }}></p>
                 </div>
                 <div className="card-footer d-flex flex-row justify-content-between align-items-center custom-card__footer room-card-v2__footer">
                     <h4 className="custom-card__header__price room-card-v2__header__price">

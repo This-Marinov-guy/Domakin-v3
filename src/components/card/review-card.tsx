@@ -1,8 +1,17 @@
 
 import StarsIcon from "@/assets/images/icon/stars.svg";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
-export default function ReviewCard({item}) {
+interface ReviewCardProps {
+    item: {
+        thumbnail_image: string | StaticImageData;
+        name: string;
+        date?: string;
+        message?: string;
+    };
+}
+
+export default function ReviewCard({item}: ReviewCardProps) {
     return (
         <div className="card custom-card review-card">
             <div className="card-content custom-card__content">

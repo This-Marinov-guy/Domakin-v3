@@ -36,7 +36,7 @@ export default function SuccessStep() {
                     dimensions, mention registration.
                 </p>
 
-                <button type="button" class="btn btn-primary border-0 btn-draft" data-bs-dismiss="modal">
+                <button type="button" className="btn btn-primary border-0 btn-draft" data-bs-dismiss="modal">
                     Exit
                 </button>
             </div>
