@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import NiceSelect from "@/ui/NiceSelect";
 import Modal from "react-bootstrap/Modal";
@@ -17,8 +17,8 @@ import { showGeneralError, transformToFormData } from "@/utils/helpers";
 import { MdClose } from "react-icons/md";
 import MultiFilePreviewInput from "../inputs/files/MultiFilePreviewInput";
 import signalIcon from "@/assets/images/icon/signal.avif";
-import useOnScreen from "@/hooks/useOnScreen";
 import SignalStatusConfirmationModal from "./SignalStatusConfirmationModal";
+import useStickyFooter from "@/hooks/useStickyFooter";
 
 const EditPropertyModal = ({ callback = () => {} }: any) => {
   const {
@@ -42,7 +42,13 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
   const [isSignalClicked, setIsSignalClicked] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const footerRef = useRef<HTMLDivElement>(null);
-  const isFooterVisible = useOnScreen(footerRef);
+  
+  // Use the sticky footer hook to detect if footer is visible
+  const isFooterVisible = useStickyFooter(footerRef, {
+    isActive: modalStore.modals[EDIT_PROPERTY_MODAL],
+    threshold: 30, // Higher threshold to ensure footer is truly out of view
+    initialDelay: 50,
+  });
 
   const { t } = useTranslation("translations");
 

@@ -907,11 +907,6 @@
 
 // Tablet and up - increase spacing and font sizes
 @media (min-width: 768px) {
-  // Hide the old sticky footer (we now have sticky header)
-  .sticky-modal-footer {
-    display: none !important;
-  }
-
   .list-room-modal {
     .modal-header {
       padding: 0.75rem 0 0.75rem;
