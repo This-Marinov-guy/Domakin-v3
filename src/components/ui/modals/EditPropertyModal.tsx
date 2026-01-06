@@ -46,7 +46,7 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
   // Use the sticky footer hook to detect if footer is visible
   const isFooterVisible = useStickyFooter(footerRef, {
     isActive: modalStore.modals[EDIT_PROPERTY_MODAL],
-    threshold: 30, // Higher threshold to ensure footer is truly out of view
+    threshold: 20, // Higher threshold to ensure footer is truly out of view
     initialDelay: 50,
   });
 
