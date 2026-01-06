@@ -599,7 +599,7 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
             backgroundColor: "white",
             padding: "15px 20px",
             boxShadow: "0 -4px 20px rgba(0, 0, 0, 0.15)",
-            zIndex: 1051,
+            zIndex: 1055,
             borderTop: "1px solid #e0e0e0",
             animation: "fadeInUp 0.3s ease-in-out",
           }}
