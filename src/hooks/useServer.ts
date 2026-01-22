@@ -156,7 +156,11 @@ export const useServer = () => {
         }
 
         showStandardNotification("error", errorMessage);
-      }      
+      }
+      
+      if (err.response.data?.warning) {
+        showStandardNotification("warning", err.response.data.warning);
+      }
 
       return err?.response?.data;
     } finally {
