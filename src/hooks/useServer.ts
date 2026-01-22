@@ -142,9 +142,9 @@ export const useServer = () => {
 
         showStandardNotification("error", errorMessage);
       }
-
-      if (response.data?.warning) {
-        showStandardNotification("warning", response.data.warning);
+      
+      if (response.data.data?.warning) {
+        showStandardNotification("warning", response.data.data.warning);
       }
 
       return response.data;
