@@ -75,7 +75,7 @@ export const useServer = () => {
     }
   ) => {
     options = { ...defaultOptions, ...options };
-    
+
     if (options?.withLoading) startLoading();
 
     axios.defaults.withCredentials = true;
@@ -99,7 +99,7 @@ export const useServer = () => {
         (data as Record<string, string>) || {}
       );
       queryParams.set("interface", "web");
-      
+
       requestData = {
         url: `${SERVER_ENDPOINT}/api/v${options.version}${url}?${queryParams.toString()}`,
         method,
@@ -109,7 +109,7 @@ export const useServer = () => {
     } else {
       // Add interface to request body (handles both objects and FormData)
       let requestBody = data;
-      
+
       if (data instanceof FormData) {
         // For FormData, append the interface field
         requestBody = new FormData();
@@ -125,7 +125,7 @@ export const useServer = () => {
           interface: "web",
         };
       }
-      
+
       requestData = {
         url: SERVER_ENDPOINT + "/api" + "/v" + options.version + url,
         method,
@@ -135,12 +135,16 @@ export const useServer = () => {
     }
 
     try {
-      const response = await axios.request(requestData);      
+      const response = await axios.request(requestData);
 
       if (options.withError && !response.data.status) {
         const errorMessage = getErrorMessage(response);
 
         showStandardNotification("error", errorMessage);
+      }
+
+      if (response.data?.warning) {
+        showStandardNotification("warning", response.data.warning);
       }
 
       return response.data;
@@ -156,10 +160,6 @@ export const useServer = () => {
         }
 
         showStandardNotification("error", errorMessage);
-      }
-      
-      if (err.response.data?.warning) {
-        showStandardNotification("warning", err.response.data.warning);
       }
 
       return err?.response?.data;
