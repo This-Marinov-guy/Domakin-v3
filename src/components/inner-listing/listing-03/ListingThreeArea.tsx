@@ -15,10 +15,10 @@ const ListingThreeAreaClient = dynamic(
 
 interface ListingThreeAreaProps {
   style?: boolean;
-  properties: any[];
+  properties?: any[];
 }
 
-const ListingThreeArea = ({ style, properties }: ListingThreeAreaProps) => {
+const ListingThreeArea = ({ style, properties = [] }: ListingThreeAreaProps) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
