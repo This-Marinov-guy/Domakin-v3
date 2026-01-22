@@ -24,6 +24,7 @@ import { EDIT_PROPERTY_MODAL, PROPERTY_ID_OFFSET } from "@/utils/defines";
 import { parsePropertyPreviewData } from "@/utils/helpers";
 import StripePaymentLinkButton from "@/components/ui/buttons/StripePaymentLinkButton";
 import { getPropertyUrl } from "@/utils/seoHelpers";
+import useTranslation from "next-translate/useTranslation";
 
 const PropertyTableBody = () => {
   const {
@@ -31,6 +32,7 @@ const PropertyTableBody = () => {
     modalStore,
     userStore: { isAdmin },
   } = useStore();
+  const { lang } = useTranslation("translations");
 
   const [propertyPreview, setPropertyPreview] = useState(null);
 
@@ -96,7 +98,7 @@ const PropertyTableBody = () => {
                     href={getPropertyUrl({
                       ...item.property_data,
                       id: PROPERTY_ID_OFFSET + item.id,
-                    })}
+                    }, true, lang)}
                   >
                     <Image
                       src={item.property_data.images[0]}

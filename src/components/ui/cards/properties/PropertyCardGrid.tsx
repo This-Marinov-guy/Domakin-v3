@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import useTranslation from "next-translate/useTranslation";
 import { STATUS_COLORS } from "@/utils/defines";
 import { getPropertyUrl } from "@/utils/seoHelpers";
 
@@ -9,9 +10,10 @@ const PropertyCardGrid = (props: {
   style?: boolean;
 }) => {
   const { property, style } = props;
+  const { lang } = useTranslation("translations");
 
   const allImages = [property.main_image, ...property.images];
-  const propertyUrl = getPropertyUrl(property);
+  const propertyUrl = getPropertyUrl(property, true, lang);
 
   return (
     <div
