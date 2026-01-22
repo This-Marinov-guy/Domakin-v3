@@ -14,8 +14,13 @@ export function createPropertySlug(property: any): string {
 }
 
 export function getPropertyUrl(property: any, useNewFormat: boolean = true): string {
+  let slug = property.slug;
+
+  if (!slug && useNewFormat) {
+    slug = createPropertySlug(property);
+  }
+
   if (useNewFormat) {
-    const slug = createPropertySlug(property);
     return `/services/renting/property/${slug}`;
   }
   

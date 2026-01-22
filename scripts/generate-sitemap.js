@@ -298,6 +298,7 @@ function generateSitemap(
   properties.forEach((property) => {
     // Generate SEO-friendly URL: id-location-title
     const propertyId = property.id.toString();
+    let propertySlug = property.slug;
     const location = property.city || property.location || "";
     const title = property.title || "";
 
@@ -320,7 +321,9 @@ function generateSitemap(
           .trim()
       );
 
-    const propertySlug = urlParts.join("-").replace(/--+/g, "-");
+    if (!propertySlug) {
+      propertySlug = urlParts.join("-").replace(/--+/g, "-");
+    }
 
     const lastmod =
       property.updated_at ||
