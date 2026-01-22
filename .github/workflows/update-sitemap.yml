@@ -45,10 +45,10 @@ jobs:
 
       - name: Generate sitemap
         run: npm run sitemap
-        env:
-          # Add any environment variables needed for the sitemap script
-          # NEXT_PUBLIC_SERVER_URL: ${{ secrets.NEXT_PUBLIC_SERVER_URL }}
-          # The script will use the default from sitemap-config.js if not set
+        # Add any environment variables needed for the sitemap script:
+        # env:
+        #   NEXT_PUBLIC_SERVER_URL: ${{ secrets.NEXT_PUBLIC_SERVER_URL }}
+        # The script will use the default from sitemap-config.js if not set
 
       - name: Check for changes
         id: check-changes
