@@ -13,6 +13,8 @@ on:
 jobs:
   update-sitemap:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     # Only run if webhook token matches (for repository_dispatch)
     # For workflow_dispatch, we skip token validation (manual trigger)
@@ -31,7 +33,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       - name: Setup Node.js
@@ -71,9 +72,9 @@ jobs:
         run: |
           git add public/sitemap*.xml
           git commit -m "chore: update sitemap [skip ci]" || exit 0
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          BRANCH=$(git branch --show-current || echo "main")
+          git push origin HEAD:$BRANCH
 
       - name: Summary
         if: steps.check-changes.outputs.has_changes == 'true'
