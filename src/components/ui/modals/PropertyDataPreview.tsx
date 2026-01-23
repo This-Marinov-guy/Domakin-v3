@@ -22,6 +22,7 @@ const PropertyDataPreview = ({ onHide, data }: any) => {
           <li>Title: {formatJsonKeyValuePairs(data?.title)}</li>
           <li>City: {data?.city ?? "-"}</li>
           <li>Address: {data?.address ?? "-"}</li>
+          <li>Postcode: {data?.postcode ?? "-"}</li>
           <li>Size: {data?.size ?? "-"}</li>
           <li>Rent: {data?.rent ?? "-"}</li>
           <li>Registration: {data?.registration ?? "-"}</li>
