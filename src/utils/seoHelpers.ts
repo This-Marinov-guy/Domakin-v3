@@ -13,14 +13,26 @@ export function createPropertySlug(property: any): string {
   return urlParts.join('-').replace(/--+/g, '-');
 }
 
-export function getPropertyUrl(property: any, useNewFormat: boolean = true): string {
+export function getPropertyUrl(
+  property: any,
+  useNewFormat: boolean = true,
+  lang?: string
+): string {
+  let slug = property.slug;
+
+  if (!slug && useNewFormat) {
+    slug = createPropertySlug(property);
+  }
+
+  // Determine language prefix (only for non-English languages)
+  const languagePrefix = lang && lang !== "en" ? `/${lang}` : "";
+
   if (useNewFormat) {
-    const slug = createPropertySlug(property);
-    return `/services/renting/property/${slug}`;
+    return `${languagePrefix}/services/renting/property/${slug}`;
   }
   
   // Fallback to old format for backward compatibility
-  return `/services/renting/property/${property.id}`;
+  return `${languagePrefix}/services/renting/property/${property.id}`;
 }
 
 export function createBlogSlug(post: any): string {

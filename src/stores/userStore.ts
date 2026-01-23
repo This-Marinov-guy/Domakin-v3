@@ -85,10 +85,7 @@ export default class UserStore {
       .single()) ?? {
       phone: "",
       profileImage: session.user.user_metadata.avatar_url,
-    };    
-
-    console.log(session.user.id);
-    
+    };        
 
     this.user = {
       ...convertKeysToCamelCase(data),

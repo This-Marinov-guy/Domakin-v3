@@ -4,61 +4,74 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "@/stores/storeContext";
 import { COOKIE_MODAL } from "@/utils/defines";
 import { LOCAL_STORAGE_COOKIE_AGREED } from "@/utils/localstorage";
-import React, { useEffect } from "react";
-import Modal from "react-bootstrap/Modal";
+import React, { useEffect, useState } from "react";
 import useTranslation from "next-translate/useTranslation";
 
 const CookiesModal = () => {
   const { modalStore } = useStore();
-
   const { t } = useTranslation("translations");
+  const [isVisible, setIsVisible] = useState(false);
 
-  const handleClose = () => {
+  const handleAcceptAll = () => {
+    localStorage.setItem(LOCAL_STORAGE_COOKIE_AGREED, "all");
+    setIsVisible(false);
     modalStore.closeModal();
-    localStorage.setItem(LOCAL_STORAGE_COOKIE_AGREED, "1");
+  };
+
+  const handleMandatoryOnly = () => {
+    localStorage.setItem(LOCAL_STORAGE_COOKIE_AGREED, "mandatory");
+    setIsVisible(false);
+    modalStore.closeModal();
   };
 
   useEffect(() => {
-    if (localStorage.getItem(LOCAL_STORAGE_COOKIE_AGREED) !== "1") {
+    if (typeof window === "undefined") return;
+    
+    const cookieAgreed = localStorage.getItem(LOCAL_STORAGE_COOKIE_AGREED);
+    if (!cookieAgreed || cookieAgreed === "1") {
+      // Show banner if no preference set or old format (migrate old "1" to "all")
+      if (cookieAgreed === "1") {
+        localStorage.setItem(LOCAL_STORAGE_COOKIE_AGREED, "all");
+      }
+      setIsVisible(true);
       modalStore.setActiveModal(COOKIE_MODAL);
     }
-  }, []);
+  }, [modalStore]);
+
+  if (!isVisible) {
+    return null;
+  }
 
   return (
-    <Modal
-      show={modalStore.modals[COOKIE_MODAL]}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header>
-        <Modal.Title
-          className="d-flex justify-content-center align-items-center w-100"
-          id="contained-modal-title-vcenter"
-        >
-          <i
-            className="fa-solid fa-cookie-bite mr-10"
-            style={{ color: "#C88F57" }}
-          ></i>{" "}
-          {t("cookies.title")}
-          <i
-            className="fa-solid fa-cookie-bite ml-10"
-            style={{ color: "#C88F57" }}
-          ></i>{" "}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="container">
-          <p>{t("cookies.content")}</p>
-          <button
-            onClick={handleClose}
-            className="mt-20 m-a btn-nine text-uppercase rounded-3 fw-normal"
-          >
-            {t("common.agree")}
-          </button>
+    <div className={`cookie-banner ${isVisible ? "cookie-banner--visible" : ""}`}>
+      <div className="container">
+        <div className="cookie-banner__content">
+          <div className="cookie-banner__text">
+            <div className="cookie-banner__icon">
+              <i className="fa-solid fa-cookie-bite" style={{ color: "#C88F57" }}></i>
+            </div>
+            <div className="cookie-banner__message">
+              <h4 className="cookie-banner__title">{t("cookies.title")}</h4>
+              <p className="cookie-banner__description">{t("cookies.content")}</p>
+            </div>
+          </div>
+          <div className="cookie-banner__actions">
+            <button
+              onClick={handleMandatoryOnly}
+              className="btn btn-outline-secondary cookie-banner__btn cookie-banner__btn--mandatory"
+            >
+              {t("cookies.mandatory_only") || `${t("common.mandatory")} Only`}
+            </button>
+            <button
+              onClick={handleAcceptAll}
+              className="btn btn-primary cookie-banner__btn cookie-banner__btn--accept"
+            >
+              {t("cookies.accept_all") || "Accept All"}
+            </button>
+          </div>
         </div>
-      </Modal.Body>
-    </Modal>
+      </div>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import NiceSelect from "@/ui/NiceSelect";
 import Modal from "react-bootstrap/Modal";
@@ -17,7 +17,8 @@ import { showGeneralError, transformToFormData } from "@/utils/helpers";
 import { MdClose } from "react-icons/md";
 import MultiFilePreviewInput from "../inputs/files/MultiFilePreviewInput";
 import signalIcon from "@/assets/images/icon/signal.avif";
-import useOnScreen from "@/hooks/useOnScreen";
+import SignalStatusConfirmationModal from "./SignalStatusConfirmationModal";
+import useStickyFooter from "@/hooks/useStickyFooter";
 
 const EditPropertyModal = ({ callback = () => {} }: any) => {
   const {
@@ -39,8 +40,15 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
     editPropertyData.releaseTimestamp
   );
   const [isSignalClicked, setIsSignalClicked] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const footerRef = useRef<HTMLDivElement>(null);
-  const isFooterVisible = useOnScreen(footerRef);
+  
+  // Use the sticky footer hook to detect if footer is visible
+  const isFooterVisible = useStickyFooter(footerRef, {
+    isActive: modalStore.modals[EDIT_PROPERTY_MODAL],
+    threshold: 20, // Higher threshold to ensure footer is truly out of view
+    initialDelay: 50,
+  });
 
   const { t } = useTranslation("translations");
 
@@ -71,8 +79,7 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
     updateEditListingData("is_signal", "", !isCurrentlyInSignal);
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const performSubmit = async () => {
     addEditErrorFields([]);
 
     sendRequest(
@@ -101,6 +108,23 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
         showGeneralError("Failed to update property");
       }
     });
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    
+    // Check if signal was clicked and status is not Active (2)
+    if (isSignalClicked && editPropertyData.is_signal && editPropertyData.status != 2) {
+      setShowConfirmationModal(true);
+      return;
+    }
+
+    performSubmit();
+  };
+
+  const handleConfirmSubmit = () => {
+    setShowConfirmationModal(false);
+    performSubmit();
   };
 
   const statusOptions = [
@@ -575,7 +599,7 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
             backgroundColor: "white",
             padding: "15px 20px",
             boxShadow: "0 -4px 20px rgba(0, 0, 0, 0.15)",
-            zIndex: 1051,
+            zIndex: 1055,
             borderTop: "1px solid #e0e0e0",
             animation: "fadeInUp 0.3s ease-in-out",
           }}
@@ -610,6 +634,13 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
           </div>
         </div>
       )}
+
+      {/* Confirmation Modal for Non-Active Status with Signal Changes */}
+      <SignalStatusConfirmationModal
+        show={showConfirmationModal}
+        onHide={() => setShowConfirmationModal(false)}
+        onConfirm={handleConfirmSubmit}
+      />
     </Modal>
   );
 };

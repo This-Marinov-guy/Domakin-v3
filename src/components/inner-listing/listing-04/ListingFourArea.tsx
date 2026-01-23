@@ -10,7 +10,7 @@ import { STATUS_COLORS } from "@/utils/defines";
 import { getPropertyUrl } from "@/utils/seoHelpers";
 
 const ListingFourArea = () => {
-  const { t } = useTranslation("translations");
+  const { t, lang } = useTranslation("translations");
 
   const forRentList: any[] = t("FOR_RENT", {}, { returnObjects: true }) ?? [];
 
@@ -148,7 +148,7 @@ const ListingFourArea = () => {
               </div>
               <div className="property-info">
                 <Link
-                  href={getPropertyUrl(item)}
+                  href={getPropertyUrl(item, true, lang)}
                   className="title tran3s mb-15"
                 >
                   {item.title}
@@ -208,7 +208,7 @@ const ListingFourArea = () => {
                     </li>
                   </ul> */}
                   <Link
-                    href={getPropertyUrl(item)}
+                    href={getPropertyUrl(item, true, lang)}
                     className="btn-four rounded-circle"
                   >
                     <i className="bi bi-arrow-up-right"></i>

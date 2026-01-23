@@ -53,7 +53,6 @@ const index = ({ serverProperties }: PropertyDetailsProps) => {
     serverPropertiesCount: serverProperties.length,
     forRentListCount: forRentList.length,
     allPropertiesCount: allProperties.length,
-    availableIds: allProperties.map(p => p.id).slice(0, 10) // Show first 10 IDs
   });
   
   // Find the property by ID

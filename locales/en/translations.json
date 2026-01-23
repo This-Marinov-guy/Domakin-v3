@@ -1416,7 +1416,9 @@
 
   "cookies": {
     "title": "Cookie Policy",
-    "content": "To guarantee a smooth experience we need our clients to accept the mandatory cookies before using the website - you can read more in the legal section after."
+    "content": "To guarantee a smooth experience we need our clients to accept the mandatory cookies before using the website - you can read more in the legal section after.",
+    "mandatory_only": "Mandatory Only",
+    "accept_all": "Accept All"
   },
 
   "subscribe_email": {
@@ -1467,6 +1469,7 @@
   "blog": {
     "title": "Blog",
     "description": "Stay updated with the latest news and tips from our blog",
+    "search_placeholder": "Search blogs by name or category...",
     "read_more": "Read more",
     "no_posts": "No posts",
     "no_posts_description": "There are no posts at the moment, please check back later!",

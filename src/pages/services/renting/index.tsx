@@ -29,10 +29,10 @@ const index = ({ serverProperties }: PropertiesIndexProps) => {
       position: index + 1,
       item: {
         "@type": "Accommodation",
-        "@id": `https://www.domakin.nl${getPropertyUrl(property)}`,
+        "@id": `https://www.domakin.nl${getPropertyUrl(property, true, lang)}`,
         name: property.title || `${property.city} Property`,
         description: property.description?.property || property.description,
-        url: `https://www.domakin.nl${getPropertyUrl(property)}`,
+        url: `https://www.domakin.nl${getPropertyUrl(property, true, lang)}`,
         address: {
           "@type": "PostalAddress",
           addressLocality: property.city,

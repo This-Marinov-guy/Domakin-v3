@@ -1,0 +1,86 @@
+name: Update Sitemap
+
+on:
+  repository_dispatch:
+    types: [update-sitemap]
+  workflow_dispatch:
+    inputs:
+      token:
+        description: 'Webhook authorization token'
+        required: false
+        type: string
+
+jobs:
+  update-sitemap:
+    runs-on: ubuntu-latest
+    
+    # Only run if webhook token matches (for repository_dispatch)
+    # For workflow_dispatch, we skip token validation (manual trigger)
+    # For repository_dispatch, we validate the token from client_payload
+    
+    steps:
+      - name: Validate webhook token
+        if: github.event_name == 'repository_dispatch'
+        run: |
+          if [ "${{ github.event.client_payload.token }}" != "${{ secrets.WEBHOOK_TOKEN }}" ]; then
+            echo "❌ Invalid webhook token"
+            exit 1
+          fi
+          echo "✅ Webhook token validated"
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate sitemap
+        run: npm run sitemap
+        # Add any environment variables needed for the sitemap script:
+        # env:
+        #   NEXT_PUBLIC_SERVER_URL: ${{ secrets.NEXT_PUBLIC_SERVER_URL }}
+        # The script will use the default from sitemap-config.js if not set
+
+      - name: Check for changes
+        id: check-changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected in sitemap files"
+          fi
+
+      - name: Configure Git
+        if: steps.check-changes.outputs.has_changes == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+      - name: Commit and push changes
+        if: steps.check-changes.outputs.has_changes == 'true'
+        run: |
+          git add public/sitemap*.xml
+          git commit -m "chore: update sitemap [skip ci]" || exit 0
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Summary
+        if: steps.check-changes.outputs.has_changes == 'true'
+        run: |
+          echo "✅ Sitemap updated and pushed successfully"
+
+      - name: Summary (no changes)
+        if: steps.check-changes.outputs.has_changes == 'false'
+        run: |
+          echo "ℹ️ No changes detected in sitemap files"
