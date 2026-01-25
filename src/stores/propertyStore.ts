@@ -225,6 +225,8 @@ export default class PropertyStore {
       case 2:
         return "Active";
       case 3:
+        return "Taken";
+      case 4:
         return "Declined";
       // TODO: think of better name for this status
       default:

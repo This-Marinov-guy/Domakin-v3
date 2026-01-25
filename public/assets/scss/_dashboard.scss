@@ -1021,7 +1021,7 @@
           background: #b5a367;
         }
 
-        &.declined {
+        &.declined, &.taken {
           color: #ffffff;
           background: #d06767;
         }
