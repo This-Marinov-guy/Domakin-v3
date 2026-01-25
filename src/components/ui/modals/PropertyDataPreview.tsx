@@ -12,24 +12,24 @@ const PropertyDataPreview = ({ onHide, data }: any) => {
       <Modal.Body>
         <h6>Personal Details</h6>
         <ul>
-          <li>Name: {data?.name ?? "-" + " " + data?.surname ?? "-"}</li>
+          <li>Name: {(data?.name ?? "-") + " " + (data?.surname ?? "-")}</li>
           <li>Phone: {data?.phone ?? "-"}</li>
           <li>Email: {data?.email ?? "-"}</li>
         </ul>
 
         <h6>Property Details</h6>
         <ul>
-          <li>Title: {formatJsonKeyValuePairs(data?.title)}</li>
+          <li>Title: {formatJsonKeyValuePairs(data?.title, ['en'])}</li>
           <li>City: {data?.city ?? "-"}</li>
           <li>Address: {data?.address ?? "-"}</li>
           <li>Postcode: {data?.postcode ?? "-"}</li>
           <li>Size: {data?.size ?? "-"}</li>
           <li>Rent: {data?.rent ?? "-"}</li>
           <li>Registration: {data?.registration ?? "-"}</li>
-          <li>Bills: {formatJsonKeyValuePairs(data?.bills)}</li>
-          <li>Flatmates: {formatJsonKeyValuePairs(data?.flatmates)}</li>
-          <li>Period: {formatJsonKeyValuePairs(data?.period)}</li>
-          <li>Description: {formatJsonKeyValuePairs(data?.description)}</li>
+          <li>Bills: {formatJsonKeyValuePairs(data?.bills, ['en'])}</li>
+          <li>Flatmates: {formatJsonKeyValuePairs(data?.flatmates, ['en'])}</li>
+          <li>Period: {formatJsonKeyValuePairs(data?.period, ['en'])}</li>
+          <li>Description: {formatJsonKeyValuePairs(data?.description, ['en'])}</li>
         </ul>
 
         <div className="row">
