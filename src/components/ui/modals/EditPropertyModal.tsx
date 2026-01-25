@@ -12,7 +12,7 @@ import { useServer } from "@/hooks/useServer";
 import { toast } from "react-toastify";
 import MultiValueInput from "../inputs/MultiValueInput";
 import ImageWithBadge from "../borders/ImageBadgeBorder";
-import { EDIT_PROPERTY_MODAL } from "@/utils/defines";
+import { EDIT_PROPERTY_MODAL, PROPERTY_STATUSES } from "@/utils/defines";
 import { showGeneralError, transformToFormData } from "@/utils/helpers";
 import { MdClose } from "react-icons/md";
 import MultiFilePreviewInput from "../inputs/files/MultiFilePreviewInput";
@@ -20,7 +20,7 @@ import signalIcon from "@/assets/images/icon/signal.avif";
 import SignalStatusConfirmationModal from "./SignalStatusConfirmationModal";
 import useStickyFooter from "@/hooks/useStickyFooter";
 
-const EditPropertyModal = ({ callback = () => {} }: any) => {
+const EditPropertyModal = ({ callback = () => { } }: any) => {
   const {
     propertyStore: {
       updateEditListingData,
@@ -42,7 +42,7 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
   const [isSignalClicked, setIsSignalClicked] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const footerRef = useRef<HTMLDivElement>(null);
-  
+
   // Use the sticky footer hook to detect if footer is visible
   const isFooterVisible = useStickyFooter(footerRef, {
     isActive: modalStore.modals[EDIT_PROPERTY_MODAL],
@@ -112,7 +112,7 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    
+
     // Check if signal was clicked and status is not Active (2)
     if (isSignalClicked && editPropertyData.is_signal && editPropertyData.status != 2) {
       setShowConfirmationModal(true);
@@ -126,12 +126,6 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
     setShowConfirmationModal(false);
     performSubmit();
   };
-
-  const statusOptions = [
-    { value: 1, text: "Pending" },
-    { value: 2, text: "Active" },
-    { value: 3, text: "Taken" },
-  ];
 
   const closeModal = () => {
     setIsSignalClicked(false);
@@ -226,8 +220,8 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
                   <label htmlFor="">Status</label>
                   <NiceSelect
                     className="nice-select border-one d-flex align-items-center"
-                    options={statusOptions}
-                    defaultCurrent={statusOptions.findIndex((item) => {
+                    options={PROPERTY_STATUSES}
+                    defaultCurrent={PROPERTY_STATUSES.findIndex((item) => {
                       return item.value == editPropertyData.status;
                     })}
                     onChange={(e) => {
@@ -472,33 +466,33 @@ const EditPropertyModal = ({ callback = () => {} }: any) => {
                               />
                               {editPropertyData.propertyData.images.length >
                                 1 && (
-                                <button
-                                  type="button"
-                                  className="position-absolute top-0 end-0"
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    removeImage(index);
-                                  }}
-                                  style={{
-                                    zIndex: 100,
-                                    borderRadius: "50%",
-                                    width: "30px",
-                                    height: "30px",
-                                    background: "rgba(255, 0, 0, 0.8)",
-                                    border: "2px solid white",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    color: "white",
-                                    padding: "0",
-                                    margin: "5px",
-                                    boxShadow: "0 0 5px rgba(0,0,0,0.5)",
-                                  }}
-                                >
-                                  <MdClose size={18} />
-                                </button>
-                              )}
+                                  <button
+                                    type="button"
+                                    className="position-absolute top-0 end-0"
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      e.stopPropagation();
+                                      removeImage(index);
+                                    }}
+                                    style={{
+                                      zIndex: 100,
+                                      borderRadius: "50%",
+                                      width: "30px",
+                                      height: "30px",
+                                      background: "rgba(255, 0, 0, 0.8)",
+                                      border: "2px solid white",
+                                      display: "flex",
+                                      alignItems: "center",
+                                      justifyContent: "center",
+                                      color: "white",
+                                      padding: "0",
+                                      margin: "5px",
+                                      boxShadow: "0 0 5px rgba(0,0,0,0.5)",
+                                    }}
+                                  >
+                                    <MdClose size={18} />
+                                  </button>
+                                )}
                             </div>
                           ) : (
                             <div className="position-relative">

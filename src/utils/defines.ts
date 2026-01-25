@@ -86,3 +86,10 @@ export const SEARCH_RENTING =
   process.env.NEXT_PUBLIC_URL + "/services/room-searching";
 
 export const PROPERTY_ID_OFFSET = 1000;
+
+export const PROPERTY_STATUSES = [
+  { value: 1, text: "Pending" },
+  { value: 2, text: "Active" },
+  { value: 3, text: "Taken" },
+  { value: 4, text: 'Declined' }
+];
