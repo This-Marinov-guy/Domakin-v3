@@ -386,7 +386,7 @@ export const removeProtocolFromLink = (link: string) => {
   return link.replace(/^https?:\/\//, "");
 };
 
-export const formatJsonKeyValuePairs = (jsonString: any, onlyValues: string[] | undefined = undefined) => {
+export const formatJsonKeyValuePairs = (jsonString: string, onlyValues: string[] | undefined = undefined): string => {
   if (!jsonString) {
     return "-";
   }
@@ -397,7 +397,7 @@ export const formatJsonKeyValuePairs = (jsonString: any, onlyValues: string[] | 
     .filter(([key]) => onlyValues ? onlyValues.includes(key) : true);
 
     if (filteredJson.length === 1) {
-      return filteredJson[0][1]; // return the value only if 1 key is provided
+      return String(filteredJson[0][1] ?? "-"); // return the value only if 1 key is provided
     }
 
   return filteredJson.map(([key, value]) => `${key}: ${value}`).join(" | ");
