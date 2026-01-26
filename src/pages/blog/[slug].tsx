@@ -57,13 +57,17 @@ const BlogPost = ({
   // Use the slug from the API response
   const seoSlug = post?.slug || slug;
 
+  // Determine the best image to use (image or thumbnail as fallback)
+  const postImage = post?.image || post?.thumbnail;
+  const defaultImage = "https://www.domakin.nl/assets/img/logo.png";
+
   // Generate JSON-LD structured data for the blog post
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: postTitle,
     description: cleanExcerpt,
-    image: post?.image || post?.thumbnail || "https://www.domakin.nl/assets/img/logo.png",
+    image: postImage || defaultImage,
     datePublished: post?.date,
     dateModified: post?.modified || post?.date,
     author: {
@@ -114,15 +118,15 @@ const BlogPost = ({
         <meta property="og:type" content="article" />
         <meta property="og:url" content={`https://www.domakin.nl/blog/${seoSlug}`} />
         <meta property="og:site_name" content="Domakin" />
-        {post?.image && <meta property="og:image" content={post.image} />}
-        {post?.image && <meta property="og:image:width" content="1200" />}
-        {post?.image && <meta property="og:image:height" content="630" />}
+        {postImage && <meta property="og:image" content={postImage} />}
+        {postImage && <meta property="og:image:width" content="1200" />}
+        {postImage && <meta property="og:image:height" content="630" />}
         
         {/* Twitter Card meta tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${postTitle} | Domakin`} />
         <meta name="twitter:description" content={cleanExcerpt} />
-        {post?.image && <meta name="twitter:image" content={post.image} />}
+        {postImage && <meta name="twitter:image" content={postImage} />}
         
         {/* Article meta tags */}
         <meta property="article:published_time" content={post?.date} />
@@ -152,10 +156,10 @@ const BlogPost = ({
                 <BlogPostMeta post={post} />
 
                 {/* Display featured image if available */}
-                {post.image && (
+                {postImage && (
                   <div className="featured-image my-4">
                     <img
-                      src={post.image}
+                      src={postImage}
                       alt={postTitle}
                       className="img-fluid rounded"
                     />
