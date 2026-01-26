@@ -393,10 +393,14 @@ export const formatJsonKeyValuePairs = (jsonString: any, onlyValues: string[] | 
 
   const json = JSON.parse(jsonString);
 
-  return Object.entries(json)
-    .filter(([key]) => onlyValues ? onlyValues.includes(key) : true)
-    .map(([key, value]) => `${key}: ${value}`)
-    .join(" | ");
+  const filteredJson = Object.entries(json)
+    .filter(([key]) => onlyValues ? onlyValues.includes(key) : true);
+
+    if (filteredJson.length === 1) {
+      return filteredJson[0][1]; // return the value only if 1 key is provided
+    }
+
+  return filteredJson.map(([key, value]) => `${key}: ${value}`).join(" | ");
 };
 
 export const parsePropertyPreviewData = (property: any) => {
