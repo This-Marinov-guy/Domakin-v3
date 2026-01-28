@@ -20,7 +20,7 @@ interface HomeSixProps {
     serverProperties?: any[];
 }
 
-export default function LendingPageV3({ serverFeedbacks = [], serverProperties = []}) {
+export default function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }) {
     const { t } = useTranslation('translations');
     const [showListRoomModal, setShowListRoomModal] = useState(false);
     const [showReminderModal, setShowReminderModal] = useState(false);
@@ -34,20 +34,22 @@ export default function LendingPageV3({ serverFeedbacks = [], serverProperties =
                 title="Most rooms get filled in 4 days"
                 isShowListingButton={true}
                 secClasses="reminder-sec-two"
-                openModal={() => setShowListRoomModal(true)}
+                openListingModal={() => setShowListRoomModal(true)}
+                openReminderModal={() => setShowReminderModal(true)}
             />
             <p className="never-text">\
                 Your listing preview —  exact <br />
                 address is <span>never public</span>.
             </p>
 
-            <Feedback style={true} feedbacks={serverFeedbacks} bg='transparent'/>
+            <Feedback style={true} feedbacks={serverFeedbacks} bg='transparent' />
 
             <ReminderSection
                 title="List your room in 2–3 minutes."
                 isShowListingButton={true}
                 secClasses="reminder-sec-two"
-                openModal={() => setShowListRoomModal(true)}
+                openListingModal={() => setShowListRoomModal(true)}
+                openReminderModal={() => setShowReminderModal(true)}
             />
 
             <QuestionsSection secClasses="custom-accordion-sec-v2" />

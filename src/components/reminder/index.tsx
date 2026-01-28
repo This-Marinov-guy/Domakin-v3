@@ -4,7 +4,7 @@ interface ReminderSectionProps {
     title?: string;
     isShowListingButton: boolean;
     secClasses?: string;
-    openModal?: () => void;
+    openListingModal?: () => void;
     openReminderModal?: () => void;
 }
 
@@ -12,7 +12,7 @@ export default function ReminderSection({
     title, 
     isShowListingButton, 
     secClasses,
-    openModal,
+    openListingModal,
     openReminderModal
 }: ReminderSectionProps) {
     return (
@@ -28,7 +28,7 @@ export default function ReminderSection({
                             <button 
                                 type="button" 
                                 className="btn btn-lg btn-warning" 
-                                onClick={openModal}
+                                onClick={openListingModal}
                             >
                                 List my room
                             </button>

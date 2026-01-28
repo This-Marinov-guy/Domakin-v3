@@ -2,6 +2,7 @@
   list-style: none;
   position: relative;
   padding: 0;
+
   &::before {
     content: "";
     position: absolute;
@@ -10,8 +11,7 @@
     transform: translateY(-50%);
     width: 0.875rem;
     height: 0.875rem;
-    background: url("../images/icon/check-green-circle.svg") no-repeat center /
-      contain;
+    background: url("../images/icon/check-green-circle.svg") no-repeat center / contain;
   }
 }
 
@@ -22,6 +22,7 @@
 
 .hero-con-v2 {
   padding: 0;
+
   p,
   li,
   button,
@@ -31,23 +32,28 @@
     line-height: 100%;
     margin: 0;
     color: $color-ten;
+
     span {
       color: $color-one;
       font-weight: 600;
     }
+
     &.hero-v2-msg-text {
       font-size: 1.125rem;
       font-weight: 500;
       text-align: center;
     }
   }
+
   .hero-box-v2 {
     background-color: $color-two;
+
     .hero-content-v2 {
       border-top-left-radius: 1.875rem;
       border-top-right-radius: 1.875rem;
       padding: 1.25rem 0 0;
       background-color: $color-nine;
+
       ol,
       ul {
         display: grid;
@@ -55,6 +61,7 @@
         gap: 0.25rem;
         padding: 0;
         margin: 0 0 1.625rem;
+
         li {
           @extend %check-list-v2;
           font-size: 0.875rem;
@@ -66,15 +73,18 @@
         }
       }
     }
+
     .hero-header-v2 {
       padding: 0 0 0.7875rem;
     }
+
     .hero-header__rating-box-v2 {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       margin: 0 0 0.7875rem;
+
       p,
       li,
       a {
@@ -82,32 +92,38 @@
         line-height: 100%;
         color: #fff;
         margin: 0;
+
         span {
           color: $color-one;
           font-weight: 600;
         }
       }
     }
+
     .hero-header__title-v2 {
       font-size: 1.5rem;
       line-height: 100%;
       font-weight: 700;
       text-align: center;
       margin: 0 0 0.75rem;
+
       span {
         color: $color-one;
       }
     }
+
     .hero-header__sub-title-v2 {
       font-size: 1.125rem;
       line-height: 25px;
       color: $color-ten;
       text-align: center;
       margin: 0 0 0.9375rem;
+
       span {
         color: $color-one;
       }
     }
+
     .btn.btn-warning {
       display: flex;
       flex-direction: row;
@@ -130,9 +146,11 @@
 
 .reminder-sec {
   padding: 1.625rem 0 0;
+
   &.reminder-sec-two {
     padding: 1.0625rem 0 0;
   }
+
   .reminder-con {
     display: flex;
     flex-direction: column;
@@ -144,12 +162,14 @@
     background-color: #fff;
     box-shadow: 12px 26px 50px 0 #5a6cea14;
     border-radius: 0.75rem;
+
     h2 {
       font-size: 1.125rem;
       line-height: 25px;
       font-weight: 600;
       color: $color-twelve;
     }
+
     .btn {
       display: flex;
       justify-content: center;
@@ -164,11 +184,13 @@
       padding-bottom: 0.5rem;
       max-width: 12rem;
       margin: 0 auto;
+
       &.btn-secondary {
         background-color: $color-thirteen;
         border-color: $color-thirteen;
         color: $color-two;
       }
+
       &.btn-warning {
         background-color: $color-one;
         border-color: $color-one;
@@ -180,22 +202,27 @@
 
 .offer-sec {
   padding: 1.0625rem 0 0;
+
   .offer-con {
     grid-template-columns: 50% 50%;
     gap: 0.25rem;
+
     .offer-box {
       gap: 0.625rem;
       padding: 0.625rem 0.5rem;
       background-color: #fff;
       border-radius: 0.75rem;
       box-shadow: 12px 26px 50px 0 #5a6cea0d;
+
       .offer-box__header__icon {
         width: 2rem;
         height: 2rem;
         border-radius: 6.25rem;
         background-color: $color-thirteen;
       }
+
       .offer-box__content {
+
         p,
         a,
         li {
@@ -214,6 +241,7 @@
 .how-to-works-sec-h,
 .custom-accordion-sec-v2 {
   padding: 1.0625rem 0 0;
+
   .section__title {
     color: $color-twelve;
     font-weight: 700;
@@ -233,6 +261,7 @@
   color: $color-two;
   padding: 1.625rem 0 0.5625rem;
   text-align: center;
+
   span {
     font-weight: 700;
   }
@@ -247,29 +276,36 @@
 #draft-request-modal.modal {
   .modal-dialog.modal-fullscreen {
     height: 100%;
+
     .modal-content {
       margin: 0;
     }
   }
+
   &.list-room-modal {
     .modal-content {
       padding: 0 0;
+
       .modal-header {
         padding: 1.1875rem 1rem 1rem !important;
       }
+
       .modal-footer {
         padding: 1rem 1.5rem;
         border-top: 1px solid $color-seventeen;
       }
+
       .btn {
         font-size: 1rem;
         line-height: 1.375rem;
         border-radius: 0.5rem;
         margin: 0;
+
         &.btn-outline-secondary {
           color: #0a0a0a;
           text-decoration: underline;
           padding: 0;
+
           &.reminder-btn {
             padding: 0.625rem 1.25rem;
             color: #222222;
@@ -278,15 +314,18 @@
             text-decoration: none;
           }
         }
+
         &.btn-primary {
           background-color: rgba($color-twenty, 1);
           padding: 0.875rem 3rem;
+
           &.btn-draft {
             background-color: rgba($color-twenty, 0.7);
           }
         }
       }
     }
+
     .steps {
       .steps__item {
         font-size: 0.875rem;
@@ -294,6 +333,7 @@
         color: $text-dark;
       }
     }
+
     h2,
     h3,
     h4 {
@@ -301,19 +341,23 @@
       line-height: 100%;
       font-weight: 700;
       color: $text-dark;
+
       &.fs-16 {
         font-size: 1rem;
       }
     }
+
     p,
     li,
     label {
       font-size: 0.875rem;
       line-height: 1.5625rem;
       color: $text-dark;
+
       span {
         color: $color-nineteen;
       }
+
       &.fs-14 {
         font-size: 0.875rem;
       }
@@ -331,11 +375,13 @@
             max-height: 13.125rem;
           }
         }
+
         .custom-card__header {
           &.room-card-v2__header {
             padding: 0 0 0.5rem;
           }
         }
+
         .custom-card__header__title {
           &.room-card-v2__header__title {
             font-size: 1rem;
@@ -343,17 +389,21 @@
             margin: 0 0 0.3125rem;
           }
         }
+
         .custom-card__header__price {
           &.room-card-v2__header__price {
             font-size: 0.75rem;
+
             span {
               font-size: 1.125rem;
             }
           }
         }
+
         .room-card-v2__header__sub-title {
           font-size: 0.875rem;
         }
+
         .custom-card__content {
           &.room-card-v2__content {
             p {
@@ -361,6 +411,7 @@
             }
           }
         }
+
         .custom-card__footer {
           &.room-card-v2__footer {
             padding: 0.75rem 0 0;
@@ -383,19 +434,23 @@
       border-radius: 1.125rem;
       box-shadow: 0px 1px 8px 0px #00000014;
       border: 1px solid $color-seventeen;
+
       ::placeholder,
       .placeholder {
         color: $color-eighteen;
         background-color: transparent;
       }
     }
+
     .form-radio-group {
       gap: 0.75rem;
     }
+
     .form-group-file {
       input {
         display: none;
       }
+
       label {
         font-size: 0.875rem;
         line-height: 100%;
@@ -409,6 +464,7 @@
         position: relative;
         cursor: pointer;
         transition: all 0.3s ease;
+
         span {
           position: absolute;
           left: 0.9375rem;
@@ -417,31 +473,39 @@
           margin: auto 0;
           height: fit-content;
         }
+
         &:hover {
           border-color: $color-two;
           background-color: rgba($color-two, 0.05);
         }
       }
     }
+
     .list-room-modal__first-step {
       .list-room-modal__first-step__header {
-        margin: 0 0 1rem; /*4.5625rem*/
+        margin: 0 0 1rem;
+        /*4.5625rem*/
       }
+
       .list-room-modal__first-step__body {
         gap: 0.75rem;
         padding: 0 1rem;
       }
     }
+
     .list-room-modal__second-step {
       padding: 0 0 2rem;
+
       .list-room-modal__second-step__body {
         gap: 0.75rem;
         padding: 0 1.5rem;
+
         .house-room-box {
           gap: 0.6875rem;
         }
       }
     }
+
     .gallery-box {
       .gallery-item {
         max-height: 10.25rem;
@@ -449,12 +513,15 @@
         overflow: hidden;
       }
     }
+
     .dropdown-divider {
       border-top: 1px solid #00000030;
     }
+
     .eleven-gap {
       gap: 0.6875rem;
     }
+
     .fs-12 {
       font-size: 0.75rem !important;
     }
@@ -475,19 +542,22 @@
       }
     }
   }
+
   .modal-body {
     background-color: $color-two;
   }
 }
 
 .checkbox-card-type {
-  .btn-check:checked + .btn,
-  :not(.btn-check) + .btn:active,
+
+  .btn-check:checked+.btn,
+  :not(.btn-check)+.btn:active,
   .btn:first-child:active,
   .btn.active,
   .btn.show {
     border: 1px solid $color-two;
   }
+
   label {
     font-size: 0.875rem;
     line-height: 100%;
@@ -545,11 +615,11 @@
       color: $text-dark;
     }
 
-      .reminder-btn {
-        white-space: nowrap;
-        flex-shrink: 0;
-        // Use standard button styles - no custom overrides
-      }
+    .reminder-btn {
+      white-space: nowrap;
+      flex-shrink: 0;
+      // Use standard button styles - no custom overrides
+    }
   }
 
   .modal-body {
@@ -566,9 +636,10 @@
     // Hide duplicate titles from step content
     .list-room-modal__first-step__body,
     .list-room-modal__second-step__body {
-      > h2,
-      > h3,
-      > h4 {
+
+      >h2,
+      >h3,
+      >h4 {
         &:first-child {
           display: none;
         }
@@ -614,6 +685,7 @@
         opacity: 0;
         transform: translateY(10px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -627,6 +699,13 @@
     .modal-body {
       padding: 0;
       background-color: $color-two;
+    }
+
+    .modal-header {
+      background-color: $color-two;
+      border: none !important;
+      padding: 20px 50px;
+      text-align: center;
     }
 
     .list-room-modal__first-step {
@@ -662,6 +741,7 @@
           grid-template-columns: repeat(2, 1fr);
           gap: 0.75rem;
           margin: 0 0 2rem;
+
           li {
             font-size: 1rem;
             padding: 0.875rem 0.75rem 0.875rem 2rem;
@@ -675,6 +755,7 @@
 
       .hero-header__rating-box-v2 {
         margin: 0 0 1rem;
+
         p,
         li,
         a {
@@ -686,6 +767,7 @@
         font-size: 2rem;
         margin: 0 0 1rem;
         line-height: 120%;
+
         br {
           display: none;
         }
@@ -695,6 +777,7 @@
         font-size: 1.375rem;
         line-height: 1.6rem;
         margin: 0 0 1.5rem;
+
         br {
           display: none;
         }
@@ -711,16 +794,20 @@
 
   .reminder-sec {
     padding: 2.5rem 0 0;
+
     &.reminder-sec-two {
       padding: 2rem 0 0;
     }
+
     .reminder-con {
       padding: 1.75rem 0;
       border-radius: 1rem;
+
       h2 {
         font-size: 1.5rem;
         line-height: 1.8rem;
       }
+
       .btn {
         font-size: 1.125rem;
         max-width: 14rem;
@@ -730,18 +817,23 @@
 
   .offer-sec {
     padding: 2rem 0 0;
+
     .offer-con {
       max-width: 600px;
       margin: 0 auto;
       gap: 0.75rem;
+
       .offer-box {
         gap: 1rem;
         padding: 1rem 1rem;
+
         .offer-box__header__icon {
           width: 2.5rem;
           height: 2.5rem;
         }
+
         .offer-box__content {
+
           p,
           a,
           li {
@@ -757,9 +849,11 @@
   .how-to-works-sec-h,
   .custom-accordion-sec-v2 {
     padding: 2rem 0 0;
+
     .container {
       max-width: 768px;
     }
+
     .section__title {
       margin: 0 0 1.5rem;
     }
@@ -773,6 +867,7 @@
     font-size: 1.125rem;
     line-height: 1.6rem;
     padding: 2.5rem 0 1rem;
+
     br {
       display: none;
     }
@@ -786,6 +881,7 @@
     &.border-footer-v2 {
       padding: 1.5rem 1.5rem;
       bottom: -8rem;
+
       p {
         max-width: 100%;
         font-size: 1rem;
@@ -838,11 +934,14 @@
 
   .reminder-sec {
     padding: 3rem 0 0;
+
     &.reminder-sec-two {
       padding: 2.5rem 0 0;
     }
+
     .reminder-con {
       padding: 2rem 0;
+
       h2 {
         font-size: 1.75rem;
         line-height: 2rem;
@@ -852,9 +951,11 @@
 
   .offer-sec {
     padding: 2.5rem 0 0;
+
     .offer-con {
       max-width: 800px;
       gap: 1rem;
+
       .offer-box {
         padding: 1.25rem 1.25rem;
       }
@@ -866,9 +967,11 @@
   .how-to-works-sec-h,
   .custom-accordion-sec-v2 {
     padding: 3rem 0 0;
+
     .container {
       max-width: 960px;
     }
+
     .section__title {
       margin: 0 0 2rem;
     }
@@ -921,6 +1024,7 @@
     .container {
       max-width: 1140px;
     }
+
     .section__title {
       font-size: 2.25rem;
     }
@@ -949,10 +1053,10 @@
         font-size: 1.25rem;
         margin-top: 0.5rem;
       }
-      
+
       .steps {
         margin-bottom: 0.25rem;
-        
+
         .steps__item {
           font-size: 0.75rem;
           padding: 0.25rem 0.5rem;
@@ -1033,6 +1137,7 @@
 
   .house-room-box {
     gap: 1rem;
+
     .checkbox-card-type {
       label {
         padding: 1.25rem;
@@ -1069,10 +1174,10 @@
         font-size: 1.375rem;
         margin-top: 0.5rem;
       }
-      
+
       .steps {
         margin-bottom: 0.25rem;
-        
+
         .steps__item {
           font-size: 0.75rem;
           padding: 0.25rem 0.5rem;
@@ -1144,6 +1249,7 @@
 
   .house-room-box {
     gap: 1.25rem;
+
     .checkbox-card-type {
       label {
         padding: 1.5rem;
@@ -1185,10 +1291,10 @@
         font-size: 1.5rem;
         margin-top: 0.5rem;
       }
-      
+
       .steps {
         margin-bottom: 0.25rem;
-        
+
         .steps__item {
           font-size: 0.75rem;
           padding: 0.25rem 0.5rem;
@@ -1257,5 +1363,16 @@
       font-size: 1.125rem;
       padding: 1.5rem 1.75rem 1.5rem 4.25rem;
     }
+  }
+}
+
+.blue-modal {
+  .modal-body {
+    background-color: $color-two;
+  }
+
+  .modal-header {
+    background-color: $color-two;
+    border: none;
   }
 }
