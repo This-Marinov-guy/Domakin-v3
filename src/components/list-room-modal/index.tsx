@@ -71,7 +71,7 @@ export default function ListRoomModal({ show, onHide }: ListRoomModalProps) {
     const getStepTitle = () => {
         switch (step) {
             case 'Domakin':
-                return 'Tell us about your place';
+                return ' Welcome to the property uploading';
             case 'Basic Information':
                 return 'Tell us the basics. You can change these later';
             case 'Gallery Advice':
@@ -134,9 +134,7 @@ export default function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                                     Save & exit
                                 </button>
                             </div>
-                            {step !== 'Domakin' && (
-                                <h2 className="modal-step-title">{getStepTitle()}</h2>
-                            )}
+                            <h5 className="modal-step-title">{getStepTitle()}</h5>
                         </div>
                     </Modal.Header>
                 )}

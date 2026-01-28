@@ -13,9 +13,7 @@ export default function SecondStep({steps, currentStep}: {steps: string[], curre
     return (
         <div className="list-room-modal__second-step">
             <div className="list-room-modal__second-step__body d-flex flex-column">
-                <h2>
-                    Tell us the basics. You can change these later
-                </h2>
+               
                 <div className="house-room-box row m-0 gx-0">
                     <div className="form-group checkbox-card-type col p-0">
                         <input type="radio" className="btn-check" name="apartment" id="apartment" autoComplete="off" />

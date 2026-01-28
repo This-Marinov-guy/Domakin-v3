@@ -481,31 +481,6 @@
       }
     }
 
-    .list-room-modal__first-step {
-      .list-room-modal__first-step__header {
-        margin: 0 0 1rem;
-        /*4.5625rem*/
-      }
-
-      .list-room-modal__first-step__body {
-        gap: 0.75rem;
-        padding: 0 1rem;
-      }
-    }
-
-    .list-room-modal__second-step {
-      padding: 0 0 2rem;
-
-      .list-room-modal__second-step__body {
-        gap: 0.75rem;
-        padding: 0 1.5rem;
-
-        .house-room-box {
-          gap: 0.6875rem;
-        }
-      }
-    }
-
     .gallery-box {
       .gallery-item {
         max-height: 10.25rem;
@@ -632,19 +607,6 @@
     .steps {
       display: none;
     }
-
-    // Hide duplicate titles from step content
-    .list-room-modal__first-step__body,
-    .list-room-modal__second-step__body {
-
-      >h2,
-      >h3,
-      >h4 {
-        &:first-child {
-          display: none;
-        }
-      }
-    }
   }
 
   .modal-footer {
@@ -706,14 +668,6 @@
       border: none !important;
       padding: 20px 50px;
       text-align: center;
-    }
-
-    .list-room-modal__first-step {
-      padding: 1.25rem 1rem;
-
-      .list-room-modal__first-step__body {
-        padding: 0 0.25rem;
-      }
     }
   }
 }
@@ -1088,29 +1042,6 @@
   .list-room-modal.draft-request-modal {
     .modal-body {
       padding: 2rem 2rem;
-
-      .list-room-modal__first-step {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 0;
-
-        .list-room-modal__first-step__body {
-          padding: 0 1rem;
-        }
-      }
-    }
-  }
-
-  .list-room-modal__first-step,
-  .list-room-modal__second-step {
-    .list-room-modal__first-step__header {
-      margin: 0 0 2rem;
-    }
-
-    .list-room-modal__first-step__body,
-    .list-room-modal__second-step__body {
-      padding: 0;
-      gap: 1rem;
     }
   }
 
@@ -1207,22 +1138,6 @@
   .list-room-modal.draft-request-modal {
     .modal-body {
       padding: 3rem 2.5rem;
-
-      .list-room-modal__first-step {
-        max-width: 700px;
-      }
-    }
-  }
-
-  .list-room-modal__first-step,
-  .list-room-modal__second-step {
-    .list-room-modal__first-step__header {
-      margin: 0 0 2.5rem;
-    }
-
-    .list-room-modal__first-step__body,
-    .list-room-modal__second-step__body {
-      gap: 1.25rem;
     }
   }
 
@@ -1324,10 +1239,6 @@
   .list-room-modal.draft-request-modal {
     .modal-body {
       padding: 4rem 3rem;
-
-      .list-room-modal__first-step {
-        max-width: 750px;
-      }
     }
   }
 
@@ -1375,4 +1286,9 @@
     background-color: $color-two;
     border: none;
   }
+}
+
+.list-room-modal__first-step,
+.list-room-modal__second-step {
+    margin: 20px 10%;
 }
