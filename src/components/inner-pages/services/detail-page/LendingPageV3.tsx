@@ -20,7 +20,7 @@ interface HomeSixProps {
     serverProperties?: any[];
 }
 
-export default function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }) {
+export default function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixProps) {
     const { t } = useTranslation('translations');
     const [showListRoomModal, setShowListRoomModal] = useState(false);
     const [showReminderModal, setShowReminderModal] = useState(false);

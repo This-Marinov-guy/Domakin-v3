@@ -13,6 +13,7 @@ import EightStep from "@/components/list-room-form/eight-step";
 import SuccessStep from "@/components/list-room-form/success-step";
 import DraftRequestModal from "@/components/list-room-form/draft-request-modal";
 import useStickyFooter from "@/hooks/useStickyFooter";
+import { auto } from "@popperjs/core";
 
 interface ListRoomModalProps {
     show: boolean;
@@ -234,26 +235,6 @@ export default function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                     <Modal.Footer className="justify-content-between" ref={footerRef}>
                         {actionButtons}
                     </Modal.Footer>
-                )}
-
-                {!isLast && !isCompleteForm && !isFooterVisible && (
-                    <div
-                        className="sticky-modal-footer"
-                        style={{
-                            position: "fixed",
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            backgroundColor: "white",
-                            padding: "15px 20px",
-                            boxShadow: "0 -4px 20px rgba(0, 0, 0, 0.15)",
-                            zIndex: 1055,
-                            borderTop: "1px solid #e0e0e0",
-                            animation: "fadeInUp 0.3s ease-in-out",
-                        }}
-                    >
-                        {actionButtons}
-                    </div>
                 )}
             </Modal>
 

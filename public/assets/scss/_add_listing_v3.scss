@@ -422,26 +422,6 @@
       }
     }
 
-    input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
-    textarea,
-    select,
-    .select-trigger {
-      font-size: 0.875rem;
-      line-height: 1.125rem;
-      color: $color-eighteen;
-      height: auto;
-      padding: 1.5rem;
-      border-radius: 1.125rem;
-      box-shadow: 0px 1px 8px 0px #00000014;
-      border: 1px solid $color-seventeen;
-
-      ::placeholder,
-      .placeholder {
-        color: $color-eighteen;
-        background-color: transparent;
-      }
-    }
-
     .form-radio-group {
       gap: 0.75rem;
     }
@@ -575,7 +555,7 @@
     background-color: #fff;
 
     &.sticky-modal-header {
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
     }
 
     .container {
@@ -1058,14 +1038,6 @@
     font-size: 1rem;
   }
 
-  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
-  textarea,
-  select,
-  .select-trigger {
-    font-size: 1rem;
-    padding: 1rem 1.25rem;
-  }
-
   .house-room-box {
     gap: 1rem;
 
@@ -1152,14 +1124,6 @@
   li,
   label {
     font-size: 1.0625rem;
-  }
-
-  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
-  textarea,
-  select,
-  .select-trigger {
-    font-size: 1.0625rem;
-    padding: 1.125rem 1.5rem;
   }
 
   .house-room-box {
@@ -1255,13 +1219,6 @@
     font-size: 1.125rem;
   }
 
-  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
-  textarea,
-  select,
-  .select-trigger {
-    font-size: 1.125rem;
-    padding: 1.25rem 1.75rem;
-  }
 
   .gallery-box {
     .gallery-item {
@@ -1291,4 +1248,8 @@
 .list-room-modal__first-step,
 .list-room-modal__second-step {
     margin: 20px 10%;
+}
+
+.form-group{
+  margin: 20px 0;
 }
