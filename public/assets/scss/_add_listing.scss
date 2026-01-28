@@ -111,20 +111,7 @@ section {
   .container {
     padding: 0 1.25rem;
   }
-  .section__title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    line-height: 120%;
-    letter-spacing: -0.8px;
-    margin: 0 0 0.75rem;
-  }
-  p {
-    line-height: 100%;
-    margin: 0;
-    font-size: 0.75rem;
-    letter-spacing: -0.48px;
-    color: #585858;
-  }
+
 }
 
 .rooms-sec {
@@ -183,7 +170,6 @@ section {
   li,
   button,
   a {
-    font-size: 0.75rem;
     letter-spacing: -0.48px;
     color: #585858;
     margin: 0;
@@ -287,7 +273,6 @@ section {
         }
         p {
           color: $color-ten;
-          font-size: 0.875rem;
           line-height: 142%;
           text-align: left;
         }
@@ -462,7 +447,6 @@ section {
       padding: 0;
       margin: 0;
 
-      font-size: 0.875rem;
       font-weight: 500;
       line-height: 120%;
       letter-spacing: -0.56px;
@@ -483,7 +467,6 @@ section {
   }
   .custom-accordion-collapse {
     .custom-accordion-body {
-      font-size: 0.75rem;
       line-height: 150%;
       letter-spacing: -0.48px;
       word-spacing: 1px;
@@ -575,12 +558,6 @@ section {
     .container {
       max-width: 768px;
       padding: 0 2rem;
-    }
-    .section__title {
-      font-size: 1.75rem;
-    }
-    p {
-      font-size: 0.875rem;
     }
   }
 

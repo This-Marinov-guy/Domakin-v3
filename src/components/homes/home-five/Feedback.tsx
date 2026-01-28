@@ -64,14 +64,15 @@ const setting = {
 interface FeedbackProps {
   style?: boolean;
   feedbacks?: any[];
+  bg?: string;
 }
 
-const Feedback = ({ style, feedbacks = [] }: FeedbackProps) => {
+const Feedback = ({ style, feedbacks = [], bg = 'bg-pink-two' }: FeedbackProps) => {
   const { t } = useTranslation("translations");
 
   return (
     <div
-      className={`center-dots bg-pink-two position-relative z-1 mt-20 pt-40 pb-40 ${
+      className={`center-dots ${bg} position-relative z-1 mt-20 pt-40 pb-40 ${
         style ? "" : "mt-170 xl-mt-120"
       }`}
       style={{ minHeight: feedbacks?.length > 0 ? '400px' : '200px' }}

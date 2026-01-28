@@ -43,8 +43,7 @@ export default function LendingPageV2() {
             <AvailableRooms />
             <ReviewsSection />
             <HowToWorksSection />
-            <QuestionsSection questions={questions} />
-            <footer className="border-footer"></footer>
+            {/* <QuestionsSection questions={questions} /> */}
             <ListRoomModal show={showListRoomModal} onHide={() => setShowListRoomModal(false)} />
             <ReminderFormModal show={showReminderModal} onHide={() => setShowReminderModal(false)} />
         </>

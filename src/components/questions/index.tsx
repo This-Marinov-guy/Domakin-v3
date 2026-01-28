@@ -3,7 +3,30 @@ interface Question {
     answer?: string;
 }
 
-export default function QuestionsSection({questions, secClasses}: {questions: Question[], secClasses?: string}) {
+const questions = [
+    {
+        question: 'Do I choose who gets my room when I move out?',
+        answer: `Lorem ipsum dolor sit amet, consectetur adipiscing Proin pharetra ultrices magna ac Pellentesque pellentesque dui vitae diam suscipit.`
+    },
+    {
+        question: 'Can I sublet my room through Domakin?',
+        answer: `Lorem ipsum dolor sit amet, consectetur adipiscing Proin pharetra ultrices magna ac Pellentesque pellentesque dui vitae diam suscipit.`
+    },
+    {
+        question: 'Can I list my room if I originally rented it through an agency?',
+        answer: `Lorem ipsum dolor sit amet, consectetur adipiscing Proin pharetra ultrices magna ac Pellentesque pellentesque dui vitae diam suscipit.`
+    },
+    {
+        question: 'How do I receive the €200 payout?',
+        answer: `Lorem ipsum dolor sit amet, consectetur adipiscing Proin pharetra ultrices magna ac Pellentesque pellentesque dui vitae diam suscipit.`
+    },
+    {
+        question: 'Do I get to decide who becomes my new rommate?',
+        answer: `Lorem ipsum dolor sit amet, consectetur adipiscing Proin pharetra ultrices magna ac Pellentesque pellentesque dui vitae diam suscipit.`
+    }
+];
+
+export default function QuestionsSection({secClasses}: {secClasses?: string}) {
     return (
         <section className={`pt-15 ${secClasses}`}>
             <div className="container">

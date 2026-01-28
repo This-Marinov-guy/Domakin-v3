@@ -1,10 +1,17 @@
-import LendingPage from "@/components/inner-pages/services/detail-page/LendingPage";
 import Wrapper from "@/layouts/Wrapper";
 import Head from "next/head";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
+import { fetchFeedbacks, fetchProperties } from "@/services/api";
 import useTranslation from "next-translate/useTranslation";
+import LendingPageV3 from "@/components/inner-pages/services/detail-page/LendingPageV3";
 
-const index = () => {
+interface HomeProps {
+  serverFeedbacks: any[];
+  serverProperties: any[];
+}
+
+const index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
   const router = useRouter();
   const { t, lang } = useTranslation("translations");
   
@@ -60,10 +67,24 @@ const index = () => {
           : "καταχώρηση δωματίου, μεταβίβαση συμβολαίου, εύρεση συγκατοίκου, Ολλανδία"} />
       </Head>
       <Wrapper>
-        <LendingPage />
+        <LendingPageV3 serverFeedbacks={serverFeedbacks} serverProperties={serverProperties}/>
       </Wrapper>
     </>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const lang = context.locale || "en";
+  const feedbacks = await fetchFeedbacks(lang);
+  const properties = await fetchProperties(lang);
+
+  return {
+    props: {
+      serverFeedbacks: feedbacks,
+      serverProperties: properties,
+    },
+  };
+};
+
 
 export default index;
