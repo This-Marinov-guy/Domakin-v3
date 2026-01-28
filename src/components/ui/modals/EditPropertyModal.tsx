@@ -560,6 +560,7 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
           </div>
         </form>
       </Modal.Body>
+      
       <Modal.Footer className="m-auto" ref={footerRef}>
         <div className="d-flex justify-content-center align-items-center gap-3">
           <button

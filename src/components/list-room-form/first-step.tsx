@@ -2,23 +2,18 @@ import LogoLarge from "@/assets/images/logo/logo-large.svg";
 import Image from "next/image";
 import StepsBar from "@/components/steps/stepsBar";
 
-export default function FirstStep({steps, currentStep}: {steps: string[], currentStep: number}) {
+export default function FirstStep({ steps, currentStep }: { steps: string[], currentStep: number }) {
     return (
-        <div className="list-room-modal__first-step">
-            <div className="list-room-modal__first-step__header">
-                <Image src={LogoLarge} alt="Logo Icon" />
-            </div>
-            <div className="list-room-modal__first-step__body d-flex flex-column">
-                <StepsBar
-                    steps={steps}
-                    currentStep={currentStep}
-                />
+        <div className="d-flex flex-column">
+            <Image className="m-auto" src={LogoLarge} alt="Logo Icon" style={{height: '200px', width: '200px', borderRadius: '20px'}}/>
+            <div className="d-flex flex-column items-center justify-center text-center mx-auto mt-80" style={{ width: '75%' }}>
                 <h2>
-                    Tell us about your place
+                    Welcome to the property uploading
                 </h2>
                 <p>
-                    In this step, well ask you the type of your place, the city, registration possible and address
+                    In the next few steps, we are going to collect some information about the property and essential contact details. The process is easy and you can save and come back from where you were at any moment.
                 </p>
+                <p>Let's start!</p>
             </div>
         </div>
     )
