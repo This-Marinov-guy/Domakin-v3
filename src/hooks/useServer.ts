@@ -152,7 +152,7 @@ export const useServer = () => {
       !ENV_PROD && console.log(err.response?.data ?? err);
 
       // only show error if the response has no status property
-      if (options?.withError && !err.response.data.hasOwnProperty('status')) {
+      if (options?.withError && !err.response?.data.hasOwnProperty('status')) {
         let errorMessage = getErrorMessage(err.response);
 
         if (GENERAL_ERROR_RESPONSE_CODES.includes(err.status)) {
