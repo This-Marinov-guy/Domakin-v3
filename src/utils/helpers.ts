@@ -4,6 +4,7 @@ import Resizer from "react-image-file-resizer";
 import { ENV_PROD, LANGUAGES } from "./defines";
 import { LOCAL_STORAGE_LOCATION } from "./localstorage";
 import { toast, ToastContent, ToastOptions } from "react-toastify";
+import { SERVER_ENDPOINT } from "./config";
 
 export const getGeoInfo = async () => {
   if (!ENV_PROD) {
@@ -239,14 +240,16 @@ export const getCookie = (name: any) => {
 };
 
 export const csrf = async () => {
-  const sessionCookie = getCookie(process.env.NEXT_PUBLIC_SESSION_ID);
+  const sessionCookie = getCookie(process.env.NEXT_PUBLIC_SESSION_ID);  
 
   if (sessionCookie) {
-    return;
+    return sessionCookie;
   }
 
   try {
-    // await axios.get(SERVER_ENDPOINT + "/sanctum/csrf-cookie");
+    await axios.get(SERVER_ENDPOINT + "/sanctum/csrf-cookie");
+    const sessionCookie = getCookie(process.env.NEXT_PUBLIC_SESSION_ID);
+    return sessionCookie;
   } catch (err) {
     //do nothing;
   }
