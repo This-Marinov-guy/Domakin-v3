@@ -22,7 +22,7 @@ const StripePaymentLinkButton: React.FC<StripePaymentLinkButtonProps> = ({
   const { modalStore } = useStore();
 
   const handleClick = () => {
-    modalStore.setActiveModal(PAYMENT_LINK_MODAL);
+    modalStore.setActiveModal(PAYMENT_LINK_MODAL, { propertyId });
   };
 
   const button = (
@@ -50,9 +50,6 @@ const StripePaymentLinkButton: React.FC<StripePaymentLinkButtonProps> = ({
       ) : (
         button
       )}
-
-      {/* Render the modal component */}
-      <PaymentLinkModal propertyId={propertyId} />
     </>
   );
 };

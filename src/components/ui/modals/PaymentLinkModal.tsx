@@ -10,13 +10,11 @@ import { useStore } from "@/stores/storeContext";
 import { showGeneralError, showStandardNotification } from "@/utils/helpers";
 import { PAYMENT_LINK_MODAL } from "@/utils/defines";
 
-interface PaymentLinkModalProps {
-  propertyId: number | string;
-}
-
-const PaymentLinkModal: React.FC<PaymentLinkModalProps> = ({ propertyId }) => {
+const PaymentLinkModal: any = () => {
   const { modalStore } = useStore();
   const { sendRequest, loading } = useServer();
+  
+  const propertyId = modalStore.modalSettings?.propertyId;
 
   const [customerName, setCustomerName] = useState<string>("");
   const [paymentLink, setPaymentLink] = useState<string>("");
@@ -24,6 +22,8 @@ const PaymentLinkModal: React.FC<PaymentLinkModalProps> = ({ propertyId }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (propertyId == null) return;
+
     try {
       const response = await sendRequest(
         "/property/payment/create-link",

@@ -1,7 +1,15 @@
 import { COOKIE_MODAL, EDIT_PROPERTY_MODAL, LOGIN_MODAL, LONG_LOADING_MODAL, PAYMENT_LINK_MODAL } from "@/utils/defines";
 import { makeAutoObservable, toJS } from "mobx";
 
-const defaultModalSettings = {
+export interface ModalSettingsType {
+  modalId: string | null;
+  settings: Record<string, unknown>;
+  onRemoveCallback: () => void;
+  propertyId?: number | string;
+  [key: string]: unknown;
+}
+
+const defaultModalSettings: ModalSettingsType = {
   modalId: null,
   settings: {},
   onRemoveCallback: () => {},
@@ -18,7 +26,7 @@ const initialValues = {
 export default class ModalStore {
   rootStore: any;
   modals:any = initialValues;
-  modalSettings = defaultModalSettings;
+  modalSettings: ModalSettingsType = defaultModalSettings;
   historyStack: string[] = [];
   historyStackSettings: any[] = [];
 

@@ -47,11 +47,13 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
     property.folder ?? "property_" + property.id
   }/`;
 
+  const propertyId = Number(property.id) - PROPERTY_ID_OFFSET;
+
   const loadExtendedPropertyDetails = async () => {
     if (Number(slug) < PROPERTY_ID_OFFSET) return;
 
     const response = await sendRequest(
-      `/property/details/${Number(slug) - PROPERTY_ID_OFFSET}`,
+      `/property/details/${propertyId}`,
       "GET",
       {},
       {},
@@ -105,7 +107,7 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
                   <div className="d-flex align-items-center gap-2 fs-5">
                     <span>Quick Actions:</span>
                     {extendedPropertyDetails?.property_data?.payment_link && (
-                      <StripePaymentLinkButton propertyId={property.id} small/>
+                      <StripePaymentLinkButton propertyId={propertyId} small/>
                     )}
                     <OverlayTrigger
                       placement="top"

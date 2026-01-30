@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { fetchFeedbacks, fetchProperties } from "@/services/api";
 import useTranslation from "next-translate/useTranslation";
 import LendingPageV3 from "@/components/inner-pages/services/detail-page/LendingPageV3";
+import LendingPage from "@/components/inner-pages/services/detail-page/LendingPage";
 
 interface HomeProps {
   serverFeedbacks: any[];
@@ -67,7 +68,8 @@ const index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
           : "καταχώρηση δωματίου, μεταβίβαση συμβολαίου, εύρεση συγκατοίκου, Ολλανδία"} />
       </Head>
       <Wrapper>
-        <LendingPageV3 serverFeedbacks={serverFeedbacks} serverProperties={serverProperties}/>
+        {/* <LendingPageV3 serverFeedbacks={serverFeedbacks} serverProperties={serverProperties}/> */}
+        <LendingPage />
       </Wrapper>
     </>
   );
