@@ -9,7 +9,7 @@ import { observer } from "mobx-react-lite";
 import { useServer } from "@/hooks/useServer";
 import { toast, ToastContent } from "react-toastify";
 import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
-import { prefillUserInfo, transformToFormData } from "@/utils/helpers";
+import { prefillUserInfo, showGeneralError, showGeneralSuccess, transformToFormData } from "@/utils/helpers";
 import Trans from "next-translate/Trans";
 import { PROPERTY_STATUS } from "@/utils/enum";
 
@@ -46,15 +46,20 @@ const RentingForm = ({ refElement, property }: any) => {
       transformToFormData({
         ...rentingData,
         property: `${property.id} | ${property.title} | ${property.location}`,
+        propertyId: property.id,
         address: `${property.location}, ${property.city}`,
       })
     ).then((res) => {
       if (res?.status) {
         resetRentingData();
         setSuccess(true);
+        showGeneralSuccess(t("viewing.confirmation_message"));
       } else if (res?.invalid_fields) {
         addRentingErrorFields(res.invalid_fields);
+        showGeneralError(t("api.fill_fields"));
       }
+    }).catch((err) => {
+      showGeneralError(t("api.general_error"));
     });
   };
 
