@@ -19,7 +19,8 @@ import { useStore } from "@/stores/storeContext";
 import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import useTranslation from "next-translate/useTranslation";
-import { EDIT_PROPERTY_MODAL, PROPERTY_ID_OFFSET } from "@/utils/defines";
+import { APPLICATION_MODAL, EDIT_PROPERTY_MODAL, PROPERTY_ID_OFFSET } from "@/utils/defines";
+import { getPropertyUrl } from "@/utils/seoHelpers";
 import EditPropertyModal from "@/components/ui/modals/EditPropertyModal";
 import { useServer } from "@/hooks/useServer";
 import { useEffect, useState } from "react";
@@ -29,7 +30,7 @@ import { parsePropertyPreviewData } from "@/utils/helpers";
 import StripePaymentLinkButton from "@/components/ui/buttons/StripePaymentLinkButton";
 
 const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
-  const { t } = useTranslation("translations");
+  const { t, lang } = useTranslation("translations");
   const {
     userStore: { isAdmin },
     modalStore,
@@ -75,6 +76,29 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
 
     setPropertyDataForEdit(extendedPropertyDetails);
     modalStore.setActiveModal(EDIT_PROPERTY_MODAL);
+  };
+
+  const openApplicationsModal = () => {
+    const rawTitle = extendedPropertyDetails?.property_data?.title ?? property?.title;
+    const propertyTitle =
+      typeof rawTitle === "string"
+        ? (() => {
+            try {
+              const j = JSON.parse(rawTitle);
+              return j?.en ?? j?.title ?? rawTitle;
+            } catch {
+              return rawTitle;
+            }
+          })()
+        : (rawTitle && typeof rawTitle === "object" && (rawTitle.en ?? (rawTitle as { title?: string }).title)) ||
+          property?.location ||
+          property?.title ||
+          `Property #${propertyId}`;
+    modalStore.setActiveModal(APPLICATION_MODAL, {
+      propertyId,
+      propertyTitle: String(propertyTitle ?? ""),
+      propertyUrl: getPropertyUrl(property, true, lang),
+    });
   };
 
   const allImages =
@@ -128,6 +152,17 @@ const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
                         onClick={() => setIsPreviewOpened(true)}
                         style={{ cursor: "pointer" }}
                         className="fa-regular ml-10 fa-eye cursor-pointer"
+                      ></i>
+                    </OverlayTrigger>
+
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip>Applications</Tooltip>}
+                    >
+                      <i
+                        onClick={openApplicationsModal}
+                        style={{ cursor: "pointer" }}
+                        className="fas ml-10 fa-users cursor-pointer"
                       ></i>
                     </OverlayTrigger>
                   </div>

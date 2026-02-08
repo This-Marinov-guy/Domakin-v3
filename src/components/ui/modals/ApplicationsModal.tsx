@@ -14,6 +14,7 @@ import { showGeneralError, showStandardNotification } from "@/utils/helpers";
 import NiceSelect from "@/ui/NiceSelect";
 import ApplicationsAccordionSkeleton from "@/components/ui/loading/ApplicationsAccordionSkeleton";
 import { getPropertyUrl } from "@/utils/seoHelpers";
+import moment from "moment";
 
 export interface ListByPropertyEntry {
   id: number | string;
@@ -139,7 +140,6 @@ const ApplicationsModal = () => {
         showGeneralError("Failed to save changes");
       }
     } catch {
-      showGeneralError("Failed to save changes");
     } finally {
       setSavingId(null);
     }
@@ -231,14 +231,13 @@ const ApplicationsModal = () => {
                     }
 
                     if (key === "internal_note") {
-                      const internalUpdatedAt = entry.internal_updated_at ?? editRow.internal_updated_at;
-                      const internalUpdatedBy = entry.internal_updated_by ?? editRow.internal_updated_by;
+                      const internalUpdatedAt = moment(entry.internal_updated_at as string).format("DD/MM/YYYY HH:mm");
+                      const internalUpdatedBy = (entry.internal_updated_by_user as any)?.name as string;
                       const hasMeta = internalUpdatedAt != null || internalUpdatedBy != null;
                       const tooltip = (
                         <Tooltip id={`internal-note-tt-${id}`}>
                           {internalUpdatedAt != null && <div>Updated at: {String(internalUpdatedAt)}</div>}
                           {internalUpdatedBy != null && <div>Updated by: {String(internalUpdatedBy)}</div>}
-                          {!hasMeta && "No update info"}
                         </Tooltip>
                       );
                       return (
