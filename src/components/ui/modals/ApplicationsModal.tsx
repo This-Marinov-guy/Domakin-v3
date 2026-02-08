@@ -231,7 +231,7 @@ const ApplicationsModal = () => {
                     }
 
                     if (key === "internal_note") {
-                      const internalUpdatedAt = moment(entry.internal_updated_at as string).format("DD/MM/YYYY HH:mm");
+                      const internalUpdatedAt = entry.internal_updated_at ? moment(entry.internal_updated_at as string).format("DD/MM/YYYY HH:mm") : null;
                       const internalUpdatedBy = (entry.internal_updated_by_user as any)?.name as string;
                       const hasMeta = internalUpdatedAt != null || internalUpdatedBy != null;
                       const tooltip = (
