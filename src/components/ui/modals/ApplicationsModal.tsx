@@ -337,7 +337,7 @@ const ApplicationsModal = () => {
                                   onClick={modalStore.closeAll}
                                   className="btn-danger text-uppercase rounded-3 fw-normal w-100"
                                 >
-                                  back
+                                  cancel
                                 </button>
                               </div>
 
