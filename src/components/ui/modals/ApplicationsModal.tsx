@@ -147,7 +147,7 @@ const ApplicationsModal = () => {
   };
 
   const getSummary = (entry: any): string => {
-    return `${entry.name} ${entry.surname} | ${entry.email}`;
+    return `${entry.name} ${entry.surname}`;
   };
 
   if (!isOpen) return null;
@@ -302,8 +302,8 @@ const ApplicationsModal = () => {
                           aria-expanded={isExpanded}
                           aria-controls={collapseId}
                         >
-                          {isSuccessStatus && <i className="fas fa-check-circle text-success" style={{ marginRight: "10px" }}></i>}
-                          {isRejectedStatus && <i className="fas fa-times-circle text-danger" style={{ marginRight: "10px" }}></i>}
+                          {isSuccessStatus && <i className="fas fa-check-circle text-success" style={{ marginRight: "10px", fontSize: "24px" }}></i>}
+                          {isRejectedStatus && <i className="fas fa-times-circle text-danger" style={{ marginRight: "10px", fontSize: "24px" }}></i>}
                           {getSummary(entry)}
                         </button>
                       </h2>
