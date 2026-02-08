@@ -471,16 +471,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.domakin.nl/services/renting/property/1052-breda-studio-for-second-semester-sublease"/>
   </url>
   <url>
-    <loc>https://www.domakin.nl/services/renting/property/1070-student-apartment-near-umcg-groningen</loc>
-    <lastmod>2026-02-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.domakin.nl/services/renting/property/1070-student-apartment-near-umcg-groningen"/>
-    <xhtml:link rel="alternate" hreflang="bg" href="https://www.domakin.nl/bg/services/renting/property/1070-student-apartment-near-umcg-groningen"/>
-    <xhtml:link rel="alternate" hreflang="el" href="https://www.domakin.nl/gr/services/renting/property/1070-student-apartment-near-umcg-groningen"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.domakin.nl/services/renting/property/1070-student-apartment-near-umcg-groningen"/>
-  </url>
-  <url>
     <loc>https://www.domakin.nl/services/renting/property/1063-furnished-apartment-near-valeriusplein-amsterdam</loc>
     <lastmod>2026-02-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -489,6 +479,16 @@
     <xhtml:link rel="alternate" hreflang="bg" href="https://www.domakin.nl/bg/services/renting/property/1063-furnished-apartment-near-valeriusplein-amsterdam"/>
     <xhtml:link rel="alternate" hreflang="el" href="https://www.domakin.nl/gr/services/renting/property/1063-furnished-apartment-near-valeriusplein-amsterdam"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.domakin.nl/services/renting/property/1063-furnished-apartment-near-valeriusplein-amsterdam"/>
+  </url>
+  <url>
+    <loc>https://www.domakin.nl/services/renting/property/1070-student-apartment-near-umcg-hospital-groningen</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.domakin.nl/services/renting/property/1070-student-apartment-near-umcg-hospital-groningen"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://www.domakin.nl/bg/services/renting/property/1070-student-apartment-near-umcg-hospital-groningen"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.domakin.nl/gr/services/renting/property/1070-student-apartment-near-umcg-hospital-groningen"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.domakin.nl/services/renting/property/1070-student-apartment-near-umcg-hospital-groningen"/>
   </url>
   <url>
     <loc>https://www.domakin.nl/services/renting/property/1060-seeking-roommate-for-peaceful-apartment-amsterdam</loc>
