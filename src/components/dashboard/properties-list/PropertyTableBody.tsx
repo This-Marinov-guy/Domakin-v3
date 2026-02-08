@@ -22,8 +22,8 @@ import { useServer } from "@/hooks/useServer";
 import PropertyDataPreview from "@/components/ui/modals/PropertyDataPreview";
 import EditPropertyModal from "@/components/ui/modals/EditPropertyModal";
 import { PROPERTY_STATUS } from "@/utils/enum";
-import { EDIT_PROPERTY_MODAL, PROPERTY_ID_OFFSET } from "@/utils/defines";
-import { parsePropertyPreviewData } from "@/utils/helpers";
+import { APPLICATION_MODAL, EDIT_PROPERTY_MODAL, PROPERTY_ID_OFFSET } from "@/utils/defines";
+import { formatJsonKeyValuePairs, parsePropertyPreviewData } from "@/utils/helpers";
 import StripePaymentLinkButton from "@/components/ui/buttons/StripePaymentLinkButton";
 import { getPropertyUrl } from "@/utils/seoHelpers";
 import useTranslation from "next-translate/useTranslation";
@@ -70,6 +70,20 @@ const PropertyTableBody = () => {
       },
     };
   };
+
+  const openApplicationsModal = (item: any) => {
+    const propertyPayload = {
+      ...item.property_data,
+      id: PROPERTY_ID_OFFSET + (item.id ?? 0),
+    };    
+
+    modalStore.setActiveModal(APPLICATION_MODAL, {
+      propertyId: item.id,
+      propertyTitle: formatJsonKeyValuePairs(item.property_data?.title, ['en']),
+      propertyUrl: getPropertyUrl(propertyPayload, true, lang),
+    });
+
+  }
 
   // Table row renderer
   const renderRows = (userProperties: any[]) => (
@@ -204,6 +218,14 @@ const PropertyTableBody = () => {
                         }}
                       >
                         <Image src={icon_3} alt="" className="lazy-img" /> Edit
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        className="dropdown-item"
+                        onClick={() => {openApplicationsModal(item)}}
+                      >
+                        <i className="fas fa-users"></i> Applications
                       </button>
                     </li>
                   </ul>

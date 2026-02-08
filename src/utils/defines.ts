@@ -71,6 +71,7 @@ export const LOGIN_MODAL = "LOGIN_MODAL";
 export const EDIT_PROPERTY_MODAL = "EDIT_PROPERTY_MODAL";
 export const LONG_LOADING_MODAL = "LONG_LOADING_MODAL";
 export const PAYMENT_LINK_MODAL = "PAYMENT_LINK_MODAL";
+export const APPLICATION_MODAL = "APPLICATION_MODAL";
 
 // tabs
 export const FORGOTTEN_PASS = 2;
@@ -92,4 +93,11 @@ export const PROPERTY_STATUSES = [
   { value: 2, text: "Active" },
   { value: 3, text: "Taken" },
   { value: 4, text: 'Declined' }
+];
+
+export const APPLICATION_STATUSES = [
+  { value: 1, text: "Pending" },
+  { value: 2, text: "Contacted" },
+  { value: 3, text: "Approved" },
+  { value: 4, text: "Rejected" }
 ];

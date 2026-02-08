@@ -573,7 +573,6 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
           </button>
           <button
             disabled={loading}
-            type="submit"
             onClick={modalStore.closeAll}
             className="btn-seven text-uppercase rounded-3 fw-normal w-100"
           >

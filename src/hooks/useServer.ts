@@ -84,7 +84,7 @@ export const useServer = () => {
     const sessionCookie = getCookie(process.env.NEXT_PUBLIC_SESSION_ID);
 
     if (!sessionCookie) {
-      await csrf();
+      // await csrf();
     }
 
     axios.defaults.headers.common["X-CSRF-TOKEN"] = decodeURIComponent(
