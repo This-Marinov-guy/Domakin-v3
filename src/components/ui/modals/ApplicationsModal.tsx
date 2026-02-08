@@ -22,6 +22,7 @@ export interface ListByPropertyEntry {
 }
 
 const DISPLAY_FIELDS = [
+  'created_at',
   "name",
   "surname",
   "phone",
@@ -183,6 +184,15 @@ const ApplicationsModal = () => {
                     const isObj = typeof val === "object" && val !== null && !Array.isArray(val);
                     const displayVal = isObj ? JSON.stringify(val) : String(val ?? "");
                     const label = FIELD_LABELS[key] ?? key;
+
+                    if (key === "created_at") {
+                      return (
+                        <tr key={key}>
+                          <td className="text-muted small pe-2">Application date</td>
+                          <td>{moment(val as string).format("DD/MM/YYYY hh:mm")}</td>
+                        </tr>
+                      );
+                    }
 
                     if (key === "letter") {
                       const url = typeof val === "string" ? val : String(val ?? "");
