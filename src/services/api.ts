@@ -261,7 +261,8 @@ export const fetchProperties = async (lang = "en") => {
   try {
     const response = await axios.get(`${SERVER_ENDPOINT}/api/v1/property/listing`, {
       headers: {
-        "Accept-Language": lang
+        "Accept-Language": lang,
+        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_AUTH_KEY}`
       }
     });
     
