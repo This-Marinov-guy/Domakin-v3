@@ -12,6 +12,7 @@ import Form from "react-bootstrap/Form";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import useTranslation from "next-translate/useTranslation";
+import SingleDatePicker from "@/components/ui/inputs/dates/SingleDatePicker";
 
 function ThirdStep({ steps, currentStep }: { steps: (string | number)[]; currentStep: number }) {
     const { t } = useTranslation("translations");
@@ -152,6 +153,46 @@ function ThirdStep({ steps, currentStep }: { steps: (string | number)[]; current
                                 </span>
                             </div>
                         </div>
+                    </div>
+
+                    <div className="input-group-meta form-group col-12 col-md-6">
+                        <label htmlFor="list-room-available-from">Available from</label>
+                        <SingleDatePicker
+                            id="list-room-available-from"
+                            placeholder="Select date"
+                            value={propertyData.availableFrom ?? ""}
+                            onChange={(value: string | Date | null) => {
+                                const next =
+                                    value == null
+                                        ? null
+                                        : value instanceof Date
+                                          ? value.toISOString().slice(0, 10)
+                                          : String(value);
+                                updateListingData("propertyData", "availableFrom", next);
+                            }}
+                            isInvalid={errorFields.includes("propertyData.availableFrom")}
+                        />
+                    </div>
+
+                    <div className="input-group-meta form-group col-12 col-md-6">
+                        <label htmlFor="list-room-available-to">
+                            Available to <span className="text-muted small">(optional)</span>
+                        </label>
+                        <SingleDatePicker
+                            id="list-room-available-to"
+                            placeholder="Select date"
+                            value={propertyData.availableTo ?? ""}
+                            onChange={(value: string | Date | null) => {
+                                const next =
+                                    value == null
+                                        ? null
+                                        : value instanceof Date
+                                          ? value.toISOString().slice(0, 10)
+                                          : String(value);
+                                updateListingData("propertyData", "availableTo", next);
+                            }}
+                            isInvalid={errorFields.includes("propertyData.availableTo")}
+                        />
                     </div>
                 </div>
             </div>
