@@ -16,7 +16,7 @@ interface RoomCardV3Props {
     };
 }
 
-export default function RoomCardV3({item}: RoomCardV3Props) {
+export default function RoomCardV3({ item }: RoomCardV3Props) {
 
     return (
         <div className="card custom-card room-card-v2 room-card-v3">
@@ -41,9 +41,7 @@ export default function RoomCardV3({item}: RoomCardV3Props) {
                     <h4 className="custom-card__header__price room-card-v2__header__price">
                         <span>{item.price && item.price}</span>{item.plan_type && item.plan_type}
                     </h4>
-                    <Link href={item.url} className="btn btn-lg btn-warning custom-card__footer__btn room-card-v2__footer__btn">
-                        <Image src={ArrowLeftWhite} alt="arrow icon" />
-                    </Link>
+                    <Image className="btn btn-lg btn-warning custom-card__footer__btn room-card-v2__footer__btn" src={ArrowLeftWhite} alt="arrow icon" />
                 </div>
             </div>
         </div>

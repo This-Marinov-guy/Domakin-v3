@@ -68,8 +68,8 @@ const index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
           : "καταχώρηση δωματίου, μεταβίβαση συμβολαίου, εύρεση συγκατοίκου, Ολλανδία"} />
       </Head>
       <Wrapper>
-        {/* <LendingPageV3 serverFeedbacks={serverFeedbacks} serverProperties={serverProperties}/> */}
-        <LendingPage />
+        <LendingPageV3 serverFeedbacks={serverFeedbacks} serverProperties={serverProperties}/>
+        {/* <LendingPage /> */}
       </Wrapper>
     </>
   );

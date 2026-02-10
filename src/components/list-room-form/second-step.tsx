@@ -1,110 +1,169 @@
-import Image from "next/image";
-import MallIcon from "@/assets/images/icon/mall.svg";
-import StudioIcon from "@/assets/images/icon/studio.svg";
-import HouseIcon from "@/assets/images/icon/house.svg";
-import StudentHouseIcon from "@/assets/images/icon/student-house.svg";
-import SearchableCitySelect from "@/components/ui/SearchableCitySelect";
-import { DUTCH_CITIES } from "@/utils/countries";
-import React, { useState } from "react";
+"use client";
+
+import React, { useEffect } from "react";
 import Form from "react-bootstrap/Form";
+import Trans from "next-translate/Trans";
+import useTranslation from "next-translate/useTranslation";
+import { useStore } from "@/stores/storeContext";
+import { observer } from "mobx-react-lite";
+import { prefillNestedUserInfo } from "@/utils/helpers";
+import PrefixPhoneInput from "@/components/ui/inputs/phone/PrefixPhoneInput";
 
-export default function SecondStep({ steps, currentStep }: { steps: string[], currentStep: number }) {
-    const [city, setCity] = useState("");
+interface SecondStepProps {
+    steps: (string | number)[];
+    currentStep: number;
+}
+
+function SecondStep({ steps, currentStep }: SecondStepProps) {
+    const { t } = useTranslation("translations");
+    const {
+        propertyStore,
+        propertyStore: {
+            addListingData: { personalData, terms, referralCode },
+            updateListingData,
+            loadListingData,
+            errorFields,
+        },
+        userStore: { user },
+    } = useStore();
+
+    useEffect(() => {
+        loadListingData();
+    }, [loadListingData]);
+
+    useEffect(() => {
+        prefillNestedUserInfo("personalData", updateListingData, user);
+    }, [user, updateListingData]);
+
     return (
-        <div className="list-room-modal__second-step">
-            <div className="list-room-modal__second-step__body d-flex flex-column">
-
-                <div className="house-room-box row gx-0">
-                    <div className="form-group checkbox-card-type col m-2">
-                        <input type="radio" className="btn-check" name="apartment" id="apartment" autoComplete="off" />
-                        <label className="btn d-flex flex-column h-100" htmlFor="apartment">
-                            <Image src={MallIcon} alt="property icon" />
-                            <span>
-                                Room in a shared apartment
-                            </span>
-                        </label>
-                    </div>
-                    <div className="form-group checkbox-card-type col m-2">
-                        <input type="radio" className="btn-check" name="apartment" id="studio-house" autoComplete="off" />
-                        <label className="btn d-flex flex-column h-100" htmlFor="studio-house">
-                            <Image src={StudioIcon} alt="property icon" />
-                            <span>
-                                Studio
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div className="house-room-box row gx-0">
-                    <div className="form-group checkbox-card-type col m-2">
-                        <input type="radio" className="btn-check" name="apartment" id="single-house" autoComplete="off" />
-                        <label className="btn d-flex flex-column h-100" htmlFor="single-house">
-                            <Image src={HouseIcon} alt="property icon" />
-                            <span>
-                                Entire place
-                            </span>
-                        </label>
-                    </div>
-                    <div className="form-group checkbox-card-type col m-2">
-                        <input type="radio" className="btn-check" name="apartment" id="student-house" autoComplete="off" />
-                        <label className="btn d-flex flex-column h-100" htmlFor="student-house">
-                            <Image src={StudentHouseIcon} alt="property icon" />
-                            <span>
-                                Student house
-                            </span>
-                        </label>
-                    </div>
-                </div>
-
-
-                <div className="form-group">
-                    <SearchableCitySelect
-                        cities={DUTCH_CITIES}
-                        placeholder="City"
-                        value={city}
-                        onChange={setCity}
-                    />
-                </div>
-
-                <div className="input-group-meta form-group">
-                    <label htmlFor="">Address</label>
-                    <Form.Control
-                        type="text"
-                    />
-                    <p className="fs-14 text-center w-100 d-block mt-2">
-                        <span>🔒 Exact address is never public </span>
-                    </p>
-                </div>
-
-                <div className="bg-pink-three p-3 d-flex justify-content-center flex-row align-items-center">
-                    <div className="switch-item d-flex items-center justify-center gap-4">
-                        <label htmlFor="registration-switch" className="switch-label">
-                           Is Registration Possible
-                        </label>
-                        <div className="d-flex gap-3 align-items-center switch-control">
-                            <Form.Check
-                                type="switch"
-                                id="registration-switch"
-                                // checked={propertyData.registration === true || propertyData.registration === "yes"}
-                                // onChange={(e) => {
-                                //     updateListingData(
-                                //         "propertyData",
-                                //         "registration",
-                                //         e.target.checked
-                                //     );
-                                // }}
-                                // isInvalid={errorFields.includes("propertyData.registration")}
-                                className="custom-switch"
+        <div className="list-room-modal__seventh-step list-room-modal__first-step">
+            <div className="list-room-modal__first-step__body d-flex flex-column">
+                <div className="row gx-3">
+                    <div className="col-12 col-md-6">
+                        <div className="input-group-meta form-group mb-30">
+                            <label htmlFor="list-room-name">{t("emergency_housing.name")}</label>
+                            <Form.Control
+                                id="list-room-name"
+                                type="text"
+                                value={personalData.name}
+                                onChange={(e) =>
+                                    updateListingData("personalData", "name", e.target.value)
+                                }
+                                isInvalid={errorFields.includes("personalData.name")}
+                                className="py-2"
                             />
-                            {/* <span className="switch-status">
-                                {propertyData.registration === true || propertyData.registration === "yes"
-                                    ? t("common.yes")
-                                    : t("common.no")}
-                            </span> */}
+                        </div>
+                    </div>
+
+                    <div className="col-12 col-md-6">
+                        <div className="input-group-meta form-group mb-30">
+                            <label htmlFor="list-room-surname">
+                                {t("emergency_housing.surname")}
+                            </label>
+                            <Form.Control
+                                id="list-room-surname"
+                                type="text"
+                                value={personalData.surname}
+                                onChange={(e) =>
+                                    updateListingData("personalData", "surname", e.target.value)
+                                }
+                                isInvalid={errorFields.includes("personalData.surname")}
+                                className="py-2"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="col-12 col-md-6">
+                        <div className="input-group-meta form-group mb-30">
+                            <label htmlFor="list-room-phone">{t("viewing.phone")}</label>
+                            <PrefixPhoneInput
+                                value={personalData.phone}
+                                onChange={(value: string) =>
+                                    updateListingData("personalData", "phone", value)
+                                }
+                                isInvalid={errorFields.includes("personalData.phone")}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="col-12 col-md-6">
+                        <div className="input-group-meta form-group mb-30">
+                            <label htmlFor="list-room-email">
+                                {t("emergency_housing.email")}
+                            </label>
+                            <Form.Control
+                                id="list-room-email"
+                                type="email"
+                                value={personalData.email}
+                                onChange={(e) =>
+                                    updateListingData("personalData", "email", e.target.value)
+                                }
+                                isInvalid={errorFields.includes("personalData.email")}
+                                className="py-2"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="col-12 col-md-6">
+                        <div className="input-group-meta form-group mb-30">
+                            <label htmlFor="list-room-referral">
+                                {t("emergency_housing.referral_code")}
+                            </label>
+                            <Form.Control
+                                id="list-room-referral"
+                                type="text"
+                                value={referralCode}
+                                onChange={(e) =>
+                                    updateListingData("referralCode", "", e.target.value)
+                                }
+                                isInvalid={errorFields.includes("referralCode")}
+                                className="py-2"
+                            />
                         </div>
                     </div>
                 </div>
 
+                <div className="form-group form-radio-group d-flex gap-2 flex-row align-items-center mb-20">
+                    <Form.Check
+                        type="checkbox"
+                        name="terms-contact"
+                        id="list-room-terms-contact"
+                        checked={terms.contact}
+                        onChange={(e) =>
+                            updateListingData("terms", "contact", e.target.checked)
+                        }
+                        isInvalid={errorFields.includes("terms.contact")}
+                    />
+                    <label htmlFor="list-room-terms-contact">
+                        {t("legals.permission_contact")}
+                    </label>
+                </div>
+
+                <div className="form-group form-radio-group d-flex gap-2 flex-row align-items-center mb-20">
+                    <Form.Check
+                        type="checkbox"
+                        name="terms-legals"
+                        id="list-room-terms-legals"
+                        checked={terms.legals}
+                        onChange={(e) =>
+                            updateListingData("terms", "legals", e.target.checked)
+                        }
+                        isInvalid={errorFields.includes("terms.legals")}
+                    />
+                    <label htmlFor="list-room-terms-legals">
+                        <Trans
+                            i18nKey="translations:legals.permission_terms"
+                            components={{
+                                link: (
+                                    <a href="/terms&policy" target="_blank" rel="noreferrer"></a>
+                                ),
+                            }}
+                        />
+                    </label>
+                </div>
             </div>
         </div>
-    )
+    );
 }
+
+export default observer(SecondStep);

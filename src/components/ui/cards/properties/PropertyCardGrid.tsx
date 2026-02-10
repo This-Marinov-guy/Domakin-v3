@@ -8,8 +8,9 @@ import { getPropertyUrl } from "@/utils/seoHelpers";
 const PropertyCardGrid = (props: {
   property: PropertyCard;
   style?: boolean;
+  disableLinks?: boolean;
 }) => {
-  const { property, style } = props;
+  const { property, style, disableLinks } = props;
   const { lang } = useTranslation("translations");
 
   const allImages = [property.main_image, ...property.images];
@@ -67,25 +68,42 @@ const PropertyCardGrid = (props: {
                     className={`carousel-item ${i === 0 && "active"}`}
                     data-bs-interval="1000000"
                   >
-                    <a
-                      target="_blank"
-                      href={propertyUrl}
-                      className="d-block"
-                    >
-                      <Image
-                        src={
-                          Number(property.id) > 1000
-                            ? image
-                            : `/assets/img/properties/${
-                                property.folder ?? "property_" + property.id
-                              }/${image}`
-                        }
-                        height={500}
-                        width={500}
-                        style={{ height: "20em", objectFit: "cover" }}
-                        alt="Preview"
-                      />
-                    </a>
+                    {(() => {
+                      const imgSrc =
+                        Number(property.id) > 1000
+                          ? image
+                          : `/assets/img/properties/${
+                              property.folder ?? "property_" + property.id
+                            }/${image}`;
+                      const isBlob = typeof imgSrc === "string" && imgSrc.startsWith("blob:");
+                      return disableLinks ? (
+                        <div className="d-block">
+                          <Image
+                            src={imgSrc}
+                            height={500}
+                            width={500}
+                            style={{ height: "20em", objectFit: "cover" }}
+                            alt="Preview"
+                            unoptimized={isBlob}
+                          />
+                        </div>
+                      ) : (
+                        <a
+                          target="_blank"
+                          href={propertyUrl}
+                          className="d-block"
+                        >
+                          <Image
+                            src={imgSrc}
+                            height={500}
+                            width={500}
+                            style={{ height: "20em", objectFit: "cover" }}
+                            alt="Preview"
+                            unoptimized={isBlob}
+                          />
+                        </a>
+                      );
+                    })()}
                   </div>
                 ))}
               </div>
@@ -93,13 +111,17 @@ const PropertyCardGrid = (props: {
           </div>
         </div>
         <div className="property-info p-25">
-          <a
-            target="_blank"
-            href={propertyUrl}
-            className="title tran3s"
-          >
-            {property.title}
-          </a>
+          {disableLinks ? (
+            <span className="title tran3s d-block">{property.title}</span>
+          ) : (
+            <a
+              target="_blank"
+              href={propertyUrl}
+              className="title tran3s"
+            >
+              {property.title}
+            </a>
+          )}
           <div className="address">{property.location}</div>
           {/* <ul className="style-none feature d-flex flex-wrap align-items-center justify-content-between">
                               <li className="d-flex align-items-center">
@@ -122,13 +144,19 @@ const PropertyCardGrid = (props: {
             <strong className="price fw-500 color-dark">
               {property.price} <sub>euro / m</sub>
             </strong>
-            <a
-              target="_blank"
-              href={propertyUrl}
-              className="btn-four rounded-circle"
-            >
-              <i className="bi bi-arrow-up-right"></i>
-            </a>
+            {disableLinks ? (
+              <span className="btn-four rounded-circle opacity-50">
+                <i className="bi bi-arrow-up-right"></i>
+              </span>
+            ) : (
+              <a
+                target="_blank"
+                href={propertyUrl}
+                className="btn-four rounded-circle"
+              >
+                <i className="bi bi-arrow-up-right"></i>
+              </a>
+            )}
           </div>
         </div>
       </div>

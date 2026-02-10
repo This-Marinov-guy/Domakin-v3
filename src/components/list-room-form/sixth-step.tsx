@@ -1,425 +1,236 @@
-import React from "react";
-import StepsBar from "@/components/steps/stepsBar";
-import Form from "react-bootstrap/Form";
+import React, { useMemo, useEffect, useRef } from "react";
+import { FiEdit2 } from "react-icons/fi";
+import PropertyCardGrid from "@/components/ui/cards/properties/PropertyCardGrid";
+import { useStore } from "@/stores/storeContext";
+import { observer } from "mobx-react-lite";
 
-export default function SixthStep({steps, currentStep}: {steps: string[], currentStep: number}) {
+const MOCK_LISTING = {
+    personalData: {
+        name: "Alex",
+        surname: "Johnson",
+        email: "alex.johnson@example.com",
+        phone: "+31 6 12345678",
+    },
+    propertyData: {
+        type: "room",
+        city: "Amsterdam",
+        address: "Jordaan 42",
+        postcode: "1015 CG",
+        size: "18",
+        period: "6 months",
+        rent: "850",
+        bills: "Included · Deposit: €1700",
+        flatmates: "2",
+        registration: true,
+        description:
+            "Bright room in a shared apartment in the heart of Jordaan. Close to cafes, markets and transport. Friendly international flatmates. Available from next month.",
+        flatmatesMale: "1",
+        flatmatesFemale: "1",
+        bathrooms: "1",
+        toilets: "1",
+        furniture: "furnished",
+    },
+};
+
+const MOCK_PLACEHOLDER_IMAGE = "https://placehold.co/600x400/e2e8f0/64748b?text=Listing+Preview";
+
+function SixthStep({
+    steps,
+    currentStep,
+}: {
+    steps: (string | number)[];
+    currentStep: number;
+}) {
+    const {
+        listRoomStore: { back, next, isLast, goTo },
+        propertyStore: { addListingData },
+    } = useStore();
+
+    const raw = addListingData;
+    const personalData = useMemo(() => ({
+        name: raw.personalData?.name || MOCK_LISTING.personalData.name,
+        surname: raw.personalData?.surname || MOCK_LISTING.personalData.surname,
+        email: raw.personalData?.email || MOCK_LISTING.personalData.email,
+        phone: raw.personalData?.phone || MOCK_LISTING.personalData.phone,
+    }), [raw.personalData]);
+    const propertyData = useMemo(() => ({
+        ...MOCK_LISTING.propertyData,
+        ...(raw.propertyData || {}),
+    }), [raw.propertyData]);
+    const formImages = raw.images || [];
+    const pd = propertyData as Record<string, unknown>;
+    const prevUrlsRef = useRef<string[]>([]);
+
+    const imageUrls = useMemo(() => {
+        const list = formImages || [];
+        return list
+            .map((fileOrUrl: unknown) => {
+                if (typeof fileOrUrl === "string") return fileOrUrl;
+                if (fileOrUrl instanceof File || fileOrUrl instanceof Blob) {
+                    return URL.createObjectURL(fileOrUrl);
+                }
+                return "";
+            })
+            .filter(Boolean) as string[];
+    }, [formImages]);
+
+    useEffect(() => {
+        prevUrlsRef.current.forEach((url) => {
+            if (url.startsWith("blob:")) URL.revokeObjectURL(url);
+        });
+        prevUrlsRef.current = imageUrls;
+        return () => {
+            prevUrlsRef.current.forEach((url) => {
+                if (url.startsWith("blob:")) URL.revokeObjectURL(url);
+            });
+        };
+    }, [imageUrls]);
+
+    const stepPanels = useMemo(() => {
+        const flatmatesMale = Math.max(0, parseInt(String(pd?.flatmatesMale ?? "0"), 10) || 0);
+        const flatmatesFemale = Math.max(0, parseInt(String(pd?.flatmatesFemale ?? "0"), 10) || 0);
+        const bathrooms = Math.max(1, parseInt(String(pd?.bathrooms ?? "1"), 10) || 1);
+        const toilets = Math.max(1, parseInt(String(pd?.toilets ?? "1"), 10) || 1);
+        const contact = [
+            [personalData?.name, personalData?.surname].filter(Boolean).join(" ") || "—",
+            personalData?.email || "—",
+            personalData?.phone || "—",
+        ].join(" · ");
+        const basics = [
+            propertyData?.type || "—",
+            propertyData?.city || "—",
+            [propertyData?.address, propertyData?.postcode].filter(Boolean).join(", ") || "—",
+            propertyData?.registration ? "Registration possible" : "No registration",
+        ].filter(Boolean).join(" · ");
+        const details = [
+            propertyData?.rent ? `€${propertyData.rent}/m` : null,
+            propertyData?.bills ? `Bills: ${String(propertyData.bills).replace(/\s*\|\s*Deposit:.*$/, "").trim() || "—"}` : null,
+            propertyData?.size ? `${propertyData.size} m²` : null,
+            flatmatesMale + flatmatesFemale > 0 ? `${flatmatesMale} male, ${flatmatesFemale} female flatmate(s)` : null,
+            `${bathrooms} bathroom(s), ${toilets} toilet(s)`,
+            pd?.furniture ? String(pd.furniture).replace(/_/g, " ") : null,
+            propertyData?.description ? String(propertyData.description).slice(0, 60) + (String(propertyData.description).length > 60 ? "…" : "") : null,
+        ].filter(Boolean).join(" · ");
+        return [
+            { step: 2, title: "Contact details", summary: contact },
+            { step: 3, title: "Basics", summary: basics },
+            { step: 4, title: "Details", summary: details },
+            { step: 5, title: "Photos", summary: "", imageUrls },
+        ];
+    }, [personalData, propertyData, pd]);
+
+    const previewProperty = useMemo(() => {
+        const main = imageUrls[0] || MOCK_PLACEHOLDER_IMAGE;
+        const rest = imageUrls.length > 1 ? imageUrls.slice(1) : [];
+        return {
+            id: 9999,
+            hidden: false,
+            status: "Draft",
+            statusCode: 0,
+            price: parseInt(String(propertyData?.rent ?? "0"), 10) || 0,
+            title: propertyData?.address
+                ? `${propertyData.address}${propertyData.city ? `, ${propertyData.city}` : ""}`
+                : propertyData?.city || "Your listing",
+            city: propertyData?.city || "",
+            location: [propertyData?.address, propertyData?.postcode, propertyData?.city].filter(Boolean).join(", ") || "—",
+            description: {
+                property: String(propertyData?.description ?? "").slice(0, 120) || "—",
+                period: "",
+                bills: "",
+                flatmates: "",
+            },
+            main_image: main,
+            images: rest,
+            folder: "",
+        };
+    }, [propertyData, imageUrls]);
+
     return (
         <div className="list-room-modal__first-step">
-            <div className="list-room-modal__first-step__body d-flex flex-column">
-                <StepsBar
-                    steps={steps}
-                    currentStep={currentStep}
-                />
-                <h2>
-                    The basics
-                </h2>
-
-                <div>
-                    <div className="form-group form-radio-group d-flex flex-row align-items-center">
-                        <Form.Check
-                            type="checkbox"
-                            name="flexible-dates"
-                            id="flexible-dates"
-                        />
-                        <label htmlFor="flexible-dates">
-                            Flexible dates
-                        </label>
-                    </div>
-                </div>
-
-                <hr className="dropdown-divider" />
-
-                <div>
-                    <div className="d-flex justify-content-between align-items-center flex-row eleven-gap">
-                        <div className="form-group w-100 d-flex flex-row align-items-center">
-                            <Form.Control
-                                type="text"
-                                name="flexible-dates"
-                                id="monthly-rent"
-                                placeholder="Monthly Rent"
-                            />
+            <div className="list-room-modal__first-step__body container">
+                <div className="row g-4 g-lg-4">
+                    {/* Left: step summary panels (2–5 only) */}
+                    <div className="col-12 col-lg-4">
+                        <div className="d-flex flex-column gap-3">
+                            {stepPanels.map((panel) => (
+                                <div
+                                    key={panel.step}
+                                    className="border rounded-3 p-3 bg-light step-panel position-relative"
+                                >
+                                    <button
+                                        type="button"
+                                        className="step-panel__edit-btn position-absolute top-0 end-0 btn btn-link p-2"
+                                        style={{ top: "0.25rem", right: "0.25rem" }}
+                                        onClick={() => goTo(panel.step - 1)}
+                                        aria-label={`Edit ${panel.title}`}
+                                    >
+                                        <FiEdit2 size={18} />
+                                    </button>
+                                    <div className="d-flex align-items-center gap-2 mb-2">
+                                        <span className="step-panel__step-badge badge rounded-circle d-inline-flex align-items-center justify-content-center">
+                                            {panel.step}
+                                        </span>
+                                        <strong className="small text-dark">{panel.title}</strong>
+                                    </div>
+                                    {panel.step === 5 && panel.imageUrls?.length ? (
+                                        <>
+                                            <p className="small text-muted mb-2">
+                                                {panel.imageUrls.length} photo{panel.imageUrls.length !== 1 ? "s" : ""} uploaded
+                                            </p>
+                                            <div className="d-flex flex-wrap gap-2">
+                                                {panel.imageUrls.map((src, i) => (
+                                                    <div
+                                                        key={i}
+                                                        className="rounded overflow-hidden bg-secondary"
+                                                        style={{ width: 56, height: 56 }}
+                                                    >
+                                                        <img
+                                                            src={src}
+                                                            alt=""
+                                                            className="w-100 h-100 object-fit-cover"
+                                                            style={{ objectFit: "cover" }}
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <p className="small text-muted mb-0">{panel.summary || "—"}</p>
+                                    )}
+                                </div>
+                            ))}
                         </div>
-                        <div className="form-group w-100 d-flex flex-row align-items-center">
-                            <Form.Control
-                                type="text"
-                                name="flexible-dates"
-                                id="deposit"
-                                placeholder="Deposit"
-                            />
-                        </div>
                     </div>
-                </div>
 
-                <hr className="dropdown-divider" />
-
-                <div>
-                    <div className="d-flex gap-3 flex-row align-items-start">
-                        <p>
-                            <span className="d-block">
-                                Bills included?
-                            </span>
-                        </p>
-                        <div>
-                            <div className="form-group form-radio-group d-flex flex-row align-items-center">
-                                <Form.Check
-                                    type="radio"
-                                    name="bill-include"
-                                    id="yes"
+                    {/* Right: preview card (form data + uploaded images) + buttons */}
+                    <div className="col-12 col-lg-8">
+                        <div className="row gx-xxl-5 mb-4">
+                            {previewProperty.main_image ? (
+                                <PropertyCardGrid
+                                    property={previewProperty}
+                                    disableLinks
                                 />
-                                <label htmlFor="yes">Yes</label>
-                            </div>
-                            <div className="form-group form-radio-group d-flex flex-row align-items-center">
-                                <Form.Check
-                                    type="radio"
-                                    name="bill-include"
-                                    id="no"
-                                />
-                                <label htmlFor="no">No</label>
-                            </div>
-                            <div className="form-group form-radio-group d-flex flex-row align-items-center">
-                                <Form.Check
-                                    type="radio"
-                                    name="bill-include"
-                                    id="not-sure"
-                                />
-                                <label htmlFor="not-sure">Bills estimate (€)</label>
-                            </div>
+                            ) : (
+                                <div className="col-12">
+                                    <div className="border rounded-3 p-4 bg-light text-center text-muted">
+                                        Add photos in step 5 to see your listing preview here.
+                                    </div>
+                                </div>
+                            )}
                         </div>
+                        {/* <div className="d-flex justify-content-between align-items-center gap-5 m-auto mb-3" style={{ maxWidth: "20em" }}>
+                            <button type="button" className="btn btn-danger" onClick={back}>
+                                Back
+                            </button>
+                            <button type="button" className="btn btn-thirteen" onClick={next}>
+                                {isLast ? "Submit" : "Next"}
+                            </button>
+                        </div> */}
                     </div>
                 </div>
-
-                <hr className="dropdown-divider" />
-
-                <div>
-                    <div className="house-room-box row m-0 gx-0 gap-3">
-                        <div className="form-group checkbox-card-type col p-0">
-                            <input type="radio" className="btn-check" name="apartment" id="furnished" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" htmlFor="furnished">
-                                <span>
-                                    Furnished
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col p-0">
-                            <input type="radio" className="btn-check" name="apartment" id="semi" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" htmlFor="semi">
-                                <span>
-                                    semi
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col p-0">
-                            <input type="radio" className="btn-check" name="apartment" id="unfurnished" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" htmlFor="unfurnished">
-                                <span>
-                                    unfurnished
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <hr className="dropdown-divider" />
-
-                <div>
-                    <div className="d-flex justify-content-between align-items-center flex-row eleven-gap">
-                        <div className="form-group w-100 d-flex flex-row align-items-center">
-                            <Form.Control
-                                type="text"
-                                name="flexible-dates"
-                                id="size"
-                                placeholder="Size (m²)"
-                                className="text-center"
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                <hr className="dropdown-divider" />
-
-                <div>
-                    <div className="d-flex justify-content-between align-items-center flex-row eleven-gap">
-                        <div className="form-group w-100 d-flex flex-row align-items-center">
-                            <Form.Control
-                                type="text"
-                                name="roommate-count"
-                                id="roommate-count"
-                                placeholder="Roommate-count"
-                                className="text-center"
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <label>
-                        Roommates gender
-                    </label>
-                    <hr className="dropdown-divider" />
-                    <div className="house-room-box row m-0 gx-0 gap-3 mt-2">
-                        <div className="form-group checkbox-card-type col p-0">
-                            <input type="radio" className="btn-check" name="gender" id="male" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" htmlFor="male">
-                                <span>
-                                    Male
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col p-0">
-                            <input type="radio" className="btn-check" name="gender" id="female" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" htmlFor="female">
-                                <span>
-                                    Female
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col p-0">
-                            <input type="radio" className="btn-check" name="gender" id="mixed" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-3 text-center rounded-4" htmlFor="mixed">
-                                <span>
-                                    Mixed
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <label>
-                        You prefer
-                    </label>
-                    <hr className="dropdown-divider" />
-                    <div className="house-room-box row mt-2">
-                        <div className="form-group checkbox-card-type col-3">
-                            <input type="radio" className="btn-check" name="prefer" id="prefer-male" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="prefer-male">
-                                <span>
-                                    Male
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col-3">
-                            <input type="radio" className="btn-check" name="prefer" id="prefer-female" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="prefer-female">
-                                <span>
-                                    Female
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col-6">
-                            <input type="radio" className="btn-check" name="prefer" id="no-preference" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="no-preference">
-                                <span>
-                                    No preference
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <label>
-                        Shared areas
-                    </label>
-                    <hr className="dropdown-divider" />
-                    <div className="house-room-box row gx-2 mt-2">
-                        <div className="form-group checkbox-card-type col">
-                            <input type="radio" className="btn-check" name="prefer" id="kitchen" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="kitchen">
-                                <span>
-                                    kitchen
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col">
-                            <input type="radio" className="btn-check" name="prefer" id="living" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="living">
-                                <span>
-                                    living
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col">
-                            <input type="radio" className="btn-check" name="prefer" id="bathroom" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="bathroom">
-                                <span>
-                                    bathroom
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col">
-                            <input type="radio" className="btn-check" name="prefer" id="toilet" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="toilet">
-                                <span>
-                                    toilet
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <label>
-                        House rules
-                    </label>
-                    <hr className="dropdown-divider" />
-                    <div className="house-room-box row gx-2 gy-2 mt-2">
-                        <div className="form-group checkbox-card-type col-4">
-                            <input type="checkbox" className="btn-check" name="house-rules[]" id="no-smoking" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="no-smoking">
-                                <span>
-                                    No smoking
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col-3">
-                            <input type="checkbox" className="btn-check" name="house-rules[]" id="no-pets" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="no-pets">
-                                <span>
-                                    No pets
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col-4">
-                            <input type="checkbox" className="btn-check" name="house-rules[]" id="quiet-hours" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="quiet-hours">
-                                <span>
-                                    Quiet hours
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col-4">
-                            <input type="checkbox" className="btn-check" name="house-rules[]" id="parties-ok" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="parties-ok">
-                                <span>
-                                    Parties ok
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col-6">
-                            <input type="checkbox" className="btn-check" name="house-rules[]" id="cleaning-schedule" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="cleaning-schedule">
-                                <span>
-                                    Cleaning schedule
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col-3">
-                            <input type="checkbox" className="btn-check" name="house-rules[]" id="kitchen-rule" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="kitchen-rule">
-                                <span>
-                                    Kitchen
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <hr className="dropdown-divider" />
-
-                <div>
-                    <div className="d-flex justify-content-between align-items-center flex-row eleven-gap">
-                        <div className="form-group w-100 d-flex flex-row align-items-center">
-                            <Form.Control
-                                type="text"
-                                name="bathroom-no"
-                                id="bathroom-no"
-                                placeholder="Bathrooms #"
-                            />
-                        </div>
-                        <div className="form-group w-100 d-flex flex-row align-items-center">
-                            <Form.Control
-                                type="text"
-                                name="toilet-no"
-                                id="toilet-no"
-                                placeholder="Toilet #"
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <label>
-                        Amenities
-                    </label>
-                    <hr className="dropdown-divider" />
-                    <div className="house-room-box row gx-2 gy-2 mt-2 mb-50">
-                        <div className="form-group checkbox-card-type col-5">
-                            <input type="checkbox" className="btn-check" name="amenities[]" id="washing-machine" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="washing-machine">
-                                <span>
-                                    Washing machine
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col-3">
-                            <input type="checkbox" className="btn-check" name="amenities[]" id="dryer" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor="dryer">
-                                <span>
-                                    Dryer
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col-4">
-                            <input type="checkbox" className="btn-check" name="amenities[]" id="dishwasher" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="dishwasher">
-                                <span>
-                                    Dishwasher
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col-4">
-                            <input type="checkbox" className="btn-check" name="amenities[]" id="balcony" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="balcony">
-                                <span>
-                                    Balcony
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col-6">
-                            <input type="checkbox" className="btn-check" name="amenities[]" id="bike-storage" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="bike-storage">
-                                <span>
-                                    Bike storage
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col-3">
-                            <input type="checkbox" className="btn-check" name="amenities[]" id="Oven" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="Oven">
-                                <span>
-                                    Oven
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col-3">
-                            <input type="checkbox" className="btn-check" name="amenities[]" id="microwave" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="microwave">
-                                <span>
-                                    Microwave
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col-4">
-                            <input type="checkbox" className="btn-check" name="amenities[]" id="parking-space" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="parking-space">
-                                <span>
-                                    Parking space
-                                </span>
-                            </label>
-                        </div>
-                        <div className="form-group checkbox-card-type col-5">
-                            <input type="checkbox" className="btn-check" name="amenities[]" id="study-area" autoComplete="off" />
-                            <label className="btn d-flex flex-column h-100 py-2 px-2 text-center rounded-4 fs-12" htmlFor="study-area">
-                                <span>
-                                    Study Area
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
-    )
+    );
 }
+
+export default observer(SixthStep);

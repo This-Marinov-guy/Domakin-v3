@@ -286,14 +286,12 @@ section {
   }
   .custom-card__header__title,
   .custom-card__header__price {
-    font-size: 0.875rem;
     letter-spacing: -0.53px;
     color: #000;
   }
   .custom-card__header__title {
     font-weight: 600;
     &.room-card-v2__header__title {
-      font-size: 1.125rem;
       line-height: 1.4375rem;
       font-weight: 500;
       color: $color-twelve;
@@ -312,10 +310,9 @@ section {
       color: #000;
     }
     &.room-card-v2__header__price {
-      font-size: 0.75rem;
+      font-size: 1.2rem;
       line-height: 1.1875rem;
       span {
-        font-size: 1.125rem;
         line-height: 100%;
         color: $color-two;
       }
@@ -372,12 +369,6 @@ section {
         font-size: 0.875rem;
         line-height: 150%;
         letter-spacing: -0.56px;
-      }
-    }
-    &.room-card-v2__content {
-      p {
-        font-size: 0.875rem;
-        line-height: 1.125rem;
       }
     }
     &.review-card-v2__content {

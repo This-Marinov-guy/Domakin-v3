@@ -275,7 +275,6 @@
 #list-room-modal.modal,
 #draft-request-modal.modal {
   .modal-dialog.modal-fullscreen {
-    height: 100%;
 
     .modal-content {
       margin: 0;
@@ -370,48 +369,6 @@
         gap: 1rem;
         padding: 0.5rem;
 
-        .custom-card__thumbnail {
-          &.room-card-v2__thumbnail {
-            max-height: 13.125rem;
-          }
-        }
-
-        .custom-card__header {
-          &.room-card-v2__header {
-            padding: 0 0 0.5rem;
-          }
-        }
-
-        .custom-card__header__title {
-          &.room-card-v2__header__title {
-            font-size: 1rem;
-            line-height: 1rem;
-            margin: 0 0 0.3125rem;
-          }
-        }
-
-        .custom-card__header__price {
-          &.room-card-v2__header__price {
-            font-size: 0.75rem;
-
-            span {
-              font-size: 1.125rem;
-            }
-          }
-        }
-
-        .room-card-v2__header__sub-title {
-          font-size: 0.875rem;
-        }
-
-        .custom-card__content {
-          &.room-card-v2__content {
-            p {
-              font-size: 0.875rem;
-            }
-          }
-        }
-
         .custom-card__footer {
           &.room-card-v2__footer {
             padding: 0.75rem 0 0;
@@ -505,12 +462,14 @@
 
 .checkbox-card-type {
 
-  .btn-check:checked+.btn,
-  :not(.btn-check)+.btn:active,
+  .btn-check:checked + .btn,
+  :not(.btn-check) + .btn:active,
   .btn:first-child:active,
   .btn.active,
   .btn.show {
     border: 1px solid $color-two;
+    background-color: $color-two;
+    color: #fff;
   }
 
   label {
@@ -523,6 +482,15 @@
     gap: 2.5rem;
     border: 1px solid $color-sixteen;
     border-radius: 0.75rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      border-color: $color-two !important;
+    }
+  }
+
+  .btn-check:checked + label {
+    color: #fff;
   }
 }
 
@@ -1250,6 +1218,58 @@
     margin: 20px 10%;
 }
 
+.step-panel {
+  &__edit-btn {
+    color: $color-two !important;
+    &:hover {
+      color: darken($color-two, 8%) !important;
+    }
+  }
+  &__step-badge {
+    background-color: $color-one !important;
+    border-color: $color-one;
+  }
+}
+
 .form-group{
   margin: 20px 0;
+}
+
+.list-room-step-transition {
+  position: relative;
+  overflow: hidden;
+
+  &__inner {
+    width: 100%;
+  }
+
+  &__inner--forward {
+    animation: list-room-slide-right 0.3s ease-out;
+  }
+
+  &__inner--backward {
+    animation: list-room-slide-left 0.3s ease-out;
+  }
+}
+
+@keyframes list-room-slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes list-room-slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

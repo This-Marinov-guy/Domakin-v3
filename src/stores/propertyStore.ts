@@ -11,6 +11,7 @@ const defaultFormData = {
   },
 
   propertyData: {
+    type: "",
     city: "",
     address: "",
     postcode: "",

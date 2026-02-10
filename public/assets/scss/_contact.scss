@@ -26,14 +26,14 @@
   }
 }
 
+label {
+  font-size: 14px;
+  color: black;
+  margin-bottom: 5px;
+}
+
 .input-group-meta {
   position: relative;
-
-  label {
-    font-size: 14px;
-    color: rgba($color: #000000, $alpha: 0.5);
-    margin-bottom: 5px;
-  }
 
   input,
   textarea {

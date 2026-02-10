@@ -2,7 +2,7 @@ import LogoLarge from "@/assets/images/logo/logo-large.svg";
 import Image from "next/image";
 import StepsBar from "@/components/steps/stepsBar";
 
-export default function FirstStep({ steps, currentStep }: { steps: string[], currentStep: number }) {
+export default function FirstStep({ steps, currentStep }: { steps: (string | number)[]; currentStep: number }) {
     return (
         <div className="list-room-modal__first-step d-flex flex-column">
             <Image className="m-auto" src={LogoLarge} alt="Logo Icon" style={{height: '200px', width: '200px', borderRadius: '20px'}}/>

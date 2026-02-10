@@ -1,40 +1,59 @@
-import React, { useState, useRef } from "react";
+"use client";
+
+import React, { useRef, useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
-import { useMultiStep } from "@/components/steps/useMultiStep";
 import StepsBar from "@/components/steps/stepsBar";
-import FirstStep from "@/components/list-room-form/first-step";
-import SecondStep from "@/components/list-room-form/second-step";
-import ThirdStep from "@/components/list-room-form/third-step";
-import FourStep from "@/components/list-room-form/fourth-step";
-import FifthStep from "@/components/list-room-form/fifth-step";
-import SixthStep from "@/components/list-room-form/sixth-step";
-import SeventhStep from "@/components/list-room-form/seventh-step";
-import EightStep from "@/components/list-room-form/eight-step";
 import SuccessStep from "@/components/list-room-form/success-step";
 import DraftRequestModal from "@/components/list-room-form/draft-request-modal";
 import useStickyFooter from "@/hooks/useStickyFooter";
-import { auto } from "@popperjs/core";
+import { useStore } from "@/stores/storeContext";
+import { observer } from "mobx-react-lite";
+import FifthStep from "../list-room-form/fifth-step";
+import FirstStep from "../list-room-form/first-step";
+import SecondStep from "../list-room-form/second-step";
+import ThirdStep from "../list-room-form/third-step";
+import FourthStep from "../list-room-form/fourth-step";
+import SixthStep from "../list-room-form/sixth-step";
 
 interface ListRoomModalProps {
     show: boolean;
     onHide: () => void;
 }
 
-export default function ListRoomModal({ show, onHide }: ListRoomModalProps) {
-    const steps = [
-        'Domakin',
-        'Basic Information',
-        'Gallery Advice',
-        'Gallery',
-        'Gallery Preview',
-        'Rent Information',
-        'Contact Information',
-        'Review & Publish',
-    ];
-    const { currentStep, step, next, back, goTo, isLast } = useMultiStep(steps);
-    const [isCompleteForm, setIsCompleteForm] = useState(false);
-    const [showDraftModal, setShowDraftModal] = useState(false);
+function ListRoomModal({ show, onHide }: ListRoomModalProps) {
+    const {
+        listRoomStore: {
+            steps,
+            currentStepIndex,
+            currentStep,
+            isLast,
+            isCompleteForm,
+            showDraftModal,
+            next,
+            back,
+            openDraftModal,
+            closeDraftModal,
+            setCompleteForm,
+            reset,
+        },
+    } = useStore();
+
     const footerRef = useRef<HTMLDivElement>(null);
+
+    const [transitionDirection, setTransitionDirection] = useState<
+        "forward" | "backward" | null
+    >(null);
+    const lastStepIndexRef = useRef(currentStepIndex);
+
+    useEffect(() => {
+        const last = lastStepIndexRef.current;
+        if (currentStepIndex > last) {
+            setTransitionDirection("forward");
+        } else if (currentStepIndex < last) {
+            setTransitionDirection("backward");
+        }
+        lastStepIndexRef.current = currentStepIndex;
+    }, [currentStepIndex]);
 
     // Use the sticky footer hook to detect if footer is visible
     const isFooterVisible = useStickyFooter(footerRef, {
@@ -44,12 +63,11 @@ export default function ListRoomModal({ show, onHide }: ListRoomModalProps) {
     });
 
     const validateStep = () => {
-        if (step === "Basic Information") {
+        if (currentStep === 2) {
             const nameInput = document.querySelector("#name") as HTMLInputElement | null;
             const name = nameInput?.value;
             if (!name) {
-                // alert("name is required");
-                // return false;
+                // validation placeholder
             }
         }
 
@@ -62,44 +80,37 @@ export default function ListRoomModal({ show, onHide }: ListRoomModalProps) {
     };
 
     const handleClose = () => {
+        reset();
         onHide();
     };
 
-    const handleOpenDraftModal = () => {
-        setShowDraftModal(true);
-    };
-
     const getStepTitle = () => {
-        switch (step) {
-            case 'Domakin':
-                return ' Welcome to the property uploading';
-            case 'Basic Information':
-                return 'Tell us the basics. You can change these later';
-            case 'Gallery Advice':
-                return 'Take some nice photos';
-            case 'Gallery':
-                return 'Upload Photos';
-            case 'Gallery Preview':
-                return 'Good job! How does it look';
-            case 'Rent Information':
-                return 'The basics';
-            case 'Contact Information':
-                return 'Contact Information';
-            case 'Review & Publish':
-                return 'Review & Publish';
+        switch (currentStep) {
+            case 1:
+                return "Welcome to the property uploading";
+            case 2:
+                return "Fill the contact details";
+            case 3:
+                return "Tell us the basics";
+            case 4:
+                return "Lets give some more details";
+            case 5:
+                return "Take some nice photos";
+            case 6:
+                return "Review & Publish";
             default:
-                return '';
+                return "";
         }
     };
 
-    const actionButtons =
+    const actionButtons = (
         <div className="d-flex justify-content-between align-items-center gap-5 m-auto">
-            {currentStep == 0 && (
+            {currentStepIndex === 0 && (
                 <button type="button" className="btn-danger" onClick={handleClose}>
                     Back
                 </button>
             )}
-            {currentStep > 0 && (
+            {currentStepIndex > 0 && (
                 <button type="button" className="btn-danger" onClick={back}>
                     Back
                 </button>
@@ -110,125 +121,92 @@ export default function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                 </button>
             )}
         </div>
+    );
+
+    const lastStepButtons = (
+        <div className="d-flex justify-content-between align-items-center gap-5 m-auto mb-3" style={{ maxWidth: "20em" }}>
+            <button type="button" className="btn-danger" onClick={back}>
+                Back
+            </button>
+            <button type="button" className="btn-thirteen" onClick={handleNext}>
+                Submit
+            </button>
+        </div>
+    );
 
     return (
         <>
             <Modal
+                id="list-room-modal"
                 show={show}
                 onHide={handleClose}
                 fullscreen
                 centered
             >
-
                 {!isCompleteForm && (
                     <Modal.Header className="sticky-modal-header">
                         <div className="container">
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="flex-grow-1">
-                                    <StepsBar steps={steps} currentStep={currentStep} />
+                                    <StepsBar steps={steps} currentStep={currentStepIndex} />
                                 </div>
-                                <button
+                                {(currentStep > 1 && currentStep < 6) && <button
                                     type="button"
-                                    className="btn-nine"
-                                    onClick={handleOpenDraftModal}
+                                    className="btn-nine mb-2"
+                                    onClick={openDraftModal}
                                 >
                                     Save & exit
-                                </button>
+                                </button>}
                             </div>
                             <h5 className="modal-step-title">{getStepTitle()}</h5>
                         </div>
                     </Modal.Header>
                 )}
 
-                <Modal.Body>
+                <Modal.Body style={{ padding: 0, minHeight: "75vh" }}>
                     {!isCompleteForm && (
                         <>
-                            {step == 'Domakin' && (
-                                <FirstStep steps={steps} currentStep={currentStep} />
-                            )}
-                            {step == 'Basic Information' && (
-                                <SecondStep steps={steps} currentStep={currentStep} />
-                            )}
-                            {step == 'Gallery Advice' && (
-                                <ThirdStep steps={steps} currentStep={currentStep} />
-                            )}
-                            {step == 'Gallery' && (
-                                <FourStep steps={steps} currentStep={currentStep} />
-                            )}
-                            {step == 'Gallery Preview' && (
-                                <FifthStep steps={steps} currentStep={currentStep} />
-                            )}
-                            {step == 'Rent Information' && (
-                                <SixthStep steps={steps} currentStep={currentStep} />
-                            )}
-                            {step == 'Contact Information' && (
-                                <SeventhStep steps={steps} currentStep={currentStep} />
-                            )}
-                            {step == 'Review & Publish' && (
-                                <EightStep steps={steps} currentStep={currentStep} />
-                            )}
-                            {isLast && (
-                                <div className="d-flex flex-column justify-content-center align-items-center mt-40 gap-2" ref={footerRef}>
-                                    <button onClick={() => setIsCompleteForm(true)} type="button" className="btn btn-primary border-0">
-                                        Publish Listing
-                                    </button>
-                                    <button type="button" className="btn btn-primary border-0 btn-draft">
-                                        Save as draft
-                                    </button>
+                            <div className="list-room-step-transition">
+                                <div
+                                    key={currentStep}
+                                    className={`list-room-step-transition__inner ${transitionDirection === "forward"
+                                        ? "list-room-step-transition__inner--forward"
+                                        : transitionDirection === "backward"
+                                            ? "list-room-step-transition__inner--backward"
+                                            : ""
+                                        }`}
+                                >
+                                    {currentStep === 1 && (
+                                        <FirstStep steps={steps} currentStep={currentStepIndex} />
+                                    )}
+                                    {currentStep === 2 && (
+                                        <SecondStep steps={steps} currentStep={currentStepIndex} />
+                                    )}
+                                    {currentStep === 3 && (
+                                        <ThirdStep steps={steps} currentStep={currentStepIndex} />
+                                    )}
+                                    {currentStep === 4 && (
+                                        <FourthStep steps={steps} currentStep={currentStepIndex} />
+                                    )}
+                                    {currentStep === 5 && (
+                                        <FifthStep steps={steps} currentStep={currentStepIndex} />
+                                    )}
+                                    {currentStep === 6 && (
+                                        <SixthStep steps={steps} currentStep={currentStepIndex} />
+                                    )}
                                 </div>
-                            )}
+                            </div>
 
                             {/* Sticky footer for final step */}
-                            {isLast && !isFooterVisible && (
-                                <div
-                                    className="sticky-modal-footer"
-                                    style={{
-                                        position: "fixed",
-                                        bottom: 0,
-                                        left: 0,
-                                        right: 0,
-                                        backgroundColor: "white",
-                                        padding: "15px 20px",
-                                        boxShadow: "0 -4px 20px rgba(0, 0, 0, 0.15)",
-                                        zIndex: 1055,
-                                        borderTop: "1px solid #e0e0e0",
-                                        animation: "fadeInUp 0.3s ease-in-out",
-                                    }}
-                                >
-                                    <div className="container">
-                                        <div className="d-flex flex-column justify-content-center align-items-center gap-2">
-                                            <button
-                                                onClick={() => setIsCompleteForm(true)}
-                                                type="button"
-                                                className="btn btn-primary border-0"
-                                                style={{
-                                                    maxWidth: "300px",
-                                                    width: "100%",
-                                                }}
-                                            >
-                                                Publish Listing
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className="btn btn-primary border-0 btn-draft"
-                                                style={{
-                                                    maxWidth: "300px",
-                                                    width: "100%",
-                                                }}
-                                            >
-                                                Save as draft
-                                            </button>
-                                        </div>
-                                    </div>
+                            {isLast &&
+                                <div className="container">
+                                    {lastStepButtons}
                                 </div>
-                            )}
+                            }
                         </>
                     )}
 
-                    {isCompleteForm && (
-                        <SuccessStep />
-                    )}
-
+                    {isCompleteForm && <SuccessStep />}
                 </Modal.Body>
 
                 {!isLast && !isCompleteForm && (
@@ -240,9 +218,11 @@ export default function ListRoomModal({ show, onHide }: ListRoomModalProps) {
 
             <DraftRequestModal
                 show={showDraftModal}
-                onHide={() => setShowDraftModal(false)}
-                onKeepEditing={() => setShowDraftModal(false)}
+                onHide={closeDraftModal}
+                onKeepEditing={closeDraftModal}
             />
         </>
     );
 }
+
+export default observer(ListRoomModal);

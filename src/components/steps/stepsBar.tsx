@@ -1,8 +1,8 @@
 import React from "react";
 
 type StepsBarProps = {
-    steps: string[];
-    currentStep: number;
+  steps: (string | number)[];
+  currentStep: number;
 };
 
 export default function StepsBar({ steps, currentStep }: StepsBarProps) {

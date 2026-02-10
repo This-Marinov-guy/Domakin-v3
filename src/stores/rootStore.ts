@@ -1,9 +1,10 @@
-import BlogStore from './blogStore';
-import CommonStore from './commonStore';
-import ModalStore from './modalStore';
-import PropertyStore from './propertyStore';
-import ServiceStore from './serviceStore';
-import UserStore from './userStore';
+import BlogStore from "./blogStore";
+import CommonStore from "./commonStore";
+import ModalStore from "./modalStore";
+import PropertyStore from "./propertyStore";
+import ServiceStore from "./serviceStore";
+import UserStore from "./userStore";
+import ListRoomStore from "./listRoomStore";
 
 class RootStore {
   commonStore;
@@ -12,6 +13,7 @@ class RootStore {
   propertyStore;
   serviceStore;
   blogStore;
+  listRoomStore;
 
   constructor() {
     this.commonStore = new CommonStore(this);
@@ -20,6 +22,7 @@ class RootStore {
     this.propertyStore = new PropertyStore(this);
     this.serviceStore = new ServiceStore(this);
     this.blogStore = new BlogStore(this);
+    this.listRoomStore = new ListRoomStore(this);
   }
 }
 
