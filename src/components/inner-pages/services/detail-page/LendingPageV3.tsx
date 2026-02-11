@@ -36,8 +36,18 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
             referenceId
         },
     } = useStore();
+
     const { sendRequest } = useServer();
     const hasFetchedRef = useRef(false);
+
+    const removeRefIdFromQuery = () => {
+        const { reference_id, referenceId, ...rest } = router.query;
+        router.replace(
+            { pathname: router.pathname, query: rest },
+            undefined,
+            { shallow: true }
+        );
+    };
 
     useEffect(() => {
         if (showListRoomModal) return;
@@ -68,7 +78,10 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
                             Continue from here
                         </a>
                     </>,
-                    { autoClose: false }
+                    {
+                        autoClose: false,
+                        onClose: () => localStorage.removeItem(LISTING_REFERENCE_ID),
+                    }
                 );
             }
         }
@@ -76,17 +89,21 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
         if (!refId || typeof refId !== "string" || refId === referenceId) return;
 
         hasFetchedRef.current = true;
-        sendRequest(`/listing-application/${refId}`)
+        sendRequest(`/listing-application/${refId}`, "GET", {}, {}, { withError: false })
             .then((res: any) => {
                 if (res?.status && res?.data) {
                     setReferenceId(refId);
                     setAddListingDataFromApplication(res.data);
                     setShowListRoomModal(true);
+                } else {
+                    removeRefIdFromQuery();
                 }
             })
-            .catch(() => { });
+            .catch(() => {
+                removeRefIdFromQuery();
+            });
     }, [router.query.referenceId, router.query.reference_id]);
-    
+
 
     return (
         <div className="lending-page-v2">
