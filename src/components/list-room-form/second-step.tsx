@@ -49,7 +49,7 @@ function SecondStep({ steps, currentStep }: SecondStepProps) {
                                 onChange={(e) =>
                                     updateListingData("personalData", "name", e.target.value)
                                 }
-                                isInvalid={errorFields.includes("personalData.name")}
+                                isInvalid={errorFields.includes("name")}
                                 className="py-2"
                             />
                         </div>
@@ -67,7 +67,7 @@ function SecondStep({ steps, currentStep }: SecondStepProps) {
                                 onChange={(e) =>
                                     updateListingData("personalData", "surname", e.target.value)
                                 }
-                                isInvalid={errorFields.includes("personalData.surname")}
+                                isInvalid={errorFields.includes("surname")}
                                 className="py-2"
                             />
                         </div>
@@ -81,7 +81,7 @@ function SecondStep({ steps, currentStep }: SecondStepProps) {
                                 onChange={(value: string) =>
                                     updateListingData("personalData", "phone", value)
                                 }
-                                isInvalid={errorFields.includes("personalData.phone")}
+                                isInvalid={errorFields.includes("phone")}
                             />
                         </div>
                     </div>
@@ -98,7 +98,7 @@ function SecondStep({ steps, currentStep }: SecondStepProps) {
                                 onChange={(e) =>
                                     updateListingData("personalData", "email", e.target.value)
                                 }
-                                isInvalid={errorFields.includes("personalData.email")}
+                                isInvalid={errorFields.includes("email")}
                                 className="py-2"
                             />
                         </div>

@@ -2,12 +2,14 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
+import Spinner from "react-bootstrap/Spinner";
 import StepsBar from "@/components/steps/stepsBar";
 import SuccessStep from "@/components/list-room-form/success-step";
 import DraftRequestModal from "@/components/list-room-form/draft-request-modal";
 import useStickyFooter from "@/hooks/useStickyFooter";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
+import { useServer } from "@/hooks/useServer";
 import FifthStep from "../list-room-form/fifth-step";
 import FirstStep from "../list-room-form/first-step";
 import SecondStep from "../list-room-form/second-step";
@@ -19,6 +21,8 @@ interface ListRoomModalProps {
     show: boolean;
     onHide: () => void;
 }
+
+const VALIDATE_STEP_INDEXES = [2, 3, 4, 5];
 
 function ListRoomModal({ show, onHide }: ListRoomModalProps) {
     const {
@@ -36,8 +40,10 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
             setCompleteForm,
             reset,
         },
+        propertyStore: { addListingData, addErrorFields },
     } = useStore();
 
+    const { sendRequest, loading } = useServer();
     const footerRef = useRef<HTMLDivElement>(null);
 
     const [transitionDirection, setTransitionDirection] = useState<
@@ -62,21 +68,37 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
         initialDelay: 50,
     });
 
-    const validateStep = () => {
-        if (currentStep === 2) {
-            const nameInput = document.querySelector("#name") as HTMLInputElement | null;
-            const name = nameInput?.value;
-            if (!name) {
-                // validation placeholder
-            }
+    const handleNext = async () => {
+        if (VALIDATE_STEP_INDEXES.includes(currentStep)) {
+            addErrorFields([]);
+            const { personalData, propertyData, terms, referralCode, images } = addListingData;
+            const amenitiesStr =
+                Array.isArray(propertyData?.amenities)
+                    ? (propertyData.amenities as number[]).join(",")
+                    : (propertyData?.amenities != null ? String(propertyData.amenities) : "");
+            const formData = {
+                step: currentStep,
+                ...(personalData ?? {}),
+                ...(propertyData ?? {}),
+                amenities: amenitiesStr,
+                terms: terms ?? { contact: false, legals: false },
+                referralCode: referralCode ?? "",
+                images: images ?? [],
+            };
+            const res = await sendRequest(
+                `/listing-application/validate/step-${currentStep}`,
+                "POST",
+                formData,
+            );
+            if (res?.status) {
+                addErrorFields([]);
+                next();
+            } else if (res?.invalid_fields) {
+                addErrorFields(res.invalid_fields);
+            } 
+        } else {
+            next();
         }
-
-        return true;
-    };
-
-    const handleNext = () => {
-        if (!validateStep()) return;
-        next();
     };
 
     const handleClose = () => {
@@ -116,8 +138,17 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                 </button>
             )}
             {!isLast && (
-                <button type="button" className="btn-thirteen" onClick={handleNext}>
-                    Next
+                <button
+                    type="button"
+                    className="btn-thirteen"
+                    onClick={handleNext}
+                    disabled={loading}
+                >
+                    {loading ? (
+                        <Spinner size="sm" animation="border" />
+                    ) : (
+                        "Next"
+                    )}
                 </button>
             )}
         </div>
@@ -125,11 +156,20 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
 
     const lastStepButtons = (
         <div className="d-flex justify-content-between align-items-center gap-5 m-auto mb-3" style={{ maxWidth: "20em" }}>
-            <button type="button" className="btn-danger" onClick={back}>
+            <button type="button" className="btn-danger" onClick={back} disabled={loading}>
                 Back
             </button>
-            <button type="button" className="btn-thirteen" onClick={handleNext}>
-                Submit
+            <button
+                type="button"
+                className="btn-thirteen"
+                onClick={handleNext}
+                disabled={loading}
+            >
+                {loading ? (
+                    <Spinner size="sm" animation="border" />
+                ) : (
+                    "Submit"
+                )}
             </button>
         </div>
     );

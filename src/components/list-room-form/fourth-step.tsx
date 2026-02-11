@@ -29,6 +29,15 @@ const AMENITIES_LIST: string[] = [
     "Elevator",
 ];
 
+const SHARED_SPACE_OPTIONS: string[] = [
+    "Bedroom",
+    "Kitchen",
+    "Bathroom",
+    "Toilet",
+    "Storage space",
+    "Living room",
+];
+
 function FourthStep({
     steps,
     currentStep,
@@ -49,12 +58,15 @@ function FourthStep({
     const selectedAmenities: number[] = Array.isArray(pd?.amenities)
         ? (pd.amenities as number[])
         : [];
-    const furnitureValue = String(pd?.furniture ?? "");
+    const selectedSharedSpaces: number[] = Array.isArray(pd?.sharedSpace)
+        ? (pd.sharedSpace as number[])
+        : [];
+    const furnishedTypeValue = Number(pd?.furnishedType);
 
     const FURNITURE_OPTIONS = [
-        { value: "fully_furnished", label: "Fully furnished" },
-        { value: "semi_furnished", label: "Semi-furnished" },
-        { value: "none", label: "None" },
+        { value: 1, label: "Fully furnished" },
+        { value: 2, label: "Semi-furnished" },
+        { value: 3, label: "None" },
     ] as const;
 
     const amenitiesSorted = useMemo(
@@ -107,6 +119,13 @@ function FourthStep({
         updateListingData("propertyData", "amenities", next);
     };
 
+    const toggleSharedSpace = (id: number) => {
+        const next = selectedSharedSpaces.includes(id)
+            ? selectedSharedSpaces.filter((x) => x !== id)
+            : [...selectedSharedSpaces, id].sort((a, b) => a - b);
+        updateListingData("propertyData", "sharedSpace", next);
+    };
+
     return (
         <div className="list-room-modal__fourth-step list-room-modal__first-step">
             <div className="list-room-modal__first-step__body d-flex flex-column">
@@ -127,7 +146,7 @@ function FourthStep({
                                     const v = Math.max(0, Math.floor(Number(e.target.value)) || 0);
                                     updateListingData("propertyData", "rent", String(v));
                                 }}
-                                isInvalid={errorFields.includes("propertyData.rent")}
+                                isInvalid={errorFields.includes("rent")}
                             />
                         </div>
                     </div>
@@ -138,7 +157,7 @@ function FourthStep({
                                 type="text"
                                 value={billsBase}
                                 onChange={handleBillsChange}
-                                isInvalid={errorFields.includes("propertyData.bills")}
+                                isInvalid={errorFields.includes("bills")}
                             />
                         </div>
                     </div>
@@ -166,7 +185,7 @@ function FourthStep({
                                 onChange={(e) =>
                                     updateListingData("propertyData", "size", e.target.value)
                                 }
-                                isInvalid={errorFields.includes("propertyData.size")}
+                                isInvalid={errorFields.includes("size")}
                             />
                         </div>
                     </div>
@@ -177,10 +196,10 @@ function FourthStep({
                     {/* Row: Flatmates (Male / Female) | House rules – same counter style as toilets */}
                     <div className="row gx-3 mb-30">
                         <div className="col-12 col-lg-6">
-                            <div className="form-group mb-30 mb-lg-30">
+                            <div className={`form-group mb-30 mb-lg-30 ${(errorFields.includes("propertyData.flatmatesMale") || errorFields.includes("propertyData.flatmatesFemale")) ? "border border-danger rounded-3 p-3" : ""}`}>
                                 <label>{t("emergency_housing.flatmates")}</label>
                                 <div className="row gx-2 mt-2">
-                                    <div className="col-6 col-lg-3">
+                                    <div className="col-6">
                                         <span className="d-block small text-muted mb-1">Male</span>
                                         <div className="d-flex align-items-center gap-2 bg-pink rounded-3" style={{ width: "7em" }}>
                                             <button
@@ -202,7 +221,7 @@ function FourthStep({
                                             </button>
                                         </div>
                                     </div>
-                                    <div className="col-6 col-lg-3">
+                                    <div className="col-6">
                                         <span className="d-block small text-muted mb-1">Female</span>
                                         <div className="d-flex align-items-center gap-2 bg-pink rounded-3" style={{ width: "7em" }}>
                                             <button
@@ -233,10 +252,10 @@ function FourthStep({
 
                         {/* Bathrooms & Toilets – start at 1, up/down each side; 2 cols on lg+, 1 on medium and below */}
                         <div className="col-12 col-lg-6">
-                            <div className="form-group mb-30 mb-lg-30">
+                            <div className={`form-group mb-30 mb-lg-30 ${(errorFields.includes("propertyData.bathrooms") || errorFields.includes("propertyData.toilets")) ? "border border-danger rounded-3 p-3" : ""}`}>
                                 <label>Number of Bathrooms & Toilets</label>
                                 <div className="row gx-2 mt-2">
-                                    <div className="col-6 col-lg-3">
+                                    <div className="col-6">
                                         <span className="d-block small text-muted mb-1">Bathrooms</span>
                                         <div className="d-flex align-items-center gap-2 bg-pink  rounded-3" style={{ width: "7em" }}>
                                             <button
@@ -258,7 +277,7 @@ function FourthStep({
                                             </button>
                                         </div>
                                     </div>
-                                    <div className="col-6 col-lg-3">
+                                    <div className="col-6">
                                         <span className="d-block small text-muted mb-1">Toilets</span>
                                         <div className="d-flex align-items-center gap-2 bg-pink  rounded-3" style={{ width: "7em" }}>
                                             <button
@@ -287,7 +306,7 @@ function FourthStep({
 
                     </div>
 
-                    <div className="col-12 col-md-6">
+                    <div className={`col-12 col-md-6 ${(errorFields.includes("propertyData.smokingAllowed") || errorFields.includes("propertyData.petsAllowed")) ? "border border-danger rounded-3 p-3" : ""}`}>
                         <div className="form-group mb-30 mb-lg-30">
                             <label className="d-block mb-2">House rules</label>
                             <div className="d-flex flex-wrap gap-3 align-items-center">
@@ -335,7 +354,7 @@ function FourthStep({
 
 
                 {/* 8. Amenities – sorted; checkbox-card-type; each adds enum int to array */}
-                <div className="form-group mb-30">
+                <div className={`form-group mb-30 ${errorFields.includes("propertyData.amenities") ? "border border-danger rounded-3 p-3" : ""}`}>
                     <label className="d-block mb-2">Amenities</label>
                     <small className="d-block">* You can select more than one</small>
 
@@ -366,12 +385,51 @@ function FourthStep({
                     </div>
                 </div>
 
-                {/* Furniture – single choice, same card style as amenities */}
-                <div className="form-group mb-30">
+                {/* Shared spaces – behaves like amenities (multi-select) */}
+                <div className={`form-group mb-30 ${errorFields.includes("sharedSpace") ? "border border-danger rounded-3 p-3" : ""}`}>
+                    <label className="d-block mb-2">Shared spaces</label>
+                    <small className="d-block">* You can select more than one</small>
+
+                    <div className="row g-2 mt-3">
+                        {SHARED_SPACE_OPTIONS.map((label, id) => {
+                            const inputId = `shared-space-${id}`;
+                            const checked = selectedSharedSpaces.includes(id);
+                            return (
+                                <div key={id} className="checkbox-card-type col-6 col-md-4">
+                                    <input
+                                        type="checkbox"
+                                        className="btn-check"
+                                        name="sharedSpace[]"
+                                        id={inputId}
+                                        autoComplete="off"
+                                        checked={checked}
+                                        onChange={() => toggleSharedSpace(id)}
+                                    />
+                                    <label
+                                        className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12"
+                                        htmlFor={inputId}
+                                    >
+                                        <span>{label}</span>
+                                    </label>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                {/* Furniture – single choice, furnishedType as integer */}
+                <div className={`form-group mb-30`}>
                     <label className="d-block mb-2">Furniture</label>
                     <div className="row g-2">
                         {FURNITURE_OPTIONS.map(({ value, label }) => (
-                            <div key={value} className="checkbox-card-type col-6 col-md-4">
+                            <div
+                                key={value}
+                                className={`checkbox-card-type col-6 col-md-4 ${
+                                    errorFields.includes("furnishedType")
+                                        ? "border border-danger rounded-5"
+                                        : ""
+                                }`}
+                            >
                                 <input
                                     type="radio"
                                     className="btn-check"
@@ -379,8 +437,8 @@ function FourthStep({
                                     id={`furniture-${value}`}
                                     value={value}
                                     autoComplete="off"
-                                    checked={furnitureValue === value}
-                                    onChange={() => updateListingData("propertyData", "furniture", value)}
+                                    checked={furnishedTypeValue === value}
+                                    onChange={() => updateListingData("propertyData", "furnishedType", value)}
                                 />
                                 <label
                                     className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12"
@@ -402,7 +460,7 @@ function FourthStep({
                         onChange={(e) =>
                             updateListingData("propertyData", "description", e.target.value)
                         }
-                        isInvalid={errorFields.includes("propertyData.description")}
+                        isInvalid={errorFields.includes("description")}
                     />
                     <small className="text-muted">* {t("emergency_housing.description_disclaimer")}</small>
                 </div>
@@ -416,7 +474,7 @@ function FourthStep({
                         onChange={(e) =>
                             updateListingData("propertyData", "note", e.target.value)
                         }
-                        isInvalid={errorFields.includes("propertyData.note")}
+                        isInvalid={errorFields.includes("note")}
                     />
                 </div>
             </div>

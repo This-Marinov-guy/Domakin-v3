@@ -138,7 +138,7 @@ export const useServer = () => {
       const response = await axios.request(requestData);
 
       if (options.withError && !response.data.status) {
-        const errorMessage = getErrorMessage(response);
+        const errorMessage = getErrorMessage(response);        
 
         showStandardNotification("error", errorMessage);
       }
@@ -150,6 +150,12 @@ export const useServer = () => {
       return response.data;
     } catch (err: any) {
       !ENV_PROD && console.log(err.response?.data ?? err);
+
+      if (options.withError && !err.response?.data.status) {
+        const errorMessage = getErrorMessage(err.response);
+
+        showStandardNotification("error", errorMessage);
+      }
 
       // only show error if the response has no status property
       if (options?.withError && !err.response?.data.hasOwnProperty('status')) {

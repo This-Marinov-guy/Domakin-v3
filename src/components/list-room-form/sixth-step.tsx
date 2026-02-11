@@ -28,8 +28,14 @@ const MOCK_LISTING = {
         flatmatesFemale: "1",
         bathrooms: "1",
         toilets: "1",
-        furniture: "furnished",
+        furnishedType: 1,
     },
+};
+
+const FURNISHED_TYPE_LABELS: Record<number, string> = {
+    1: "Fully furnished",
+    2: "Semi-furnished",
+    3: "None",
 };
 
 const MOCK_PLACEHOLDER_IMAGE = "https://placehold.co/600x400/e2e8f0/64748b?text=Listing+Preview";
@@ -108,7 +114,7 @@ function SixthStep({
             propertyData?.size ? `${propertyData.size} m²` : null,
             flatmatesMale + flatmatesFemale > 0 ? `${flatmatesMale} male, ${flatmatesFemale} female flatmate(s)` : null,
             `${bathrooms} bathroom(s), ${toilets} toilet(s)`,
-            pd?.furniture ? String(pd.furniture).replace(/_/g, " ") : null,
+            pd?.furnishedType != null ? (FURNISHED_TYPE_LABELS[Number(pd.furnishedType)] ?? String(pd.furnishedType)) : null,
             propertyData?.description ? String(propertyData.description).slice(0, 60) + (String(propertyData.description).length > 60 ? "…" : "") : null,
         ].filter(Boolean).join(" · ");
         return [
@@ -148,67 +154,65 @@ function SixthStep({
     return (
         <div className="list-room-modal__first-step">
             <div className="list-room-modal__first-step__body container">
+                {/* Left: step summary panels (2–5 only) */}
                 <div className="row g-4 g-lg-4">
-                    {/* Left: step summary panels (2–5 only) */}
-                    <div className="col-12 col-lg-4">
-                        <div className="d-flex flex-column gap-3">
-                            {stepPanels.map((panel) => (
-                                <div
-                                    key={panel.step}
-                                    className="border rounded-3 p-3 bg-light step-panel position-relative"
+                    <div className="col-12 col-lg-4 d-flex flex-column gap-3">
+                        {stepPanels.map((panel) => (
+                            <div
+                                key={panel.step}
+                                className="border rounded-3 p-3 bg-light step-panel position-relative"
+                            >
+                                <button
+                                    type="button"
+                                    className="step-panel__edit-btn position-absolute top-0 end-0 btn btn-link p-2"
+                                    style={{ top: "0.25rem", right: "0.25rem" }}
+                                    onClick={() => goTo(panel.step - 1)}
+                                    aria-label={`Edit ${panel.title}`}
                                 >
-                                    <button
-                                        type="button"
-                                        className="step-panel__edit-btn position-absolute top-0 end-0 btn btn-link p-2"
-                                        style={{ top: "0.25rem", right: "0.25rem" }}
-                                        onClick={() => goTo(panel.step - 1)}
-                                        aria-label={`Edit ${panel.title}`}
-                                    >
-                                        <FiEdit2 size={18} />
-                                    </button>
-                                    <div className="d-flex align-items-center gap-2 mb-2">
-                                        <span className="step-panel__step-badge badge rounded-circle d-inline-flex align-items-center justify-content-center">
-                                            {panel.step}
-                                        </span>
-                                        <strong className="small text-dark">{panel.title}</strong>
-                                    </div>
-                                    {panel.step === 5 && panel.imageUrls?.length ? (
-                                        <>
-                                            <p className="small text-muted mb-2">
-                                                {panel.imageUrls.length} photo{panel.imageUrls.length !== 1 ? "s" : ""} uploaded
-                                            </p>
-                                            <div className="d-flex flex-wrap gap-2">
-                                                {panel.imageUrls.map((src, i) => (
-                                                    <div
-                                                        key={i}
-                                                        className="rounded overflow-hidden bg-secondary"
-                                                        style={{ width: 56, height: 56 }}
-                                                    >
-                                                        <img
-                                                            src={src}
-                                                            alt=""
-                                                            className="w-100 h-100 object-fit-cover"
-                                                            style={{ objectFit: "cover" }}
-                                                        />
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </>
-                                    ) : (
-                                        <p className="small text-muted mb-0">{panel.summary || "—"}</p>
-                                    )}
+                                    <FiEdit2 size={18} />
+                                </button>
+                                <div className="d-flex align-items-center gap-2 mb-2">
+                                    <span className="step-panel__step-badge badge rounded-circle d-inline-flex align-items-center justify-content-center">
+                                        {panel.step}
+                                    </span>
+                                    <strong className="small text-dark">{panel.title}</strong>
                                 </div>
-                            ))}
-                        </div>
-                    </div>
+                                {panel.step === 5 && panel.imageUrls?.length ? (
+                                    <>
+                                        <p className="small text-muted mb-2">
+                                            {panel.imageUrls.length} photo{panel.imageUrls.length !== 1 ? "s" : ""} uploaded
+                                        </p>
+                                        <div className="d-flex flex-wrap gap-2">
+                                            {panel.imageUrls.map((src, i) => (
+                                                <div
+                                                    key={i}
+                                                    className="rounded overflow-hidden bg-secondary"
+                                                    style={{ width: 56, height: 56 }}
+                                                >
+                                                    <img
+                                                        src={src}
+                                                        alt=""
+                                                        className="w-100 h-100 object-fit-cover"
+                                                        style={{ objectFit: "cover" }}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </>
+                                ) : (
+                                    <p className="small text-muted mb-0">{panel.summary || "—"}</p>
+                                )}
+                            </div>
+                        ))}
 
+                    </div>
                     {/* Right: preview card (form data + uploaded images) + buttons */}
-                    <div className="col-12 col-lg-8">
-                        <div className="row gx-xxl-5 mb-4">
+                    <div className="col-12 col-lg-8 d-flex justify-content-center">
                             {previewProperty.main_image ? (
                                 <PropertyCardGrid
                                     property={previewProperty}
                                     disableLinks
+                                    style
                                 />
                             ) : (
                                 <div className="col-12">
@@ -217,15 +221,6 @@ function SixthStep({
                                     </div>
                                 </div>
                             )}
-                        </div>
-                        {/* <div className="d-flex justify-content-between align-items-center gap-5 m-auto mb-3" style={{ maxWidth: "20em" }}>
-                            <button type="button" className="btn btn-danger" onClick={back}>
-                                Back
-                            </button>
-                            <button type="button" className="btn btn-thirteen" onClick={next}>
-                                {isLast ? "Submit" : "Next"}
-                            </button>
-                        </div> */}
                     </div>
                 </div>
             </div>

@@ -251,11 +251,10 @@ function FifthStep({ steps, currentStep }: FifthStepProps) {
                       }}
                       style={{
                         zIndex: 100,
-                        borderRadius: "50%",
+                        borderRadius: "20%",
                         width: "30px",
                         height: "30px",
-                        background: "rgba(255, 0, 0, 0.8)",
-                        border: "2px solid white",
+                        background: "#dc3545",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",

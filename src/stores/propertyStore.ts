@@ -132,7 +132,7 @@ export default class PropertyStore {
       this.addListingData[key] = value;
     }
 
-    if (typeof window !== "undefined" && window.localStorage) {
+    if (typeof window !== "undefined" && window.localStorage && key !== 'images') {
       localStorage.setItem(
         "addListingData",
         JSON.stringify(this.addListingData)

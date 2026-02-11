@@ -89,7 +89,16 @@ input[type="checkbox"] {
 
   .phone-prefix {
     position: absolute;
+    max-width: 65px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
     left: 10px;
+  }
+
+  .dropdown-toggle::after {
+    height: 10px !important;
+    margin-top: 8px;
   }
 
   .phone-content {
