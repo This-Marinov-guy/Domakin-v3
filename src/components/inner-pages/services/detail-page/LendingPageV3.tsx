@@ -14,6 +14,8 @@ import { useRouter } from "next/router";
 import { useStore } from "@/stores/storeContext";
 import { useServer } from "@/hooks/useServer";
 import { observer } from "mobx-react-lite";
+import { showGeneralSuccess, showStandardNotification } from "@/utils/helpers";
+import { LISTING_REFERENCE_ID } from "@/utils/defines";
 
 interface HomeSixProps {
     serverFeedbacks?: any[];
@@ -31,6 +33,7 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
             showReminderModal,
             setShowListRoomModal,
             setShowReminderModal,
+            referenceId
         },
     } = useStore();
     const { sendRequest } = useServer();
@@ -41,7 +44,36 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
 
         const refId = router.query.referenceId ?? router.query.reference_id;
 
-        if (!refId || typeof refId !== "string") return;
+        if (typeof window !== "undefined" && window.localStorage) {
+            const storedRefId = localStorage.getItem(LISTING_REFERENCE_ID);
+
+            if (storedRefId && !refId) {
+                const continueUrl = `${router.pathname}?reference_id=${encodeURIComponent(storedRefId)}`;
+                showStandardNotification(
+                    "info",
+                    <>
+                        You have a listing in progress.{" "}
+                        <a
+                            href={continueUrl}
+                            className="text-white text-decoration-underline fw-semibold"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                router.replace(
+                                    { pathname: router.pathname, query: { ...router.query, reference_id: storedRefId } },
+                                    undefined,
+                                    { shallow: true }
+                                );
+                            }}
+                        >
+                            Continue from here
+                        </a>
+                    </>,
+                    { autoClose: false }
+                );
+            }
+        }
+
+        if (!refId || typeof refId !== "string" || refId === referenceId) return;
 
         hasFetchedRef.current = true;
         sendRequest(`/listing-application/${refId}`)
@@ -54,6 +86,7 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
             })
             .catch(() => { });
     }, [router.query.referenceId, router.query.reference_id]);
+    
 
     return (
         <div className="lending-page-v2">

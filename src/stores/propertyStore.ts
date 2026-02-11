@@ -1,3 +1,4 @@
+import { LISTING_REFERENCE_ID } from "@/utils/defines";
 import { isEmpty } from "lodash";
 import { action, makeAutoObservable, observable, toJS } from "mobx";
 
@@ -227,6 +228,10 @@ export default class PropertyStore {
   @action
   setReferenceId = (id: string | null) => {
     this.referenceId = id;
+
+    if (typeof window !== "undefined" && window.localStorage) {
+      localStorage.setItem(LISTING_REFERENCE_ID, id ?? "");
+    }
   };
 
   @action

@@ -17,6 +17,7 @@ import SecondStep from "../list-room-form/second-step";
 import ThirdStep from "../list-room-form/third-step";
 import FourthStep from "../list-room-form/fourth-step";
 import SixthStep from "../list-room-form/sixth-step";
+import { LISTING_REFERENCE_ID } from "@/utils/defines";
 
 interface ListRoomModalProps {
     show: boolean;
@@ -46,7 +47,6 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
             addListingIsLast: isLast,
             nextAddListingStep,
             backAddListingStep: back,
-            goToAddListingStep,
         },
     } = useStore();
 
@@ -123,13 +123,13 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                 addErrorFields(res.invalid_fields);
             }
         } else {
+            localStorage.removeItem(LISTING_REFERENCE_ID);
             nextAddListingStep();
         }
     };
 
     const handleClose = () => {
         reset();
-        goToAddListingStep(0);
         onHide();
     };
 

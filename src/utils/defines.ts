@@ -74,6 +74,9 @@ export const LONG_LOADING_MODAL = "LONG_LOADING_MODAL";
 export const PAYMENT_LINK_MODAL = "PAYMENT_LINK_MODAL";
 export const APPLICATION_MODAL = "APPLICATION_MODAL";
 
+// local storage
+export const LISTING_REFERENCE_ID = "listing_reference_id";
+
 // tabs
 export const FORGOTTEN_PASS = 2;
 export const SIGN_UP = 1;
