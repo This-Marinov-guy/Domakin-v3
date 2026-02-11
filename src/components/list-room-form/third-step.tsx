@@ -170,13 +170,7 @@ function ThirdStep({ steps, currentStep }: { steps: (string | number)[]; current
                             placeholder="Select date"
                             value={propertyData.availableFrom ?? ""}
                             onChange={(value: string | Date | null) => {
-                                const next =
-                                    value == null
-                                        ? null
-                                        : value instanceof Date
-                                          ? value.toISOString().slice(0, 10)
-                                          : String(value);
-                                updateListingData("propertyData", "availableFrom", next);
+                                updateListingData("propertyData", "availableFrom", value);
                             }}
                             isInvalid={errorFields.includes("availableFrom")}
                         />
@@ -191,13 +185,7 @@ function ThirdStep({ steps, currentStep }: { steps: (string | number)[]; current
                             placeholder="Select date"
                             value={propertyData.availableTo ?? ""}
                             onChange={(value: string | Date | null) => {
-                                const next =
-                                    value == null
-                                        ? null
-                                        : value instanceof Date
-                                          ? value.toISOString().slice(0, 10)
-                                          : String(value);
-                                updateListingData("propertyData", "availableTo", next);
+                                updateListingData("propertyData", "availableTo", value);
                             }}
                             isInvalid={errorFields.includes("availableTo")}
                         />

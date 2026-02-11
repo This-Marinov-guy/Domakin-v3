@@ -49,6 +49,9 @@ export default class PropertyStore {
   @observable errorFields: string[] = [];
   @observable referenceId: string | null = null;
 
+  @observable showListRoomModal = false;
+  @observable showReminderModal = false;
+
   /** Add-listing wizard: steps 1–6, 0-based index */
   @observable addListingCurrentStepIndex = 0;
   get addListingSteps(): number[] {
@@ -224,6 +227,16 @@ export default class PropertyStore {
   @action
   setReferenceId = (id: string | null) => {
     this.referenceId = id;
+  };
+
+  @action
+  setShowListRoomModal = (show: boolean) => {
+    this.showListRoomModal = show;
+  };
+
+  @action
+  setShowReminderModal = (show: boolean) => {
+    this.showReminderModal = show;
   };
 
   @action

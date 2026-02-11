@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import HeaderV2 from "@/layouts/headers/HeaderV2";
 import HeroSectionV2 from "@/components/hero/hero-section-v2";
 import "react-multi-carousel/lib/styles.css";
@@ -13,24 +13,32 @@ import Feedback from "@/components/homes/home-five/Feedback";
 import { useRouter } from "next/router";
 import { useStore } from "@/stores/storeContext";
 import { useServer } from "@/hooks/useServer";
+import { observer } from "mobx-react-lite";
 
 interface HomeSixProps {
     serverFeedbacks?: any[];
     serverProperties?: any[];
 }
 
-export default function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixProps) {
+function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixProps) {
     const { t } = useTranslation("translations");
-    const [showListRoomModal, setShowListRoomModal] = useState(false);
-    const [showReminderModal, setShowReminderModal] = useState(false);
-
     const router = useRouter();
-    const { propertyStore: { setReferenceId, setAddListingDataFromApplication } } = useStore();
+    const {
+        propertyStore: {
+            setReferenceId,
+            setAddListingDataFromApplication,
+            showListRoomModal,
+            showReminderModal,
+            setShowListRoomModal,
+            setShowReminderModal,
+        },
+    } = useStore();
     const { sendRequest } = useServer();
     const hasFetchedRef = useRef(false);
 
     useEffect(() => {
-        if (!router.isReady || hasFetchedRef.current) return;
+        if (showListRoomModal) return;
+
         const refId = router.query.referenceId ?? router.query.reference_id;
 
         if (!refId || typeof refId !== "string") return;
@@ -44,8 +52,8 @@ export default function LendingPageV3({ serverFeedbacks = [], serverProperties =
                     setShowListRoomModal(true);
                 }
             })
-            .catch(() => {});
-    }, [router.isReady, router.query.referenceId, router.query.reference_id, sendRequest, setReferenceId, setAddListingDataFromApplication]);
+            .catch(() => { });
+    }, [router.query.referenceId, router.query.reference_id]);
 
     return (
         <div className="lending-page-v2">
@@ -81,4 +89,6 @@ export default function LendingPageV3({ serverFeedbacks = [], serverProperties =
             <FooterFour />
         </div>
     );
-};
+}
+
+export default observer(LendingPageV3);
