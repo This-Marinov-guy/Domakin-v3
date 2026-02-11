@@ -1,9 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import locationIcon from "@/assets/images/icon/icon_39.svg";
-import emailIcon from "@/assets/img/icons/10.png";
-import phoneIcon from "@/assets/img/icons/11.png";
+import emailIcon from "@/assets/images/icon/mail.svg";
+import phoneIcon from "@/assets/images/icon/phone.svg";
 
 import ContactForm from "@/components/forms/ContactForm";
 import useTranslation from "next-translate/useTranslation";
@@ -14,12 +13,13 @@ import {
   INSTAGRAM,
   LINKEDIN,
   PHONE,
+  PHONE_NUMBER,
 } from "@/utils/defines";
 import { logoByTheme } from "@/utils/config";
 
 interface DataType {
   id: number;
-  icon?: string;
+  icon?: any;
   forceIcon?: string;
   class_name?: string;
   title: string;
@@ -31,7 +31,7 @@ interface DataType {
 const address_data: DataType[] = [
   {
     id: 1,
-    icon: locationIcon,
+    icon: emailIcon,
     title: "contact.email",
     address_1: EMAIL,
     link: "mailto:" + EMAIL,
@@ -40,8 +40,8 @@ const address_data: DataType[] = [
     id: 2,
     icon: phoneIcon,
     title: "contact.telephone",
-    address_1: "+31 85 083 5000",
-    link: "tel:+31850835000",
+    address_1: PHONE_NUMBER,
+    link: "tel:" + PHONE_NUMBER,
   },
   {
     id: 3,
@@ -57,13 +57,13 @@ const address_data: DataType[] = [
     address_1: "Domakin",
     link: LINKEDIN,
   },
-  {
-    id: 5,
-    forceIcon: "fa-brands fa-facebook",
-    title: "Facebook",
-    address_1: "Domakin",
-    link: FACEBOOK,
-  },
+  // {
+  //   id: 5,
+  //   forceIcon: "fa-brands fa-facebook",
+  //   title: "Facebook",
+  //   address_1: "Domakin",
+  //   link: FACEBOOK,
+  // },
   // {
   //   id: 2,
   //   icon: locationIcon,
@@ -110,9 +110,15 @@ const ContactArea = () => {
                       style={{ color: "white", fontSize: "1.8em" }}
                       className={item.forceIcon}
                     />
-                  ) : (
-                    <Image src={item.icon ?? ""} alt="" className="lazy-img" />
-                  )}
+                  ) : item.icon ? (
+                    <Image
+                      src={item.icon}
+                      alt=""
+                      width={28}
+                      height={28}
+                      style={{ filter: "brightness(0) invert(1)" }}
+                    />
+                  ) : null}
                 </div>
                 <div className="text">
                   <p className="fs-22">{t(item.title)}</p>

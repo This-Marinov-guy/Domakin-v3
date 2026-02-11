@@ -90,14 +90,18 @@ function DraftRequestModal({ show, onHide, onKeepEditing }: DraftRequestModalPro
                             </>
                         )}
 
-                        <>
-                            <div className="d-flex flex-row justify-content-center align-items-center gap-3">
+                        <div style={{ marginTop: '100px' }}>
+                            <Image src={logoTransparentWhite} alt="Logo Icon" className="m-auto" style={{ height: '100px', objectFit: 'contain' }} />
+
+                            <div className="d-flex flex-row justify-content-center align-items-center gap-3" >
                                 <Image src={StarsIcon} alt="stars icon" />
                                 <p className="text-center text-white fs-6">
                                     Trusted by <strong className="text-white"> 385+ </strong> students
                                 </p>
                             </div>
-                        </>
+                        </div>
+
+                        {/* <Image width={1000} height={1000} src={'/assets/img/bg/6.webp'} alt="Logo Icon" className="w-100" /> */}
 
 
                         {/* <button 

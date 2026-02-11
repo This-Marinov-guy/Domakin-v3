@@ -2,6 +2,7 @@ export const ENV_PROD = process.env.NODE_ENV === "production";
 
 // social
 export const EMAIL = "info@domakin.nl";
+export const PHONE_NUMBER = "+31 85 083 5000";
 export const FACEBOOK =
   "https://www.facebook.com/profile.php?id=100093230497851";
 export const INSTAGRAM = "https://www.instagram.com/domakin.nl/";
