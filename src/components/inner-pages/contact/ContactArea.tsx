@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import emailIcon from "@/assets/images/icon/mail.svg";
 import phoneIcon from "@/assets/images/icon/phone.svg";
+import linkedinIcon from "@/assets/images/icon/linkedin.svg";
 
 import ContactForm from "@/components/forms/ContactForm";
 import useTranslation from "next-translate/useTranslation";
@@ -52,7 +53,7 @@ const address_data: DataType[] = [
   },
   {
     id: 4,
-    forceIcon: "fa-brands fa-linkedin",
+    icon: linkedinIcon,
     title: "LinkedIn",
     address_1: "Domakin",
     link: LINKEDIN,

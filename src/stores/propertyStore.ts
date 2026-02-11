@@ -1,4 +1,3 @@
-import { stat } from "fs";
 import { isEmpty } from "lodash";
 import { action, makeAutoObservable, observable, toJS } from "mobx";
 
@@ -48,6 +47,19 @@ export default class PropertyStore {
 
   @observable addListingData: any = { ...defaultFormData };
   @observable errorFields: string[] = [];
+  @observable referenceId: string | null = null;
+
+  /** Add-listing wizard: steps 1–6, 0-based index */
+  @observable addListingCurrentStepIndex = 0;
+  get addListingSteps(): number[] {
+    return [1, 2, 3, 4, 5, 6];
+  }
+  get addListingCurrentStep(): number {
+    return this.addListingSteps[this.addListingCurrentStepIndex] ?? 1;
+  }
+  get addListingIsLast(): boolean {
+    return this.addListingCurrentStepIndex >= this.addListingSteps.length - 1;
+  }
 
   @observable editPropertyData: any = { ...defaultFormData };
   @observable editErrorFields: string[] = [];
@@ -56,9 +68,9 @@ export default class PropertyStore {
     makeAutoObservable(this);
     this.rootStore = root;
 
-    if (typeof window !== "undefined" && window.localStorage) {
-      this.loadListingData();
-    }
+    // if (typeof window !== "undefined" && window.localStorage) {
+    //   this.loadListingData();
+    // }
   }
 
   @action
@@ -132,12 +144,12 @@ export default class PropertyStore {
       this.addListingData[key] = value;
     }
 
-    if (typeof window !== "undefined" && window.localStorage && key !== 'images') {
-      localStorage.setItem(
-        "addListingData",
-        JSON.stringify(this.addListingData)
-      );
-    }
+    // if (typeof window !== "undefined" && window.localStorage && key !== 'images') {
+    //   localStorage.setItem(
+    //     "addListingData",
+    //     JSON.stringify(this.addListingData)
+    //   );
+    // }
   };
 
   @action
@@ -192,6 +204,7 @@ export default class PropertyStore {
     };
 
     this.addListingData = { ...defaultFormData, ...globalData };
+    this.addListingCurrentStepIndex = 0;
 
     if (typeof window !== "undefined" && window.localStorage) {
       localStorage.removeItem("addListingData");
@@ -206,6 +219,52 @@ export default class PropertyStore {
   @action
   setReferralCode = (code: string) => {
     this.addListingData.referralCode = code;
+  };
+
+  @action
+  setReferenceId = (id: string | null) => {
+    this.referenceId = id;
+  };
+
+  @action
+  nextAddListingStep = () => {
+    if (this.addListingCurrentStepIndex < this.addListingSteps.length - 1) {
+      this.addListingCurrentStepIndex += 1;
+    }
+  };
+
+  @action
+  backAddListingStep = () => {
+    if (this.addListingCurrentStepIndex > 0) {
+      this.addListingCurrentStepIndex -= 1;
+    }
+  };
+
+  @action
+  goToAddListingStep = (index: number) => {
+    if (index >= 0 && index < this.addListingSteps.length) {
+      this.addListingCurrentStepIndex = index;
+    }
+  };
+
+  @action
+  setAddListingDataFromApplication = (data: any) => {
+    if (!data || typeof data !== "object") return;
+    const personalData = data.personalData ?? data.personal_data;
+    const propertyData = data.propertyData ?? data.property_data;
+    const terms = data.terms;
+    const referralCode = data.referralCode ?? data.referral_code;
+    const images = data.images;
+    if (personalData) this.addListingData.personalData = { ...this.addListingData.personalData, ...personalData };
+    if (propertyData) this.addListingData.propertyData = { ...this.addListingData.propertyData, ...propertyData };
+    if (terms) this.addListingData.terms = { ...this.addListingData.terms, ...terms };
+    if (referralCode !== undefined) this.addListingData.referralCode = referralCode;
+    if (images !== undefined) this.addListingData.images = Array.isArray(images) ? images : [];
+    const stepFromApi = data.current_step ?? data.step;
+    if (stepFromApi != null) {
+      const stepIndex = Math.max(0, Math.min(Number(stepFromApi) - 1, this.addListingSteps.length - 1));
+      this.addListingCurrentStepIndex = stepIndex;
+    }
   };
 
   @action

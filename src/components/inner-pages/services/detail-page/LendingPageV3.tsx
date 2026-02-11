@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import HeaderV2 from "@/layouts/headers/HeaderV2";
 import HeroSectionV2 from "@/components/hero/hero-section-v2";
-import 'react-multi-carousel/lib/styles.css';
-import AvailableRoomsV2 from "@/components/rooms/available-rooms-v2";
-import ReviewsSectionV2 from "@/components/reviews/reviews-v2";
+import "react-multi-carousel/lib/styles.css";
 import HowToWorksSectionHorizontal from "@/components/howToWorks/how-to-works-horizontal";
 import QuestionsSection from "@/components/questions";
 import ReminderSection from "@/components/reminder";
-import OffersSection from "@/components/offers";
-import { KVK } from "@/utils/defines";
-import useTranslation from "next-translate/useTranslation"
+import useTranslation from "next-translate/useTranslation";
 import ListRoomModal from "@/components/list-room-modal";
 import ReminderFormModal from "@/components/list-room-form/reminder-form-modal";
 import FooterFour from "@/layouts/footers/FooterFour";
 import Feedback from "@/components/homes/home-five/Feedback";
+import { useRouter } from "next/router";
+import { useStore } from "@/stores/storeContext";
+import { useServer } from "@/hooks/useServer";
 
 interface HomeSixProps {
     serverFeedbacks?: any[];
@@ -21,9 +20,32 @@ interface HomeSixProps {
 }
 
 export default function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixProps) {
-    const { t } = useTranslation('translations');
+    const { t } = useTranslation("translations");
     const [showListRoomModal, setShowListRoomModal] = useState(false);
     const [showReminderModal, setShowReminderModal] = useState(false);
+
+    const router = useRouter();
+    const { propertyStore: { setReferenceId, setAddListingDataFromApplication } } = useStore();
+    const { sendRequest } = useServer();
+    const hasFetchedRef = useRef(false);
+
+    useEffect(() => {
+        if (!router.isReady || hasFetchedRef.current) return;
+        const refId = router.query.referenceId ?? router.query.reference_id;
+
+        if (!refId || typeof refId !== "string") return;
+
+        hasFetchedRef.current = true;
+        sendRequest(`/listing-application/${refId}`)
+            .then((res: any) => {
+                if (res?.status && res?.data) {
+                    setReferenceId(refId);
+                    setAddListingDataFromApplication(res.data);
+                    setShowListRoomModal(true);
+                }
+            })
+            .catch(() => {});
+    }, [router.isReady, router.query.referenceId, router.query.reference_id, sendRequest, setReferenceId, setAddListingDataFromApplication]);
 
     return (
         <div className="lending-page-v2">

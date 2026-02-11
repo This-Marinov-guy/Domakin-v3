@@ -48,8 +48,13 @@ function SixthStep({
     currentStep: number;
 }) {
     const {
-        listRoomStore: { back, next, isLast, goTo },
-        propertyStore: { addListingData },
+        propertyStore: {
+            addListingData,
+            backAddListingStep: back,
+            nextAddListingStep: next,
+            addListingIsLast: isLast,
+            goToAddListingStep: goTo,
+        },
     } = useStore();
 
     const raw = addListingData;

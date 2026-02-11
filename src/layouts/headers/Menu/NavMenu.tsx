@@ -18,7 +18,13 @@ const NavMenu = () => {
 
   const { t } = useTranslation("translations");
 
-  //openMobileMenu
+  const isParentActive = (menu: any) => {
+    if (pathname === menu.link) return true;
+    if (menu.sub_menus?.some((s: any) => pathname === s.link)) return true;
+    if (menu.menu_column?.some((col: any) => col.mega_menus?.some((m: any) => pathname === m.link))) return true;
+    return false;
+  };
+
   const openMobileMenu = (menu: any) => {
     if (navTitle === menu) {
       setNavTitle("");
@@ -32,7 +38,7 @@ const NavMenu = () => {
       <li className="d-block d-lg-none">
         <div className="logo">
           <Link href="/" scroll={false} className="d-block">
-            <Image src={logo} alt="" />
+            <Image src={logo} alt="" className="rounded-3"/>
           </Link>
         </div>
       </li>
@@ -46,9 +52,8 @@ const NavMenu = () => {
           <Link
             href={menu.has_dropdown ? "" : menu.link}
             className={`nav-link ${menu.has_dropdown && "dropdown-toggle"} ${
-              pathname === menu.link ? "active" : ""
-            }
-                     ${navTitle === menu.title ? "show" : ""}`}
+              isParentActive(menu) ? "active" : ""
+            } ${navTitle === menu.title ? "show" : ""}`}
             onClick={() => openMobileMenu(menu.title)}
           >
             {t(menu.title)}

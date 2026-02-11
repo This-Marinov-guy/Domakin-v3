@@ -1,7 +1,7 @@
 .round-logo {
   border-radius: 50%;
-  height: 5em;
-  width: 5em;
+  height: 4em;
+  width: 4em;
 }
 
 .logo {
@@ -247,6 +247,10 @@
 
   .fixed .nav-link {
     color: $color-three !important;
+  }
+
+  .fixed .nav-item .nav-link.active {
+    color: $color-one !important;
   }
 }
 

@@ -10,6 +10,7 @@ import useStickyFooter from "@/hooks/useStickyFooter";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import { useServer } from "@/hooks/useServer";
+import { useRouter } from "next/router";
 import FifthStep from "../list-room-form/fifth-step";
 import FirstStep from "../list-room-form/first-step";
 import SecondStep from "../list-room-form/second-step";
@@ -27,22 +28,29 @@ const VALIDATE_STEP_INDEXES = [2, 3, 4, 5];
 function ListRoomModal({ show, onHide }: ListRoomModalProps) {
     const {
         listRoomStore: {
-            steps,
-            currentStepIndex,
-            currentStep,
-            isLast,
             isCompleteForm,
             showDraftModal,
-            next,
-            back,
             openDraftModal,
             closeDraftModal,
             setCompleteForm,
             reset,
         },
-        propertyStore: { addListingData, addErrorFields },
+        propertyStore: {
+            addListingData,
+            addErrorFields,
+            referenceId,
+            setReferenceId,
+            addListingSteps,
+            addListingCurrentStepIndex: currentStepIndex,
+            addListingCurrentStep: currentStep,
+            addListingIsLast: isLast,
+            nextAddListingStep,
+            backAddListingStep: back,
+            goToAddListingStep,
+        },
     } = useStore();
 
+    const router = useRouter();
     const { sendRequest, loading } = useServer();
     const footerRef = useRef<HTMLDivElement>(null);
 
@@ -61,17 +69,25 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
         lastStepIndexRef.current = currentStepIndex;
     }, [currentStepIndex]);
 
-    // Use the sticky footer hook to detect if footer is visible
-    const isFooterVisible = useStickyFooter(footerRef, {
-        isActive: show,
-        threshold: 20, // Higher threshold to ensure footer is truly out of view
-        initialDelay: 50,
-    });
+    // Sync referenceId from URL query when modal is open (e.g. user landed with ?reference_id=xxx)
+    useEffect(() => {
+        if (!show || typeof window === "undefined") return;
+        const q = router?.query;
+        const refId = q?.referenceId;
+        if (refId && typeof refId === "string") {
+            setReferenceId(refId);
+        }
+    }, [show, router?.query, setReferenceId]);
+
 
     const handleNext = async () => {
         if (VALIDATE_STEP_INDEXES.includes(currentStep)) {
             addErrorFields([]);
             const { personalData, propertyData, terms, referralCode, images } = addListingData;
+            const rawImages = images ?? [];
+            const existingOrdered = rawImages.filter((item: unknown) => typeof item === "string") as string[];
+            const newImages = rawImages.filter((item: unknown) => item instanceof File) as File[];
+            const imagesStr = existingOrdered.join(",");
             const amenitiesStr =
                 Array.isArray(propertyData?.amenities)
                     ? (propertyData.amenities as number[]).join(",")
@@ -83,7 +99,9 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                 amenities: amenitiesStr,
                 terms: terms ?? { contact: false, legals: false },
                 referralCode: referralCode ?? "",
-                images: images ?? [],
+                images: imagesStr,
+                new_images: newImages,
+                ...(referenceId ? { referenceId } : {}),
             };
             const res = await sendRequest(
                 `/listing-application/validate/step-${currentStep}`,
@@ -92,17 +110,26 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
             );
             if (res?.status) {
                 addErrorFields([]);
-                next();
+                if (res.data.referenceId) {
+                    setReferenceId(res.data.referenceId);
+                    router.replace(
+                        { pathname: router.pathname, query: { ...router.query, reference_id: res.data.referenceId } },
+                        undefined,
+                        { shallow: true }
+                    );
+                }
+                nextAddListingStep();
             } else if (res?.invalid_fields) {
                 addErrorFields(res.invalid_fields);
-            } 
+            }
         } else {
-            next();
+            nextAddListingStep();
         }
     };
 
     const handleClose = () => {
         reset();
+        goToAddListingStep(0);
         onHide();
     };
 
@@ -188,7 +215,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                         <div className="container">
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="flex-grow-1">
-                                    <StepsBar steps={steps} currentStep={currentStepIndex} />
+                                    <StepsBar steps={addListingSteps} currentStep={currentStepIndex} />
                                 </div>
                                 {(currentStep > 1 && currentStep < 6) && <button
                                     type="button"
@@ -217,22 +244,22 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                                         }`}
                                 >
                                     {currentStep === 1 && (
-                                        <FirstStep steps={steps} currentStep={currentStepIndex} />
+                                        <FirstStep steps={addListingSteps} currentStep={currentStepIndex} />
                                     )}
                                     {currentStep === 2 && (
-                                        <SecondStep steps={steps} currentStep={currentStepIndex} />
+                                        <SecondStep steps={addListingSteps} currentStep={currentStepIndex} />
                                     )}
                                     {currentStep === 3 && (
-                                        <ThirdStep steps={steps} currentStep={currentStepIndex} />
+                                        <ThirdStep steps={addListingSteps} currentStep={currentStepIndex} />
                                     )}
                                     {currentStep === 4 && (
-                                        <FourthStep steps={steps} currentStep={currentStepIndex} />
+                                        <FourthStep steps={addListingSteps} currentStep={currentStepIndex} />
                                     )}
                                     {currentStep === 5 && (
-                                        <FifthStep steps={steps} currentStep={currentStepIndex} />
+                                        <FifthStep steps={addListingSteps} currentStep={currentStepIndex} />
                                     )}
                                     {currentStep === 6 && (
-                                        <SixthStep steps={steps} currentStep={currentStepIndex} />
+                                        <SixthStep steps={addListingSteps} currentStep={currentStepIndex} />
                                     )}
                                 </div>
                             </div>

@@ -151,21 +151,18 @@ export const useServer = () => {
     } catch (err: any) {
       !ENV_PROD && console.log(err.response?.data ?? err);
 
-      if (options.withError && !err.response?.data.status) {
-        const errorMessage = getErrorMessage(err.response);
-
-        showStandardNotification("error", errorMessage);
-      }
-
-      // only show error if the response has no status property
-      if (options?.withError && !err.response?.data.hasOwnProperty('status')) {
-        let errorMessage = getErrorMessage(err.response);
-
-        if (GENERAL_ERROR_RESPONSE_CODES.includes(err.status)) {
-          errorMessage = t("api.general_error");
+      if (options.withError) {
+        const data = err.response?.data;
+        const hasStatus = data != null && Object.prototype.hasOwnProperty.call(data, "status");
+        const statusOk = data?.status;
+        if (!hasStatus || !statusOk) {
+          const httpStatus = err.response?.status;
+          let errorMessage =
+            GENERAL_ERROR_RESPONSE_CODES.includes(httpStatus)
+              ? t("api.general_error")
+              : getErrorMessage(err.response);
+          showStandardNotification("error", errorMessage);
         }
-
-        showStandardNotification("error", errorMessage);
       }
 
       return err?.response?.data;
