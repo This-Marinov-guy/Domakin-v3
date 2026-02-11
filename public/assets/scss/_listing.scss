@@ -795,3 +795,13 @@ td.center {
   text-align: center;
   vertical-align: middle;
 }
+
+.flex-box {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}

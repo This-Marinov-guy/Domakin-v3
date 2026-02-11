@@ -155,12 +155,12 @@ function SixthStep({
         <div className="list-room-modal__first-step">
             <div className="list-room-modal__first-step__body container">
                 {/* Left: step summary panels (2–5 only) */}
-                <div className="row g-4 g-lg-4">
-                    <div className="col-12 col-lg-4 d-flex flex-column gap-3">
+                <div className="flex-box">
+                    <div className="col-12 col-lg-4">
                         {stepPanels.map((panel) => (
                             <div
                                 key={panel.step}
-                                className="border rounded-3 p-3 bg-light step-panel position-relative"
+                                className="border rounded-3 p-3 bg-light step-panel position-relative mb-3"
                             >
                                 <button
                                     type="button"
@@ -204,24 +204,26 @@ function SixthStep({
                                 )}
                             </div>
                         ))}
+                    </div>
 
-                    </div>
+
                     {/* Right: preview card (form data + uploaded images) + buttons */}
-                    <div className="col-12 col-lg-8 d-flex justify-content-center">
-                            {previewProperty.main_image ? (
-                                <PropertyCardGrid
-                                    property={previewProperty}
-                                    disableLinks
-                                    style
-                                />
-                            ) : (
-                                <div className="col-12">
-                                    <div className="border rounded-3 p-4 bg-light text-center text-muted">
-                                        Add photos in step 5 to see your listing preview here.
-                                    </div>
+                    <div className="d-flex justify-content-center w-100">
+                        {previewProperty.main_image ? (
+                            <PropertyCardGrid
+                                property={previewProperty}
+                                disableLinks
+                                style
+                            />
+                        ) : (
+                            <div className="col-12">
+                                <div className="border rounded-3 p-4 bg-light text-center text-muted">
+                                    Add photos in step 5 to see your listing preview here.
                                 </div>
-                            )}
+                            </div>
+                        )}
                     </div>
+
                 </div>
             </div>
         </div>

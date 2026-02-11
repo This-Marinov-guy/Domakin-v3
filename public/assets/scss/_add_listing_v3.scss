@@ -1231,6 +1231,20 @@
   }
 }
 
+.list-room-preview-card-wrapper {
+  max-width: 380px;
+  width: 100%;
+
+  > div {
+    max-width: 100%;
+    flex: 0 1 auto;
+  }
+
+  .listing-card-one {
+    max-width: 100%;
+  }
+}
+
 .form-group{
   margin: 20px 0;
 }
