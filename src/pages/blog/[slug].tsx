@@ -149,7 +149,7 @@ const BlogPost = ({
           <div className="col-12">
             {post ? (
               <div className="wordpress-embedded-container">
-                <h1 className="mb-4">{postTitle}</h1>
+                <h2 className="mb-4">{postTitle}</h2>
                 <BreadcrumbNav link_title={t("blog.title")} />
                 
                 {/* Blog Post Meta Information */}
