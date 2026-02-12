@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
 
@@ -22,6 +22,7 @@ interface SubmitListingModalProps {
     successMessage?: string;
     errorTitle?: string;
     errorMessage?: string;
+    successCallback?: () => void;
 }
 
 export default function SubmitListingModal({
@@ -29,6 +30,7 @@ export default function SubmitListingModal({
     status,
     onClose,
     onRetry,
+    successCallback,
     loadingMessages = DEFAULT_LOADING_MESSAGES,
     successTitle = "Listing submitted",
     successMessage = "Your listing has been published successfully.",
@@ -36,6 +38,7 @@ export default function SubmitListingModal({
     errorMessage = "We couldn't submit your listing. Please try again or contact support.",
 }: SubmitListingModalProps) {
     const [messageIndex, setMessageIndex] = useState(0);
+    const autoSuccessTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     useEffect(() => {
         if (!show || status !== "loading" || loadingMessages.length === 0) return;
@@ -43,7 +46,39 @@ export default function SubmitListingModal({
             setMessageIndex((i) => (i + 1) % loadingMessages.length);
         }, 2500);
         return () => clearInterval(interval);
-    }, [show, status, loadingMessages.length]);
+    }, [show, status]);
+
+    useEffect(() => {
+        // Schedule auto-close callback on success
+        if (status === "success" && successCallback) {
+            autoSuccessTimeoutRef.current = setTimeout(() => {
+                autoSuccessTimeoutRef.current = null;
+                successCallback();
+            }, 5000);
+        }
+
+        // Cleanup: cancel pending timeout when status changes or component unmounts
+        return () => {
+            if (autoSuccessTimeoutRef.current) {
+                clearTimeout(autoSuccessTimeoutRef.current);
+                autoSuccessTimeoutRef.current = null;
+            }
+        };
+    }, [status, successCallback]);
+
+    const handleClose = () => {
+        // If user closes manually, cancel any scheduled auto-callback
+        if (autoSuccessTimeoutRef.current) {
+            clearTimeout(autoSuccessTimeoutRef.current);
+            autoSuccessTimeoutRef.current = null;
+        }
+
+        if (status === "success" && successCallback) {
+            successCallback();
+        } else {
+            onClose();
+        }
+    };
 
     return (
         <Modal
@@ -52,7 +87,7 @@ export default function SubmitListingModal({
             centered
             backdrop="static"
             keyboard={false}
-            onHide={status === "loading" ? undefined : onClose}
+            onHide={handleClose}
             className="submit-listing-modal"
             backdropClassName="submit-listing-modal-backdrop"
         >
@@ -95,7 +130,7 @@ export default function SubmitListingModal({
                         />
                         <h5 className="text-success mb-2">{successTitle}</h5>
                         <p className="text-muted mb-4">{successMessage}</p>
-                        <button type="button" className="btn-two" onClick={onClose}>
+                        <button type="button" className="btn-two" onClick={handleClose}>
                             Close
                         </button>
                     </>
@@ -118,7 +153,7 @@ export default function SubmitListingModal({
                                     Retry
                                 </button>
                             )}
-                            <button type="button" className="btn-danger" onClick={onClose}>
+                            <button type="button" className="btn-danger" onClick={handleClose}>
                                 Close
                             </button>
                         </div>

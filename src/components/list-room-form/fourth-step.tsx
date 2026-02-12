@@ -314,7 +314,7 @@ function FourthStep({
                                     <Form.Check
                                         type="switch"
                                         id="fourth-no-smoking"
-                                        checked={propertyData.smokingAllowed === false}
+                                        checked={propertyData.smokingAllowed === true}
                                         onChange={(e) =>
                                             updateListingData(
                                                 "propertyData",
@@ -332,7 +332,7 @@ function FourthStep({
                                     <Form.Check
                                         type="switch"
                                         id="fourth-no-pets"
-                                        checked={propertyData.petsAllowed === false}
+                                        checked={propertyData.petsAllowed === true}
                                         onChange={(e) =>
                                             updateListingData(
                                                 "propertyData",

@@ -453,6 +453,7 @@ export default class PropertyStore {
     const males = Math.max(0, parseInt(String(propertyData?.flatmatesMale ?? "0"), 10) || 0);
     const females = Math.max(0, parseInt(String(propertyData?.flatmatesFemale ?? "0"), 10) || 0);
     const flatmatesStr = `${males},${females}`;
+
     return {
       ...(personalData ?? {}),
       ...(propertyData ?? {}),

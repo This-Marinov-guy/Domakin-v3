@@ -85,6 +85,11 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
 
 
     const handleNext = async () => {
+        if (currentStep === 1) {
+            nextAddListingStep();
+            return;
+        }
+
         addErrorFields([]);
         const formData = getListingApplicationPayload({ step: currentStep });
         const res = await sendRequest(
@@ -108,6 +113,18 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
         }
     };
 
+    const successCallback = () => {
+        addErrorFields([]);
+        const { reference_id, referenceId, ...rest } = router.query;
+        router.replace(
+            { pathname: router.pathname, query: rest },
+            undefined,
+            { shallow: true }
+        );
+        resetListRoomModal();
+        onHide();
+    }
+
     const runSubmitRequest = async () => {
         addErrorFields([]);
         const formData = getListingApplicationPayload({ step: currentStep });
@@ -118,15 +135,6 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
         );
         if (res?.status) {
             setSubmitStatus("success");
-            addErrorFields([]);
-            const { reference_id, referenceId, ...rest } = router.query;
-            router.replace(
-                { pathname: router.pathname, query: rest },
-                undefined,
-                { shallow: true }
-            );
-            resetListRoomModal();
-            onHide();
         } else {
             setSubmitStatus("error");
             if (res?.invalid_fields) addErrorFields(res.invalid_fields);
@@ -192,7 +200,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                 <button
                     type="button"
                     className="btn-thirteen"
-                    onClick={handleSubmit}
+                    onClick={handleNext}
                     disabled={loading}
                 >
                     {loading ? (
@@ -318,6 +326,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                 status={submitStatus}
                 onClose={handleSubmitModalClose}
                 onRetry={handleSubmitRetry}
+                successCallback={successCallback}
                 loadingMessages={[
                     "Submitting your listing…",
                     "Almost there…",
