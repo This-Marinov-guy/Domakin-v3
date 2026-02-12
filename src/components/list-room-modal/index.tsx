@@ -37,7 +37,6 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
             reset,
         },
         propertyStore: {
-            addListingData,
             addErrorFields,
             referenceId,
             setReferenceId,
@@ -47,6 +46,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
             addListingIsLast: isLast,
             nextAddListingStep,
             backAddListingStep: back,
+            getListingApplicationPayload,
         },
     } = useStore();
 
@@ -83,26 +83,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
     const handleNext = async () => {
         if (VALIDATE_STEP_INDEXES.includes(currentStep)) {
             addErrorFields([]);
-            const { personalData, propertyData, terms, referralCode, images } = addListingData;
-            const rawImages = images ?? [];
-            const existingOrdered = rawImages.filter((item: unknown) => typeof item === "string") as string[];
-            const newImages = rawImages.filter((item: unknown) => item instanceof File) as File[];
-            const imagesStr = existingOrdered.join(",");
-            const amenitiesStr =
-                Array.isArray(propertyData?.amenities)
-                    ? (propertyData.amenities as number[]).join(",")
-                    : (propertyData?.amenities != null ? String(propertyData.amenities) : "");
-            const formData = {
-                step: currentStep,
-                ...(personalData ?? {}),
-                ...(propertyData ?? {}),
-                amenities: amenitiesStr,
-                terms: terms ?? { contact: false, legals: false },
-                referralCode: referralCode ?? "",
-                images: imagesStr,
-                new_images: newImages,
-                ...(referenceId ? { referenceId } : {}),
-            };
+            const formData = getListingApplicationPayload({ step: currentStep });
             const res = await sendRequest(
                 `/listing-application/validate/step-${currentStep}`,
                 "POST",

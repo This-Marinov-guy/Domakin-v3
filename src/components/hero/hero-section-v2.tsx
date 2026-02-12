@@ -15,7 +15,7 @@ export default function HeroSectionV2({ openModal }: HeroSectionV2Props)
                 <div className="hero-box-v2">
 
                     <div className="hero-header-v2">
-                        <div className="container">
+                        <div className="container" style={{ paddingTop: '80px' }}>
                             <div className="hero-header__rating-box-v2">
                                 <Image src={RatingStars} alt="ratings" />
                                 <p>

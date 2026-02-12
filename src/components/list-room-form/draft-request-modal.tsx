@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import Spinner from "react-bootstrap/Spinner";
 import Image from "next/image";
 import logoTransparentWhite from "@/assets/img/logo-transparent-white.png";
 import StarsIcon from "@/assets/images/icon/stars.svg";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router";
 import HeaderV2 from "@/layouts/headers/HeaderV2";
+import { useServer } from "@/hooks/useServer";
 
 interface DraftRequestModalProps {
     show: boolean;
@@ -17,8 +20,10 @@ interface DraftRequestModalProps {
 function DraftRequestModal({ show, onHide, onKeepEditing }: DraftRequestModalProps) {
     const [isSave, setIsSave] = useState(false);
     const [email, setEmail] = useState("");
+    const router = useRouter();
+    const { sendRequest, loading } = useServer();
     const {
-        propertyStore: { addListingData },
+        propertyStore: { addListingData, setReferenceId, getListingApplicationPayload, resetListRoomModal },
         userStore: { user },
     } = useStore();
 
@@ -30,6 +35,22 @@ function DraftRequestModal({ show, onHide, onKeepEditing }: DraftRequestModalPro
             setEmail(prefilledEmail);
         }
     }, [show, prefilledEmail]);
+
+    const handleSaveDraft = async () => {
+        const formData = getListingApplicationPayload({ email: email.trim() });
+        const res = await sendRequest("/listing-application/save", "POST", formData);
+
+        if (res?.status) {
+            const { reference_id, referenceId, ...rest } = router.query;
+            router.replace(
+                { pathname: router.pathname, query: rest },
+                undefined,
+                { shallow: true }
+            );
+            resetListRoomModal();
+            onHide();
+        }
+    };
 
     return (
         <Modal
@@ -68,8 +89,17 @@ function DraftRequestModal({ show, onHide, onKeepEditing }: DraftRequestModalPro
                                     <button type="button" className="btn-danger-solid" onClick={() => onHide()}>
                                         Back
                                     </button>
-                                    <button type="button" className="btn-two" onClick={() => setIsSave(true)}>
-                                        Submit
+                                    <button
+                                        type="button"
+                                        className="btn-two"
+                                        onClick={handleSaveDraft}
+                                        disabled={loading || !email.trim()}
+                                    >
+                                        {loading ? (
+                                            <Spinner size="sm" animation="border" />
+                                        ) : (
+                                            "Submit"
+                                        )}
                                     </button>
                                 </div>
                             </>

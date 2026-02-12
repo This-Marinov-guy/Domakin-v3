@@ -75,7 +75,7 @@ const PropertyTableBody = () => {
     const propertyPayload = {
       ...item.property_data,
       id: PROPERTY_ID_OFFSET + (item.id ?? 0),
-    };    
+    };
 
     modalStore.setActiveModal(APPLICATION_MODAL, {
       propertyId: item.id,
@@ -145,9 +145,9 @@ const PropertyTableBody = () => {
                     className="p-img"
                   />
                 )}
-               
+
               </div>
-             
+
             </td>
             <td className="center w-25 responsive-title-col">
               <strong className="price color-dark">
@@ -186,51 +186,54 @@ const PropertyTableBody = () => {
             </td>
             {/* Action column */}
             <td className="center">
-              
-              {isAdmin && (
-                <div className="action-dots float-end">
-                  <button
-                    className="action-btn dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <span></span>
-                  </button>
-                  <ul className="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        onClick={() =>
-                          setPropertyPreview(parsePropertyPreviewData(item))
-                        }
-                      >
-                        <Image src={icon_1} alt="" className="lazy-img" />
-                        View Details
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        onClick={() => {
-                          setPropertyDataForEdit(item);
-                          modalStore.setActiveModal(EDIT_PROPERTY_MODAL);
-                        }}
-                      >
-                        <Image src={icon_3} alt="" className="lazy-img" /> Edit
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        onClick={() => {openApplicationsModal(item)}}
-                      >
-                        <i className="fas fa-users"></i> Applications
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              )}
+
+              <div className="action-dots float-end">
+                <button
+                  className="action-btn dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <span></span>
+                </button>
+                <ul className="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <button
+                      className="dropdown-item"
+                      onClick={() =>
+                        setPropertyPreview(parsePropertyPreviewData(item))
+                      }
+                    >
+                      <Image src={icon_1} alt="" className="lazy-img" />
+                      View Details
+                    </button>
+                  </li>
+                  {isAdmin &&
+                    <>
+                      <li>
+                        <button
+                          className="dropdown-item"
+                          onClick={() => {
+                            setPropertyDataForEdit(item);
+                            modalStore.setActiveModal(EDIT_PROPERTY_MODAL);
+                          }}
+                        >
+                          <Image src={icon_3} alt="" className="lazy-img" /> Edit
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          className="dropdown-item"
+                          onClick={() => { openApplicationsModal(item) }}
+                        >
+                          <i className="fas fa-users"></i> Applications
+                        </button>
+                      </li>
+                    </>
+                  }
+
+                </ul>
+              </div>
             </td>
           </tr>
         );

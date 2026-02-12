@@ -265,6 +265,47 @@ export default class PropertyStore {
     }
   };
 
+  /**
+   * Reset list-room modal to start over: clear form data, set step to 1, clear reference and errors.
+   */
+  resetListRoomModal = (withReferenceId: boolean = true) => {
+    this.addListingData = { ...defaultFormData };
+    this.addListingCurrentStepIndex = 0;
+    this.errorFields = [];
+    this.referenceId = null;
+    this.showListRoomModal = false;
+
+    if (withReferenceId && typeof window !== "undefined" && window.localStorage) {
+      localStorage.removeItem(LISTING_REFERENCE_ID);
+    }
+  };
+
+  /**
+   * Build payload for listing-application API (validate or save).
+   * Uses current addListingData and referenceId; optional overrides (e.g. step, email) are merged in.
+   */
+  getListingApplicationPayload = (overrides: { step?: number; email?: string } = {}) => {
+    const { personalData, propertyData, terms, referralCode, images } = this.addListingData ?? {};
+    const rawImages = images ?? [];
+    const existingOrdered = rawImages.filter((item: unknown) => typeof item === "string") as string[];
+    const newImages = rawImages.filter((item: unknown) => item instanceof File) as File[];
+    const amenitiesStr =
+      Array.isArray(propertyData?.amenities)
+        ? (propertyData.amenities as number[]).join(",")
+        : (propertyData?.amenities != null ? String(propertyData.amenities) : "");
+    return {
+      ...(personalData ?? {}),
+      ...(propertyData ?? {}),
+      amenities: amenitiesStr,
+      terms: terms ?? { contact: false, legals: false },
+      referralCode: referralCode ?? "",
+      images: existingOrdered.join(","),
+      new_images: newImages,
+      ...(this.referenceId ? { referenceId: this.referenceId } : {}),
+      ...overrides,
+    };
+  };
+
   @action
   setAddListingDataFromApplication = (data: any) => {
     if (!data || typeof data !== "object") return;

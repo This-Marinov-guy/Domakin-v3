@@ -16,6 +16,7 @@ import { useServer } from "@/hooks/useServer";
 import { observer } from "mobx-react-lite";
 import { showGeneralSuccess, showStandardNotification } from "@/utils/helpers";
 import { LISTING_REFERENCE_ID } from "@/utils/defines";
+import HeaderOne from "@/layouts/headers/HeaderOne";
 
 interface HomeSixProps {
     serverFeedbacks?: any[];
@@ -107,7 +108,7 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
 
     return (
         <div className="lending-page-v2">
-            <HeaderV2 headerClasses="header-v3" />
+            <HeaderOne />
             <HeroSectionV2 openModal={() => setShowListRoomModal(true)} />
             <HowToWorksSectionHorizontal />
             <ReminderSection
