@@ -4,6 +4,7 @@ import useTranslation from "next-translate/useTranslation";
 import CareersForm from "@/components/forms/CareersForm";
 import { useRef } from "react";
 import useOnScreen from "@/hooks/useOnScreen";
+import FloatingCenterButton from "@/components/ui/buttons/FloatingCenterButton";
 
 const CareersArea = () => {
   const { t } = useTranslation("translations");
@@ -184,39 +185,16 @@ const CareersArea = () => {
 
       {/* Floating Apply Now Button */}
       {!isFormVisible && (
-        <button
+        <FloatingCenterButton
+          label={t("careers.apply_now")}
           onClick={() => {
             formRef.current?.scrollIntoView({
               behavior: "smooth",
               block: "start",
             });
           }}
-          className="btn-nine floating-apply-btn"
-          style={{
-            position: "fixed",
-            bottom: "30px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            zIndex: 999,
-            padding: "15px",
-            fontSize: "18px",
-            fontWeight: "500",
-            borderRadius: "50px",
-            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
-            animation: "fadeInUp 0.3s ease-in-out",
-            transition: "all 0.3s ease-in-out",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "translateX(-50%) scale(1.05)";
-            e.currentTarget.style.boxShadow = "0 6px 25px rgba(0, 0, 0, 0.2)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "translateX(-50%) scale(1)";
-            e.currentTarget.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.15)";
-          }}
-        >
-          {t("careers.apply_now")}
-        </button>
+          className="btn-nine"
+        />
       )}
     </div>
   );

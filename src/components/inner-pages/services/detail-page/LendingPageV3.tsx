@@ -17,6 +17,9 @@ import { observer } from "mobx-react-lite";
 import { showGeneralSuccess, showStandardNotification } from "@/utils/helpers";
 import { LISTING_REFERENCE_ID } from "@/utils/defines";
 import HeaderOne from "@/layouts/headers/HeaderOne";
+import PropertyCardGrid from "@/components/ui/cards/properties/PropertyCardGrid";
+import { MOCK_PROPERTY } from "@/utils/mocks";
+import FloatingCenterButton from "@/components/ui/buttons/FloatingCenterButton";
 
 interface HomeSixProps {
     serverFeedbacks?: any[];
@@ -105,23 +108,37 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
             });
     }, [router.query.referenceId, router.query.reference_id]);
 
-
     return (
         <div className="lending-page-v2">
             <HeaderOne />
             <HeroSectionV2 openModal={() => setShowListRoomModal(true)} />
             <HowToWorksSectionHorizontal />
-            <ReminderSection
-                title="Most rooms get filled in 4 days"
-                isShowListingButton={true}
-                secClasses="reminder-sec-two"
-                openListingModal={() => setShowListRoomModal(true)}
-                openReminderModal={() => setShowReminderModal(true)}
-            />
-            <p className="never-text">\
-                Your listing preview —  exact <br />
-                address is <span>never public</span>.
-            </p>
+
+
+            <div className='row'>
+                <div className="col-12">
+                    <ReminderSection
+                        title="Most rooms get filled in 4 days"
+                        isShowListingButton={true}
+                        secClasses="reminder-sec-two"
+                        openListingModal={() => setShowListRoomModal(true)}
+                        openReminderModal={() => setShowReminderModal(true)}
+                    />
+                </div>
+
+                <div className="col-12">
+                    <p className="never-text">\
+                        Your listing preview —  exact <br />
+                        address is <span>never public</span>.
+                    </p>
+
+                    <div className="container my-40">
+                        <div className="row justify-content-center">
+                            <PropertyCardGrid property={MOCK_PROPERTY} disableLinks />
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <Feedback style={true} feedbacks={serverFeedbacks} bg='transparent' />
 
@@ -138,6 +155,12 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
             <ListRoomModal show={showListRoomModal} onHide={() => setShowListRoomModal(false)} />
             <ReminderFormModal show={showReminderModal} onHide={() => setShowReminderModal(false)} />
             <FooterFour />
+
+            {/* Floating bottom-center \"List\" button, reusing the same component as careers page */}
+            {(!showListRoomModal && !showReminderModal) && <FloatingCenterButton
+                label="List my room"
+                onClick={() => setShowListRoomModal(true)}
+            />}
         </div>
     );
 }
