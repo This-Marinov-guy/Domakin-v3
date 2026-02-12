@@ -125,6 +125,8 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                 undefined,
                 { shallow: true }
             );
+            resetListRoomModal();
+            onHide();
         } else {
             setSubmitStatus("error");
             if (res?.invalid_fields) addErrorFields(res.invalid_fields);
