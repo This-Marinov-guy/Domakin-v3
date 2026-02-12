@@ -20,6 +20,8 @@ const defaultFormData = {
     rent: "",
     bills: "",
     flatmates: "",
+    bathrooms: 1,
+    toilets: 1,
     registration: true,
     description: "",
     petsAllowed: false,
@@ -293,10 +295,19 @@ export default class PropertyStore {
       Array.isArray(propertyData?.amenities)
         ? (propertyData.amenities as number[]).join(",")
         : (propertyData?.amenities != null ? String(propertyData.amenities) : "");
+    const sharedSpaceStr =
+      Array.isArray(propertyData?.sharedSpace)
+        ? (propertyData.sharedSpace as number[]).join(",")
+        : (propertyData?.sharedSpace != null ? String(propertyData.sharedSpace) : "");
+    const males = Math.max(0, parseInt(String(propertyData?.flatmatesMale ?? "0"), 10) || 0);
+    const females = Math.max(0, parseInt(String(propertyData?.flatmatesFemale ?? "0"), 10) || 0);
+    const flatmatesStr = `${males},${females}`;
     return {
       ...(personalData ?? {}),
       ...(propertyData ?? {}),
+      flatmates: flatmatesStr,
       amenities: amenitiesStr,
+      sharedSpace: sharedSpaceStr,
       terms: terms ?? { contact: false, legals: false },
       referralCode: referralCode ?? "",
       images: existingOrdered.join(","),

@@ -386,7 +386,7 @@ function FourthStep({
                 </div>
 
                 {/* Shared spaces – behaves like amenities (multi-select) */}
-                <div className={`form-group mb-30 ${errorFields.includes("sharedSpace") ? "border border-danger rounded-3 p-3" : ""}`}>
+                <div className={`form-group mb-30`}>
                     <label className="d-block mb-2">Shared spaces</label>
                     <small className="d-block">* You can select more than one</small>
 
