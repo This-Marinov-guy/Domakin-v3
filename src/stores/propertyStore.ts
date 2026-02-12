@@ -37,6 +37,43 @@ const defaultFormData = {
   images: [],
 };
 
+const ADD_LISTING_DISPLAY_DEFAULTS = {
+  personalData: { name: "Alex", surname: "Johnson", email: "alex.johnson@example.com", phone: "+31 6 12345678" },
+  propertyData: {
+    type: "room",
+    city: "Amsterdam",
+    address: "Jordaan 42",
+    postcode: "1015 CG",
+    size: "18",
+    period: "6 months",
+    rent: "850",
+    bills: "Included · Deposit: €1700",
+    flatmates: "2",
+    flatmatesMale: "1",
+    flatmatesFemale: "1",
+    bathrooms: "1",
+    toilets: "1",
+    furnishedType: 1,
+    description: "Bright room in a shared apartment in the heart of Jordaan.",
+  },
+};
+
+const PROPERTY_TYPE_LABELS: Record<number, string> = {
+  1: "Room in a shared apartment",
+  2: "Studio",
+  3: "Entire place",
+  4: "Student house",
+};
+
+const FURNISHED_TYPE_LABELS: Record<number, string> = {
+  1: "Fully furnished",
+  2: "Semi-furnished",
+  3: "None",
+};
+
+export const ADD_LISTING_PLACEHOLDER_IMAGE =
+  "https://placehold.co/600x400/e2e8f0/64748b?text=Listing+Preview";
+
 export default class PropertyStore {
   rootStore;
 
@@ -66,6 +103,120 @@ export default class PropertyStore {
   get addListingIsLast(): boolean {
     return this.addListingCurrentStepIndex >= this.addListingSteps.length - 1;
   }
+
+  /** Add-listing images: strings (URLs from backend) and/or File. Backend can send comma-separated string. */
+  get addListingImages(): (string | File)[] {
+    const raw = this.addListingData?.images;
+    if (Array.isArray(raw)) return raw;
+    if (typeof raw === "string") {
+      return raw.split(",").map((s) => s.trim()).filter(Boolean);
+    }
+    return [];
+  }
+
+  /** Plain personal data for add-listing review, with display fallbacks. */
+  get addListingDisplayPersonalData(): { name: string; surname: string; email: string; phone: string } {
+    const def = ADD_LISTING_DISPLAY_DEFAULTS.personalData;
+    const pd = this.addListingData?.personalData;
+    return {
+      name: (pd?.name ?? def.name) as string,
+      surname: (pd?.surname ?? def.surname) as string,
+      email: (pd?.email ?? def.email) as string,
+      phone: (pd?.phone ?? def.phone) as string,
+    };
+  }
+
+  /** Plain property data for add-listing review. Reads each field so MobX tracks. */
+  get addListingDisplayPropertyData(): Record<string, unknown> {
+    const def = ADD_LISTING_DISPLAY_DEFAULTS.propertyData as Record<string, unknown>;
+    const raw = this.addListingData?.propertyData;
+    if (!raw) return { ...def };
+    const keys = [
+      "type", "city", "address", "postcode", "size", "period", "rent", "bills",
+      "registration", "description", "flatmatesMale", "flatmatesFemale",
+      "bathrooms", "toilets", "furnishedType", "property_type",
+    ];
+    const pd: Record<string, unknown> = { ...def };
+    for (const k of keys) {
+      const v = (raw as Record<string, unknown>)[k];
+      if (v !== undefined) pd[k] = v;
+    }
+    return pd;
+  }
+
+  /** Step summary strings for add-listing review (contact, basics, details). */
+  get addListingStepSummaries(): { contact: string; basics: string; details: string } {
+    const personal = this.addListingDisplayPersonalData;
+    const pd = this.addListingDisplayPropertyData;    
+
+    const contact = [
+      [personal.name, personal.surname].filter(Boolean).join(" ") || "—",
+      personal.email || "—",
+      personal.phone || "—",
+    ].join(" · ");
+    const typeNum = Number(pd.type ?? pd.property_type ?? 0);
+    const typeLabel =
+      typeNum && PROPERTY_TYPE_LABELS[typeNum]
+        ? PROPERTY_TYPE_LABELS[typeNum]
+        : pd.type != null && pd.type !== "" ? String(pd.type) : "—";
+    const basics = [
+      typeLabel,
+      (pd.city ?? "").toString().trim() || "—",
+      [pd.address, pd.postcode].filter((v) => v != null && String(v).trim() !== "").join(", ") || "—",
+      pd.registration === true || pd.registration === "yes" ? "Registration possible" : "No registration",
+    ].filter(Boolean).join(" · ");
+    const flatmatesMale = Math.max(0, parseInt(String(pd.flatmatesMale ?? "0"), 10) || 0);
+    const flatmatesFemale = Math.max(0, parseInt(String(pd.flatmatesFemale ?? "0"), 10) || 0);
+    const bathrooms = Math.max(1, parseInt(String(pd.bathrooms ?? "1"), 10) || 1);
+    const toilets = Math.max(1, parseInt(String(pd.toilets ?? "1"), 10) || 1);
+    const details = [
+      pd.rent ? `€${pd.rent}/m` : null,
+      pd.bills ? `Bills: ${String(pd.bills).replace(/\s*\|\s*Deposit:.*$/, "").trim() || "—"}` : null,
+      pd.size ? `${pd.size} m²` : null,
+      flatmatesMale + flatmatesFemale > 0 ? `${flatmatesMale} male, ${flatmatesFemale} female flatmate(s)` : null,
+      `${bathrooms} bathroom(s), ${toilets} toilet(s)`,
+      pd.furnishedType != null ? (FURNISHED_TYPE_LABELS[Number(pd.furnishedType)] ?? String(pd.furnishedType)) : null,
+      pd.description ? String(pd.description).slice(0, 60) + (String(pd.description).length > 60 ? "…" : "") : null,
+    ].filter(Boolean).join(" · ");
+    return { contact, basics, details };
+  }
+
+  /** Step panels for add-listing review (step 2–5). Pass imageUrls from component (strings + blob URLs for Files). */
+  getAddListingStepPanels = (imageUrls: string[]) => {
+    const summaries = this.addListingStepSummaries;
+    return [
+      { step: 2, title: "Contact details", summary: summaries.contact },
+      { step: 3, title: "Basics", summary: summaries.basics },
+      { step: 4, title: "Details", summary: summaries.details },
+      { step: 5, title: "Photos", summary: "", imageUrls },
+    ];
+  };
+
+  /** Preview property object for add-listing card. Pass imageUrls from component. */
+  getAddListingPreviewProperty = (imageUrls: string[]) => {
+    const pd = this.addListingDisplayPropertyData;
+    const main = imageUrls[0] || ADD_LISTING_PLACEHOLDER_IMAGE;
+    const rest = imageUrls.length > 1 ? imageUrls.slice(1) : [];
+    return {
+      id: 9999,
+      hidden: false,
+      status: "Rent",
+      statusCode: 2,
+      price: parseInt(String(pd?.rent ?? "0"), 10) || 0,
+      title: pd?.address ? `${pd.address}${pd.city ? `, ${pd.city}` : ""}` : (pd?.city as string) || "Your listing",
+      city: (pd?.city as string) || "",
+      location: [pd?.address, pd?.postcode, pd?.city].filter(Boolean).join(", ") || "—",
+      description: {
+        property: String(pd?.description ?? "").slice(0, 120) || "—",
+        period: "",
+        bills: "",
+        flatmates: "",
+      },
+      main_image: main,
+      images: rest,
+      folder: "",
+    };
+  };
 
   @observable editPropertyData: any = { ...defaultFormData };
   @observable editErrorFields: string[] = [];
@@ -317,20 +468,93 @@ export default class PropertyStore {
     };
   };
 
+  /**
+   * Hydrate add-listing form from API response. Supports flat data shape:
+   * { name, surname, email, phone, city, address, postcode, size, rent, bills, flatmates, type, images, ... }
+   * Also accepts nested personalData / propertyData if present.
+   */
   @action
   setAddListingDataFromApplication = (data: any) => {
     if (!data || typeof data !== "object") return;
-    const personalData = data.personalData ?? data.personal_data;
-    const propertyData = data.propertyData ?? data.property_data;
-    const terms = data.terms;
-    const referralCode = data.referralCode ?? data.referral_code;
-    const images = data.images;
-    if (personalData) this.addListingData.personalData = { ...this.addListingData.personalData, ...personalData };
-    if (propertyData) this.addListingData.propertyData = { ...this.addListingData.propertyData, ...propertyData };
-    if (terms) this.addListingData.terms = { ...this.addListingData.terms, ...terms };
-    if (referralCode !== undefined) this.addListingData.referralCode = referralCode;
-    if (images !== undefined) this.addListingData.images = Array.isArray(images) ? images : [];
-    const stepFromApi = data.current_step ?? data.step;
+
+    const flat = data;
+    const nestedPersonal = data.personalData ?? data.personal_data;
+    const nestedProperty = data.propertyData ?? data.property_data;
+
+    this.addListingData.personalData = {
+      ...this.addListingData.personalData,
+      ...(nestedPersonal ?? {}),
+      name: flat.name ?? nestedPersonal?.name ?? this.addListingData.personalData.name,
+      surname: flat.surname ?? nestedPersonal?.surname ?? this.addListingData.personalData.surname,
+      email: flat.email ?? nestedPersonal?.email ?? this.addListingData.personalData.email,
+      phone: flat.phone ?? nestedPersonal?.phone ?? this.addListingData.personalData.phone,
+    };
+
+    const flatmatesStr = flat.flatmates ?? nestedProperty?.flatmates;
+    const flatmatesParts =
+      typeof flatmatesStr === "string"
+        ? flatmatesStr.split(",").map((s) => String(parseInt(s.trim(), 10) || 0))
+        : [];
+    const flatmatesMale = flatmatesParts[0] ?? nestedProperty?.flatmatesMale ?? "";
+    const flatmatesFemale = flatmatesParts[1] ?? nestedProperty?.flatmatesFemale ?? "";
+    const amenitiesVal = flat.amenities ?? nestedProperty?.amenities;
+    const amenitiesArr =
+      typeof amenitiesVal === "string"
+        ? amenitiesVal.split(",").map((s) => parseInt(s.trim(), 10)).filter((n) => !Number.isNaN(n))
+        : Array.isArray(amenitiesVal)
+          ? amenitiesVal
+          : nestedProperty?.amenities;
+    const sharedSpaceVal = flat.shared_space ?? nestedProperty?.sharedSpace ?? nestedProperty?.shared_space;
+    const sharedSpaceArr =
+      typeof sharedSpaceVal === "string"
+        ? sharedSpaceVal.split(",").map((s) => parseInt(s.trim(), 10)).filter((n) => !Number.isNaN(n))
+        : Array.isArray(sharedSpaceVal)
+          ? sharedSpaceVal
+          : nestedProperty?.sharedSpace;
+
+    this.addListingData.propertyData = {
+      ...this.addListingData.propertyData,
+      ...(nestedProperty ?? {}),
+      type: flat.type ?? nestedProperty?.type ?? this.addListingData.propertyData.type,
+      city: flat.city ?? nestedProperty?.city ?? this.addListingData.propertyData.city,
+      address: flat.address ?? nestedProperty?.address ?? this.addListingData.propertyData.address,
+      postcode: flat.postcode ?? nestedProperty?.postcode ?? this.addListingData.propertyData.postcode,
+      size: flat.size ?? nestedProperty?.size ?? this.addListingData.propertyData.size,
+      period: flat.period ?? nestedProperty?.period ?? this.addListingData.propertyData.period,
+      rent: flat.rent ?? nestedProperty?.rent ?? this.addListingData.propertyData.rent,
+      bills: flat.bills ?? nestedProperty?.bills ?? this.addListingData.propertyData.bills,
+      registration: flat.registration ?? nestedProperty?.registration ?? this.addListingData.propertyData.registration,
+      description: flat.description ?? nestedProperty?.description ?? this.addListingData.propertyData.description,
+      flatmatesMale: flatmatesMale !== undefined && flatmatesMale !== "" ? flatmatesMale : (nestedProperty?.flatmatesMale ?? this.addListingData.propertyData.flatmatesMale ?? ""),
+      flatmatesFemale: flatmatesFemale !== undefined && flatmatesFemale !== "" ? flatmatesFemale : (nestedProperty?.flatmatesFemale ?? this.addListingData.propertyData.flatmatesFemale ?? ""),
+      bathrooms: flat.bathrooms ?? nestedProperty?.bathrooms ?? this.addListingData.propertyData.bathrooms,
+      toilets: flat.toilets ?? nestedProperty?.toilets ?? this.addListingData.propertyData.toilets,
+      furnishedType: flat.furnished_type ?? nestedProperty?.furnishedType ?? nestedProperty?.furnished_type ?? this.addListingData.propertyData.furnishedType,
+      availableFrom: flat.available_from ?? nestedProperty?.availableFrom ?? nestedProperty?.available_from ?? this.addListingData.propertyData.availableFrom,
+      availableTo: flat.available_to ?? nestedProperty?.availableTo ?? nestedProperty?.available_to ?? this.addListingData.propertyData.availableTo,
+      petsAllowed: flat.pets_allowed ?? nestedProperty?.petsAllowed ?? nestedProperty?.pets_allowed ?? this.addListingData.propertyData.petsAllowed,
+      smokingAllowed: flat.smoking_allowed ?? nestedProperty?.smokingAllowed ?? nestedProperty?.smoking_allowed ?? this.addListingData.propertyData.smokingAllowed,
+      ...(amenitiesArr != null ? { amenities: amenitiesArr } : {}),
+      ...(sharedSpaceArr != null ? { sharedSpace: sharedSpaceArr } : {}),
+    };
+
+    if (data.terms) this.addListingData.terms = { ...this.addListingData.terms, ...data.terms };
+    if (data.referralCode !== undefined || data.referral_code !== undefined) {
+      this.addListingData.referralCode = data.referralCode ?? data.referral_code ?? "";
+    }
+
+    const images = flat.images;
+    if (images !== undefined) {
+      this.addListingData.images = Array.isArray(images)
+        ? images
+        : typeof images === "string"
+          ? images.split(",").map((s) => s.trim()).filter(Boolean)
+          : [];
+    }
+
+    if (flat.reference_id != null) this.setReferenceId(flat.reference_id);
+
+    const stepFromApi = flat.current_step ?? flat.step;
     if (stepFromApi != null) {
       const stepIndex = Math.max(0, Math.min(Number(stepFromApi) - 1, this.addListingSteps.length - 1));
       this.addListingCurrentStepIndex = stepIndex;

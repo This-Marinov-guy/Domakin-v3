@@ -1287,3 +1287,22 @@
     transform: translateX(0);
   }
 }
+
+@keyframes submitListingSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Submit listing modal: always on top of other modals (e.g. list-room) with its own backdrop
+.submit-listing-modal-backdrop {
+  z-index: 2060 !important;
+}
+.submit-listing-modal {
+  z-index: 2070 !important;
+}

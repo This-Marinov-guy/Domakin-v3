@@ -17,6 +17,7 @@ import SecondStep from "../list-room-form/second-step";
 import ThirdStep from "../list-room-form/third-step";
 import FourthStep from "../list-room-form/fourth-step";
 import SixthStep from "../list-room-form/sixth-step";
+import SubmitListingModal, { type SubmitListingStatus } from "@/components/ui/modals/SubmitListingModal";
 import { LISTING_REFERENCE_ID } from "@/utils/defines";
 
 interface ListRoomModalProps {
@@ -47,6 +48,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
             nextAddListingStep,
             backAddListingStep: back,
             getListingApplicationPayload,
+            resetListRoomModal
         },
     } = useStore();
 
@@ -57,6 +59,8 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
     const [transitionDirection, setTransitionDirection] = useState<
         "forward" | "backward" | null
     >(null);
+    const [showSubmitModal, setShowSubmitModal] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<SubmitListingStatus>("loading");
     const lastStepIndexRef = useRef(currentStepIndex);
 
     useEffect(() => {
@@ -81,32 +85,69 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
 
 
     const handleNext = async () => {
-        if (VALIDATE_STEP_INDEXES.includes(currentStep)) {
+        addErrorFields([]);
+        const formData = getListingApplicationPayload({ step: currentStep });
+        const res = await sendRequest(
+            `/listing-application/validate/step-${currentStep}`,
+            "POST",
+            formData,
+        );
+        if (res?.status) {
             addErrorFields([]);
-            const formData = getListingApplicationPayload({ step: currentStep });
-            const res = await sendRequest(
-                `/listing-application/validate/step-${currentStep}`,
-                "POST",
-                formData,
-            );
-            if (res?.status) {
-                addErrorFields([]);
-                if (res.data.referenceId) {
-                    setReferenceId(res.data.referenceId);
-                    router.replace(
-                        { pathname: router.pathname, query: { ...router.query, reference_id: res.data.referenceId } },
-                        undefined,
-                        { shallow: true }
-                    );
-                }
-                nextAddListingStep();
-            } else if (res?.invalid_fields) {
-                addErrorFields(res.invalid_fields);
+            if (res.data.referenceId) {
+                setReferenceId(res.data.referenceId);
+                router.replace(
+                    { pathname: router.pathname, query: { ...router.query, reference_id: res.data.referenceId } },
+                    undefined,
+                    { shallow: true }
+                );
             }
-        } else {
-            localStorage.removeItem(LISTING_REFERENCE_ID);
             nextAddListingStep();
+        } else if (res?.invalid_fields) {
+            addErrorFields(res.invalid_fields);
         }
+    };
+
+    const runSubmitRequest = async () => {
+        addErrorFields([]);
+        const formData = getListingApplicationPayload({ step: currentStep });
+        const res = await sendRequest(
+            "/listing-application/submit",
+            "POST",
+            formData
+        );
+        if (res?.status) {
+            setSubmitStatus("success");
+            addErrorFields([]);
+            const { reference_id, referenceId, ...rest } = router.query;
+            router.replace(
+                { pathname: router.pathname, query: rest },
+                undefined,
+                { shallow: true }
+            );
+        } else {
+            setSubmitStatus("error");
+            if (res?.invalid_fields) addErrorFields(res.invalid_fields);
+        }
+    };
+
+    const handleSubmit = async () => {
+        setShowSubmitModal(true);
+        setSubmitStatus("loading");
+        await runSubmitRequest();
+    };
+
+    const handleSubmitModalClose = () => {
+        setShowSubmitModal(false);
+        if (submitStatus === "success") {
+            resetListRoomModal();
+            onHide();
+        }
+    };
+
+    const handleSubmitRetry = async () => {
+        setSubmitStatus("loading");
+        await runSubmitRequest();
     };
 
     const handleClose = () => {
@@ -149,7 +190,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                 <button
                     type="button"
                     className="btn-thirteen"
-                    onClick={handleNext}
+                    onClick={handleSubmit}
                     disabled={loading}
                 >
                     {loading ? (
@@ -170,7 +211,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
             <button
                 type="button"
                 className="btn-thirteen"
-                onClick={handleNext}
+                onClick={handleSubmit}
                 disabled={loading}
             >
                 {loading ? (
@@ -268,6 +309,22 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                 show={showDraftModal}
                 onHide={closeDraftModal}
                 onKeepEditing={closeDraftModal}
+            />
+
+            <SubmitListingModal
+                show={showSubmitModal}
+                status={submitStatus}
+                onClose={handleSubmitModalClose}
+                onRetry={handleSubmitRetry}
+                loadingMessages={[
+                    "Submitting your listing…",
+                    "Almost there…",
+                    "Publishing your room…",
+                ]}
+                successTitle="Listing submitted"
+                successMessage="Your listing has been published successfully."
+                errorTitle="Something went wrong"
+                errorMessage="We couldn't submit your listing. Please try again."
             />
         </>
     );

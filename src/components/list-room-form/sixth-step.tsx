@@ -4,41 +4,20 @@ import PropertyCardGrid from "@/components/ui/cards/properties/PropertyCardGrid"
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 
-const MOCK_LISTING = {
-    personalData: {
-        name: "Alex",
-        surname: "Johnson",
-        email: "alex.johnson@example.com",
-        phone: "+31 6 12345678",
-    },
-    propertyData: {
-        type: "room",
-        city: "Amsterdam",
-        address: "Jordaan 42",
-        postcode: "1015 CG",
-        size: "18",
-        period: "6 months",
-        rent: "850",
-        bills: "Included · Deposit: €1700",
-        flatmates: "2",
-        registration: true,
-        description:
-            "Bright room in a shared apartment in the heart of Jordaan. Close to cafes, markets and transport. Friendly international flatmates. Available from next month.",
-        flatmatesMale: "1",
-        flatmatesFemale: "1",
-        bathrooms: "1",
-        toilets: "1",
-        furnishedType: 1,
-    },
-};
-
-const FURNISHED_TYPE_LABELS: Record<number, string> = {
-    1: "Fully furnished",
-    2: "Semi-furnished",
-    3: "None",
-};
-
-const MOCK_PLACEHOLDER_IMAGE = "https://placehold.co/600x400/e2e8f0/64748b?text=Listing+Preview";
+/**
+ * Converts addListingImages (string URLs from backend + File objects) to display URLs.
+ * Strings are used as-is; File/Blob get a blob URL (caller must revoke on unmount).
+ */
+function toDisplayImageUrls(images: (string | File)[]): string[] {
+    return images
+        .map((item: string | File) => {
+            if (typeof item === "string") return item;
+            if (typeof File !== "undefined" && item instanceof File) return URL.createObjectURL(item);
+            if (typeof Blob !== "undefined" && item instanceof Blob) return URL.createObjectURL(item);
+            return "";
+        })
+        .filter(Boolean);
+}
 
 function SixthStep({
     steps,
@@ -49,41 +28,15 @@ function SixthStep({
 }) {
     const {
         propertyStore: {
-            addListingData,
-            backAddListingStep: back,
-            nextAddListingStep: next,
-            addListingIsLast: isLast,
+            addListingImages,
             goToAddListingStep: goTo,
+            getAddListingStepPanels,
+            getAddListingPreviewProperty,
         },
     } = useStore();
 
-    const raw = addListingData;
-    const personalData = useMemo(() => ({
-        name: raw.personalData?.name || MOCK_LISTING.personalData.name,
-        surname: raw.personalData?.surname || MOCK_LISTING.personalData.surname,
-        email: raw.personalData?.email || MOCK_LISTING.personalData.email,
-        phone: raw.personalData?.phone || MOCK_LISTING.personalData.phone,
-    }), [raw.personalData]);
-    const propertyData = useMemo(() => ({
-        ...MOCK_LISTING.propertyData,
-        ...(raw.propertyData || {}),
-    }), [raw.propertyData]);
-    const formImages = raw.images || [];
-    const pd = propertyData as Record<string, unknown>;
     const prevUrlsRef = useRef<string[]>([]);
-
-    const imageUrls = useMemo(() => {
-        const list = formImages || [];
-        return list
-            .map((fileOrUrl: unknown) => {
-                if (typeof fileOrUrl === "string") return fileOrUrl;
-                if (fileOrUrl instanceof File || fileOrUrl instanceof Blob) {
-                    return URL.createObjectURL(fileOrUrl);
-                }
-                return "";
-            })
-            .filter(Boolean) as string[];
-    }, [formImages]);
+    const imageUrls = useMemo(() => toDisplayImageUrls(addListingImages), [addListingImages]);
 
     useEffect(() => {
         prevUrlsRef.current.forEach((url) => {
@@ -97,69 +50,12 @@ function SixthStep({
         };
     }, [imageUrls]);
 
-    const stepPanels = useMemo(() => {
-        const flatmatesMale = Math.max(0, parseInt(String(pd?.flatmatesMale ?? "0"), 10) || 0);
-        const flatmatesFemale = Math.max(0, parseInt(String(pd?.flatmatesFemale ?? "0"), 10) || 0);
-        const bathrooms = Math.max(1, parseInt(String(pd?.bathrooms ?? "1"), 10) || 1);
-        const toilets = Math.max(1, parseInt(String(pd?.toilets ?? "1"), 10) || 1);
-        const contact = [
-            [personalData?.name, personalData?.surname].filter(Boolean).join(" ") || "—",
-            personalData?.email || "—",
-            personalData?.phone || "—",
-        ].join(" · ");
-        const basics = [
-            propertyData?.type || "—",
-            propertyData?.city || "—",
-            [propertyData?.address, propertyData?.postcode].filter(Boolean).join(", ") || "—",
-            propertyData?.registration ? "Registration possible" : "No registration",
-        ].filter(Boolean).join(" · ");
-        const details = [
-            propertyData?.rent ? `€${propertyData.rent}/m` : null,
-            propertyData?.bills ? `Bills: ${String(propertyData.bills).replace(/\s*\|\s*Deposit:.*$/, "").trim() || "—"}` : null,
-            propertyData?.size ? `${propertyData.size} m²` : null,
-            flatmatesMale + flatmatesFemale > 0 ? `${flatmatesMale} male, ${flatmatesFemale} female flatmate(s)` : null,
-            `${bathrooms} bathroom(s), ${toilets} toilet(s)`,
-            pd?.furnishedType != null ? (FURNISHED_TYPE_LABELS[Number(pd.furnishedType)] ?? String(pd.furnishedType)) : null,
-            propertyData?.description ? String(propertyData.description).slice(0, 60) + (String(propertyData.description).length > 60 ? "…" : "") : null,
-        ].filter(Boolean).join(" · ");
-        return [
-            { step: 2, title: "Contact details", summary: contact },
-            { step: 3, title: "Basics", summary: basics },
-            { step: 4, title: "Details", summary: details },
-            { step: 5, title: "Photos", summary: "", imageUrls },
-        ];
-    }, [personalData, propertyData, pd]);
-
-    const previewProperty = useMemo(() => {
-        const main = imageUrls[0] || MOCK_PLACEHOLDER_IMAGE;
-        const rest = imageUrls.length > 1 ? imageUrls.slice(1) : [];
-        return {
-            id: 9999,
-            hidden: false,
-            status: "Draft",
-            statusCode: 0,
-            price: parseInt(String(propertyData?.rent ?? "0"), 10) || 0,
-            title: propertyData?.address
-                ? `${propertyData.address}${propertyData.city ? `, ${propertyData.city}` : ""}`
-                : propertyData?.city || "Your listing",
-            city: propertyData?.city || "",
-            location: [propertyData?.address, propertyData?.postcode, propertyData?.city].filter(Boolean).join(", ") || "—",
-            description: {
-                property: String(propertyData?.description ?? "").slice(0, 120) || "—",
-                period: "",
-                bills: "",
-                flatmates: "",
-            },
-            main_image: main,
-            images: rest,
-            folder: "",
-        };
-    }, [propertyData, imageUrls]);
+    const stepPanels = getAddListingStepPanels(imageUrls);
+    const previewProperty = getAddListingPreviewProperty(imageUrls);
 
     return (
         <div className="list-room-modal__first-step">
             <div className="list-room-modal__first-step__body container">
-                {/* Left: step summary panels (2–5 only) */}
                 <div className="flex-box">
                     <div className="col-12 col-lg-4">
                         {stepPanels.map((panel) => (
@@ -211,8 +107,6 @@ function SixthStep({
                         ))}
                     </div>
 
-
-                    {/* Right: preview card (form data + uploaded images) + buttons */}
                     <div className="d-flex justify-content-center w-100">
                         {previewProperty.main_image ? (
                             <PropertyCardGrid
@@ -228,7 +122,6 @@ function SixthStep({
                             </div>
                         )}
                     </div>
-
                 </div>
             </div>
         </div>

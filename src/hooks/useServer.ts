@@ -108,18 +108,39 @@ export const useServer = () => {
       };
     } else {
       // Add interface to request body (handles both objects and FormData)
-      let requestBody = data;
+      let requestBody: any = data;
 
       if (data instanceof FormData) {
         // For FormData, append the interface field
         requestBody = new FormData();
-        // Copy all existing entries
         for (const [key, value] of data.entries()) {
           requestBody.append(key, value);
         }
         requestBody.append("interface", "web");
+      } else if (
+        data &&
+        typeof data === "object" &&
+        Array.isArray(data.new_images) &&
+        data.new_images.some((item: unknown) => item instanceof File)
+      ) {
+        // Plain object with File[] in new_images: send as FormData so files are not JSON-serialized to {}
+        requestBody = new FormData();
+        const payload = { ...(data || {}), interface: "web" };
+        for (const [key, value] of Object.entries(payload)) {
+          if (key === "new_images") {
+            (value as File[]).forEach((file) => {
+              if (file instanceof File) requestBody.append("new_images[]", file);
+            });
+          } else if (value === undefined || value === null) {
+            requestBody.append(key, "");
+          } else if (typeof value === "object" && !(value instanceof File) && !(value instanceof Blob)) {
+            requestBody.append(key, JSON.stringify(value));
+          } else {
+            requestBody.append(key, String(value));
+          }
+        }
       } else {
-        // For regular objects, spread and add interface
+        // Regular object without files
         requestBody = {
           ...(data || {}),
           interface: "web",
