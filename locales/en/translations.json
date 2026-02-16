@@ -550,7 +550,9 @@
     "amenities": "Amenities",
     "registration": "Registration",
     "shared_space": "Shared space",
-    "pets_allowed": "Pets allowed"
+    "pets_allowed": "Pets allowed",
+    "bathrooms": "Bathrooms",
+    "toilets": "Toilets"
   },
   "enums": {
     "property_type": {

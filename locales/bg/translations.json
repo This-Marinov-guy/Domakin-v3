@@ -553,7 +553,9 @@
     "amenities": "Удобства",
     "registration": "Регистрация на адрес",
     "shared_space": "Споделени помещения",
-    "pets_allowed": "Домашни любимци"
+    "pets_allowed": "Домашни любимци",
+    "bathrooms": "Банни",
+    "toilets": "Тоалетни"
   },
   "enums": {
     "property_type": {

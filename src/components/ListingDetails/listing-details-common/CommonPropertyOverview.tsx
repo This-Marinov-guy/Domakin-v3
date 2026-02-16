@@ -15,13 +15,6 @@ import {
 
 const ICONS_BASE = "/assets/img/icons";
 
-interface DataType {
-  id: number;
-  icon: string;
-  title?: string;
-  content: string;
-}
-
 const translatedPropertyTypeLabel = (
   t: (k: string) => string,
   value: number | string | undefined
@@ -54,29 +47,6 @@ const parseAmenityIds = (amenities: unknown): number[] => {
   return [];
 };
 
-const translatedAmenitiesLabel = (t: (k: string) => string, amenities: unknown): string => {
-  const arr = parseAmenityIds(amenities);
-  if (arr.length === 0) return "—";
-  return arr
-    .map((id) => getTranslatedEnum(t, getAmenityLabelKey(id), getAmenityLabel(id)))
-    .filter(Boolean)
-    .join(", ");
-};
-
-const translatedSharedSpaceLabel = (t: (k: string) => string, value: unknown): string => {
-  if (value == null) return "—";
-  const arr: number[] = Array.isArray(value)
-    ? (value as number[])
-    : typeof value === "string"
-      ? value.split(",").map((s) => parseInt(s.trim(), 10)).filter((n) => !Number.isNaN(n))
-      : [];
-  if (arr.length === 0) return "—";
-  return arr
-    .map((id) => getTranslatedEnum(t, getSharedSpaceLabelKey(id), getSharedSpaceLabel(id)))
-    .filter(Boolean)
-    .join(", ");
-};
-
 const formatYesNo = (value: unknown): string => {
   if (value === true || value === "1" || value === "true") return "Yes";
   if (value === false || value === "0" || value === "false") return "No";
@@ -85,145 +55,158 @@ const formatYesNo = (value: unknown): string => {
 
 const CommonPropertyOverview = ({ property, extendedData }: any) => {
   const { description } = property;
-
   const { t } = useTranslation("translations");
 
-  const property_overview_data: DataType[] = [
+  const amenityIds = parseAmenityIds(extendedData?.amenities ?? property.amenities);
+  const amenityLabels = amenityIds
+    .map((id) => getTranslatedEnum(t, getAmenityLabelKey(id), getAmenityLabel(id)))
+    .filter(Boolean);
+
+  const sharedSpaceRaw = extendedData?.shared_space ?? extendedData?.sharedSpace ?? property.shared_space;
+  const sharedSpaceIds: number[] = Array.isArray(sharedSpaceRaw)
+    ? (sharedSpaceRaw as number[])
+    : typeof sharedSpaceRaw === "string"
+      ? sharedSpaceRaw.split(",").map((s: string) => parseInt(s.trim(), 10)).filter((n: number) => !Number.isNaN(n))
+      : [];
+  const sharedSpaceLabels = sharedSpaceIds
+    .map((id) => getTranslatedEnum(t, getSharedSpaceLabelKey(id), getSharedSpaceLabel(id)))
+    .filter(Boolean);
+
+  const infoItems = [
     {
-      id: 6,
+      id: "type",
       icon: `${ICONS_BASE}/building.svg`,
       title: t("property.type") || "Type",
       content: translatedPropertyTypeLabel(t, extendedData?.type ?? extendedData?.property_type ?? property.type),
     },
     {
-      id: 7,
+      id: "furnished",
       icon: `${ICONS_BASE}/furniture.svg`,
-      title: t("property.furnished_type") || "Furnished type",
+      title: t("property.furnished_type") || "Furnished",
       content: translatedFurnishedTypeLabel(t, extendedData?.furnished_type ?? extendedData?.furnishedType ?? property.furnished_type),
     },
-
     {
-      id: 9,
+      id: "period",
+      icon: `${ICONS_BASE}/calendar.svg`,
+      title: t("property.free_from_period") || "Available From",
+      content: description.period ?? "",
+    },
+    {
+      id: "bills",
+      icon: `${ICONS_BASE}/bills.svg`,
+      title: t("property.bills") || "Bills",
+      content: description.bills ?? "",
+    },
+    {
+      id: "registration",
       icon: `${ICONS_BASE}/registration.svg`,
       title: t("property.registration") || "Registration",
       content: formatYesNo(extendedData?.registration ?? property.registration),
     },
     {
-      id: 2,
-      icon: `${ICONS_BASE}/calendar.svg`,
-      title: t("property.free_from_period"),
-      content: description.period ?? "",
-    },
-    {
-      id: 3,
-      icon: `${ICONS_BASE}/bills.svg`,
-      title: t("property.bills"),
-      content: description.bills ?? "",
-    },
-    {
-      id: 11,
+      id: "pets",
       icon: `${ICONS_BASE}/pets.svg`,
-      title: t("property.pets_allowed") || "Pets allowed",
+      title: t("property.pets_allowed") || "Pets Allowed",
       content: formatYesNo(extendedData?.pets_allowed ?? extendedData?.petsAllowed ?? property.pets_allowed),
     },
-  ];
-
-  const property_complex_data: DataType[] = [
     {
-      id: 5,
+      id: "flatmates",
       icon: `${ICONS_BASE}/flatmates.svg`,
-      title: t("property.flatmates"),
+      title: t("property.flatmates") || "Flatmates",
       content: description.flatmates ?? "",
     },
     {
-      id: 8,
-      icon: `${ICONS_BASE}/amenties.svg`,
-      title: t("property.amenities") || "Amenities",
-      content: translatedAmenitiesLabel(t, extendedData?.amenities ?? property.amenities ?? property.amenities),
-    },
-    {
-      id: 10,
-      icon: `${ICONS_BASE}/shared.svg`,
-      title: t("property.shared_space") || "Shared space",
-      content: translatedSharedSpaceLabel(t, extendedData?.shared_space ?? extendedData?.sharedSpace ?? property.shared_space),
-    },
-    {
-      id: 8,
+      id: "bathrooms",
       icon: `${ICONS_BASE}/bath.svg`,
-      title: "Bathrooms",
-      content: property.bathrooms ?? "",
+      title: t("property.bathrooms") || "Bathrooms",
+      content: property.bathrooms != null ? String(property.bathrooms) : "",
     },
     {
-      id: 10,
+      id: "toilets",
       icon: `${ICONS_BASE}/toilet.svg`,
-      title: "Toilets",
-      content: property.toilets ?? "",
+      title: t("property.toilets") || "Toilets",
+      content: property.toilets != null ? String(property.toilets) : "",
     },
-  ];
+  ].filter((item) => item.content && item.content !== "" && item.content !== "—");
 
-
-  const itemCount = property_overview_data.length;
+  const hasBadges = amenityLabels.length > 0 || sharedSpaceLabels.length > 0;
 
   return (
     <>
-      <div className="row">
-        {property_overview_data.map((item) => {
-          if (item.content === "") return null;
-
-          return (
-            <div className={`mb-30 col-lg-4 col-md-6 col-12`} key={item.id}>
-              <Image
-                width={30}
-                height={30}
-                src={item.icon}
-                alt=""
-                className="m-a lazy-img icon w-10"
-              />
-              <div className="d-flex align-items-center justify-content-center gap-3 mt-10">
-                {item.title && (
-                  <span className="fs-20 color-dark fw-bold">{item.title}</span>
-                )}
+      {infoItems.length > 0 && (
+        <div className="row g-3 mb-30">
+          {infoItems.map((item) => (
+            <div className="col-md-6 col-12" key={item.id}>
+              <div className="bg-light d-flex align-items-center gap-3 p-15 shadow4 border-10">
+                <Image
+                  width={30}
+                  height={30}
+                  src={item.icon}
+                  alt=""
+                  className="lazy-img flex-shrink-0"
+                />
+                <div>
+                  <div className="fs-14 color-dark" style={{ opacity: 0.55 }}>
+                    {item.title}
+                  </div>
+                  <div className="fs-16 fw-500 color-dark">
+                    {capitalizeFirstLetter(item.content)}
+                  </div>
+                </div>
               </div>
-              <span className="d-flex text-center align-items-center justify-content-center fs-20 color-dark">
-                {capitalizeFirstLetter(item.content)}
-              </span>
             </div>
-          )
-        })}
-      </div>
-      <hr />
-      <div className="row">
-        {property_complex_data.map((item) => {
-          if (item.content === "") return null;
-
-          return (
-            <div className={`mb-30 col-lg-4 col-md-6 col-12`} key={item.id}>
-              <Image
-                width={30}
-                height={30}
-                src={item.icon}
-                alt=""
-                className="m-a lazy-img icon w-10"
-              />
-              <div className="d-flex align-items-center justify-content-center gap-3 mt-10">
-                {item.title && (
-                  <span className="fs-20 color-dark fw-bold">{item.title}</span>
-                )}
-              </div>
-              <span className="d-flex text-center align-items-center justify-content-center fs-20 color-dark">
-                {capitalizeFirstLetter(item.content)}
-              </span>
-            </div>
-          )
-        })}
-      </div>
-      <hr />
-      {property.description.property && (
-        <div className="mt-20 row">
-          <div className="text-center col-lg-12 col-md-12 col-12">
-            {property.description.property}
-          </div>
+          ))}
         </div>
+      )}
+
+      <div className="row">
+        {amenityLabels.length > 0 && (
+          <div className="mb-30 col-md-6 col-12">
+            <div className="fs-16 fw-500 color-dark mb-15">
+              {t("property.amenities") || "Amenities"}
+            </div>
+            <div className="d-flex flex-wrap gap-2">
+              {amenityLabels.map((label, i) => (
+                <span
+                  key={i}
+                  className="d-inline-flex align-items-center bg-light border-10 p-15 fs-14 fw-500 color-dark"
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {sharedSpaceLabels.length > 0 && (
+          <div className="mb-30 col-md-6 col-12">
+            <div className="fs-16 fw-500 color-dark mb-15">
+              {t("property.shared_space") || "Shared Spaces"}
+            </div>
+            <div className="d-flex flex-wrap gap-2">
+              {sharedSpaceLabels.map((label, i) => (
+                <span
+                  key={i}
+                  className="d-inline-flex align-items-center bg-light border-10 p-15 fs-14 fw-500 color-dark"
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+      </div>
+
+      {property.description.property && (
+        <>
+          {(infoItems.length > 0 || hasBadges) && <hr />}
+          <div className="mt-20">
+            <p className="fs-20 lh-lg color-dark m0">
+              {property.description.property}
+            </p>
+          </div>
+        </>
       )}
     </>
   );
