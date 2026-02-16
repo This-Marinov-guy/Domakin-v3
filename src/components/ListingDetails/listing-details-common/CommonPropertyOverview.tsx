@@ -145,7 +145,9 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
     },
   ].filter((item) => item.content && item.content !== "" && item.content !== "—");
 
-  const hasAmenitiesOrSharedSpace = AMENITIES_LIST.length > 0 || SHARED_SPACE_LIST.length > 0;
+  const showAmenitiesCol = AMENITIES_LIST.length > 0 && amenityIdsSet.size > 0;
+  const showSharedSpaceCol = SHARED_SPACE_LIST.length > 0 && sharedSpaceIdsSet.size > 0;
+  const hasAmenitiesOrSharedSpace = showAmenitiesCol || showSharedSpaceCol;
 
   return (
     <>
@@ -176,7 +178,7 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
       )}
 
       <div className="row">
-        {AMENITIES_LIST.length > 0 && (
+        {showAmenitiesCol && (
           <div className="mb-30 col-md-6 col-12">
             <div className="fs-16 fw-500 color-dark mb-15">
               {t("property.amenities") || "Amenities"}
@@ -201,7 +203,7 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
           </div>
         )}
 
-        {SHARED_SPACE_LIST.length > 0 && (
+        {showSharedSpaceCol && (
           <div className="mb-30 col-md-6 col-12">
             <div className="fs-16 fw-500 color-dark mb-15">
               {t("property.shared_space") || "Shared space"}
@@ -229,7 +231,6 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
 
       {property.description.property && (
         <>
-          {(infoItems.length > 0 || hasAmenitiesOrSharedSpace) && <hr />}
           <div className="mt-20">
             <p className="fs-20 lh-lg color-dark m0">
               {property.description.property}
