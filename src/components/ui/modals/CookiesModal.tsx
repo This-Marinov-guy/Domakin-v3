@@ -4,32 +4,48 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "@/stores/storeContext";
 import { COOKIE_MODAL } from "@/utils/defines";
 import { LOCAL_STORAGE_COOKIE_AGREED } from "@/utils/localstorage";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import useTranslation from "next-translate/useTranslation";
 
 const CookiesModal = () => {
   const { modalStore } = useStore();
   const { t } = useTranslation("translations");
   const [isVisible, setIsVisible] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
+  const [isEntered, setIsEntered] = useState(false);
+  const bannerRef = useRef<HTMLDivElement>(null);
+
+  const finishClose = useCallback(() => {
+    setIsVisible(false);
+    setIsExiting(false);
+    setIsEntered(false);
+    modalStore.closeModal();
+  }, [modalStore]);
 
   const handleAcceptAll = () => {
     localStorage.setItem(LOCAL_STORAGE_COOKIE_AGREED, "all");
-    setIsVisible(false);
-    modalStore.closeModal();
+    setIsExiting(true);
   };
 
   const handleMandatoryOnly = () => {
     localStorage.setItem(LOCAL_STORAGE_COOKIE_AGREED, "mandatory");
-    setIsVisible(false);
-    modalStore.closeModal();
+    setIsExiting(true);
   };
+
+  // Trigger enter animation: add --visible on next frame after mount
+  useEffect(() => {
+    if (!isVisible || isExiting) return;
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => setIsEntered(true));
+    });
+    return () => cancelAnimationFrame(id);
+  }, [isVisible, isExiting]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    
+
     const cookieAgreed = localStorage.getItem(LOCAL_STORAGE_COOKIE_AGREED);
     if (!cookieAgreed || cookieAgreed === "1") {
-      // Show banner if no preference set or old format (migrate old "1" to "all")
       if (cookieAgreed === "1") {
         localStorage.setItem(LOCAL_STORAGE_COOKIE_AGREED, "all");
       }
@@ -38,12 +54,26 @@ const CookiesModal = () => {
     }
   }, [modalStore]);
 
+  const handleTransitionEnd = useCallback(
+    (e: React.TransitionEvent) => {
+      if (e.target !== bannerRef.current || e.propertyName !== "transform") return;
+      if (isExiting) finishClose();
+    },
+    [isExiting, finishClose]
+  );
+
   if (!isVisible) {
     return null;
   }
 
+  const showVisibleClass = isEntered && !isExiting;
+
   return (
-    <div className={`cookie-banner ${isVisible ? "cookie-banner--visible" : ""}`}>
+    <div
+      ref={bannerRef}
+      className={`cookie-banner ${showVisibleClass ? "cookie-banner--visible" : ""}`}
+      onTransitionEnd={handleTransitionEnd}
+    >
       <div className="container">
         <div className="cookie-banner__content">
           <div className="cookie-banner__text">
