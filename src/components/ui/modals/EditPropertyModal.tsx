@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useMemo, useState, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import NiceSelect from "@/ui/NiceSelect";
 import Modal from "react-bootstrap/Modal";
@@ -12,13 +12,35 @@ import { useServer } from "@/hooks/useServer";
 import { toast } from "react-toastify";
 import MultiValueInput from "../inputs/MultiValueInput";
 import ImageWithBadge from "../borders/ImageBadgeBorder";
-import { EDIT_PROPERTY_MODAL, PROPERTY_STATUSES } from "@/utils/defines";
+import { EDIT_PROPERTY_MODAL, FURNISHED_TYPES, PROPERTY_STATUSES, PROPERTY_TYPES } from "@/utils/defines";
 import { showGeneralError, transformToFormData } from "@/utils/helpers";
 import { MdClose } from "react-icons/md";
 import MultiFilePreviewInput from "../inputs/files/MultiFilePreviewInput";
 import signalIcon from "@/assets/images/icon/signal.avif";
 import SignalStatusConfirmationModal from "./SignalStatusConfirmationModal";
 import useStickyFooter from "@/hooks/useStickyFooter";
+
+const AMENITIES_LIST: string[] = [
+  "A/C & Heating",
+  "Garages",
+  "Swimming Pool",
+  "Parking",
+  "Lake View",
+  "Garden",
+  "Disabled Access",
+  "Pet Friendly",
+  "Ceiling Height",
+  "Outdoor Shower",
+  "Refrigerator",
+  "Fireplace",
+  "Wifi",
+  "TV Cable",
+  "Barbeque",
+  "Laundry",
+  "Dryer",
+  "Lawn",
+  "Elevator",
+];
 
 const EditPropertyModal = ({ callback = () => { } }: any) => {
   const {
@@ -51,6 +73,20 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
   });
 
   const { t } = useTranslation("translations");
+
+  const amenitiesSorted = useMemo(
+    () => AMENITIES_LIST.map((label, id) => ({ id, label })).sort((a, b) => a.label.localeCompare(b.label)),
+    []
+  );
+  const selectedAmenities: number[] = Array.isArray(editPropertyData.propertyData?.amenities)
+    ? editPropertyData.propertyData.amenities
+    : [];
+  const toggleAmenity = (id: number) => {
+    const next = selectedAmenities.includes(id)
+      ? selectedAmenities.filter((x) => x !== id)
+      : [...selectedAmenities, id].sort((a, b) => a - b);
+    updateEditListingData("propertyData", "amenities", next);
+  };
 
   const reloadProperties = async () => {
     try {
@@ -297,6 +333,24 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
 
               <div className="col-lg-6 col-md-6 col-12">
                 <div className="input-group-meta form-group mb-30">
+                  <label htmlFor="">{t("emergency_housing.postcode")}</label>
+                  <Form.Control
+                    type="text"
+                    value={editPropertyData.propertyData.postcode ?? ""}
+                    onChange={(e) => {
+                      updateEditListingData(
+                        "propertyData",
+                        "postcode",
+                        e.target.value
+                      );
+                    }}
+                    isInvalid={editErrorFields.includes("propertyData.postcode")}
+                  />
+                </div>
+              </div>
+
+              <div className="col-lg-6 col-md-6 col-12">
+                <div className="input-group-meta form-group mb-30">
                   <label htmlFor="">{t("emergency_housing.size")}</label>
                   <Form.Control
                     type="text"
@@ -315,6 +369,57 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
 
               <div className="col-md-6">
                 <div className="input-group-meta form-group mb-30">
+                  <label htmlFor="">Property type</label>
+                  <NiceSelect
+                    className="nice-select border-one d-flex align-items-center"
+                    options={PROPERTY_TYPES}
+                    defaultCurrent={Math.max(0, PROPERTY_TYPES.findIndex(
+                      (item) => String(item.value) === String(editPropertyData.propertyData?.type ?? editPropertyData.propertyData?.property_type)
+                    ))}
+                    onChange={(e) => {
+                      updateEditListingData("propertyData", "type", e.target.value);
+                    }}
+                    isInvalid={editErrorFields.includes("propertyData.type")}
+                    name=""
+                    placeholder=""
+                  />
+                </div>
+              </div>
+
+              <div className="col-lg-6 col-md-6 col-12">
+                <div className="input-group-meta form-group mb-30">
+                  <label htmlFor="">Bathrooms</label>
+                  <Form.Control
+                    type="number"
+                    min={1}
+                    value={editPropertyData.propertyData.bathrooms ?? 1}
+                    onChange={(e) => {
+                      const value = Math.max(1, Math.floor(Number(e.target.value)) || 1);
+                      updateEditListingData("propertyData", "bathrooms", value);
+                    }}
+                    isInvalid={editErrorFields.includes("propertyData.bathrooms")}
+                  />
+                </div>
+              </div>
+
+              <div className="col-lg-6 col-md-6 col-12">
+                <div className="input-group-meta form-group mb-30">
+                  <label htmlFor="">Toilets</label>
+                  <Form.Control
+                    type="number"
+                    min={1}
+                    value={editPropertyData.propertyData.toilets ?? 1}
+                    onChange={(e) => {
+                      const value = Math.max(1, Math.floor(Number(e.target.value)) || 1);
+                      updateEditListingData("propertyData", "toilets", value);
+                    }}
+                    isInvalid={editErrorFields.includes("propertyData.toilets")}
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6">
+                <div className="input-group-meta form-group mb-30">
                   <label htmlFor="">
                     {t("emergency_housing.registration")}
                   </label>
@@ -324,7 +429,7 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
                       { value: "yes", text: t("common.yes") },
                       { value: "no", text: t("common.no") },
                     ]}
-                    defaultCurrent={0}
+                    defaultCurrent={editPropertyData.propertyData?.registration === false || String(editPropertyData.propertyData?.registration).toLowerCase() === "no" ? 1 : 0}
                     onChange={(e) => {
                       updateEditListingData(
                         "propertyData",
@@ -376,6 +481,104 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
                     }}
                     isInvalid={editErrorFields.includes("referralCode")}
                   />
+                </div>
+              </div>
+
+              <div className="col-md-6">
+                <div className="input-group-meta form-group mb-30">
+                  <label htmlFor="">Furnished</label>
+                  <NiceSelect
+                    className="nice-select border-one d-flex align-items-center"
+                    options={FURNISHED_TYPES}
+                    defaultCurrent={Math.max(0, FURNISHED_TYPES.findIndex(
+                      (item) => String(item.value) === String(editPropertyData.propertyData?.furnishedType ?? editPropertyData.propertyData?.furnished_type ?? 1)
+                    ))}
+                    onChange={(e) => {
+                      updateEditListingData("propertyData", "furnishedType", e.target.value);
+                    }}
+                    isInvalid={editErrorFields.includes("propertyData.furnishedType")}
+                    name=""
+                    placeholder=""
+                  />
+                </div>
+              </div>
+
+              <div className="col-lg-6 col-md-6 col-12">
+                <div className="input-group-meta form-group mb-30">
+                  <label htmlFor="">Available from</label>
+                  <SingleDatePicker
+                    placeholder=""
+                    value={editPropertyData.propertyData?.availableFrom ?? editPropertyData.propertyData?.available_from ?? ""}
+                    onChange={(value: string) => {
+                      updateEditListingData("propertyData", "availableFrom", value);
+                    }}
+                    isInvalid={editErrorFields.includes("propertyData.availableFrom")}
+                  />
+                </div>
+              </div>
+
+              <div className="col-lg-6 col-md-6 col-12">
+                <div className="input-group-meta form-group mb-30">
+                  <label htmlFor="">Available to</label>
+                  <SingleDatePicker
+                    placeholder=""
+                    value={editPropertyData.propertyData?.availableTo ?? editPropertyData.propertyData?.available_to ?? ""}
+                    onChange={(value: string) => {
+                      updateEditListingData("propertyData", "availableTo", value);
+                    }}
+                    isInvalid={editErrorFields.includes("propertyData.availableTo")}
+                  />
+                </div>
+              </div>
+
+              <div className="col-lg-6 col-md-6 col-12">
+                <div className="input-group-meta form-group mb-30 d-flex align-items-center gap-2">
+                  <Form.Check
+                    type="switch"
+                    id="edit-pets-allowed"
+                    label="Pets allowed"
+                    checked={editPropertyData.propertyData?.petsAllowed === true || editPropertyData.propertyData?.pets_allowed === true}
+                    onChange={(e) => {
+                      updateEditListingData("propertyData", "petsAllowed", e.target.checked);
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="col-lg-6 col-md-6 col-12">
+                <div className="input-group-meta form-group mb-30 d-flex align-items-center gap-2">
+                  <Form.Check
+                    type="switch"
+                    id="edit-smoking-allowed"
+                    label="Smoking allowed"
+                    checked={editPropertyData.propertyData?.smokingAllowed === true || editPropertyData.propertyData?.smoking_allowed === true}
+                    onChange={(e) => {
+                      updateEditListingData("propertyData", "smokingAllowed", e.target.checked);
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className={`col-12 form-group mb-30 ${editErrorFields.includes("propertyData.amenities") ? "border border-danger rounded-3 p-3" : ""}`}>
+                <label className="d-block mb-2">Amenities</label>
+                <small className="d-block text-muted mb-2">Select all that apply</small>
+                <div className="row g-2 mt-2">
+                  {amenitiesSorted.map(({ id, label }) => (
+                    <div key={id} className="checkbox-card-type col-6 col-md-4 col-lg-3">
+                      <input
+                        type="checkbox"
+                        className="btn-check"
+                        name="amenities[]"
+                        id={`edit-amenity-${id}`}
+                        autoComplete="off"
+                        checked={selectedAmenities.includes(id)}
+                        onChange={() => toggleAmenity(id)}
+                      />
+                      <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor={`edit-amenity-${id}`}>
+                        <span>{label}</span>
+                      </label>
+                    </div>
+                  ))}
                 </div>
               </div>
 

@@ -73,6 +73,7 @@ export const EDIT_PROPERTY_MODAL = "EDIT_PROPERTY_MODAL";
 export const LONG_LOADING_MODAL = "LONG_LOADING_MODAL";
 export const PAYMENT_LINK_MODAL = "PAYMENT_LINK_MODAL";
 export const APPLICATION_MODAL = "APPLICATION_MODAL";
+export const APPLICATION_PREVIEW_MODAL = "APPLICATION_PREVIEW_MODAL";
 
 // local storage
 export const LISTING_REFERENCE_ID = "listing_reference_id";
@@ -104,4 +105,18 @@ export const APPLICATION_STATUSES = [
   { value: 2, text: "Contacted" },
   { value: 3, text: "Approved" },
   { value: 4, text: "Rejected" }
+];
+
+// Property listing types (matches propertyStore / list-room form)
+export const PROPERTY_TYPES = [
+  { value: 1, text: "Room in a shared apartment" },
+  { value: 2, text: "Studio" },
+  { value: 3, text: "Entire place" },
+  { value: 4, text: "Student house" },
+];
+
+export const FURNISHED_TYPES = [
+  { value: 1, text: "Fully furnished" },
+  { value: 2, text: "Semi-furnished" },
+  { value: 3, text: "None" },
 ];

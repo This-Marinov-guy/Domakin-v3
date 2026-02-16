@@ -145,6 +145,24 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
                 <span>Add New Listing</span>
               </Link>
             </li>
+            <li className="plr">
+              <Link
+                href="/account/applications-list"
+                className={`d-flex w-100 align-items-center ${
+                  pathname === "/account/applications-list" ? "active" : ""
+                }`}
+              >
+                <Image
+                  src={
+                    pathname === "/account/applications-list"
+                      ? dashboardIconActive_1
+                      : dashboardIcon_1
+                  }
+                  alt=""
+                />
+                <span>Applications</span>
+              </Link>
+            </li>
             {/* <li className="plr"><Link href="/account/favourites" className={`d-flex w-100 align-items-center ${pathname === '/dashboard/favourites' ? 'active' : ''}`}>
                      <Image src={pathname === '/dashboard/favourites' ? dashboardIconActive_8 : dashboardIcon_8} alt="" />
                      <span>Favourites</span>

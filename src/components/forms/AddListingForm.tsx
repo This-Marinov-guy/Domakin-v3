@@ -7,6 +7,7 @@ import useTranslation from "next-translate/useTranslation";
 import PrefixMultiFilePreviewInput from "../ui/inputs/files/MultiFilePreviewInput";
 import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
 import SearchableCitySelect from "@/components/ui/SearchableCitySelect";
+import SingleDatePicker from "@/components/ui/inputs/dates/SingleDatePicker";
 import { DUTCH_CITIES } from "@/utils/countries";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
@@ -17,7 +18,7 @@ import {
   transformToFormData,
 } from "@/utils/helpers";
 import { toast } from "react-toastify";
-import { LONG_LOADING_MODAL } from "@/utils/defines";
+import { FURNISHED_TYPES, LONG_LOADING_MODAL, PROPERTY_TYPES } from "@/utils/defines";
 
 const AddListingForm = () => {
   const { t } = useTranslation("translations");
@@ -189,6 +190,40 @@ const AddListingForm = () => {
             </div>
           </div>
 
+          <div className="col-6">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">Property type</label>
+              <NiceSelect
+                className="nice-select border-one d-flex align-items-center"
+                options={PROPERTY_TYPES}
+                defaultCurrent={Math.max(0, PROPERTY_TYPES.findIndex((item) => String(item.value) === String(propertyData?.type ?? propertyData?.property_type)))}
+                onChange={(e) => {
+                  updateListingData("propertyData", "type", e.target.value);
+                }}
+                isInvalid={errorFields.includes("propertyData.type")}
+                name=""
+                placeholder=""
+              />
+            </div>
+          </div>
+
+          <div className="col-6">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">Furnished</label>
+              <NiceSelect
+                className="nice-select border-one d-flex align-items-center"
+                options={FURNISHED_TYPES}
+                defaultCurrent={Math.max(0, FURNISHED_TYPES.findIndex((item) => String(item.value) === String(propertyData?.furnishedType ?? propertyData?.furnished_type ?? 1)))}
+                onChange={(e) => {
+                  updateListingData("propertyData", "furnishedType", e.target.value);
+                }}
+                isInvalid={errorFields.includes("propertyData.furnishedType")}
+                name=""
+                placeholder=""
+              />
+            </div>
+          </div>
+
           <div className="col-lg-6 col-md-6 col-12">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("emergency_housing.address")}</label>
@@ -251,6 +286,38 @@ const AddListingForm = () => {
                   updateListingData("propertyData", "rent", value.toString());
                 }}
                 isInvalid={errorFields.includes("propertyData.rent")}
+              />
+            </div>
+          </div>
+
+          <div className="col-6">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">Bathrooms</label>
+              <Form.Control
+                type="number"
+                min={1}
+                value={propertyData.bathrooms ?? 1}
+                onChange={(e) => {
+                  const value = Math.max(1, Math.floor(Number(e.target.value)) || 1);
+                  updateListingData("propertyData", "bathrooms", value);
+                }}
+                isInvalid={errorFields.includes("propertyData.bathrooms")}
+              />
+            </div>
+          </div>
+
+          <div className="col-6">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">Toilets</label>
+              <Form.Control
+                type="number"
+                min={1}
+                value={propertyData.toilets ?? 1}
+                onChange={(e) => {
+                  const value = Math.max(1, Math.floor(Number(e.target.value)) || 1);
+                  updateListingData("propertyData", "toilets", value);
+                }}
+                isInvalid={errorFields.includes("propertyData.toilets")}
               />
             </div>
           </div>
@@ -373,6 +440,34 @@ const AddListingForm = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">Available from</label>
+              <SingleDatePicker
+                placeholder=""
+                value={propertyData?.availableFrom ?? propertyData?.available_from ?? ""}
+                onChange={(value: string) => {
+                  updateListingData("propertyData", "availableFrom", value);
+                }}
+                isInvalid={errorFields.includes("propertyData.availableFrom")}
+              />
+            </div>
+          </div>
+
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">Available to</label>
+              <SingleDatePicker
+                placeholder=""
+                value={propertyData?.availableTo ?? propertyData?.available_to ?? ""}
+                onChange={(value: string) => {
+                  updateListingData("propertyData", "availableTo", value);
+                }}
+                isInvalid={errorFields.includes("propertyData.availableTo")}
+              />
             </div>
           </div>
 

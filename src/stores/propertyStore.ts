@@ -248,6 +248,9 @@ export default class PropertyStore {
   setPropertyDataForEdit = (property: any) => {
     if (isEmpty(property)) return;
 
+    const pd = property.property_data ?? {};
+    const camel = (snakeKey: string, camelKey: string) => pd[camelKey] ?? pd[snakeKey];
+
     this.editPropertyData = {
       id: property.id,
       approved: property.approved,
@@ -256,15 +259,30 @@ export default class PropertyStore {
       referralCode: property.referral_code,
       is_signal: property.is_signal,
       propertyData: {
-        ...property.property_data,
-        bills: JSON.parse(property.property_data.bills),
-        flatmates: JSON.parse(property.property_data.flatmates),
-        description: JSON.parse(property.property_data.description),
-        period: JSON.parse(property.property_data.period),
-        title: property?.property_data?.title
-          ? JSON.parse(property.property_data.title ?? "")
-          : property.property_data.title,
-        images: property?.property_data?.images,
+        ...pd,
+        type: camel("property_type", "type"),
+        postcode: pd.postcode,
+        bathrooms: pd.bathrooms,
+        toilets: pd.toilets,
+        furnishedType: camel("furnished_type", "furnishedType"),
+        availableFrom: camel("available_from", "availableFrom"),
+        availableTo: camel("available_to", "availableTo"),
+        petsAllowed: pd.petsAllowed ?? pd.pets_allowed,
+        smokingAllowed: pd.smokingAllowed ?? pd.smoking_allowed,
+        bills: typeof pd.bills === "string" ? JSON.parse(pd.bills) : pd.bills,
+        flatmates: typeof pd.flatmates === "string" ? JSON.parse(pd.flatmates) : pd.flatmates,
+        description: typeof pd.description === "string" ? JSON.parse(pd.description) : pd.description,
+        period: typeof pd.period === "string" ? JSON.parse(pd.period) : pd.period,
+        title: pd?.title != null
+          ? (typeof pd.title === "string" ? JSON.parse(pd.title) : pd.title)
+          : pd.title,
+        images: pd?.images,
+        amenities: (() => {
+          const raw = pd.amenities;
+          if (Array.isArray(raw)) return raw.map((n: unknown) => Number(n)).filter((n) => !Number.isNaN(n));
+          if (typeof raw === "string") return raw.split(",").map((s) => parseInt(s.trim(), 10)).filter((n) => !Number.isNaN(n));
+          return [];
+        })(),
       },
       newImages: [],
     };
