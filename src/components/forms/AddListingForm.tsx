@@ -19,12 +19,18 @@ import {
 } from "@/utils/helpers";
 import { toast } from "react-toastify";
 import {
+  AMENITIES_LIST,
   FURNISHED_TYPES,
+  getAmenityLabel,
+  getAmenityLabelKey,
   getFurnishedTypeLabelKey,
   getPropertyTypeLabelKey,
+  getSharedSpaceLabel,
+  getSharedSpaceLabelKey,
   getTranslatedEnum,
   LONG_LOADING_MODAL,
   PROPERTY_TYPES,
+  SHARED_SPACE_LIST,
 } from "@/utils/defines";
 
 const AddListingForm = () => {
@@ -60,6 +66,38 @@ const AddListingForm = () => {
     userStore: { user, isUserFullySet },
     modalStore,
   } = useStore();
+
+  const amenitiesOptions = useMemo(
+    () =>
+      [...AMENITIES_LIST].map((_, id) => ({
+        id,
+        label: getTranslatedEnum(t, getAmenityLabelKey(id), getAmenityLabel(id)),
+      })).sort((a, b) => a.label.localeCompare(b.label)),
+    [t]
+  );
+  const sharedSpaceOptions = useMemo(
+    () =>
+      SHARED_SPACE_LIST.map((_, id) => ({
+        id,
+        label: getTranslatedEnum(t, getSharedSpaceLabelKey(id), getSharedSpaceLabel(id)),
+      })),
+    [t]
+  );
+
+  const selectedAmenities: number[] = Array.isArray(propertyData?.amenities) ? propertyData.amenities : [];
+  const selectedSharedSpaces: number[] = Array.isArray(propertyData?.sharedSpace) ? propertyData.sharedSpace : [];
+  const toggleAmenity = (id: number) => {
+    const next = selectedAmenities.includes(id)
+      ? selectedAmenities.filter((x) => x !== id)
+      : [...selectedAmenities, id].sort((a, b) => a - b);
+    updateListingData("propertyData", "amenities", next);
+  };
+  const toggleSharedSpace = (id: number) => {
+    const next = selectedSharedSpaces.includes(id)
+      ? selectedSharedSpaces.filter((x) => x !== id)
+      : [...selectedSharedSpaces, id].sort((a, b) => a - b);
+    updateListingData("propertyData", "sharedSpace", next);
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -216,7 +254,7 @@ const AddListingForm = () => {
 
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">Property type</label>
+              <label htmlFor="">{t("property.type") || "Property type"}</label>
               <NiceSelect
                 className="nice-select border-one d-flex align-items-center"
                 options={propertyTypeOptions}
@@ -233,7 +271,7 @@ const AddListingForm = () => {
 
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">Furnished</label>
+              <label htmlFor="">{t("property.furnished_type") || "Furnished"}</label>
               <NiceSelect
                 className="nice-select border-one d-flex align-items-center"
                 options={furnishedTypeOptions}
@@ -316,7 +354,7 @@ const AddListingForm = () => {
 
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">Bathrooms</label>
+              <label htmlFor="">{t("property.bathrooms") || "Bathrooms"}</label>
               <Form.Control
                 type="number"
                 min={1}
@@ -332,7 +370,7 @@ const AddListingForm = () => {
 
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">Toilets</label>
+              <label htmlFor="">{t("property.toilets") || "Toilets"}</label>
               <Form.Control
                 type="number"
                 min={1}
@@ -375,6 +413,52 @@ const AddListingForm = () => {
                 }}
                 isInvalid={errorFields.includes("propertyData.flatmates")}
               />
+            </div>
+          </div>
+
+          <div className={`col-12 form-group mb-30 ${errorFields.includes("propertyData.amenities") ? "border border-danger rounded-3 p-3" : ""}`}>
+            <label className="d-block mb-2">{t("property.amenities") || "Amenities"}</label>
+            <small className="d-block text-muted mb-2">Select all that apply</small>
+            <div className="row g-2 mt-2">
+              {amenitiesOptions.map(({ id, label }) => (
+                <div key={id} className="checkbox-card-type col-6 col-md-4 col-lg-3">
+                  <input
+                    type="checkbox"
+                    className="btn-check"
+                    name="amenities[]"
+                    id={`add-amenity-${id}`}
+                    autoComplete="off"
+                    checked={selectedAmenities.includes(id)}
+                    onChange={() => toggleAmenity(id)}
+                  />
+                  <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor={`add-amenity-${id}`}>
+                    <span>{label}</span>
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className={`col-12 form-group mb-30 ${errorFields.includes("propertyData.sharedSpace") ? "border border-danger rounded-3 p-3" : ""}`}>
+            <label className="d-block mb-2">{t("property.shared_space") || "Shared space"}</label>
+            <small className="d-block text-muted mb-2">Select all that apply</small>
+            <div className="row g-2 mt-2">
+              {sharedSpaceOptions.map(({ id, label }) => (
+                <div key={id} className="checkbox-card-type col-6 col-md-4 col-lg-3">
+                  <input
+                    type="checkbox"
+                    className="btn-check"
+                    name="sharedSpace[]"
+                    id={`add-shared-space-${id}`}
+                    autoComplete="off"
+                    checked={selectedSharedSpaces.includes(id)}
+                    onChange={() => toggleSharedSpace(id)}
+                  />
+                  <label className="btn d-flex flex-column h-100 py-2 px-1 text-center rounded-4 fs-12" htmlFor={`add-shared-space-${id}`}>
+                    <span>{label}</span>
+                  </label>
+                </div>
+              ))}
             </div>
           </div>
 

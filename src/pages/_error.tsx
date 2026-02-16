@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { ErrorBoundary } from "react-error-boundary";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
@@ -19,6 +20,13 @@ const ErrorFallback = ({ resetErrorBoundary }: any) => {
           style={{ marginTop: "20vh" }}
           className="flex flex-col items-center justify-center text-center"
         >
+          <Image
+            src="/assets/img/icons/tnt.png"
+            alt="Error"
+            width={150}
+            height={150}
+            className="mb-4 m-auto"
+          />
           <h4 className="font-semibold mb-4">
             {t("react_error.something_went_wrong")}
           </h4>
