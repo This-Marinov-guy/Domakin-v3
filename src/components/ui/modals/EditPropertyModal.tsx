@@ -442,34 +442,6 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
                 </div>
               </div>
 
-              <div className="col-md-6">
-                <div className="input-group-meta form-group mb-30">
-                  <label htmlFor="">
-                    {t("emergency_housing.registration")}
-                  </label>
-                  <NiceSelect
-                    className="nice-select border-one d-flex align-items-center"
-                    options={[
-                      { value: "yes", text: t("common.yes") },
-                      { value: "no", text: t("common.no") },
-                    ]}
-                    defaultCurrent={editPropertyData.propertyData?.registration === false || String(editPropertyData.propertyData?.registration).toLowerCase() === "no" ? 1 : 0}
-                    onChange={(e) => {
-                      updateEditListingData(
-                        "propertyData",
-                        "registration",
-                        e.target.value
-                      );
-                    }}
-                    isInvalid={editErrorFields.includes(
-                      "propertyData.registration"
-                    )}
-                    name=""
-                    placeholder=""
-                  />
-                </div>
-              </div>
-
               <div className="col-lg-6 col-md-6 col-12">
                 <div className="input-group-meta form-group mb-30">
                   <label htmlFor="">{t("emergency_housing.rent")}</label>
@@ -555,31 +527,77 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
                 </div>
               </div>
 
-              <div className="col-lg-6 col-md-6 col-12">
-                <div className="input-group-meta form-group mb-30 d-flex align-items-center gap-2">
-                  <Form.Check
-                    type="switch"
-                    id="edit-pets-allowed"
-                    label="Pets allowed"
-                    checked={editPropertyData.propertyData?.petsAllowed === true || editPropertyData.propertyData?.pets_allowed === true}
-                    onChange={(e) => {
-                      updateEditListingData("propertyData", "petsAllowed", e.target.checked);
-                    }}
-                  />
-                </div>
-              </div>
+              <div className="col-12">
+                <div className="switches-row bg-pink p-3 rounded-3 mb-30">
+                  <div className="row gx-4">
+                    <div className="col-md-4 col-12 mb-20 md-mb-30">
+                      <div className="switch-item">
+                        <label htmlFor="registration-switch" className="switch-label">
+                          {t("emergency_housing.registration")}
+                        </label>
+                        <div className="d-flex gap-3 align-items-center switch-control">
+                          <Form.Check
+                            type="switch"
+                            id="registration-switch"
+                            checked={editPropertyData.propertyData?.registration === true || editPropertyData.propertyData?.smoking_allowed === true}
+                            onChange={(e) => {
+                              updateEditListingData("propertyData", "registration", e.target.checked);
+                            }}
+                            className="custom-switch"
+                          />
+                          <span className="switch-status">
+                            {editPropertyData.propertyData.registration === true || editPropertyData.propertyData.registration === "yes"
+                              ? t("common.yes")
+                              : t("common.no")}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
 
-              <div className="col-lg-6 col-md-6 col-12">
-                <div className="input-group-meta form-group mb-30 d-flex align-items-center gap-2">
-                  <Form.Check
-                    type="switch"
-                    id="edit-smoking-allowed"
-                    label="Smoking allowed"
-                    checked={editPropertyData.propertyData?.smokingAllowed === true || editPropertyData.propertyData?.smoking_allowed === true}
-                    onChange={(e) => {
-                      updateEditListingData("propertyData", "smokingAllowed", e.target.checked);
-                    }}
-                  />
+                    <div className="col-md-4 col-12 mb-20 md-mb-30">
+                      <div className="switch-item">
+                        <label htmlFor="pets-allowed-switch" className="switch-label">
+                          {t("emergency_housing.pets_allowed")}
+                        </label>
+                        <div className="d-flex gap-3 align-items-center switch-control">
+                          <Form.Check
+                            type="switch"
+                            id="pets-allowed-switch"
+                            checked={editPropertyData.propertyData?.petsAllowed === true || editPropertyData.propertyData?.pets_allowed === true}
+                            onChange={(e) => {
+                              updateEditListingData("propertyData", "petsAllowed", e.target.checked);
+                            }}
+                            className="custom-switch"
+                          />
+                          <span className="switch-status">
+                            {editPropertyData.propertyData.petsAllowed ? t("common.yes") : t("common.no")}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col-md-4 col-12 mb-20 md-mb-30">
+                      <div className="switch-item">
+                        <label htmlFor="smoking-allowed-switch" className="switch-label">
+                          {t("emergency_housing.smoking_allowed")}
+                        </label>
+                        <div className="d-flex gap-3 align-items-center switch-control">
+                          <Form.Check
+                            type="switch"
+                            id="smoking-allowed-switch"
+                            checked={editPropertyData.propertyData?.smokingAllowed === true || editPropertyData.propertyData?.smoking_allowed === true}
+                            onChange={(e) => {
+                              updateEditListingData("propertyData", "smokingAllowed", e.target.checked);
+                            }}
+                            className="custom-switch"
+                          />
+                          <span className="switch-status">
+                            {editPropertyData.propertyData.smokingAllowed ? t("common.yes") : t("common.no")}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 

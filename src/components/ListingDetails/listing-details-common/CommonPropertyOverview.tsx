@@ -79,7 +79,7 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
   const sharedSpaceIds = parseSharedSpaceIds(
     extendedData?.shared_space ?? extendedData?.sharedSpace ?? property.shared_space ?? description.shared_space
   );
-  const sharedSpaceIdsSet = new Set(sharedSpaceIds);
+  const sharedSpaceIdsSet = new Set(sharedSpaceIds);  
 
   const infoItems = [
     {
@@ -89,17 +89,23 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
       content: translatedPropertyTypeLabel(t, extendedData?.type ?? extendedData?.property_type ?? property.type),
     },
     {
+      id: "size",
+      icon: `${ICONS_BASE}/size.svg`,
+      title: t("emergency_housing.size") || "Size",
+      content: property.size ?? "",
+    },
+    {
       id: "furnished",
       icon: `${ICONS_BASE}/furniture.svg`,
       title: t("property.furnished_type") || "Furnished",
       content: translatedFurnishedTypeLabel(t, extendedData?.furnished_type ?? extendedData?.furnishedType ?? property.furnished_type),
     },
-    {
-      id: "rent",
-      icon: `${ICONS_BASE}/rent.svg`,
-      title: t("property.rent") || "Rent",
-      content: property.rent != null && property.rent !== "" ? `${property.rent} €/m` : "",
-    },
+    // {
+    //   id: "rent",
+    //   icon: `${ICONS_BASE}/rent.svg`,
+    //   title: t("property.rent") || "Rent",
+    //   content: property.rent != null && property.rent !== "" ? `${property.rent} €/m` : "",
+    // },
     {
       id: "bills",
       icon: `${ICONS_BASE}/bills.svg`,
