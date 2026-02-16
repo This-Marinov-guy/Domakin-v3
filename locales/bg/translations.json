@@ -555,7 +555,8 @@
     "shared_space": "Споделени помещения",
     "pets_allowed": "Домашни любимци",
     "bathrooms": "Банни",
-    "toilets": "Тоалетни"
+    "toilets": "Тоалетни",
+    "rent": "Наем"
   },
   "enums": {
     "property_type": {

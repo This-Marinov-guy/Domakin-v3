@@ -534,7 +534,8 @@
     "shared_space": "Κοινόχρηστοι χώροι",
     "pets_allowed": "Κατοικίδια",
     "bathrooms": "Μπάνια",
-    "toilets": "Τουαλέτες"
+    "toilets": "Τουαλέτες",
+    "rent": "Ενοίκιο"
   },
   "enums": {
     "property_type": {

@@ -2,12 +2,14 @@ import Image from "next/image";
 import useTranslation from "next-translate/useTranslation";
 import { capitalizeFirstLetter } from "@/utils/helpers";
 import {
+  AMENITIES_LIST,
   getAmenityLabel,
   getAmenityLabelKey,
   getFurnishedTypeLabel,
   getFurnishedTypeLabelKey,
   getPropertyTypeLabel,
   getPropertyTypeLabelKey,
+  SHARED_SPACE_LIST,
   getSharedSpaceLabel,
   getSharedSpaceLabelKey,
   getTranslatedEnum,
@@ -47,6 +49,20 @@ const parseAmenityIds = (amenities: unknown): number[] => {
   return [];
 };
 
+const parseSharedSpaceIds = (value: unknown): number[] => {
+  if (value == null) return [];
+  if (Array.isArray(value)) return (value as number[]).map(Number).filter((n) => !Number.isNaN(n));
+  if (typeof value === "string") {
+    const trimmed = value.replace(/^\[|\]$/g, "").trim();
+    if (!trimmed) return [];
+    return trimmed
+      .split(",")
+      .map((s) => parseInt(s.trim(), 10))
+      .filter((n) => !Number.isNaN(n));
+  }
+  return [];
+};
+
 const formatYesNo = (value: unknown): string => {
   if (value === true || value === "1" || value === "true") return "Yes";
   if (value === false || value === "0" || value === "false") return "No";
@@ -57,20 +73,13 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
   const { description } = property;
   const { t } = useTranslation("translations");
 
-  const amenityIds = parseAmenityIds(extendedData?.amenities ?? property.amenities);
-  const amenityLabels = amenityIds
-    .map((id) => getTranslatedEnum(t, getAmenityLabelKey(id), getAmenityLabel(id)))
-    .filter(Boolean);
+  const amenityIds = parseAmenityIds(extendedData?.amenities ?? property.amenities ?? description.amenities);
+  const amenityIdsSet = new Set(amenityIds);
 
-  const sharedSpaceRaw = extendedData?.shared_space ?? extendedData?.sharedSpace ?? property.shared_space;
-  const sharedSpaceIds: number[] = Array.isArray(sharedSpaceRaw)
-    ? (sharedSpaceRaw as number[])
-    : typeof sharedSpaceRaw === "string"
-      ? sharedSpaceRaw.split(",").map((s: string) => parseInt(s.trim(), 10)).filter((n: number) => !Number.isNaN(n))
-      : [];
-  const sharedSpaceLabels = sharedSpaceIds
-    .map((id) => getTranslatedEnum(t, getSharedSpaceLabelKey(id), getSharedSpaceLabel(id)))
-    .filter(Boolean);
+  const sharedSpaceIds = parseSharedSpaceIds(
+    extendedData?.shared_space ?? extendedData?.sharedSpace ?? property.shared_space ?? description.shared_space
+  );
+  const sharedSpaceIdsSet = new Set(sharedSpaceIds);
 
   const infoItems = [
     {
@@ -86,10 +95,10 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
       content: translatedFurnishedTypeLabel(t, extendedData?.furnished_type ?? extendedData?.furnishedType ?? property.furnished_type),
     },
     {
-      id: "period",
-      icon: `${ICONS_BASE}/calendar.svg`,
-      title: t("property.free_from_period") || "Available From",
-      content: description.period ?? "",
+      id: "rent",
+      icon: `${ICONS_BASE}/rent.svg`,
+      title: t("property.rent") || "Rent",
+      content: property.rent != null && property.rent !== "" ? `${property.rent} €/m` : "",
     },
     {
       id: "bills",
@@ -97,6 +106,13 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
       title: t("property.bills") || "Bills",
       content: description.bills ?? "",
     },
+    {
+      id: "period",
+      icon: `${ICONS_BASE}/calendar.svg`,
+      title: t("property.free_from_period") || "Available From",
+      content: description.period ?? "",
+    },
+
     {
       id: "registration",
       icon: `${ICONS_BASE}/registration.svg`,
@@ -129,7 +145,7 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
     },
   ].filter((item) => item.content && item.content !== "" && item.content !== "—");
 
-  const hasBadges = amenityLabels.length > 0 || sharedSpaceLabels.length > 0;
+  const hasAmenitiesOrSharedSpace = AMENITIES_LIST.length > 0 || SHARED_SPACE_LIST.length > 0;
 
   return (
     <>
@@ -160,47 +176,60 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
       )}
 
       <div className="row">
-        {amenityLabels.length > 0 && (
+        {AMENITIES_LIST.length > 0 && (
           <div className="mb-30 col-md-6 col-12">
             <div className="fs-16 fw-500 color-dark mb-15">
               {t("property.amenities") || "Amenities"}
             </div>
             <div className="d-flex flex-wrap gap-2">
-              {amenityLabels.map((label, i) => (
-                <span
-                  key={i}
-                  className="d-inline-flex align-items-center bg-light border-10 p-15 fs-14 fw-500 color-dark"
-                >
-                  {label}
-                </span>
-              ))}
+              {AMENITIES_LIST.map((_, id) => {
+                const label = getTranslatedEnum(t, getAmenityLabelKey(id), getAmenityLabel(id));
+                const available = amenityIdsSet.has(id);
+                return (
+                  <span
+                    key={id}
+                    className={`d-inline-flex align-items-center border-10 p-15 fs-14 fw-500 ${available
+                      ? "bg-blue text-white"
+                      : "bg-light opacity-50 text-muted"
+                      }`}
+                  >
+                    {label}
+                  </span>
+                );
+              })}
             </div>
           </div>
         )}
 
-        {sharedSpaceLabels.length > 0 && (
+        {SHARED_SPACE_LIST.length > 0 && (
           <div className="mb-30 col-md-6 col-12">
             <div className="fs-16 fw-500 color-dark mb-15">
-              {t("property.shared_space") || "Shared Spaces"}
+              {t("property.shared_space") || "Shared space"}
             </div>
             <div className="d-flex flex-wrap gap-2">
-              {sharedSpaceLabels.map((label, i) => (
-                <span
-                  key={i}
-                  className="d-inline-flex align-items-center bg-light border-10 p-15 fs-14 fw-500 color-dark"
-                >
-                  {label}
-                </span>
-              ))}
+              {SHARED_SPACE_LIST.map((_, id) => {
+                const label = getTranslatedEnum(t, getSharedSpaceLabelKey(id), getSharedSpaceLabel(id));
+                const available = sharedSpaceIdsSet.has(id);
+                return (
+                  <span
+                    key={id}
+                    className={`d-inline-flex align-items-center border-10 p-15 fs-14 fw-500 ${available
+                      ? "bg-blue text-white"
+                      : "bg-light opacity-50 text-muted"
+                      }`}
+                  >
+                    {label}
+                  </span>
+                );
+              })}
             </div>
           </div>
         )}
-
       </div>
 
       {property.description.property && (
         <>
-          {(infoItems.length > 0 || hasBadges) && <hr />}
+          {(infoItems.length > 0 || hasAmenitiesOrSharedSpace) && <hr />}
           <div className="mt-20">
             <p className="fs-20 lh-lg color-dark m0">
               {property.description.property}

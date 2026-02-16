@@ -552,7 +552,8 @@
     "shared_space": "Shared space",
     "pets_allowed": "Pets allowed",
     "bathrooms": "Bathrooms",
-    "toilets": "Toilets"
+    "toilets": "Toilets",
+    "rent": "Rent"
   },
   "enums": {
     "property_type": {

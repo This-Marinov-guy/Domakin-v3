@@ -138,12 +138,16 @@ p {
   background: linear-gradient(135deg, $color-one 0%, lighten($color-one, 14%) 100%);
 }
 
+.bg-blue {
+  background: $color-two;
+}
+
 .bg-blue-two {
   background: linear-gradient(135deg, $color-two 0%, darken($color-two, 10%) 100%);
 }
 
 .bg-blue-three {
-  background: linear-gradient(135deg, $color-two 0%, lighten($color-two, 18%) 100%);
+  background: linear-gradient(135deg, $color-two 0%, lighten($color-two, 32%) 100%);
 }
 
 .bg-light {
