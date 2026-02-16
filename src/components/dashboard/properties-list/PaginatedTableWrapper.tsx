@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useImperativeHandle, forwardRef } from "react";
+import React, { useEffect, useRef, useState, useImperativeHandle, forwardRef } from "react";
 import ReactPaginate from "react-paginate";
 import styles from "./PaginatedTableWrapper.module.css";
 import { PAGINATION_PER_PAGE_OPTIONS_1, PAGINATION_PER_PAGE_OPTIONS_2 } from "@/utils/config";
@@ -26,6 +26,10 @@ interface PaginatedTableWrapperProps<T> {
   initialPerPage?: number;
   perPageOptionsType?: 'default' | 'extended';
   perPageOptions?: number[];
+  /** When this changes, we load page 0 once (e.g. filter signature). Prevents remount + multiple requests. */
+  filterKey?: string;
+  /** When false, do not run load effect (e.g. until parent has initialized from URL). Default true. */
+  loadEnabled?: boolean;
 }
 
 const PaginatedTableWrapper = forwardRef(function PaginatedTableWrapper<T>(
@@ -35,6 +39,8 @@ const PaginatedTableWrapper = forwardRef(function PaginatedTableWrapper<T>(
     initialPerPage = 10,
     perPageOptionsType = 'default',
     perPageOptions,
+    filterKey = "",
+    loadEnabled = true,
   }: PaginatedTableWrapperProps<T>,
   ref: React.Ref<PaginatedTableWrapperHandle>
 ) {
@@ -61,6 +67,8 @@ const PaginatedTableWrapper = forwardRef(function PaginatedTableWrapper<T>(
   const [perPage, setPerPage] = useState(getInitialPerPage);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  const prevFilterKeyRef = useRef(filterKey);
+  const skipNextLoadRef = useRef(false);
 
   const load = async (page = currentPage, perPageValue = perPage) => {
     setLoading(true);
@@ -85,11 +93,23 @@ const PaginatedTableWrapper = forwardRef(function PaginatedTableWrapper<T>(
   }));
 
   useEffect(() => {
+    if (!loadEnabled) return;
+    if (skipNextLoadRef.current) {
+      skipNextLoadRef.current = false;
+      return;
+    }
+    const filterKeyChanged = prevFilterKeyRef.current !== filterKey;
+    if (filterKeyChanged) {
+      prevFilterKeyRef.current = filterKey;
+      setCurrentPage(0);
+      skipNextLoadRef.current = true;
+      load(0, perPage);
+      return;
+    }
     load(currentPage, perPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, perPage]);
+  }, [loadEnabled, filterKey, currentPage, perPage]);
 
-  // Save perPage to localStorage whenever it changes
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem(localStorageKey, String(perPage));

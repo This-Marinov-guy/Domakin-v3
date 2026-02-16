@@ -43,12 +43,15 @@ interface ApplicationTableBodyProps {
   filterCity?: string;
   filterSearch?: string;
   filterReferenceId?: string;
+  /** When false, table does not fetch until true (avoids initial load before URL init). */
+  loadEnabled?: boolean;
 }
 
 const ApplicationTableBody = ({
   filterCity = "",
   filterSearch = "",
   filterReferenceId = "",
+  loadEnabled = true,
 }: ApplicationTableBodyProps) => {
   const { modalStore, userStore: { isAdmin } } = useStore();
   const { sendRequest } = useServer();
@@ -130,8 +133,20 @@ const ApplicationTableBody = ({
     });
   };
 
-  const openPreviewModal = (item: ApplicationListItem) => {
-    modalStore.setActiveModal(APPLICATION_PREVIEW_MODAL, { entry: item });
+  const openPreviewModal = async (item: ApplicationListItem) => {
+    const applicationId = item.id;
+    try {
+      const response = await sendRequest(
+        `/listing-application/${applicationId}`
+      );
+      const fullEntry =
+        response?.status && response?.data != null
+          ? (response.data as ApplicationListItem)
+          : item;
+      modalStore.setActiveModal(APPLICATION_PREVIEW_MODAL, { entry: fullEntry });
+    } catch {
+      modalStore.setActiveModal(APPLICATION_PREVIEW_MODAL, { entry: item });
+    }
   };
 
   const handleCopyLink = async (item: ApplicationListItem) => {
@@ -265,7 +280,7 @@ const ApplicationTableBody = ({
                         Preview
                       </button>
                     </li>
-                    <li>
+                    {/* <li>
                       <button
                         type="button"
                         className="dropdown-item"
@@ -274,7 +289,7 @@ const ApplicationTableBody = ({
                         <Image src={icon_3} alt="" className="lazy-img" />
                         Edit
                       </button>
-                    </li>
+                    </li> */}
                     <li>
                       <button
                         type="button"
@@ -313,14 +328,17 @@ const ApplicationTableBody = ({
     </>
   );
 
+  const filterKey = `${filterCity}-${filterSearch}-${filterReferenceId}`;
+
   return (
     <tbody className="border-0">
       <PaginatedTableWrapper
-        key={`${filterCity}-${filterSearch}-${filterReferenceId}`}
         ref={paginationRef}
         fetchData={fetchData}
         renderRows={(data) => renderRows(data as ApplicationListItem[])}
         initialPerPage={10}
+        filterKey={filterKey}
+        loadEnabled={loadEnabled}
       />
     </tbody>
   );

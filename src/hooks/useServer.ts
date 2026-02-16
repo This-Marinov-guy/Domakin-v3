@@ -94,14 +94,20 @@ export const useServer = () => {
     let requestData = {};
 
     if (["GET", "DELETE"].includes(method)) {
-      // Add interface to query params
-      const queryParams = new URLSearchParams(
-        (data as Record<string, string>) || {}
-      );
+      // Parse url: path may already contain query string
+      const [pathOnly, existingSearch] = url.split("?");
+      const queryParams = new URLSearchParams(existingSearch || "");
+      // Merge in data (body params for GET/DELETE)
+      const dataObj = (data as Record<string, string>) || {};
+      for (const [k, v] of Object.entries(dataObj)) {
+        if (v !== undefined && v !== null) queryParams.set(k, String(v));
+      }
       queryParams.set("interface", "web");
 
+      const basePath = `${SERVER_ENDPOINT}/api/v${options.version}${pathOnly}`;
+      const queryString = queryParams.toString();
       requestData = {
-        url: `${SERVER_ENDPOINT}/api/v${options.version}${url}?${queryParams.toString()}`,
+        url: queryString ? `${basePath}?${queryString}` : basePath,
         method,
         data: {},
         headers,

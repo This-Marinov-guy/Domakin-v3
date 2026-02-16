@@ -17,9 +17,10 @@ const ApplicationListBody = () => {
   const [filterCity, setFilterCity] = useState("");
   const [filterSearch, setFilterSearch] = useState("");
   const [filterReferenceId, setFilterReferenceId] = useState("");
+  const [isInitialized, setIsInitialized] = useState(false);
   const hasInitializedFromUrl = useRef(false);
 
-  // Initialize filter inputs from URL query when page loads (e.g. shared link)
+  // Initialize filter inputs from URL query once when router is ready (avoids load with empty then with URL params)
   useEffect(() => {
     if (!router.isReady || hasInitializedFromUrl.current) return;
     hasInitializedFromUrl.current = true;
@@ -34,21 +35,23 @@ const ApplicationListBody = () => {
     setFilterCity(city);
     setFilterSearch(search);
     setFilterReferenceId(referenceId);
-  }, [router.isReady, router.query]);
+    setIsInitialized(true);
+  }, [router.isReady]);
 
-  // Debounce: sync inputs to effective filters
+  // Debounce: sync inputs to effective filters (only after init, so we don't overwrite URL state immediately)
   useEffect(() => {
+    if (!isInitialized) return;
     const t = setTimeout(() => {
       setFilterCity(cityInput.trim());
       setFilterSearch(searchInput.trim());
       setFilterReferenceId(referenceIdInput.trim());
     }, DEBOUNCE_MS);
     return () => clearTimeout(t);
-  }, [cityInput, searchInput, referenceIdInput]);
+  }, [isInitialized, cityInput, searchInput, referenceIdInput]);
 
-  // Push filter state to URL so the link can be shared
+  // Push filter state to URL so the link can be shared (only after init, avoid firing before we've set state from URL)
   useEffect(() => {
-    if (!router.isReady) return;
+    if (!isInitialized) return;
     const q = { ...router.query } as Record<string, string>;
     if (filterCity) q.city = filterCity;
     else delete q.city;
@@ -63,7 +66,7 @@ const ApplicationListBody = () => {
       current.reference_id === (q.reference_id ?? "");
     if (same) return;
     router.replace({ pathname: router.pathname, query: q }, undefined, { shallow: true });
-  }, [filterCity, filterSearch, filterReferenceId, router.isReady]);
+  }, [isInitialized, filterCity, filterSearch, filterReferenceId]);
 
   return (
     <div className="bg-white card-box p0 border-20">
@@ -108,23 +111,15 @@ const ApplicationListBody = () => {
         </div>
       </div>
       <div className="table-responsive pt-0 pb-25 pe-4 ps-4">
-        <table className="table property-list-table">
+        {!isInitialized && (
+          <div className="text-center py-5 text-muted">Loading filters…</div>
+        )}
+        <table className="table property-list-table" style={{ visibility: isInitialized ? undefined : "hidden" }}>
           <thead>
             <tr>
               <th className="text-center" scope="col">
                 Property
-                <OverlayTrigger
-                  placement="top"
-                  overlay={
-                    <Tooltip id="property-th-tooltip">
-                      Hover over the property image to see the reference ID
-                    </Tooltip>
-                  }
-                >
-                  <span className="ms-1 text-muted" style={{ cursor: "pointer"}}>
-                    <i className="fas fa-info-circle" style={{backgroundColor: "white", borderRadius: "50%"}} aria-hidden />
-                  </span>
-                </OverlayTrigger>
+               
               </th>
               <th className="text-center" scope="col">
                 Location
@@ -150,6 +145,7 @@ const ApplicationListBody = () => {
             filterCity={filterCity}
             filterSearch={filterSearch}
             filterReferenceId={filterReferenceId}
+            loadEnabled={isInitialized}
           />
         </table>
       </div>
