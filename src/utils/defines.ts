@@ -120,3 +120,33 @@ export const FURNISHED_TYPES = [
   { value: 2, text: "Semi-furnished" },
   { value: 3, text: "None" },
 ];
+
+/**
+ * Amenities enum: index = value stored in DB, string = label shown to client.
+ * Use AMENITIES_LIST[id] to get label for a given id.
+ */
+export const AMENITIES_LIST: readonly string[] = [
+  "A/C & Heating",
+  "Garages",
+  "Swimming Pool",
+  "Parking",
+  "Lake View",
+  "Garden",
+  "Disabled Access",
+  "Pet Friendly",
+  "Ceiling Height",
+  "Outdoor Shower",
+  "Refrigerator",
+  "Fireplace",
+  "Wifi",
+  "TV Cable",
+  "Barbeque",
+  "Laundry",
+  "Dryer",
+  "Lawn",
+  "Elevator",
+];
+
+/** Get display label for an amenity id (number from DB). */
+export const getAmenityLabel = (id: number): string =>
+  AMENITIES_LIST[id] ?? `#${id}`;

@@ -1,29 +1,7 @@
 import { formatJsonKeyValuePairs } from "@/utils/helpers";
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import { FURNISHED_TYPES, PROPERTY_TYPES } from "@/utils/defines";
-
-const AMENITIES_LIST: string[] = [
-  "A/C & Heating",
-  "Garages",
-  "Swimming Pool",
-  "Parking",
-  "Lake View",
-  "Garden",
-  "Disabled Access",
-  "Pet Friendly",
-  "Ceiling Height",
-  "Outdoor Shower",
-  "Refrigerator",
-  "Fireplace",
-  "Wifi",
-  "TV Cable",
-  "Barbeque",
-  "Laundry",
-  "Dryer",
-  "Lawn",
-  "Elevator",
-];
+import { FURNISHED_TYPES, getAmenityLabel, PROPERTY_TYPES } from "@/utils/defines";
 
 const propertyTypeLabel = (value: number | string | undefined) => {
   if (value == null || value === "") return "-";
@@ -87,10 +65,7 @@ const amenitiesLabel = (amenities: unknown): string => {
       ? amenities.split(",").map((s) => parseInt(s.trim(), 10)).filter((n) => !Number.isNaN(n))
       : [];
   if (arr.length === 0) return "-";
-  return arr
-    .map((id) => AMENITIES_LIST[id] ?? `#${id}`)
-    .filter(Boolean)
-    .join(", ");
+  return arr.map((id) => getAmenityLabel(id)).filter(Boolean).join(", ");
 };
 
 const PropertyDataPreview = ({ onHide, data }: any) => {

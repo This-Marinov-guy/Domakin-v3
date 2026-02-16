@@ -189,7 +189,7 @@ const ApplicationsModal = () => {
                       return (
                         <tr key={key}>
                           <td className="text-muted small pe-2">Application date</td>
-                          <td>{moment(val as string).format("DD/MM/YYYY hh:mm")}</td>
+                          <td>{moment(val as string).format("DD-MM-YYYY HH:mm")}</td>
                         </tr>
                       );
                     }
@@ -241,7 +241,7 @@ const ApplicationsModal = () => {
                     }
 
                     if (key === "internal_note") {
-                      const internalUpdatedAt = entry.internal_updated_at ? moment(entry.internal_updated_at as string).format("DD/MM/YYYY HH:mm") : null;
+                      const internalUpdatedAt = entry.internal_updated_at ? moment(entry.internal_updated_at as string).format("DD-MM-YYYY HH:mm") : null;
                       const internalUpdatedBy = (entry.internal_updated_by_user as any)?.name as string;
                       const hasMeta = internalUpdatedAt != null || internalUpdatedBy != null;
                       const tooltip = (

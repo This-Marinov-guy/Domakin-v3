@@ -8,6 +8,7 @@ import { APPLICATION_PREVIEW_MODAL } from "@/utils/defines";
 import { APPLICATION_STATUSES } from "@/utils/defines";
 import moment from "moment";
 import { formatJsonKeyValuePairs } from "@/utils/helpers";
+import { getAmenityLabel } from "@/utils/defines";
 
 const FIELD_LABELS: Record<string, string> = {
   id: "ID",
@@ -55,10 +56,8 @@ const PREFERRED_ORDER = [
   "property_data",
 ];
 
-const formatLabel = (key: string) =>
-  key
-    .replace(/_/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+const formatKeyLabel = (key: string) =>
+  FIELD_LABELS[key] ?? key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
 const ApplicationPreviewModal = () => {
   const { modalStore } = useStore();
@@ -75,10 +74,9 @@ const ApplicationPreviewModal = () => {
       ? APPLICATION_STATUSES.find((s) => s.value === statusValue)?.text ?? String(statusValue)
       : "—";
 
-  const displayValue = (key: string, val: unknown): React.ReactNode => {
-    if (val == null || val === "") return "—";
-    if (key === "created_at")
-      return moment(String(val)).format("DD/MM/YYYY HH:mm");
+  const toDisplayText = (key: string, val: unknown): React.ReactNode => {
+    if (val == null || val === "") return null;
+    if (key === "created_at") return moment(String(val)).format("DD-MM-YYYY HH:mm");
     if (key === "letter") {
       const url = String(val);
       if (/^https?:\/\//i.test(url))
@@ -87,54 +85,24 @@ const ApplicationPreviewModal = () => {
             Open letter <i className="fas fa-external-link-alt ms-1 small" />
           </a>
         );
-      return url || "—";
+      return url;
     }
     if (key === "status") return statusText;
     if (key === "property_title") {
       if (typeof val === "object" && val !== null) {
         try {
           const str = typeof val === "string" ? val : JSON.stringify(val);
-          return formatJsonKeyValuePairs(str, ["en"]) || "—";
+          return formatJsonKeyValuePairs(str, ["en"]) || null;
         } catch {
           return String(val);
         }
       }
       return String(val);
     }
-    if (key === "property_data") {
-      const pd = val as Record<string, unknown> | null | undefined;
-      if (!pd || typeof pd !== "object") return "—";
-      return (
-        <div className="small mt-1">
-          <table className="table table-sm table-borderless mb-0">
-            <tbody>
-              {Object.entries(pd).map(([k, v]) => {
-                if (v === undefined || v === null) return null;
-                const display =
-                  typeof v === "object"
-                    ? (Array.isArray(v) ? JSON.stringify(v) : JSON.stringify(v))
-                    : String(v);
-                return (
-                  <tr key={k}>
-                    <td className="text-muted pe-2" style={{ width: "35%" }}>
-                      {formatLabel(k)}
-                    </td>
-                    <td className="text-break">{display}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      );
-    }
+    if (key === "property_data") return null;
     if (typeof val === "object" && val !== null) {
       if (Array.isArray(val)) return JSON.stringify(val);
-      return (
-        <pre className="small mb-0 text-break" style={{ whiteSpace: "pre-wrap" }}>
-          {JSON.stringify(val, null, 2)}
-        </pre>
-      );
+      return JSON.stringify(val);
     }
     return String(val);
   };
@@ -145,27 +113,67 @@ const ApplicationPreviewModal = () => {
     ...allKeys.filter((k) => !PREFERRED_ORDER.includes(k)).sort(),
   ];
 
+  const rows: { key: string; label: string; value: React.ReactNode }[] = [];
+  if (entry) {
+    for (const key of orderedKeys) {
+      const val = entry[key];
+      if (key === "property_data") {
+        const pd = val as Record<string, unknown> | null | undefined;
+        if (pd && typeof pd === "object") {
+          for (const [k, v] of Object.entries(pd)) {
+            if (v === undefined || v === null) continue;
+            const display =
+              typeof v === "object" ? JSON.stringify(v) : String(v);
+            rows.push({
+              key: `property_data.${k}`,
+              label: k.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
+              value: display,
+            });
+          }
+        }
+        continue;
+      }
+      if (key === "amenities") {
+        const arr = Array.isArray(val) ? (val as number[]) : [];
+        const amenityLabels = arr.map((id) => getAmenityLabel(Number(id))).filter(Boolean);
+        if (amenityLabels.length > 0) {
+          rows.push({
+            key: "amenities",
+            label: "Amenities",
+            value: amenityLabels.join(", "),
+          });
+        }
+        continue;
+      }
+      const value = toDisplayText(key, val);
+      if (value == null) continue;
+      rows.push({
+        key,
+        label: formatKeyLabel(key),
+        value,
+      });
+    }
+  }
+
   return (
-    <Modal show={isOpen} onHide={handleClose} size="lg" centered scrollable>
+    <Modal show={isOpen} onHide={handleClose} size="lg" centered>
       <Modal.Header closeButton>
-        <Modal.Title>Application preview</Modal.Title>
+        <h6>Application preview</h6>
       </Modal.Header>
       <Modal.Body>
         {!entry ? (
           <p className="text-muted">No application data.</p>
         ) : (
-          <table className="table table-sm table-borderless">
-            <tbody>
-              {orderedKeys.map((key) => (
-                <tr key={key}>
-                  <td className="text-muted small pe-2 align-top" style={{ width: "40%" }}>
-                    {FIELD_LABELS[key] ?? formatLabel(key)}
-                  </td>
-                  <td className="align-top">{displayValue(key, entry[key])}</td>
-                </tr>
+          <>
+            <h6>Application details</h6>
+            <ul>
+              {rows.map(({ key, label, value }) => (
+                <li key={key}>
+                  {label}: {value}
+                </li>
               ))}
-            </tbody>
-          </table>
+            </ul>
+          </>
         )}
       </Modal.Body>
     </Modal>

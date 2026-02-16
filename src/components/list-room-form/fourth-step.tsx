@@ -6,28 +6,7 @@ import useTranslation from "next-translate/useTranslation";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
-
-const AMENITIES_LIST: string[] = [
-    "A/C & Heating",
-    "Garages",
-    "Swimming Pool",
-    "Parking",
-    "Lake View",
-    "Garden",
-    "Disabled Access",
-    "Pet Friendly",
-    "Ceiling Height",
-    "Outdoor Shower",
-    "Refrigerator",
-    "Fireplace",
-    "Wifi",
-    "TV Cable",
-    "Barbeque",
-    "Laundry",
-    "Dryer",
-    "Lawn",
-    "Elevator",
-];
+import { AMENITIES_LIST } from "@/utils/defines";
 
 const SHARED_SPACE_OPTIONS: string[] = [
     "Bedroom",
@@ -71,7 +50,7 @@ function FourthStep({
 
     const amenitiesSorted = useMemo(
         () =>
-            AMENITIES_LIST.map((label, id) => ({ id, label })).sort((a, b) =>
+            [...AMENITIES_LIST].map((label, id) => ({ id, label })).sort((a, b) =>
                 a.label.localeCompare(b.label)
             ),
         []

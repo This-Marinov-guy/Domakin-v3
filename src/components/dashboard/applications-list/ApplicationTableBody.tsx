@@ -9,7 +9,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import { useServer } from "@/hooks/useServer";
 import { APPLICATION_MODAL, APPLICATION_PREVIEW_MODAL } from "@/utils/defines";
 import { formatJsonKeyValuePairs } from "@/utils/helpers";
-import { getPropertyUrl } from "@/utils/seoHelpers";
+import { getApplicationUrl, getPropertyUrl } from "@/utils/seoHelpers";
 import { showGeneralError, showStandardNotification } from "@/utils/helpers";
 import useTranslation from "next-translate/useTranslation";
 import PaginatedTableWrapper, {
@@ -133,31 +133,19 @@ const ApplicationTableBody = ({
     });
   };
 
-  const openPreviewModal = async (item: ApplicationListItem) => {
-    const applicationId = item.id;
-    try {
-      const response = await sendRequest(
-        `/listing-application/${applicationId}`
-      );
-      const fullEntry =
-        response?.status && response?.data != null
-          ? (response.data as ApplicationListItem)
-          : item;
-      modalStore.setActiveModal(APPLICATION_PREVIEW_MODAL, { entry: fullEntry });
-    } catch {
-      modalStore.setActiveModal(APPLICATION_PREVIEW_MODAL, { entry: item });
-    }
+  const openPreviewModal = (item: ApplicationListItem) => {
+    modalStore.setActiveModal(APPLICATION_PREVIEW_MODAL, { entry: item });
   };
 
   const handleCopyLink = async (item: ApplicationListItem) => {
-    const url = getPropertyUrlForItem(item);
+    const url = getApplicationUrl(item);
     if (!url) {
       showGeneralError("No link to copy");
       return;
     }
     try {
       await navigator.clipboard.writeText(url);
-      showStandardNotification("success", "Link copied to clipboard");
+      showStandardNotification("info", "Link copied to clipboard");
     } catch {
       showGeneralError("Failed to copy link");
     }
@@ -214,7 +202,7 @@ const ApplicationTableBody = ({
             : String(item.property_title ?? "—");
         const applicant = [item.name, item.surname].filter(Boolean).join(" ") || "—";
         const date = item.created_at
-          ? moment(item.created_at).format("DD/MM/YYYY HH:mm")
+          ? moment(item.created_at).format("DD-MM-YYYY HH:mm")
           : "—";
         const propertyImageSrc = getFirstPropertyImage(item);
         const isFallback = propertyImageSrc === FALLBACK_PROPERTY_IMAGE;

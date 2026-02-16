@@ -7,6 +7,7 @@ import icon_4 from "@/assets/images/icon/icon_50.svg";
 import icon_5 from "@/assets/images/icon/icon_44.svg";
 import useTranslation from "next-translate/useTranslation";
 import { capitalizeFirstLetter } from "@/utils/helpers";
+import { FURNISHED_TYPES, getAmenityLabel, PROPERTY_TYPES } from "@/utils/defines";
 
 interface DataType {
   id: number;
@@ -16,7 +17,30 @@ interface DataType {
 }
 [];
 
-const CommonPropertyOverview = ({ property }: any) => {
+const propertyTypeLabel = (value: number | string | undefined) => {
+  if (value == null || value === "") return "—";
+  const v = Number(value);
+  return PROPERTY_TYPES.find((o) => o.value === v)?.text ?? String(value);
+};
+
+const furnishedTypeLabel = (value: number | string | undefined) => {
+  if (value == null || value === "") return "—";
+  const v = Number(value);
+  return FURNISHED_TYPES.find((o) => o.value === v)?.text ?? String(value);
+};
+
+const amenitiesLabel = (amenities: unknown): string => {
+  if (amenities == null) return "—";
+  const arr: number[] = Array.isArray(amenities)
+    ? (amenities as number[])
+    : typeof amenities === "string"
+      ? amenities.split(",").map((s) => parseInt(s.trim(), 10)).filter((n) => !Number.isNaN(n))
+      : [];
+  if (arr.length === 0) return "—";
+  return arr.map((id) => getAmenityLabel(id)).filter(Boolean).join(", ");
+};
+
+const CommonPropertyOverview = ({ property, extendedData }: any) => {
   const { description } = property;
 
   const { t } = useTranslation("translations");
@@ -72,6 +96,34 @@ const CommonPropertyOverview = ({ property }: any) => {
           </div>
         ))}
       </div>
+      {extendedData && (
+        <div className="mt-20 row border-top pt-20">
+          <div className="col-12">
+            <ul className="style-none d-flex flex-wrap gap-3 gap-lg-4 mb-0 fs-6">
+              <li className="d-flex align-items-center gap-2">
+                <span className="fw-bold color-dark">{t("property.type") || "Type"}:</span>
+                <span>{propertyTypeLabel(extendedData.type ?? extendedData.property_type)}</span>
+              </li>
+              <li className="d-flex align-items-center gap-2">
+                <span className="fw-bold color-dark">{t("property.furnished_type") || "Furnished"}:</span>
+                <span>{furnishedTypeLabel(extendedData.furnished_type ?? extendedData.furnishedType)}</span>
+              </li>
+              <li className="d-flex align-items-center gap-2">
+                <span className="fw-bold color-dark">{t("property.amenities") || "Amenities"}:</span>
+                <span>{amenitiesLabel(extendedData.amenities)}</span>
+              </li>
+              <li className="d-flex align-items-center gap-2">
+                <span className="fw-bold color-dark">{t("property.toilets") || "Toilets"}:</span>
+                <span>{extendedData.toilets != null && extendedData.toilets !== "" ? String(extendedData.toilets) : "—"}</span>
+              </li>
+              <li className="d-flex align-items-center gap-2">
+                <span className="fw-bold color-dark">{t("property.bathrooms") || "Bathrooms"}:</span>
+                <span>{extendedData.bathrooms != null && extendedData.bathrooms !== "" ? String(extendedData.bathrooms) : "—"}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
       {property.description.property && (
         <div className="mt-20 row">
           <div className="text-center col-lg-12 col-md-12 col-12">

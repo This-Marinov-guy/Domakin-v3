@@ -35,6 +35,10 @@ export function getPropertyUrl(
   return `${languagePrefix}/services/renting/property/${property.id}`;
 }
 
+export const getApplicationUrl = (application: any): string => {
+  return `${process.env.NEXT_PUBLIC_URL}/services/add-listing?reference_id=${application.reference_id}`;
+}
+
 export function createBlogSlug(post: any): string {
   // Always use the slug from the API response
   return post.slug || 'post';

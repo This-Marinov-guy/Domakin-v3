@@ -12,35 +12,13 @@ import { useServer } from "@/hooks/useServer";
 import { toast } from "react-toastify";
 import MultiValueInput from "../inputs/MultiValueInput";
 import ImageWithBadge from "../borders/ImageBadgeBorder";
-import { EDIT_PROPERTY_MODAL, FURNISHED_TYPES, PROPERTY_STATUSES, PROPERTY_TYPES } from "@/utils/defines";
+import { AMENITIES_LIST, EDIT_PROPERTY_MODAL, FURNISHED_TYPES, PROPERTY_STATUSES, PROPERTY_TYPES } from "@/utils/defines";
 import { showGeneralError, transformToFormData } from "@/utils/helpers";
 import { MdClose } from "react-icons/md";
 import MultiFilePreviewInput from "../inputs/files/MultiFilePreviewInput";
 import signalIcon from "@/assets/images/icon/signal.avif";
 import SignalStatusConfirmationModal from "./SignalStatusConfirmationModal";
 import useStickyFooter from "@/hooks/useStickyFooter";
-
-const AMENITIES_LIST: string[] = [
-  "A/C & Heating",
-  "Garages",
-  "Swimming Pool",
-  "Parking",
-  "Lake View",
-  "Garden",
-  "Disabled Access",
-  "Pet Friendly",
-  "Ceiling Height",
-  "Outdoor Shower",
-  "Refrigerator",
-  "Fireplace",
-  "Wifi",
-  "TV Cable",
-  "Barbeque",
-  "Laundry",
-  "Dryer",
-  "Lawn",
-  "Elevator",
-];
 
 const EditPropertyModal = ({ callback = () => { } }: any) => {
   const {
@@ -75,7 +53,7 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
   const { t } = useTranslation("translations");
 
   const amenitiesSorted = useMemo(
-    () => AMENITIES_LIST.map((label, id) => ({ id, label })).sort((a, b) => a.label.localeCompare(b.label)),
+    () => [...AMENITIES_LIST].map((label, id) => ({ id, label })).sort((a, b) => a.label.localeCompare(b.label)),
     []
   );
   const selectedAmenities: number[] = Array.isArray(editPropertyData.propertyData?.amenities)
@@ -91,14 +69,7 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
   const reloadProperties = async () => {
     try {
       const response = await sendRequest(
-        "/property/listing",
-        "GET",
-        {},
-        {},
-        {
-          withError: false,
-          withLoading: true,
-        }
+        "/property/listing"
       );
 
       if (response?.status) {
