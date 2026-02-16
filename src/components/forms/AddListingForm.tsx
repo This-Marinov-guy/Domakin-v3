@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import Form from "react-bootstrap/Form";
 import NiceSelect from "@/ui/NiceSelect";
 import Trans from "next-translate/Trans";
@@ -18,10 +18,34 @@ import {
   transformToFormData,
 } from "@/utils/helpers";
 import { toast } from "react-toastify";
-import { FURNISHED_TYPES, LONG_LOADING_MODAL, PROPERTY_TYPES } from "@/utils/defines";
+import {
+  FURNISHED_TYPES,
+  getFurnishedTypeLabelKey,
+  getPropertyTypeLabelKey,
+  getTranslatedEnum,
+  LONG_LOADING_MODAL,
+  PROPERTY_TYPES,
+} from "@/utils/defines";
 
 const AddListingForm = () => {
   const { t } = useTranslation("translations");
+
+  const propertyTypeOptions = useMemo(
+    () =>
+      PROPERTY_TYPES.map(({ value, text }) => ({
+        value,
+        text: getTranslatedEnum(t, getPropertyTypeLabelKey(value), text),
+      })),
+    [t]
+  );
+  const furnishedTypeOptions = useMemo(
+    () =>
+      FURNISHED_TYPES.map(({ value, text }) => ({
+        value,
+        text: getTranslatedEnum(t, getFurnishedTypeLabelKey(value), text),
+      })),
+    [t]
+  );
 
   const { sendRequest, loading } = useServer();
 
@@ -195,8 +219,8 @@ const AddListingForm = () => {
               <label htmlFor="">Property type</label>
               <NiceSelect
                 className="nice-select border-one d-flex align-items-center"
-                options={PROPERTY_TYPES}
-                defaultCurrent={Math.max(0, PROPERTY_TYPES.findIndex((item) => String(item.value) === String(propertyData?.type ?? propertyData?.property_type)))}
+                options={propertyTypeOptions}
+                defaultCurrent={Math.max(0, propertyTypeOptions.findIndex((item) => String(item.value) === String(propertyData?.type ?? propertyData?.property_type)))}
                 onChange={(e) => {
                   updateListingData("propertyData", "type", e.target.value);
                 }}
@@ -212,8 +236,8 @@ const AddListingForm = () => {
               <label htmlFor="">Furnished</label>
               <NiceSelect
                 className="nice-select border-one d-flex align-items-center"
-                options={FURNISHED_TYPES}
-                defaultCurrent={Math.max(0, FURNISHED_TYPES.findIndex((item) => String(item.value) === String(propertyData?.furnishedType ?? propertyData?.furnished_type ?? 1)))}
+                options={furnishedTypeOptions}
+                defaultCurrent={Math.max(0, furnishedTypeOptions.findIndex((item) => String(item.value) === String(propertyData?.furnishedType ?? propertyData?.furnished_type ?? 1)))}
                 onChange={(e) => {
                   updateListingData("propertyData", "furnishedType", e.target.value);
                 }}

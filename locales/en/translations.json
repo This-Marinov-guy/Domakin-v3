@@ -544,7 +544,55 @@
     "bills": "Utilities",
     "flatmates": "Flatmates",
     "no_related_properties_found": "No related properties found",
-    "no_properties_for_the_criteria": "No properties for the criteria"
+    "no_properties_for_the_criteria": "No properties for the criteria",
+    "type": "Type",
+    "furnished_type": "Furnished type",
+    "amenities": "Amenities",
+    "registration": "Registration",
+    "shared_space": "Shared space",
+    "pets_allowed": "Pets allowed"
+  },
+  "enums": {
+    "property_type": {
+      "1": "Room in a shared apartment",
+      "2": "Studio",
+      "3": "Entire place",
+      "4": "Student house"
+    },
+    "furnished_type": {
+      "1": "Fully furnished",
+      "2": "Semi-furnished",
+      "3": "None"
+    },
+    "amenities": {
+      "0": "A/C & Heating",
+      "1": "Garages",
+      "2": "Swimming Pool",
+      "3": "Parking",
+      "4": "Lake View",
+      "5": "Garden",
+      "6": "Disabled Access",
+      "7": "Pet Friendly",
+      "8": "Ceiling Height",
+      "9": "Outdoor Shower",
+      "10": "Refrigerator",
+      "11": "Fireplace",
+      "12": "Wifi",
+      "13": "TV Cable",
+      "14": "Barbeque",
+      "15": "Laundry",
+      "16": "Dryer",
+      "17": "Lawn",
+      "18": "Elevator"
+    },
+    "shared_space": {
+      "0": "Bedroom",
+      "1": "Kitchen",
+      "2": "Bathroom",
+      "3": "Toilet",
+      "4": "Storage space",
+      "5": "Living room"
+    }
   },
   "filter": {
     "search_keyword": "Search Keyword...",

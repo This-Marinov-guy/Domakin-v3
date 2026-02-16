@@ -12,7 +12,16 @@ import { useServer } from "@/hooks/useServer";
 import { toast } from "react-toastify";
 import MultiValueInput from "../inputs/MultiValueInput";
 import ImageWithBadge from "../borders/ImageBadgeBorder";
-import { AMENITIES_LIST, EDIT_PROPERTY_MODAL, FURNISHED_TYPES, PROPERTY_STATUSES, PROPERTY_TYPES } from "@/utils/defines";
+import {
+  AMENITIES_LIST,
+  EDIT_PROPERTY_MODAL,
+  FURNISHED_TYPES,
+  getFurnishedTypeLabelKey,
+  getPropertyTypeLabelKey,
+  getTranslatedEnum,
+  PROPERTY_STATUSES,
+  PROPERTY_TYPES,
+} from "@/utils/defines";
 import { showGeneralError, transformToFormData } from "@/utils/helpers";
 import { MdClose } from "react-icons/md";
 import MultiFilePreviewInput from "../inputs/files/MultiFilePreviewInput";
@@ -51,6 +60,23 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
   });
 
   const { t } = useTranslation("translations");
+
+  const propertyTypeOptions = useMemo(
+    () =>
+      PROPERTY_TYPES.map(({ value, text }) => ({
+        value,
+        text: getTranslatedEnum(t, getPropertyTypeLabelKey(value), text),
+      })),
+    [t]
+  );
+  const furnishedTypeOptions = useMemo(
+    () =>
+      FURNISHED_TYPES.map(({ value, text }) => ({
+        value,
+        text: getTranslatedEnum(t, getFurnishedTypeLabelKey(value), text),
+      })),
+    [t]
+  );
 
   const amenitiesSorted = useMemo(
     () => [...AMENITIES_LIST].map((label, id) => ({ id, label })).sort((a, b) => a.label.localeCompare(b.label)),
@@ -343,8 +369,8 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
                   <label htmlFor="">Property type</label>
                   <NiceSelect
                     className="nice-select border-one d-flex align-items-center"
-                    options={PROPERTY_TYPES}
-                    defaultCurrent={Math.max(0, PROPERTY_TYPES.findIndex(
+                    options={propertyTypeOptions}
+                    defaultCurrent={Math.max(0, propertyTypeOptions.findIndex(
                       (item) => String(item.value) === String(editPropertyData.propertyData?.type ?? editPropertyData.propertyData?.property_type)
                     ))}
                     onChange={(e) => {
@@ -460,8 +486,8 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
                   <label htmlFor="">Furnished</label>
                   <NiceSelect
                     className="nice-select border-one d-flex align-items-center"
-                    options={FURNISHED_TYPES}
-                    defaultCurrent={Math.max(0, FURNISHED_TYPES.findIndex(
+                    options={furnishedTypeOptions}
+                    defaultCurrent={Math.max(0, furnishedTypeOptions.findIndex(
                       (item) => String(item.value) === String(editPropertyData.propertyData?.furnishedType ?? editPropertyData.propertyData?.furnished_type ?? 1)
                     ))}
                     onChange={(e) => {

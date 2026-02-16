@@ -29,7 +29,7 @@ import PropertyDataPreview from "@/components/ui/modals/PropertyDataPreview";
 import { parsePropertyPreviewData } from "@/utils/helpers";
 import StripePaymentLinkButton from "@/components/ui/buttons/StripePaymentLinkButton";
 
-const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {
+const ListingDetailsOneArea = ({ property, slug, style_3 }: any) => {  
   const { t, lang } = useTranslation("translations");
   const {
     userStore: { isAdmin },

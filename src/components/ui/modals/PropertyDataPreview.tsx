@@ -1,18 +1,33 @@
 import { formatJsonKeyValuePairs } from "@/utils/helpers";
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import { FURNISHED_TYPES, getAmenityLabel, PROPERTY_TYPES } from "@/utils/defines";
+import useTranslation from "next-translate/useTranslation";
+import {
+  getAmenityLabel,
+  getAmenityLabelKey,
+  getFurnishedTypeLabel,
+  getFurnishedTypeLabelKey,
+  getPropertyTypeLabel,
+  getPropertyTypeLabelKey,
+  getTranslatedEnum,
+} from "@/utils/defines";
 
-const propertyTypeLabel = (value: number | string | undefined) => {
+const translatedPropertyTypeLabel = (
+  t: (k: string) => string,
+  value: number | string | undefined
+) => {
   if (value == null || value === "") return "-";
   const v = Number(value);
-  return PROPERTY_TYPES.find((o) => o.value === v)?.text ?? String(value);
+  return getTranslatedEnum(t, getPropertyTypeLabelKey(v), getPropertyTypeLabel(v));
 };
 
-const furnishedTypeLabel = (value: number | string | undefined) => {
+const translatedFurnishedTypeLabel = (
+  t: (k: string) => string,
+  value: number | string | undefined
+) => {
   if (value == null || value === "") return "-";
   const v = Number(value);
-  return FURNISHED_TYPES.find((o) => o.value === v)?.text ?? String(value);
+  return getTranslatedEnum(t, getFurnishedTypeLabelKey(v), getFurnishedTypeLabel(v));
 };
 
 const formatDateDDMMYYYY = (value: string | number | undefined): string => {
@@ -57,7 +72,7 @@ const formatFlatmatesWithGender = (flatmates: unknown): string => {
     .join(" | ") || "-";
 };
 
-const amenitiesLabel = (amenities: unknown): string => {
+const translatedAmenitiesLabel = (t: (k: string) => string, amenities: unknown): string => {
   if (amenities == null) return "-";
   const arr: number[] = Array.isArray(amenities)
     ? (amenities as number[])
@@ -65,10 +80,14 @@ const amenitiesLabel = (amenities: unknown): string => {
       ? amenities.split(",").map((s) => parseInt(s.trim(), 10)).filter((n) => !Number.isNaN(n))
       : [];
   if (arr.length === 0) return "-";
-  return arr.map((id) => getAmenityLabel(id)).filter(Boolean).join(", ");
+  return arr
+    .map((id) => getTranslatedEnum(t, getAmenityLabelKey(id), getAmenityLabel(id)))
+    .filter(Boolean)
+    .join(", ");
 };
 
 const PropertyDataPreview = ({ onHide, data }: any) => {
+  const { t } = useTranslation("translations");
   const typeVal = data?.type ?? data?.property_type;
   const furnishedVal = data?.furnishedType ?? data?.furnished_type;
   const availableFrom = data?.availableFrom ?? data?.available_from;
@@ -93,7 +112,7 @@ const PropertyDataPreview = ({ onHide, data }: any) => {
         <h6>Property Details</h6>
         <ul>
           <li>Title: {formatJsonKeyValuePairs(data?.title, ["en"])}</li>
-          <li>Property type: {propertyTypeLabel(typeVal)}</li>
+          <li>Property type: {translatedPropertyTypeLabel(t, typeVal)}</li>
           <li>City: {data?.city ?? "-"}</li>
           <li>Address: {data?.address ?? "-"}</li>
           <li>Postcode: {data?.postcode ?? "-"}</li>
@@ -102,8 +121,8 @@ const PropertyDataPreview = ({ onHide, data }: any) => {
           <li>Registration: {formatYesNo(data?.registration)}</li>
           <li>Bathrooms: {data?.bathrooms ?? "-"}</li>
           <li>Toilets: {data?.toilets ?? "-"}</li>
-          <li>Furnished: {furnishedTypeLabel(furnishedVal)}</li>
-          <li>Amenities: {amenitiesLabel(data?.amenities)}</li>
+          <li>Furnished: {translatedFurnishedTypeLabel(t, furnishedVal)}</li>
+          <li>Amenities: {translatedAmenitiesLabel(t, data?.amenities)}</li>
           <li>Available from: {formatDateDDMMYYYY(availableFrom)}</li>
           <li>Available to: {formatDateDDMMYYYY(availableTo)}</li>
           <li>Pets allowed: {formatYesNo(petsAllowed)}</li>

@@ -107,19 +107,50 @@ export const APPLICATION_STATUSES = [
   { value: 4, text: "Rejected" }
 ];
 
-// Property listing types (matches propertyStore / list-room form)
-export const PROPERTY_TYPES = [
-  { value: 1, text: "Room in a shared apartment" },
-  { value: 2, text: "Studio" },
-  { value: 3, text: "Entire place" },
-  { value: 4, text: "Student house" },
+// Property type enum: DB value 1,2,3,4 → label (index = value)
+const PROPERTY_TYPE_LABELS: readonly (string | undefined)[] = [
+  undefined, // 0 unused
+  "Room in a shared apartment",
+  "Studio",
+  "Entire place",
+  "Student house",
 ];
 
-export const FURNISHED_TYPES = [
-  { value: 1, text: "Fully furnished" },
-  { value: 2, text: "Semi-furnished" },
-  { value: 3, text: "None" },
+/** Translation key for property type (use with t(): t(getPropertyTypeLabelKey(id))). */
+export const getPropertyTypeLabelKey = (id: number): string =>
+  `enums.property_type.${id}`;
+
+/** Get display label for property type id from DB (1, 2, 3, 4). Fallback when no t(). */
+export const getPropertyTypeLabel = (id: number): string =>
+  PROPERTY_TYPE_LABELS[id] ?? `#${id}`;
+
+/** Options for selects; derived from enum. */
+export const PROPERTY_TYPES = [1, 2, 3, 4].map((value) => ({
+  value,
+  text: getPropertyTypeLabel(value),
+}));
+
+// Furnished type enum: DB value 1,2,3 → label (index = value)
+const FURNISHED_TYPE_LABELS: readonly (string | undefined)[] = [
+  undefined, // 0 unused
+  "Fully furnished",
+  "Semi-furnished",
+  "None",
 ];
+
+/** Translation key for furnished type (use with t(): t(getFurnishedTypeLabelKey(id))). */
+export const getFurnishedTypeLabelKey = (id: number): string =>
+  `enums.furnished_type.${id}`;
+
+/** Get display label for furnished type id from DB (1, 2, 3). Fallback when no t(). */
+export const getFurnishedTypeLabel = (id: number): string =>
+  FURNISHED_TYPE_LABELS[id] ?? `#${id}`;
+
+/** Options for selects; derived from enum. */
+export const FURNISHED_TYPES = [1, 2, 3].map((value) => ({
+  value,
+  text: getFurnishedTypeLabel(value),
+}));
 
 /**
  * Amenities enum: index = value stored in DB, string = label shown to client.
@@ -147,6 +178,41 @@ export const AMENITIES_LIST: readonly string[] = [
   "Elevator",
 ];
 
-/** Get display label for an amenity id (number from DB). */
+/** Translation key for amenity (use with t(): t(getAmenityLabelKey(id))). */
+export const getAmenityLabelKey = (id: number): string =>
+  `enums.amenities.${id}`;
+
+/** Get display label for an amenity id (number from DB). Fallback when no t(). */
 export const getAmenityLabel = (id: number): string =>
   AMENITIES_LIST[id] ?? `#${id}`;
+
+/**
+ * Shared space enum: index = value stored in DB, string = label shown to client.
+ * Use SHARED_SPACE_LIST[id] or getSharedSpaceLabel(id) for a given id.
+ */
+export const SHARED_SPACE_LIST: readonly string[] = [
+  "Bedroom",
+  "Kitchen",
+  "Bathroom",
+  "Toilet",
+  "Storage space",
+  "Living room",
+];
+
+/** Translation key for shared space (use with t(): t(getSharedSpaceLabelKey(id))). */
+export const getSharedSpaceLabelKey = (id: number): string =>
+  `enums.shared_space.${id}`;
+
+/** Get display label for a shared space id (number from DB). Fallback when no t(). */
+export const getSharedSpaceLabel = (id: number): string =>
+  SHARED_SPACE_LIST[id] ?? `#${id}`;
+
+/** Return translated label if key exists, otherwise fallback. Use: getTranslatedEnum(t, getXLabelKey(id), getXLabel(id)). */
+export const getTranslatedEnum = (
+  t: (key: string) => string,
+  key: string,
+  fallback: string
+): string => {
+  const translated = t(key);
+  return translated !== key ? translated : fallback;
+};

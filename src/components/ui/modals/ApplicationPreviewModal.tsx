@@ -7,8 +7,9 @@ import { observer } from "mobx-react-lite";
 import { APPLICATION_PREVIEW_MODAL } from "@/utils/defines";
 import { APPLICATION_STATUSES } from "@/utils/defines";
 import moment from "moment";
+import useTranslation from "next-translate/useTranslation";
 import { formatJsonKeyValuePairs } from "@/utils/helpers";
-import { getAmenityLabel } from "@/utils/defines";
+import { getAmenityLabel, getAmenityLabelKey, getTranslatedEnum } from "@/utils/defines";
 
 const FIELD_LABELS: Record<string, string> = {
   id: "ID",
@@ -60,6 +61,7 @@ const formatKeyLabel = (key: string) =>
   FIELD_LABELS[key] ?? key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
 const ApplicationPreviewModal = () => {
+  const { t } = useTranslation("translations");
   const { modalStore } = useStore();
   const isOpen = modalStore.modals[APPLICATION_PREVIEW_MODAL];
   const entry = modalStore.modalSettings?.entry as Record<string, unknown> | undefined;
@@ -135,7 +137,9 @@ const ApplicationPreviewModal = () => {
       }
       if (key === "amenities") {
         const arr = Array.isArray(val) ? (val as number[]) : [];
-        const amenityLabels = arr.map((id) => getAmenityLabel(Number(id))).filter(Boolean);
+        const amenityLabels = arr
+          .map((id) => getTranslatedEnum(t, getAmenityLabelKey(Number(id)), getAmenityLabel(Number(id))))
+          .filter(Boolean);
         if (amenityLabels.length > 0) {
           rows.push({
             key: "amenities",

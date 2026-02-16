@@ -6,16 +6,7 @@ import useTranslation from "next-translate/useTranslation";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
-import { AMENITIES_LIST } from "@/utils/defines";
-
-const SHARED_SPACE_OPTIONS: string[] = [
-    "Bedroom",
-    "Kitchen",
-    "Bathroom",
-    "Toilet",
-    "Storage space",
-    "Living room",
-];
+import { AMENITIES_LIST, SHARED_SPACE_LIST } from "@/utils/defines";
 
 function FourthStep({
     steps,
@@ -370,7 +361,7 @@ function FourthStep({
                     <small className="d-block">* You can select more than one</small>
 
                     <div className="row g-2 mt-3">
-                        {SHARED_SPACE_OPTIONS.map((label, id) => {
+                        {SHARED_SPACE_LIST.map((label, id) => {
                             const inputId = `shared-space-${id}`;
                             const checked = selectedSharedSpaces.includes(id);
                             return (
