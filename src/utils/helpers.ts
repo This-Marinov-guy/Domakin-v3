@@ -23,9 +23,9 @@ export const getGeoInfo = async () => {
 export function capitalizeFirstLetter(str: string) {
   if (!str) {
     return '-';
-  }  
+  } 
 
-  const words = str.split(" ");
+  const words = str.toString().split(" ");
   words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1).toLowerCase();
 
   return words.join(" ");
