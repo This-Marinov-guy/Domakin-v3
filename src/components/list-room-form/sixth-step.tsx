@@ -19,12 +19,23 @@ function toDisplayImageUrls(images: (string | File)[]): string[] {
         .filter(Boolean);
 }
 
+/** Strip street number and optional suffix (e.g. "42" or "42a") from address for approximate display. */
+function toApproximateAddress(address: string): string {
+    if (!address || typeof address !== "string") return "";
+    return address
+        .replace(/\s+\d+[a-zA-Z]?\s*$/, "") // trailing " 42" or " 42a"
+        .replace(/^\s*\d+[a-zA-Z]?\s+/, "") // leading "42 " or "42a "
+        .trim() || address;
+}
+
 function SixthStep({
     steps,
     currentStep,
+    discreteAddress = false,
 }: {
     steps: (string | number)[];
     currentStep: number;
+    discreteAddress?: boolean;
 }) {
     const {
         propertyStore: {
@@ -32,6 +43,7 @@ function SixthStep({
             goToAddListingStep: goTo,
             getAddListingStepPanels,
             getAddListingPreviewProperty,
+            addListingDisplayPropertyData: pd,
         },
     } = useStore();
 
@@ -52,6 +64,20 @@ function SixthStep({
 
     const stepPanels = getAddListingStepPanels(imageUrls);
     const previewProperty = getAddListingPreviewProperty(imageUrls);
+
+    const displayProperty = useMemo(() => {
+        if (!discreteAddress) return previewProperty;
+        const address = (pd?.address as string) ?? "";
+        const city = (pd?.city as string) ?? "";
+        const approxAddress = toApproximateAddress(address);
+        const approxTitle = approxAddress ? `${approxAddress}${city ? `, ${city}` : ""}` : city || previewProperty.title;
+        const approxLocation = [approxAddress, city].filter(Boolean).join(", ") || previewProperty.location;
+        return {
+            ...previewProperty,
+            title: approxTitle,
+            location: approxLocation,
+        };
+    }, [discreteAddress, previewProperty, pd?.address, pd?.city]);
 
     return (
         <div className="list-room-modal__first-step">
@@ -108,9 +134,9 @@ function SixthStep({
                     </div>
 
                     <div className="d-flex justify-content-center w-100">
-                        {previewProperty.main_image ? (
+                        {displayProperty.main_image ? (
                             <PropertyCardGrid
-                                property={previewProperty}
+                                property={displayProperty}
                                 disableLinks
                                 style
                             />
