@@ -557,10 +557,10 @@
   },
   "enums": {
     "property_type": {
-      "1": "Room in a shared apartment",
+      "1": "Room in a shared property",
       "2": "Studio",
-      "3": "Entire place",
-      "4": "Student house"
+      "3": "Apartment",
+      "4": "House"
     },
     "furnished_type": {
       "1": "Fully furnished",
@@ -568,25 +568,17 @@
       "3": "None"
     },
     "amenities": {
-      "0": "A/C & Heating",
-      "1": "Garages",
-      "2": "Swimming Pool",
-      "3": "Parking",
-      "4": "Lake View",
-      "5": "Garden",
-      "6": "Disabled Access",
-      "7": "Pet Friendly",
-      "8": "Ceiling Height",
-      "9": "Outdoor Shower",
-      "10": "Refrigerator",
-      "11": "Fireplace",
-      "12": "Wifi",
-      "13": "TV Cable",
-      "14": "Barbeque",
-      "15": "Laundry",
-      "16": "Dryer",
-      "17": "Lawn",
-      "18": "Elevator"
+      "0": "Air Conditioning",
+      "1": "Heating",
+      "2": "Kitchen Appliances",
+      "3": "Garage",
+      "4": "Parking",
+      "5": "Storage Space",
+      "6": "Garden",
+      "7": "Disabled Access",
+      "8": "Wifi",
+      "9": "Barbeque",
+      "10": "Laundry"
     },
     "shared_space": {
       "0": "Bedroom",

@@ -110,10 +110,10 @@ export const APPLICATION_STATUSES = [
 // Property type enum: DB value 1,2,3,4 → label (index = value)
 const PROPERTY_TYPE_LABELS: readonly (string | undefined)[] = [
   undefined, // 0 unused
-  "Room in a shared apartment",
+  "Room in a shared property",
   "Studio",
-  "Entire place",
-  "Student house",
+  "Apartment",
+  "House",
 ];
 
 /** Translation key for property type (use with t(): t(getPropertyTypeLabelKey(id))). */
@@ -157,25 +157,17 @@ export const FURNISHED_TYPES = [1, 2, 3].map((value) => ({
  * Use AMENITIES_LIST[id] to get label for a given id.
  */
 export const AMENITIES_LIST: readonly string[] = [
-  "A/C & Heating",
-  "Garages",
-  "Swimming Pool",
+  "Air Conditioning",
+  "Heating",
+  "Kitchen Appliances",
+  "Garage",
   "Parking",
-  "Lake View",
+  "Storage Space",
   "Garden",
   "Disabled Access",
-  "Pet Friendly",
-  "Ceiling Height",
-  "Outdoor Shower",
-  "Refrigerator",
-  "Fireplace",
   "Wifi",
-  "TV Cable",
   "Barbeque",
   "Laundry",
-  "Dryer",
-  "Lawn",
-  "Elevator",
 ];
 
 /** Translation key for amenity (use with t(): t(getAmenityLabelKey(id))). */
