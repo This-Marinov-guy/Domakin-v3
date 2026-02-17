@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import useTranslation from "next-translate/useTranslation";
 import { STATUS_COLORS } from "@/utils/defines";
 import { getPropertyUrl } from "@/utils/seoHelpers";
+
+declare global {
+  interface Window {
+    bootstrap?: { Carousel: { getOrCreateInstance: (el: HTMLElement, opts?: { touch?: boolean }) => unknown } };
+  }
+}
 
 const PropertyCardGrid = (props: {
   property: PropertyCard;
@@ -12,9 +18,19 @@ const PropertyCardGrid = (props: {
 }) => {
   const { property, style, disableLinks } = props;
   const { lang } = useTranslation("translations");
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-  const allImages = [property.main_image, ...property.images];
+  const allImages = [property.main_image, ...(property.images ?? [])].filter(Boolean);
+  const slides = allImages.length > 0 ? allImages : [property.main_image];
   const propertyUrl = getPropertyUrl(property, true, lang);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || slides.length <= 1 || !carouselRef.current) return;
+    const bootstrap = window.bootstrap;
+    if (bootstrap?.Carousel) {
+      bootstrap.Carousel.getOrCreateInstance(carouselRef.current, { touch: true });
+    }
+  }, [slides.length]);
 
   return (
     <div
@@ -38,31 +54,50 @@ const PropertyCardGrid = (props: {
               {property.status}
             </div>
             {/* <Link href="#" className="fav-btn tran3s"><i className="fa-light fa-heart"></i></Link> */}
-            <div id={`carousel${property.id}`} className="carousel slide">
-              <div className="carousel-indicators">
-                <button
-                  type="button"
-                  data-bs-target={`#carousel${property.id}`}
-                  data-bs-slide-to="0"
-                  className="active"
-                  aria-current="true"
-                  aria-label="Slide 1"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target={`#carousel${property.id}`}
-                  data-bs-slide-to="1"
-                  aria-label="Slide 2"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target={`#carousel${property.id}`}
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
-                ></button>
-              </div>
+            <div
+              ref={carouselRef}
+              id={`carousel${property.id}`}
+              className="carousel slide"
+              data-bs-ride="carousel"
+              data-bs-touch="true"
+            >
+              {slides.length > 1 && (
+                <>
+                  <div className="carousel-indicators">
+                    {slides.map((_, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        data-bs-target={`#carousel${property.id}`}
+                        data-bs-slide-to={i}
+                        className={i === 0 ? "active" : ""}
+                        aria-current={i === 0 ? "true" : undefined}
+                        aria-label={`Slide ${i + 1}`}
+                      />
+                    ))}
+                  </div>
+                  <button
+                    className="carousel-control-prev"
+                    type="button"
+                    data-bs-target={`#carousel${property.id}`}
+                    data-bs-slide="prev"
+                    aria-label="Previous"
+                  >
+                    <span className="carousel-control-prev-icon" aria-hidden="true" />
+                  </button>
+                  <button
+                    className="carousel-control-next"
+                    type="button"
+                    data-bs-target={`#carousel${property.id}`}
+                    data-bs-slide="next"
+                    aria-label="Next"
+                  >
+                    <span className="carousel-control-next-icon" aria-hidden="true" />
+                  </button>
+                </>
+              )}
               <div className="carousel-inner">
-                {allImages.slice(0, 3).map((image: any, i: any) => (
+                {slides.map((image: any, i: number) => (
                   <div
                     key={i}
                     className={`carousel-item ${i === 0 && "active"}`}
