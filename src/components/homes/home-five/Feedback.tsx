@@ -14,9 +14,9 @@ import moment from "moment";
 const arrowDownIcon = "/assets/img/icons/arrow-down.svg";
 
 /** Max characters shown when collapsed. Expand and "..." only if content exceeds this. */
-const FEEDBACK_COLLAPSED_CHAR_LIMIT = 120;
+const FEEDBACK_COLLAPSED_CHAR_LIMIT = 200;
 /** Fixed height for the quote text area — same for all cards so card height is identical; when expanded, content scrolls inside. */
-const FEEDBACK_QUOTE_HEIGHT = 120;
+const FEEDBACK_QUOTE_HEIGHT = 180;
 
 export const CustomPrevArrow = (props: any) => {
   const { onClick } = props;
