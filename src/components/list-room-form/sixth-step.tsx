@@ -22,10 +22,14 @@ function toDisplayImageUrls(images: (string | File)[]): string[] {
 /** Strip street number and optional suffix (e.g. "42" or "42a") from address for approximate display. */
 function toApproximateAddress(address: string): string {
     if (!address || typeof address !== "string") return "";
-    return address
-        .replace(/\s+\d+[a-zA-Z]?\s*$/, "") // trailing " 42" or " 42a"
-        .replace(/^\s*\d+[a-zA-Z]?\s+/, "") // leading "42 " or "42a "
-        .trim() || address;
+
+    const cleaned = address
+        .replace(/\d+[a-zA-Z]*/g, "") // removes 12, 12A, 12bis (partial)
+        .replace(/\s{2,}/g, " ")
+        .replace(/[,\-\/]+/g, " ")
+        .trim();
+
+    return cleaned || "";
 }
 
 function SixthStep({
@@ -66,12 +70,11 @@ function SixthStep({
     const previewProperty = getAddListingPreviewProperty(imageUrls);
 
     const displayProperty = useMemo(() => {
-        if (!discreteAddress) return previewProperty;
         const address = (pd?.address as string) ?? "";
         const city = (pd?.city as string) ?? "";
         const approxAddress = toApproximateAddress(address);
-        const approxTitle = approxAddress ? `${approxAddress}${city ? `, ${city}` : ""}` : city || previewProperty.title;
-        const approxLocation = [approxAddress, city].filter(Boolean).join(", ") || previewProperty.location;
+        const approxTitle = 'Available property';
+        const approxLocation = `${approxAddress}, ${city}`;
         return {
             ...previewProperty,
             title: approxTitle,

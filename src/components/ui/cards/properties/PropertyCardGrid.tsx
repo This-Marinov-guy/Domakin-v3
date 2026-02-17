@@ -15,8 +15,9 @@ const PropertyCardGrid = (props: {
   property: PropertyCard;
   style?: boolean;
   disableLinks?: boolean;
+  hideAddress?: boolean;
 }) => {
-  const { property, style, disableLinks } = props;
+  const { property, style, disableLinks, hideAddress = false } = props;
   const { lang } = useTranslation("translations");
   const carouselRef = useRef<HTMLDivElement>(null);
 
