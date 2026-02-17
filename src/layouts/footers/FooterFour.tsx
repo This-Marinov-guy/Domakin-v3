@@ -73,7 +73,7 @@ const FooterFour = () => {
          </div>
          <div className="bottom-footer">
            <p className="m0 text-center fs-16">KVK: {KVK}</p>
-           <p className="m0 text-center fs-16">
+           <p className="m0 text-center fs-16" suppressHydrationWarning>
              {t("footer.all_rights_reserved")} {new Date().getFullYear()}
            </p>
          </div>

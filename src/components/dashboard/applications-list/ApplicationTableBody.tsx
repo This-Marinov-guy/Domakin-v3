@@ -173,7 +173,7 @@ const ApplicationTableBody = ({
     const images = item?.images;
 
     if (typeof images !== "string" || !images) return FALLBACK_PROPERTY_IMAGE;
-    
+
     return images.split(",")[0];
   };
 
@@ -243,7 +243,7 @@ const ApplicationTableBody = ({
             <td className="center">{getLocation(item)}</td>
             <td className="center">{applicant}</td>
             <td className="center">{item.email ?? "—"}</td>
-            <td className="center">{date}</td>
+            <td className="center" suppressHydrationWarning>{date}</td>
             <td className="center">{getStepDisplay(item)}</td>
             <td className="center">
               {isAdmin ? (

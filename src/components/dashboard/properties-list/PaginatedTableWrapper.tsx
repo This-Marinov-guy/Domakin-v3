@@ -51,24 +51,24 @@ const PaginatedTableWrapper = forwardRef(function PaginatedTableWrapper<T>(
       : PAGINATION_PER_PAGE_OPTIONS_1);
   const localStorageKey = perPageOptionsType === 'extended' ? LOCAL_STORAGE_PER_PAGE_EXTENDED : LOCAL_STORAGE_PER_PAGE_DEFAULT;
 
-  // Read perPage from localStorage or use initialPerPage
-  const getInitialPerPage = () => {
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem(localStorageKey);
-      if (stored && !isNaN(Number(stored))) {
-        return Number(stored);
-      }
-    }
-    return initialPerPage;
-  };
-
   const [data, setData] = useState<T[]>([]);
   const [currentPage, setCurrentPage] = useState(0); // 0-based
-  const [perPage, setPerPage] = useState(getInitialPerPage);
+  const [perPage, setPerPage] = useState(initialPerPage);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const prevFilterKeyRef = useRef(filterKey);
   const skipNextLoadRef = useRef(false);
+
+  // Sync perPage from localStorage after mount to avoid hydration mismatch (server has no localStorage)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const stored = localStorage.getItem(localStorageKey);
+    if (stored && !isNaN(Number(stored))) {
+      const value = Number(stored);
+      if (value !== perPage) setPerPage(value);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const load = async (page = currentPage, perPageValue = perPage) => {
     setLoading(true);

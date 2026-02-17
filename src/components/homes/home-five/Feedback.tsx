@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Rating } from "react-simple-star-rating";
 import Slider from "react-slick";
@@ -15,9 +15,8 @@ const arrowDownIcon = "/assets/img/icons/arrow-down.svg";
 
 /** Max characters shown when collapsed. Expand and "..." only if content exceeds this. */
 const FEEDBACK_COLLAPSED_CHAR_LIMIT = 120;
-/** Fixed height for the quote text area when collapsed — keeps all cards same height and leaves room for name + arrow. */
-const FEEDBACK_QUOTE_COLLAPSED_HEIGHT = 120;
-const FEEDBACK_QUOTE_EXPANDED_MAX_HEIGHT = 2000;
+/** Fixed height for the quote text area — same for all cards so card height is identical; when expanded, content scrolls inside. */
+const FEEDBACK_QUOTE_HEIGHT = 120;
 
 export const CustomPrevArrow = (props: any) => {
   const { onClick } = props;
@@ -79,6 +78,8 @@ interface FeedbackProps {
 const Feedback = ({ style, feedbacks = [], bg = 'bg-pink-two' }: FeedbackProps) => {
   const { t } = useTranslation("translations");
   const [expandedIds, setExpandedIds] = useState<Set<number | string>>(new Set());
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
 
   const toggleExpanded = (id: number | string) => {
     setExpandedIds((prev) => {
@@ -101,6 +102,9 @@ const Feedback = ({ style, feedbacks = [], bg = 'bg-pink-two' }: FeedbackProps) 
           <h3>{t("feedbacks.feedbacks")}</h3>
         </div>
         {feedbacks?.length > 0 ? (
+          !mounted ? (
+            <div style={{ minHeight: 300 }} />
+          ) : (
           <Slider {...setting}>
             {feedbacks.map((item: any, index: number) => {
               const id = item.id ?? index;
@@ -128,10 +132,11 @@ const Feedback = ({ style, feedbacks = [], bg = 'bg-pink-two' }: FeedbackProps) 
                   <div
                     className="feedback-quote-wrapper feedback-content-wrapper"
                     style={{
-                      height: !hasMore || !isExpanded ? FEEDBACK_QUOTE_COLLAPSED_HEIGHT : undefined,
-                      maxHeight: hasMore && isExpanded ? FEEDBACK_QUOTE_EXPANDED_MAX_HEIGHT : FEEDBACK_QUOTE_COLLAPSED_HEIGHT,
-                      overflow: hasMore && !isExpanded ? "hidden" : hasMore && isExpanded ? "auto" : "hidden",
-                      transition: "max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                      height: FEEDBACK_QUOTE_HEIGHT,
+                      minHeight: FEEDBACK_QUOTE_HEIGHT,
+                      maxHeight: FEEDBACK_QUOTE_HEIGHT,
+                      overflow: hasMore && isExpanded ? "auto" : "hidden",
+                      transition: "overflow 0.2s ease",
                     }}
                   >
                     <p className="feedback-content mb-0">
@@ -140,11 +145,11 @@ const Feedback = ({ style, feedbacks = [], bg = 'bg-pink-two' }: FeedbackProps) 
                   </div>
                   <div className="d-flex align-items-center justify-content-between mt-3 feedback-name-row">
                     <h6 className="fs-20 m0">{item.name}</h6>
-                    {item?.created_at && (
-                      <small className="text-muted">
-                        {moment(item.created_at).format("DD MMM YYYY")}
-                      </small>
-                    )}
+{item?.created_at && (
+                        <small className="text-muted" suppressHydrationWarning>
+                          {moment(item.created_at).format("DD MMM YYYY")}
+                        </small>
+                      )}
                   </div>
                   <div className="d-flex justify-content-center mt-auto pt-2 min-h-expand-row">
                     {hasMore && (
@@ -173,6 +178,7 @@ const Feedback = ({ style, feedbacks = [], bg = 'bg-pink-two' }: FeedbackProps) 
               );
             })}
           </Slider>
+          )
         ) : (
           <h6 className="text-center d-flex flex-column">
             {t("feedbacks.no_feedbacks")}

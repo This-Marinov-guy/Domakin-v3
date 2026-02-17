@@ -329,11 +329,19 @@
     height: 60px;
   }
 }
-// Feedback Section Six
+// Feedback Section Six — equal-height cards for non-expanded panels (responsive)
 .feedback-section-six {
   .slick-slider {
+    .slick-track {
+      display: flex;
+      align-items: stretch;
+    }
     .slick-slide {
       padding: 0 30px;
+      height: auto;
+      > div {
+        height: 100%;
+      }
     }
   }
   .slick-dots {
@@ -389,7 +397,10 @@
 }
 .feedback-block-six {
   padding: 30px 40px;
-
+  min-height: 320px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   background: #fff;
   .rating {
     li {
