@@ -2,6 +2,7 @@
 
 import React, { useMemo } from "react";
 import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 import useTranslation from "next-translate/useTranslation";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useStore } from "@/stores/storeContext";
@@ -47,26 +48,41 @@ function FourthStep({
         []
     );
 
-    const billsRaw = String(propertyData.bills ?? "");
-    const depositMatch = billsRaw.match(/\|\s*Deposit:\s*(.*)$/);
-    const billsBase = depositMatch ? billsRaw.replace(/\|\s*Deposit:.*$/, "").trim() : billsRaw;
-    const depositValue = depositMatch ? depositMatch[1].trim() : "";
+    const billsValue: number | "" =
+        pd?.bills == null || pd?.bills === ""
+            ? ""
+            : typeof pd?.bills === "number"
+                ? Math.max(0, pd.bills)
+                : Math.max(0, parseInt(String(pd?.bills ?? "0"), 10) || 0);
+    const rentValue = typeof propertyData.rent === "number" ? propertyData.rent : Math.max(0, parseInt(String(propertyData.rent ?? "0"), 10) || 0);
+    const sizeValue = typeof pd?.size === "number" ? pd.size : Math.max(0, parseInt(String(pd?.size ?? "0"), 10) || 0);
+    const depositValue: number | "" =
+        pd?.deposit == null || pd?.deposit === ""
+            ? ""
+            : typeof pd?.deposit === "number"
+                ? pd.deposit
+                : Math.max(0, parseInt(String(pd.deposit), 10) || 0);
 
     const handleBillsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const base = e.target.value.trim();
-        const next = depositValue
-            ? `${base}${base ? " | " : ""}Deposit: ${depositValue}`
-            : base;
-        updateListingData("propertyData", "bills", next);
+        const raw = e.target.value.trim();
+        if (raw === "") {
+            updateListingData("propertyData", "bills", undefined);
+            return;
+        }
+        const v = Math.max(0, Math.floor(Number(raw)) || 0);
+        updateListingData("propertyData", "bills", v);
     };
 
     const handleDepositChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const deposit = e.target.value.trim();
-        const next = deposit
-            ? `${billsBase}${billsBase ? " | " : ""}Deposit: ${deposit}`
-            : billsBase;
-        updateListingData("propertyData", "bills", next);
+        const raw = e.target.value.trim();
+        if (raw === "") {
+            updateListingData("propertyData", "deposit", undefined);
+            return;
+        }
+        const v = Math.max(0, Math.floor(Number(raw)) || 0);
+        updateListingData("propertyData", "deposit", v);
     };
+
 
     const flatmatesMaleCount = Math.max(0, parseInt(String(pd?.flatmatesMale ?? "0"), 10) || 0);
     const flatmatesFemaleCount = Math.max(0, parseInt(String(pd?.flatmatesFemale ?? "0"), 10) || 0);
@@ -104,59 +120,88 @@ function FourthStep({
                     <div className="col-12 col-lg-6">
                         <div className="input-group-meta form-group mb-30 mb-lg-30">
                             <label>{t("emergency_housing.rent")}</label>
-                            <Form.Control
-                                type="number"
-                                min={0}
-                                step={1}
-                                value={propertyData.rent}
-                                onKeyDown={(e) => {
-                                    if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
-                                }}
-                                onChange={(e) => {
-                                    const v = Math.max(0, Math.floor(Number(e.target.value)) || 0);
-                                    updateListingData("propertyData", "rent", String(v));
-                                }}
-                                isInvalid={errorFields.includes("rent")}
-                            />
+                            <InputGroup>
+                                <Form.Control
+                                    type="number"
+                                    min={0}
+                                    step={1}
+                                    value={rentValue}
+                                    onKeyDown={(e) => {
+                                        if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                                    }}
+                                    onChange={(e) => {
+                                        const v = Math.max(0, Math.floor(Number(e.target.value)) || 0);
+                                        updateListingData("propertyData", "rent", v);
+                                    }}
+                                    isInvalid={errorFields.includes("rent")}
+                                />
+                                <InputGroup.Text id="rent-unit">€</InputGroup.Text>
+                            </InputGroup>
                         </div>
                     </div>
                     <div className="col-12 col-lg-6">
                         <div className="input-group-meta form-group mb-30 mb-lg-30">
-                            <label>{t("emergency_housing.bills")}</label>
-                            <Form.Control
-                                type="text"
-                                value={billsBase}
-                                onChange={handleBillsChange}
-                                isInvalid={errorFields.includes("bills")}
-                            />
+                            <label>{t("emergency_housing.bills")} <span className="text-muted small">(optional)</span></label>
+                            <InputGroup>
+                                <Form.Control
+                                    type="number"
+                                    min={0}
+                                    step={1}
+                                    placeholder="Optional"
+                                    value={billsValue}
+                                    onChange={handleBillsChange}
+                                    onKeyDown={(e) => {
+                                        if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                                    }}
+                                    isInvalid={errorFields.includes("bills")}
+                                />
+                                <InputGroup.Text id="bills-unit">€</InputGroup.Text>
+                            </InputGroup>
                         </div>
                     </div>
                 </div>
 
-                {/* Row: Deposit | Size */}
+                {/* Row: Deposit in euro | Size */}
                 <div className="row gx-3 mb-30">
                     <div className="col-12 col-lg-6">
                         <div className="input-group-meta form-group mb-30 mb-lg-30">
-                            <label>Deposit</label>
-                            <Form.Control
-                                type="text"
-                                placeholder="e.g. 1 month rent"
-                                value={depositValue}
-                                onChange={handleDepositChange}
-                            />
+                            <label>Deposit in euro <span className="text-muted small">(optional)</span></label>
+                            <InputGroup>
+                                <Form.Control
+                                    type="number"
+                                    min={0}
+                                    step={1}
+                                    placeholder="Optional"
+                                    value={depositValue}
+                                    onChange={handleDepositChange}
+                                    onKeyDown={(e) => {
+                                        if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                                    }}
+                                />
+                                <InputGroup.Text id="deposit-unit">€</InputGroup.Text>
+                            </InputGroup>
                         </div>
                     </div>
                     <div className="col-12 col-lg-6">
                         <div className="input-group-meta form-group mb-30 mb-lg-30">
                             <label>{t("emergency_housing.size")}</label>
-                            <Form.Control
-                                type="text"
-                                value={propertyData.size}
-                                onChange={(e) =>
-                                    updateListingData("propertyData", "size", e.target.value)
-                                }
-                                isInvalid={errorFields.includes("size")}
-                            />
+                            <InputGroup>
+                                <Form.Control
+                                    type="number"
+                                    min={0}
+                                    step={1}
+                                    value={sizeValue}
+                                    onKeyDown={(e) => {
+                                        if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                                    }}
+                                    onChange={(e) => {
+                                        const v = Math.max(0, Math.floor(Number(e.target.value)) || 0);
+                                        updateListingData("propertyData", "size", v);
+                                    }}
+                                    isInvalid={errorFields.includes("size")}
+                                />
+                                <InputGroup.Text id="size-unit">m²</InputGroup.Text>
+                            </InputGroup>
                         </div>
                     </div>
                 </div>
@@ -270,7 +315,7 @@ function FourthStep({
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
 
@@ -285,12 +330,13 @@ function FourthStep({
                                         type="switch"
                                         id="fourth-no-smoking"
                                         checked={propertyData.smokingAllowed === true}
-                                        onChange={(e) =>
+                                        onChange={(e) => {
                                             updateListingData(
                                                 "propertyData",
                                                 "smokingAllowed",
-                                                !e.target.checked
+                                                !propertyData.smokingAllowed
                                             )
+                                        }
                                         }
                                         className="custom-switch"
                                     />
@@ -307,7 +353,7 @@ function FourthStep({
                                             updateListingData(
                                                 "propertyData",
                                                 "petsAllowed",
-                                                !e.target.checked
+                                                !propertyData.petsAllowed
                                             )
                                         }
                                         className="custom-switch"
@@ -394,11 +440,10 @@ function FourthStep({
                         {FURNITURE_OPTIONS.map(({ value, label }) => (
                             <div
                                 key={value}
-                                className={`checkbox-card-type col-6 col-md-4 ${
-                                    errorFields.includes("furnishedType")
+                                className={`checkbox-card-type col-6 col-md-4 ${errorFields.includes("furnishedType")
                                         ? "border border-danger rounded-5"
                                         : ""
-                                }`}
+                                    }`}
                             >
                                 <input
                                     type="radio"

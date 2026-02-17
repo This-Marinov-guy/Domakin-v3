@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 import NiceSelect from "@/ui/NiceSelect";
 import Trans from "next-translate/Trans";
 import Spinner from "react-bootstrap/Spinner";
@@ -319,36 +320,104 @@ const AddListingForm = () => {
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("emergency_housing.size")}</label>
-              <Form.Control
-                type="text"
-                value={propertyData.size}
-                onChange={(e) => {
-                  updateListingData("propertyData", "size", e.target.value);
-                }}
-                isInvalid={errorFields.includes("propertyData.size")}
-              />
+              <InputGroup>
+                <Form.Control
+                  type="number"
+                  min={0}
+                  step={1}
+                  value={typeof propertyData.size === "number" ? propertyData.size : Math.max(0, parseInt(String(propertyData.size ?? "0"), 10) || 0)}
+                  onKeyDown={(e) => {
+                    if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                  }}
+                  onChange={(e) => {
+                    const v = Math.max(0, Math.floor(Number(e.target.value)) || 0);
+                    updateListingData("propertyData", "size", v);
+                  }}
+                  isInvalid={errorFields.includes("propertyData.size")}
+                />
+                <InputGroup.Text id="size-unit">m²</InputGroup.Text>
+              </InputGroup>
             </div>
           </div>
 
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("emergency_housing.rent")}</label>
-              <Form.Control
-                type="number"
-                min={0}
-                step={1}
-                value={propertyData.rent}
-                onKeyDown={(e) => {
-                  if (e.key === "-" || e.key === "e" || e.key === ".") {
-                    e.preventDefault();
-                  }
-                }}
-                onChange={(e) => {
-                  const value = Math.max(0, Math.floor(Number(e.target.value)));
-                  updateListingData("propertyData", "rent", value.toString());
-                }}
-                isInvalid={errorFields.includes("propertyData.rent")}
-              />
+              <InputGroup>
+                <Form.Control
+                  type="number"
+                  min={0}
+                  step={1}
+                  value={typeof propertyData.rent === "number" ? propertyData.rent : Math.max(0, parseInt(String(propertyData.rent ?? "0"), 10) || 0)}
+                  onKeyDown={(e) => {
+                    if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                  }}
+                  onChange={(e) => {
+                    const value = Math.max(0, Math.floor(Number(e.target.value)) || 0);
+                    updateListingData("propertyData", "rent", value);
+                  }}
+                  isInvalid={errorFields.includes("propertyData.rent")}
+                />
+                <InputGroup.Text id="rent-unit">€</InputGroup.Text>
+              </InputGroup>
+            </div>
+          </div>
+
+          <div className="col-6">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("emergency_housing.bills")} <span className="text-muted small">(optional)</span></label>
+              <InputGroup>
+                <Form.Control
+                  type="number"
+                  min={0}
+                  step={1}
+                  placeholder="Optional"
+                  value={propertyData.bills != null && propertyData.bills !== "" ? (typeof propertyData.bills === "number" ? propertyData.bills : Math.max(0, parseInt(String(propertyData.bills), 10) || 0)) : ""}
+                  onKeyDown={(e) => {
+                    if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                  }}
+                  onChange={(e) => {
+                    const raw = e.target.value.trim();
+                    if (raw === "") {
+                      updateListingData("propertyData", "bills", undefined);
+                      return;
+                    }
+                    const v = Math.max(0, Math.floor(Number(raw)) || 0);
+                    updateListingData("propertyData", "bills", v);
+                  }}
+                  isInvalid={errorFields.includes("propertyData.bills")}
+                />
+                <InputGroup.Text id="bills-unit">€</InputGroup.Text>
+              </InputGroup>
+            </div>
+          </div>
+
+          <div className="col-6">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("property.deposit_label") || "Deposit in euro"} <span className="text-muted small">(optional)</span></label>
+              <InputGroup>
+                <Form.Control
+                  type="number"
+                  min={0}
+                  step={1}
+                  placeholder="Optional"
+                  value={propertyData.deposit != null && propertyData.deposit !== "" ? (typeof propertyData.deposit === "number" ? propertyData.deposit : Math.max(0, parseInt(String(propertyData.deposit), 10) || 0)) : ""}
+                  onKeyDown={(e) => {
+                    if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                  }}
+                  onChange={(e) => {
+                    const raw = e.target.value.trim();
+                    if (raw === "") {
+                      updateListingData("propertyData", "deposit", undefined);
+                      return;
+                    }
+                    const v = Math.max(0, Math.floor(Number(raw)) || 0);
+                    updateListingData("propertyData", "deposit", v);
+                  }}
+                  isInvalid={errorFields.includes("propertyData.deposit")}
+                />
+                <InputGroup.Text id="deposit-unit">€</InputGroup.Text>
+              </InputGroup>
             </div>
           </div>
 
@@ -384,19 +453,6 @@ const AddListingForm = () => {
             </div>
           </div>
 
-          <div className="col-6">
-            <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">{t("emergency_housing.bills")}</label>
-              <Form.Control
-                type="text"
-                value={propertyData.bills}
-                onChange={(e) => {
-                  updateListingData("propertyData", "bills", e.target.value);
-                }}
-                isInvalid={errorFields.includes("propertyData.bills")}
-              />
-            </div>
-          </div>
 
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">

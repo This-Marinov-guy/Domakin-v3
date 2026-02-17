@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useRef } from "react";
 import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 import NiceSelect from "@/ui/NiceSelect";
 import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
@@ -376,18 +377,23 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
               <div className="col-lg-6 col-md-6 col-12">
                 <div className="input-group-meta form-group mb-30">
                   <label htmlFor="">{t("emergency_housing.size")}</label>
-                  <Form.Control
-                    type="text"
-                    value={editPropertyData.propertyData.size}
-                    onChange={(e) => {
-                      updateEditListingData(
-                        "propertyData",
-                        "size",
-                        e.target.value
-                      );
-                    }}
-                    isInvalid={editErrorFields.includes("propertyData.size")}
-                  />
+                  <InputGroup>
+                    <Form.Control
+                      type="number"
+                      min={0}
+                      step={1}
+                      value={editPropertyData.propertyData.size ?? 0}
+                      onKeyDown={(e) => {
+                        if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                      }}
+                      onChange={(e) => {
+                        const value = Math.max(0, Math.floor(Number(e.target.value)) || 0);
+                        updateEditListingData("propertyData", "size", value);
+                      }}
+                      isInvalid={editErrorFields.includes("propertyData.size")}
+                    />
+                    <InputGroup.Text id="size-unit">m²</InputGroup.Text>
+                  </InputGroup>
                 </div>
               </div>
 
@@ -445,24 +451,23 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
               <div className="col-lg-6 col-md-6 col-12">
                 <div className="input-group-meta form-group mb-30">
                   <label htmlFor="">{t("emergency_housing.rent")}</label>
-                  <Form.Control
-                    type="number"
-                    value={editPropertyData.propertyData.rent}
-                    onKeyDown={(e) => {
-                      if (e.key === "-" || e.key === "e" || e.key === ".") {
-                        e.preventDefault();
-                      }
-                    }}
-                    onChange={(e) => {
-                      const value = Math.max(
-                        0,
-                        Math.floor(Number(e.target.value))
-                      );
-
-                      updateEditListingData("propertyData", "rent", value);
-                    }}
-                    isInvalid={editErrorFields.includes("propertyData.rent")}
-                  />
+                  <InputGroup>
+                    <Form.Control
+                      type="number"
+                      min={0}
+                      step={1}
+                      value={editPropertyData.propertyData.rent ?? 0}
+                      onKeyDown={(e) => {
+                        if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                      }}
+                      onChange={(e) => {
+                        const value = Math.max(0, Math.floor(Number(e.target.value)) || 0);
+                        updateEditListingData("propertyData", "rent", value);
+                      }}
+                      isInvalid={editErrorFields.includes("propertyData.rent")}
+                    />
+                    <InputGroup.Text id="rent-unit">€</InputGroup.Text>
+                  </InputGroup>
                 </div>
               </div>
 
@@ -477,6 +482,35 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
                     }}
                     isInvalid={editErrorFields.includes("referralCode")}
                   />
+                </div>
+              </div>
+
+              <div className="col-lg-6 col-md-6 col-12">
+                <div className="input-group-meta form-group mb-30">
+                  <label htmlFor="">Deposit in euro <span className="text-muted small">(optional)</span></label>
+                  <InputGroup>
+                    <Form.Control
+                      type="number"
+                      min={0}
+                      step={1}
+                      placeholder="Optional"
+                      value={editPropertyData.propertyData?.deposit ?? ""}
+                      onKeyDown={(e) => {
+                        if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                      }}
+                      onChange={(e) => {
+                        const raw = e.target.value.trim();
+                        if (raw === "") {
+                          updateEditListingData("propertyData", "deposit", undefined);
+                          return;
+                        }
+                        const value = Math.max(0, Math.floor(Number(raw)) || 0);
+                        updateEditListingData("propertyData", "deposit", value);
+                      }}
+                      isInvalid={editErrorFields.includes("propertyData.deposit")}
+                    />
+                    <InputGroup.Text id="deposit-unit">€</InputGroup.Text>
+                  </InputGroup>
                 </div>
               </div>
 
@@ -648,14 +682,32 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
               </div>
 
               <div className="col-6">
-                <MultiValueInput
-                  label="Bills"
-                  data={editPropertyData.propertyData.bills}
-                  onChange={(updatedData) =>
-                    updateEditListingData("propertyData", "bills", updatedData)
-                  }
-                  isInvalid={editErrorFields.includes("propertyData.bills")}
-                />
+                <div className="input-group-meta form-group mb-30">
+                  <label htmlFor="">{t("emergency_housing.bills")} <span className="text-muted small">(optional)</span></label>
+                  <InputGroup>
+                    <Form.Control
+                      type="number"
+                      min={0}
+                      step={1}
+                      placeholder="Optional"
+                      value={editPropertyData.propertyData?.bills ?? ""}
+                      onKeyDown={(e) => {
+                        if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                      }}
+                      onChange={(e) => {
+                        const raw = e.target.value.trim();
+                        if (raw === "") {
+                          updateEditListingData("propertyData", "bills", undefined);
+                          return;
+                        }
+                        const value = Math.max(0, Math.floor(Number(raw)) || 0);
+                        updateEditListingData("propertyData", "bills", value);
+                      }}
+                      isInvalid={editErrorFields.includes("propertyData.bills")}
+                    />
+                    <InputGroup.Text id="bills-unit">€</InputGroup.Text>
+                  </InputGroup>
+                </div>
               </div>
 
               <div className="col-6">

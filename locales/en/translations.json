@@ -344,7 +344,7 @@
     "precise_address": "Please give the exact address and number so we can arrange a viewing (we will not share it on our website)",
     "size": "Size",
     "period": "Period of availability",
-    "rent": "Rent in euro",
+    "rent": "Base rent in euro",
     "bills": "Approximate cost of bills in euro",
     "flatmates": "Number of flatmates / roommates",
     "registration": "Is address registration possible",
@@ -542,6 +542,8 @@
     "free_from_period": "Free from / period",
     "price_in_euro": "Price in euro",
     "bills": "Utilities",
+    "bills_label": "Bills",
+    "deposit_label": "Deposit in euro",
     "flatmates": "Flatmates",
     "no_related_properties_found": "No related properties found",
     "no_properties_for_the_criteria": "No properties for the criteria",
@@ -553,7 +555,7 @@
     "pets_allowed": "Pets allowed",
     "bathrooms": "Bathrooms",
     "toilets": "Toilets",
-    "rent": "Rent"
+    "rent": "Base rent in euro"
   },
   "enums": {
     "property_type": {
@@ -933,7 +935,7 @@
       "status": "TAKEN",
       "price": 950,
       "statusCode": 3,
-      "title": "Room in a shared apartment",
+      "title": "Room in a shared property",
       "city": "Hague",
       "location": "Goeverneurlaan 462 The Hague",
       "description": {
@@ -955,7 +957,7 @@
       "city": "Groningen",
       "location": "Gedempte Zuiderdiep, Groningen",
       "description": {
-        "property": "Cozy 20 sq. meters room studio apartment with own kitchen and bathroom. Located close to the city centre of Groningen, 4 mins walking from Vismarkt, 8 mins from Groningen train station and 10 mins from the University Library. The building hosts mainly students. Registration can be made for the time of stay",
+        "property": "Cozy 20 m²eters room studio apartment with own kitchen and bathroom. Located close to the city centre of Groningen, 4 mins walking from Vismarkt, 8 mins from Groningen train station and 10 mins from the University Library. The building hosts mainly students. Registration can be made for the time of stay",
         "period": "available September-December 2024/January 2025",
         "bills": "bills are included",
         "flatmates": "No roommates/ flatmates"
@@ -973,7 +975,7 @@
       "city": "Groningen",
       "location": "Petrus Driessenstraat, Groningen",
       "description": {
-        "property": "Cozy 15 sq. meters room, close to the city center. The room comes furnished. The house is shared with 3 other Bulgarian roommates. There is 1 kitchen, 1 toilet, 1 bathroom, and a shared room for relaxation. Registration is NOT possible.",
+        "property": "Cozy 15 m²eters room, close to the city center. The room comes furnished. The house is shared with 3 other Bulgarian roommates. There is 1 kitchen, 1 toilet, 1 bathroom, and a shared room for relaxation. Registration is NOT possible.",
         "period": "available 22nd of August - 31st of January",
         "bills": "bills are NOT included",
         "flatmates": "up to 3 roommates"
@@ -1064,7 +1066,7 @@
       "status": "Taken",
       "price": 850,
       "statusCode": 3,
-      "title": "Room in a shared apartment",
+      "title": "Room in a shared property",
       "city": "Groningen",
       "location": "Sabotagelaan, Groningen",
       "description": {
@@ -1109,11 +1111,11 @@
       "status": "Taken",
       "price": 630,
       "statusCode": 3,
-      "title": "Room in a shared apartment",
+      "title": "Room in a shared property",
       "city": "Groningen",
       "location": "Oosterhamrikkade, Groningen",
       "description": {
-        "property": "Room in a shared apartment with 2 girls. Spacious room in a shared apartment with 2 Bulgarian room. There is a shared toilet, shower, kitchen + living room. Registration IS possible",
+        "property": "Room in a shared property with 2 girls. Spacious Room in a shared property with 2 Bulgarian room. There is a shared toilet, shower, kitchen + living room. Registration IS possible",
         "period": "12 months",
         "bills": "bills included",
         "flatmates": "2"
@@ -1196,7 +1198,7 @@
       "status": "Taken",
       "price": 385,
       "statusCode": 3,
-      "title": "Room in a shared apartment",
+      "title": "Room in a shared property",
       "city": "Groningen",
       "location": "Huygensstraat, Groningen",
       "description": {
@@ -1213,7 +1215,7 @@
       "status": "Taken",
       "price": 430,
       "statusCode": 3,
-      "title": "Room in a shared apartment",
+      "title": "Room in a shared property",
       "city": "Groningen",
       "location": "Petrus Driessenstraat, Groningen",
       "description": {
@@ -1257,13 +1259,13 @@
       "status": "Taken",
       "price": 410,
       "statusCode": 3,
-      "title": "Room in a shared apartment",
+      "title": "Room in a shared property",
       "city": "Groningen",
       "location": "Turkooisstraat, Groningen",
       "description": {
-        "property": "Size of the room is 20 sq. meters. All furnitures can be bought from the current lender for 400 euro (furnitures are from IKEA and cost approxiamtely 400 euro)",
+        "property": "Size of the room is 20 m²eters. All furnitures can be bought from the current lender for 400 euro (furnitures are from IKEA and cost approxiamtely 400 euro)",
         "period": "Free from 1st of July",
-        "bills": "main bills are included. Deposit of 410 euro is required. Wi-Fi can be paid if used according to the current plan",
+        "bills": "main bills are included. Deposit in euro of 410 euro is required. Wi-Fi can be paid if used according to the current plan",
         "flatmates": "2 Bulgarians and 2 Germans"
       },
       "main_image": "1.jpg",

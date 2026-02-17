@@ -49,7 +49,7 @@ function ThirdStep({ steps, currentStep }: { steps: (string | number)[]; current
                         />
                         <label className="btn d-flex flex-column h-100" htmlFor="apartment">
                             <Image src={MallIcon} alt="property icon" />
-                            <span>Room in a shared apartment</span>
+                            <span>Room in a shared property</span>
                         </label>
                     </div>
                     <div className={`form-group checkbox-card-type col m-2 ${typeError ? "border border-danger rounded-3" : ""}`}>

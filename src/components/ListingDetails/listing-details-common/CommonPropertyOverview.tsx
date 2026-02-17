@@ -92,7 +92,7 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
       id: "size",
       icon: `${ICONS_BASE}/size.svg`,
       title: t("emergency_housing.size") || "Size",
-      content: property.size ?? "",
+      content: property.size ? property.size + ' m²' : '',
     },
     {
       id: "furnished",
@@ -110,7 +110,14 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
       id: "bills",
       icon: `${ICONS_BASE}/bills.svg`,
       title: t("property.bills") || "Bills",
-      content: description.bills ?? "",
+      content: (() => {
+        const hasBills = description.bills != null && description.bills !== "";
+        const hasDeposit = description.deposit != null && description.deposit !== "";
+        const parts: string[] = [];
+        if (hasBills) parts.push((t("property.bills_label") || "Bills") + ": " + description.bills + "€");
+        if (hasDeposit) parts.push((t("property.deposit_label") || "Deposit in euro") + ": " + description.deposit + "€");
+        return parts.length > 0 ? parts.join(" | ") : "—";
+      })(),
     },
     {
       id: "period",

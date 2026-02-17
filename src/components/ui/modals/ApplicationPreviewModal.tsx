@@ -32,6 +32,7 @@ const FIELD_LABELS: Record<string, string> = {
   property_data: "Property data",
   reference_id: "Reference ID",
   location: "Location",
+  deposit: "Deposit in euro (€)",
 };
 
 const PREFERRED_ORDER = [
@@ -54,6 +55,7 @@ const PREFERRED_ORDER = [
   "property_title",
   "property_url",
   "location",
+  "deposit",
   "property_data",
 ];
 
