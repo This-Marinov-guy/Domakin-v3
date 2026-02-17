@@ -15,8 +15,10 @@ const arrowDownIcon = "/assets/img/icons/arrow-down.svg";
 
 /** Max characters shown when collapsed. Expand and "..." only if content exceeds this. */
 const FEEDBACK_COLLAPSED_CHAR_LIMIT = 200;
-/** Fixed height for the quote text area — same for all cards so card height is identical; when expanded, content scrolls inside. */
+/** Fixed height for the quote text area when collapsed — same for all cards. */
 const FEEDBACK_QUOTE_HEIGHT = 180;
+/** When expanded, quote area can grow up to this height then becomes scrollable. */
+const FEEDBACK_QUOTE_EXPANDED_MAX_HEIGHT = 1000;
 
 export const CustomPrevArrow = (props: any) => {
   const { onClick } = props;
@@ -132,11 +134,11 @@ const Feedback = ({ style, feedbacks = [], bg = 'bg-pink-two' }: FeedbackProps) 
                   <div
                     className="feedback-quote-wrapper feedback-content-wrapper"
                     style={{
-                      height: FEEDBACK_QUOTE_HEIGHT,
-                      minHeight: FEEDBACK_QUOTE_HEIGHT,
-                      maxHeight: FEEDBACK_QUOTE_HEIGHT,
+                      height: hasMore && isExpanded ? undefined : FEEDBACK_QUOTE_HEIGHT,
+                      minHeight: hasMore && isExpanded ? undefined : FEEDBACK_QUOTE_HEIGHT,
+                      maxHeight: hasMore && isExpanded ? FEEDBACK_QUOTE_EXPANDED_MAX_HEIGHT : FEEDBACK_QUOTE_HEIGHT,
                       overflow: hasMore && isExpanded ? "auto" : "hidden",
-                      transition: "overflow 0.2s ease",
+                      transition: "max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                     }}
                   >
                     <p className="feedback-content mb-0">
