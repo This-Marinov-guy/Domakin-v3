@@ -132,7 +132,7 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
                         address is <span>never public</span>.
                     </p>
 
-                    <div className="container my-40">
+                    <div className="container mt-20">
                         <div className="row justify-content-center">
                             <PropertyCardGrid property={MOCK_PROPERTY} disableLinks />
                         </div>

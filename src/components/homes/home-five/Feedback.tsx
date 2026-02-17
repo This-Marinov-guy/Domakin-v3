@@ -92,14 +92,14 @@ const Feedback = ({ style, feedbacks = [], bg = 'bg-pink-two' }: FeedbackProps) 
 
   return (
     <div
-      className={`center-dots ${bg} position-relative z-1 mt-20 pt-40 pb-40 ${
+      className={`center-dots ${bg} position-relative z-1 mt-20 pt-20 pb-40 ${
         style ? "" : "mt-170 xl-mt-120"
       }`}
       style={{ minHeight: feedbacks?.length > 0 ? '400px' : '200px' }}
     >
       <div className={`container ${style ? "" : "container-large"}`}>
         <div className="title-one text-center mb-60 xl-mb-50 md-mb-30">
-          <h3>{t("feedbacks.feedbacks")}</h3>
+          <h4>{t("feedbacks.feedbacks")}</h4>
         </div>
         {feedbacks?.length > 0 ? (
           !mounted ? (
