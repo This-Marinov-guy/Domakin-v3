@@ -127,7 +127,8 @@ const PropertyDataPreview = ({ onHide, data }: any) => {
           <li>Available to: {formatDateDDMMYYYY(availableTo)}</li>
           <li>Pets allowed: {formatYesNo(petsAllowed)}</li>
           <li>Smoking allowed: {formatYesNo(smokingAllowed)}</li>
-          <li>Bills: {formatJsonKeyValuePairs(data?.bills, ["en"])}</li>
+          <li>Deposit: {data?.deposit ?? "-"}</li>
+          <li>Bills: {data?.bills ?? "-"}</li>
           <li>Flatmates: {formatFlatmatesWithGender(data?.flatmates)}</li>
           <li>Period: {formatJsonKeyValuePairs(data?.period, ["en"])}</li>
           <li>Description: {formatJsonKeyValuePairs(data?.description, ["en"])}</li>

@@ -471,17 +471,32 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
                 </div>
               </div>
 
-              <div className="col-lg-6 col-md-6 col-12">
+              <div className="col-6">
                 <div className="input-group-meta form-group mb-30">
-                  <label htmlFor="">Referral Code</label>
-                  <Form.Control
-                    type="text"
-                    value={editPropertyData.referralCode || ""}
-                    onChange={(e) => {
-                      updateEditListingData("referralCode", "", e.target.value);
-                    }}
-                    isInvalid={editErrorFields.includes("referralCode")}
-                  />
+                  <label htmlFor="">{t("emergency_housing.bills")} <span className="text-muted small">(optional)</span></label>
+                  <InputGroup>
+                    <Form.Control
+                      type="number"
+                      min={0}
+                      step={1}
+                      placeholder="Optional"
+                      value={editPropertyData.propertyData?.bills ?? ""}
+                      onKeyDown={(e) => {
+                        if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                      }}
+                      onChange={(e) => {
+                        const raw = e.target.value.trim();
+                        if (raw === "") {
+                          updateEditListingData("propertyData", "bills", undefined);
+                          return;
+                        }
+                        const value = Math.max(0, Math.floor(Number(raw)) || 0);
+                        updateEditListingData("propertyData", "bills", value);
+                      }}
+                      isInvalid={editErrorFields.includes("propertyData.bills")}
+                    />
+                    <InputGroup.Text id="bills-unit">€</InputGroup.Text>
+                  </InputGroup>
                 </div>
               </div>
 
@@ -529,6 +544,20 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
                     isInvalid={editErrorFields.includes("propertyData.furnishedType")}
                     name=""
                     placeholder=""
+                  />
+                </div>
+              </div>
+
+              <div className="col-lg-6 col-md-6 col-12">
+                <div className="input-group-meta form-group mb-30">
+                  <label htmlFor="">Referral Code</label>
+                  <Form.Control
+                    type="text"
+                    value={editPropertyData.referralCode || ""}
+                    onChange={(e) => {
+                      updateEditListingData("referralCode", "", e.target.value);
+                    }}
+                    isInvalid={editErrorFields.includes("referralCode")}
                   />
                 </div>
               </div>
@@ -678,35 +707,6 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
                       </label>
                     </div>
                   ))}
-                </div>
-              </div>
-
-              <div className="col-6">
-                <div className="input-group-meta form-group mb-30">
-                  <label htmlFor="">{t("emergency_housing.bills")} <span className="text-muted small">(optional)</span></label>
-                  <InputGroup>
-                    <Form.Control
-                      type="number"
-                      min={0}
-                      step={1}
-                      placeholder="Optional"
-                      value={editPropertyData.propertyData?.bills ?? ""}
-                      onKeyDown={(e) => {
-                        if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
-                      }}
-                      onChange={(e) => {
-                        const raw = e.target.value.trim();
-                        if (raw === "") {
-                          updateEditListingData("propertyData", "bills", undefined);
-                          return;
-                        }
-                        const value = Math.max(0, Math.floor(Number(raw)) || 0);
-                        updateEditListingData("propertyData", "bills", value);
-                      }}
-                      isInvalid={editErrorFields.includes("propertyData.bills")}
-                    />
-                    <InputGroup.Text id="bills-unit">€</InputGroup.Text>
-                  </InputGroup>
                 </div>
               </div>
 
