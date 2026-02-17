@@ -36,6 +36,7 @@ export interface ApplicationListItem {
   step?: number;
   current_step?: number;
   location?: string;
+  images?: string;
   [key: string]: unknown;
 }
 
@@ -169,13 +170,11 @@ const ApplicationTableBody = ({
   };
 
   const getFirstPropertyImage = (item: ApplicationListItem): string => {
-    const pd = item.property_data;
-    if (!pd) return FALLBACK_PROPERTY_IMAGE;
-    const main = pd.main_image ?? pd.main_image_url;
-    if (main && typeof main === "string") return main;
-    const images = pd.images;
-    if (Array.isArray(images) && images.length > 0 && typeof images[0] === "string") return images[0];
-    return FALLBACK_PROPERTY_IMAGE;
+    const images = item?.images;
+
+    if (typeof images !== "string" || !images) return FALLBACK_PROPERTY_IMAGE;
+    
+    return images.split(",")[0];
   };
 
   const getLocation = (item: ApplicationListItem): string => {
@@ -221,9 +220,9 @@ const ApplicationTableBody = ({
                     <Image
                       src={propertyImageSrc}
                       alt=""
-                      width={56}
-                      height={56}
-                      className="w-100 h-100"
+                      width={100}
+                      height={100}
+                      className="w-100 h-100 rounded-4"
                       style={{ objectFit: "cover" }}
                       unoptimized={isFallback}
                     />

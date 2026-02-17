@@ -32,7 +32,7 @@ const ServicesList = ({ style, withPricing = false }: any) => {
           className="lazy-img"
         />
         <h6>{t(item.title)}</h6>
-        <p>{t(item.desc)}</p>
+        <p className="text-center text-black">{t(item.desc)}</p>
       </div>
     </Link>
   ));

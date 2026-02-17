@@ -364,8 +364,31 @@
     opacity: 0.3;
   }
 }
+.feedback-content-wrapper {
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.feedback-quote-wrapper {
+  flex-shrink: 0;
+}
+.feedback-name-row {
+  flex-shrink: 0;
+}
+.feedback-expand-btn {
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+.min-h-expand-row {
+  min-height: 50px;
+}
 .feedback-block-six {
-  padding: 50px 60px;
+  padding: 30px 40px;
 
   background: #fff;
   .rating {

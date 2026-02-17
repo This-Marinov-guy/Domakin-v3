@@ -42,11 +42,11 @@
       font-size: 1.125rem;
       font-weight: 500;
       text-align: center;
-    }
+    } 
   }
 
   .hero-box-v2 {
-    background-color: $color-two;
+    background: url("../img/bg/7.webp") no-repeat center / cover;
 
     .hero-content-v2 {
       border-top-left-radius: 1.875rem;
@@ -656,7 +656,11 @@
       }
 
       .hero-header__rating-box-v2 {
-        margin: 0 0 1rem;
+        margin: 0 auto 1rem;
+        // background-color: $color-two;
+        border-radius: 0.75rem;
+        padding: 0.5rem 1rem;
+        width: 300px;
 
         p,
         li,

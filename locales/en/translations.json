@@ -481,7 +481,9 @@
     "want_to_support_the_organisation": "Want to support the organisation?",
     "you_can_now_donate_or_leave_feedback": "You can now donate or leave a positive feedback so we can continue helping other students",
     "contribute": "Contribute",
-    "no_feedbacks": "No feedbacks yet - A chance to be the first!"
+    "no_feedbacks": "No feedbacks yet - A chance to be the first!",
+    "expand": "Expand",
+    "shrink": "Shrink"
   },
   "recommendations": {
     "our_recommendations": "Our recommendations",

@@ -1,4 +1,5 @@
 "use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Rating } from "react-simple-star-rating";
 import Slider from "react-slick";
@@ -9,6 +10,14 @@ import useTranslation from "next-translate/useTranslation";
 
 import quoteIcon from "@/assets/images/icon/icon_29.svg";
 import moment from "moment";
+
+const arrowDownIcon = "/assets/img/icons/arrow-down.svg";
+
+/** Max characters shown when collapsed. Expand and "..." only if content exceeds this. */
+const FEEDBACK_COLLAPSED_CHAR_LIMIT = 120;
+/** Fixed height for the quote text area when collapsed — keeps all cards same height and leaves room for name + arrow. */
+const FEEDBACK_QUOTE_COLLAPSED_HEIGHT = 120;
+const FEEDBACK_QUOTE_EXPANDED_MAX_HEIGHT = 2000;
 
 export const CustomPrevArrow = (props: any) => {
   const { onClick } = props;
@@ -69,6 +78,16 @@ interface FeedbackProps {
 
 const Feedback = ({ style, feedbacks = [], bg = 'bg-pink-two' }: FeedbackProps) => {
   const { t } = useTranslation("translations");
+  const [expandedIds, setExpandedIds] = useState<Set<number | string>>(new Set());
+
+  const toggleExpanded = (id: number | string) => {
+    setExpandedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
 
   return (
     <div
@@ -83,32 +102,76 @@ const Feedback = ({ style, feedbacks = [], bg = 'bg-pink-two' }: FeedbackProps) 
         </div>
         {feedbacks?.length > 0 ? (
           <Slider {...setting}>
-            {feedbacks.map((item: any) => (
-              <div
-                key={item.id}
-                className={`feedback-block-six ${style ? "rounded-4" : ""}`}
-              >
-                <div className="d-flex justify-content-between align-items-center">
-                  <ul className="rating style-none d-flex">
-                    <li>
-                      <Rating initialValue={5} size={25} readonly={true} />
-                    </li>
-                  </ul>
-                  <Image src={quoteIcon} alt="" className="icon" />
+            {feedbacks.map((item: any, index: number) => {
+              const id = item.id ?? index;
+              const isExpanded = expandedIds.has(id);
+              const content = String(item.content ?? "").trim();
+              const hasMore = content.length > FEEDBACK_COLLAPSED_CHAR_LIMIT;
+              const displayText =
+                hasMore && !isExpanded
+                  ? content.slice(0, FEEDBACK_COLLAPSED_CHAR_LIMIT).trim() + "..."
+                  : content;
+
+              return (
+                <div
+                  key={item.id ?? index}
+                  className={`feedback-block-six d-flex flex-column ${style ? "rounded-4" : ""}`}
+                >
+                  <div className="d-flex justify-content-between align-items-center">
+                    <ul className="rating style-none d-flex">
+                      <li>
+                        <Rating initialValue={5} size={25} readonly={true} />
+                      </li>
+                    </ul>
+                    <Image src={quoteIcon} alt="" className="icon" />
+                  </div>
+                  <div
+                    className="feedback-quote-wrapper feedback-content-wrapper"
+                    style={{
+                      height: !hasMore || !isExpanded ? FEEDBACK_QUOTE_COLLAPSED_HEIGHT : undefined,
+                      maxHeight: hasMore && isExpanded ? FEEDBACK_QUOTE_EXPANDED_MAX_HEIGHT : FEEDBACK_QUOTE_COLLAPSED_HEIGHT,
+                      overflow: hasMore && !isExpanded ? "hidden" : hasMore && isExpanded ? "auto" : "hidden",
+                      transition: "max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                    }}
+                  >
+                    <p className="feedback-content mb-0">
+                      {displayText}
+                    </p>
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between mt-3 feedback-name-row">
+                    <h6 className="fs-20 m0">{item.name}</h6>
+                    {item?.created_at && (
+                      <small className="text-muted">
+                        {moment(item.created_at).format("DD MMM YYYY")}
+                      </small>
+                    )}
+                  </div>
+                  <div className="d-flex justify-content-center mt-auto pt-2 min-h-expand-row">
+                    {hasMore && (
+                      <button
+                        type="button"
+                        className="feedback-expand-btn d-flex align-items-center justify-content-center border-0 rounded-circle bg-transparent p-2"
+                        onClick={() => toggleExpanded(id)}
+                        title={isExpanded ? t("feedbacks.shrink") : t("feedbacks.expand")}
+                        aria-label={isExpanded ? t("feedbacks.shrink") : t("feedbacks.expand")}
+                        style={{
+                          transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                          transition: "transform 0.3s ease",
+                        }}
+                      >
+                        <Image
+                          src={arrowDownIcon}
+                          alt=""
+                          width={24}
+                          height={24}
+                          className="d-block"
+                        />
+                      </button>
+                    )}
+                  </div>
                 </div>
-                <p className="feedback-content">
-                 {item.content}
-                </p>
-                <div className="d-flex align-items-center justify-content-between">
-                  <h6 className="fs-20 m0">{item.name}</h6>
-                  {item?.created_at && (
-                    <small className="text-muted">
-                      {moment(item.created_at).format("DD MMM YYYY")}
-                    </small>
-                  )}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </Slider>
         ) : (
           <h6 className="text-center d-flex flex-column">
