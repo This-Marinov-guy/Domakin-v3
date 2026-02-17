@@ -79,7 +79,7 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
   const sharedSpaceIds = parseSharedSpaceIds(
     extendedData?.shared_space ?? extendedData?.sharedSpace ?? property.shared_space ?? description.shared_space
   );
-  const sharedSpaceIdsSet = new Set(sharedSpaceIds);  
+  const sharedSpaceIdsSet = new Set(sharedSpaceIds);
 
   const infoItems = [
     {
@@ -112,10 +112,11 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
       title: t("property.bills") || "Bills",
       content: (() => {
         const hasBills = description.bills != null && description.bills !== "";
-        const hasDeposit = description.deposit != null && description.deposit !== "";
+        const hasDeposit = property.deposit != null && property.deposit !== "";
         const parts: string[] = [];
+
         if (hasBills) parts.push((t("property.bills_label") || "Bills") + ": " + description.bills + "€");
-        if (hasDeposit) parts.push((t("property.deposit_label") || "Deposit in euro") + ": " + description.deposit + "€");
+        if (hasDeposit) parts.push((t("property.deposit_label") || "Deposit") + ": " + property.deposit + "€");
         return parts.length > 0 ? parts.join(" | ") : "—";
       })(),
     },
