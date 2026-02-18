@@ -504,3 +504,29 @@ button:disabled,
     /* Move down slightly */
   }
 }
+
+/* Input-group suffix inside input on the right (mirror of phone prefix); content scrolls behind it */
+.input-group {
+  position: relative;
+
+  .form-control {
+    padding-right: 3rem;
+  }
+
+  .input-group-text {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 70%;
+    margin: auto 8px auto auto;
+    display: flex;
+    border-radius: 8px !important;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-one !important;
+    border: none;
+    color: #fff !important;
+    z-index: 40;
+  }
+}

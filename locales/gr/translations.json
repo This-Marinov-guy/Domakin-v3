@@ -1605,7 +1605,7 @@
       "select_date": "Select date"
     },
     "fourth": {
-      "deposit_label": "Deposit (€)",
+      "deposit_label": "Deposit in euro",
       "tooltips": {
         "base_rent": "The amount required each month in order to use the property.",
         "bills": "Combined sum of all fixed monthly bills. If they vary, you can enter an approximate amount.",

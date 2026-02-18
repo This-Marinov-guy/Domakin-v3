@@ -17,8 +17,12 @@ import {
   prefillNestedUserInfo,
   prefillUserInfo,
   transformToFormData,
+  turnDecimalToInteger,
 } from "@/utils/helpers";
 import { toast } from "react-toastify";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import { FiInfo } from "react-icons/fi";
 import {
   AMENITIES_LIST,
   FURNISHED_TYPES,
@@ -99,6 +103,23 @@ const AddListingForm = () => {
       : [...selectedSharedSpaces, id].sort((a, b) => a - b);
     updateListingData("propertyData", "sharedSpace", next);
   };
+
+  const InfoTip = ({ id, text }: { id: string; text: string }) => (
+    <OverlayTrigger placement="top" overlay={<Tooltip id={id}>{text}</Tooltip>}>
+      <span
+        className="ms-2 text-muted"
+        role="button"
+        tabIndex={0}
+        aria-label="Info"
+        style={{ display: "inline-flex", alignItems: "center" }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") e.preventDefault();
+        }}
+      >
+        <FiInfo />
+      </span>
+    </OverlayTrigger>
+  );
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -317,107 +338,126 @@ const AddListingForm = () => {
             </div>
           </div>
 
-          <div className="col-6">
-            <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">{t("emergency_housing.size")}</label>
-              <InputGroup>
-                <Form.Control
-                  type="number"
-                  min={0}
-                  step={1}
-                  value={typeof propertyData.size === "number" ? propertyData.size : Math.max(0, parseInt(String(propertyData.size ?? "0"), 10) || 0)}
-                  onKeyDown={(e) => {
-                    if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
-                  }}
-                  onChange={(e) => {
-                    const v = Math.max(0, Math.floor(Number(e.target.value)) || 0);
-                    updateListingData("propertyData", "size", v);
-                  }}
-                  isInvalid={errorFields.includes("propertyData.size")}
-                />
-                <InputGroup.Text id="size-unit">m²</InputGroup.Text>
-              </InputGroup>
+          {/* Row: Rent | Bills – same as list-room fourth-step */}
+          <div className="row gx-3 mb-30">
+            <div className="col-12 col-lg-6">
+              <div className="input-group-meta form-group mb-30 mb-lg-30">
+                <label className="d-flex align-items-center">
+                  {t("emergency_housing.rent")}
+                  <InfoTip
+                    id="add-listing-tt-rent"
+                    text={t("list_room_steps.fourth.tooltips.base_rent")}
+                  />
+                </label>
+                <InputGroup>
+                  <Form.Control
+                    type="number"
+                    min={0}
+                    step={1}
+                    value={propertyData.rent ?? ""}
+                    onKeyDown={(e) => {
+                      if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                    }}
+                    onChange={(e) => {
+                      updateListingData("propertyData", "rent", turnDecimalToInteger(e.target.value));
+                    }}
+                    isInvalid={errorFields.includes("propertyData.rent")}
+                  />
+                  <InputGroup.Text id="rent-unit">€</InputGroup.Text>
+                </InputGroup>
+              </div>
+            </div>
+            <div className="col-12 col-lg-6">
+              <div className="input-group-meta form-group mb-30 mb-lg-30">
+                <label className="d-flex align-items-center">
+                  <span>
+                    Bills {' '}
+                    <span className="text-muted small">({t("common.optional")})</span>
+                  </span>
+                  <InfoTip
+                    id="add-listing-tt-bills"
+                    text={t("list_room_steps.fourth.tooltips.bills")}
+                  />
+                </label>
+                <InputGroup>
+                  <Form.Control
+                    type="number"
+                    min={0}
+                    step={1}
+                    placeholder={t("common.optional")}
+                    value={propertyData.bills ?? ""}
+                    onChange={(e) => {
+                      updateListingData("propertyData", "bills", turnDecimalToInteger(e.target.value));
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                    }}
+                    isInvalid={errorFields.includes("propertyData.bills")}
+                  />
+                  <InputGroup.Text id="bills-unit">€</InputGroup.Text>
+                </InputGroup>
+              </div>
             </div>
           </div>
 
-          <div className="col-6">
-            <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">{t("emergency_housing.rent")}</label>
-              <InputGroup>
-                <Form.Control
-                  type="number"
-                  min={0}
-                  step={1}
-                  value={typeof propertyData.rent === "number" ? propertyData.rent : Math.max(0, parseInt(String(propertyData.rent ?? "0"), 10) || 0)}
-                  onKeyDown={(e) => {
-                    if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
-                  }}
-                  onChange={(e) => {
-                    const value = Math.max(0, Math.floor(Number(e.target.value)) || 0);
-                    updateListingData("propertyData", "rent", value);
-                  }}
-                  isInvalid={errorFields.includes("propertyData.rent")}
-                />
-                <InputGroup.Text id="rent-unit">€</InputGroup.Text>
-              </InputGroup>
+          {/* Row: Deposit | Size – same as list-room fourth-step */}
+          <div className="row gx-3 mb-30">
+            <div className="col-12 col-lg-6">
+              <div className="input-group-meta form-group mb-30 mb-lg-30">
+                <label className="d-flex align-items-center">
+                  <span>
+                    {t("list_room_steps.fourth.deposit_label") || t("property.deposit_label") || "Deposit in euro"}{" "}
+                    <span className="text-muted small">({t("common.optional")})</span>
+                  </span>
+                  <InfoTip
+                    id="add-listing-tt-deposit"
+                    text={t("list_room_steps.fourth.tooltips.deposit")}
+                  />
+                </label>
+                <InputGroup>
+                  <Form.Control
+                    type="number"
+                    min={0}
+                    step={1}
+                    placeholder={t("common.optional")}
+                    value={propertyData.deposit ?? ""}
+                    onChange={(e) => {
+                      updateListingData("propertyData", "deposit", turnDecimalToInteger(e.target.value));
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                    }}
+                  />
+                  <InputGroup.Text id="deposit-unit">€</InputGroup.Text>
+                </InputGroup>
+              </div>
             </div>
-          </div>
-
-          <div className="col-6">
-            <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">{t("emergency_housing.bills")} <span className="text-muted small">(optional)</span></label>
-              <InputGroup>
-                <Form.Control
-                  type="number"
-                  min={0}
-                  step={1}
-                  placeholder="Optional"
-                  value={propertyData.bills != null && propertyData.bills !== "" ? (typeof propertyData.bills === "number" ? propertyData.bills : Math.max(0, parseInt(String(propertyData.bills), 10) || 0)) : ""}
-                  onKeyDown={(e) => {
-                    if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
-                  }}
-                  onChange={(e) => {
-                    const raw = e.target.value.trim();
-                    if (raw === "") {
-                      updateListingData("propertyData", "bills", undefined);
-                      return;
-                    }
-                    const v = Math.max(0, Math.floor(Number(raw)) || 0);
-                    updateListingData("propertyData", "bills", v);
-                  }}
-                  isInvalid={errorFields.includes("propertyData.bills")}
-                />
-                <InputGroup.Text id="bills-unit">€</InputGroup.Text>
-              </InputGroup>
-            </div>
-          </div>
-
-          <div className="col-6">
-            <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">{t("property.deposit_label") || "Deposit in euro"} <span className="text-muted small">(optional)</span></label>
-              <InputGroup>
-                <Form.Control
-                  type="number"
-                  min={0}
-                  step={1}
-                  placeholder="Optional"
-                  value={propertyData.deposit != null && propertyData.deposit !== "" ? (typeof propertyData.deposit === "number" ? propertyData.deposit : Math.max(0, parseInt(String(propertyData.deposit), 10) || 0)) : ""}
-                  onKeyDown={(e) => {
-                    if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
-                  }}
-                  onChange={(e) => {
-                    const raw = e.target.value.trim();
-                    if (raw === "") {
-                      updateListingData("propertyData", "deposit", undefined);
-                      return;
-                    }
-                    const v = Math.max(0, Math.floor(Number(raw)) || 0);
-                    updateListingData("propertyData", "deposit", v);
-                  }}
-                  isInvalid={errorFields.includes("propertyData.deposit")}
-                />
-                <InputGroup.Text id="deposit-unit">€</InputGroup.Text>
-              </InputGroup>
+            <div className="col-12 col-lg-6">
+              <div className="input-group-meta form-group mb-30 mb-lg-30">
+                <label className="d-flex align-items-center">
+                  {t("emergency_housing.size")}
+                  <InfoTip
+                    id="add-listing-tt-size"
+                    text={t("list_room_steps.fourth.tooltips.size")}
+                  />
+                </label>
+                <InputGroup>
+                  <Form.Control
+                    type="number"
+                    min={0}
+                    step={1}
+                    value={propertyData.size ?? ""}
+                    onKeyDown={(e) => {
+                      if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
+                    }}
+                    onChange={(e) => {
+                      updateListingData("propertyData", "size", turnDecimalToInteger(e.target.value));
+                    }}
+                    isInvalid={errorFields.includes("propertyData.size")}
+                  />
+                  <InputGroup.Text id="size-unit">m²</InputGroup.Text>
+                </InputGroup>
+              </div>
             </div>
           </div>
 
@@ -542,8 +582,8 @@ const AddListingForm = () => {
                         className="custom-switch"
                       />
                       <span className="switch-status">
-                        {propertyData.registration === true || propertyData.registration === "yes" 
-                          ? t("common.yes") 
+                        {propertyData.registration === true || propertyData.registration === "yes"
+                          ? t("common.yes")
                           : t("common.no")}
                       </span>
                     </div>
