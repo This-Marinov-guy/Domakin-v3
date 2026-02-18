@@ -42,7 +42,7 @@
       font-size: 1.125rem;
       font-weight: 500;
       text-align: center;
-    } 
+    }
   }
 
   .hero-box-v2 {
@@ -462,8 +462,8 @@
 
 .checkbox-card-type {
 
-  .btn-check:checked + .btn,
-  :not(.btn-check) + .btn:active,
+  .btn-check:checked+.btn,
+  :not(.btn-check)+.btn:active,
   .btn:first-child:active,
   .btn.active,
   .btn.show {
@@ -489,7 +489,7 @@
     }
   }
 
-  .btn-check:checked + label {
+  .btn-check:checked+label {
     color: #fff;
   }
 }
@@ -507,9 +507,10 @@
 }
 
 // Fullscreen modal styles for all devices
-.list-room-modal {
+#list-room-modal {
   .modal-content {
-    height: 100vh;
+    min-height: 100vh !important;
+    margin: 0 !important;
     display: flex;
     flex-direction: column;
   }
@@ -523,7 +524,7 @@
     background-color: #fff;
 
     &.sticky-modal-header {
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .container {
@@ -1219,16 +1220,18 @@
 
 .list-room-modal__first-step,
 .list-room-modal__second-step {
-    margin: 20px 10%;
+  margin: 20px 10%;
 }
 
 .step-panel {
   &__edit-btn {
     color: $color-two !important;
+
     &:hover {
       color: darken($color-two, 8%) !important;
     }
   }
+
   &__step-badge {
     background-color: $color-one !important;
     border-color: $color-one;
@@ -1239,7 +1242,7 @@
   max-width: 380px;
   width: 100%;
 
-  > div {
+  >div {
     max-width: 100%;
     flex: 0 1 auto;
   }
@@ -1249,7 +1252,7 @@
   }
 }
 
-.form-group{
+.form-group {
   margin: 20px 0;
 }
 
@@ -1275,6 +1278,7 @@
     opacity: 0;
     transform: translateX(40px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -1286,6 +1290,7 @@
     opacity: 0;
     transform: translateX(-40px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -1297,6 +1302,7 @@
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1307,6 +1313,7 @@
 .submit-listing-modal-backdrop {
   z-index: 2060 !important;
 }
+
 .submit-listing-modal {
   z-index: 2070 !important;
 }

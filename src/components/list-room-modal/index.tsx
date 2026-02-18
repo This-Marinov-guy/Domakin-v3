@@ -262,7 +262,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                     </Modal.Header>
                 )}
 
-                <Modal.Body style={{ padding: 0, minHeight: "75vh" }}>
+                <Modal.Body>
                     {!isCompleteForm && (
                         <>
                             <div className="list-room-step-transition">
