@@ -224,7 +224,16 @@ const ListingThreeAreaClient = ({
   const start = currentPage * pageLimit;
   const end = start + pageLimit;
   const paginatedProperties = sorted.slice(start, end);
-  const pageCount = Math.ceil(filtered.length / pageLimit);
+  const pageCount = Math.ceil(sorted.length / pageLimit);
+
+  // If filters reduce results, clamp page so we don't show an empty page
+  useEffect(() => {
+    if (!isMounted) return;
+    const maxPage = Math.max(0, pageCount - 1);
+    if (currentPage > maxPage) {
+      updateUrlParams({ page: maxPage });
+    }
+  }, [isMounted, currentPage, pageCount, updateUrlParams]);
 
   const handlePageClick = (event: { selected: number }) => {
     updateUrlParams({ page: event.selected });

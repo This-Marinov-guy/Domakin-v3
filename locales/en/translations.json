@@ -598,6 +598,7 @@
     "your_range": "Your range",
     "property_location": "Property Location",
     "filter_by_price": "Filter By Price",
+    "apply": "Apply",
     "toggle_all": "Toggle All",
     "availability": "Availabilty",
     "showing": "Showing <span class='color-dark fw-500'>{{start}}</span>–<span class='color-dark fw-500'>{{end}}</span> of <span class='color-dark fw-500'>{{total}}</span> results",

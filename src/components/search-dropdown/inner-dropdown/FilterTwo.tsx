@@ -11,6 +11,20 @@ const FilterTwo = ({ properties, query, setQuery, cityFilter, setCityFilter, pri
 
   const { t } = useTranslation("translations");
 
+  const [draftPriceFilter, setDraftPriceFilter] = useState<string>(priceFilter);
+  useEffect(() => {
+    setDraftPriceFilter(priceFilter);
+  }, [priceFilter]);
+
+  // Auto-apply price filter after debounce so the UI updates immediately
+  useEffect(() => {
+    if (draftPriceFilter === priceFilter) return;
+    const timer = setTimeout(() => {
+      setPriceFilter(draftPriceFilter);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [draftPriceFilter, priceFilter, setPriceFilter]);
+
   const initValue = {
     text: t("filter.all"),
     value: 'all',
@@ -78,8 +92,8 @@ const FilterTwo = ({ properties, query, setQuery, cityFilter, setCityFilter, pri
             <div className="input-box-one border-left border-lg-0">
               <div className="label">{t("filter.filter_by_price")}</div>
               <RangesSelect
-                values={priceFilter.split('-').map(Number)}
-                onChange={(values: number[]) => setPriceFilter(values.join('-'))}
+                values={draftPriceFilter.split('-').map(Number)}
+                onChange={(values: number[]) => setDraftPriceFilter(values.join('-'))}
                 min={min}
                 max={max}
                 symbol="€"
