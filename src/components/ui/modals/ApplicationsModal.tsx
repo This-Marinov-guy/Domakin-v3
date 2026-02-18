@@ -216,9 +216,6 @@ const ApplicationsModal = () => {
 
                     if (key === "status") {
                       const statusValue = editRow.status;
-                      const defaultIndex = APPLICATION_STATUSES.findIndex(
-                        (item) => item.value == statusValue
-                      );
                       return (
                         <tr key={key}>
                           <td className="text-muted small pe-2 align-middle">{label}</td>
@@ -226,9 +223,7 @@ const ApplicationsModal = () => {
                             <NiceSelect
                               className="nice-select border-one d-flex align-items-center"
                               options={APPLICATION_STATUSES}
-                              defaultCurrent={
-                                defaultIndex >= 0 ? defaultIndex : 0
-                              }
+                              value={String(statusValue ?? '')}
                               onChange={(e) =>
                                 setEntryEditField(entry, key, e.target.value)
                               }

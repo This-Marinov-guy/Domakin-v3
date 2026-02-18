@@ -30,7 +30,7 @@ const ReviewBody = () => {
                            { value: "3", text: "Rating Low" },
                            { value: "4", text: "Rating High" },
                         ]}
-                        defaultCurrent={0}
+                        value="1"
                         onChange={selectHandler}
                         name=""
                         placeholder="" />

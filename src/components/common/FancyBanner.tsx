@@ -78,7 +78,7 @@ const FancyBanner = ({ style }: any) => {
                       text: capitalizeFirstLetter(location),
                     };
                   })}
-                  defaultCurrent={0}
+                  value={locations[0]}
                   onChange={(e) => {
                     setForm((prevState: any) => {
                       return { ...prevState, cities: e.target.value };

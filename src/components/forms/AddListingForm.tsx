@@ -259,7 +259,7 @@ const AddListingForm = () => {
               <NiceSelect
                 className="nice-select border-one d-flex align-items-center"
                 options={propertyTypeOptions}
-                defaultCurrent={Math.max(0, propertyTypeOptions.findIndex((item) => String(item.value) === String(propertyData?.type ?? propertyData?.property_type)))}
+                value={String(propertyData?.type ?? propertyData?.property_type ?? '')}
                 onChange={(e) => {
                   updateListingData("propertyData", "type", e.target.value);
                 }}
@@ -276,7 +276,7 @@ const AddListingForm = () => {
               <NiceSelect
                 className="nice-select border-one d-flex align-items-center"
                 options={furnishedTypeOptions}
-                defaultCurrent={Math.max(0, furnishedTypeOptions.findIndex((item) => String(item.value) === String(propertyData?.furnishedType ?? propertyData?.furnished_type ?? 1)))}
+                value={String(propertyData?.furnishedType ?? propertyData?.furnished_type ?? 1)}
                 onChange={(e) => {
                   updateListingData("propertyData", "furnishedType", e.target.value);
                 }}

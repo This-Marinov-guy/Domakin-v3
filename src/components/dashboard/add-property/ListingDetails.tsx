@@ -24,7 +24,7 @@ const ListingDetails = () => {
                         { value: 3, text: 2 },
                         { value: 4, text: 3 },
                      ]}
-                     defaultCurrent={0}
+                     value={1}
                      onChange={selectHandler}
                      name=""
                      placeholder="" />
@@ -40,7 +40,7 @@ const ListingDetails = () => {
                         { value: 3, text: 2 },
                         { value: 4, text: 3 },
                      ]}
-                     defaultCurrent={0}
+                     value={1}
                      onChange={selectHandler}
                      name=""
                      placeholder="" />
@@ -56,7 +56,7 @@ const ListingDetails = () => {
                         { value: 3, text: 2 },
                         { value: 4, text: 3 },
                      ]}
-                     defaultCurrent={0}
+                     value={2}
                      onChange={selectHandler}
                      name=""
                      placeholder="" />
@@ -72,7 +72,7 @@ const ListingDetails = () => {
                         { value: 3, text: 3 },
                         { value: 4, text: 4 },
                      ]}
-                     defaultCurrent={0}
+                     value={1}
                      onChange={selectHandler}
                      name=""
                      placeholder="" />
@@ -100,7 +100,7 @@ const ListingDetails = () => {
                         { value: 3, text: 2 },
                         { value: 4, text: 3 },
                      ]}
-                     defaultCurrent={0}
+                     value={1}
                      onChange={selectHandler}
                      name=""
                      placeholder="" />

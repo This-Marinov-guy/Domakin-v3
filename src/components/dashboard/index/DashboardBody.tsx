@@ -87,7 +87,7 @@ const DashboardBody = () => {
                                  { value: "2", text: "Daily" },
                                  { value: "3", text: "Monthly" },
                               ]}
-                              defaultCurrent={0}
+                              value="1"
                               onChange={selectHandler}
                               name=""
                               placeholder="" />

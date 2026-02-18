@@ -74,7 +74,7 @@ const DropdownFour = ({
                                              { value: "industrial", text: "Rent Industrial" },
                                              { value: "villas", text: "Sell Villas" },
                                           ]}
-                                          defaultCurrent={0}
+                                          value="apartments"
                                           onChange={handleStatusChange}
                                           name=""
                                           placeholder="" />
@@ -93,7 +93,7 @@ const DropdownFour = ({
                                              { value: "giza", text: "Giza, Egypt" },
                                              { value: "cuba", text: "Havana, Cuba" },
                                           ]}
-                                          defaultCurrent={0}
+                                          value="washington"
                                           onChange={handleLocationChange}
                                           name=""
                                           placeholder="" />
@@ -130,7 +130,7 @@ const DropdownFour = ({
                                              { value: "industrial", text: "Rent Industrial" },
                                              { value: "villas", text: "Sell Villas" },
                                           ]}
-                                          defaultCurrent={0}
+                                          value="houses"
                                           onChange={handleStatusChange}
                                           name=""
                                           placeholder="" />
@@ -149,7 +149,7 @@ const DropdownFour = ({
                                              { value: "giza", text: "Giza, Egypt" },
                                              { value: "cuba", text: "Havana, Cuba" },
                                           ]}
-                                          defaultCurrent={0}
+                                          value="mexico"
                                           onChange={handleLocationChange}
                                           name=""
                                           placeholder="" />
@@ -186,7 +186,7 @@ const DropdownFour = ({
                                              { value: "condos", text: "Rent Condos" },
                                              { value: "villas", text: "Sell Villas" },
                                           ]}
-                                          defaultCurrent={0}
+                                          value="industrial"
                                           onChange={handleStatusChange}
                                           name=""
                                           placeholder="" />
@@ -205,7 +205,7 @@ const DropdownFour = ({
                                              { value: "giza", text: "Giza, Egypt" },
                                              { value: "cuba", text: "Havana, Cuba" },
                                           ]}
-                                          defaultCurrent={0}
+                                          value="france"
                                           onChange={handleLocationChange}
                                           name=""
                                           placeholder="" />

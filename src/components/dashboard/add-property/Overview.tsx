@@ -27,7 +27,7 @@ const Overview = () => {
                         { value: "4", text: "Industrial" },
                         { value: "5", text: "Villas" },
                      ]}
-                     defaultCurrent={0}
+                     value="1"
                      onChange={selectHandler}
                      name=""
                      placeholder="" />
@@ -43,7 +43,7 @@ const Overview = () => {
                         { value: "3", text: "Sell" },
                         { value: "4", text: "Rent" },
                      ]}
-                     defaultCurrent={0}
+                     value="1"
                      onChange={selectHandler}
                      name=""
                      placeholder="" />

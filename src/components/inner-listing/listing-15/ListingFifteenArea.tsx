@@ -119,7 +119,7 @@ const ListingFifteenArea = () => {
                                  { value: "price_low", text: "Price Low" },
                                  { value: "price_high", text: "Price High" },
                               ]}
-                              defaultCurrent={0}
+                              value="newest"
                               onChange={handleTypeChange}
                               name=""
                               placeholder="" />

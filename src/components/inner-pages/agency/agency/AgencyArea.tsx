@@ -42,7 +42,7 @@ const AgencyArea = () => {
                            { value: "03", text: "Price Low" },
                            { value: "04", text: "Price High" },
                         ]}
-                        defaultCurrent={0}
+                        value="01"
                         onChange={selectHandler}
                         name=""
                         placeholder="" />

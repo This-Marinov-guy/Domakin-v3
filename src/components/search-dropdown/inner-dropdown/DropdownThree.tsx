@@ -30,7 +30,7 @@ const DropdownThree = ({
                            { value: "industrial", text: "Rent Industrial" },
                            { value: "villas", text: "Sell Villas" },
                         ]}
-                        defaultCurrent={0}
+                        value="apartments"
                         onChange={handleStatusChange}
                         name=""
                         placeholder="" />
@@ -49,7 +49,7 @@ const DropdownThree = ({
                            { value: "giza", text: "Giza, Egypt" },
                            { value: "cuba", text: "Havana, Cuba" },
                         ]}
-                        defaultCurrent={0}
+                        value="washington"
                         onChange={handleLocationChange}
                         name=""
                         placeholder="" />
@@ -65,7 +65,7 @@ const DropdownThree = ({
                            { value: "2", text: "$20,000 - $300,000" },
                            { value: "3", text: "$30,000 - $400,000" },
                         ]}
-                        defaultCurrent={0}
+                        value="1"
                         onChange={(event) => handlePriceDropChange(event.target.value)}
                         name=""
                         placeholder=""

@@ -60,7 +60,7 @@ const BreadcrumbThree = ({
                           { value: "houses", text: "Sell Houses" },
                           { value: "villas", text: "Sell Villas" },
                         ]}
-                        defaultCurrent={0}
+                        value="apartments"
                         onChange={selectHandler}
                         name=""
                         placeholder=""
@@ -81,7 +81,7 @@ const BreadcrumbThree = ({
                           { value: "giza", text: "Giza, Egypt" },
                           { value: "cuba", text: "Havana, Cuba" },
                         ]}
-                        defaultCurrent={0}
+                        value="dhaka"
                         onChange={selectHandler}
                         name=""
                         placeholder=""

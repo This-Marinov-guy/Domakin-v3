@@ -15,7 +15,6 @@ import {
 } from "@/utils/enum";
 import { useStore } from "@/stores/storeContext";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { observer } from "mobx-react-lite";
 
 interface ListingThreeAreaClientProps {
   style?: boolean;
@@ -27,6 +26,15 @@ interface ListingThreeAreaClientProps {
   initialPrice?: string;
   initialAvail?: string;
 }
+
+type UrlParams = {
+  query: string;
+  sort: string;
+  page: number;
+  city: string;
+  price: string;
+  avail: string;
+};
 
 const ListingThreeAreaClient = ({
   style,
@@ -47,10 +55,10 @@ const ListingThreeAreaClient = ({
   const [isMounted, setIsMounted] = useState(false);
 
   const {
-    propertyStore: { propertiesListFilters, setPropertiesListFilters },
+    propertyStore: { setPropertiesListFilters },
   } = useStore();
 
-  // Derive filter/sort/page from URL (single source of truth)
+  // URL is the single source of truth — derive everything from searchParams
   const query = searchParams?.get("query") ?? initialQuery;
   const sortIndex = searchParams?.get("sort") ?? initialSort;
   const currentPage = Math.max(
@@ -64,15 +72,7 @@ const ListingThreeAreaClient = ({
   const pageLimit = 6;
   const startRef = useRef<HTMLDivElement>(null);
 
-  type UrlParams = {
-    query: string;
-    sort: string;
-    page: number;
-    city: string;
-    price: string;
-    avail: string;
-  };
-
+  // The only function that changes state — updates the URL, no extra store call
   const updateUrlParams = useCallback(
     (updates: Partial<UrlParams>) => {
       const current: UrlParams = {
@@ -87,6 +87,8 @@ const ListingThreeAreaClient = ({
         avail: searchParams?.get("avail") ?? initialAvail,
       };
       const next: UrlParams = { ...current, ...updates };
+
+      // Reset to page 0 whenever a filter or sort changes
       const filterOrSortKeys: (keyof UrlParams)[] = [
         "query",
         "sort",
@@ -94,10 +96,9 @@ const ListingThreeAreaClient = ({
         "price",
         "avail",
       ];
-      const didFilterOrSortChange = filterOrSortKeys.some(
-        (k) => updates[k] !== undefined
-      );
-      if (didFilterOrSortChange) next.page = 0;
+      if (filterOrSortKeys.some((k) => updates[k] !== undefined)) {
+        next.page = 0;
+      }
 
       const params = new URLSearchParams();
       if (next.query?.trim()) params.set("query", next.query);
@@ -112,7 +113,6 @@ const ListingThreeAreaClient = ({
         queryString ? `${pathname}?${queryString}` : pathname,
         { scroll: false }
       );
-      setPropertiesListFilters(next);
     },
     [
       searchParams,
@@ -124,11 +124,17 @@ const ListingThreeAreaClient = ({
       initialCity,
       initialPrice,
       initialAvail,
-      setPropertiesListFilters,
     ]
   );
 
-  // Initialize from localStorage only on client
+  // Keep a stable ref for the clamp effect so it doesn't re-run on every
+  // searchParams change (which would recreate updateUrlParams)
+  const updateUrlParamsRef = useRef(updateUrlParams);
+  useEffect(() => {
+    updateUrlParamsRef.current = updateUrlParams;
+  });
+
+  // Mount: read localStorage for view preference
   useEffect(() => {
     setIsMounted(true);
     try {
@@ -141,53 +147,17 @@ const ListingThreeAreaClient = ({
     }
   }, []);
 
-  // One-time: if URL is empty but store has filters, push store to URL
-  const hasSyncedStoreRef = useRef(false);
+  // Sync URL → store (unidirectional) so other components can read current filters
   useEffect(() => {
-    if (!isMounted || !searchParams || hasSyncedStoreRef.current) return;
-    const hasURLParams = searchParams.toString().length > 0;
-    const hasStoreFilters =
-      propertiesListFilters.query ||
-      propertiesListFilters.city !== "all" ||
-      propertiesListFilters.price !== "200-2000" ||
-      propertiesListFilters.avail !== "all" ||
-      propertiesListFilters.sort !== SORT_NEWEST ||
-      (propertiesListFilters.page ?? 0) > 0;
-    if (!hasURLParams && hasStoreFilters) {
-      hasSyncedStoreRef.current = true;
-      const next: UrlParams = {
-        query: propertiesListFilters.query ?? initialQuery,
-        sort: propertiesListFilters.sort ?? initialSort,
-        page: Math.max(0, propertiesListFilters.page ?? initialPage),
-        city: propertiesListFilters.city ?? initialCity,
-        price: propertiesListFilters.price ?? initialPrice,
-        avail: propertiesListFilters.avail ?? initialAvail,
-      };
-      const params = new URLSearchParams();
-      if (next.query?.trim()) params.set("query", next.query);
-      if (next.city !== "all") params.set("city", next.city);
-      if (next.price !== "200-2000") params.set("price", next.price);
-      if (next.avail !== "all") params.set("avail", next.avail);
-      if (next.sort !== SORT_NEWEST) params.set("sort", next.sort);
-      if (next.page > 0) params.set("page", String(next.page));
-      const queryString = params.toString();
-      if (queryString) {
-        router.replace(`${pathname}?${queryString}`, { scroll: false });
-      }
-    }
-  }, [
-    isMounted,
-    searchParams,
-    pathname,
-    router,
-    propertiesListFilters,
-    initialQuery,
-    initialSort,
-    initialPage,
-    initialCity,
-    initialPrice,
-    initialAvail,
-  ]);
+    setPropertiesListFilters({
+      query,
+      sort: sortIndex,
+      page: currentPage,
+      city: cityFilter,
+      price: priceFilter,
+      avail: availFilter,
+    });
+  }, [query, sortIndex, currentPage, cityFilter, priceFilter, availFilter, setPropertiesListFilters]);
 
   const toggleView = () => {
     const newView = listStyle === GRID ? LIST : GRID;
@@ -195,7 +165,7 @@ const ListingThreeAreaClient = ({
     localStorage.setItem(LOCAL_STORAGE_PROPERTY_VIEW, newView);
   };
 
-  // Filtering and sorting logic
+  // Filtering and sorting — derived purely from URL params
   const keys = ["title", "location", "city"];
   const [minPrice, maxPrice] = priceFilter.split("-").map(Number);
   const queryLower = query.toLowerCase();
@@ -226,14 +196,16 @@ const ListingThreeAreaClient = ({
   const paginatedProperties = sorted.slice(start, end);
   const pageCount = Math.ceil(sorted.length / pageLimit);
 
-  // If filters reduce results, clamp page so we don't show an empty page
+  // Clamp page only when pageCount drops (filters narrowed results).
+  // Does NOT include currentPage in deps — normal pagination must not trigger this.
   useEffect(() => {
     if (!isMounted) return;
     const maxPage = Math.max(0, pageCount - 1);
     if (currentPage > maxPage) {
-      updateUrlParams({ page: maxPage });
+      updateUrlParamsRef.current({ page: maxPage });
     }
-  }, [isMounted, currentPage, pageCount, updateUrlParams]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMounted, pageCount]);
 
   const handlePageClick = (event: { selected: number }) => {
     updateUrlParams({ page: event.selected });
@@ -247,7 +219,7 @@ const ListingThreeAreaClient = ({
         className={`property-listing-six pb-170 xl-pb-120 ${
           style ? "pt-80 xl-pt-60" : "pt-80 md-pt-40 mt-80 xl-mt-60 bg-pink-two"
         }`}
-        style={{ minHeight: '800px' }}
+        style={{ minHeight: "800px" }}
       >
         <div className="container"></div>
       </div>
@@ -259,7 +231,7 @@ const ListingThreeAreaClient = ({
       className={`property-listing-six pb-170 xl-pb-120 ${
         style ? "pt-80 xl-pt-60" : "pt-80 md-pt-40 mt-80 xl-mt-60 bg-pink-two"
       }`}
-      style={{ minHeight: '800px' }}
+      style={{ minHeight: "800px" }}
     >
       <div className="container">
         {!style && (
@@ -301,12 +273,7 @@ const ListingThreeAreaClient = ({
                   { value: SORT_PRICE_LOW, text: t("filter.price_low_high") },
                   { value: SORT_PRICE_HIGH, text: t("filter.price_high_low") },
                 ]}
-                defaultCurrent={[
-                  SORT_NEWEST,
-                  SORT_OLDEST,
-                  SORT_PRICE_LOW,
-                  SORT_PRICE_HIGH,
-                ].indexOf(sortIndex)}
+                value={sortIndex}
                 onChange={(e) => updateUrlParams({ sort: e.target.value })}
                 name=""
                 placeholder=""
@@ -327,7 +294,11 @@ const ListingThreeAreaClient = ({
           </div>
         </div>
 
-        <div className="row gx-xxl-5" ref={startRef} style={{ minHeight: paginatedProperties?.length > 0 ? '600px' : '200px' }}>
+        <div
+          className="row gx-xxl-5"
+          ref={startRef}
+          style={{ minHeight: paginatedProperties?.length > 0 ? "600px" : "200px" }}
+        >
           {paginatedProperties?.length > 0 ? (
             paginatedProperties.map((property: any, index: number) =>
               listStyle === LIST ? (
@@ -363,4 +334,4 @@ const ListingThreeAreaClient = ({
   );
 };
 
-export default observer(ListingThreeAreaClient);
+export default ListingThreeAreaClient;

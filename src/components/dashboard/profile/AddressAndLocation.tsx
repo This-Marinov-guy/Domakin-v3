@@ -42,7 +42,7 @@ const AddressAndLocation = () => {
                         { value: "19", text: "Benin" },
                         { value: "20", text: "Bhutan" },
                      ]}
-                     defaultCurrent={0}
+                     value="1"
                      onChange={selectHandler}
                      name=""
                      placeholder="" />
@@ -60,7 +60,7 @@ const AddressAndLocation = () => {
                         { value: "5", text: "Mumbai" },
                         { value: "6", text: "Bangalore" },
                      ]}
-                     defaultCurrent={0}
+                     value="1"
                      onChange={selectHandler}
                      name=""
                      placeholder="" />
@@ -84,7 +84,7 @@ const AddressAndLocation = () => {
                         { value: "5", text: "Mumbai" },
                         { value: "6", text: "Bangalore" },
                      ]}
-                     defaultCurrent={0}
+                     value="1"
                      onChange={selectHandler}
                      name=""
                      placeholder="" />

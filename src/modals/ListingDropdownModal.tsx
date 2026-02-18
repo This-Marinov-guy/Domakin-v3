@@ -40,7 +40,7 @@ const ListingDropdownModal = ({
                                                 { value: "industrial", text: "Rent Industrial" },
                                                 { value: "villas", text: "Sell Villas" },
                                              ]}
-                                             defaultCurrent={0}
+                                             value="apartments"
                                              onChange={handleStatusChange}
                                              name=""
                                              placeholder="" />
@@ -59,7 +59,7 @@ const ListingDropdownModal = ({
                                                 { value: "giza", text: "Giza, Egypt" },
                                                 { value: "cuba", text: "Havana, Cuba" },
                                              ]}
-                                             defaultCurrent={0}
+                                             value="washington"
                                              onChange={handleLocationChange}
                                              name=""
                                              placeholder="" />
@@ -88,7 +88,7 @@ const ListingDropdownModal = ({
                                                 { value: "3", text: "3" },
                                                 { value: "4", text: "4" },
                                              ]}
-                                             defaultCurrent={0}
+                                             value="1"
                                              onChange={handleBedroomChange}
                                              name=""
                                              placeholder="" />
@@ -104,7 +104,7 @@ const ListingDropdownModal = ({
                                                 { value: "3", text: "3" },
                                                 { value: "4", text: "4" },
                                              ]}
-                                             defaultCurrent={0}
+                                             value="1"
                                              onChange={handleBathroomChange}
                                              name=""
                                              placeholder="" />

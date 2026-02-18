@@ -38,7 +38,7 @@ const AgencyDetailsSidebar = () => {
                            { value: "06", text: "Giza, Egypt" },
                            { value: "07", text: "Havana, Cuba" },
                         ]}
-                        defaultCurrent={0}
+                        value="01"
                         onChange={selectHandler}
                         name=""
                         placeholder="" />

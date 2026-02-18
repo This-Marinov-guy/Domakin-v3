@@ -282,9 +282,7 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
                   <NiceSelect
                     className="nice-select border-one d-flex align-items-center"
                     options={PROPERTY_STATUSES}
-                    defaultCurrent={PROPERTY_STATUSES.findIndex((item) => {
-                      return item.value == editPropertyData.status;
-                    })}
+                    value={String(editPropertyData.status ?? '')}
                     onChange={(e) => {
                       if (
                         !editPropertyData.releaseTimestamp &&
@@ -403,9 +401,7 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
                   <NiceSelect
                     className="nice-select border-one d-flex align-items-center"
                     options={propertyTypeOptions}
-                    defaultCurrent={Math.max(0, propertyTypeOptions.findIndex(
-                      (item) => String(item.value) === String(editPropertyData.propertyData?.type ?? editPropertyData.propertyData?.property_type)
-                    ))}
+                    value={String(editPropertyData.propertyData?.type ?? editPropertyData.propertyData?.property_type ?? '')}
                     onChange={(e) => {
                       updateEditListingData("propertyData", "type", e.target.value);
                     }}
@@ -535,9 +531,7 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
                   <NiceSelect
                     className="nice-select border-one d-flex align-items-center"
                     options={furnishedTypeOptions}
-                    defaultCurrent={Math.max(0, furnishedTypeOptions.findIndex(
-                      (item) => String(item.value) === String(editPropertyData.propertyData?.furnishedType ?? editPropertyData.propertyData?.furnished_type ?? 1)
-                    ))}
+                    value={String(editPropertyData.propertyData?.furnishedType ?? editPropertyData.propertyData?.furnished_type ?? 1)}
                     onChange={(e) => {
                       updateEditListingData("propertyData", "furnishedType", e.target.value);
                     }}

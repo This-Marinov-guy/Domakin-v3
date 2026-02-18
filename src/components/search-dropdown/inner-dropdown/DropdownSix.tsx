@@ -35,7 +35,7 @@ const DropdownSix = ({
                            { value: "industrial", text: "Rent Industrial" },
                            { value: "villas", text: "Sell Villas" },
                         ]}
-                        defaultCurrent={0}
+                        value="apartments"
                         onChange={handleStatusChange}
                         name=""
                         placeholder="" />
@@ -60,7 +60,7 @@ const DropdownSix = ({
                            { value: "giza", text: "Giza, Egypt" },
                            { value: "cuba", text: "Havana, Cuba" },
                         ]}
-                        defaultCurrent={0}
+                        value="washington"
                         onChange={handleLocationChange}
                         name=""
                         placeholder="" />
@@ -77,7 +77,7 @@ const DropdownSix = ({
                            { value: "3", text: "3+" },
                            { value: "4", text: "4+" },
                         ]}
-                        defaultCurrent={0}
+                        value="0"
                         onChange={handleBedroomChange}
                         name=""
                         placeholder="" />
@@ -94,7 +94,7 @@ const DropdownSix = ({
                            { value: "3", text: "3+" },
                            { value: "4", text: "4+" },
                         ]}
-                        defaultCurrent={0}
+                        value="0"
                         onChange={handleBathroomChange}
                         name=""
                         placeholder="" />
@@ -149,7 +149,7 @@ const DropdownSix = ({
                               { value: "3", text: "2017" },
                               { value: "4", text: "2016" },
                            ]}
-                           defaultCurrent={0}
+                           value="0"
                            onChange={selectHandler}
                            name=""
                            placeholder="" />

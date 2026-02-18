@@ -22,7 +22,7 @@ const DropdownOne = ({ style }: any) => {
                         { value: "industrial", text: "Rent Industrial" },
                         { value: "villas", text: "Sell Villas" },
                      ]}
-                     defaultCurrent={0}
+                     value="apartments"
                      onChange={selectHandler}
                      name=""
                      placeholder="" />
@@ -41,7 +41,7 @@ const DropdownOne = ({ style }: any) => {
                         { value: "giza", text: "Giza, Egypt" },
                         { value: "cuba", text: "Havana, Cuba" },
                      ]}
-                     defaultCurrent={0}
+                     value="germany"
                      onChange={selectHandler}
                      name=""
                      placeholder="" />
@@ -57,7 +57,7 @@ const DropdownOne = ({ style }: any) => {
                         { value: "2", text: "$20,000 - $300,000" },
                         { value: "3", text: "$30,000 - $400,000" },
                      ]}
-                     defaultCurrent={0}
+                     value="1"
                      onChange={selectHandler}
                      name=""
                      placeholder="" />

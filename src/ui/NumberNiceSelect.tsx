@@ -7,34 +7,37 @@ interface Option {
    text: number;
 }
 
-type NiceSelectProps = {
+type NumberNiceSelectProps = {
    options: Option[];
-   defaultCurrent: number;
+   /** The currently selected value (controlled). */
+   value: number;
    placeholder: string;
    className?: string;
    onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
    name: string;
 }
 
-const NumberNiceSelect: FC<NiceSelectProps> = ({
+const NumberNiceSelect: FC<NumberNiceSelectProps> = ({
    options,
-   defaultCurrent,
+   value,
    placeholder,
    className,
    onChange,
    name,
 }) => {
    const [open, setOpen] = useState(false);
-   const [current, setCurrent] = useState<Option>(options[defaultCurrent]);
+
    const onClose = useCallback(() => {
       setOpen(false);
    }, []);
-   const ref = useRef<HTMLDivElement | null>(null);
 
+   const ref = useRef<HTMLDivElement | null>(null);
    useClickAway(ref, onClose);
 
+   // Derive the selected option from the value prop — no internal selection state
+   const selectedOption = options.find((opt) => opt.value === value);
+
    const currentHandler = (item: Option) => {
-      setCurrent(item);
       onChange({ target: { value: item.value } } as unknown as ChangeEvent<HTMLSelectElement>);
       onClose();
    };
@@ -48,7 +51,7 @@ const NumberNiceSelect: FC<NiceSelectProps> = ({
          onKeyDown={(e) => e}
          ref={ref}
       >
-         <span className="current">{current?.text || placeholder}</span>
+         <span className="current">{selectedOption?.text ?? placeholder}</span>
          <ul
             className="list"
             role="menubar"
@@ -59,8 +62,7 @@ const NumberNiceSelect: FC<NiceSelectProps> = ({
                <li
                   key={i}
                   data-value={item.value}
-                  className={`option ${item.value === current?.value ? "selected focus" : ""
-                     }`}
+                  className={`option ${item.value === value ? "selected focus" : ""}`}
                   style={{ fontSize: '14px' }}
                   role="menuitem"
                   onClick={() => currentHandler(item)}

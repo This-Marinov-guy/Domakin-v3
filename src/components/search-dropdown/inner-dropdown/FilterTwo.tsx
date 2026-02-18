@@ -54,7 +54,7 @@ const FilterTwo = ({ properties, query, setQuery, cityFilter, setCityFilter, pri
                     text: location === 'all' ? t('filter.all') : capitalizeFirstLetter(location),
                   };
                 })}
-                defaultCurrent={Math.max(0, locations.indexOf(cityFilter))}
+                value={cityFilter}
                 onChange={(e) => {
                   setCityFilter(e.target.value.toLowerCase());
                 }}
@@ -75,11 +75,7 @@ const FilterTwo = ({ properties, query, setQuery, cityFilter, setCityFilter, pri
                     text: statusCodeMapping[key],
                   })),
                 ]}
-                defaultCurrent={(() => {
-                  if (availFilter === 'all') return 0;
-                  const idx = statusKeys.findIndex((key: string, i: number) => String(i + 1) === availFilter);
-                  return idx >= 0 ? idx + 1 : 0;
-                })()}
+                value={availFilter}
                 onChange={(e) => {
                   setAvailFilter(e.target.value);
                 }}

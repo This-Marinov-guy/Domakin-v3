@@ -73,7 +73,7 @@ const ListingDetailsFourArea = () => {
                                     { value: "02", text: "Best Seller" },
                                     { value: "03", text: "Best Match" },
                                  ]}
-                                 defaultCurrent={0}
+                                 value="01"
                                  onChange={selectHandler}
                                  name=""
                                  placeholder="" />

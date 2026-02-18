@@ -43,7 +43,7 @@ const DropdownFive = () => {
                                     { value: "industrial", text: "Rent Industrial" },
                                     { value: "villas", text: "Sell Villas" },
                                  ]}
-                                 defaultCurrent={0}
+                                 value="apartments"
                                  onChange={selectHandler}
                                  name=""
                                  placeholder="" />
@@ -62,7 +62,7 @@ const DropdownFive = () => {
                                     { value: "giza", text: "Giza, Egypt" },
                                     { value: "cuba", text: "Havana, Cuba" },
                                  ]}
-                                 defaultCurrent={0}
+                                 value="germany"
                                  onChange={selectHandler}
                                  name=""
                                  placeholder="" />
@@ -78,7 +78,7 @@ const DropdownFive = () => {
                                     { value: "2", text: "$20,000 - $300,000" },
                                     { value: "3", text: "$30,000 - $400,000" },
                                  ]}
-                                 defaultCurrent={0}
+                                 value="1"
                                  onChange={selectHandler}
                                  name=""
                                  placeholder="" />
@@ -98,7 +98,7 @@ const DropdownFive = () => {
                      <div className="row gx-0 align-items-center">
                         <div className="col-lg-3">
                            <div className="input-box-one border-left">
-                              <div className="label">I’m looking to...</div>
+                              <div className="label">I'm looking to...</div>
                               <NiceSelect className="nice-select fw-normal"
                                  options={[
                                     { value: "industrial", text: "Rent Industrial" },
@@ -107,7 +107,7 @@ const DropdownFive = () => {
                                     { value: "houses", text: "Sell Houses" },
                                     { value: "villas", text: "Sell Villas" },
                                  ]}
-                                 defaultCurrent={0}
+                                 value="industrial"
                                  onChange={selectHandler}
                                  name=""
                                  placeholder="" />
@@ -126,7 +126,7 @@ const DropdownFive = () => {
                                     { value: "giza", text: "Giza, Egypt" },
                                     { value: "cuba", text: "Havana, Cuba" },
                                  ]}
-                                 defaultCurrent={0}
+                                 value="france"
                                  onChange={selectHandler}
                                  name=""
                                  placeholder="" />
@@ -142,7 +142,7 @@ const DropdownFive = () => {
                                     { value: "2", text: "$20,000 - $300,000" },
                                     { value: "3", text: "$30,000 - $400,000" },
                                  ]}
-                                 defaultCurrent={0}
+                                 value="1"
                                  onChange={selectHandler}
                                  name=""
                                  placeholder="" />

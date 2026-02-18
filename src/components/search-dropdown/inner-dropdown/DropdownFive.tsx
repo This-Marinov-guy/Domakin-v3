@@ -45,7 +45,7 @@ const DropdownFive = ({
                                              { value: "industrial", text: "Rent Industrial" },
                                              { value: "villas", text: "Sell Villas" },
                                           ]}
-                                          defaultCurrent={0}
+                                          value="apartments"
                                           onChange={handleStatusChange}
                                           name=""
                                           placeholder="" />
@@ -64,7 +64,7 @@ const DropdownFive = ({
                                              { value: "giza", text: "Giza, Egypt" },
                                              { value: "cuba", text: "Havana, Cuba" },
                                           ]}
-                                          defaultCurrent={0}
+                                          value="washington"
                                           onChange={handleLocationChange}
                                           name=""
                                           placeholder="" />

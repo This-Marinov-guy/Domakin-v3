@@ -4,18 +4,18 @@ import React, {
   useRef,
   FC,
   ChangeEvent,
-  useEffect,
 } from "react";
 import { useClickAway } from "react-use";
 
 interface Option {
-  value: string|number;
+  value: string | number;
   text: string;
 }
 
 type NiceSelectProps = {
   options: Option[];
-  defaultCurrent?: number | number[]; // Made optional
+  /** The currently selected value (controlled). Pass undefined to show placeholder. */
+  value?: string | number;
   placeholder: string;
   className?: string;
   style?: React.CSSProperties;
@@ -28,7 +28,7 @@ type NiceSelectProps = {
 
 const NiceSelect: FC<NiceSelectProps> = ({
   options,
-  defaultCurrent,
+  value,
   placeholder,
   className,
   style,
@@ -40,64 +40,36 @@ const NiceSelect: FC<NiceSelectProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
 
-  const [current, setCurrent] = useState<Option[]>(
-    defaultCurrent !== undefined
-      ? multi
-        ? Array.isArray(defaultCurrent)
-          ? defaultCurrent.map((index) => options[index])
-          : []
-        : [options[defaultCurrent as number]]
-      : []
-  );
-
   const onClose = useCallback(() => {
     setOpen(false);
   }, []);
 
   const ref = useRef<HTMLDivElement | null>(null);
-
   useClickAway(ref, onClose);
 
-  useEffect(() => {
-    if (current.length) {
-      if (multi) {
-        onChange({
-          target: { value: current.map((item) => item.value).join(",") },
-        } as ChangeEvent<HTMLSelectElement>);
-      } else {
-        onChange({
-          target: { value: current[0].value },
-        } as ChangeEvent<HTMLSelectElement>);
-      }
-    }
-  }, [current]);
+  // Derive selected options from the value prop — no internal selection state
+  const selectedOptions =
+    value === undefined || value === ""
+      ? []
+      : multi
+      ? options.filter((opt) =>
+          (Array.isArray(value) ? value.map(String) : String(value).split(",")).includes(
+            String(opt.value)
+          )
+        )
+      : options.filter((opt) => String(opt.value) === String(value));
 
   const currentHandler = (item: Option) => {
     if (multi) {
-      const isSelected = current.some(
-        (selected) => selected.value === item.value
-      );
-      let newSelection: Option[];
-
-      if (isSelected) {
-        newSelection = current.filter(
-          (selected) => selected.value !== item.value
-        );
-      } else {
-        newSelection = [...current, item];
-      }
-
-      setCurrent(newSelection);
+      const isSelected = selectedOptions.some((s) => s.value === item.value);
+      const newSelection = isSelected
+        ? selectedOptions.filter((s) => s.value !== item.value)
+        : [...selectedOptions, item];
       onChange({
-        target: {
-          value: newSelection.map((selected) => selected.value).join(","),
-        },
+        target: { value: newSelection.map((s) => s.value).join(",") },
       } as ChangeEvent<HTMLSelectElement>);
     } else {
-      setCurrent([item]);
-      onChange({
-        target: { value: item.value },
-      } as ChangeEvent<HTMLSelectElement>);
+      onChange({ target: { value: item.value } } as ChangeEvent<HTMLSelectElement>);
       onClose();
     }
   };
@@ -116,10 +88,10 @@ const NiceSelect: FC<NiceSelectProps> = ({
     >
       {icon && <img src={icon} style={{ width: "20px" }} alt="icon" />}
       <span className="current">
-        {current.length
+        {selectedOptions.length
           ? multi
-            ? current.map((item) => item.text).join(", ")
-            : current[0].text
+            ? selectedOptions.map((item) => item.text).join(", ")
+            : selectedOptions[0].text
           : placeholder}
       </span>
       <ul
@@ -132,7 +104,7 @@ const NiceSelect: FC<NiceSelectProps> = ({
             key={i}
             data-value={item.value}
             className={`d-flex align-items-center justify-content-start gap-2 option ${
-              current.some((selected) => selected.value === item.value)
+              selectedOptions.some((s) => s.value === item.value)
                 ? "selected focus"
                 : ""
             }`}
@@ -144,9 +116,7 @@ const NiceSelect: FC<NiceSelectProps> = ({
             {multi && (
               <input
                 type="checkbox"
-                checked={current.some(
-                  (selected) => selected.value === item.value
-                )}
+                checked={selectedOptions.some((s) => s.value === item.value)}
                 onChange={() => {}}
               />
             )}

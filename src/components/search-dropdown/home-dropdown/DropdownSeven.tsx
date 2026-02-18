@@ -46,7 +46,7 @@ const DropdownSeven = () => {
                                        { value: "industrial", text: "Rent Industrial" },
                                        { value: "villas", text: "Sell Villas" },
                                     ]}
-                                    defaultCurrent={0}
+                                    value="apartments"
                                     onChange={selectHandler}
                                     name=""
                                     placeholder="" />
@@ -65,7 +65,7 @@ const DropdownSeven = () => {
                                        { value: "giza", text: "Giza, Egypt" },
                                        { value: "cuba", text: "Havana, Cuba" },
                                     ]}
-                                    defaultCurrent={0}
+                                    value="germany"
                                     onChange={selectHandler}
                                     name=""
                                     placeholder="" />
@@ -81,7 +81,7 @@ const DropdownSeven = () => {
                                        { value: "2", text: "$20,000 - $300,000" },
                                        { value: "3", text: "$30,000 - $400,000" },
                                     ]}
-                                    defaultCurrent={0}
+                                    value="1"
                                     onChange={selectHandler}
                                     name=""
                                     placeholder="" />
@@ -110,7 +110,7 @@ const DropdownSeven = () => {
                         <div className="row gx-0 align-items-center">
                            <div className="col-xxl-2 col-xl-3 col-lg-4">
                               <div className="input-box-one border-left">
-                                 <div className="label">I’m looking to...</div>
+                                 <div className="label">I'm looking to...</div>
                                  <NiceSelect className="nice-select fw-normal"
                                     options={[
                                        { value: "industrial", text: "Rent Industrial" },
@@ -119,7 +119,7 @@ const DropdownSeven = () => {
                                        { value: "houses", text: "Sell Houses" },
                                        { value: "villas", text: "Sell Villas" },
                                     ]}
-                                    defaultCurrent={0}
+                                    value="industrial"
                                     onChange={selectHandler}
                                     name=""
                                     placeholder="" />
@@ -138,7 +138,7 @@ const DropdownSeven = () => {
                                        { value: "giza", text: "Giza, Egypt" },
                                        { value: "cuba", text: "Havana, Cuba" },
                                     ]}
-                                    defaultCurrent={0}
+                                    value="mexico"
                                     onChange={selectHandler}
                                     name=""
                                     placeholder="" />
@@ -154,7 +154,7 @@ const DropdownSeven = () => {
                                        { value: "2", text: "$20,000 - $300,000" },
                                        { value: "3", text: "$30,000 - $400,000" },
                                     ]}
-                                    defaultCurrent={0}
+                                    value="1"
                                     onChange={selectHandler}
                                     name=""
                                     placeholder="" />
@@ -183,7 +183,7 @@ const DropdownSeven = () => {
                         <div className="row gx-0 align-items-center">
                            <div className="col-xxl-2 col-xl-3 col-lg-4">
                               <div className="input-box-one border-left">
-                                 <div className="label">I’m looking to...</div>
+                                 <div className="label">I'm looking to...</div>
                                  <NiceSelect className="nice-select fw-normal"
                                     options={[
                                        { value: "houses", text: "Sell Houses" },
@@ -192,7 +192,7 @@ const DropdownSeven = () => {
                                        { value: "industrial", text: "Rent Industrial" },
                                        { value: "villas", text: "Sell Villas" },
                                     ]}
-                                    defaultCurrent={0}
+                                    value="houses"
                                     onChange={selectHandler}
                                     name=""
                                     placeholder="" />
@@ -211,7 +211,7 @@ const DropdownSeven = () => {
                                        { value: "giza", text: "Giza, Egypt" },
                                        { value: "cuba", text: "Havana, Cuba" },
                                     ]}
-                                    defaultCurrent={0}
+                                    value="france"
                                     onChange={selectHandler}
                                     name=""
                                     placeholder="" />
@@ -227,7 +227,7 @@ const DropdownSeven = () => {
                                        { value: "2", text: "$20,000 - $300,000" },
                                        { value: "3", text: "$30,000 - $400,000" },
                                     ]}
-                                    defaultCurrent={0}
+                                    value="1"
                                     onChange={selectHandler}
                                     name=""
                                     placeholder="" />
