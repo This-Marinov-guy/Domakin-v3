@@ -44,9 +44,7 @@ function DraftRequestModal({ show, onHide, onKeepEditing }: DraftRequestModalPro
         const res = await sendRequest("/listing-application/save", "POST", formData);
 
         if (res?.status) {
-            toast.success(
-                ("Draft saved successfully.") as unknown as ToastContent<unknown>
-            );
+            toast.success("Draft saved successfully.");
             const { reference_id, referenceId, ...rest } = router.query;
             router.replace(
                 { pathname: router.pathname, query: rest },

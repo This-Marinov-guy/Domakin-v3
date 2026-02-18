@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import axios from "axios";
 import TrackingLayout from "./TrackingLayout";
 import { ToastContainer } from "react-toastify";
@@ -21,11 +22,16 @@ if (typeof window !== "undefined") {
 }
 
 const MainLayout = ({ children }: any) => {
+  const [toastMounted, setToastMounted] = useState(false);
   const { sendRequest } = useServer();
 
   const { t, lang } = useTranslation();
 
   const router = useRouter();
+
+  useEffect(() => {
+    setToastMounted(true);
+  }, []);
 
   const {
     propertyStore: { setReferralCode },
@@ -96,18 +102,24 @@ const MainLayout = ({ children }: any) => {
           {children}
           <ModalsLayout />
           <ScrollToTop />
-          <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={true}
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />{" "}
+          {toastMounted &&
+            typeof document !== "undefined" &&
+            createPortal(
+              <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                style={{ zIndex: 99999 }}
+              />,
+              document.body
+            )}
         </TrackingLayout>
       </StoreProvider>
     </ErrorLayout>
