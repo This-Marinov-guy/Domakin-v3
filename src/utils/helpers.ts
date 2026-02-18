@@ -20,6 +20,14 @@ export const getGeoInfo = async () => {
   }
 };
 
+export const turnDecimalToInteger = (value: number | string | null) => {
+  if (value && !Number.isInteger(Number(value))) {
+    return Math.round(Number(value));
+  }
+
+  return value;
+};
+
 export function capitalizeFirstLetter(str: string) {
   if (!str) {
     return '-';

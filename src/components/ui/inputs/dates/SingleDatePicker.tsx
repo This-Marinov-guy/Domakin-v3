@@ -15,6 +15,10 @@ const SingleDatePicker = (props: any) => {
         type="text"
         value={props.value ? new Date(props.value).toLocaleDateString() : ""}
         placeholder={props.placeholder ?? "Select a date"}
+        readOnly
+        inputMode="none"
+        onKeyDown={(e) => e.preventDefault()}
+        onPaste={(e) => e.preventDefault()}
         data-bs-toggle="dropdown"
         aria-expanded="false"
         data-bs-auto-close="outside"

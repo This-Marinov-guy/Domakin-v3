@@ -8,6 +8,7 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import { AMENITIES_LIST, SHARED_SPACE_LIST } from "@/utils/defines";
+import { turnDecimalToInteger } from "@/utils/helpers";
 
 function FourthStep({
     steps,
@@ -47,42 +48,6 @@ function FourthStep({
             ),
         []
     );
-
-    const billsValue: number | "" =
-        pd?.bills == null || pd?.bills === ""
-            ? ""
-            : typeof pd?.bills === "number"
-                ? Math.max(0, pd.bills)
-                : Math.max(0, parseInt(String(pd?.bills ?? "0"), 10) || 0);
-    const rentValue = typeof propertyData.rent === "number" ? propertyData.rent : Math.max(0, parseInt(String(propertyData.rent ?? "0"), 10) || 0);
-    const sizeValue = typeof pd?.size === "number" ? pd.size : Math.max(0, parseInt(String(pd?.size ?? "0"), 10) || 0);
-    const depositValue: number | "" =
-        pd?.deposit == null || pd?.deposit === ""
-            ? ""
-            : typeof pd?.deposit === "number"
-                ? pd.deposit
-                : Math.max(0, parseInt(String(pd.deposit), 10) || 0);
-
-    const handleBillsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const raw = e.target.value.trim();
-        if (raw === "") {
-            updateListingData("propertyData", "bills", undefined);
-            return;
-        }
-        const v = Math.max(0, Math.floor(Number(raw)) || 0);
-        updateListingData("propertyData", "bills", v);
-    };
-
-    const handleDepositChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const raw = e.target.value.trim();
-        if (raw === "") {
-            updateListingData("propertyData", "deposit", undefined);
-            return;
-        }
-        const v = Math.max(0, Math.floor(Number(raw)) || 0);
-        updateListingData("propertyData", "deposit", v);
-    };
-
 
     const flatmatesMaleCount = Math.max(0, parseInt(String(pd?.flatmatesMale ?? "0"), 10) || 0);
     const flatmatesFemaleCount = Math.max(0, parseInt(String(pd?.flatmatesFemale ?? "0"), 10) || 0);
@@ -125,13 +90,12 @@ function FourthStep({
                                     type="number"
                                     min={0}
                                     step={1}
-                                    value={rentValue}
+                                    value={propertyData.rent}
                                     onKeyDown={(e) => {
                                         if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
                                     }}
                                     onChange={(e) => {
-                                        const v = Math.max(0, Math.floor(Number(e.target.value)) || 0);
-                                        updateListingData("propertyData", "rent", v);
+                                        updateListingData("propertyData", "rent", turnDecimalToInteger(e.target.value));
                                     }}
                                     isInvalid={errorFields.includes("rent")}
                                 />
@@ -148,8 +112,10 @@ function FourthStep({
                                     min={0}
                                     step={1}
                                     placeholder="Optional"
-                                    value={billsValue}
-                                    onChange={handleBillsChange}
+                                    value={propertyData.bills}
+                                    onChange={(e) => {
+                                        updateListingData("propertyData", "bills", turnDecimalToInteger(e.target.value));
+                                    }}
                                     onKeyDown={(e) => {
                                         if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
                                     }}
@@ -172,8 +138,10 @@ function FourthStep({
                                     min={0}
                                     step={1}
                                     placeholder="Optional"
-                                    value={depositValue}
-                                    onChange={handleDepositChange}
+                                    value={propertyData.deposit}
+                                    onChange={(e) => {
+                                        updateListingData("propertyData", "deposit", turnDecimalToInteger(e.target.value));
+                                    }}
                                     onKeyDown={(e) => {
                                         if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
                                     }}
@@ -190,13 +158,12 @@ function FourthStep({
                                     type="number"
                                     min={0}
                                     step={1}
-                                    value={sizeValue}
+                                    value={propertyData.size}
                                     onKeyDown={(e) => {
                                         if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
                                     }}
                                     onChange={(e) => {
-                                        const v = Math.max(0, Math.floor(Number(e.target.value)) || 0);
-                                        updateListingData("propertyData", "size", v);
+                                        updateListingData("propertyData", "size", turnDecimalToInteger(e.target.value));
                                     }}
                                     isInvalid={errorFields.includes("size")}
                                 />
@@ -441,8 +408,8 @@ function FourthStep({
                             <div
                                 key={value}
                                 className={`checkbox-card-type col-6 col-md-4 ${errorFields.includes("furnishedType")
-                                        ? "border border-danger rounded-5"
-                                        : ""
+                                    ? "border border-danger rounded-5"
+                                    : ""
                                     }`}
                             >
                                 <input
