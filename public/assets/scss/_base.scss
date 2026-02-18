@@ -17,7 +17,15 @@
   border-radius: 0;
 }
 
+// Ensure page fills viewport on all screens so content extends to the right edge (no strip)
+html {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .main-page-wrapper {
+  width: 100%;
+  min-width: 100%;
   overflow-x: hidden;
 }
 
@@ -28,6 +36,8 @@ body {
   position: relative;
   color: $text-color;
   overflow-x: hidden;
+  width: 100%;
+  min-width: 100%;
 }
 
 .font-garamond {
