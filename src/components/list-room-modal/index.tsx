@@ -306,24 +306,15 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                                     )}
                                 </div>
                             </div>
-
-                            {/* Sticky footer for final step */}
-                            {isLast &&
-                                <div className="container">
-                                    {lastStepButtons}
-                                </div>
-                            }
                         </>
                     )}
 
                     {isCompleteForm && <SuccessStep />}
                 </Modal.Body>
 
-                {!isLast && !isCompleteForm && (
-                    <Modal.Footer className="justify-content-between" ref={footerRef}>
-                        {actionButtons}
-                    </Modal.Footer>
-                )}
+                <Modal.Footer className="justify-content-between" ref={footerRef}>
+                    {isLast ? lastStepButtons : actionButtons}
+                </Modal.Footer>
             </Modal>
 
             <DraftRequestModal
