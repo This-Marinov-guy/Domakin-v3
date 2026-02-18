@@ -1,5 +1,3 @@
-"use client";
-
 import FilterTwo from "@/components/search-dropdown/inner-dropdown/FilterTwo";
 import ReactPaginate from "react-paginate";
 import useTranslation from "next-translate/useTranslation";
@@ -16,7 +14,7 @@ import {
   SORT_PRICE_HIGH,
 } from "@/utils/enum";
 import { useStore } from "@/stores/storeContext";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { observer } from "mobx-react-lite";
 
 interface ListingThreeAreaClientProps {
@@ -40,8 +38,9 @@ const ListingThreeAreaClient = ({
   initialPrice = "200-2000",
   initialAvail = "all",
 }: ListingThreeAreaClientProps) => {
-  const { t, lang } = useTranslation("translations");
+  const { t } = useTranslation("translations");
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const [listStyle, setListStyle] = useState(GRID);
@@ -50,6 +49,84 @@ const ListingThreeAreaClient = ({
   const {
     propertyStore: { propertiesListFilters, setPropertiesListFilters },
   } = useStore();
+
+  // Derive filter/sort/page from URL (single source of truth)
+  const query = searchParams?.get("query") ?? initialQuery;
+  const sortIndex = searchParams?.get("sort") ?? initialSort;
+  const currentPage = Math.max(
+    0,
+    parseInt(searchParams?.get("page") ?? String(initialPage), 10) || 0
+  );
+  const cityFilter = searchParams?.get("city") ?? initialCity;
+  const priceFilter = searchParams?.get("price") ?? initialPrice;
+  const availFilter = searchParams?.get("avail") ?? initialAvail;
+
+  const pageLimit = 6;
+  const startRef = useRef<HTMLDivElement>(null);
+
+  type UrlParams = {
+    query: string;
+    sort: string;
+    page: number;
+    city: string;
+    price: string;
+    avail: string;
+  };
+
+  const updateUrlParams = useCallback(
+    (updates: Partial<UrlParams>) => {
+      const current: UrlParams = {
+        query: searchParams?.get("query") ?? initialQuery,
+        sort: searchParams?.get("sort") ?? initialSort,
+        page: Math.max(
+          0,
+          parseInt(searchParams?.get("page") ?? String(initialPage), 10) || 0
+        ),
+        city: searchParams?.get("city") ?? initialCity,
+        price: searchParams?.get("price") ?? initialPrice,
+        avail: searchParams?.get("avail") ?? initialAvail,
+      };
+      const next: UrlParams = { ...current, ...updates };
+      const filterOrSortKeys: (keyof UrlParams)[] = [
+        "query",
+        "sort",
+        "city",
+        "price",
+        "avail",
+      ];
+      const didFilterOrSortChange = filterOrSortKeys.some(
+        (k) => updates[k] !== undefined
+      );
+      if (didFilterOrSortChange) next.page = 0;
+
+      const params = new URLSearchParams();
+      if (next.query?.trim()) params.set("query", next.query);
+      if (next.city !== "all") params.set("city", next.city);
+      if (next.price !== "200-2000") params.set("price", next.price);
+      if (next.avail !== "all") params.set("avail", next.avail);
+      if (next.sort !== SORT_NEWEST) params.set("sort", next.sort);
+      if (next.page > 0) params.set("page", String(next.page));
+
+      const queryString = params.toString();
+      router.replace(
+        queryString ? `${pathname}?${queryString}` : pathname,
+        { scroll: false }
+      );
+      setPropertiesListFilters(next);
+    },
+    [
+      searchParams,
+      router,
+      pathname,
+      initialQuery,
+      initialSort,
+      initialPage,
+      initialCity,
+      initialPrice,
+      initialAvail,
+      setPropertiesListFilters,
+    ]
+  );
 
   // Initialize from localStorage only on client
   useEffect(() => {
@@ -60,208 +137,63 @@ const ListingThreeAreaClient = ({
         setListStyle(savedStyle);
       }
     } catch (error) {
-      // localStorage might not be available
       console.warn("Failed to read from localStorage:", error);
     }
   }, []);
+
+  // One-time: if URL is empty but store has filters, push store to URL
+  const hasSyncedStoreRef = useRef(false);
+  useEffect(() => {
+    if (!isMounted || !searchParams || hasSyncedStoreRef.current) return;
+    const hasURLParams = searchParams.toString().length > 0;
+    const hasStoreFilters =
+      propertiesListFilters.query ||
+      propertiesListFilters.city !== "all" ||
+      propertiesListFilters.price !== "200-2000" ||
+      propertiesListFilters.avail !== "all" ||
+      propertiesListFilters.sort !== SORT_NEWEST ||
+      (propertiesListFilters.page ?? 0) > 0;
+    if (!hasURLParams && hasStoreFilters) {
+      hasSyncedStoreRef.current = true;
+      const next: UrlParams = {
+        query: propertiesListFilters.query ?? initialQuery,
+        sort: propertiesListFilters.sort ?? initialSort,
+        page: Math.max(0, propertiesListFilters.page ?? initialPage),
+        city: propertiesListFilters.city ?? initialCity,
+        price: propertiesListFilters.price ?? initialPrice,
+        avail: propertiesListFilters.avail ?? initialAvail,
+      };
+      const params = new URLSearchParams();
+      if (next.query?.trim()) params.set("query", next.query);
+      if (next.city !== "all") params.set("city", next.city);
+      if (next.price !== "200-2000") params.set("price", next.price);
+      if (next.avail !== "all") params.set("avail", next.avail);
+      if (next.sort !== SORT_NEWEST) params.set("sort", next.sort);
+      if (next.page > 0) params.set("page", String(next.page));
+      const queryString = params.toString();
+      if (queryString) {
+        router.replace(`${pathname}?${queryString}`, { scroll: false });
+      }
+    }
+  }, [
+    isMounted,
+    searchParams,
+    pathname,
+    router,
+    propertiesListFilters,
+    initialQuery,
+    initialSort,
+    initialPage,
+    initialCity,
+    initialPrice,
+    initialAvail,
+  ]);
 
   const toggleView = () => {
     const newView = listStyle === GRID ? LIST : GRID;
     setListStyle(newView);
     localStorage.setItem(LOCAL_STORAGE_PROPERTY_VIEW, newView);
   };
-
-  // Initialize state with defaults first (to prevent hydration mismatch)
-  const [query, setQuery] = useState(initialQuery);
-  const [sortIndex, setSortIndex] = useState(initialSort);
-  const [currentPage, setCurrentPage] = useState(initialPage);
-  const [cityFilter, setCityFilter] = useState(initialCity);
-  const [priceFilter, setPriceFilter] = useState(initialPrice);
-  const [availFilter, setAvailFilter] = useState(initialAvail);
-
-  // Update state from URL params and store when mounted
-  useEffect(() => {
-    if (!isMounted) return;
-    
-    try {
-      // Get values from URL params first, then store, then defaults
-      const urlQuery = searchParams?.get("query");
-      const urlSort = searchParams?.get("sort");
-      const urlPage = searchParams?.get("page");
-      const urlCity = searchParams?.get("city");
-      const urlPrice = searchParams?.get("price");
-      const urlAvail = searchParams?.get("avail");
-
-      const finalQuery = urlQuery ?? propertiesListFilters.query ?? initialQuery;
-      const finalSort = urlSort ?? propertiesListFilters.sort ?? initialSort;
-      const finalPage = urlPage ? Number(urlPage) : (propertiesListFilters.page ?? initialPage);
-      const finalCity = urlCity ?? propertiesListFilters.city ?? initialCity;
-      const finalPrice = urlPrice ?? propertiesListFilters.price ?? initialPrice;
-      const finalAvail = urlAvail ?? propertiesListFilters.avail ?? initialAvail;
-
-      // Only update if values are different
-      if (finalQuery !== query) setQuery(finalQuery);
-      if (finalSort !== sortIndex) setSortIndex(finalSort);
-      if (finalPage !== currentPage) setCurrentPage(finalPage);
-      if (finalCity !== cityFilter) setCityFilter(finalCity);
-      if (finalPrice !== priceFilter) setPriceFilter(finalPrice);
-      if (finalAvail !== availFilter) setAvailFilter(finalAvail);
-    } catch (error) {
-      console.warn("Failed to read URL params:", error);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isMounted]); // Only run once when mounted
-
-  const pageLimit = 6;
-  const startRef = useRef<HTMLDivElement>(null);
-  const isInitialMount = useRef(true);
-
-  // Track previous filter values (initialize with current state)
-  const prevFilters = useRef({
-    query,
-    city: cityFilter,
-    price: priceFilter,
-    avail: availFilter,
-    sort: sortIndex,
-    page: currentPage,
-  });
-
-  // Single effect to handle URL updates and page reset on filter change
-  useEffect(() => {
-    if (!isMounted || !searchParams) return;
-
-    // Handle initial mount
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      
-      const hasURLParams = searchParams.toString().length > 0;
-      const hasStoreFilters = propertiesListFilters.query || 
-                             propertiesListFilters.city !== "all" ||
-                             propertiesListFilters.price !== "200-2000" ||
-                             propertiesListFilters.avail !== "all" ||
-                             propertiesListFilters.sort !== SORT_NEWEST ||
-                             propertiesListFilters.page > 0;
-      
-      // If no URL params but we have store filters, sync URL with store
-      if (!hasURLParams && hasStoreFilters) {
-        const params = new URLSearchParams();
-        
-        if (query && query.trim() !== "") {
-          params.set("query", query);
-        }
-        if (cityFilter !== "all") {
-          params.set("city", cityFilter);
-        }
-        if (priceFilter !== "200-2000") {
-          params.set("price", priceFilter);
-        }
-        if (availFilter !== "all") {
-          params.set("avail", availFilter);
-        }
-        if (sortIndex !== SORT_NEWEST) {
-          params.set("sort", sortIndex);
-        }
-        if (currentPage > 0) {
-          params.set("page", String(currentPage));
-        }
-        
-        const queryString = params.toString();
-        if (queryString) {
-          router.replace(`?${queryString}`, { scroll: false });
-        }
-      }
-      
-      prevFilters.current = {
-        query,
-        city: cityFilter,
-        price: priceFilter,
-        avail: availFilter,
-        sort: sortIndex,
-        page: currentPage,
-      };
-      setPropertiesListFilters({
-        query,
-        city: cityFilter,
-        price: priceFilter,
-        avail: availFilter,
-        sort: sortIndex,
-        page: currentPage,
-      });
-      return;
-    }
-
-    // Check if filters actually changed
-    const filtersChanged =
-      prevFilters.current.query !== query ||
-      prevFilters.current.city !== cityFilter ||
-      prevFilters.current.price !== priceFilter ||
-      prevFilters.current.avail !== availFilter ||
-      prevFilters.current.sort !== sortIndex;
-
-    let nextPage = currentPage;
-    if (filtersChanged) {
-      nextPage = 0;
-      if (currentPage !== 0) {
-        setCurrentPage(0);
-        return; // Let the state update trigger this effect again
-      }
-    }
-
-    // Build new params - only include non-default values
-    const params = new URLSearchParams();
-    
-    // Only add params that differ from defaults or are explicitly set
-    if (query && query.trim() !== "") {
-      params.set("query", query);
-    }
-    if (cityFilter !== "all") {
-      params.set("city", cityFilter);
-    }
-    if (priceFilter !== "200-2000") {
-      params.set("price", priceFilter);
-    }
-    if (availFilter !== "all") {
-      params.set("avail", availFilter);
-    }
-    if (sortIndex !== SORT_NEWEST) {
-      params.set("sort", sortIndex);
-    }
-    if (nextPage > 0) {
-      params.set("page", String(nextPage));
-    }
-
-    // Build the new URL query string
-    const newQueryString = params.toString();
-    const currentQueryString = searchParams?.toString() || "";
-
-    // Only update URL if it actually changed and we have params, or if we're removing all params
-    const shouldUpdateURL = newQueryString !== currentQueryString;
-    
-    if (shouldUpdateURL) {
-      const newURL = newQueryString ? `?${newQueryString}` : window.location.pathname;
-      router.replace(newURL, { scroll: false });
-    }
-
-    // Update previous filters
-    prevFilters.current = {
-      query,
-      city: cityFilter,
-      price: priceFilter,
-      avail: availFilter,
-      sort: sortIndex,
-      page: nextPage,
-    };
-
-    setPropertiesListFilters({
-      query,
-      city: cityFilter,
-      price: priceFilter,
-      avail: availFilter,
-      sort: sortIndex,
-      page: nextPage,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, cityFilter, priceFilter, availFilter, sortIndex, currentPage, isMounted]);
 
   // Filtering and sorting logic
   const keys = ["title", "location", "city"];
@@ -294,8 +226,8 @@ const ListingThreeAreaClient = ({
   const paginatedProperties = sorted.slice(start, end);
   const pageCount = Math.ceil(filtered.length / pageLimit);
 
-  const handlePageClick = (event: any) => {
-    setCurrentPage(event.selected);
+  const handlePageClick = (event: { selected: number }) => {
+    updateUrlParams({ page: event.selected });
     startRef.current?.scrollIntoView();
   };
 
@@ -327,13 +259,13 @@ const ListingThreeAreaClient = ({
               <FilterTwo
                 properties={properties}
                 query={query}
-                setQuery={setQuery}
+                setQuery={(v: string) => updateUrlParams({ query: v })}
                 cityFilter={cityFilter}
-                setCityFilter={setCityFilter}
+                setCityFilter={(v: string) => updateUrlParams({ city: v })}
                 priceFilter={priceFilter}
-                setPriceFilter={setPriceFilter}
+                setPriceFilter={(v: string) => updateUrlParams({ price: v })}
                 availFilter={availFilter}
-                setAvailFilter={setAvailFilter}
+                setAvailFilter={(v: string) => updateUrlParams({ avail: v })}
               />
             </div>
           </div>
@@ -366,9 +298,7 @@ const ListingThreeAreaClient = ({
                   SORT_PRICE_LOW,
                   SORT_PRICE_HIGH,
                 ].indexOf(sortIndex)}
-                onChange={(e) => {
-                  setSortIndex(e.target.value);
-                }}
+                onChange={(e) => updateUrlParams({ sort: e.target.value })}
                 name=""
                 placeholder=""
               />
