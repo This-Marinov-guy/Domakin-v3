@@ -271,6 +271,18 @@
   padding: 1.75rem 0 0;
 }
 
+.step-transition-loading-modal.modal {
+  z-index: 1060;
+  .modal-dialog {
+    z-index: 1061;
+  }
+}
+
+.step-transition-loading-modal-backdrop {
+  z-index: 1055 !important;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 #reminder-modal.modal,
 #list-room-modal.modal,
 #draft-request-modal.modal {

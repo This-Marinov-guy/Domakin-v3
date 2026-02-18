@@ -3,8 +3,10 @@
 import React, { useMemo } from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import useTranslation from "next-translate/useTranslation";
-import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp, FiInfo } from "react-icons/fi";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import { AMENITIES_LIST, SHARED_SPACE_LIST } from "@/utils/defines";
@@ -77,6 +79,23 @@ function FourthStep({
         updateListingData("propertyData", "sharedSpace", next);
     };
 
+    const InfoTip = ({ id, text }: { id: string; text: string }) => (
+        <OverlayTrigger placement="top" overlay={<Tooltip id={id}>{text}</Tooltip>}>
+            <span
+                className="ms-2 text-muted"
+                role="button"
+                tabIndex={0}
+                aria-label="Info"
+                style={{ display: "inline-flex", alignItems: "center" }}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") e.preventDefault();
+                }}
+            >
+                <FiInfo />
+            </span>
+        </OverlayTrigger>
+    );
+
     return (
         <div className="list-room-modal__fourth-step list-room-modal__first-step">
             <div className="list-room-modal__first-step__body d-flex flex-column">
@@ -84,7 +103,13 @@ function FourthStep({
                 <div className="row gx-3 mb-30">
                     <div className="col-12 col-lg-6">
                         <div className="input-group-meta form-group mb-30 mb-lg-30">
-                            <label>{t("emergency_housing.rent")}</label>
+                            <label className="d-flex align-items-center">
+                                {t("emergency_housing.rent")}
+                                <InfoTip
+                                    id="tt-base-rent"
+                                    text="The amount required each month in order to use the property."
+                                />
+                            </label>
                             <InputGroup>
                                 <Form.Control
                                     type="number"
@@ -105,7 +130,16 @@ function FourthStep({
                     </div>
                     <div className="col-12 col-lg-6">
                         <div className="input-group-meta form-group mb-30 mb-lg-30">
-                            <label>{t("emergency_housing.bills")} <span className="text-muted small">(optional)</span></label>
+                            <label className="d-flex align-items-center">
+                                <span>
+                                    {t("emergency_housing.bills")}{" "}
+                                    <span className="text-muted small">(optional)</span>
+                                </span>
+                                <InfoTip
+                                    id="tt-bills"
+                                    text="Combined sum of all fixed monthly bills. If they vary, you can enter an approximate amount."
+                                />
+                            </label>
                             <InputGroup>
                                 <Form.Control
                                     type="number"
@@ -131,7 +165,15 @@ function FourthStep({
                 <div className="row gx-3 mb-30">
                     <div className="col-12 col-lg-6">
                         <div className="input-group-meta form-group mb-30 mb-lg-30">
-                            <label>Deposit in euro <span className="text-muted small">(optional)</span></label>
+                            <label className="d-flex align-items-center">
+                                <span>
+                                    Deposit in euro <span className="text-muted small">(optional)</span>
+                                </span>
+                                <InfoTip
+                                    id="tt-deposit"
+                                    text="A one-time payment held by the landlord and returned when leaving the property. It is most commonly withheld if the property is damaged or the tenant is unresponsive."
+                                />
+                            </label>
                             <InputGroup>
                                 <Form.Control
                                     type="number"
@@ -152,7 +194,13 @@ function FourthStep({
                     </div>
                     <div className="col-12 col-lg-6">
                         <div className="input-group-meta form-group mb-30 mb-lg-30">
-                            <label>{t("emergency_housing.size")}</label>
+                            <label className="d-flex align-items-center">
+                                {t("emergency_housing.size")}
+                                <InfoTip
+                                    id="tt-size"
+                                    text="Approximate size of the private property. Shared space should not be included."
+                                />
+                            </label>
                             <InputGroup>
                                 <Form.Control
                                     type="number"

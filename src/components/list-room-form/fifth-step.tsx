@@ -18,7 +18,7 @@ interface FifthStepProps {
 function FifthStep({ steps, currentStep }: FifthStepProps) {
   const { t } = useTranslation("translations");
   const {
-    propertyStore: { addListingData, updateListingData, errorFields },
+    propertyStore: { addListingData, updateListingData, errorFields, setHasNewImages },
   } = useStore();
 
   const images = addListingData.images || [];
@@ -32,6 +32,7 @@ function FifthStep({ steps, currentStep }: FifthStepProps) {
 
   const onDrop = async (acceptedFiles: File[]) => {
     setImageLoading(true);
+    setHasNewImages(true);
     const corruptedFiles: string[] = [];
 
     try {
@@ -124,17 +125,22 @@ function FifthStep({ steps, currentStep }: FifthStepProps) {
           place so it stands out.
         </p>
         <p>
-          Add at least 4 photos to attract more candidates. 6–10 works best.
+          Add at least 4 photos to attract more candidates. 6–10 works best. Any images above the allowed limit will not be accepted.
         </p>
 
         <div className="mt-4">
-          <h5 className="mb-1">{t("emergency_housing.property_images")}</h5>
-          <small className="d-block mb-2">
-            {t("emergency_housing.image_requirements")}
-          </small>
-          <small className="d-block mb-3">
-            {t("emergency_housing.extra_images")}
-          </small>
+          <h5 className="mb-4">
+            Wishlist of images includes:
+          </h5>
+          <ul>
+            <li>Private rooms</li>
+            <li>Common areas</li>
+            <li>Bathroom/s and toilet/s</li>
+            <li>Amenities (e.g., laundry room, kitchen, storage space)</li>
+            <li>Outdoors</li>
+            <li>Any private furniture that is included in the rental</li>
+          </ul>
+
 
           <Dropzone
             onDrop={onDrop}
@@ -168,17 +174,16 @@ function FifthStep({ steps, currentStep }: FifthStepProps) {
               <div className="w-100" {...getRootProps()}>
                 <input {...getInputProps()} />
                 <div
-                  className={`file-dropzone-container ${
-                    errorFields.includes("images") ? "is-invalid" : ""
-                  }`}
+                  className={`file-dropzone-container ${errorFields.includes("images") ? "is-invalid" : ""
+                    }`}
                 >
                   {imageLoading ? (
                     <p>{t("common.loading")}</p>
                   ) : (
                     <div className="text-center">
                       <i
-                        className="fa-light fa-cloud-arrow-up"
-                        style={{ color: "purple", fontSize: "30px" }}
+                        className="fa-light fa-image"
+                        style={{ color: "#FF6725", fontSize: "30px" }}
                       ></i>
                       <p>
                         {isDragActive
@@ -201,10 +206,10 @@ function FifthStep({ steps, currentStep }: FifthStepProps) {
 
         {images.length > 0 && (
           <div className="mt-4">
-            <div className="d-flex justify-content-between align-items-center mb-2">
-              <h5 className="mb-0">Preview & order</h5>
-              <small className="text-muted">
-                Drag to reorder, click an image to make it the main one.
+            <div className="row mb-4 align-items-center justify-content-between">
+              <h5 className="col-md-6 col-12">Preview & order</h5>
+              <small className="col-md-6 col-12 text-muted w-auto">
+                *Drag to reorder, click an image to make it the main one.
               </small>
             </div>
 

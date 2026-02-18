@@ -14,10 +14,11 @@ declare global {
 const PropertyCardGrid = (props: {
   property: PropertyCard;
   style?: boolean;
+  columnClass?: string;
   disableLinks?: boolean;
   hideAddress?: boolean;
 }) => {
-  const { property, style, disableLinks, hideAddress = false } = props;
+  const { property, style, disableLinks, hideAddress = false, columnClass = "col-lg-4 col-md-6" } = props;
   const { lang } = useTranslation("translations");
   const carouselRef = useRef<HTMLDivElement>(null);
 
@@ -36,7 +37,8 @@ const PropertyCardGrid = (props: {
   return (
     <div
       key={property.id}
-      className="col-lg-4 col-md-6 d-flex mb-50 wow fadeInUp"
+      className={`${columnClass} d-flex mb-50 wow fadeInUp`}
+      style={{ maxWidth: '450px' }}
       //   data-wow-delay={item.data_delay_time}
     >
       <div

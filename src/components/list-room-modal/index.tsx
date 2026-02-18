@@ -25,8 +25,6 @@ interface ListRoomModalProps {
     onHide: () => void;
 }
 
-const VALIDATE_STEP_INDEXES = [2, 3, 4, 5];
-
 function ListRoomModal({ show, onHide }: ListRoomModalProps) {
     const {
         listRoomStore: {
@@ -38,6 +36,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
             reset,
         },
         propertyStore: {
+            hasNewImages,
             addErrorFields,
             referenceId,
             setReferenceId,
@@ -48,7 +47,8 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
             nextAddListingStep,
             backAddListingStep: back,
             getListingApplicationPayload,
-            resetListRoomModal
+            resetListRoomModal,
+            setHasNewImages
         },
     } = useStore();
 
@@ -61,6 +61,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
     >(null);
     const [showSubmitModal, setShowSubmitModal] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<SubmitListingStatus>("loading");
+    const [showStepTransitionModal, setShowStepTransitionModal] = useState(false);
     const lastStepIndexRef = useRef(currentStepIndex);
 
     useEffect(() => {
@@ -90,26 +91,36 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
             return;
         }
 
+        // only show step transition modal if leaving fifth step and there are new images
+        const isLeavingFifthStep = currentStep === 5;
+        if (isLeavingFifthStep && hasNewImages) setShowStepTransitionModal(true);
+
         addErrorFields([]);
         const formData = getListingApplicationPayload({ step: currentStep });
-        const res = await sendRequest(
-            `/listing-application/validate/step-${currentStep}`,
-            "POST",
-            formData,
-        );
-        if (res?.status) {
-            addErrorFields([]);
-            if (res.data.referenceId) {
-                setReferenceId(res.data.referenceId);
-                router.replace(
-                    { pathname: router.pathname, query: { ...router.query, reference_id: res.data.referenceId } },
-                    undefined,
-                    { shallow: true }
-                );
+        try {
+            const res = await sendRequest(
+                `/listing-application/validate/step-${currentStep}`,
+                "POST",
+                formData,
+            );
+            if (res?.status) {
+                addErrorFields([]);
+                if (res.data.referenceId) {
+                    setReferenceId(res.data.referenceId);
+                    router.replace(
+                        { pathname: router.pathname, query: { ...router.query, reference_id: res.data.referenceId } },
+                        undefined,
+                        { shallow: true }
+                    );
+                }
+                nextAddListingStep();
+
+                if (currentStep === 5) setHasNewImages(false);
+            } else if (res?.invalid_fields) {
+                addErrorFields(res.invalid_fields);
             }
-            nextAddListingStep();
-        } else if (res?.invalid_fields) {
-            addErrorFields(res.invalid_fields);
+        } finally {
+            if (isLeavingFifthStep) setShowStepTransitionModal(false);
         }
     };
 
@@ -337,6 +348,22 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                 errorTitle="Something went wrong"
                 errorMessage="We couldn't submit your listing. Please try again."
             />
+
+            <Modal
+                show={showStepTransitionModal}
+                backdrop="static"
+                backdropClassName="step-transition-loading-modal-backdrop"
+                keyboard={false}
+                centered
+                size="sm"
+                contentClassName="border-0 shadow"
+                className="step-transition-loading-modal"
+            >
+                <Modal.Body className="d-flex text-center flex-column align-items-center justify-content-center py-4">
+                    <Spinner animation="border" role="status" className="mb-3" />
+                    <p className="mb-0 text-muted small">Images take a bit more time to upload</p>
+                </Modal.Body>
+            </Modal>
         </>
     );
 }

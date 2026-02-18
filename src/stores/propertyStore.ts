@@ -226,6 +226,8 @@ export default class PropertyStore {
   @observable editPropertyData: any = { ...defaultFormData };
   @observable editErrorFields: string[] = [];
 
+  @observable hasNewImages: boolean = true;
+
   constructor(root: any) {
     makeAutoObservable(this);
     this.rootStore = root;
@@ -234,6 +236,11 @@ export default class PropertyStore {
     //   this.loadListingData();
     // }
   }
+
+  @action
+  setHasNewImages = (hasNewImages: boolean) => {
+    this.hasNewImages = hasNewImages;
+  };
 
   @action
   setPropertiesListFilters = (filters: any) => {

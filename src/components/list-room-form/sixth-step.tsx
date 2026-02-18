@@ -85,8 +85,8 @@ function SixthStep({
     return (
         <div className="list-room-modal__first-step">
             <div className="list-room-modal__first-step__body container">
-                <div className="flex-box">
-                    <div className="col-12 col-lg-4">
+                <div className="row">
+                    <div className="col-12 col-lg-6">
                         {stepPanels.map((panel) => (
                             <div
                                 key={panel.step}
@@ -136,12 +136,13 @@ function SixthStep({
                         ))}
                     </div>
 
-                    <div className="d-flex justify-content-center w-100">
+                    <div className="d-flex justify-content-center col-12 col-lg-6">
                         {displayProperty.main_image ? (
                             <PropertyCardGrid
                                 property={displayProperty}
                                 disableLinks
                                 style
+                                columnClass=""
                             />
                         ) : (
                             <div className="col-12">
