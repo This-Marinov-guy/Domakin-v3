@@ -262,7 +262,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                                 <div className="flex-grow-1">
                                     <StepsBar steps={addListingSteps} currentStep={currentStepIndex} />
                                 </div>
-                                {(currentStep > 1 && currentStep < 6) && <button
+                                {(currentStep > 2 && currentStep < 6) && <button
                                     type="button"
                                     className="btn-nine mb-2"
                                     onClick={openDraftModal}

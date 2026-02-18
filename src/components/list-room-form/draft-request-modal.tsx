@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import HeaderV2 from "@/layouts/headers/HeaderV2";
 import { useServer } from "@/hooks/useServer";
 import useTranslation from "next-translate/useTranslation";
+import { toast, ToastContent } from "react-toastify";
 
 interface DraftRequestModalProps {
     show: boolean;
@@ -43,6 +44,9 @@ function DraftRequestModal({ show, onHide, onKeepEditing }: DraftRequestModalPro
         const res = await sendRequest("/listing-application/save", "POST", formData);
 
         if (res?.status) {
+            toast.success(
+                ("Draft saved successfully.") as unknown as ToastContent<unknown>
+            );
             const { reference_id, referenceId, ...rest } = router.query;
             router.replace(
                 { pathname: router.pathname, query: rest },
