@@ -149,7 +149,7 @@ export default class PropertyStore {
   /** Step summary strings for add-listing review (contact, basics, details). */
   get addListingStepSummaries(): { contact: string; basics: string; details: string } {
     const personal = this.addListingDisplayPersonalData;
-    const pd = this.addListingDisplayPropertyData;    
+    const pd = this.addListingDisplayPropertyData;
 
     const contact = [
       [personal.name, personal.surname].filter(Boolean).join(" ") || "—",
@@ -267,8 +267,8 @@ export default class PropertyStore {
         ...pd,
         type: camel("property_type", "type"),
         postcode: pd.postcode,
-        size: typeof pd.size === "number" ? pd.size : Math.max(0, parseInt(String(pd.size ?? "0"), 10) || 0),
-        rent: typeof pd.rent === "number" ? pd.rent : Math.max(0, parseInt(String(pd.rent ?? "0"), 10) || 0),
+        size: Number(pd.size),
+        rent: Number(pd.rent),
         bathrooms: pd.bathrooms,
         toilets: pd.toilets,
         furnishedType: camel("furnished_type", "furnishedType"),
@@ -276,17 +276,8 @@ export default class PropertyStore {
         availableTo: camel("available_to", "availableTo"),
         petsAllowed: pd.petsAllowed ?? pd.pets_allowed,
         smokingAllowed: pd.smokingAllowed ?? pd.smoking_allowed,
-        bills: (() => {
-          const v = pd.bills;
-          if (v == null) return undefined;
-          if (typeof v === "number") return Math.max(0, v);
-          if (typeof v === "string") {
-            const parsed = parseInt(v, 10);
-            return !Number.isNaN(parsed) && parsed >= 0 ? parsed : undefined;
-          }
-          if (typeof v === "object" && v !== null) return undefined;
-          return undefined;
-        })(),
+        bills: Number(pd.bills),
+        deposit: Number(pd.deposit),
         flatmates: typeof pd.flatmates === "string" ? JSON.parse(pd.flatmates) : pd.flatmates,
         description: typeof pd.description === "string" ? JSON.parse(pd.description) : pd.description,
         period: typeof pd.period === "string" ? JSON.parse(pd.period) : pd.period,
@@ -300,7 +291,6 @@ export default class PropertyStore {
           if (typeof raw === "string") return raw.split(",").map((s) => parseInt(s.trim(), 10)).filter((n) => !Number.isNaN(n));
           return [];
         })(),
-        deposit: pd.deposit != null && typeof pd.deposit === "number" ? pd.deposit : (typeof pd.deposit === "string" && pd.deposit !== "" ? Math.max(0, parseInt(pd.deposit, 10) || 0) : undefined),
       },
       newImages: [],
     };
@@ -321,7 +311,7 @@ export default class PropertyStore {
   setProperties = (properties: any[]) => {
     this.properties = toJS(properties);
   };
-  
+
   @action
   setSSRProperties = (properties: any[]) => {
     // For SSR data, set properties and ensure loading state is false
@@ -574,20 +564,11 @@ export default class PropertyStore {
       city: flat.city ?? nestedProperty?.city ?? this.addListingData.propertyData.city,
       address: flat.address ?? nestedProperty?.address ?? this.addListingData.propertyData.address,
       postcode: flat.postcode ?? nestedProperty?.postcode ?? this.addListingData.propertyData.postcode,
-      size: (() => {
-        const v = flat.size ?? nestedProperty?.size ?? this.addListingData.propertyData.size;
-        return typeof v === "number" ? Math.max(0, v) : Math.max(0, parseInt(String(v ?? "0"), 10) || 0);
-      })(),
+      size: Number(flat.size ?? nestedProperty?.size ?? this.addListingData.propertyData.size),
       period: flat.period ?? nestedProperty?.period ?? this.addListingData.propertyData.period,
-      rent: (() => {
-        const v = flat.rent ?? nestedProperty?.rent ?? this.addListingData.propertyData.rent;
-        return typeof v === "number" ? Math.max(0, v) : Math.max(0, parseInt(String(v ?? "0"), 10) || 0);
-      })(),
-      bills: (() => {
-        const v = flat.bills ?? nestedProperty?.bills ?? this.addListingData.propertyData.bills;
-        if (v == null || v === "") return undefined;
-        return typeof v === "number" ? Math.max(0, v) : Math.max(0, parseInt(String(v), 10) || 0) || undefined;
-      })(),
+      rent: Number(flat.rent ?? nestedProperty?.rent ?? this.addListingData.propertyData.rent),
+      bills: Number(flat.bills ?? nestedProperty?.bills ?? this.addListingData.propertyData.bills),
+      deposit: Number(flat.deposit ?? nestedProperty?.deposit ?? this.addListingData.propertyData.deposit),
       registration: flat.registration ?? nestedProperty?.registration ?? this.addListingData.propertyData.registration,
       description: flat.description ?? nestedProperty?.description ?? this.addListingData.propertyData.description,
       flatmatesMale: flatmatesMale !== undefined && flatmatesMale !== "" ? flatmatesMale : (nestedProperty?.flatmatesMale ?? this.addListingData.propertyData.flatmatesMale ?? ""),
@@ -599,7 +580,6 @@ export default class PropertyStore {
       availableTo: flat.available_to ?? nestedProperty?.availableTo ?? nestedProperty?.available_to ?? this.addListingData.propertyData.availableTo,
       petsAllowed: flat.pets_allowed ?? nestedProperty?.petsAllowed ?? nestedProperty?.pets_allowed ?? this.addListingData.propertyData.petsAllowed,
       smokingAllowed: flat.smoking_allowed ?? nestedProperty?.smokingAllowed ?? nestedProperty?.smoking_allowed ?? this.addListingData.propertyData.smokingAllowed,
-      deposit: flat.deposit != null && typeof flat.deposit === "number" ? flat.deposit : (typeof (flat.deposit ?? nestedProperty?.deposit) === "string" && (flat.deposit ?? nestedProperty?.deposit) !== "" ? Math.max(0, parseInt(String(flat.deposit ?? nestedProperty?.deposit), 10) || 0) : undefined),
       ...(amenitiesArr != null ? { amenities: amenitiesArr } : {}),
       ...(sharedSpaceArr != null ? { sharedSpace: sharedSpaceArr } : {}),
     };
