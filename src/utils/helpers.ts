@@ -335,7 +335,7 @@ export const showStandardNotification = (
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "colored",
+    theme: options?.theme ?? "colored",
     ...options,
   } as ToastOptions);
 };
