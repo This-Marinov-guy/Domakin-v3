@@ -107,7 +107,7 @@ function FourthStep({
                                 {t("emergency_housing.rent")}
                                 <InfoTip
                                     id="tt-base-rent"
-                                    text="The amount required each month in order to use the property."
+                                    text={t("list_room_steps.fourth.tooltips.base_rent")}
                                 />
                             </label>
                             <InputGroup>
@@ -133,11 +133,11 @@ function FourthStep({
                             <label className="d-flex align-items-center">
                                 <span>
                                     {t("emergency_housing.bills")}{" "}
-                                    <span className="text-muted small">(optional)</span>
+                                    <span className="text-muted small">({t("common.optional")})</span>
                                 </span>
                                 <InfoTip
                                     id="tt-bills"
-                                    text="Combined sum of all fixed monthly bills. If they vary, you can enter an approximate amount."
+                                    text={t("list_room_steps.fourth.tooltips.bills")}
                                 />
                             </label>
                             <InputGroup>
@@ -145,7 +145,7 @@ function FourthStep({
                                     type="number"
                                     min={0}
                                     step={1}
-                                    placeholder="Optional"
+                                    placeholder={t("common.optional")}
                                     value={propertyData.bills}
                                     onChange={(e) => {
                                         updateListingData("propertyData", "bills", turnDecimalToInteger(e.target.value));
@@ -167,11 +167,12 @@ function FourthStep({
                         <div className="input-group-meta form-group mb-30 mb-lg-30">
                             <label className="d-flex align-items-center">
                                 <span>
-                                    Deposit in euro <span className="text-muted small">(optional)</span>
+                                    {t("list_room_steps.fourth.deposit_label")}{" "}
+                                    <span className="text-muted small">({t("common.optional")})</span>
                                 </span>
                                 <InfoTip
                                     id="tt-deposit"
-                                    text="A one-time payment held by the landlord and returned when leaving the property. It is most commonly withheld if the property is damaged or the tenant is unresponsive."
+                                    text={t("list_room_steps.fourth.tooltips.deposit")}
                                 />
                             </label>
                             <InputGroup>
@@ -179,7 +180,7 @@ function FourthStep({
                                     type="number"
                                     min={0}
                                     step={1}
-                                    placeholder="Optional"
+                                    placeholder={t("common.optional")}
                                     value={propertyData.deposit}
                                     onChange={(e) => {
                                         updateListingData("propertyData", "deposit", turnDecimalToInteger(e.target.value));
@@ -198,7 +199,7 @@ function FourthStep({
                                 {t("emergency_housing.size")}
                                 <InfoTip
                                     id="tt-size"
-                                    text="Approximate size of the private property. Shared space should not be included."
+                                    text={t("list_room_steps.fourth.tooltips.size")}
                                 />
                             </label>
                             <InputGroup>

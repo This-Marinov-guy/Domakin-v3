@@ -329,7 +329,7 @@
     "surname": "Surname",
     "phone": "Phone",
     "email": "Email",
-    "referral_code": "Referral code (optional)",
+    "referral_code": "Referral code (Optional)",
     "brief_description": "Briefly describe yourself",
     "property_information": "Property information",
     "location": "Location",
@@ -1494,7 +1494,10 @@
     "search": "Search",
     "code": "Code",
     "back": "Back",
+    "next": "Next",
     "cancel": "Cancel",
+    "submit": "Submit",
+    "exit": "Exit",
     "loading": "Loading...",
     "uploading": "Uploading...",
     "yes": "Yes",
@@ -1596,6 +1599,117 @@
       "try_again": "Try Again",
       "contact_support": "Contact Support"
     }
+  },
+  "list_room_modal": {
+    "save_exit": "Save & exit",
+    "loading_next_step": "Images take a bit more time to upload",
+    "step_titles": {
+      "welcome": "Welcome to the property uploading",
+      "contact": "Fill the contact details",
+      "basics": "Tell us the basics",
+      "details": "Let’s give some more details",
+      "photos": "Take some nice photos",
+      "review_publish": "Review & Publish"
+    }
+  },
+  "list_room_steps": {
+    "first": {
+      "intro": "We are going to collect some information about the property and essential contact details. The process is easy and you can save and come back from where you were at any moment.",
+      "start": "Let’s start!"
+    },
+    "third": {
+      "property_types": {
+        "room_shared": "Room in a shared property",
+        "studio": "Studio",
+        "entire_place": "Entire place",
+        "student_house": "Student house"
+      },
+      "available_from": "Available from",
+      "available_to": "Available to",
+      "select_date": "Select date"
+    },
+    "fourth": {
+      "deposit_label": "Deposit (€)",
+      "tooltips": {
+        "base_rent": "The amount required each month in order to use the property.",
+        "bills": "Combined sum of all fixed monthly bills. If they vary, you can enter an approximate amount.",
+        "deposit": "A one-time payment held by the landlord and returned when leaving the property. It is most commonly withheld if the property is damaged or the tenant is unresponsive.",
+        "size": "Approximate size of the private property. Shared space should not be included."
+      }
+    },
+    "fifth": {
+      "intro_1": "In this step we are going to guide you through taking pictures of your place so it stands out.",
+      "intro_2": "Add at least 4 photos to attract more candidates. 6–10 works best. Any images above the allowed limit will not be accepted.",
+      "wishlist_title": "Wishlist of images includes:",
+      "wishlist": {
+        "private_rooms": "Private rooms",
+        "common_areas": "Common areas",
+        "bathroom_toilet": "Bathroom(s) and toilet(s)",
+        "amenities": "Amenities (e.g., laundry room, kitchen, storage space)",
+        "outdoors": "Outdoors",
+        "private_furniture": "Any private furniture that is included in the rental"
+      },
+      "upload_rejected": "File upload rejected. Please check file size and format.",
+      "preview_order_title": "Preview & order",
+      "preview_order_hint": "*Drag to reorder, click an image to make it the main one.",
+      "main_badge": "Main"
+    },
+    "sixth": {
+      "available_property_title": "Available property",
+      "photo_uploaded_one": "photo uploaded",
+      "photo_uploaded_other": "photos uploaded",
+      "add_photos_hint": "Add photos in step 5 to see your listing preview here."
+    },
+    "success": {
+      "title": "Success",
+      "message": "Listing successfully<br/>sent for review<br/>You will be contacted shortly!",
+      "contact_intro": "If you have any questions, do not hesitate to contact us at",
+      "or_at": "or at",
+      "tips": "How to get more candidates:<br/>add 6–10 photos, include<br/>dimensions, mention registration."
+    },
+    "draft": {
+      "title": "Save and finish later?",
+      "subtitle": "Enter your email and we’ll send you a resume link.",
+      "trusted_by_prefix": "Trusted by",
+      "trusted_by_suffix": "students",
+      "saved_message": "Draft saved! We sent a resume link to {{email}}."
+    },
+    "reminder": {
+      "title": "Reminder for uploading",
+      "future_date_error": "Please select a month and year in the future (not current or past).",
+      "success_toast": "Reminder set successfully.",
+      "when_free": "When will your room become free?",
+      "month": "Month",
+      "year": "Year"
+    }
+  },
+  "lending_page": {
+    "listing_in_progress": "You have a listing in progress.",
+    "continue_from_here": "Continue from here",
+    "reminder_title_filled": "Most rooms get filled in 4 days",
+    "reminder_title_list_room": "List your room in 2–3 minutes.",
+    "preview_intro": "Your listing preview — exact",
+    "preview_address_is": "address is",
+    "preview_never_public": "never public",
+    "list_my_room": "List my room"
+  },
+  "reminder_section": {
+    "list_my_room": "List my room",
+    "remind_me_later": "Remind me later"
+  },
+  "hero_lending": {
+    "trusted_by": "Trusted by",
+    "trusted_by_suffix": "Students",
+    "get_commission_title": "Get <span> €200 </span> when you list <br /> your room"
+  },
+  "how_to_works_lending": {
+    "title": "How does it work?",
+    "step1_title": "1. Add room details",
+    "step1_description": "Add a description and photos of the room and common areas.",
+    "step2_title": "2. Pick your tenant",
+    "step2_description": "Receive a list of high quality candidates and choose the new tenant.",
+    "step3_title": "3. Receive your commission",
+    "step3_description": "Receive €200 once the new tenant signs the contract."
   },
   "modal": {
     "long_loading": {

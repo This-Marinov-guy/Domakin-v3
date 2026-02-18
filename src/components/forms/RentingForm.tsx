@@ -54,12 +54,7 @@ const RentingForm = ({ refElement, property }: any) => {
         resetRentingData();
         setSuccess(true);
         showGeneralSuccess(t("viewing.confirmation_message"));
-      } else if (res?.invalid_fields) {
-        addRentingErrorFields(res.invalid_fields);
-        showGeneralError(t("api.fill_fields"));
       }
-    }).catch((err) => {
-      showGeneralError(t("api.general_error"));
     });
   };
 
@@ -145,9 +140,12 @@ const RentingForm = ({ refElement, property }: any) => {
           </div>
         )}
 
-        <div className="col-lg-6col-md-12 col-12 mb-40">
+        <div className="col-lg-6col-md-12 col-12 mb-10">
           <div className="input-item input-item-name">
-            <label htmlFor="">{t("files.motivational_letter_input")}</label>
+            <label htmlFor="">
+              {t("files.motivational_letter_input")}{" "}
+              <span className="text-muted small">({t("common.optional")})</span>
+            </label>
             <Form.Control
               type="file"
               accept=".docx,.doc,.pdf"
@@ -162,7 +160,7 @@ const RentingForm = ({ refElement, property }: any) => {
           </div>
         </div>
 
-        <div className="col-lg-6col-md-12 col-12 mb-40 d-flex align-items-center gap-3">
+        <div className="col-lg-6 col-md-12 col-12 mb-20 d-flex align-items-center gap-3">
           <label htmlFor="">{t("files.motivational_letter_example")}</label>
           <a
             href="/assets/img/templates/cover_letter_template.pdf"
@@ -171,6 +169,21 @@ const RentingForm = ({ refElement, property }: any) => {
           >
             {t("files.download")}
           </a>
+        </div>
+
+        <div className="col-12">
+          <div className="input-group-meta form-group mb-40">
+            <label htmlFor="">{t("emergency_housing.note")}               <span className="text-muted small">({t("common.optional")})</span>
+            </label>
+            <Form.Control
+              as="textarea"
+              value={rentingData.note}
+              onChange={(e) => {
+                updateRentingData("note", "", e.target.value);
+              }}
+              isInvalid={rentingErrorFields.includes("note")}
+            />
+          </div>
         </div>
 
         <div className="col-6">
@@ -183,20 +196,6 @@ const RentingForm = ({ refElement, property }: any) => {
                 updateRentingData("referralCode", "", e.target.value);
               }}
               isInvalid={rentingErrorFields.includes("referralCode")}
-            />
-          </div>
-        </div>
-
-        <div className="col-12">
-          <div className="input-group-meta form-group mb-40">
-            <Form.Control
-              as="textarea"
-              placeholder={t("viewing.comments")}
-              value={rentingData.note}
-              onChange={(e) => {
-                updateRentingData("note", "", e.target.value);
-              }}
-              isInvalid={rentingErrorFields.includes("note")}
             />
           </div>
         </div>

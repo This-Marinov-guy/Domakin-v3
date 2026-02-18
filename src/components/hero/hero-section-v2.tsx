@@ -1,5 +1,7 @@
 import React from "react";
 import Image from "next/image";
+import useTranslation from "next-translate/useTranslation";
+import Trans from "next-translate/Trans";
 import RatingStars from "@/assets/images/icon/stars.svg";
 import ListIcon from "@/assets/images/icon/list.svg";
 
@@ -7,8 +9,8 @@ interface HeroSectionV2Props {
     openModal?: () => void;
 }
 
-export default function HeroSectionV2({ openModal }: HeroSectionV2Props)
-{
+export default function HeroSectionV2({ openModal }: HeroSectionV2Props) {
+    const { t } = useTranslation("translations");
     return (
         <>
             <section className="hero-con-v2">
@@ -19,7 +21,7 @@ export default function HeroSectionV2({ openModal }: HeroSectionV2Props)
                             <div className="hero-header__rating-box-v2">
                                 <Image src={RatingStars} alt="ratings" />
                                 <p>
-                                    Trusted by <span> 500+ </span> Students
+                                    {t("hero_lending.trusted_by")} <span> 500+ </span> {t("hero_lending.trusted_by_suffix")}
                                 </p>
                             </div>
                         </div>
@@ -31,7 +33,10 @@ export default function HeroSectionV2({ openModal }: HeroSectionV2Props)
                             <div className="d-flex flex-column">
 
                                 <h2 className="hero-header__title-v2">
-                                    Get <span> €200 </span> when you list <br /> your room
+                                    <Trans
+                                        i18nKey="translations:hero_lending.get_commission_title"
+                                        components={{ span: <span />, br: <br /> }}
+                                    />
                                 </h2>
                                 
                                 {/* <p className="hero-v2-msg-text">

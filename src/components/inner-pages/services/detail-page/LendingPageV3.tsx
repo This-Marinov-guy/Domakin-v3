@@ -66,7 +66,7 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
                 showStandardNotification(
                     "info",
                     <>
-                        You have a listing in progress.{" "}
+                        {t("lending_page.listing_in_progress")}{" "}
                         <a
                             href={continueUrl}
                             className="text-white text-decoration-underline fw-semibold"
@@ -79,7 +79,7 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
                                 );
                             }}
                         >
-                            Continue from here
+                            {t("lending_page.continue_from_here")}
                         </a>
                     </>,
                     {
@@ -118,7 +118,7 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
             <div className='row'>
                 <div className="col-12">
                     <ReminderSection
-                        title="Most rooms get filled in 4 days"
+                        title={t("lending_page.reminder_title_filled")}
                         isShowListingButton={true}
                         secClasses="reminder-sec-two"
                         openListingModal={() => setShowListRoomModal(true)}
@@ -127,9 +127,9 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
                 </div>
 
                 <div className="col-12">
-                    <p className="never-text">\
-                        Your listing preview —  exact <br />
-                        address is <span>never public</span>.
+                    <p className="never-text">
+                        {t("lending_page.preview_intro")} <br />
+                        {t("lending_page.preview_address_is")} <span>{t("lending_page.preview_never_public")}</span>.
                     </p>
 
                     <div className="container mt-20">
@@ -143,7 +143,7 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
             <Feedback style={true} feedbacks={serverFeedbacks} bg='transparent' />
 
             <ReminderSection
-                title="List your room in 2–3 minutes."
+                title={t("lending_page.reminder_title_list_room")}
                 isShowListingButton={true}
                 secClasses="reminder-sec-two"
                 openListingModal={() => setShowListRoomModal(true)}
@@ -158,7 +158,7 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
 
             {/* Floating bottom-center \"List\" button, reusing the same component as careers page */}
             {(!showListRoomModal && !showReminderModal) && <FloatingCenterButton
-                label="List my room"
+                label={t("lending_page.list_my_room")}
                 onClick={() => setShowListRoomModal(true)}
             />}
         </div>

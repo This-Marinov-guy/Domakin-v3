@@ -10,6 +10,7 @@ import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import HeaderV2 from "@/layouts/headers/HeaderV2";
 import { useServer } from "@/hooks/useServer";
+import useTranslation from "next-translate/useTranslation";
 
 interface DraftRequestModalProps {
     show: boolean;
@@ -22,6 +23,7 @@ function DraftRequestModal({ show, onHide, onKeepEditing }: DraftRequestModalPro
     const [email, setEmail] = useState("");
     const router = useRouter();
     const { sendRequest, loading } = useServer();
+    const { t } = useTranslation("translations");
     const {
         propertyStore: { addListingData, setReferenceId, getListingApplicationPayload, resetListRoomModal },
         userStore: { user },
@@ -55,9 +57,9 @@ function DraftRequestModal({ show, onHide, onKeepEditing }: DraftRequestModalPro
     return (
         <Modal
             show={show}
-            onHide={onHide}
+            centered
             fullscreen
-            className="list-room-modal draft-request-modal"
+            className="draft-request-modal"
         >
             <Modal.Body>
 
@@ -67,17 +69,17 @@ function DraftRequestModal({ show, onHide, onKeepEditing }: DraftRequestModalPro
                         {!isSave ? (
                             <>
                                 <h2 className="text-center pb-25 text-white">
-                                    Save and finish later?
+                                    {t("list_room_steps.draft.title")}
                                 </h2>
 
                                 <div className="d-flex flex-column eleven-gap px-15">
                                     <label className="text-white">
-                                        Enter your email and we’ll send you a resume link.
+                                        {t("list_room_steps.draft.subtitle")}
                                     </label>
                                     <div className="form-group">
                                         <Form.Control
                                             type="email"
-                                            placeholder="Email"
+                                            placeholder={t("emergency_housing.email")}
                                             className="py-2"
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
@@ -87,7 +89,7 @@ function DraftRequestModal({ show, onHide, onKeepEditing }: DraftRequestModalPro
 
                                 <div className="d-flex justify-content-between align-items-center gap-5 m-auto" style={{ maxWidth: "20em", marginTop: "60px" }}>
                                     <button type="button" className="btn-danger-solid" onClick={() => onHide()}>
-                                        Back
+                                        {t("common.back")}
                                     </button>
                                     <button
                                         type="button"
@@ -98,7 +100,7 @@ function DraftRequestModal({ show, onHide, onKeepEditing }: DraftRequestModalPro
                                         {loading ? (
                                             <Spinner size="sm" animation="border" />
                                         ) : (
-                                            "Submit"
+                                            t("common.submit")
                                         )}
                                     </button>
                                 </div>
@@ -108,13 +110,15 @@ function DraftRequestModal({ show, onHide, onKeepEditing }: DraftRequestModalPro
                                 <div className="d-flex flex-row justify-content-center align-items-center gap-3">
                                     <Image src={StarsIcon} alt="stars icon" />
                                     <p className="text-center text-white">
-                                        Trusted by <strong className="text-white"> 385+ </strong> students
+                                        <span>{t("list_room_steps.draft.trusted_by_prefix")}</span>{" "}
+                                        <strong className="text-white">385+</strong>{" "}
+                                        <span>{t("list_room_steps.draft.trusted_by_suffix")}</span>
                                     </p>
                                 </div>
 
                                 <div className="d-flex flex-row justify-content-center align-items-center position-absolute bottom-0 top-0 left-0 right-0 m-auto px-15">
                                     <h2 className="text-center text-white">
-                                        Draft saved! We sent a resume link to {email || "(email)"}.
+                                        {t("list_room_steps.draft.saved_message", { email: email || "(email)" })}
                                     </h2>
                                 </div>
                             </>
@@ -126,7 +130,9 @@ function DraftRequestModal({ show, onHide, onKeepEditing }: DraftRequestModalPro
                             <div className="d-flex flex-row justify-content-center align-items-center gap-3" >
                                 <Image src={StarsIcon} alt="stars icon" />
                                 <p className="text-center text-white fs-6">
-                                    Trusted by <strong className="text-white"> 385+ </strong> students
+                                    <span>{t("list_room_steps.draft.trusted_by_prefix")}</span>{" "}
+                                    <strong className="text-white">385+</strong>{" "}
+                                    <span>{t("list_room_steps.draft.trusted_by_suffix")}</span>
                                 </p>
                             </div>
                         </div>

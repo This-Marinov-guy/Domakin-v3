@@ -49,7 +49,7 @@ function ThirdStep({ steps, currentStep }: { steps: (string | number)[]; current
                         />
                         <label className="btn d-flex flex-column h-100" htmlFor="apartment">
                             <Image src={MallIcon} alt="property icon" />
-                            <span>Room in a shared property</span>
+                            <span>{t("list_room_steps.third.property_types.room_shared")}</span>
                         </label>
                     </div>
                     <div className={`form-group checkbox-card-type col m-2 ${typeError ? "border border-danger rounded-3" : ""}`}>
@@ -64,7 +64,7 @@ function ThirdStep({ steps, currentStep }: { steps: (string | number)[]; current
                         />
                         <label className="btn d-flex flex-column h-100" htmlFor="studio-house">
                             <Image src={StudioIcon} alt="property icon" />
-                            <span>Studio</span>
+                            <span>{t("list_room_steps.third.property_types.studio")}</span>
                         </label>
                     </div>
                     </div>
@@ -81,7 +81,7 @@ function ThirdStep({ steps, currentStep }: { steps: (string | number)[]; current
                         />
                         <label className="btn d-flex flex-column h-100" htmlFor="single-house">
                             <Image src={HouseIcon} alt="property icon" />
-                            <span>Entire place</span>
+                            <span>{t("list_room_steps.third.property_types.entire_place")}</span>
                         </label>
                     </div>
                     <div className={`form-group checkbox-card-type col m-2 ${typeError ? "border border-danger rounded-3" : ""}`}>
@@ -96,7 +96,7 @@ function ThirdStep({ steps, currentStep }: { steps: (string | number)[]; current
                         />
                         <label className="btn d-flex flex-column h-100" htmlFor="student-house">
                             <Image src={StudentHouseIcon} alt="property icon" />
-                            <span>Student house</span>
+                            <span>{t("list_room_steps.third.property_types.student_house")}</span>
                         </label>
                     </div>
                     </div>
@@ -164,10 +164,10 @@ function ThirdStep({ steps, currentStep }: { steps: (string | number)[]; current
                     </div>
 
                     <div className="input-group-meta form-group col-12 col-md-6">
-                        <label htmlFor="list-room-available-from">Available from</label>
+                        <label htmlFor="list-room-available-from">{t("list_room_steps.third.available_from")}</label>
                         <SingleDatePicker
                             id="list-room-available-from"
-                            placeholder="Select date"
+                            placeholder={t("list_room_steps.third.select_date")}
                             value={propertyData.availableFrom ?? ""}
                             onChange={(value: string | Date | null) => {
                                 updateListingData("propertyData", "availableFrom", value);
@@ -178,11 +178,12 @@ function ThirdStep({ steps, currentStep }: { steps: (string | number)[]; current
 
                     <div className="input-group-meta form-group col-12 col-md-6">
                         <label htmlFor="list-room-available-to">
-                            Available to <span className="text-muted small">(optional)</span>
+                            {t("list_room_steps.third.available_to")}{" "}
+                            <span className="text-muted small">({t("common.optional")})</span>
                         </label>
                         <SingleDatePicker
                             id="list-room-available-to"
-                            placeholder="Select date"
+                            placeholder={t("list_room_steps.third.select_date")}
                             value={propertyData.availableTo ?? ""}
                             onChange={(value: string | Date | null) => {
                                 updateListingData("propertyData", "availableTo", value);

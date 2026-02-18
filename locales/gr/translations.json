@@ -1456,7 +1456,10 @@
     "search": "Αναζήτηση",
     "code": "Κωδικός",
     "back": "Πίσω",
+    "next": "Επόμενο",
     "cancel": "Ακύρωση",
+    "submit": "Υποβολή",
+    "exit": "Έξοδος",
     "loading": "Φόρτωση...",
     "uploading": "Μεταφόρτωση...",
     "yes": "Ναι",
@@ -1571,6 +1574,117 @@
       "try_again": "Δοκιμάστε Ξανά",
       "contact_support": "Επικοινωνία με Υποστήριξη"
     }
+  },
+  "list_room_modal": {
+    "save_exit": "Save & exit",
+    "loading_next_step": "Images take a bit more time to upload",
+    "step_titles": {
+      "welcome": "Welcome to the property uploading",
+      "contact": "Fill the contact details",
+      "basics": "Tell us the basics",
+      "details": "Let’s give some more details",
+      "photos": "Take some nice photos",
+      "review_publish": "Review & Publish"
+    }
+  },
+  "list_room_steps": {
+    "first": {
+      "intro": "We are going to collect some information about the property and essential contact details. The process is easy and you can save and come back from where you were at any moment.",
+      "start": "Let’s start!"
+    },
+    "third": {
+      "property_types": {
+        "room_shared": "Room in a shared property",
+        "studio": "Studio",
+        "entire_place": "Entire place",
+        "student_house": "Student house"
+      },
+      "available_from": "Available from",
+      "available_to": "Available to",
+      "select_date": "Select date"
+    },
+    "fourth": {
+      "deposit_label": "Deposit (€)",
+      "tooltips": {
+        "base_rent": "The amount required each month in order to use the property.",
+        "bills": "Combined sum of all fixed monthly bills. If they vary, you can enter an approximate amount.",
+        "deposit": "A one-time payment held by the landlord and returned when leaving the property. It is most commonly withheld if the property is damaged or the tenant is unresponsive.",
+        "size": "Approximate size of the private property. Shared space should not be included."
+      }
+    },
+    "fifth": {
+      "intro_1": "In this step we are going to guide you through taking pictures of your place so it stands out.",
+      "intro_2": "Add at least 4 photos to attract more candidates. 6–10 works best. Any images above the allowed limit will not be accepted.",
+      "wishlist_title": "Wishlist of images includes:",
+      "wishlist": {
+        "private_rooms": "Private rooms",
+        "common_areas": "Common areas",
+        "bathroom_toilet": "Bathroom(s) and toilet(s)",
+        "amenities": "Amenities (e.g., laundry room, kitchen, storage space)",
+        "outdoors": "Outdoors",
+        "private_furniture": "Any private furniture that is included in the rental"
+      },
+      "upload_rejected": "File upload rejected. Please check file size and format.",
+      "preview_order_title": "Preview & order",
+      "preview_order_hint": "*Drag to reorder, click an image to make it the main one.",
+      "main_badge": "Main"
+    },
+    "sixth": {
+      "available_property_title": "Available property",
+      "photo_uploaded_one": "photo uploaded",
+      "photo_uploaded_other": "photos uploaded",
+      "add_photos_hint": "Add photos in step 5 to see your listing preview here."
+    },
+    "success": {
+      "title": "Success",
+      "message": "Listing successfully<br/>sent for review<br/>You will be contacted shortly!",
+      "contact_intro": "If you have any questions, do not hesitate to contact us at",
+      "or_at": "or at",
+      "tips": "How to get more candidates:<br/>add 6–10 photos, include<br/>dimensions, mention registration."
+    },
+    "draft": {
+      "title": "Save and finish later?",
+      "subtitle": "Enter your email and we’ll send you a resume link.",
+      "trusted_by_prefix": "Trusted by",
+      "trusted_by_suffix": "students",
+      "saved_message": "Draft saved! We sent a resume link to {{email}}."
+    },
+    "reminder": {
+      "title": "Reminder for uploading",
+      "future_date_error": "Please select a month and year in the future (not current or past).",
+      "success_toast": "Reminder set successfully.",
+      "when_free": "When will your room become free?",
+      "month": "Month",
+      "year": "Year"
+    }
+  },
+  "lending_page": {
+    "listing_in_progress": "Έχετε μια αγγελία σε εξέλιξη.",
+    "continue_from_here": "Συνεχίστε από εδώ",
+    "reminder_title_filled": "Τα περισσότερα δωμάτια γεμίζουν σε 4 μέρες",
+    "reminder_title_list_room": "Δημοσιεύστε το δωμάτιό σας σε 2–3 λεπτά.",
+    "preview_intro": "Η προεπισκόπηση της αγγελίας σας — η ακριβής",
+    "preview_address_is": "διεύθυνση δεν",
+    "preview_never_public": "δημοσιοποιείται ποτέ",
+    "list_my_room": "Δημοσίευσε το δωμάτιό μου"
+  },
+  "reminder_section": {
+    "list_my_room": "Δημοσίευσε το δωμάτιό μου",
+    "remind_me_later": "Υπενθύμισέ με αργότερα"
+  },
+  "hero_lending": {
+    "trusted_by": "Αξιόπιστο από",
+    "trusted_by_suffix": "Φοιτητές",
+    "get_commission_title": "Κερδίστε <span> €200 </span> όταν δημοσιεύετε <br /> το δωμάτιό σας"
+  },
+  "how_to_works_lending": {
+    "title": "Πώς λειτουργεί;",
+    "step1_title": "1. Προσθέστε λεπτομέρειες δωματίου",
+    "step1_description": "Προσθέστε μια περιγραφή και φωτογραφίες του δωματίου και των κοινόχρηστων χώρων.",
+    "step2_title": "2. Επιλέξτε τον ενοικιαστή σας",
+    "step2_description": "Λάβετε μια λίστα ποιοτικών υποψηφίων και επιλέξτε τον νέο ενοικιαστή.",
+    "step3_title": "3. Λάβετε την προμήθειά σας",
+    "step3_description": "Λάβετε €200 μόλις ο νέος ενοικιαστής υπογράψει το συμβόλαιο."
   },
   "modal": {
     "long_loading": {

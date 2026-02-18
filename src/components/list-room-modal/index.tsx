@@ -11,6 +11,7 @@ import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import { useServer } from "@/hooks/useServer";
 import { useRouter } from "next/router";
+import useTranslation from "next-translate/useTranslation";
 import FifthStep from "../list-room-form/fifth-step";
 import FirstStep from "../list-room-form/first-step";
 import SecondStep from "../list-room-form/second-step";
@@ -26,6 +27,7 @@ interface ListRoomModalProps {
 }
 
 function ListRoomModal({ show, onHide }: ListRoomModalProps) {
+    const { t } = useTranslation("translations");
     const {
         listRoomStore: {
             isCompleteForm,
@@ -179,17 +181,17 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
     const getStepTitle = () => {
         switch (currentStep) {
             case 1:
-                return "Welcome to the property uploading";
+                return t("list_room_modal.step_titles.welcome");
             case 2:
-                return "Fill the contact details";
+                return t("list_room_modal.step_titles.contact");
             case 3:
-                return "Tell us the basics";
+                return t("list_room_modal.step_titles.basics");
             case 4:
-                return "Lets give some more details";
+                return t("list_room_modal.step_titles.details");
             case 5:
-                return "Take some nice photos";
+                return t("list_room_modal.step_titles.photos");
             case 6:
-                return "Review & Publish";
+                return t("list_room_modal.step_titles.review_publish");
             default:
                 return "";
         }
@@ -199,12 +201,12 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
         <div className="d-flex justify-content-between align-items-center gap-5 m-auto">
             {currentStepIndex === 0 && (
                 <button type="button" className="btn-danger" onClick={handleClose}>
-                    Back
+                    {t("common.back")}
                 </button>
             )}
             {currentStepIndex > 0 && (
                 <button type="button" className="btn-danger" onClick={back}>
-                    Back
+                    {t("common.back")}
                 </button>
             )}
             {!isLast && (
@@ -217,7 +219,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                     {loading ? (
                         <Spinner size="sm" animation="border" />
                     ) : (
-                        "Next"
+                        t("common.next")
                     )}
                 </button>
             )}
@@ -227,7 +229,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
     const lastStepButtons = (
         <div className="d-flex justify-content-between align-items-center gap-5 m-auto mb-3" style={{ maxWidth: "20em" }}>
             <button type="button" className="btn-danger" onClick={back} disabled={loading}>
-                Back
+                {t("common.back")}
             </button>
             <button
                 type="button"
@@ -238,7 +240,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                 {loading ? (
                     <Spinner size="sm" animation="border" />
                 ) : (
-                    "Submit"
+                    t("common.submit")
                 )}
             </button>
         </div>
@@ -265,7 +267,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                                     className="btn-nine mb-2"
                                     onClick={openDraftModal}
                                 >
-                                    Save & exit
+                                    {t("list_room_modal.save_exit")}
                                 </button>}
                             </div>
                             <h5 className="modal-step-title">{getStepTitle()}</h5>
@@ -330,16 +332,15 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                 onRetry={handleSubmitRetry}
                 successCallback={successCallback}
                 loadingMessages={[
-                    "Submitting your listing…",
-                    "Almost there…",
-                    "Publishing your room…",
+                    t("list_room_modal.submit_modal.loading_1"),
+                    t("list_room_modal.submit_modal.loading_2"),
+                    t("list_room_modal.submit_modal.loading_3"),
                 ]}
-                successTitle="Listing submitted"
-                successMessage="Your listing has been published successfully."
-                errorTitle="Something went wrong"
-                errorMessage="We couldn't submit your listing. Please try again."
+                successTitle={t("list_room_modal.submit_modal.success_title")}
+                successMessage={t("list_room_modal.submit_modal.success_message")}
+                errorTitle={t("list_room_modal.submit_modal.error_title")}
+                errorMessage={t("list_room_modal.submit_modal.error_message")}
             />
-
             <Modal
                 show={showStepTransitionModal}
                 backdrop="static"
@@ -352,7 +353,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
             >
                 <Modal.Body className="d-flex text-center flex-column align-items-center justify-content-center py-4">
                     <Spinner animation="border" role="status" className="mb-3" />
-                    <p className="mb-0 text-muted small">Images take a bit more time to upload</p>
+                    <p className="mb-0 text-muted small">{t("list_room_modal.loading_next_step")}</p>
                 </Modal.Body>
             </Modal>
         </>

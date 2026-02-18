@@ -3,6 +3,7 @@ import { FiEdit2 } from "react-icons/fi";
 import PropertyCardGrid from "@/components/ui/cards/properties/PropertyCardGrid";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
+import useTranslation from "next-translate/useTranslation";
 
 /**
  * Converts addListingImages (string URLs from backend + File objects) to display URLs.
@@ -41,6 +42,7 @@ function SixthStep({
     currentStep: number;
     discreteAddress?: boolean;
 }) {
+    const { t } = useTranslation("translations");
     const {
         propertyStore: {
             addListingImages,
@@ -73,14 +75,14 @@ function SixthStep({
         const address = (pd?.address as string) ?? "";
         const city = (pd?.city as string) ?? "";
         const approxAddress = toApproximateAddress(address);
-        const approxTitle = 'Available property';
+        const approxTitle = t("list_room_steps.sixth.available_property_title");
         const approxLocation = `${approxAddress}, ${city}`;
         return {
             ...previewProperty,
             title: approxTitle,
             location: approxLocation,
         };
-    }, [discreteAddress, previewProperty, pd?.address, pd?.city]);
+    }, [t, discreteAddress, previewProperty, pd?.address, pd?.city]);
 
     return (
         <div className="list-room-modal__first-step">
@@ -110,7 +112,10 @@ function SixthStep({
                                 {panel.step === 5 && panel.imageUrls?.length ? (
                                     <>
                                         <p className="small text-muted mb-2">
-                                            {panel.imageUrls.length} photo{panel.imageUrls.length !== 1 ? "s" : ""} uploaded
+                                            {panel.imageUrls.length}{" "}
+                                            {panel.imageUrls.length === 1
+                                                ? t("list_room_steps.sixth.photo_uploaded_one")
+                                                : t("list_room_steps.sixth.photo_uploaded_other")}
                                         </p>
                                         <div className="d-flex flex-wrap gap-2">
                                             {panel.imageUrls.map((src, i) => (
@@ -147,7 +152,7 @@ function SixthStep({
                         ) : (
                             <div className="col-12">
                                 <div className="border rounded-3 p-4 bg-light text-center text-muted">
-                                    Add photos in step 5 to see your listing preview here.
+                                    {t("list_room_steps.sixth.add_photos_hint")}
                                 </div>
                             </div>
                         )}

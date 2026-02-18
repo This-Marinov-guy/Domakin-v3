@@ -121,24 +121,23 @@ function FifthStep({ steps, currentStep }: FifthStepProps) {
     <div className="list-room-modal__first-step mt-3">
       <div className="list-room-modal__first-step__body d-flex flex-column">
         <p>
-          In this step we are going to guide you through taking pictures of your
-          place so it stands out.
+          {t("list_room_steps.fifth.intro_1")}
         </p>
         <p>
-          Add at least 4 photos to attract more candidates. 6–10 works best. Any images above the allowed limit will not be accepted.
+          {t("list_room_steps.fifth.intro_2")}
         </p>
 
         <div className="mt-4">
           <h5 className="mb-4">
-            Wishlist of images includes:
+            {t("list_room_steps.fifth.wishlist_title")}
           </h5>
           <ul>
-            <li>Private rooms</li>
-            <li>Common areas</li>
-            <li>Bathroom/s and toilet/s</li>
-            <li>Amenities (e.g., laundry room, kitchen, storage space)</li>
-            <li>Outdoors</li>
-            <li>Any private furniture that is included in the rental</li>
+            <li>{t("list_room_steps.fifth.wishlist.private_rooms")}</li>
+            <li>{t("list_room_steps.fifth.wishlist.common_areas")}</li>
+            <li>{t("list_room_steps.fifth.wishlist.bathroom_toilet")}</li>
+            <li>{t("list_room_steps.fifth.wishlist.amenities")}</li>
+            <li>{t("list_room_steps.fifth.wishlist.outdoors")}</li>
+            <li>{t("list_room_steps.fifth.wishlist.private_furniture")}</li>
           </ul>
 
 
@@ -157,7 +156,8 @@ function FifthStep({ steps, currentStep }: FifthStepProps) {
             maxFiles={10}
             onDropRejected={() => {
               toast.error(
-                "File upload rejected. Please check file size and format.",
+                (t("list_room_steps.fifth.upload_rejected") ||
+                  "File upload rejected. Please check file size and format.") as unknown as ToastContent<unknown>,
                 {
                   position: "top-center",
                   hideProgressBar: false,
@@ -207,9 +207,9 @@ function FifthStep({ steps, currentStep }: FifthStepProps) {
         {images.length > 0 && (
           <div className="mt-4">
             <div className="row mb-4 align-items-center justify-content-between">
-              <h5 className="col-md-6 col-12">Preview & order</h5>
+              <h5 className="col-md-6 col-12">{t("list_room_steps.fifth.preview_order_title")}</h5>
               <small className="col-md-6 col-12 text-muted w-auto">
-                *Drag to reorder, click an image to make it the main one.
+                {t("list_room_steps.fifth.preview_order_hint")}
               </small>
             </div>
 
@@ -242,7 +242,7 @@ function FifthStep({ steps, currentStep }: FifthStepProps) {
                       </div>
                       {index === 0 && (
                         <span className="badge bg-primary position-absolute top-0 start-0 m-2">
-                          Main
+                          {t("list_room_steps.fifth.main_badge")}
                         </span>
                       )}
                     </div>

@@ -1,43 +1,43 @@
 
 import logoTransparentWhite from "@/assets/img/logo.png";
 import Image from "next/image";
-import StepsBar from "@/components/steps/stepsBar";
+import useTranslation from "next-translate/useTranslation";
+import Trans from "next-translate/Trans";
 
 export default function SuccessStep() {
+    const { t } = useTranslation("translations");
     return (
         <div className="list-room-modal__first-step pt-25">
             <div className="list-room-modal__first-step__body d-flex flex-column justify-content-center">
                 <h2 className="text-center pb-25">
-                    Success
+                    {t("list_room_steps.success.title")}
                 </h2>
                 <div className="list-room-modal__first-step__header justify-content-center">
                     <Image src={logoTransparentWhite} alt="Logo Icon" />
                 </div>
                 <h3 className="text-center">
-                    Listing successfully <br />
-                    send for review <br />
-                    You will be contacted shortly!
+                    <Trans
+                        i18nKey="translations:list_room_steps.success.message"
+                        components={{ br: <br /> }}
+                    />
                 </h3>
                 <p className="text-center">
-                    If you have any questions do not
-                    hesitate to contacts us at <br />
+                    {t("list_room_steps.success.contact_intro")} <br />
                     <strong>
                         list-my-room@domakin.nl
                     </strong>
                     <br />
-                    or at
+                    {t("list_room_steps.success.or_at")}
                     <strong>
                         (+31) 085 083 5000
                     </strong>
                 </p>
                 <p className="text-center">
-                    How to get more candidates: <br />
-                    add 6–10 photos, include <br />
-                    dimensions, mention registration.
+                    {t("list_room_steps.success.tips")}
                 </p>
 
                 <button type="button" className="btn btn-primary border-0 btn-draft" data-bs-dismiss="modal">
-                    Exit
+                    {t("common.exit")}
                 </button>
             </div>
         </div>

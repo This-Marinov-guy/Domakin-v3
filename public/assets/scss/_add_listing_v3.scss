@@ -273,6 +273,7 @@
 
 .step-transition-loading-modal.modal {
   z-index: 1060;
+
   .modal-dialog {
     z-index: 1061;
   }
@@ -613,22 +614,6 @@
         opacity: 1;
         transform: translateY(0);
       }
-    }
-  }
-
-  // Special styling for draft and reminder modals
-  &.draft-request-modal,
-  &.reminder-modal {
-    .modal-body {
-      padding: 0;
-      background-color: $color-two;
-    }
-
-    .modal-header {
-      background-color: $color-two;
-      border: none !important;
-      padding: 20px 50px;
-      text-align: center;
     }
   }
 }
@@ -1328,4 +1313,26 @@
 
 .submit-listing-modal {
   z-index: 2070 !important;
+}
+
+// Special styling for draft and reminder modals
+.draft-request-modal,
+.reminder-modal {
+  padding: 0;
+  margin: 0;
+  min-height: 100vh !important;
+  background-color: $color-two;
+
+  .modal-header {
+    background-color: $color-two;
+    border: none !important;
+    padding: 20px 50px;
+    text-align: center;
+  }
+
+  .modal-body {
+    padding: 0;
+    background-color: $color-two;
+    border: none !important;
+  }
 }

@@ -1,24 +1,9 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useServer } from "@/hooks/useServer";
 import useTranslation from "next-translate/useTranslation";
-import { toast } from "react-toastify";
-
-const MONTHS = [
-    { value: 1, label: "January" },
-    { value: 2, label: "February" },
-    { value: 3, label: "March" },
-    { value: 4, label: "April" },
-    { value: 5, label: "May" },
-    { value: 6, label: "June" },
-    { value: 7, label: "July" },
-    { value: 8, label: "August" },
-    { value: 9, label: "September" },
-    { value: 10, label: "October" },
-    { value: 11, label: "November" },
-    { value: 12, label: "December" },
-];
+import { toast, ToastContent } from "react-toastify";
 
 function isFirstOfMonthInFuture(month: number, year: number): boolean {
     const today = new Date();
@@ -35,6 +20,15 @@ interface ReminderFormModalProps {
 export default function ReminderFormModal({ show, onHide }: ReminderFormModalProps) {
     const { t } = useTranslation("translations");
     const { sendRequest, loading } = useServer();
+    const months = useMemo(
+        () =>
+            Array.from({ length: 12 }, (_, i) => {
+                const value = i + 1;
+                const key = String(value).padStart(2, "0");
+                return { value, label: t(`date_time.${key}`) };
+            }),
+        [t]
+    );
 
     const [name, setName] = useState("");
     const [city, setCity] = useState("");
@@ -77,7 +71,7 @@ export default function ReminderFormModal({ show, onHide }: ReminderFormModalPro
         setInvalidFields({});
 
         if (!isFirstOfMonthInFuture(month, year)) {
-            setDateError("Please select a month and year in the future (not current or past).");
+            setDateError(t("list_room_steps.reminder.future_date_error"));
             return;
         }
 
@@ -94,7 +88,9 @@ export default function ReminderFormModal({ show, onHide }: ReminderFormModalPro
         const response = await sendRequest("/reminder/listing", "POST", payload, {}, { withLoading: true, withError: true });
 
         if (response?.status) {
-            toast.success("Reminder set successfully.");
+            toast.success(
+                (t("list_room_steps.reminder.success_toast") || "Reminder set successfully.") as unknown as ToastContent<unknown>
+            );
             setName("");
             setCity("");
             setEmail("");
@@ -113,7 +109,7 @@ export default function ReminderFormModal({ show, onHide }: ReminderFormModalPro
     return (
         <Modal show={show} onHide={onHide} centered className="blue-modal">
             <Modal.Header closeButton>
-                <h5 className="text-white">Reminder for uploading</h5>
+                <h5 className="text-white">{t("list_room_steps.reminder.title")}</h5>
             </Modal.Header>
             <Modal.Body>
                 <div className="">
@@ -121,7 +117,7 @@ export default function ReminderFormModal({ show, onHide }: ReminderFormModalPro
                         <div className="form-group mb-2">
                             <Form.Control
                                 type="text"
-                                placeholder="Name"
+                                placeholder={t("emergency_housing.name")}
                                 className="py-2"
                                 value={name}
                                 onChange={(e) => {
@@ -136,7 +132,7 @@ export default function ReminderFormModal({ show, onHide }: ReminderFormModalPro
                         <div className="form-group mb-2">
                             <Form.Control
                                 type="text"
-                                placeholder="City"
+                                placeholder={t("emergency_housing.city")}
                                 className="py-2"
                                 value={city}
                                 onChange={(e) => {
@@ -151,7 +147,7 @@ export default function ReminderFormModal({ show, onHide }: ReminderFormModalPro
                         <div className="form-group mb-2">
                             <Form.Control
                                 type="email"
-                                placeholder="Email"
+                                placeholder={t("emergency_housing.email")}
                                 className="py-2"
                                 value={email}
                                 onChange={(e) => {
@@ -165,7 +161,7 @@ export default function ReminderFormModal({ show, onHide }: ReminderFormModalPro
 
                         <div className="d-flex flex-column gap-3 mt-5">
                             <div className="d-flex flex-column gap-0 justify-content-between align-items-center">
-                                <p className="text-white">When will your room become free?</p>
+                                <p className="text-white">{t("list_room_steps.reminder.when_free")}</p>
                                 <div className="d-flex flex-row justify-content-center align-items-center gap-2 w-75">
                                     <div className="form-group flex-grow-1">
                                         <Form.Select
@@ -175,10 +171,10 @@ export default function ReminderFormModal({ show, onHide }: ReminderFormModalPro
                                                 setMonth(Number(e.target.value));
                                                 clearFieldError("date");
                                             }}
-                                            aria-label="Month"
+                                            aria-label={t("list_room_steps.reminder.month")}
                                             isInvalid={!!invalidFields.date}
                                         >
-                                            {MONTHS.map((m) => (
+                                            {months.map((m) => (
                                                 <option key={m.value} value={m.value}>
                                                     {m.label}
                                                 </option>
@@ -193,7 +189,7 @@ export default function ReminderFormModal({ show, onHide }: ReminderFormModalPro
                                                 setYear(Number(e.target.value));
                                                 clearFieldError("date");
                                             }}
-                                            aria-label="Year"
+                                            aria-label={t("list_room_steps.reminder.year")}
                                             isInvalid={!!invalidFields.date}
                                         >
                                             {yearOptions.map((y) => (
@@ -217,7 +213,7 @@ export default function ReminderFormModal({ show, onHide }: ReminderFormModalPro
                                 onClick={handleSubmit}
                                 disabled={loading}
                             >
-                                {loading ? "..." : "Submit"}
+                                {loading ? "..." : t("common.submit")}
                             </button>
                         </div>
                     </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import useTranslation from "next-translate/useTranslation";
 
 interface ReminderSectionProps {
     title?: string;
@@ -9,12 +10,13 @@ interface ReminderSectionProps {
 }
 
 export default function ReminderSection({
-    title, 
-    isShowListingButton, 
+    title,
+    isShowListingButton,
     secClasses,
     openListingModal,
     openReminderModal
 }: ReminderSectionProps) {
+    const { t } = useTranslation("translations");
     return (
         <section className={`reminder-sec ${secClasses}`}>
             <div className="container">
@@ -25,24 +27,24 @@ export default function ReminderSection({
 
                     <div className="d-flex flex-row justify-content-center align-items-center gap-1">
                         {isShowListingButton && isShowListingButton === true && (
-                            <button 
-                                type="button" 
-                                className="btn btn-lg btn-warning" 
+                            <button
+                                type="button"
+                                className="btn btn-lg btn-warning"
                                 onClick={openListingModal}
                             >
-                                List my room
+                                {t("reminder_section.list_my_room")}
                             </button>
                         )}
-                        <button 
-                            type="button" 
-                            className="btn btn-lg btn-secondary" 
+                        <button
+                            type="button"
+                            className="btn btn-lg btn-secondary"
                             onClick={openReminderModal}
                         >
-                            Remind me later
+                            {t("reminder_section.remind_me_later")}
                         </button>
                     </div>
                 </div>
             </div>
         </section>
-    )
+    );
 }
