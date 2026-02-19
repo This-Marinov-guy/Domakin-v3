@@ -305,10 +305,11 @@ export default class PropertyStore {
 
   @action
   loadListingData = () => {
+    // Needs to be implemented but improved
     const data = localStorage.getItem("addListingData");
 
     if (data) {
-      this.addListingData = JSON.parse(data);
+      this.addListingData = { ...defaultFormData, ...JSON.parse(data) };
     } else {
       this.addListingData = { ...defaultFormData };
     }
@@ -334,12 +335,12 @@ export default class PropertyStore {
       this.addListingData[key] = value;
     }
 
-    // if (typeof window !== "undefined" && window.localStorage && key !== 'images') {
-    //   localStorage.setItem(
-    //     "addListingData",
-    //     JSON.stringify(this.addListingData)
-    //   );
-    // }
+    if (typeof window !== "undefined" && window.localStorage && key !== 'images') {
+      localStorage.setItem(
+        "addListingData",
+        JSON.stringify(this.addListingData)
+      );
+    }
   };
 
   @action

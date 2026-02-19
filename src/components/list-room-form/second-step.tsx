@@ -21,15 +21,11 @@ function SecondStep({ steps, currentStep }: SecondStepProps) {
         propertyStore: {
             addListingData: { personalData, terms, referralCode },
             updateListingData,
-            loadListingData,
             errorFields,
         },
         userStore: { user },
     } = useStore();
 
-    useEffect(() => {
-        loadListingData();
-    }, [loadListingData]);
 
     useEffect(() => {
         prefillNestedUserInfo("personalData", updateListingData, user);
