@@ -108,6 +108,18 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
             });
     }, [router.query.referenceId, router.query.reference_id]);
 
+    // Hide scrollbar on the whole page
+    useEffect(() => {
+        const root = document.documentElement;
+        const body = document.body;
+        root.classList.add("hide-scrollbar");
+        body.classList.add("hide-scrollbar");
+        return () => {
+            root.classList.remove("hide-scrollbar");
+            body.classList.remove("hide-scrollbar");
+        };
+    }, []);
+
     return (
         <div className="lending-page-v2">
             <HeaderOne />
@@ -126,7 +138,7 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
                     />
                 </div>
 
-                <div className="col-12">
+                <div className="col-12 ">
                     <p className="never-text">
                         {t("lending_page.preview_intro")} <br />
                         {t("lending_page.preview_address_is")} <span>{t("lending_page.preview_never_public")}</span>.

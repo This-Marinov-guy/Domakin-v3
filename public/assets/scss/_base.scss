@@ -292,3 +292,17 @@ p {
 .tran6s {
   transition: all 0.6s ease-in-out;
 }
+
+/* Hide scrollbar but allow scroll */
+.hide-scrollbar {
+  overflow: auto !important;
+  -ms-overflow-style: none !important;
+  /* IE + Edge */
+  scrollbar-width: none !important;
+  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  /* Chrome, Safari */
+}
