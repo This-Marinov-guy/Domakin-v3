@@ -57,6 +57,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
     const router = useRouter();
     const { sendRequest, loading } = useServer();
     const footerRef = useRef<HTMLDivElement>(null);
+    const modalBodyRef = useRef<HTMLDivElement>(null);
 
     const [transitionDirection, setTransitionDirection] = useState<
         "forward" | "backward" | null
@@ -74,22 +75,8 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
             setTransitionDirection("backward");
         }
         lastStepIndexRef.current = currentStepIndex;
+        modalBodyRef.current?.scrollTo({ top: 0, behavior: "smooth" });
     }, [currentStepIndex]);
-
-    // Scroll modal body to top when step changes (next or back)
-    useEffect(() => {
-        if (!show) return;
-        const run = () => {
-            const modal = typeof document !== "undefined" ? document.getElementById("list-room-modal") : null;
-            if (!modal) return;
-            const body = modal.querySelector(".modal-body") as HTMLElement | null;
-            const content = modal.querySelector(".modal-content") as HTMLElement | null;
-            if (body) body.scrollTop = 0;
-            if (content && content.scrollHeight > content.clientHeight) content.scrollTop = 0;
-        };
-        const id = requestAnimationFrame(() => requestAnimationFrame(run));
-        return () => cancelAnimationFrame(id);
-    }, [currentStepIndex, show]);
 
     // Sync referenceId from URL query when modal is open (e.g. user landed with ?reference_id=xxx)
     useEffect(() => {
@@ -290,7 +277,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                     </Modal.Header>
                 )}
 
-                <Modal.Body>
+                <Modal.Body ref={modalBodyRef}>
                     {!isCompleteForm && (
                         <>
                             <div className="list-room-step-transition">

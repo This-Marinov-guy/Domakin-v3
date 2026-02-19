@@ -305,14 +305,14 @@ export default class PropertyStore {
 
   @action
   loadListingData = () => {
-    // Needs to be implemented but improved
-    const data = localStorage.getItem("addListingData");
+    // TODO:Needs to be implemented but improved / divide the 2 forms to use different local storage keys and read from different objects
+    // const data = localStorage.getItem("addListingData");
 
-    if (data) {
-      this.addListingData = { ...defaultFormData, ...JSON.parse(data) };
-    } else {
-      this.addListingData = { ...defaultFormData };
-    }
+    // if (data) {
+    //   this.addListingData = { ...defaultFormData, ...JSON.parse(data) };
+    // } else {
+    //   this.addListingData = { ...defaultFormData };
+    // }
   };
 
   @action

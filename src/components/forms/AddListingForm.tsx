@@ -159,10 +159,6 @@ const AddListingForm = () => {
     prefillNestedUserInfo("personalData", updateListingData, user);
   }, [user]);
 
-  useEffect(() => {
-    propertyStore.loadListingData();
-  }, []);
-
   return (
     <form className="form-style-one wow fadeInUp pt-40 pb-40">
       <div className="container m-a controls">
