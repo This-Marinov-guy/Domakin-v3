@@ -311,9 +311,9 @@ const RoomSearchingForm = () => {
 
         <div className="col-12">
           <div className="input-group-meta form-group mb-40">
+            <label htmlFor="">{t("viewing.comments_optional")}</label>
             <Form.Control
               as="textarea"
-              placeholder={t("viewing.comments_optional")}
               value={searchingData.note}
               onChange={(e) => {
                 updateSearchingData("note", "", e.target.value);
