@@ -7,6 +7,7 @@ import StepsBar from "@/components/steps/stepsBar";
 import SuccessStep from "@/components/list-room-form/success-step";
 import DraftRequestModal from "@/components/list-room-form/draft-request-modal";
 import useStickyFooter from "@/hooks/useStickyFooter";
+import { useScrollListRoomModalToTop } from "@/hooks/useScrollListRoomModalToTop";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import { useServer } from "@/hooks/useServer";
@@ -57,7 +58,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
     const router = useRouter();
     const { sendRequest, loading } = useServer();
     const footerRef = useRef<HTMLDivElement>(null);
-    const modalBodyRef = useRef<HTMLDivElement>(null);
+    const scrollModalToTop = useScrollListRoomModalToTop();
 
     const [transitionDirection, setTransitionDirection] = useState<
         "forward" | "backward" | null
@@ -67,6 +68,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
     const [showStepTransitionModal, setShowStepTransitionModal] = useState(false);
     const lastStepIndexRef = useRef(currentStepIndex);
 
+    // Update transition direction and scroll modal to top on step change
     useEffect(() => {
         const last = lastStepIndexRef.current;
         if (currentStepIndex > last) {
@@ -75,23 +77,15 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
             setTransitionDirection("backward");
         }
         lastStepIndexRef.current = currentStepIndex;
-    }, [currentStepIndex]);
 
-    // Scroll to top on step change – target the actual scroll container (div[role="dialog"])
-    useEffect(() => {
         if (!show) return;
-        const scrollToTop = () => {
-            const listRoomModal = document.getElementById("list-room-modal");
-            const dialog = listRoomModal?.closest("[role='dialog']") as HTMLElement | null;
-            if (dialog) dialog.scrollTop = 0;
-        };
-        const rafId = requestAnimationFrame(() => requestAnimationFrame(scrollToTop));
-        const tId = window.setTimeout(scrollToTop, 50);
+        const rafId = requestAnimationFrame(() => requestAnimationFrame(scrollModalToTop));
+        const tId = window.setTimeout(scrollModalToTop, 50);
         return () => {
             cancelAnimationFrame(rafId);
             window.clearTimeout(tId);
         };
-    }, [currentStepIndex, show]);
+    }, [currentStepIndex, show, scrollModalToTop]);
 
     // Sync referenceId from URL query when modal is open (e.g. user landed with ?reference_id=xxx)
     useEffect(() => {
@@ -292,7 +286,7 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                     </Modal.Header>
                 )}
 
-                <Modal.Body ref={modalBodyRef}>
+                <Modal.Body>
                     {!isCompleteForm && (
                         <>
                             <div className="list-room-step-transition">
