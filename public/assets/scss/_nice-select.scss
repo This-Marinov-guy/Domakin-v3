@@ -29,6 +29,13 @@
   width: auto;
 }
 
+.nice-select .current {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .nice-select:after {
   border-bottom: 1px solid #000;
   border-right: 1px solid #000;

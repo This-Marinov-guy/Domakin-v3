@@ -165,8 +165,6 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
         });
       } else if (res?.invalid_fields) {
         addEditErrorFields(res.invalid_fields);
-      } else {
-        showGeneralError("Failed to update property");
       }
     });
   };
