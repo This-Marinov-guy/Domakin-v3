@@ -75,8 +75,23 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
             setTransitionDirection("backward");
         }
         lastStepIndexRef.current = currentStepIndex;
-        modalBodyRef.current?.scrollTo({ top: 0, behavior: "smooth" });
     }, [currentStepIndex]);
+
+    // Scroll to top on step change – target the actual scroll container (div[role="dialog"])
+    useEffect(() => {
+        if (!show) return;
+        const scrollToTop = () => {
+            const listRoomModal = document.getElementById("list-room-modal");
+            const dialog = listRoomModal?.closest("[role='dialog']") as HTMLElement | null;
+            if (dialog) dialog.scrollTop = 0;
+        };
+        const rafId = requestAnimationFrame(() => requestAnimationFrame(scrollToTop));
+        const tId = window.setTimeout(scrollToTop, 50);
+        return () => {
+            cancelAnimationFrame(rafId);
+            window.clearTimeout(tId);
+        };
+    }, [currentStepIndex, show]);
 
     // Sync referenceId from URL query when modal is open (e.g. user landed with ?reference_id=xxx)
     useEffect(() => {
