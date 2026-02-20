@@ -73,7 +73,9 @@ jobs:
         if: steps.check-changes.outputs.has_changes == 'true'
         run: |
           BRANCH=$(git branch --show-current)
+          git stash -u
           git pull --rebase origin "$BRANCH"
+          git stash pop
           git add public/sitemap*.xml
           git commit -m "chore: update sitemap [skip ci]" || exit 0
           git push origin "$BRANCH"
