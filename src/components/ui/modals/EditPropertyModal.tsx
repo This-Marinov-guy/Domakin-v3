@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useRef } from "react";
+import React, { useMemo, useState, useRef, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import NiceSelect from "@/ui/NiceSelect";
@@ -12,7 +12,6 @@ import SingleDatePicker from "@/components/ui/inputs/dates/SingleDatePicker";
 import { useServer } from "@/hooks/useServer";
 import { toast } from "react-toastify";
 import MultiValueInput from "../inputs/MultiValueInput";
-import ImageWithBadge from "../borders/ImageBadgeBorder";
 import {
   AMENITIES_LIST,
   EDIT_PROPERTY_MODAL,
@@ -28,11 +27,12 @@ import {
   PROPERTY_TYPES,
   SHARED_SPACE_LIST,
 } from "@/utils/defines";
-import { showGeneralError, transformToFormData } from "@/utils/helpers";
+import { showGeneralError, transformToFormData, resizeFile } from "@/utils/helpers";
 import { MdClose } from "react-icons/md";
-import MultiFilePreviewInput from "../inputs/files/MultiFilePreviewInput";
+import Dropzone from "react-dropzone";
 import signalIcon from "@/assets/images/icon/signal.avif";
 import SignalStatusConfirmationModal from "./SignalStatusConfirmationModal";
+import StepTransitionLoadingModal from "@/components/ui/loading/StepTransitionLoadingModal";
 import useStickyFooter from "@/hooks/useStickyFooter";
 
 const EditPropertyModal = ({ callback = () => { } }: any) => {
@@ -56,6 +56,7 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
   );
   const [isSignalClicked, setIsSignalClicked] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [showSubmitLoadingModal, setShowSubmitLoadingModal] = useState(false);
   const footerRef = useRef<HTMLDivElement>(null);
 
   // Use the sticky footer hook to detect if footer is visible
@@ -120,6 +121,42 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
     updateEditListingData("propertyData", "sharedSpace", next);
   };
 
+  const images = editPropertyData.propertyData?.images ?? [];
+  const [imageLoading, setImageLoading] = useState(false);
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+
+  const imagePreviewUrls = useMemo(() => {
+    return images.map((fileOrUrl: unknown) => {
+      if (typeof fileOrUrl === "string") return fileOrUrl;
+      if (fileOrUrl instanceof File || fileOrUrl instanceof Blob) {
+        return URL.createObjectURL(fileOrUrl);
+      }
+      return "";
+    });
+  }, [images]);
+
+  useEffect(() => {
+    return () => {
+      imagePreviewUrls.forEach((url: string) => {
+        if (url && url.startsWith("blob:")) URL.revokeObjectURL(url);
+      });
+    };
+  }, [imagePreviewUrls]);
+
+  const handleSetMainImage = (index: number) => {
+    if (index === 0) return;
+    updateMainImage(index);
+  };
+
+  const handleImageDropOn = (index: number) => {
+    if (draggedIndex === null || draggedIndex === index) return;
+    const list = [...images];
+    const [moved] = list.splice(draggedIndex, 1);
+    list.splice(index, 0, moved);
+    updateEditListingData("propertyData", "images", list);
+    setDraggedIndex(null);
+  };
+
   const reloadProperties = async () => {
     try {
       const response = await sendRequest(
@@ -143,30 +180,59 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
   const performSubmit = async () => {
     addEditErrorFields([]);
 
+    const allImages = editPropertyData.propertyData?.images ?? [];
+    // Preserve full order so backend knows which image is main (first) and how to merge existing + new.
+    // images: existing URLs in order, with "__new__" placeholder where a new file sits. newImages: new files in same order.
+    const imagesOrder: string[] = [];
+    const newFiles: File[] = [];
+    for (const item of allImages) {
+      if (typeof item === "string") {
+        imagesOrder.push(item);
+      } else if (item instanceof File) {
+        imagesOrder.push("__new__");
+        newFiles.push(item);
+      }
+    }
+
+    const payload = {
+      ...editPropertyData,
+      propertyData: {
+        ...editPropertyData.propertyData,
+        images: imagesOrder,
+      },
+      newImages: newFiles,
+    };
+
+    if (newFiles.length > 0) setShowSubmitLoadingModal(true);
+
     sendRequest(
       "/property/edit",
       "POST",
-      transformToFormData(editPropertyData)
-    ).then((res) => {
-      if (res?.status) {
-        reloadProperties();
-        modalStore.closeAll();
-        callback();
+      transformToFormData(payload)
+    )
+      .then((res) => {
+        if (res?.status) {
+          reloadProperties();
+          modalStore.closeAll();
+          callback();
 
-        toast.success("The property was successfully updated", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-      } else if (res?.invalid_fields) {
-        addEditErrorFields(res.invalid_fields);
-      }
-    });
+          toast.success("The property was successfully updated", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        } else if (res?.invalid_fields) {
+          addEditErrorFields(res.invalid_fields);
+        }
+      })
+      .finally(() => {
+        setShowSubmitLoadingModal(false);
+      });
   };
 
   const handleSubmit = async (e: any) => {
@@ -192,6 +258,7 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
   };
 
   return (
+    <>
     <Modal
       show={modalStore.modals[EDIT_PROPERTY_MODAL]}
       fullscreen
@@ -758,115 +825,133 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
               </div>
 
               <div className="col-12">
-                <p>Click on an image to make it the main one</p>
-                <div className="row">
-                  {editPropertyData.propertyData?.images?.length > 0 &&
-                    editPropertyData.propertyData.images.map(
-                      (image: string, index: number) => (
+                <p className="mb-2">Drag to reorder. Click an image to set as main. First image is the main one.</p>
+                <div className="mb-4">
+                  <Dropzone
+                    onDrop={async (acceptedFiles: File[]) => {
+                      setImageLoading(true);
+                      const corruptedFiles: string[] = [];
+                      try {
+                        const resized = await Promise.all(
+                          acceptedFiles.map(async (file: File) => {
+                            try {
+                              return await resizeFile(file);
+                            } catch {
+                              corruptedFiles.push(file?.name ?? "-");
+                              return null;
+                            }
+                          })
+                        );
+                        if (corruptedFiles.length > 0) {
+                          showGeneralError(
+                            "Some files could not be processed: " + corruptedFiles.join(", ")
+                          );
+                        }
+                        const valid = resized.filter(Boolean) as File[];
+                        if (valid.length) {
+                          const current = editPropertyData.propertyData?.images ?? [];
+                          updateEditListingData("propertyData", "images", [...current, ...valid]);
+                        }
+                      } finally {
+                        setImageLoading(false);
+                      }
+                    }}
+                    accept={{
+                      "image/jpeg": [],
+                      "image/png": [],
+                      "image/webp": [],
+                      "image/jpg": [],
+                      "image/svg+xml": [".svg"],
+                      "image/heic": [".heif", ".heic"],
+                    }}
+                    maxSize={5 * 1024 * 1024}
+                    onDropRejected={() => {
+                      showGeneralError(
+                        "File upload rejected. Please check file size (max 5MB) and format (JPG, PNG, WEBP, SVG, HEIC)."
+                      );
+                    }}
+                  >
+                    {({ getRootProps, getInputProps, isDragActive }) => (
+                      <div className="w-100" {...getRootProps()}>
+                        <input {...getInputProps()} />
                         <div
-                          key={index}
-                          className="col-6 col-sm-4 col-md-3 col-lg-2 mb-4 position-relative"
+                          className={`file-dropzone-container ${editErrorFields.includes("propertyData.images") ? "is-invalid" : ""}`}
                         >
-                          {index === 0 ? (
-                            <div className="position-relative">
-                              <ImageWithBadge
-                                src={image}
-                                alt={`Property Image ${index + 1}`}
-                                label="Main"
-                                width={200}
-                                height={200}
-                              />
-                              {editPropertyData.propertyData.images.length >
-                                1 && (
-                                  <button
-                                    type="button"
-                                    className="position-absolute top-0 end-0"
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                      e.stopPropagation();
-                                      removeImage(index);
-                                    }}
-                                    style={{
-                                      zIndex: 100,
-                                      borderRadius: "50%",
-                                      width: "30px",
-                                      height: "30px",
-                                      background: "rgba(255, 0, 0, 0.8)",
-                                      border: "2px solid white",
-                                      display: "flex",
-                                      alignItems: "center",
-                                      justifyContent: "center",
-                                      color: "white",
-                                      padding: "0",
-                                      margin: "5px",
-                                      boxShadow: "0 0 5px rgba(0,0,0,0.5)",
-                                    }}
-                                  >
-                                    <MdClose size={18} />
-                                  </button>
-                                )}
-                            </div>
+                          {imageLoading ? (
+                            <p>Loading…</p>
                           ) : (
-                            <div className="position-relative">
-                              <Image
-                                src={image}
-                                alt={`Property Image ${index + 1}`}
-                                width={200}
-                                height={200}
-                                onClick={() => {
-                                  updateMainImage(index);
-                                }}
-                                className="img-fluid rounded border"
-                              />
-                              <button
-                                type="button"
-                                className="position-absolute top-0 end-0"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  e.stopPropagation();
-                                  removeImage(index);
-                                }}
-                                style={{
-                                  zIndex: 100,
-                                  borderRadius: "50%",
-                                  width: "30px",
-                                  height: "30px",
-                                  background: "rgba(255, 0, 0, 0.8)",
-                                  border: "2px solid white",
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  color: "white",
-                                  padding: "0",
-                                  margin: "5px",
-                                  boxShadow: "0 0 5px rgba(0,0,0,0.5)",
-                                }}
-                              >
-                                <MdClose size={18} />
-                              </button>
+                            <div className="text-center">
+                              <i className="fa-light fa-image" style={{ color: "#FF6725", fontSize: "30px" }} />
+                              <p>{isDragActive ? "Drop files here" : "Drag files or click to add more images"}</p>
+                              <small className="d-block">Max 5MB. JPG, PNG, WEBP, SVG, HEIC</small>
                             </div>
                           )}
                         </div>
-                      )
+                      </div>
                     )}
+                  </Dropzone>
                 </div>
 
-                <div className="mt-4">
-                  <h5>Add New Images</h5>
-                  <MultiFilePreviewInput
-                    onChange={(files: any) =>
-                      updateEditListingData("newImages", "", files)
-                    }
-                    value={editPropertyData.newImages}
-                    maxSizeNote="Max file size: 5MB"
-                    allowedFormatsNotes="Allowed formats: JPG, PNG, WEBP, SVG, HEIC"
-                    onReject={(rejectedFiles: any[]) => {
-                      showGeneralError(
-                        "File upload rejected. Please check file size and format."
+                {images.length > 0 && (
+                  <div className="row">
+                    {images.map((_img: unknown, index: number) => {
+                      const src = imagePreviewUrls[index];
+                      if (!src) return null;
+                      return (
+                        <div
+                          key={index}
+                          className="col-6 col-sm-4 col-md-3 col-lg-2 mb-3 position-relative"
+                          draggable
+                          onDragStart={() => setDraggedIndex(index)}
+                          onDragOver={(e) => e.preventDefault()}
+                          onDrop={() => handleImageDropOn(index)}
+                          style={{ cursor: "move" }}
+                        >
+                          <div
+                            className="position-relative w-100 h-100"
+                            onClick={() => handleSetMainImage(index)}
+                          >
+                            <div className="ratio ratio-1x1">
+                              <img
+                                src={src}
+                                alt={`Property image ${index + 1}`}
+                                className="w-100 h-100 rounded border object-fit-cover"
+                              />
+                            </div>
+                            {index === 0 && (
+                              <span className="badge bg-primary position-absolute top-0 start-0 m-2">Main</span>
+                            )}
+                          </div>
+                          <button
+                            type="button"
+                            className="position-absolute top-0 end-0"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              removeImage(index);
+                            }}
+                            style={{
+                              zIndex: 100,
+                              borderRadius: "20%",
+                              width: "30px",
+                              height: "30px",
+                              background: "#dc3545",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              color: "white",
+                              padding: 0,
+                              margin: "5px",
+                              boxShadow: "0 0 5px rgba(0,0,0,0.5)",
+                            }}
+                          >
+                            <MdClose size={18} />
+                          </button>
+                        </div>
                       );
-                    }}
-                  />
-                </div>
+                    })}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -948,6 +1033,11 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
         onConfirm={handleConfirmSubmit}
       />
     </Modal>
+    <StepTransitionLoadingModal
+      show={showSubmitLoadingModal}
+      message={t("list_room_modal.loading_next_step")}
+    />
+    </>
   );
 };
 

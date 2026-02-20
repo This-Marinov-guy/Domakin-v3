@@ -291,7 +291,7 @@ export default class PropertyStore {
         title: pd?.title != null
           ? (typeof pd.title === "string" ? JSON.parse(pd.title) : pd.title)
           : pd.title,
-        images: pd?.images,
+        images: Array.isArray(pd?.images) ? pd.images : pd?.images ? [pd.images] : [],
         amenities: (() => {
           const raw = pd.amenities;
           if (Array.isArray(raw)) return raw.map((n: unknown) => Number(n)).filter((n) => !Number.isNaN(n));

@@ -72,9 +72,11 @@ jobs:
       - name: Commit and push changes
         if: steps.check-changes.outputs.has_changes == 'true'
         run: |
+          BRANCH=$(git branch --show-current)
+          git pull --rebase origin "$BRANCH"
           git add public/sitemap*.xml
           git commit -m "chore: update sitemap [skip ci]" || exit 0
-          git push
+          git push origin "$BRANCH"
 
       - name: Summary
         if: steps.check-changes.outputs.has_changes == 'true'

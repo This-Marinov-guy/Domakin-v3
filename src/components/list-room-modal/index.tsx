@@ -20,6 +20,7 @@ import ThirdStep from "../list-room-form/third-step";
 import FourthStep from "../list-room-form/fourth-step";
 import SixthStep from "../list-room-form/sixth-step";
 import SubmitListingModal, { type SubmitListingStatus } from "@/components/ui/modals/SubmitListingModal";
+import StepTransitionLoadingModal from "@/components/ui/loading/StepTransitionLoadingModal";
 import { LISTING_REFERENCE_ID } from "@/utils/defines";
 
 interface ListRoomModalProps {
@@ -352,21 +353,10 @@ function ListRoomModal({ show, onHide }: ListRoomModalProps) {
                 errorTitle={t("list_room_modal.submit_modal.error_title")}
                 errorMessage={t("list_room_modal.submit_modal.error_message")}
             />
-            <Modal
+            <StepTransitionLoadingModal
                 show={showStepTransitionModal}
-                backdrop="static"
-                backdropClassName="step-transition-loading-modal-backdrop"
-                keyboard={false}
-                centered
-                size="sm"
-                contentClassName="border-0 shadow"
-                className="step-transition-loading-modal"
-            >
-                <Modal.Body className="d-flex text-center flex-column align-items-center justify-content-center py-4">
-                    <Spinner animation="border" role="status" className="mb-3" />
-                    <p className="mb-0 text-muted small">{t("list_room_modal.loading_next_step")}</p>
-                </Modal.Body>
-            </Modal>
+                message={t("list_room_modal.loading_next_step")}
+            />
         </>
     );
 }
