@@ -12,6 +12,9 @@ import { observer } from "mobx-react-lite";
 import { AMENITIES_LIST, SHARED_SPACE_LIST } from "@/utils/defines";
 import { turnDecimalToInteger } from "@/utils/helpers";
 
+const toInputValue = (val: any): number | string =>
+    val !== null && val !== undefined && !isNaN(Number(val)) ? val : "";
+
 function FourthStep({
     steps,
     currentStep,
@@ -115,7 +118,7 @@ function FourthStep({
                                     type="number"
                                     min={0}
                                     step={1}
-                                    value={propertyData.rent}
+                                    value={toInputValue(propertyData.rent)}
                                     onKeyDown={(e) => {
                                         if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
                                     }}
@@ -133,7 +136,6 @@ function FourthStep({
                             <label className="d-flex align-items-center">
                                 <span>
                                     {t("emergency_housing.bills")}{" "}
-                                    <span className="text-muted small">({t("common.optional")})</span>
                                 </span>
                                 <InfoTip
                                     id="tt-bills"
@@ -145,8 +147,7 @@ function FourthStep({
                                     type="number"
                                     min={0}
                                     step={1}
-                                    placeholder={t("common.optional")}
-                                    value={propertyData.bills}
+                                    value={toInputValue(propertyData.bills)}
                                     onChange={(e) => {
                                         updateListingData("propertyData", "bills", turnDecimalToInteger(e.target.value));
                                     }}
@@ -168,7 +169,6 @@ function FourthStep({
                             <label className="d-flex align-items-center">
                                 <span>
                                     {t("list_room_steps.fourth.deposit_label")}{" "}
-                                    <span className="text-muted small">({t("common.optional")})</span>
                                 </span>
                                 <InfoTip
                                     id="tt-deposit"
@@ -180,14 +180,14 @@ function FourthStep({
                                     type="number"
                                     min={0}
                                     step={1}
-                                    placeholder={t("common.optional")}
-                                    value={propertyData.deposit}
+                                    value={toInputValue(propertyData.deposit)}
                                     onChange={(e) => {
                                         updateListingData("propertyData", "deposit", turnDecimalToInteger(e.target.value));
                                     }}
                                     onKeyDown={(e) => {
                                         if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
                                     }}
+                                    isInvalid={errorFields.includes("deposit")}
                                 />
                                 <InputGroup.Text id="deposit-unit">€</InputGroup.Text>
                             </InputGroup>
@@ -207,7 +207,7 @@ function FourthStep({
                                     type="number"
                                     min={0}
                                     step={1}
-                                    value={propertyData.size}
+                                    value={toInputValue(propertyData.size)}
                                     onKeyDown={(e) => {
                                         if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
                                     }}

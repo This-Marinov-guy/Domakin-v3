@@ -2,6 +2,13 @@ import { LISTING_REFERENCE_ID } from "@/utils/defines";
 import { isEmpty } from "lodash";
 import { action, makeAutoObservable, observable, toJS } from "mobx";
 
+const toBoolean = (value: any): boolean => Boolean(value);
+
+const toNumberOrUndefined = (value: any): number | undefined => {
+  const num = Number(value);
+  return isNaN(num) ? undefined : num;
+};
+
 const defaultFormData = {
   personalData: {
     name: "",
@@ -281,8 +288,8 @@ export default class PropertyStore {
         furnishedType: camel("furnished_type", "furnishedType"),
         availableFrom: camel("available_from", "availableFrom"),
         availableTo: camel("available_to", "availableTo"),
-        petsAllowed: pd.petsAllowed ?? pd.pets_allowed,
-        smokingAllowed: pd.smokingAllowed ?? pd.smoking_allowed,
+        petsAllowed: toBoolean(pd.petsAllowed ?? pd.pets_allowed),
+        smokingAllowed: toBoolean(pd.smokingAllowed ?? pd.smoking_allowed),
         bills: Number(pd.bills),
         deposit: Number(pd.deposit),
         flatmates: typeof pd.flatmates === "string" ? JSON.parse(pd.flatmates) : pd.flatmates,
@@ -488,11 +495,6 @@ export default class PropertyStore {
     const females = Math.max(0, parseInt(String(propertyData?.flatmatesFemale ?? "0"), 10) || 0);
     const flatmatesStr = `${males},${females}`;
 
-    const deposit = Number(propertyData?.deposit) || 0;
-    const bills = Number(propertyData?.bills) || 0;
-    const size = Number(propertyData?.size) || 0;
-    const rent = Number(propertyData?.rent) || 0;
-
     const payload: Record<string, unknown> = {
       ...(personalData ?? {}),
       ...(propertyData ?? {}),
@@ -503,10 +505,6 @@ export default class PropertyStore {
       referralCode: referralCode ?? "",
       images: existingOrdered.join(","),
       new_images: newImages,
-      deposit: deposit,
-      bills: bills,
-      size: size,
-      rent: rent,
       ...(this.referenceId ? { referenceId: this.referenceId } : {}),
       ...overrides,
     };
@@ -565,12 +563,12 @@ export default class PropertyStore {
       city: flat.city ?? nestedProperty?.city ?? this.addListingData.propertyData.city,
       address: flat.address ?? nestedProperty?.address ?? this.addListingData.propertyData.address,
       postcode: flat.postcode ?? nestedProperty?.postcode ?? this.addListingData.propertyData.postcode,
-      size: Number(flat.size ?? nestedProperty?.size ?? this.addListingData.propertyData.size),
       period: flat.period ?? nestedProperty?.period ?? this.addListingData.propertyData.period,
-      rent: Number(flat.rent ?? nestedProperty?.rent ?? this.addListingData.propertyData.rent),
-      bills: Number(flat.bills ?? nestedProperty?.bills ?? this.addListingData.propertyData.bills),
-      deposit: Number(flat.deposit ?? nestedProperty?.deposit ?? this.addListingData.propertyData.deposit),
-      registration: flat.registration ?? nestedProperty?.registration ?? this.addListingData.propertyData.registration,
+      size: toNumberOrUndefined(flat.size ?? nestedProperty?.size ?? this.addListingData.propertyData.size),
+      rent: toNumberOrUndefined(flat.rent ?? nestedProperty?.rent ?? this.addListingData.propertyData.rent),
+      bills: toNumberOrUndefined(flat.bills ?? nestedProperty?.bills ?? this.addListingData.propertyData.bills),
+      deposit: toNumberOrUndefined(flat.deposit ?? nestedProperty?.deposit ?? this.addListingData.propertyData.deposit),
+      registration: toBoolean(flat.registration ?? nestedProperty?.registration ?? this.addListingData.propertyData.registration),
       description: flat.description ?? nestedProperty?.description ?? this.addListingData.propertyData.description,
       flatmatesMale: flatmatesMale !== undefined && flatmatesMale !== "" ? flatmatesMale : (nestedProperty?.flatmatesMale ?? this.addListingData.propertyData.flatmatesMale ?? ""),
       flatmatesFemale: flatmatesFemale !== undefined && flatmatesFemale !== "" ? flatmatesFemale : (nestedProperty?.flatmatesFemale ?? this.addListingData.propertyData.flatmatesFemale ?? ""),
@@ -579,8 +577,8 @@ export default class PropertyStore {
       furnishedType: flat.furnished_type ?? nestedProperty?.furnishedType ?? nestedProperty?.furnished_type ?? this.addListingData.propertyData.furnishedType,
       availableFrom: flat.available_from ?? nestedProperty?.availableFrom ?? nestedProperty?.available_from ?? this.addListingData.propertyData.availableFrom,
       availableTo: flat.available_to ?? nestedProperty?.availableTo ?? nestedProperty?.available_to ?? this.addListingData.propertyData.availableTo,
-      petsAllowed: flat.pets_allowed ?? nestedProperty?.petsAllowed ?? nestedProperty?.pets_allowed ?? this.addListingData.propertyData.petsAllowed,
-      smokingAllowed: flat.smoking_allowed ?? nestedProperty?.smokingAllowed ?? nestedProperty?.smoking_allowed ?? this.addListingData.propertyData.smokingAllowed,
+      petsAllowed: toBoolean(flat.pets_allowed ?? nestedProperty?.petsAllowed ?? nestedProperty?.pets_allowed ?? this.addListingData.propertyData.petsAllowed),
+      smokingAllowed: toBoolean(flat.smoking_allowed ?? nestedProperty?.smokingAllowed ?? nestedProperty?.smoking_allowed ?? this.addListingData.propertyData.smokingAllowed),
       ...(amenitiesArr != null ? { amenities: amenitiesArr } : {}),
       ...(sharedSpaceArr != null ? { sharedSpace: sharedSpaceArr } : {}),
     };

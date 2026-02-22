@@ -367,7 +367,6 @@ const AddListingForm = () => {
                 <label className="d-flex align-items-center">
                   <span>
                     Bills {' '}
-                    <span className="text-muted small">({t("common.optional")})</span>
                   </span>
                   <InfoTip
                     id="add-listing-tt-bills"
@@ -379,7 +378,6 @@ const AddListingForm = () => {
                     type="number"
                     min={0}
                     step={1}
-                    placeholder={t("common.optional")}
                     value={propertyData.bills ?? ""}
                     onChange={(e) => {
                       updateListingData("propertyData", "bills", turnDecimalToInteger(e.target.value));
@@ -402,7 +400,6 @@ const AddListingForm = () => {
                 <label className="d-flex align-items-center">
                   <span>
                     {t("list_room_steps.fourth.deposit_label") || t("property.deposit_label") || "Deposit in euro"}{" "}
-                    <span className="text-muted small">({t("common.optional")})</span>
                   </span>
                   <InfoTip
                     id="add-listing-tt-deposit"
@@ -414,7 +411,6 @@ const AddListingForm = () => {
                     type="number"
                     min={0}
                     step={1}
-                    placeholder={t("common.optional")}
                     value={propertyData.deposit ?? ""}
                     onChange={(e) => {
                       updateListingData("propertyData", "deposit", turnDecimalToInteger(e.target.value));
@@ -422,6 +418,7 @@ const AddListingForm = () => {
                     onKeyDown={(e) => {
                       if (e.key === "-" || e.key === "e" || e.key === ".") e.preventDefault();
                     }}
+                    isInvalid={errorFields.includes("propertyData.deposit")}
                   />
                   <InputGroup.Text id="deposit-unit">€</InputGroup.Text>
                 </InputGroup>

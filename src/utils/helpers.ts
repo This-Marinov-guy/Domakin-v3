@@ -21,11 +21,16 @@ export const getGeoInfo = async () => {
 };
 
 export const turnDecimalToInteger = (value: number | string | null) => {
-  if (value && !Number.isInteger(Number(value))) {
-    return Math.round(Number(value));
+  if (value === null || value === undefined || value === "") return value;
+
+  // Strip leading zeros (e.g. "05" → "5", "007" → "7"; bare "0" is kept)
+  const stripped = String(value).replace(/^0+(\d)/, "$1");
+
+  if (!Number.isInteger(Number(stripped))) {
+    return Math.round(Number(stripped));
   }
 
-  return value;
+  return stripped;
 };
 
 export function capitalizeFirstLetter(str: string) {
