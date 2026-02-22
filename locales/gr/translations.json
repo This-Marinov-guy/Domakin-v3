@@ -1586,6 +1586,15 @@
       "details": "Let’s give some more details",
       "photos": "Take some nice photos",
       "review_publish": "Review & Publish"
+    },
+    "submit_modal": {
+      "loading_1": "Ανέβασμα της καταχώρησης...",
+      "loading_2": "Επεξεργασία εικόνων...",
+      "loading_3": "Σχεδόν έτοιμο...",
+      "success_title": "Επιτυχία!",
+      "success_message": "Η καταχώρησή σας στάλθηκε επιτυχώς για έλεγχο. Θα επικοινωνήσουμε μαζί σας σύντομα!",
+      "error_title": "Κάτι πήγε στραβά",
+      "error_message": "Παρουσιάστηκε σφάλμα κατά την υποβολή της καταχώρησης. Παρακαλώ δοκιμάστε ξανά."
     }
   },
   "list_room_steps": {

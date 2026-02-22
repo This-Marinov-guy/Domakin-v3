@@ -1607,6 +1607,15 @@
       "details": "Let’s give some more details",
       "photos": "Take some nice photos",
       "review_publish": "Review & Publish"
+    },
+    "submit_modal": {
+      "loading_1": "Качване на обявата...",
+      "loading_2": "Обработка на снимките...",
+      "loading_3": "Почти готово...",
+      "success_title": "Успех!",
+      "success_message": "Вашата обява беше успешно изпратена за преглед. Ще се свържем с вас скоро!",
+      "error_title": "Нещо се обърка",
+      "error_message": "Възникна грешка при изпращането на обявата. Моля, опитайте отново."
     }
   },
   "list_room_steps": {

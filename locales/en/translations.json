@@ -1611,6 +1611,15 @@
       "details": "Let’s give some more details",
       "photos": "Take some nice photos",
       "review_publish": "Review & Publish"
+    },
+    "submit_modal": {
+      "loading_1": "Uploading your listing...",
+      "loading_2": "Processing images...",
+      "loading_3": "Almost there...",
+      "success_title": "Success!",
+      "success_message": "Your listing has been successfully sent for review. You will be contacted shortly!",
+      "error_title": "Something went wrong",
+      "error_message": "An error occurred while submitting your listing. Please try again."
     }
   },
   "list_room_steps": {
