@@ -77,7 +77,7 @@ const RentingForm = ({ refElement, property }: any) => {
       <div className="container m-a row controls">
         <h4 className="mb-20">{t("viewing.fill_your_details")}</h4>
 
-        {(!user?.name || !rentingData.name) && (
+        {
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("viewing.name")}</label>
@@ -91,9 +91,9 @@ const RentingForm = ({ refElement, property }: any) => {
               />
             </div>
           </div>
-        )}
+        }
 
-        {(!user?.name || !rentingData.surname) && (
+        {
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("viewing.surname")}</label>
@@ -107,9 +107,9 @@ const RentingForm = ({ refElement, property }: any) => {
               />
             </div>
           </div>
-        )}
+        }
 
-        {(!user?.phone || !rentingData.phone) && (
+        {
           <div className="col-lg-6 col-md-6 col-12">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("viewing.phone")}</label>
@@ -122,9 +122,9 @@ const RentingForm = ({ refElement, property }: any) => {
               />
             </div>
           </div>
-        )}
+        }
 
-        {(!user?.email || !rentingData.email) && (
+        {
           <div className="col-lg-6 col-md-6 col-12">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("viewing.email")}</label>
@@ -138,7 +138,7 @@ const RentingForm = ({ refElement, property }: any) => {
               />
             </div>
           </div>
-        )}
+        }
 
         <div className="col-lg-6col-md-12 col-12 mb-10">
           <div className="input-item input-item-name">

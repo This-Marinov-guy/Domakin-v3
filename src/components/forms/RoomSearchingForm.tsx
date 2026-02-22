@@ -89,7 +89,7 @@ const RoomSearchingForm = () => {
       <div className="container m-a row controls">
         <h4 className="mb-20">{t("viewing.fill_your_details")}</h4>
 
-        {(!user?.name || !searchingData.name) && (
+        {
           <div className="col-lg-6 col-md-6 col-12">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("viewing.name")}</label>
@@ -103,9 +103,9 @@ const RoomSearchingForm = () => {
               />
             </div>
           </div>
-        )}
+        }
 
-        {(!user?.name || !searchingData.surname) && (
+        {
           <div className="col-lg-6 col-md-6 col-12">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("viewing.surname")}</label>
@@ -119,9 +119,9 @@ const RoomSearchingForm = () => {
               />
             </div>
           </div>
-        )}
+        }
 
-        {(!user?.phone || !searchingData.phone) && (
+        {
           <div className="col-lg-6 col-md-6 col-12">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("viewing.phone")}</label>
@@ -134,9 +134,9 @@ const RoomSearchingForm = () => {
               />
             </div>
           </div>
-        )}
+        }
 
-        {(!user?.email || !searchingData.email) && (
+        {
           <div className="col-lg-6 col-md-6 col-12">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("viewing.email")}</label>
@@ -150,7 +150,7 @@ const RoomSearchingForm = () => {
               />
             </div>
           </div>
-        )}
+        }
 
         <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta form-group mb-30">

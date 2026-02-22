@@ -168,7 +168,7 @@ const AddListingForm = () => {
             </h4>
           )}
 
-          {(!user?.name || !personalData.name) && (
+          {
             <div className="col-6">
               <div className="input-group-meta form-group mb-30">
                 <label htmlFor="">{t("emergency_housing.name")}</label>
@@ -182,9 +182,9 @@ const AddListingForm = () => {
                 />
               </div>
             </div>
-          )}
+          }
 
-          {(!user?.name || !personalData.surname) && (
+          {
             <div className="col-6">
               <div className="input-group-meta form-group mb-30">
                 <label htmlFor="">{t("emergency_housing.surname")}</label>
@@ -202,9 +202,9 @@ const AddListingForm = () => {
                 />
               </div>
             </div>
-          )}
+          }
 
-          {(!user?.phone || !personalData.phone) && (
+          {
             <div className="col-lg-6 col-md-6 col-12">
               <div className="input-group-meta form-group mb-30">
                 <label htmlFor="">{t("viewing.phone")}</label>
@@ -217,9 +217,9 @@ const AddListingForm = () => {
                 />
               </div>
             </div>
-          )}
+          }
 
-          {(!user?.email || !personalData.email) && (
+          {
             <div className="col-lg-6 col-md-6 col-12">
               <div className="input-group-meta form-group mb-30">
                 <label htmlFor="">{t("emergency_housing.email")}</label>
@@ -233,7 +233,7 @@ const AddListingForm = () => {
                 />
               </div>
             </div>
-          )}
+          }
         </div>
 
         <div className="row mt-20 mb-20">

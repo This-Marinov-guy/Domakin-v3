@@ -75,7 +75,7 @@ const ViewingForm = () => {
           <h4 className="mb-20">{t("viewing.fill_your_details")}</h4>
         )}
 
-        {(!user?.name || !viewingData.name) && (
+        {
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("viewing.name")}</label>
@@ -89,9 +89,9 @@ const ViewingForm = () => {
               />
             </div>
           </div>
-        )}
+        }
 
-        {(!user?.name || !viewingData.surname) && (
+        {
           <div className="col-6">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("viewing.surname")}</label>
@@ -105,9 +105,9 @@ const ViewingForm = () => {
               />
             </div>
           </div>
-        )}
+        }
 
-        {(!user?.phone || !viewingData.phone) && (
+        {
           <div className="col-lg-6 col-md-6 col-12">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("viewing.phone")}</label>
@@ -120,9 +120,9 @@ const ViewingForm = () => {
               />
             </div>
           </div>
-        )}
+        }
 
-        {(!user?.email || !viewingData.email) && (
+        {
           <div className="col-lg-6 col-md-6 col-12">
             <div className="input-group-meta form-group mb-30">
               <label htmlFor="">{t("viewing.email")}</label>
@@ -136,7 +136,7 @@ const ViewingForm = () => {
               />
             </div>
           </div>
-        )}
+        }
 
         <h4 className="mb-20 mt-20">{t("viewing.viewing_details")}</h4>
 
