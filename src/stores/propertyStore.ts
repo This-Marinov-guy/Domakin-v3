@@ -488,18 +488,11 @@ export default class PropertyStore {
     const females = Math.max(0, parseInt(String(propertyData?.flatmatesFemale ?? "0"), 10) || 0);
     const flatmatesStr = `${males},${females}`;
 
-    const deposit =
-      propertyData?.deposit != null && typeof propertyData.deposit === "number"
-        ? propertyData.deposit
-        : (typeof propertyData?.deposit === "string" && propertyData.deposit !== ""
-          ? Math.max(0, parseInt(propertyData.deposit, 10) || 0)
-          : undefined);
-    const bills =
-      propertyData?.bills != null && typeof propertyData.bills === "number"
-        ? propertyData.bills
-        : (typeof propertyData?.bills === "string" && propertyData.bills !== ""
-          ? Math.max(0, parseInt(propertyData.bills, 10) || 0)
-          : undefined);
+    const deposit = Number(propertyData?.deposit) || 0;
+    const bills = Number(propertyData?.bills) || 0;
+    const size = Number(propertyData?.size) || 0;
+    const rent = Number(propertyData?.rent) || 0;
+
     const payload: Record<string, unknown> = {
       ...(personalData ?? {}),
       ...(propertyData ?? {}),
@@ -510,13 +503,13 @@ export default class PropertyStore {
       referralCode: referralCode ?? "",
       images: existingOrdered.join(","),
       new_images: newImages,
+      deposit: deposit,
+      bills: bills,
+      size: size,
+      rent: rent,
       ...(this.referenceId ? { referenceId: this.referenceId } : {}),
       ...overrides,
     };
-    if (deposit !== undefined) payload.deposit = deposit;
-    else delete payload.deposit;
-    if (bills !== undefined) payload.bills = bills;
-    else delete payload.bills;
     delete payload.independent;
     return payload;
   };
