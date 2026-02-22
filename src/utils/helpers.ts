@@ -31,7 +31,7 @@ export const turnDecimalToInteger = (value: number | string | null) => {
 export function capitalizeFirstLetter(str: string) {
   if (!str) {
     return '-';
-  } 
+  }
 
   const words = str.toString().split(" ");
   words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1).toLowerCase();
@@ -248,7 +248,7 @@ export const getCookie = (name: any) => {
 };
 
 export const csrf = async () => {
-  const sessionCookie = getCookie(process.env.NEXT_PUBLIC_SESSION_ID);  
+  const sessionCookie = getCookie(process.env.NEXT_PUBLIC_SESSION_ID);
 
   if (sessionCookie) {
     return sessionCookie;
@@ -340,37 +340,18 @@ export const showStandardNotification = (
   } as ToastOptions);
 };
 
-export const prefillUserInfo = (callback: Function, user: any | null) => {
+export const prefillUserInfo = (callback: Function, user: any | null, currentData: any | null) => {
   if (!user) {
     return;
   }
 
-  callback("name", "", user.name.split(" ")[0] ?? "");
-  callback("surname", "", user.name.split(" ")[1] ?? "-");
-  callback("email", "", user.email ?? "");
+  if (!currentData?.name) callback("name", "", user.name.split(" ")[0] ?? "");
+  if (!currentData?.surname) callback("surname", "", user.name.split(" ")[1] ?? "-");
+  if (!currentData?.email) callback("email", "", user.email ?? "");
 
   // or else we will set the code to null
-  if (user.phone) {
+  if (!currentData?.phone && user.phone) {
     callback("phone", "", user.phone ?? "");
-  }
-};
-
-export const prefillNestedUserInfo = (
-  key: string,
-  callback: Function,
-  user: any | null
-) => {
-  if (!user) {
-    return;
-  }
-
-  callback(key, "name", user.name.split(" ")[0] ?? "");
-  callback(key, "surname", user.name.split(" ")[1] ?? "");
-  callback(key, "email", user.email ?? "");
-
-  // or else we will set the code to null
-  if (user.phone) {
-    callback(key, "phone", user.phone ?? "");
   }
 };
 
@@ -407,9 +388,9 @@ export const formatJsonKeyValuePairs = (jsonString: string, onlyValues: string[]
   const filteredJson = Object.entries(json)
     .filter(([key]) => onlyValues ? onlyValues.includes(key) : true);
 
-    if (filteredJson.length === 1) {
-      return String(filteredJson[0][1] ?? "-"); // return the value only if 1 key is provided
-    }
+  if (filteredJson.length === 1) {
+    return String(filteredJson[0][1] ?? "-"); // return the value only if 1 key is provided
+  }
 
   return filteredJson.map(([key, value]) => `${key}: ${value}`).join(" | ");
 };

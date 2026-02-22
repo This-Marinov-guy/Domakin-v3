@@ -59,7 +59,7 @@ const RentingForm = ({ refElement, property }: any) => {
   };
 
   useEffect(() => {
-    prefillUserInfo(updateRentingData, user);
+    prefillUserInfo(updateRentingData, user, rentingData);
   }, [user]);
 
   if (success) {

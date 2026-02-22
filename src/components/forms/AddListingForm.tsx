@@ -14,7 +14,6 @@ import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import { useServer } from "@/hooks/useServer";
 import {
-  prefillNestedUserInfo,
   prefillUserInfo,
   transformToFormData,
   turnDecimalToInteger,
@@ -156,7 +155,7 @@ const AddListingForm = () => {
   };
 
   useEffect(() => {
-    prefillNestedUserInfo("personalData", updateListingData, user);
+    prefillUserInfo((field: string, _: string, value: any) => updateListingData("personalData", field, value), user, propertyStore.addListingData?.personalData);
   }, [user]);
 
   return (

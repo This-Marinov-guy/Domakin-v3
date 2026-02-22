@@ -81,7 +81,7 @@ const RoomSearchingForm = () => {
   };
 
   useEffect(() => {
-    prefillUserInfo(updateSearchingData, user);
+    prefillUserInfo(updateSearchingData, user, searchingData);
   }, [user]);
 
   return (

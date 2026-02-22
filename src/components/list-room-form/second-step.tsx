@@ -6,7 +6,7 @@ import Trans from "next-translate/Trans";
 import useTranslation from "next-translate/useTranslation";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
-import { prefillNestedUserInfo } from "@/utils/helpers";
+import { prefillUserInfo } from "@/utils/helpers";
 import PrefixPhoneInput from "@/components/ui/inputs/phone/PrefixPhoneInput";
 
 interface SecondStepProps {
@@ -28,7 +28,7 @@ function SecondStep({ steps, currentStep }: SecondStepProps) {
 
 
     useEffect(() => {
-        prefillNestedUserInfo("personalData", updateListingData, user);
+        prefillUserInfo((field: string, _: string, value: any) => updateListingData("personalData", field, value), user, null);
     }, [user, updateListingData]);
 
     return (

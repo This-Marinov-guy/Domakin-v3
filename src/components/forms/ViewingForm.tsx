@@ -65,7 +65,7 @@ const ViewingForm = () => {
   };
 
   useEffect(() => {
-    prefillUserInfo(updateViewingData, user);
+    prefillUserInfo(updateViewingData, user, viewingData);
   }, [user]);
 
   return (
