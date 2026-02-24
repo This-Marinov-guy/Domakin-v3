@@ -38,19 +38,35 @@ const SettingsBody = () => {
             works offline and launches straight from your home screen.
           </p>
 
-          <div className="d-flex align-items-start gap-2">
-            {isInstalled ? (
-              <div className="d-flex align-items-center gap-2 text-success">
-                <i className="fa-regular fa-circle-check fs-5"></i>
-                <span>App is already installed on this device.</span>
-              </div>
-            ) : (
-              <button className="btn-ten" onClick={handleInstall}>
-                <i className="fa-regular fa-download me-2"></i>
-                Install App
-              </button>
-            )}
-          </div>
+          {isInstalled ? (
+            <div className="d-flex align-items-center gap-2 text-success">
+              <i className="fa-regular fa-circle-check fs-5"></i>
+              <span>App is already installed on this device.</span>
+            </div>
+          ) : isIOS ? (
+            <ol className="mb-0 d-flex flex-column gap-2">
+              <li>
+                Open this page in <strong>Safari</strong> if you haven&apos;t
+                already
+              </li>
+              <li>
+                Tap the <strong>Share</strong> button{" "}
+                <i className="fa-regular fa-arrow-up-from-bracket"></i> at the
+                bottom of the screen
+              </li>
+              <li>
+                Scroll down and tap <strong>Add to Home Screen</strong>
+              </li>
+              <li>
+                Tap <strong>Add</strong> to confirm
+              </li>
+            </ol>
+          ) : (
+            <button className="btn-ten" onClick={handleInstall}>
+              <i className="fa-regular fa-download me-2"></i>
+              Install App
+            </button>
+          )}
         </li>
       </ul>
 
@@ -78,44 +94,22 @@ const SettingsBody = () => {
           <Modal.Title>Install Domakin</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {isIOS ? (
-            <>
-              <p className="fw-500 mb-3">To install on iPhone / iPad:</p>
-              <ol>
-                <li className="mb-2">
-                  Tap the <strong>Share</strong> button{" "}
-                  <i className="fa-regular fa-arrow-up-from-bracket"></i> in
-                  Safari
-                </li>
-                <li className="mb-2">
-                  Scroll down and tap <strong>Add to Home Screen</strong>
-                </li>
-                <li>
-                  Tap <strong>Add</strong> to confirm
-                </li>
-              </ol>
-            </>
-          ) : (
-            <>
-              <p className="fw-500 mb-3">To install on your device:</p>
-              <ul>
-                <li className="mb-2">
-                  <strong>Chrome / Edge:</strong> click the install icon{" "}
-                  <i className="fa-regular fa-circle-plus"></i> in the address
-                  bar
-                </li>
-                <li className="mb-2">
-                  <strong>Android Chrome:</strong> tap the menu{" "}
-                  <i className="fa-regular fa-ellipsis-vertical"></i> and select{" "}
-                  <strong>Add to Home Screen</strong>
-                </li>
-                <li>
-                  <strong>Samsung Browser:</strong> tap the menu and choose{" "}
-                  <strong>Add page to</strong> → <strong>Apps screen</strong>
-                </li>
-              </ul>
-            </>
-          )}
+          <p className="fw-500 mb-3">To install on your device:</p>
+          <ul>
+            <li className="mb-2">
+              <strong>Chrome / Edge:</strong> click the install icon{" "}
+              <i className="fa-regular fa-circle-plus"></i> in the address bar
+            </li>
+            <li className="mb-2">
+              <strong>Android Chrome:</strong> tap the menu{" "}
+              <i className="fa-regular fa-ellipsis-vertical"></i> and select{" "}
+              <strong>Add to Home Screen</strong>
+            </li>
+            <li>
+              <strong>Samsung Browser:</strong> tap the menu and choose{" "}
+              <strong>Add page to</strong> → <strong>Apps screen</strong>
+            </li>
+          </ul>
         </Modal.Body>
       </Modal>
     </DashboardFrame>
