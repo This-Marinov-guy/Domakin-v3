@@ -2,6 +2,7 @@ User-agent: *
 Disallow: /user/
 Disallow: /account/
 Disallow: /api/
+Disallow: /firebase-messaging-sw.js
 Allow: /api/sitemap.xml
 
 Sitemap: https://www.domakin.nl/sitemap.xml

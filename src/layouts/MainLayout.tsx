@@ -16,9 +16,19 @@ import ErrorLayout from "@/pages/_error";
 import { SESSION_REFRESH_INTERVAL } from "@/utils/config";
 import { useRouter } from "next/router";
 import RouteLoader from "@/components/ui/loading/RouteLoader";
+import { usePushNotifications } from "@/hooks/usePushNotifications";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
+  // Capture PWA install prompt as early as possible so Settings page can use it
+  window.addEventListener(
+    "beforeinstallprompt",
+    (e: Event) => {
+      e.preventDefault();
+      (window as any).__pwaInstallPrompt = e;
+    },
+    { once: true }
+  );
 }
 
 const MainLayout = ({ children }: any) => {
@@ -35,9 +45,11 @@ const MainLayout = ({ children }: any) => {
 
   const {
     propertyStore: { setReferralCode },
-    userStore: { login, refreshSession, user },
+    userStore: { login, refreshSession, user, isAdmin },
     serviceStore,
   } = useStore();
+
+  usePushNotifications(isAdmin);
 
 
   const fetchLanguage = async () => {

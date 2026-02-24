@@ -10,6 +10,7 @@
     "sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
+    "@ducanh2912/next-pwa": "^10.2.9",
     "@emailjs/browser": "^4.1.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
@@ -22,6 +23,7 @@
     "@types/react-google-recaptcha": "^2.1.9",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
+    "firebase": "^12.9.0",
     "framer-motion": "^11.18.2",
     "heic2any": "^0.0.4",
     "isotope-layout": "^3.0.6",
@@ -72,8 +74,8 @@
     "@types/react-dom": "^18",
     "@types/react-modal-video": "^1.2.3",
     "@types/react-slick": "^0.23.12",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4",
+    "eslint": "^4.0.0",
+    "eslint-config-next": "^16.1.6",
     "typescript": "^5"
   }
 }
