@@ -50,10 +50,8 @@ const SettingsBody = () => {
 
     const res = await sendRequest(
       "/user/notification-settings",
-      "POST",
+      "PATCH",
       { email_notifications: emailNotifications, push_notifications: pushNotifications },
-      {},
-      { withLoading: false }
     );
 
     if (!res?.status) {
