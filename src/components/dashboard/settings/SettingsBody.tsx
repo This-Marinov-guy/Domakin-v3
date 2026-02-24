@@ -206,15 +206,14 @@ const SettingsBody = () => {
               <h5 className="m-0 mb-1">App Version</h5>
               <p className="text-muted m-0">v{APP_VERSION}</p>
             </div>
-            // TODO: remove this button so we do not reset the FCM token
-            {/* <button
+            <button
               className="btn-ten"
               onClick={handleForceUpdate}
               disabled={updating}
             >
               <i className={`fa-regular fa-rotate-right me-2 ${updating ? "fa-spin" : ""}`}></i>
               {updating ? "Updating..." : "Force Update"}
-            </button> */}
+            </button>
           </div>
         </li>
       </ul>
