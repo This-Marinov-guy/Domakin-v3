@@ -45,12 +45,9 @@ const MainLayout = ({ children }: any) => {
 
   const {
     propertyStore: { setReferralCode },
-    userStore: { login, refreshSession, user, isAdmin },
+    userStore: { login, refreshSession },
     serviceStore,
   } = useStore();
-
-  usePushNotifications(isAdmin);
-
 
   const fetchLanguage = async () => {
     let locale = window.location.pathname.split("/")[1];

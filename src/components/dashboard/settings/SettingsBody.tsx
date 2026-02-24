@@ -3,24 +3,65 @@ import DashboardFrame from "@/layouts/frames/DashboardFrame";
 import { Modal } from "react-bootstrap";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
+import { useServer } from "@/hooks/useServer";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
+import Skeleton from "react-loading-skeleton";
+import { showStandardNotification } from "@/utils/helpers";
 
 const APP_VERSION = process.env.NEXT_PUBLIC_APP_VERSION ?? "—";
-const EMAIL_NOTIF_KEY = "notif_email_enabled";
 
 const SettingsBody = () => {
   const [showGuide, setShowGuide] = useState(false);
   const [updating, setUpdating] = useState(false);
+  const [savingNotificationSettings, setSavingNotificationSettings] = useState(false);
   const { isInstalled, isIOS, triggerInstall } = usePWAInstall();
   const { requestPermission, permissionStatus } = usePushNotifications();
-  const { userStore: { isAdmin, notificationPreferences } } = useStore();
+  const { sendRequest } = useServer();
+  const {
+    userStore: {
+      isAdmin,
+      notificationPreferences,
+      notificationPreferencesLoading,
+      setNotificationPreferences,
+      loadNotificationPreferences,
+    },
+  } = useStore();
 
-  const pushEnabled = permissionStatus === "granted";
   const pushDenied = permissionStatus === "denied";
+  const notificationsLoading =
+    notificationPreferencesLoading || savingNotificationSettings;
+  const disabledPush = pushDenied || !isInstalled || notificationsLoading;
+
+  useEffect(() => {
+    loadNotificationPreferences();
+  }, [loadNotificationPreferences]);
+
+  const saveNotificationSettings = async (emailNotifications: boolean, pushNotifications: boolean) => {
+    setNotificationPreferences(emailNotifications, pushNotifications);
+
+    const res = await sendRequest(
+      "/user/notification-settings",
+      "PATCH",
+      { email_notifications: emailNotifications, push_notifications: pushNotifications },
+    );
+    if (res?.status) {
+      showStandardNotification("success", "Notification settings saved");
+    }
+  };
+
+  const handleEmailToggle = () => {
+    const next = !notificationPreferences.email;
+    saveNotificationSettings(next, notificationPreferences.push);
+  };
 
   const handlePushToggle = async () => {
-    await requestPermission();
+    const next = !notificationPreferences.push;
+    if (next) {
+      const granted = await requestPermission();
+      if (!granted) return;
+    }
+    saveNotificationSettings(notificationPreferences.email, next);
   };
 
   const handleInstall = async () => {
@@ -49,50 +90,57 @@ const SettingsBody = () => {
           <p className="text-muted mb-4">
             Choose how you&apos;d like to receive updates and alerts.
           </p>
-          <div className="d-flex flex-wrap gap-2">
-            <div className="checkbox-card-type">
-              <input
-                type="checkbox"
-                className="btn-check"
-                id="notif-email"
-                autoComplete="off"
-                checked={notificationPreferences.email}
-                onChange={() => { }}
-              />
-              <label
-                className="btn d-flex align-items-center text-center rounded-4 fs-12"
-                htmlFor="notif-email"
-              >
-                <i className="fa-regular fa-envelope fs-5 mb-1"></i>
-                <span>Email</span>
-              </label>
+          {notificationsLoading ? (
+            <div className="d-flex flex-wrap gap-2">
+              <Skeleton height={52} width={96} borderRadius={16} />
+              <Skeleton height={52} width={96} borderRadius={16} />
             </div>
+          ) : (
+            <div className="d-flex flex-wrap gap-2">
+              <div className="checkbox-card-type">
+                <input
+                  type="checkbox"
+                  className="btn-check"
+                  id="notif-email"
+                  autoComplete="off"
+                  checked={notificationPreferences.email}
+                  disabled={notificationsLoading}
+                  onChange={handleEmailToggle}
+                />
+                <label
+                  className="btn d-flex align-items-center text-center rounded-4 fs-12"
+                  htmlFor="notif-email"
+                >
+                  <i className="fa-regular fa-envelope fs-5 mb-1"></i>
+                  <span>Email</span>
+                </label>
+              </div>
 
-            <div className="checkbox-card-type">
-              <input
-                type="checkbox"
-                className="btn-check"
-                id="notif-push"
-                autoComplete="off"
-                checked={notificationPreferences.push}
-                onChange={handlePushToggle}
-              />
-              <label
-                className={`btn d-flex align-items-center text-center rounded-4 fs-12 ${pushDenied ? "opacity-50" : ""}`}
-                htmlFor="notif-push"
-                title={pushDenied ? "Blocked in browser settings" : undefined}
-              >
-                <i className="fa-regular fa-bell fs-5 mb-1"></i>
-                <span>Push</span>
-              </label>
+              <div className="checkbox-card-type">
+                <input
+                  type="checkbox"
+                  className="btn-check"
+                  id="notif-push"
+                  autoComplete="off"
+                  checked={notificationPreferences.push}
+                  disabled={disabledPush}
+                  onChange={handlePushToggle}
+                />
+                <label
+                  className={`btn d-flex align-items-center text-center rounded-4 fs-12 ${pushDenied ? "opacity-50" : ""}`}
+                  htmlFor="notif-push"
+                >
+                  <i className="fa-regular fa-bell fs-5 mb-1"></i>
+                  <span>Push</span>
+                </label>
+              </div>
             </div>
-          </div>
+          )}
 
-          {pushDenied && (
-            <p className="text-muted mt-3 mb-0" style={{ fontSize: "0.8rem" }}>
+          {!notificationsLoading && disabledPush && (
+            <p className="text-muted mt-3 mb-0">
               <i className="fa-regular fa-circle-info me-1"></i>
-              Push notifications are blocked. Enable them in your browser
-              settings to receive alerts.
+              Push notifications are only enabled on installed apps and when notifications are allowed.
             </p>
           )}
         </li>

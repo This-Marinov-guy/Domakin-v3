@@ -21,8 +21,9 @@ export default class UserStore {
   @observable referralCode = "";
   @observable notificationPreferences = {
     email: true,
-    push: true,
-  }; //TODO fix this
+    push: false,
+  };
+  @observable notificationPreferencesLoading = true;
 
   @observable userLoading = true;
   @observable user: any = null;
@@ -106,6 +107,10 @@ export default class UserStore {
     this.referralCode = code;
   };
 
+  @action setNotificationPreferences = (email: boolean, push: boolean) => {
+    this.notificationPreferences = { email, push };
+  };
+
   @action loadReferralCode = async () => {
     const { data } = (await supabase
       .from("users")
@@ -116,6 +121,31 @@ export default class UserStore {
     };
 
     this.referralCode = data?.referral_code || "";
+  };
+
+  @action loadNotificationPreferences = async () => {
+    if (!this.user?.id) {
+      this.notificationPreferencesLoading = false;
+      return;
+    }
+
+    this.notificationPreferencesLoading = true;
+    try {
+      const { data } = (await supabase
+        .from("user_settings")
+        .select("email_notifications, push_notifications")
+        .eq("user_id", this.user.id)
+        .single()) ?? {
+        data: { email_notifications: true, push_notifications: false },
+      };
+
+      this.notificationPreferences = {
+        email: !!data?.email_notifications,
+        push: !!data?.push_notifications,
+      };
+    } finally {
+      this.notificationPreferencesLoading = false;
+    }
   };
 
   @action updateUser = (data: any) => {
