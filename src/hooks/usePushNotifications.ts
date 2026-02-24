@@ -26,7 +26,7 @@ export const usePushNotifications = (isAdmin = false) => {
     setPermissionStatus('granted');
 
     const res = await sendRequest(
-      'user/fcm-token',
+      '/user/fcm-token',
       'PATCH',
       { token },
       {},
