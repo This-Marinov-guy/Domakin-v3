@@ -42,21 +42,25 @@ const SettingsBody = () => {
     pushNotifications: boolean
   ) => {
     setSavingNotificationSettings(true);
-    try {
-      const res = await sendRequest(
-        "/user/notification-settings",
-        "POST",
-        { email_notifications: emailNotifications, push_notifications: pushNotifications },
-        {},
-        { withLoading: false }
-      );
 
-      if (res?.status) {
-        setNotificationPreferences(emailNotifications, pushNotifications);
-      }
-    } finally {
-      setSavingNotificationSettings(false);
+    const prevEmail = notificationPreferences.email;
+    const prevPush = notificationPreferences.push;
+
+    setNotificationPreferences(emailNotifications, pushNotifications);
+
+    const res = await sendRequest(
+      "/user/notification-settings",
+      "POST",
+      { email_notifications: emailNotifications, push_notifications: pushNotifications },
+      {},
+      { withLoading: false }
+    );
+
+    if (!res?.status) {
+      setNotificationPreferences(prevEmail, prevPush);
     }
+
+    setSavingNotificationSettings(false);
   };
 
   const handleEmailToggle = () => {
@@ -113,7 +117,7 @@ const SettingsBody = () => {
                   id="notif-email"
                   autoComplete="off"
                   checked={notificationPreferences.email}
-                  disabled={notificationsLoading}
+                  disabled={savingNotificationSettings}
                   onChange={handleEmailToggle}
                 />
                 <label
@@ -132,7 +136,7 @@ const SettingsBody = () => {
                   id="notif-push"
                   autoComplete="off"
                   checked={notificationPreferences.push}
-                  disabled={disabledPush}
+                  disabled={disabledPush || savingNotificationSettings}
                   onChange={handlePushToggle}
                 />
                 <label
