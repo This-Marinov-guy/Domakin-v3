@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import DashboardFrame from "@/layouts/frames/DashboardFrame";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Form, InputGroup, Button } from "react-bootstrap";
+import { Form, InputGroup, Button, Spinner } from "react-bootstrap";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
+import { useServer } from "@/hooks/useServer";
+import useTranslation from "next-translate/useTranslation";
 import {
   VIEWING_URL,
   RENTING_URL,
@@ -19,10 +21,49 @@ import { removeProtocolFromLink } from "@/utils/helpers";
 const ReferralCode = () => {
   const [copied, setCopied] = useState(false);
   const [termsModal, setTermsModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const [newCode, setNewCode] = useState("");
+  const [codeError, setCodeError] = useState("");
+
+  const { t } = useTranslation("account");
+  const { sendRequest, loading: saving } = useServer();
 
   const {
-    userStore: { loadReferralCode, referralCode },
+    userStore: { loadReferralCode, referralCode, setReferralCode },
   } = useStore();
+
+  const handleEditOpen = () => {
+    setNewCode(referralCode);
+    setCodeError("");
+    setEditModal(true);
+  };
+
+  const handleEditClose = () => {
+    setEditModal(false);
+    setCodeError("");
+  };
+
+  const handleEditSave = async () => {
+    setCodeError("");
+    const res = await sendRequest(
+      "/user/referral-code",
+      "PATCH",
+      { referralCode: newCode },
+      {},
+      { withLoading: false, withError: false }
+    );
+
+    if (res?.status) {
+      setReferralCode(newCode);
+      setEditModal(false);
+    } else if (res?.invalid_fields?.length) {
+      const tag: string = res.invalid_fields[0]?.tag ?? "";
+      const key = tag.split(":").pop() ?? "";
+      setCodeError(key ? t(key) : res.message ?? "");
+    } else {
+      setCodeError(res?.message ?? "");
+    }
+  };
 
   useEffect(() => {
     loadReferralCode();
@@ -60,8 +101,11 @@ const ReferralCode = () => {
 
         <div className="bg-orange px-20 py-20 d-flex flex-column flex-md-row justify-content-center align-items-center gap-4 mt-40 border rounded">
           <h6 className="text-lg font-semibold">Your Referral Code</h6>
-          <InputGroup style={{ maxWidth: "14em" }}>
+          <InputGroup style={{ maxWidth: "18em" }}>
             <Form.Control type="text" readOnly value={referralCode} />
+            <Button variant="outline-dark" onClick={handleEditOpen}>
+              <i className="fa-regular fa-pen-to-square"></i>
+            </Button>
             <Button variant="outline-dark" onClick={() => handleCopy()}>
               <i className="fa-regular fa-clone"></i>
             </Button>
@@ -148,6 +192,42 @@ const ReferralCode = () => {
           </div>
         </div>
       </div>
+      <Modal centered show={editModal} onHide={handleEditClose}>
+        <Modal.Header closeButton>
+          <h5>Change Referral Code</h5>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group>
+            <label className="form-label">New referral code</label>
+            <Form.Control
+              type="text"
+              value={newCode}
+              onChange={(e) => setNewCode(e.target.value)}
+              isInvalid={!!codeError}
+              disabled={saving}
+            />
+            <Form.Control.Feedback type="invalid">{codeError}</Form.Control.Feedback>
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <button type="button" className="btn-danger" onClick={handleEditClose}>
+            Cancel
+          </button>
+          <button
+            type="button"
+            className="btn-thirteen"
+            onClick={handleEditSave}
+            disabled={saving}
+          >
+            {saving ? (
+              <Spinner size="sm" animation="border" />
+            ) : (
+              "Save"
+            )}
+          </button>
+        </Modal.Footer>
+      </Modal>
+
       <Modal show={termsModal} onHide={() => setTermsModal(false)} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Terms & Conditions</Modal.Title>

@@ -30,5 +30,12 @@
             "login_failed": "Invalid email and/or password",
             "terms_must_be_accepted": "You must accept the Terms & Conditions to continue"
         }
+    },
+    "profile": {
+        "errors": {
+            "referral_code_required": "Referral code is required",
+            "referral_code_too_short": "Referral code is too short",
+            "referral_code_taken": "This referral code is already taken"
+        }
     }
 }

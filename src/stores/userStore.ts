@@ -102,6 +102,10 @@ export default class UserStore {
     ] = `Bearer ${session.access_token}`;
   };
 
+  @action setReferralCode = (code: string) => {
+    this.referralCode = code;
+  };
+
   @action loadReferralCode = async () => {
     const { data } = (await supabase
       .from("users")

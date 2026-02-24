@@ -30,5 +30,12 @@
       "login_failed": "Невалиден имейл и/или парола",
       "terms_must_be_accepted": "Трябва да приемете Общите условия, за да продължите"
     }
+  },
+  "profile": {
+    "errors": {
+      "referral_code_required": "Референтният код е задължителен",
+      "referral_code_too_short": "Референтният код е твърде кратък",
+      "referral_code_taken": "Този референтен код вече е зает"
+    }
   }
 }
