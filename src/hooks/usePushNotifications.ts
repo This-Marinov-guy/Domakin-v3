@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { requestPushPermission } from '@/utils/firebase';
 import { useServer } from '@/hooks/useServer';
+import { FCM_TOKEN_KEY } from '@/utils/defines';
+import { usePWAInstall } from './usePWAInstall';
 
-const FCM_TOKEN_KEY = 'fcm_token_registered';
 
 export const usePushNotifications = (isAdmin = false) => {
   const { sendRequest } = useServer();
+  const { isInstalled } = usePWAInstall();
+
   const [permissionStatus, setPermissionStatus] = useState<NotificationPermission>('default');
 
   useEffect(() => {
@@ -13,8 +16,11 @@ export const usePushNotifications = (isAdmin = false) => {
     setPermissionStatus(Notification.permission);
   }, []);
 
-  const registerToken = async (): Promise<boolean> => {
-    const token = await requestPushPermission();    
+  const registerToken = async (withConsent = true): Promise<boolean> => {
+    // Only allow to register token if the app is installed
+    if (!isInstalled) return false;
+
+    const token = await requestPushPermission(withConsent);    
 
     if (!token) {
       if (typeof window !== 'undefined' && 'Notification' in window) {
@@ -41,12 +47,6 @@ export const usePushNotifications = (isAdmin = false) => {
 
     return false;
   };
-
-  useEffect(() => {
-    if (!isAdmin || typeof window === 'undefined') return;
-    if (sessionStorage.getItem(FCM_TOKEN_KEY)) return;
-    registerToken();
-  }, [isAdmin]);
 
   return { requestPermission: registerToken, permissionStatus };
 };

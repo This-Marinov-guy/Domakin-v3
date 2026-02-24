@@ -13,26 +13,29 @@ function getFirebaseApp() {
   return getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 }
 
-export async function requestPushPermission(): Promise<string | null> {
+export async function requestPushPermission(withConsent = true): Promise<string | null> {
   try {
-    const supported = await isSupported();
-    if (!supported) return null;
+    if (withConsent) {
+      const supported = await isSupported();
+      if (!supported) return null;
 
-    if (typeof window === "undefined") return null;
-    if (!("serviceWorker" in navigator)) return null;
+      if (typeof window === "undefined") return null;
+      if (!("serviceWorker" in navigator)) return null;
 
-    if (Notification.permission === "denied") return null;
+      if (Notification.permission === "denied") return null;
 
-    if (Notification.permission !== "granted") {
-      const permission = await Notification.requestPermission();
-      if (permission !== "granted") return null;
+      if (Notification.permission !== "granted") {
+        const permission = await Notification.requestPermission();
+        if (permission !== "granted") return null;
+      }
     }
 
-    // ✅ Register YOUR SW explicitly
+    // ✅ Register YOUR SW explicitly (only change the version to force a new registration)
     const registration = await navigator.serviceWorker.register(
-      "/firebase-messaging-sw.js",
+      "/firebase-messaging-sw.js?v=1",
       { scope: "/" }
     );
+
 
     const messaging = getMessaging(getFirebaseApp());
 

@@ -16,7 +16,7 @@ import ErrorLayout from "@/pages/_error";
 import { SESSION_REFRESH_INTERVAL } from "@/utils/config";
 import { useRouter } from "next/router";
 import RouteLoader from "@/components/ui/loading/RouteLoader";
-import { usePushNotifications } from "@/hooks/usePushNotifications";
+import UserLayout from "@/layouts/UserLayout";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
@@ -109,6 +109,7 @@ const MainLayout = ({ children }: any) => {
         <TrackingLayout>
           <RouteLoader />
           {children}
+          <UserLayout />
           <ModalsLayout />
           <ScrollToTop />
           {toastMounted &&

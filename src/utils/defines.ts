@@ -211,3 +211,5 @@ export const getTranslatedEnum = (
   const translated = t(key);
   return translated !== key ? translated : fallback;
 };
+
+export const FCM_TOKEN_KEY = 'fcm_token_registered';
