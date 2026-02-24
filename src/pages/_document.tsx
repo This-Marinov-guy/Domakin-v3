@@ -5,6 +5,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        <link rel="manifest" href="/manifest.json" />
         {/* Ahrefs site verification */}
         <meta
           name="ahrefs-site-verification"
