@@ -3,6 +3,7 @@ import { getMessaging, getToken, isSupported } from 'firebase/messaging';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
@@ -15,31 +16,41 @@ function getFirebaseApp() {
 export async function requestPushPermission(): Promise<string | null> {
   try {
     const supported = await isSupported();
-
-    console.log('supported', supported);
-    console.log('Notification.permission', Notification.permission);
-
     if (!supported) return null;
+
+    if (typeof window === "undefined") return null;
+    if (!("serviceWorker" in navigator)) return null;
+
+    if (Notification.permission === "denied") return null;
+
+    if (Notification.permission !== "granted") {
+      const permission = await Notification.requestPermission();
+      if (permission !== "granted") return null;
+    }
+
+    // ✅ Register YOUR SW explicitly
+    const registration = await navigator.serviceWorker.register(
+      "/firebase-messaging-sw.js",
+      { scope: "/" }
+    );
 
     const messaging = getMessaging(getFirebaseApp());
 
-    if (Notification.permission === 'denied') return null;
-
-    if (Notification.permission !== 'granted') {
-      const permission = await Notification.requestPermission();
-      if (permission !== 'granted') return null;
-    }    
+    const vapidKey = process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY;
+    if (!vapidKey) {
+      console.error("Missing NEXT_PUBLIC_FIREBASE_VAPID_KEY");
+      return null;
+    }
 
     const token = await getToken(messaging, {
-      vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
-    }); 
-    
-    console.log('token', token);
-    
+      vapidKey,
+      serviceWorkerRegistration: registration, // ✅ critical
+    });
+
+    console.log("token", token);
     return token || null;
   } catch (error) {
-    console.log(error);
-        
+    console.log("FCM getToken error:", error);
     return null;
   }
 }
