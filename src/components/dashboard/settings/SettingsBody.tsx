@@ -37,16 +37,25 @@ const SettingsBody = () => {
     loadNotificationPreferences();
   }, [loadNotificationPreferences]);
 
-  const saveNotificationSettings = async (emailNotifications: boolean, pushNotifications: boolean) => {
-    setNotificationPreferences(emailNotifications, pushNotifications);
+  const saveNotificationSettings = async (
+    emailNotifications: boolean,
+    pushNotifications: boolean
+  ) => {
+    setSavingNotificationSettings(true);
+    try {
+      const res = await sendRequest(
+        "/user/notification-settings",
+        "POST",
+        { email_notifications: emailNotifications, push_notifications: pushNotifications },
+        {},
+        { withLoading: false }
+      );
 
-    const res = await sendRequest(
-      "/user/notification-settings",
-      "PATCH",
-      { email_notifications: emailNotifications, push_notifications: pushNotifications },
-    );
-    if (res?.status) {
-      showStandardNotification("success", "Notification settings saved");
+      if (res?.status) {
+        setNotificationPreferences(emailNotifications, pushNotifications);
+      }
+    } finally {
+      setSavingNotificationSettings(false);
     }
   };
 
@@ -140,7 +149,7 @@ const SettingsBody = () => {
           {!notificationsLoading && disabledPush && (
             <p className="text-muted mt-3 mb-0">
               <i className="fa-regular fa-circle-info me-1"></i>
-              Push notifications are only enabled on installed apps and when notifications are allowed.
+              Push notifications are only enabled on downloaded apps and when notifications are allowed.
             </p>
           )}
         </li>
