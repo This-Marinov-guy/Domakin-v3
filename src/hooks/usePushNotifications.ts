@@ -14,7 +14,7 @@ export const usePushNotifications = (isAdmin = false) => {
   }, []);
 
   const registerToken = async (): Promise<boolean> => {
-    const token = await requestPushPermission();
+    const token = await requestPushPermission();    
 
     if (!token) {
       if (typeof window !== 'undefined' && 'Notification' in window) {

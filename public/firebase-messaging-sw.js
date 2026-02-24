@@ -1,5 +1,5 @@
-importScripts('https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js');
-importScripts('https://www.gstatic.com/firebasejs/10.0.0/firebase-messaging-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging-compat.js');
 
 // NOTE: Service workers cannot access process.env — values are hardcoded here.
 firebase.initializeApp({
