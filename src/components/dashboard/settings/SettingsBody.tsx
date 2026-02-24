@@ -1,14 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardFrame from "@/layouts/frames/DashboardFrame";
 import { Modal } from "react-bootstrap";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
+import { usePushNotifications } from "@/hooks/usePushNotifications";
+import { useStore } from "@/stores/storeContext";
+import { observer } from "mobx-react-lite";
 
 const APP_VERSION = process.env.NEXT_PUBLIC_APP_VERSION ?? "—";
+const EMAIL_NOTIF_KEY = "notif_email_enabled";
 
 const SettingsBody = () => {
   const [showGuide, setShowGuide] = useState(false);
   const [updating, setUpdating] = useState(false);
   const { isInstalled, isIOS, triggerInstall } = usePWAInstall();
+  const { requestPermission, permissionStatus } = usePushNotifications();
+  const { userStore: { isAdmin, notificationPreferences } } = useStore();
+
+  const pushEnabled = permissionStatus === "granted";
+  const pushDenied = permissionStatus === "denied";
+
+  const handlePushToggle = async () => {
+    await requestPermission();
+  };
 
   const handleInstall = async () => {
     const result = await triggerInstall();
@@ -28,6 +41,63 @@ const SettingsBody = () => {
 
   return (
     <DashboardFrame title="Settings">
+      {isAdmin && <ul className="bg-white card-box border-20 p-4 mt-20">
+        <li>
+          <div className="d-flex align-items-center gap-3 mb-3">
+            <h5 className="m-0">Notification Preferences</h5>
+          </div>
+          <p className="text-muted mb-4">
+            Choose how you&apos;d like to receive updates and alerts.
+          </p>
+          <div className="d-flex flex-wrap gap-2">
+            <div className="checkbox-card-type">
+              <input
+                type="checkbox"
+                className="btn-check"
+                id="notif-email"
+                autoComplete="off"
+                checked={notificationPreferences.email}
+                onChange={() => { }}
+              />
+              <label
+                className="btn d-flex align-items-center text-center rounded-4 fs-12"
+                htmlFor="notif-email"
+              >
+                <i className="fa-regular fa-envelope fs-5 mb-1"></i>
+                <span>Email</span>
+              </label>
+            </div>
+
+            <div className="checkbox-card-type">
+              <input
+                type="checkbox"
+                className="btn-check"
+                id="notif-push"
+                autoComplete="off"
+                checked={notificationPreferences.push}
+                onChange={handlePushToggle}
+              />
+              <label
+                className={`btn d-flex align-items-center text-center rounded-4 fs-12 ${pushDenied ? "opacity-50" : ""}`}
+                htmlFor="notif-push"
+                title={pushDenied ? "Blocked in browser settings" : undefined}
+              >
+                <i className="fa-regular fa-bell fs-5 mb-1"></i>
+                <span>Push</span>
+              </label>
+            </div>
+          </div>
+
+          {pushDenied && (
+            <p className="text-muted mt-3 mb-0" style={{ fontSize: "0.8rem" }}>
+              <i className="fa-regular fa-circle-info me-1"></i>
+              Push notifications are blocked. Enable them in your browser
+              settings to receive alerts.
+            </p>
+          )}
+        </li>
+      </ul>}
+
       <ul className="bg-white card-box border-20 p-4 mt-20">
         <li>
           <div className="d-flex align-items-center gap-3 mb-3">
@@ -116,4 +186,4 @@ const SettingsBody = () => {
   );
 };
 
-export default SettingsBody;
+export default observer(SettingsBody);

@@ -473,40 +473,6 @@
   }
 }
 
-.checkbox-card-type {
-
-  .btn-check:checked+.btn,
-  :not(.btn-check)+.btn:active,
-  .btn:first-child:active,
-  .btn.active,
-  .btn.show {
-    border: 1px solid $color-two;
-    background-color: $color-two;
-    color: #fff;
-  }
-
-  label {
-    font-size: 0.875rem;
-    line-height: 100%;
-    font-weight: 600;
-    color: #222222;
-    text-align: left;
-    padding: 1rem;
-    gap: 2.5rem;
-    border: 1px solid $color-sixteen;
-    border-radius: 0.75rem;
-    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
-
-    &:hover {
-      border-color: $color-two !important;
-    }
-  }
-
-  .btn-check:checked+label {
-    color: #fff;
-  }
-}
-
 .left-0 {
   left: 0 !important;
 }
@@ -621,7 +587,8 @@
 // Responsive styles for larger screens (tablets and up)
 @media (min-width: 768px) {
   .lending-page-v2 {
-    padding-bottom: 2rem;  }
+    padding-bottom: 2rem;
+  }
 
   .hero-con-v2 {
     .hero-box-v2 {
@@ -1010,11 +977,12 @@
   .house-room-box {
     gap: 1rem;
 
-    .checkbox-card-type {
-      label {
-        padding: 1.25rem;
-        font-size: 1rem;
-      }
+  }
+
+  .checkbox-card-type {
+    label {
+      padding: 1.25rem;
+      font-size: 1rem;
     }
   }
 
@@ -1097,12 +1065,12 @@
 
   .house-room-box {
     gap: 1.25rem;
+  }
 
-    .checkbox-card-type {
-      label {
-        padding: 1.5rem;
-        font-size: 1.0625rem;
-      }
+  .checkbox-card-type {
+    label {
+      padding: 1.5rem;
+      font-size: 1.0625rem;
     }
   }
 
@@ -1333,5 +1301,38 @@
     padding: 0;
     background-color: $color-two;
     border: none !important;
+  }
+}
+
+.checkbox-card-type {
+  .btn-check:checked+.btn,
+  :not(.btn-check)+.btn:active,
+  .btn:first-child:active,
+  .btn.active,
+  .btn.show {
+    border: 1px solid $color-two;
+    background-color: $color-two;
+    color: #fff;
+  }
+
+  label {
+    font-size: 0.875rem;
+    line-height: 100%;
+    font-weight: 600;
+    color: #222222;
+    text-align: left;
+    padding: 1rem;
+    gap: 2.5rem;
+    border: 1px solid $color-sixteen;
+    border-radius: 0.75rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      border-color: $color-two !important;
+    }
+  }
+
+  .btn-check:checked+label {
+    color: #fff;
   }
 }

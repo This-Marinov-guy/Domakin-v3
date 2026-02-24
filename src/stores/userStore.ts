@@ -19,6 +19,10 @@ export default class UserStore {
   }
 
   @observable referralCode = "";
+  @observable notificationPreferences = {
+    email: true,
+    push: true,
+  }; //TODO fix this
 
   @observable userLoading = true;
   @observable user: any = null;
@@ -85,7 +89,7 @@ export default class UserStore {
       .single()) ?? {
       phone: "",
       profileImage: session.user.user_metadata.avatar_url,
-    };        
+    };
 
     this.user = {
       ...convertKeysToCamelCase(data),
