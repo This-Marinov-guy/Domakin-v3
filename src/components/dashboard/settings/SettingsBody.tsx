@@ -7,7 +7,7 @@ import { useServer } from "@/hooks/useServer";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import Skeleton from "react-loading-skeleton";
-import { showStandardNotification } from "@/utils/helpers";
+import { showGeneralSuccess, showStandardNotification } from "@/utils/helpers";
 
 const APP_VERSION = process.env.NEXT_PUBLIC_APP_VERSION ?? "—";
 
@@ -54,7 +54,9 @@ const SettingsBody = () => {
       { email_notifications: emailNotifications, push_notifications: pushNotifications },
     );
 
-    if (!res?.status) {
+    if (res?.status) {
+      showStandardNotification("success", "Settings saved.", { theme: "light" });
+    } else {
       setNotificationPreferences(prevEmail, prevPush);
     }
 
@@ -68,10 +70,13 @@ const SettingsBody = () => {
 
   const handlePushToggle = async () => {
     const next = !notificationPreferences.push;
+
     if (next) {
+      setSavingNotificationSettings(true);
       const granted = await requestPermission();
       if (!granted) return;
     }
+
     saveNotificationSettings(notificationPreferences.email, next);
   };
 
