@@ -34,6 +34,7 @@ export const usePushNotifications = (isAdmin = false) => {
     );
 
     if (res?.status) {
+      console.log('res', res);
       sessionStorage.setItem(FCM_TOKEN_KEY, 'true');
       return true;
     }

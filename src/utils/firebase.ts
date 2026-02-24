@@ -15,7 +15,10 @@ function getFirebaseApp() {
 export async function requestPushPermission(): Promise<string | null> {
   try {
     const supported = await isSupported();
-    
+
+    console.log('supported', supported);
+    console.log('Notification.permission', Notification.permission);
+
     if (!supported) return null;
 
     const messaging = getMessaging(getFirebaseApp());
@@ -29,8 +32,10 @@ export async function requestPushPermission(): Promise<string | null> {
 
     const token = await getToken(messaging, {
       vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
-    });    
-
+    }); 
+    
+    console.log('token', token);
+    
     return token || null;
   } catch (error) {
     console.log(error);
