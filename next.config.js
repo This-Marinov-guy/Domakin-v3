@@ -11,6 +11,9 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 
 const nextConfig = nextTranslate({
   reactStrictMode: false,
+  env: {
+    NEXT_PUBLIC_APP_VERSION: require("./package.json").version,
+  },
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
