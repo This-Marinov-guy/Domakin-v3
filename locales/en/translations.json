@@ -1622,6 +1622,47 @@
       "error_message": "An error occurred while submitting your listing. Please try again."
     }
   },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "When do I get my €200?",
+        "answer": "You receive the €200 after the new tenant signs the contract and has officially moved into the room. The payment is made once everything is confirmed and there is no doubt that the tenancy has started."
+      },
+      {
+        "question": "Who is Domakin for?",
+        "answer": "Domakin is for anyone who needs to find a tenant quickly and safely. This includes:<ul class=\"mb-0 mt-2\"><li>Students leaving the city</li><li>Students going on exchange</li><li>People switching universities</li><li>Tenants who want to sublet temporarily</li><li>Anyone who needs a smooth and secure handover</li></ul>We organize the viewings based on your criteria and you choose the most suitable candidate."
+      },
+      {
+        "question": "Can I sublet if I have a landlord?",
+        "answer": "Yes. Domakin operates as a social housing platform similar to Facebook or WhatsApp groups, but with added structure, screening, and support.<br><br>However, you must inform your landlord and have permission to sublet if your contract requires it."
+      },
+      {
+        "question": "Can I sublet if I rent through an agency?",
+        "answer": "Yes. The same rule applies. Domakin helps you find a tenant, but your agency must allow subletting according to your contract.<br><br>If subletting is not allowed in your contract, you must first get written approval."
+      },
+      {
+        "question": "What is the minimum sublet period?",
+        "answer": "The minimum sublet period is 6 months.<br><br>This ensures stability for the incoming tenant and avoids unnecessary short term turnover."
+      },
+      {
+        "question": "Does the room need to allow registration?",
+        "answer": "Yes. To list your room on Domakin, the room must allow municipal registration.<br><br>This protects both the new tenant and you, and ensures everything is legally compliant."
+      },
+      {
+        "question": "Can someone register at the address while I am subletting?",
+        "answer": "Yes. We can structure the contract so the new tenant can register at the address while subletting your room.<br><br>This can be arranged in a way that does not affect your DUO or other benefits, depending on your situation. We guide you through the correct setup."
+      },
+      {
+        "question": "Do I have to organize the viewings myself?",
+        "answer": "No. Domakin can organize and manage the viewings for you based on your preferences. You remain in control of the final decision."
+      },
+      {
+        "question": "How do you select tenants?",
+        "answer": "We pre screen candidates and only present you with serious and suitable options. You always make the final choice."
+      }
+    ]
+  },
   "list_room_steps": {
     "first": {
       "intro": "We are going to collect some information about the property and essential contact details. The process is easy and you can save and come back from where you were at any moment.",
@@ -1636,7 +1677,8 @@
       },
       "available_from": "Available from",
       "available_to": "Available to",
-      "select_date": "Select date"
+      "select_date": "Select date",
+      "select_type_label": "Select property type"
     },
     "fourth": {
       "deposit_label": "Deposit in euro",
@@ -1645,7 +1687,20 @@
         "bills": "Combined sum of all fixed monthly bills. If they vary, you can enter an approximate amount.",
         "deposit": "A one-time payment held by the landlord and returned when leaving the property. It is most commonly withheld if the property is damaged or the tenant is unresponsive.",
         "size": "Approximate size of the private property. Shared space should not be included."
-      }
+      },
+      "flatmates_male": "Male",
+      "flatmates_female": "Female",
+      "bathrooms_toilets_label": "Number of Bathrooms & Toilets",
+      "bathrooms_label": "Bathrooms",
+      "toilets_label": "Toilets",
+      "total": "Total",
+      "house_rules": "House rules",
+      "no_smoking": "No smoking",
+      "no_pets": "No pets",
+      "amenities_label": "Amenities",
+      "select_multiple": "You can select more than one",
+      "shared_spaces_label": "Shared spaces",
+      "furniture_label": "Furniture"
     },
     "fifth": {
       "intro_1": "In this step we are going to guide you through taking pictures of your place so it stands out.",

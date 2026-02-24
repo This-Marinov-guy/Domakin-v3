@@ -264,10 +264,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     
     // If accessed with old format or incorrect slug, redirect to correct SEO-friendly URL
     if (slug !== correctSlug) {
+      const localePrefix = context.locale && context.locale !== (context.defaultLocale || 'en') ? `/${context.locale}` : '';
       return {
         redirect: {
-          destination: `/services/renting/property/${correctSlug}`,
-          permanent: true, // 301 redirect for SEO
+          destination: `${localePrefix}/services/renting/property/${correctSlug}`,
+          permanent: false,
         },
       };
     }

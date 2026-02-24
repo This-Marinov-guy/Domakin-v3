@@ -19,14 +19,12 @@ const ChangeLanguage = () => {
     { value: "gr", text: "GR" },
   ];
 
-  const changeLanguage = async (lang: string) => {
-    if (!lang) {
-      return "";
-    }
+  const changeLanguage = async (newLang: string) => {
+    if (!newLang) return;
 
-    await setLanguage(lang);
-    axios.defaults.headers.common["Accept-Language"] = lang || "en";
-    localStorage.setItem("language", lang);
+    axios.defaults.headers.common["Accept-Language"] = newLang;
+    localStorage.setItem("language", newLang);
+    await setLanguage(newLang);
   };
 
   const selectHandler = async (e: any) => {

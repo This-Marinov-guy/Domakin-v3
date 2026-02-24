@@ -1577,15 +1577,15 @@
     }
   },
   "list_room_modal": {
-    "save_exit": "Save & exit",
-    "loading_next_step": "Images take a bit more time to upload",
+    "save_exit": "Αποθήκευση & έξοδος",
+    "loading_next_step": "Οι εικόνες χρειάζονται λίγο περισσότερο χρόνο για να ανεβούν",
     "step_titles": {
-      "welcome": "Welcome to the property uploading",
-      "contact": "Fill the contact details",
-      "basics": "Tell us the basics",
-      "details": "Let’s give some more details",
-      "photos": "Take some nice photos",
-      "review_publish": "Review & Publish"
+      "welcome": "Καλώς ήρθατε στην ανάρτηση ακινήτου",
+      "contact": "Συμπληρώστε τα στοιχεία επικοινωνίας",
+      "basics": "Πείτε μας τα βασικά",
+      "details": "Ας δώσουμε περισσότερες λεπτομέρειες",
+      "photos": "Τραβήξτε ωραίες φωτογραφίες",
+      "review_publish": "Ελέγξτε & Δημοσιεύστε"
     },
     "submit_modal": {
       "loading_1": "Ανέβασμα της καταχώρησης...",
@@ -1597,75 +1597,130 @@
       "error_message": "Παρουσιάστηκε σφάλμα κατά την υποβολή της καταχώρησης. Παρακαλώ δοκιμάστε ξανά."
     }
   },
+  "faq": {
+    "title": "Συχνές Ερωτήσεις",
+    "items": [
+      {
+        "question": "Πότε παίρνω τα €200 μου;",
+        "answer": "Λαμβάνετε τα €200 αφού ο νέος ενοικιαστής υπογράψει το συμβόλαιο και έχει επίσημα μετακομίσει στο δωμάτιο. Η πληρωμή γίνεται μόλις επιβεβαιωθούν τα πάντα και δεν υπάρχει αμφιβολία ότι η ενοικίαση έχει ξεκινήσει."
+      },
+      {
+        "question": "Για ποιον είναι το Domakin;",
+        "answer": "Το Domakin απευθύνεται σε όποιον χρειάζεται να βρει ενοικιαστή γρήγορα και με ασφάλεια. Αυτό περιλαμβάνει:<ul class=\"mb-0 mt-2\"><li>Φοιτητές που φεύγουν από την πόλη</li><li>Φοιτητές σε ανταλλαγή</li><li>Άτομα που αλλάζουν πανεπιστήμιο</li><li>Ενοικιαστές που θέλουν να υπεκμισθώσουν προσωρινά</li><li>Όποιος χρειάζεται ομαλή και ασφαλή μεταβίβαση</li></ul>Οργανώνουμε τις επισκέψεις βάσει των κριτηρίων σας και εσείς επιλέγετε τον καταλληλότερο υποψήφιο."
+      },
+      {
+        "question": "Μπορώ να υπεκμισθώσω αν έχω ιδιοκτήτη;",
+        "answer": "Ναι. Το Domakin λειτουργεί ως πλατφόρμα κοινωνικής στέγασης παρόμοια με το Facebook ή ομάδες WhatsApp, αλλά με πρόσθετη δομή, ελέγχους και υποστήριξη.<br><br>Ωστόσο, πρέπει να ενημερώσετε τον ιδιοκτήτη σας και να έχετε άδεια υπεκμίσθωσης αν το συμβόλαιό σας το απαιτεί."
+      },
+      {
+        "question": "Μπορώ να υπεκμισθώσω αν ενοικιάζω μέσω πρακτορείου;",
+        "answer": "Ναι. Ισχύει ο ίδιος κανόνας. Το Domakin σας βοηθά να βρείτε ενοικιαστή, αλλά το πρακτορείο σας πρέπει να επιτρέπει υπεκμίσθωση σύμφωνα με το συμβόλαιο.<br><br>Αν η υπεκμίσθωση δεν επιτρέπεται στο συμβόλαιό σας, πρέπει πρώτα να λάβετε γραπτή έγκριση."
+      },
+      {
+        "question": "Ποια είναι η ελάχιστη περίοδος υπεκμίσθωσης;",
+        "answer": "Η ελάχιστη περίοδος υπεκμίσθωσης είναι 6 μήνες.<br><br>Αυτό εξασφαλίζει σταθερότητα για τον νέο ενοικιαστή και αποφεύγει την άσκοπη βραχυπρόθεσμη εναλλαγή."
+      },
+      {
+        "question": "Χρειάζεται το δωμάτιο να επιτρέπει εγγραφή;",
+        "answer": "Ναι. Για να καταχωρίσετε το δωμάτιό σας στο Domakin, πρέπει να επιτρέπει δημοτική εγγραφή.<br><br>Αυτό προστατεύει τόσο τον νέο ενοικιαστή όσο και εσάς, και διασφαλίζει τη νομική συμμόρφωση."
+      },
+      {
+        "question": "Μπορεί κάποιος να εγγραφεί στη διεύθυνση ενώ υπεκμισθώνω;",
+        "answer": "Ναι. Μπορούμε να δομήσουμε το συμβόλαιο ώστε ο νέος ενοικιαστής να μπορεί να εγγραφεί στη διεύθυνση ενώ ενοικιάζει το δωμάτιό σας.<br><br>Αυτό μπορεί να ρυθμιστεί κατά τρόπο που δεν επηρεάζει το DUO ή άλλα επιδόματα, ανάλογα με την κατάστασή σας. Σας καθοδηγούμε στη σωστή ρύθμιση."
+      },
+      {
+        "question": "Πρέπει να οργανώσω μόνος μου τις επισκέψεις;",
+        "answer": "Όχι. Το Domakin μπορεί να οργανώσει και να διαχειριστεί τις επισκέψεις για εσάς βάσει των προτιμήσεών σας. Εσείς παραμένετε υπεύθυνοι για την τελική απόφαση."
+      },
+      {
+        "question": "Πώς επιλέγετε ενοικιαστές;",
+        "answer": "Κάνουμε προεπιλογή των υποψηφίων και σας παρουσιάζουμε μόνο σοβαρές και κατάλληλες επιλογές. Εσείς πάντα παίρνετε την τελική απόφαση."
+      }
+    ]
+  },
   "list_room_steps": {
     "first": {
-      "intro": "We are going to collect some information about the property and essential contact details. The process is easy and you can save and come back from where you were at any moment.",
-      "start": "Let’s start!"
+      "intro": "Θα συλλέξουμε μερικές πληροφορίες για το ακίνητο και βασικά στοιχεία επικοινωνίας. Η διαδικασία είναι εύκολη και μπορείτε να αποθηκεύσετε και να συνεχίσετε από εκεί που σταματήσατε.",
+      "start": "Ας ξεκινήσουμε!"
     },
     "third": {
       "property_types": {
-        "room_shared": "Room in a shared property",
-        "studio": "Studio",
-        "entire_place": "Entire place",
-        "student_house": "Student house"
+        "room_shared": "Δωμάτιο σε κοινόχρηστο ακίνητο",
+        "studio": "Στούντιο",
+        "entire_place": "Ολόκληρο διαμέρισμα",
+        "student_house": "Φοιτητική κατοικία"
       },
-      "available_from": "Available from",
-      "available_to": "Available to",
-      "select_date": "Select date"
+      "available_from": "Διαθέσιμο από",
+      "available_to": "Διαθέσιμο έως",
+      "select_date": "Επιλέξτε ημερομηνία",
+      "select_type_label": "Επιλέξτε τύπο ακινήτου"
     },
     "fourth": {
-      "deposit_label": "Deposit in euro",
+      "deposit_label": "Εγγύηση σε ευρώ",
       "tooltips": {
-        "base_rent": "The amount required each month in order to use the property.",
-        "bills": "Combined sum of all fixed monthly bills. If they vary, you can enter an approximate amount.",
-        "deposit": "A one-time payment held by the landlord and returned when leaving the property. It is most commonly withheld if the property is damaged or the tenant is unresponsive.",
-        "size": "Approximate size of the private property. Shared space should not be included."
-      }
+        "base_rent": "Το ποσό που απαιτείται κάθε μήνα για τη χρήση του ακινήτου.",
+        "bills": "Συνολικό άθροισμα όλων των σταθερών μηνιαίων λογαριασμών. Αν ποικίλλουν, μπορείτε να εισαγάγετε ένα κατά προσέγγιση ποσό.",
+        "deposit": "Εφάπαξ πληρωμή που κρατά ο ιδιοκτήτης και επιστρέφεται κατά την αποχώρηση. Συνήθως κατακρατείται σε περίπτωση ζημιάς ή μη ανταπόκρισης του ενοικιαστή.",
+        "size": "Κατά προσέγγιση μέγεθος του ιδιωτικού χώρου. Δεν πρέπει να περιλαμβάνονται κοινόχρηστοι χώροι."
+      },
+      "flatmates_male": "Άνδρες",
+      "flatmates_female": "Γυναίκες",
+      "bathrooms_toilets_label": "Αριθμός μπάνιων & τουαλετών",
+      "bathrooms_label": "Μπάνια",
+      "toilets_label": "Τουαλέτες",
+      "total": "Σύνολο",
+      "house_rules": "Κανόνες σπιτιού",
+      "no_smoking": "Απαγορεύεται το κάπνισμα",
+      "no_pets": "Δεν επιτρέπονται κατοικίδια",
+      "amenities_label": "Παροχές",
+      "select_multiple": "Μπορείτε να επιλέξετε περισσότερα από ένα",
+      "shared_spaces_label": "Κοινόχρηστοι χώροι",
+      "furniture_label": "Έπιπλα"
     },
     "fifth": {
-      "intro_1": "In this step we are going to guide you through taking pictures of your place so it stands out.",
-      "intro_2": "Add at least 4 photos to attract more candidates. 6–10 works best. Any images above the allowed limit will not be accepted.",
-      "wishlist_title": "Wishlist of images includes:",
+      "intro_1": "Σε αυτό το βήμα θα σας καθοδηγήσουμε στη λήψη φωτογραφιών του χώρου σας ώστε να ξεχωρίσει.",
+      "intro_2": "Προσθέστε τουλάχιστον 4 φωτογραφίες για να προσελκύσετε περισσότερους υποψηφίους. Το ιδανικό είναι 6–10. Εικόνες πάνω από το επιτρεπόμενο όριο δεν θα γίνουν δεκτές.",
+      "wishlist_title": "Λίστα επιθυμητών εικόνων:",
       "wishlist": {
-        "private_rooms": "Private rooms",
-        "common_areas": "Common areas",
-        "bathroom_toilet": "Bathroom(s) and toilet(s)",
-        "amenities": "Amenities (e.g., laundry room, kitchen, storage space)",
-        "outdoors": "Outdoors",
-        "private_furniture": "Any private furniture that is included in the rental"
+        "private_rooms": "Ιδιωτικοί χώροι",
+        "common_areas": "Κοινόχρηστοι χώροι",
+        "bathroom_toilet": "Μπάνιο(α) και τουαλέτα(ες)",
+        "amenities": "Παροχές (π.χ. πλυντήριο, κουζίνα, αποθηκευτικός χώρος)",
+        "outdoors": "Εξωτερικοί χώροι",
+        "private_furniture": "Ιδιωτικά έπιπλα που περιλαμβάνονται στη μίσθωση"
       },
-      "upload_rejected": "File upload rejected. Please check file size and format.",
-      "preview_order_title": "Preview & order",
-      "preview_order_hint": "*Drag to reorder, click an image to make it the main one.",
-      "main_badge": "Main"
+      "upload_rejected": "Το αρχείο απορρίφθηκε. Ελέγξτε το μέγεθος και τη μορφή.",
+      "preview_order_title": "Προεπισκόπηση & ταξινόμηση",
+      "preview_order_hint": "*Σύρετε για αναδιάταξη, κάντε κλικ σε εικόνα για να την ορίσετε ως κύρια.",
+      "main_badge": "Κύρια"
     },
     "sixth": {
-      "available_property_title": "Available property",
-      "photo_uploaded_one": "photo uploaded",
-      "photo_uploaded_other": "photos uploaded",
-      "add_photos_hint": "Add photos in step 5 to see your listing preview here."
+      "available_property_title": "Διαθέσιμο ακίνητο",
+      "photo_uploaded_one": "φωτογραφία ανέβηκε",
+      "photo_uploaded_other": "φωτογραφίες ανέβηκαν",
+      "add_photos_hint": "Προσθέστε φωτογραφίες στο βήμα 5 για να δείτε την προεπισκόπηση εδώ."
     },
     "success": {
-      "title": "Success",
-      "message": "Listing successfully<br/>sent for review<br/>You will be contacted shortly!",
-      "contact_intro": "If you have any questions, do not hesitate to contact us at",
-      "or_at": "or at",
-      "tips": "How to get more candidates:<br/>add 6–10 photos, include<br/>dimensions, mention registration."
+      "title": "Επιτυχία",
+      "message": "Η καταχώρηση στάλθηκε<br/>για έλεγχο.<br/>Θα επικοινωνήσουμε μαζί σας σύντομα!",
+      "contact_intro": "Αν έχετε απορίες, μη διστάσετε να επικοινωνήσετε μαζί μας στο",
+      "or_at": "ή στο",
+      "tips": "Πώς να προσελκύσετε περισσότερους υποψηφίους:<br/>προσθέστε 6–10 φωτογραφίες, αναφέρατε<br/>τις διαστάσεις, αναφέρατε την εγγραφή."
     },
     "draft": {
-      "title": "Save and finish later?",
-      "subtitle": "Enter your email and we’ll send you a resume link.",
-      "trusted_by_prefix": "Trusted by",
-      "trusted_by_suffix": "students",
-      "saved_message": "Draft saved! We sent a resume link to {{email}}."
+      "title": "Αποθήκευση και ολοκλήρωση αργότερα;",
+      "subtitle": "Εισαγάγετε το email σας και θα σας στείλουμε σύνδεσμο συνέχισης.",
+      "trusted_by_prefix": "Αξιόπιστο από",
+      "trusted_by_suffix": "φοιτητές",
+      "saved_message": "Το προσχέδιο αποθηκεύτηκε! Στείλαμε σύνδεσμο συνέχισης στο {{email}}."
     },
     "reminder": {
-      "title": "Reminder for uploading",
-      "future_date_error": "Please select a month and year in the future (not current or past).",
-      "success_toast": "Reminder set successfully.",
-      "when_free": "When will your room become free?",
-      "month": "Month",
-      "year": "Year"
+      "title": "Υπενθύμιση για ανάρτηση",
+      "future_date_error": "Παρακαλώ επιλέξτε μήνα και χρόνο στο μέλλον (όχι τρέχοντα ή παρελθόντα).",
+      "success_toast": "Η υπενθύμιση ορίστηκε επιτυχώς.",
+      "when_free": "Πότε θα ελευθερωθεί το δωμάτιό σας;",
+      "month": "Μήνας",
+      "year": "Έτος"
     }
   },
   "lending_page": {

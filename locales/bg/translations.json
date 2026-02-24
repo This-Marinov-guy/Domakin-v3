@@ -1598,15 +1598,15 @@
     }
   },
   "list_room_modal": {
-    "save_exit": "Save & exit",
-    "loading_next_step": "Images take a bit more time to upload",
+    "save_exit": "Запази и излез",
+    "loading_next_step": "Снимките отнемат малко повече время за качване",
     "step_titles": {
-      "welcome": "Welcome to the property uploading",
-      "contact": "Fill the contact details",
-      "basics": "Tell us the basics",
-      "details": "Let’s give some more details",
-      "photos": "Take some nice photos",
-      "review_publish": "Review & Publish"
+      "welcome": "Добре дошли при качването на имот",
+      "contact": "Попълнете данните за контакт",
+      "basics": "Разкажете ни основното",
+      "details": "Нека добавим още детайли",
+      "photos": "Направете хубави снимки",
+      "review_publish": "Преглед и публикуване"
     },
     "submit_modal": {
       "loading_1": "Качване на обявата...",
@@ -1618,75 +1618,130 @@
       "error_message": "Възникна грешка при изпращането на обявата. Моля, опитайте отново."
     }
   },
+  "faq": {
+    "title": "Често задавани въпроси",
+    "items": [
+      {
+        "question": "Кога получавам своите €200?",
+        "answer": "Получавате €200, след като новият наемател подпише договора и официално се е нанесъл в стаята. Плащането се извършва, след като всичко е потвърдено и е безспорно, че наемателството е започнало."
+      },
+      {
+        "question": "За кого е Domakin?",
+        "answer": "Domakin е за всеки, който трябва да намери наемател бързо и безопасно. Това включва:<ul class=\"mb-0 mt-2\"><li>Студенти, напускащи града</li><li>Студенти на обмен</li><li>Хора, сменящи университет</li><li>Наематели, искащи временно да поднаемат</li><li>Всеки, нуждаещ се от плавно и сигурно прехвърляне</li></ul>Ние организираме огледите по вашите критерии и вие избирате най-подходящия кандидат."
+      },
+      {
+        "question": "Мога ли да поднаема, ако имам наемодател?",
+        "answer": "Да. Domakin функционира като платформа за социално жилищно настаняване, подобна на Facebook или WhatsApp групи, но с допълнителна структура, проверка и поддръжка.<br><br>Въпреки това, трябва да информирате наемодателя си и да имате разрешение за поднаемане, ако договорът ви го изисква."
+      },
+      {
+        "question": "Мога ли да поднаема, ако наемам чрез агенция?",
+        "answer": "Да. Важи същото правило. Domakin ви помага да намерите наемател, но агенцията ви трябва да позволява поднаемане съгласно договора.<br><br>Ако поднаемането не е позволено в договора ви, трябва първо да получите писмено одобрение."
+      },
+      {
+        "question": "Какъв е минималният период на поднаемане?",
+        "answer": "Минималният период на поднаемане е 6 месеца.<br><br>Това осигурява стабилност за новия наемател и избягва ненужно краткосрочно текучество."
+      },
+      {
+        "question": "Трябва ли стаята да позволява регистрация?",
+        "answer": "Да. За да публикувате стаята си в Domakin, тя трябва да позволява общинска регистрация.<br><br>Това защитава както новия наемател, така и вас, и гарантира, че всичко е законно."
+      },
+      {
+        "question": "Може ли някой да се регистрира на адреса, докато аз поднаемам?",
+        "answer": "Да. Можем да структурираме договора така, че новият наемател да може да се регистрира на адреса, докато наема стаята ви.<br><br>Това може да бъде уредено по начин, който не засяга DUO или други обезщетения, в зависимост от ситуацията ви. Ние ще ви насочим към правилната настройка."
+      },
+      {
+        "question": "Трябва ли сам да организирам огледите?",
+        "answer": "Не. Domakin може да организира и управлява огледите вместо вас по вашите предпочитания. Вие оставате контрол над окончателното решение."
+      },
+      {
+        "question": "Как избирате наематели?",
+        "answer": "Предварително проверяваме кандидатите и ви представяме само сериозни и подходящи варианти. Вие винаги вземате окончателното решение."
+      }
+    ]
+  },
   "list_room_steps": {
     "first": {
-      "intro": "We are going to collect some information about the property and essential contact details. The process is easy and you can save and come back from where you were at any moment.",
-      "start": "Let’s start!"
+      "intro": "Ще съберем информация за имота и основни данни за контакт. Процесът е лесен и можете да запазите и да продължите от там, където сте спрели.",
+      "start": "Да започваме!"
     },
     "third": {
       "property_types": {
-        "room_shared": "Room in a shared property",
-        "studio": "Studio",
-        "entire_place": "Entire place",
-        "student_house": "Student house"
+        "room_shared": "Стая в споделен имот",
+        "studio": "Студио",
+        "entire_place": "Цял апартамент",
+        "student_house": "Студентска квартира"
       },
-      "available_from": "Available from",
-      "available_to": "Available to",
-      "select_date": "Select date"
+      "available_from": "Свободно от",
+      "available_to": "Свободно до",
+      "select_date": "Изберете дата",
+      "select_type_label": "Изберете тип имот"
     },
     "fourth": {
-      "deposit_label": "Deposit in euro",
+      "deposit_label": "Депозит в евро",
       "tooltips": {
-        "base_rent": "The amount required each month in order to use the property.",
-        "bills": "Combined sum of all fixed monthly bills. If they vary, you can enter an approximate amount.",
-        "deposit": "A one-time payment held by the landlord and returned when leaving the property. It is most commonly withheld if the property is damaged or the tenant is unresponsive.",
-        "size": "Approximate size of the private property. Shared space should not be included."
-      }
+        "base_rent": "Сумата, изисквана всеки месец за ползване на имота.",
+        "bills": "Обща сума на всички фиксирани месечни сметки. Ако варират, можете да въведете приблизителна сума.",
+        "deposit": "Еднократно плащане, задържано от наемодателя и върнато при напускане на имота. Задържа се при наличие на щети или при неотзивчивост на наемателя.",
+        "size": "Приблизителен размер на личното пространство. Общите части не трябва да се включват."
+      },
+      "flatmates_male": "Мъже",
+      "flatmates_female": "Жени",
+      "bathrooms_toilets_label": "Брой бани и тоалетни",
+      "bathrooms_label": "Бани",
+      "toilets_label": "Тоалетни",
+      "total": "Общо",
+      "house_rules": "Правила на дома",
+      "no_smoking": "Непушачи",
+      "no_pets": "Без домашни любимци",
+      "amenities_label": "Удобства",
+      "select_multiple": "Можете да изберете повече от едно",
+      "shared_spaces_label": "Общи части",
+      "furniture_label": "Обзавеждане"
     },
     "fifth": {
-      "intro_1": "In this step we are going to guide you through taking pictures of your place so it stands out.",
-      "intro_2": "Add at least 4 photos to attract more candidates. 6–10 works best. Any images above the allowed limit will not be accepted.",
-      "wishlist_title": "Wishlist of images includes:",
+      "intro_1": "В тази стъпка ще ви насочим как да снимате жилището си, за да се откроите.",
+      "intro_2": "Добавете поне 4 снимки, за да привлечете повече кандидати. Оптимален брой е 6–10. Снимките над разрешения лимит няма да бъдат приети.",
+      "wishlist_title": "Препоръчани снимки:",
       "wishlist": {
-        "private_rooms": "Private rooms",
-        "common_areas": "Common areas",
-        "bathroom_toilet": "Bathroom(s) and toilet(s)",
-        "amenities": "Amenities (e.g., laundry room, kitchen, storage space)",
-        "outdoors": "Outdoors",
-        "private_furniture": "Any private furniture that is included in the rental"
+        "private_rooms": "Лично помещение",
+        "common_areas": "Общи части",
+        "bathroom_toilet": "Баня(и) и тоалетна(и)",
+        "amenities": "Удобства (перално, кухня, склад и др.)",
+        "outdoors": "Екстериор / Двор",
+        "private_furniture": "Лично обзавеждане, включено в наема"
       },
-      "upload_rejected": "File upload rejected. Please check file size and format.",
-      "preview_order_title": "Preview & order",
-      "preview_order_hint": "*Drag to reorder, click an image to make it the main one.",
-      "main_badge": "Main"
+      "upload_rejected": "Файлът е отхвърлен. Моля проверете размера и формата.",
+      "preview_order_title": "Преглед и наредете",
+      "preview_order_hint": "*Плъзнете за пренареждане, кликнете на снимка, за да я направите главна.",
+      "main_badge": "Главна"
     },
     "sixth": {
-      "available_property_title": "Available property",
-      "photo_uploaded_one": "photo uploaded",
-      "photo_uploaded_other": "photos uploaded",
-      "add_photos_hint": "Add photos in step 5 to see your listing preview here."
+      "available_property_title": "Наличен имот",
+      "photo_uploaded_one": "качена снимка",
+      "photo_uploaded_other": "качени снимки",
+      "add_photos_hint": "Добавете снимки в стъпка 5, за да видите предварителния преглед тук."
     },
     "success": {
-      "title": "Success",
-      "message": "Listing successfully<br/>sent for review<br/>You will be contacted shortly!",
-      "contact_intro": "If you have any questions, do not hesitate to contact us at",
-      "or_at": "or at",
-      "tips": "How to get more candidates:<br/>add 6–10 photos, include<br/>dimensions, mention registration."
+      "title": "Успех",
+      "message": "Обявата е изпратена<br/>за преглед.<br/>Ще се свържем с вас скоро!",
+      "contact_intro": "Ако имате въпроси, не се колебайте да се свържете с нас на",
+      "or_at": "или на",
+      "tips": "Как да привлечете повече кандидати:<br/>добавете 6–10 снимки, включете<br/>размерите, споменете регистрацията."
     },
     "draft": {
-      "title": "Save and finish later?",
-      "subtitle": "Enter your email and we’ll send you a resume link.",
-      "trusted_by_prefix": "Trusted by",
-      "trusted_by_suffix": "students",
-      "saved_message": "Draft saved! We sent a resume link to {{email}}."
+      "title": "Запазете и довършете по-късно?",
+      "subtitle": "Въведете имейла си и ще ви изпратим връзка за продължаване.",
+      "trusted_by_prefix": "Доверие от",
+      "trusted_by_suffix": "студенти",
+      "saved_message": "Чернова запазена! Изпратихме връзка за продължаване на {{email}}."
     },
     "reminder": {
-      "title": "Reminder for uploading",
-      "future_date_error": "Please select a month and year in the future (not current or past).",
-      "success_toast": "Reminder set successfully.",
-      "when_free": "When will your room become free?",
-      "month": "Month",
-      "year": "Year"
+      "title": "Напомняне за качване",
+      "future_date_error": "Моля изберете месец и година в бъдещето (не текущи или минали).",
+      "success_toast": "Напомнянето е зададено успешно.",
+      "when_free": "Кога ще бъде свободна стаята ви?",
+      "month": "Месец",
+      "year": "Година"
     }
   },
   "lending_page": {

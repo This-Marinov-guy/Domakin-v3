@@ -41,9 +41,9 @@ function FourthStep({
     const furnishedTypeValue = Number(pd?.furnishedType);
 
     const FURNITURE_OPTIONS = [
-        { value: 1, label: "Fully furnished" },
-        { value: 2, label: "Semi-furnished" },
-        { value: 3, label: "None" },
+        { value: 1, label: t("enums.furnished_type.1") },
+        { value: 2, label: t("enums.furnished_type.2") },
+        { value: 3, label: t("enums.furnished_type.3") },
     ] as const;
 
     const amenitiesSorted = useMemo(
@@ -231,7 +231,7 @@ function FourthStep({
                                 <label>{t("emergency_housing.flatmates")}</label>
                                 <div className="row gx-2 mt-2">
                                     <div className="col-6">
-                                        <span className="d-block small text-muted mb-1">Male</span>
+                                        <span className="d-block small text-muted mb-1">{t("list_room_steps.fourth.flatmates_male")}</span>
                                         <div className="d-flex align-items-center gap-2 bg-pink rounded-3" style={{ width: "7em" }}>
                                             <button
                                                 type="button"
@@ -253,7 +253,7 @@ function FourthStep({
                                         </div>
                                     </div>
                                     <div className="col-6">
-                                        <span className="d-block small text-muted mb-1">Female</span>
+                                        <span className="d-block small text-muted mb-1">{t("list_room_steps.fourth.flatmates_female")}</span>
                                         <div className="d-flex align-items-center gap-2 bg-pink rounded-3" style={{ width: "7em" }}>
                                             <button
                                                 type="button"
@@ -276,7 +276,7 @@ function FourthStep({
                                     </div>
                                 </div>
                                 <small className="d-block mt-1 text-muted">
-                                    Total: {flatmatesMaleCount + flatmatesFemaleCount}
+                                    {t("list_room_steps.fourth.total")}: {flatmatesMaleCount + flatmatesFemaleCount}
                                 </small>
                             </div>
                         </div>
@@ -284,10 +284,10 @@ function FourthStep({
                         {/* Bathrooms & Toilets – start at 1, up/down each side; 2 cols on lg+, 1 on medium and below */}
                         <div className="col-12 col-lg-6">
                             <div className={`form-group mb-30 mb-lg-30 ${(errorFields.includes("propertyData.bathrooms") || errorFields.includes("propertyData.toilets")) ? "border border-danger rounded-3 p-3" : ""}`}>
-                                <label>Number of Bathrooms & Toilets</label>
+                                <label>{t("list_room_steps.fourth.bathrooms_toilets_label")}</label>
                                 <div className="row gx-2 mt-2">
                                     <div className="col-6">
-                                        <span className="d-block small text-muted mb-1">Bathrooms</span>
+                                        <span className="d-block small text-muted mb-1">{t("list_room_steps.fourth.bathrooms_label")}</span>
                                         <div className="d-flex align-items-center gap-2 bg-pink  rounded-3" style={{ width: "7em" }}>
                                             <button
                                                 type="button"
@@ -309,7 +309,7 @@ function FourthStep({
                                         </div>
                                     </div>
                                     <div className="col-6">
-                                        <span className="d-block small text-muted mb-1">Toilets</span>
+                                        <span className="d-block small text-muted mb-1">{t("list_room_steps.fourth.toilets_label")}</span>
                                         <div className="d-flex align-items-center gap-2 bg-pink  rounded-3" style={{ width: "7em" }}>
                                             <button
                                                 type="button"
@@ -339,7 +339,7 @@ function FourthStep({
 
                     <div className={`col-12 col-md-6 ${(errorFields.includes("propertyData.smokingAllowed") || errorFields.includes("propertyData.petsAllowed")) ? "border border-danger rounded-3 p-3" : ""}`}>
                         <div className="form-group mb-30 mb-lg-30">
-                            <label className="d-block mb-2">House rules</label>
+                            <label className="d-block mb-2">{t("list_room_steps.fourth.house_rules")}</label>
                             <div className="d-flex flex-wrap gap-3 align-items-center">
                                 <div className="d-flex align-items-center gap-2 bg-pink p-3 rounded-3">
                                     <Form.Check
@@ -357,7 +357,7 @@ function FourthStep({
                                         className="custom-switch"
                                     />
                                     <label htmlFor="fourth-no-smoking" className="mb-0">
-                                        No smoking
+                                        {t("list_room_steps.fourth.no_smoking")}
                                     </label>
                                 </div>
                                 <div className="d-flex align-items-center gap-2 bg-pink p-3 rounded-3">
@@ -375,7 +375,7 @@ function FourthStep({
                                         className="custom-switch"
                                     />
                                     <label htmlFor="fourth-no-pets" className="mb-0">
-                                        No pets
+                                        {t("list_room_steps.fourth.no_pets")}
                                     </label>
                                 </div>
                             </div>
@@ -387,8 +387,8 @@ function FourthStep({
 
                 {/* 8. Amenities – sorted; checkbox-card-type; each adds enum int to array */}
                 <div className={`form-group mb-30 ${errorFields.includes("propertyData.amenities") ? "border border-danger rounded-3 p-3" : ""}`}>
-                    <label className="d-block mb-2">Amenities</label>
-                    <small className="d-block">* You can select more than one</small>
+                    <label className="d-block mb-2">{t("list_room_steps.fourth.amenities_label")}</label>
+                    <small className="d-block">* {t("list_room_steps.fourth.select_multiple")}</small>
 
                     <div className="row g-2 mt-3">
                         {amenitiesSorted.map(({ id, label }) => {
@@ -419,8 +419,8 @@ function FourthStep({
 
                 {/* Shared spaces – behaves like amenities (multi-select) */}
                 <div className={`form-group mb-30`}>
-                    <label className="d-block mb-2">Shared spaces</label>
-                    <small className="d-block">* You can select more than one</small>
+                    <label className="d-block mb-2">{t("list_room_steps.fourth.shared_spaces_label")}</label>
+                    <small className="d-block">* {t("list_room_steps.fourth.select_multiple")}</small>
 
                     <div className="row g-2 mt-3">
                         {SHARED_SPACE_LIST.map((label, id) => {
@@ -451,7 +451,7 @@ function FourthStep({
 
                 {/* Furniture – single choice, furnishedType as integer */}
                 <div className={`form-group mb-30`}>
-                    <label className="d-block mb-2">Furniture</label>
+                    <label className="d-block mb-2">{t("list_room_steps.fourth.furniture_label")}</label>
                     <div className="row g-2">
                         {FURNITURE_OPTIONS.map(({ value, label }) => (
                             <div

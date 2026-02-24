@@ -63,9 +63,9 @@ const parseSharedSpaceIds = (value: unknown): number[] => {
   return [];
 };
 
-const formatYesNo = (value: unknown): string => {
-  if (value === true || value === "1" || value === "true") return "Yes";
-  if (value === false || value === "0" || value === "false") return "No";
+const formatYesNo = (t: (k: string) => string, value: unknown): string => {
+  if (value === true || value === "1" || value === "true") return t("common.yes");
+  if (value === false || value === "0" || value === "false") return t("common.no");
   return "—";
 };
 
@@ -111,8 +111,8 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
       icon: `${ICONS_BASE}/bills.svg`,
       title: t("property.bills") || "Bills",
       content: (() => {
-        const hasBills = description.bills != null && description.bills !== "";
-        const hasDeposit = property.deposit != null && property.deposit !== "";
+        const hasBills = !!description.bills;
+        const hasDeposit = !!property.deposit;
         const parts: string[] = [];
 
         if (hasBills) parts.push((t("property.bills_label") || "Bills") + ": " + description.bills + "€");
@@ -131,13 +131,13 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
       id: "registration",
       icon: `${ICONS_BASE}/registration.svg`,
       title: t("property.registration") || "Registration",
-      content: formatYesNo(extendedData?.registration ?? property.registration),
+      content: formatYesNo(t, extendedData?.registration ?? property.registration),
     },
     {
       id: "pets",
       icon: `${ICONS_BASE}/pets.svg`,
       title: t("property.pets_allowed") || "Pets Allowed",
-      content: formatYesNo(extendedData?.pets_allowed ?? extendedData?.petsAllowed ?? property.pets_allowed),
+      content: formatYesNo(t, extendedData?.pets_allowed ?? extendedData?.petsAllowed ?? property.pets_allowed),
     },
     {
       id: "flatmates",

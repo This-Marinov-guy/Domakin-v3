@@ -35,7 +35,7 @@ function ThirdStep({ steps, currentStep }: { steps: (string | number)[]; current
     return (
         <div className="list-room-modal__second-step">
             <div className="list-room-modal__second-step__body d-flex flex-column">
-                <label htmlFor="list-room-type">Select property type</label>
+                <label htmlFor="list-room-type">{t("list_room_steps.third.select_type_label")}</label>
 
                 <div className="house-room-box row gx-0">
                     <div className={`form-group checkbox-card-type col m-2 ${typeError ? "border border-danger rounded-3" : ""}`}>
