@@ -17,11 +17,11 @@ export const usePushNotifications = (isAdmin = false) => {
   }, []);
 
   const registerToken = async (withConsent = true): Promise<boolean> => {
-    // Only allow to register token if the app is installed
+    // Only allow to register token if the app is installed    
     if (!isInstalled) return false;
 
     const token = await requestPushPermission(withConsent);    
-
+    
     if (!token) {
       if (typeof window !== 'undefined' && 'Notification' in window) {
         setPermissionStatus(Notification.permission);
