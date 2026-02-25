@@ -56,17 +56,20 @@ const PaginatedTableWrapper = forwardRef(function PaginatedTableWrapper<T>(
   const [perPage, setPerPage] = useState(initialPerPage);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [perPageReady, setPerPageReady] = useState(false);
   const prevFilterKeyRef = useRef(filterKey);
   const skipNextLoadRef = useRef(false);
 
-  // Sync perPage from localStorage after mount to avoid hydration mismatch (server has no localStorage)
+  // Sync perPage from localStorage after mount to avoid hydration mismatch (server has no localStorage).
+  // Sets perPageReady=true so the load effect only runs once perPage is finalized.
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const stored = localStorage.getItem(localStorageKey);
-    if (stored && !isNaN(Number(stored))) {
-      const value = Number(stored);
-      if (value !== perPage) setPerPage(value);
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem(localStorageKey);
+      if (stored && !isNaN(Number(stored))) {
+        setPerPage(Number(stored));
+      }
     }
+    setPerPageReady(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -93,7 +96,7 @@ const PaginatedTableWrapper = forwardRef(function PaginatedTableWrapper<T>(
   }));
 
   useEffect(() => {
-    if (!loadEnabled) return;
+    if (!loadEnabled || !perPageReady) return;
     if (skipNextLoadRef.current) {
       skipNextLoadRef.current = false;
       return;
@@ -108,7 +111,7 @@ const PaginatedTableWrapper = forwardRef(function PaginatedTableWrapper<T>(
     }
     load(currentPage, perPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loadEnabled, filterKey, currentPage, perPage]);
+  }, [loadEnabled, perPageReady, filterKey, currentPage, perPage]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
