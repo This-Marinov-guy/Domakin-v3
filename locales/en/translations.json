@@ -133,7 +133,7 @@
       "part_3": "Below is a breakdown of our services designed to support you at every step of the rental process."
     },
     "viewing_assistance": {
-      "section_title": "🔍 Viewing Assistance Services",
+      "section_title": " Viewing Assistance Services",
       "intro": "We understand that attending property viewings in person isn't always possible. That's why we offer Viewing Assistance Services, allowing you to have a trusted representative from Domakin attend the viewing on your behalf and provide detailed feedback.",
       "types": {
         "standard": {
@@ -183,7 +183,7 @@
       }
     },
     "renting_room": {
-      "section_title": "🏡 Renting a Room Through Our Platform – <b>1-month rent</b>",
+      "section_title": " Renting a Room Through Our Platform – <b>1-month rent</b>",
       "intro": "Looking for a student-friendly room without the stress of endless searches? Our Renting a Room Through Domakin service connects you with verified listings, offering a secure and reliable way to find accommodation.",
       "how_it_works": {
         "title": "How it works:",
