@@ -27,6 +27,11 @@ const defaultFormData = {
     rent: undefined as number | undefined,
     bills: undefined as number | undefined,
     flatmates: "",
+    furnishedType: 1,
+    availableFrom: undefined as string | undefined,
+    availableTo: undefined as string | undefined,
+    sharedSpace: [],
+    amenities: [],
     bathrooms: 1,
     toilets: 1,
     registration: true,
@@ -43,6 +48,7 @@ const defaultFormData = {
   },
 
   images: [],
+  newImages: [],
 };
 
 const ADD_LISTING_DISPLAY_DEFAULTS = {
@@ -301,6 +307,12 @@ export default class PropertyStore {
         images: Array.isArray(pd?.images) ? pd.images : pd?.images ? [pd.images] : [],
         amenities: (() => {
           const raw = pd.amenities;
+          if (Array.isArray(raw)) return raw.map((n: unknown) => Number(n)).filter((n) => !Number.isNaN(n));
+          if (typeof raw === "string") return raw.split(",").map((s) => parseInt(s.trim(), 10)).filter((n) => !Number.isNaN(n));
+          return [];
+        })(),
+        sharedSpace: (() => {
+          const raw = pd.sharedSpace ?? pd.shared_space;
           if (Array.isArray(raw)) return raw.map((n: unknown) => Number(n)).filter((n) => !Number.isNaN(n));
           if (typeof raw === "string") return raw.split(",").map((s) => parseInt(s.trim(), 10)).filter((n) => !Number.isNaN(n));
           return [];

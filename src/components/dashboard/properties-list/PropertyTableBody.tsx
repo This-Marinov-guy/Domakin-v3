@@ -94,6 +94,10 @@ const PropertyTableBody = () => {
       />
       <EditPropertyModal callback={() => paginationRef.current?.reload()} />
       {userProperties.map((item) => {
+        if (!item.property_data) {
+          return null;
+        }
+        
         const isRentSwap = item.interface === "rentswap" || item.property_data?.interface === "rentswap";
 
         return (

@@ -158,19 +158,16 @@ export const FURNISHED_TYPES = [1, 2, 3].map((value) => ({
  */
 export const AMENITIES_LIST: readonly string[] = [
   "Air Conditioning",
-  'Washing Machine',
-  'Dishwasher',
-  'Microwave',
-  'Stove',
-  'Oven',
-  'Bike Space',
+  "Heating",
+  "Kitchen Appliances",
   "Garage",
   "Parking",
   "Storage Space",
   "Garden",
   "Disabled Access",
-  "Wi-fi",
-  "BBQ",
+  "Wifi",
+  "Barbeque",
+  "Laundry",
 ];
 
 /** Translation key for amenity (use with t(): t(getAmenityLabelKey(id))). */
@@ -186,7 +183,7 @@ export const getAmenityLabel = (id: number): string =>
  * Use SHARED_SPACE_LIST[id] or getSharedSpaceLabel(id) for a given id.
  */
 export const SHARED_SPACE_LIST: readonly string[] = [
-  "Balcony",
+  "Bedroom",
   "Kitchen",
   "Bathroom",
   "Toilet",

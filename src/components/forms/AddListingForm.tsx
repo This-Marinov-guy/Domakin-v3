@@ -1,11 +1,12 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import NiceSelect from "@/ui/NiceSelect";
 import Trans from "next-translate/Trans";
 import Spinner from "react-bootstrap/Spinner";
 import useTranslation from "next-translate/useTranslation";
-import PrefixMultiFilePreviewInput from "../ui/inputs/files/MultiFilePreviewInput";
+import Dropzone from "react-dropzone";
+import { MdClose } from "react-icons/md";
 import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
 import SearchableCitySelect from "@/components/ui/SearchableCitySelect";
 import SingleDatePicker from "@/components/ui/inputs/dates/SingleDatePicker";
@@ -15,10 +16,11 @@ import { observer } from "mobx-react-lite";
 import { useServer } from "@/hooks/useServer";
 import {
   prefillUserInfo,
+  resizeFile,
   transformToFormData,
   turnDecimalToInteger,
 } from "@/utils/helpers";
-import { toast } from "react-toastify";
+import { toast, ToastContent } from "react-toastify";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { FiInfo } from "react-icons/fi";
@@ -66,6 +68,7 @@ const AddListingForm = () => {
       updateListingData,
       addErrorFields,
       errorFields,
+      setHasNewImages,
     },
     userStore: { user, isUserFullySet },
     modalStore,
@@ -103,6 +106,77 @@ const AddListingForm = () => {
     updateListingData("propertyData", "sharedSpace", next);
   };
 
+  const images = propertyStore.addListingData.images || [];
+  const [imageLoading, setImageLoading] = useState(false);
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+
+  const handleImagesChange = (newImages: any[]) => {
+    updateListingData("images", "", newImages);
+  };
+
+  const onDrop = async (acceptedFiles: File[]) => {
+    setImageLoading(true);
+    setHasNewImages(true);
+    const corruptedFiles: string[] = [];
+    try {
+      const resizedImages = await Promise.all(
+        acceptedFiles.map(async (file: File) => {
+          try {
+            return await resizeFile(file);
+          } catch {
+            corruptedFiles.push(file?.name ?? "-");
+            return null;
+          }
+        })
+      );
+      if (corruptedFiles.length > 0) {
+        toast.error(
+          (t("files.file_corrupted", { file: corruptedFiles.join(", ") }) ||
+            "Some files could not be processed.") as unknown as ToastContent<unknown>,
+          { position: "top-center", hideProgressBar: false, closeOnClick: false, pauseOnHover: true, draggable: true, theme: "colored" }
+        );
+      }
+      const validImages = resizedImages.filter(Boolean) as File[];
+      if (validImages.length) handleImagesChange([...images, ...validImages]);
+    } catch (error) {
+      console.error("Error processing files:", error);
+    } finally {
+      setImageLoading(false);
+    }
+  };
+
+  const handleRemove = (index: number) => {
+    handleImagesChange(images.filter((_: unknown, i: number) => i !== index));
+  };
+
+  const handleSetMain = (index: number) => {
+    if (index === 0) return;
+    const main = images[index];
+    const rest = images.filter((_: unknown, i: number) => i !== index);
+    handleImagesChange([main, ...rest]);
+  };
+
+  const handleDragStart = (index: number) => setDraggedIndex(index);
+
+  const handleDropOn = (index: number) => {
+    if (draggedIndex === null || draggedIndex === index) return;
+    const updated = [...images];
+    const [moved] = updated.splice(draggedIndex, 1);
+    updated.splice(index, 0, moved);
+    handleImagesChange(updated);
+    setDraggedIndex(null);
+  };
+
+  const previewUrls = useMemo(
+    () =>
+      images.map((fileOrUrl: any) => {
+        if (typeof fileOrUrl === "string") return fileOrUrl;
+        if (fileOrUrl instanceof File || fileOrUrl instanceof Blob) return URL.createObjectURL(fileOrUrl);
+        return "";
+      }),
+    [images]
+  );
+
   const InfoTip = ({ id, text }: { id: string; text: string }) => (
     <OverlayTrigger placement="top" overlay={<Tooltip id={id}>{text}</Tooltip>}>
       <span
@@ -127,10 +201,28 @@ const AddListingForm = () => {
     // Open the loading modal
     modalStore.setActiveModal(LONG_LOADING_MODAL);
 
+    const allImages = propertyStore.addListingData.images ?? [];
+    const imagesOrder: string[] = [];
+    const newFiles: File[] = [];
+    for (const item of allImages) {
+      if (typeof item === "string") {
+        imagesOrder.push(item);
+      } else if (item instanceof File) {
+        imagesOrder.push("__new__");
+        newFiles.push(item);
+      }
+    }
+        
+    const payload = {
+      ...propertyStore.addListingData,
+      images: imagesOrder,
+      newImages: newFiles,
+    };
+
     sendRequest(
       "/property/create",
       "POST",
-      transformToFormData(propertyStore.addListingData, { toSnakeCase: true })
+      transformToFormData(payload, { toSnakeCase: true })
     ).then((res) => {
       // Close the loading modal
       modalStore.closeModal();
@@ -294,9 +386,9 @@ const AddListingForm = () => {
                 options={furnishedTypeOptions}
                 value={String(propertyData?.furnishedType ?? propertyData?.furnished_type ?? 1)}
                 onChange={(e) => {
-                  updateListingData("propertyData", "furnishedType", e.target.value);
+                  updateListingData("propertyData", "furnished_type", e.target.value);
                 }}
-                isInvalid={errorFields.includes("propertyData.furnishedType")}
+                isInvalid={errorFields.includes("propertyData.furnished_type")}
                 name=""
                 placeholder=""
               />
@@ -648,7 +740,7 @@ const AddListingForm = () => {
                 onChange={(value: string) => {
                   updateListingData("propertyData", "availableFrom", value);
                 }}
-                isInvalid={errorFields.includes("propertyData.availableFrom")}
+                isInvalid={errorFields.includes("propertyData.available_from")}
               />
             </div>
           </div>
@@ -662,7 +754,7 @@ const AddListingForm = () => {
                 onChange={(value: string) => {
                   updateListingData("propertyData", "availableTo", value);
                 }}
-                isInvalid={errorFields.includes("propertyData.availableTo")}
+                isInvalid={errorFields.includes("propertyData.available_to")}
               />
             </div>
           </div>
@@ -721,17 +813,110 @@ const AddListingForm = () => {
         <small className="mb-40">* {t("emergency_housing.extra_images")}</small>
 
         <div className="col-12 mt-10 mb-40">
-          <PrefixMultiFilePreviewInput
-            value={propertyStore.addListingData.images}
-            onChange={(files: any) => {
-              updateListingData("images", "", files);
+          <Dropzone
+            onDrop={onDrop}
+            accept={{
+              "image/jpeg": [],
+              "image/png": [],
+              "image/webp": [],
+              "image/jpg": [],
+              "image/svg+xml": [".svg"],
+              "image/bmp": [],
+              "image/heic": [".heif", ".heic"],
+              "video/mp4": [".mp4"],
             }}
-            isInvalid={errorFields.includes("images")}
-            // maxSizeNote={t("files.allowed_sizes_note", { allowed_size: "5MB" })}
-            allowedFormatsNotes={t("files.allowed_types_note", {
-              allowed_types: "jpg, png, jpeg, webp, svg, bmp, heic, mp4",
-            })}
-          />
+            maxFiles={10}
+            onDropRejected={() => {
+              toast.error(
+                (t("list_room_steps.fifth.upload_rejected") ||
+                  "File upload rejected. Please check file size and format.") as unknown as ToastContent<unknown>,
+                { position: "top-center", hideProgressBar: false, closeOnClick: false, pauseOnHover: true, draggable: true, theme: "colored" }
+              );
+            }}
+          >
+            {({ getRootProps, getInputProps, isDragActive }) => (
+              <div className="w-100" {...getRootProps()}>
+                <input {...getInputProps()} />
+                <div className={`file-dropzone-container ${errorFields.includes("images") ? "is-invalid" : ""}`}>
+                  {imageLoading ? (
+                    <p>{t("common.loading")}</p>
+                  ) : (
+                    <div className="text-center">
+                      <i className="fa-light fa-image" style={{ color: "#FF6725", fontSize: "30px" }}></i>
+                      <p>{isDragActive ? t("files.drag_files") || "Drop files here" : t("files.drag_files")}</p>
+                      <small className="d-block">
+                        {t("files.allowed_types_note", { allowed_types: "jpg, png, jpeg, webp, svg, bmp, heic, mp4" })}
+                      </small>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </Dropzone>
+
+          {images.length > 0 && (
+            <div className="mt-4">
+              <div className="row mb-4 align-items-center justify-content-between">
+                <h5 className="col-md-6 col-12">{t("list_room_steps.fifth.preview_order_title")}</h5>
+                <small className="col-md-6 col-12 text-muted w-auto">
+                  {t("list_room_steps.fifth.preview_order_hint")}
+                </small>
+              </div>
+              <div className="row">
+                {images.map((_image: unknown, index: number) => {
+                  const src = previewUrls[index];
+                  if (!src) return null;
+                  return (
+                    <div
+                      key={index}
+                      className="col-6 col-sm-4 col-md-3 col-lg-2 mb-3 position-relative"
+                      draggable
+                      onDragStart={() => handleDragStart(index)}
+                      onDragOver={(e) => e.preventDefault()}
+                      onDrop={() => handleDropOn(index)}
+                      style={{ cursor: "move" }}
+                    >
+                      <div className="position-relative w-100 h-100" onClick={() => handleSetMain(index)}>
+                        <div className="ratio ratio-1x1">
+                          <img
+                            src={src}
+                            alt={`Property image ${index + 1}`}
+                            className="w-100 h-100 rounded border object-fit-cover"
+                          />
+                        </div>
+                        {index === 0 && (
+                          <span className="badge bg-primary position-absolute top-0 start-0 m-2">
+                            {t("list_room_steps.fifth.main_badge")}
+                          </span>
+                        )}
+                      </div>
+                      <button
+                        type="button"
+                        className="position-absolute top-0 end-0"
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleRemove(index); }}
+                        style={{
+                          zIndex: 100,
+                          borderRadius: "20%",
+                          width: "30px",
+                          height: "30px",
+                          background: "#dc3545",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "white",
+                          padding: 0,
+                          margin: "5px",
+                          boxShadow: "0 0 5px rgba(0,0,0,0.5)",
+                        }}
+                      >
+                        <MdClose size={18} />
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="col-12 mb-20 d-flex gap-3 align-items-center justify-content-start">

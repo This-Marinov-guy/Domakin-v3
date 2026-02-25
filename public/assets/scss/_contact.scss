@@ -200,7 +200,7 @@ input[type="checkbox"] {
   }
 
   &.is-invalid .select-trigger {
-    border-color: #dc3545;
+    border: 2px solid #dc3545 !important;
   }
 
   .selected-value {

@@ -72,14 +72,6 @@ const LongLoadingModal = () => {
       backdrop="static"
       keyboard={false}
     >
-      <Modal.Header>
-        <Modal.Title
-          className="d-flex justify-content-center align-items-center w-100"
-          id="contained-modal-title-vcenter"
-        >
-          {t("modal.long_loading.title")}
-        </Modal.Title>
-      </Modal.Header>
       <Modal.Body>
         <div className="container text-center">
           {t("modal.long_loading.description")}

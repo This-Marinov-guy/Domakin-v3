@@ -198,6 +198,10 @@ const convertNestedKeysToSnakeCase = (obj: any, isTopLevel: boolean = true): any
     return obj;
   }
 
+  if (obj instanceof Date) {
+    return obj.toISOString();
+  }
+
   if (Array.isArray(obj)) {
     return obj.map((item) => convertNestedKeysToSnakeCase(item, false));
   }
