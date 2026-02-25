@@ -125,10 +125,9 @@ export const getPropertyTypeLabel = (id: number): string =>
   PROPERTY_TYPE_LABELS[id] ?? `#${id}`;
 
 /** Options for selects; derived from enum. */
-export const PROPERTY_TYPES = [1, 2, 3, 4].map((value) => ({
-  value,
-  text: getPropertyTypeLabel(value),
-}));
+export const PROPERTY_TYPES = PROPERTY_TYPE_LABELS.flatMap((text, value) =>
+  value === 0 || text === undefined ? [] : [{ value, text }]
+);
 
 // Furnished type enum: DB value 1,2,3 → label (index = value)
 const FURNISHED_TYPE_LABELS: readonly (string | undefined)[] = [
@@ -147,57 +146,65 @@ export const getFurnishedTypeLabel = (id: number): string =>
   FURNISHED_TYPE_LABELS[id] ?? `#${id}`;
 
 /** Options for selects; derived from enum. */
-export const FURNISHED_TYPES = [1, 2, 3].map((value) => ({
-  value,
-  text: getFurnishedTypeLabel(value),
-}));
+export const FURNISHED_TYPES = FURNISHED_TYPE_LABELS.flatMap((text, value) =>
+  value === 0 || text === undefined ? [] : [{ value, text }]
+);
 
-/**
- * Amenities enum: index = value stored in DB, string = label shown to client.
- * Use AMENITIES_LIST[id] to get label for a given id.
- */
-export const AMENITIES_LIST: readonly string[] = [
-  "Air Conditioning",
-  "Heating",
-  "Kitchen Appliances",
-  "Garage",
-  "Parking",
-  "Storage Space",
-  "Garden",
-  "Disabled Access",
-  "Wifi",
-  "Barbeque",
-  "Laundry",
+// Amenities — DB values 1–14 (index = id); 0 is unused; append new values at the end
+const AMENITIES_LIST: readonly (string | undefined)[] = [
+  undefined,           // 0 unused
+  "Air Conditioning",  // 1
+  "Washing Machine",   // 2
+  "Dishwasher",        // 3
+  "Microwave",         // 4
+  "Stove",             // 5
+  "Oven",              // 6
+  "Bike Space",        // 7
+  "Garage",            // 8
+  "Parking",           // 9
+  "Storage Space",     // 10
+  "Garden",            // 11
+  "Disabled Access",   // 12
+  "Wi-fi",             // 13
+  "BBQ",               // 14
 ];
 
-/** Translation key for amenity (use with t(): t(getAmenityLabelKey(id))). */
+/** Translation key: t(getAmenityLabelKey(id)) */
 export const getAmenityLabelKey = (id: number): string =>
   `enums.amenities.${id}`;
 
-/** Get display label for an amenity id (number from DB). Fallback when no t(). */
+/** Fallback English label for amenity id. */
 export const getAmenityLabel = (id: number): string =>
   AMENITIES_LIST[id] ?? `#${id}`;
 
-/**
- * Shared space enum: index = value stored in DB, string = label shown to client.
- * Use SHARED_SPACE_LIST[id] or getSharedSpaceLabel(id) for a given id.
- */
-export const SHARED_SPACE_LIST: readonly string[] = [
-  "Bedroom",
-  "Kitchen",
-  "Bathroom",
-  "Toilet",
-  "Storage space",
-  "Living room",
+/** {id, text} options for checkboxes (IDs 1–14). */
+export const AMENITY_OPTIONS = AMENITIES_LIST.flatMap((text, id) =>
+  id === 0 || text === undefined ? [] : [{ id, text }]
+);
+
+// Shared space — DB values 1–6 (index = id); 0 is unused; append new values at the end
+const SHARED_SPACE_LIST: readonly (string | undefined)[] = [
+  undefined,       // 0 unused
+  "Balcony",       // 1
+  "Kitchen",       // 2
+  "Bathroom",      // 3
+  "Toilet",        // 4
+  "Storage space", // 5
+  "Living room",   // 6
 ];
 
-/** Translation key for shared space (use with t(): t(getSharedSpaceLabelKey(id))). */
+/** Translation key: t(getSharedSpaceLabelKey(id)) */
 export const getSharedSpaceLabelKey = (id: number): string =>
   `enums.shared_space.${id}`;
 
-/** Get display label for a shared space id (number from DB). Fallback when no t(). */
+/** Fallback English label for shared space id. */
 export const getSharedSpaceLabel = (id: number): string =>
   SHARED_SPACE_LIST[id] ?? `#${id}`;
+
+/** {id, text} options for checkboxes (IDs 1–6). */
+export const SHARED_SPACE_OPTIONS = SHARED_SPACE_LIST.flatMap((text, id) =>
+  id === 0 || text === undefined ? [] : [{ id, text }]
+);
 
 /** Return translated label if key exists, otherwise fallback. Use: getTranslatedEnum(t, getXLabelKey(id), getXLabel(id)). */
 export const getTranslatedEnum = (

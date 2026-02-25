@@ -2,14 +2,14 @@ import Image from "next/image";
 import useTranslation from "next-translate/useTranslation";
 import { capitalizeFirstLetter } from "@/utils/helpers";
 import {
-  AMENITIES_LIST,
+  AMENITY_OPTIONS,
   getAmenityLabel,
   getAmenityLabelKey,
   getFurnishedTypeLabel,
   getFurnishedTypeLabelKey,
   getPropertyTypeLabel,
   getPropertyTypeLabelKey,
-  SHARED_SPACE_LIST,
+  SHARED_SPACE_OPTIONS,
   getSharedSpaceLabel,
   getSharedSpaceLabelKey,
   getTranslatedEnum,
@@ -159,8 +159,8 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
     },
   ].filter((item) => item.content && item.content !== "" && item.content !== "—");
 
-  const showAmenitiesCol = AMENITIES_LIST.length > 0 && amenityIdsSet.size > 0;
-  const showSharedSpaceCol = SHARED_SPACE_LIST.length > 0 && sharedSpaceIdsSet.size > 0;
+  const showAmenitiesCol = AMENITY_OPTIONS.length > 0 && amenityIdsSet.size > 0;
+  const showSharedSpaceCol = SHARED_SPACE_OPTIONS.length > 0 && sharedSpaceIdsSet.size > 0;
   const hasAmenitiesOrSharedSpace = showAmenitiesCol || showSharedSpaceCol;
 
   return (
@@ -198,7 +198,7 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
               {t("property.amenities") || "Amenities"}
             </div>
             <div className="d-flex flex-wrap gap-2">
-              {AMENITIES_LIST.map((_, id) => {
+              {AMENITY_OPTIONS.map(({ id }) => {
                 const label = getTranslatedEnum(t, getAmenityLabelKey(id), getAmenityLabel(id));
                 const available = amenityIdsSet.has(id);
                 return (
@@ -223,7 +223,7 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
               {t("property.shared_space") || "Shared space"}
             </div>
             <div className="d-flex flex-wrap gap-2">
-              {SHARED_SPACE_LIST.map((_, id) => {
+              {SHARED_SPACE_OPTIONS.map(({ id }) => {
                 const label = getTranslatedEnum(t, getSharedSpaceLabelKey(id), getSharedSpaceLabel(id));
                 const available = sharedSpaceIdsSet.has(id);
                 return (

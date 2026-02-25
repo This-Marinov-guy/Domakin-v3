@@ -25,7 +25,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { FiInfo } from "react-icons/fi";
 import {
-  AMENITIES_LIST,
+  AMENITY_OPTIONS,
   FURNISHED_TYPES,
   getAmenityLabel,
   getAmenityLabelKey,
@@ -36,7 +36,7 @@ import {
   getTranslatedEnum,
   LONG_LOADING_MODAL,
   PROPERTY_TYPES,
-  SHARED_SPACE_LIST,
+  SHARED_SPACE_OPTIONS,
 } from "@/utils/defines";
 
 const AddListingForm = () => {
@@ -76,15 +76,15 @@ const AddListingForm = () => {
 
   const amenitiesOptions = useMemo(
     () =>
-      [...AMENITIES_LIST].map((_, id) => ({
+      AMENITY_OPTIONS.map(({ id }) => ({
         id,
         label: getTranslatedEnum(t, getAmenityLabelKey(id), getAmenityLabel(id)),
-      })).sort((a, b) => a.label.localeCompare(b.label)),
+      })),
     [t]
   );
   const sharedSpaceOptions = useMemo(
     () =>
-      SHARED_SPACE_LIST.map((_, id) => ({
+      SHARED_SPACE_OPTIONS.map(({ id }) => ({
         id,
         label: getTranslatedEnum(t, getSharedSpaceLabelKey(id), getSharedSpaceLabel(id)),
       })),

@@ -66,7 +66,6 @@
     "enter_your_message": "Enter your message",
     "send": "Send"
   },
-
   "careers": {
     "title": "Careers",
     "meta_description": "Join Domakin as a viewing agent or property seeker. Flexible working hours, commission-based system, work all around the Netherlands.",
@@ -125,7 +124,6 @@
     "error_please_try_again": "Error! Please try again!",
     "resume_error": "Invalid file format. Please upload a PDF, DOC, or DOCX file."
   },
-
   "pricing": {
     "pricing": "Pricing",
     "page_title": "Our Services & Pricing",
@@ -217,7 +215,6 @@
       }
     }
   },
-
   "viewing": {
     "viewing_service": "Viewing service",
     "viewing": "Viewing",
@@ -261,7 +258,7 @@
     "pricing_link": "Pricing",
     "policy_link": "Policy"
   },
-  "room_searching" : {
+  "room_searching": {
     "room_searching_service": "Room searching",
     "tell_us_what_are_you_looking_for": "Tell us your requirements and we will search for a room with your specifications!",
     "step_1": "1) Fill in your details",
@@ -572,25 +569,28 @@
       "3": "None"
     },
     "amenities": {
-      "0": "Air Conditioning",
-      "1": "Heating",
-      "2": "Kitchen Appliances",
-      "3": "Garage",
-      "4": "Parking",
-      "5": "Storage Space",
-      "6": "Garden",
-      "7": "Disabled Access",
-      "8": "Wifi",
-      "9": "Barbeque",
-      "10": "Laundry"
+      "1": "Air Conditioning",
+      "2": "Washing Machine",
+      "3": "Dishwasher",
+      "4": "Microwave",
+      "5": "Stove",
+      "6": "Oven",
+      "7": "Bike Space",
+      "8": "Garage",
+      "9": "Parking",
+      "10": "Storage Space",
+      "11": "Garden",
+      "12": "Disabled Access",
+      "13": "Wi-fi",
+      "14": "BBQ"
     },
     "shared_space": {
-      "0": "Bedroom",
-      "1": "Kitchen",
-      "2": "Bathroom",
-      "3": "Toilet",
-      "4": "Storage space",
-      "5": "Living room"
+      "1": "Balcony",
+      "2": "Kitchen",
+      "3": "Bathroom",
+      "4": "Toilet",
+      "5": "Storage space",
+      "6": "Living room"
     }
   },
   "filter": {
@@ -632,7 +632,10 @@
         "flatmates": "3 people"
       },
       "main_image": "1.png",
-      "images": ["2.png", "3.png"]
+      "images": [
+        "2.png",
+        "3.png"
+      ]
     },
     {
       "id": "38",
@@ -650,7 +653,11 @@
         "flatmates": "2 boys and 1 girl"
       },
       "main_image": "1.png",
-      "images": ["2.png", "3.png", "4.png"]
+      "images": [
+        "2.png",
+        "3.png",
+        "4.png"
+      ]
     },
     {
       "id": "37",
@@ -668,7 +675,15 @@
         "flatmates": "5 people"
       },
       "main_image": "1.jpg",
-      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg"]
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg"
+      ]
     },
     {
       "id": "36",
@@ -686,7 +701,13 @@
         "flatmates": "4 people"
       },
       "main_image": "1.jpeg",
-      "images": ["2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpeg"]
+      "images": [
+        "2.jpeg",
+        "3.jpeg",
+        "4.jpeg",
+        "5.jpeg",
+        "6.jpeg"
+      ]
     },
     {
       "id": "35",
@@ -704,7 +725,11 @@
         "flatmates": "3 people"
       },
       "main_image": "1.jpeg",
-      "images": ["2.jpeg", "3.jpeg", "4.jpeg"]
+      "images": [
+        "2.jpeg",
+        "3.jpeg",
+        "4.jpeg"
+      ]
     },
     {
       "id": "34",
@@ -750,7 +775,11 @@
         "flatmates": "2 people"
       },
       "main_image": "1.jpg",
-      "images": ["2.jpg", "3.jpg", "4.jpg"]
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "4.jpg"
+      ]
     },
     {
       "id": "32",
@@ -768,7 +797,14 @@
         "flatmates": "4-5 people"
       },
       "main_image": "1.jpeg",
-      "images": ["2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpeg", "7.jpeg"]
+      "images": [
+        "2.jpeg",
+        "3.jpeg",
+        "4.jpeg",
+        "5.jpeg",
+        "6.jpeg",
+        "7.jpeg"
+      ]
     },
     {
       "id": "31",
@@ -904,7 +940,10 @@
         "flatmates": "1 female vegan"
       },
       "main_image": "1.jpeg",
-      "images": ["2.jpeg", "3.jpeg"]
+      "images": [
+        "2.jpeg",
+        "3.jpeg"
+      ]
     },
     {
       "id": "26",
@@ -948,7 +987,14 @@
         "flatmates": "2"
       },
       "main_image": "4.jpg",
-      "images": ["2.jpg", "3.jpg", "1.jpg", "5.jpg", "6.jpg", "7.jpg"]
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "1.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg"
+      ]
     },
     {
       "id": "24",
@@ -966,7 +1012,14 @@
         "flatmates": "No roommates/ flatmates"
       },
       "main_image": "4.jpg",
-      "images": ["2.jpg", "3.jpg", "1.jpg", "5.jpg", "6.jpg", "7.jpg"]
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "1.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg"
+      ]
     },
     {
       "id": "23",
@@ -984,7 +1037,13 @@
         "flatmates": "up to 3 roommates"
       },
       "main_image": "1.jpg",
-      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"]
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg"
+      ]
     },
     {
       "id": "22",
@@ -1002,7 +1061,11 @@
         "flatmates": "up to 3 roommates"
       },
       "main_image": "1.jpg",
-      "images": ["2.jpg", "3.jpg", "4.jpg"]
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "4.jpg"
+      ]
     },
     {
       "id": "21",
@@ -1107,7 +1170,13 @@
         "flatmates": "-"
       },
       "main_image": "1.jpg",
-      "images": ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"]
+      "images": [
+        "1.jpg",
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg"
+      ]
     },
     {
       "id": "17",
@@ -1124,7 +1193,15 @@
         "flatmates": "2"
       },
       "main_image": "1.jpg",
-      "images": ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg"]
+      "images": [
+        "1.jpg",
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg"
+      ]
     },
     {
       "id": "16",
@@ -1142,7 +1219,10 @@
       },
       "folder": "property_venlo_molensingel",
       "main_image": "1.jpeg",
-      "images": ["1.jpeg", "2.jpeg"]
+      "images": [
+        "1.jpeg",
+        "2.jpeg"
+      ]
     },
     {
       "id": "15",
@@ -1160,7 +1240,13 @@
       },
       "folder": "property_groningen_peperstraat",
       "main_image": "Thumbnail.jpeg",
-      "images": ["1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg"]
+      "images": [
+        "1.jpeg",
+        "2.jpeg",
+        "3.jpeg",
+        "4.jpeg",
+        "5.jpeg"
+      ]
     },
     {
       "id": "14",
@@ -1177,7 +1263,12 @@
         "flatmates": "-"
       },
       "main_image": "1.jpg",
-      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg"]
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg"
+      ]
     },
     {
       "id": "13",
@@ -1194,7 +1285,10 @@
         "flatmates": "3х girls"
       },
       "main_image": "1.jpg",
-      "images": ["2.jpg", "3.jpg"]
+      "images": [
+        "2.jpg",
+        "3.jpg"
+      ]
     },
     {
       "id": "11",
@@ -1211,7 +1305,9 @@
         "flatmates": "1х Greek и 1х Vietnamese"
       },
       "main_image": "2.jpg",
-      "images": ["1.mp4"]
+      "images": [
+        "1.mp4"
+      ]
     },
     {
       "id": "10",
@@ -1228,7 +1324,12 @@
         "flatmates": "3 Bulgarian males"
       },
       "main_image": "1.jpeg",
-      "images": ["2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg"]
+      "images": [
+        "2.jpeg",
+        "3.jpeg",
+        "4.jpeg",
+        "5.jpeg"
+      ]
     },
     {
       "id": "9",
@@ -1272,7 +1373,13 @@
         "flatmates": "2 Bulgarians and 2 Germans"
       },
       "main_image": "1.jpg",
-      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"]
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg"
+      ]
     },
     {
       "id": "7",
@@ -1289,7 +1396,14 @@
         "flatmates": "3 flatmates - 2 x Bulgarians (male and female), 1 х Argentian female"
       },
       "main_image": "1.jpg",
-      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg"]
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg"
+      ]
     },
     {
       "id": "6",
@@ -1306,7 +1420,14 @@
         "flatmates": "1 girl (Bulgarian)"
       },
       "main_image": "1.jpg",
-      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg"]
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg"
+      ]
     },
     {
       "id": "5",
@@ -1408,7 +1529,14 @@
       },
       "folder": "studio",
       "main_image": "1.jpg",
-      "images": ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg"]
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg"
+      ]
     }
   ],
   "EMERGENCY_HOUSING": [
@@ -1461,25 +1589,21 @@
       }
     }
   ],
-
   "cookies": {
     "title": "Cookie Policy",
     "content": "To guarantee a smooth experience we need our clients to accept the mandatory cookies before using the website - you can read more in the legal section after.",
     "mandatory_only": "Mandatory Only",
     "accept_all": "Accept All"
   },
-
   "subscribe_email": {
     "description": "Subscribe to our newsletter and receive updates for new properties and services!",
     "email": "Email Address",
     "send": "Send"
   },
-
   "unsubscribe_email": {
     "title": "Unsubscribing from our newsletter was successful!",
     "description": "You will no longer receive updates or newsletters from us. If you have unsubscribed by mistake, you can subscribe again at any time!"
   },
-
   "legals": {
     "title": "Legal Documents",
     "cookies": "Cookies",
@@ -1488,7 +1612,6 @@
     "permission_contact": "I give my permission to be contacted by the organization for the purposes of the service",
     "permission_terms": "I have read and agree to the <link>Terms & Conditions</link>"
   },
-
   "common": {
     "agree": "Agree",
     "continue": "Continue",
@@ -1516,7 +1639,6 @@
     "from": "from",
     "to": "to"
   },
-
   "blog": {
     "title": "Blog",
     "description": "Stay updated with the latest news and tips from our blog",
@@ -1528,11 +1650,10 @@
     "details": "Blog Details",
     "post_not_found": "Post not found"
   },
-
   "date_time": {
     "timezone_nl": "Timezone: Europe/Amsterdam",
     "years": "years",
-    "months" : "months",
+    "months": "months",
     "weeks": "weeks",
     "days": "days",
     "hours": "hours",
@@ -1551,7 +1672,6 @@
     "12": "December",
     "today": "Today"
   },
-
   "files": {
     "drag_files": "Drag files or click to upload",
     "required": "Please attach a file!",
@@ -1567,13 +1687,11 @@
     "download": "Download",
     "file_corrupted": "The file/s {{file}} might be corrupted, please try again, covert them to .jpg or use another file"
   },
-
   "react_error": {
     "something_went_wrong": "Something went wrong. Please try again or report the problem to get some help.",
     "try_again": "Try again",
     "go_home": "Go Home"
   },
-
   "api": {
     "error": "Error",
     "fill_fields": "Please fill all the required fields",
@@ -1585,7 +1703,6 @@
     "not_enough_pictures": "Not enough pictures, please submit at least 3",
     "failed_fetching_feedbacks": "We could not get the feedbacks - please try again!"
   },
-
   "payment": {
     "success": {
       "title": "Payment Successful!",

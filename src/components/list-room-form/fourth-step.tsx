@@ -9,7 +9,7 @@ import useTranslation from "next-translate/useTranslation";
 import { FiChevronDown, FiChevronUp, FiInfo } from "react-icons/fi";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
-import { AMENITIES_LIST, SHARED_SPACE_LIST } from "@/utils/defines";
+import { AMENITY_OPTIONS, SHARED_SPACE_OPTIONS } from "@/utils/defines";
 import { turnDecimalToInteger } from "@/utils/helpers";
 
 const toInputValue = (val: any): number | string =>
@@ -48,9 +48,7 @@ function FourthStep({
 
     const amenitiesSorted = useMemo(
         () =>
-            [...AMENITIES_LIST].map((label, id) => ({ id, label })).sort((a, b) =>
-                a.label.localeCompare(b.label)
-            ),
+            AMENITY_OPTIONS.map(({ id, text: label }) => ({ id, label })),
         []
     );
 
@@ -423,7 +421,7 @@ function FourthStep({
                     <small className="d-block">* {t("list_room_steps.fourth.select_multiple")}</small>
 
                     <div className="row g-2 mt-3">
-                        {SHARED_SPACE_LIST.map((label, id) => {
+                        {SHARED_SPACE_OPTIONS.map(({ id, text: label }) => {
                             const inputId = `shared-space-${id}`;
                             const checked = selectedSharedSpaces.includes(id);
                             return (

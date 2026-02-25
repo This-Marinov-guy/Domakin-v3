@@ -13,7 +13,7 @@ import { useServer } from "@/hooks/useServer";
 import { toast } from "react-toastify";
 import MultiValueInput from "../inputs/MultiValueInput";
 import {
-  AMENITIES_LIST,
+  AMENITY_OPTIONS,
   EDIT_PROPERTY_MODAL,
   FURNISHED_TYPES,
   getAmenityLabel,
@@ -25,7 +25,7 @@ import {
   getTranslatedEnum,
   PROPERTY_STATUSES,
   PROPERTY_TYPES,
-  SHARED_SPACE_LIST,
+  SHARED_SPACE_OPTIONS,
 } from "@/utils/defines";
 import { showGeneralError, transformToFormData, resizeFile } from "@/utils/helpers";
 import { MdClose } from "react-icons/md";
@@ -87,15 +87,15 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
 
   const amenitiesOptions = useMemo(
     () =>
-      [...AMENITIES_LIST].map((_, id) => ({
+      AMENITY_OPTIONS.map(({ id }) => ({
         id,
         label: getTranslatedEnum(t, getAmenityLabelKey(id), getAmenityLabel(id)),
-      })).sort((a, b) => a.label.localeCompare(b.label)),
+      })),
     [t]
   );
   const sharedSpaceOptions = useMemo(
     () =>
-      SHARED_SPACE_LIST.map((_, id) => ({
+      SHARED_SPACE_OPTIONS.map(({ id }) => ({
         id,
         label: getTranslatedEnum(t, getSharedSpaceLabelKey(id), getSharedSpaceLabel(id)),
       })),
