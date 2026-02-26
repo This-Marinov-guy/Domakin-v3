@@ -169,6 +169,8 @@ const PropertyTableBody = () => {
                   ).toLowerCase()}`}
                   style={{ cursor: "pointer" }}
                   onClick={() => {
+                    if (!isAdmin) return;
+                    
                     setPropertyDataForEdit(item);
                     modalStore.setActiveModal(EDIT_PROPERTY_MODAL);
                   }}
