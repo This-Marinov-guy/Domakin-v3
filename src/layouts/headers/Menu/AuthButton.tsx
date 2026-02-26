@@ -51,7 +51,7 @@ const AuthButton = ({
           : "d-lg-inline-block ms-3"
       }
     >
-      {!isEmpty(user) ? (
+      {(!isEmpty(user) && user.name) ? (
         <div className="d-flex align-items-center justify-center gap-3">
           <div
             className="avatar-container"

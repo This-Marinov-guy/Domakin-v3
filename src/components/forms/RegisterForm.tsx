@@ -25,7 +25,8 @@ const defaultData = {
 };
 
 const RegisterForm = () => {
-  const { t } = useTranslation("account");
+  const { t: tAccount } = useTranslation("account");
+  const { t: tTranslations } = useTranslation("translations");
 
   const { modalStore, userStore } = useStore();
 
@@ -76,8 +77,10 @@ const RegisterForm = () => {
         },
       });
 
-      if (error) {
-        return showGeneralError(t("api.general_error"));
+      if (error && error.code === 'user_already_exists') {
+        return showGeneralError(tAccount("authentication.errors.email_exists"));
+      } else if (error) {
+        return showGeneralError(tTranslations("api.general_error"));
       }
 
       const responseData = await sendRequest("/authentication/register", "POST", {
@@ -93,7 +96,7 @@ const RegisterForm = () => {
         setErrors(responseData.invalid_fields);
       }
     } catch (error) {
-      showGeneralError(t("api.general_error"));
+      showGeneralError(tTranslations("api.general_error"));
     } finally {
       setLoading(false);
     }
@@ -104,7 +107,7 @@ const RegisterForm = () => {
       <div className="row">
         <div className="col-12">
           <div className="input-group-meta position-relative mb-25">
-            <label htmlFor="">{t("authentication.email")}</label>
+            <label htmlFor="">{tAccount("authentication.email")}</label>
             <Form.Control
               type="email"
               name="email"
@@ -119,7 +122,7 @@ const RegisterForm = () => {
 
         <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta position-relative mb-25">
-            <label htmlFor="">{t("authentication.first_name")}</label>
+            <label htmlFor="">{tAccount("authentication.first_name")}</label>
             <Form.Control
               type="text"
               name="firstName"
@@ -134,7 +137,7 @@ const RegisterForm = () => {
 
         <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta position-relative mb-25">
-            <label htmlFor="">{t("authentication.last_name")}</label>
+            <label htmlFor="">{tAccount("authentication.last_name")}</label>
             <Form.Control
               type="text"
               name="lastName"
@@ -149,7 +152,7 @@ const RegisterForm = () => {
 
         <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta position-relative mb-25">
-            <label htmlFor="">{t("authentication.phone")}</label>
+            <label htmlFor="">{tAccount("authentication.phone")}</label>
             <PrefixPhoneInput
               value={form.phone}
               onChange={(value: string) => {
@@ -164,7 +167,7 @@ const RegisterForm = () => {
 
         <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta position-relative mb-20">
-            <label htmlFor="">{t("authentication.password")}</label>
+            <label htmlFor="">{tAccount("authentication.password")}</label>
             <Form.Control
               type={isPasswordVisible ? "text" : "password"}
               name="password"
@@ -190,7 +193,7 @@ const RegisterForm = () => {
 
         <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta position-relative mb-20">
-            <label htmlFor="">{t("authentication.confirm_password")}</label>
+            <label htmlFor="">{tAccount("authentication.confirm_password")}</label>
             <Form.Control
               type={isPasswordVisible ? "text" : "password"}
               name="password_confirmation"
@@ -245,7 +248,7 @@ const RegisterForm = () => {
             onClick={signUpWithPassword}
             className="btn-two w-100 text-uppercase d-block mt-20"
           >
-            {loading ? <Spinner size='sm' animation="border"/> : t("authentication.sign_up")}
+            {loading ? <Spinner size='sm' animation="border"/> : tAccount("authentication.sign_up")}
           </button>
         </div>
       </div>
