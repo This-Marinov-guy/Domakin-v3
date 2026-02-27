@@ -41,7 +41,7 @@ const RelatedPosts = ({
   }
 
   return (
-    <section className="related-posts mt-80 mb-40">
+    <section className="related-posts mt-40 mb-40">
       <div className="container">
         <div className="row">
           <div className="col-12">

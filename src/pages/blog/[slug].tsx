@@ -144,7 +144,7 @@ const BlogPost = ({
         />
       </Head>
       <HeaderOne />
-      <div className="container mt-80 mb-150">
+      <div className="container mt-40 mb-40">
         <div className="row">
           <div className="col-12">
             {post ? (
@@ -180,6 +180,8 @@ const BlogPost = ({
           </div>
         </div>
       </div>
+
+      <hr/>
       
       {/* Related Posts Section */}
       <RelatedPosts 
