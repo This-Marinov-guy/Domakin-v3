@@ -120,20 +120,18 @@ const PropertyTableBody = () => {
         data={propertyPreview}
         onHide={() => setPropertyPreview(null)}
       />
-      <Modal show={!!deleteConfirm} onHide={() => !deleting && setDeleteConfirm(null)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Delete property</Modal.Title>
-        </Modal.Header>
+      <Modal show={!!deleteConfirm} onHide={() => !deleting && setDeleteConfirm(null)} centered closeButton>
+       
         <Modal.Body>
           {deleteConfirm && (
-            <>Are you sure you want to delete &quot;{deleteConfirm.title}&quot;? This cannot be undone.</>
+            <>Are you sure you want to delete &quot;{deleteConfirm.title}&quot;?</>
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setDeleteConfirm(null)} disabled={deleting}>
+          <Button className="btn-danger" onClick={() => setDeleteConfirm(null)} disabled={deleting}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={handleDeleteProperty} disabled={deleting}>
+          <Button className="btn-danger-solid" onClick={handleDeleteProperty} disabled={deleting}>
             {deleting ? "Deleting…" : "Delete"}
           </Button>
         </Modal.Footer>
