@@ -111,6 +111,7 @@ const PropertyDataPreview = ({ onHide, data }: any) => {
 
         <h6>Property Details</h6>
         <ul>
+          <li>ID: {data?.id ? data.id + 1000: "-"}</li>
           <li>Title: {formatJsonKeyValuePairs(data?.title, ["en"])}</li>
           <li>Property type: {translatedPropertyTypeLabel(t, typeVal)}</li>
           <li>City: {data?.city ?? "-"}</li>

@@ -2,6 +2,8 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 import ReactPaginate from "react-paginate";
 import PaginatedTableWrapper, {
   PaginatedTableWrapperHandle,
@@ -23,7 +25,7 @@ import PropertyDataPreview from "@/components/ui/modals/PropertyDataPreview";
 import EditPropertyModal from "@/components/ui/modals/EditPropertyModal";
 import { PROPERTY_STATUS } from "@/utils/enum";
 import { APPLICATION_MODAL, EDIT_PROPERTY_MODAL, PROPERTY_ID_OFFSET } from "@/utils/defines";
-import { formatJsonKeyValuePairs, parsePropertyPreviewData } from "@/utils/helpers";
+import { formatJsonKeyValuePairs, parsePropertyPreviewData, showGeneralError, showStandardNotification } from "@/utils/helpers";
 import StripePaymentLinkButton from "@/components/ui/buttons/StripePaymentLinkButton";
 import { getPropertyUrl } from "@/utils/seoHelpers";
 import useTranslation from "next-translate/useTranslation";
@@ -37,6 +39,8 @@ const PropertyTableBody = () => {
   const { lang } = useTranslation("translations");
 
   const [propertyPreview, setPropertyPreview] = useState(null);
+  const [deleteConfirm, setDeleteConfirm] = useState<{ id: number; title: string } | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   const { sendRequest } = useServer();
 
@@ -82,8 +86,32 @@ const PropertyTableBody = () => {
       propertyTitle: formatJsonKeyValuePairs(item.property_data?.title, ['en']),
       propertyUrl: getPropertyUrl(propertyPayload, true, lang),
     });
+  };
 
-  }
+  const handleDeleteProperty = async () => {
+    if (!deleteConfirm) return;
+    setDeleting(true);
+    try {
+      const res = await sendRequest(
+        `/property/delete/${deleteConfirm.id}`,
+        "DELETE",
+        {},
+        {},
+        { withLoading: false }
+      );
+      if (res?.status) {
+        showStandardNotification("success", "Property deleted.");
+        setDeleteConfirm(null);
+        paginationRef.current?.reload();
+      } else {
+        showGeneralError(res?.message ?? "Failed to delete property.");
+      }
+    } catch {
+      showGeneralError("Failed to delete property.");
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   // Table row renderer
   const renderRows = (userProperties: any[]) => (
@@ -92,6 +120,24 @@ const PropertyTableBody = () => {
         data={propertyPreview}
         onHide={() => setPropertyPreview(null)}
       />
+      <Modal show={!!deleteConfirm} onHide={() => !deleting && setDeleteConfirm(null)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete property</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {deleteConfirm && (
+            <>Are you sure you want to delete &quot;{deleteConfirm.title}&quot;? This cannot be undone.</>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setDeleteConfirm(null)} disabled={deleting}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleDeleteProperty} disabled={deleting}>
+            {deleting ? "Deleting…" : "Delete"}
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <EditPropertyModal callback={() => paginationRef.current?.reload()} />
       {userProperties.map((item) => {
         const isRentSwap = item.interface === "rentswap" || item.property_data?.interface === "rentswap";
@@ -170,7 +216,7 @@ const PropertyTableBody = () => {
                   style={{ cursor: "pointer" }}
                   onClick={() => {
                     if (!isAdmin) return;
-                    
+
                     setPropertyDataForEdit(item);
                     modalStore.setActiveModal(EDIT_PROPERTY_MODAL);
                   }}
@@ -210,25 +256,38 @@ const PropertyTableBody = () => {
                       View Details
                     </button>
                   </li>
+                  <li>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => {
+                        setPropertyDataForEdit(item);
+                        modalStore.setActiveModal(EDIT_PROPERTY_MODAL);
+                      }}
+                    >
+                      <Image src={icon_3} alt="" className="lazy-img" /> Edit
+                    </button>
+                  </li>
                   {isAdmin &&
                     <>
                       <li>
                         <button
                           className="dropdown-item"
-                          onClick={() => {
-                            setPropertyDataForEdit(item);
-                            modalStore.setActiveModal(EDIT_PROPERTY_MODAL);
-                          }}
+                          onClick={() => openApplicationsModal(item)}
                         >
-                          <Image src={icon_3} alt="" className="lazy-img" /> Edit
+                          <i className="fas fa-users"></i> Applications
                         </button>
                       </li>
                       <li>
                         <button
-                          className="dropdown-item"
-                          onClick={() => { openApplicationsModal(item) }}
+                          className="dropdown-item text-danger"
+                          onClick={() =>
+                            setDeleteConfirm({
+                              id: item.id,
+                              title: formatJsonKeyValuePairs(item.property_data?.title, ["en"]) || `Property #${item.id}`,
+                            })
+                          }
                         >
-                          <i className="fas fa-users"></i> Applications
+                          <i className="fas fa-trash-alt"></i> Delete
                         </button>
                       </li>
                     </>
