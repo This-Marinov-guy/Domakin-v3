@@ -24,9 +24,10 @@ const ReferralCode = () => {
   const [editModal, setEditModal] = useState(false);
   const [newCode, setNewCode] = useState("");
   const [codeError, setCodeError] = useState("");
+  const [updating, setUpdating] = useState(false);
 
   const { t } = useTranslation("account");
-  const { sendRequest, loading: saving } = useServer();
+  const { sendRequest } = useServer();
 
   const {
     userStore: { loadReferralCode, referralCode, setReferralCode },
@@ -45,23 +46,43 @@ const ReferralCode = () => {
 
   const handleEditSave = async () => {
     setCodeError("");
-    const res = await sendRequest(
-      "/user/referral-code",
-      "PATCH",
-      { referralCode: newCode },
-      {},
-      { withLoading: false, withError: false }
-    );
+    const trimmed = newCode.trim();
+    if (trimmed.length > 0 && trimmed.length < 4) {
+      setCodeError("Referral code must be at least 4 characters.");
+      return;
+    }
+    setUpdating(true);
+    try {
+      const res = await sendRequest(
+        "/user/referral-code",
+        "PATCH",
+        { referralCode: trimmed },
+        {},
+        { withLoading: false, withError: false }
+      );
 
-    if (res?.status) {
-      setReferralCode(newCode);
-      setEditModal(false);
-    } else if (res?.invalid_fields?.length) {
-      const tag: string = res.invalid_fields[0]?.tag ?? "";
-      const key = tag.split(":").pop() ?? "";
-      setCodeError(key ? t(key) : res.message ?? "");
-    } else {
-      setCodeError(res?.message ?? "");
+      if (res?.status) {
+        setReferralCode(trimmed);
+        setEditModal(false);
+        toast.success("Referral code updated.", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      } else if (res?.invalid_fields?.length) {
+        const tag: string = res.invalid_fields[0]?.tag ?? "";
+        const key = tag.split(":").pop() ?? "";
+        setCodeError(key ? t(key) : res.message ?? "");
+      } else {
+        setCodeError(res?.message ?? "");
+      }
+    } finally {
+      setUpdating(false);
     }
   };
 
@@ -204,23 +225,27 @@ const ReferralCode = () => {
               value={newCode}
               onChange={(e) => setNewCode(e.target.value)}
               isInvalid={!!codeError}
-              disabled={saving}
+              disabled={updating}
             />
+            <Form.Text className="text-muted">Minimum 4 characters.</Form.Text>
             <Form.Control.Feedback type="invalid">{codeError}</Form.Control.Feedback>
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <button type="button" className="btn-danger" onClick={handleEditClose}>
+          <button type="button" className="btn-danger" onClick={handleEditClose} disabled={updating}>
             Cancel
           </button>
           <button
             type="button"
             className="btn-thirteen"
             onClick={handleEditSave}
-            disabled={saving}
+            disabled={updating}
           >
-            {saving ? (
-              <Spinner size="sm" animation="border" />
+            {updating ? (
+              <>
+                <Spinner size="sm" animation="border" className="me-2" />
+                Saving…
+              </>
             ) : (
               "Save"
             )}
