@@ -150,7 +150,7 @@ export const FURNISHED_TYPES = FURNISHED_TYPE_LABELS.flatMap((text, value) =>
   value === 0 || text === undefined ? [] : [{ value, text }]
 );
 
-// Amenities — DB values 1–14 (index = id); 0 is unused; append new values at the end
+// Amenities — DB values 1–15 (index = id); 0 is unused; append new values at the end
 const AMENITIES_LIST: readonly (string | undefined)[] = [
   undefined,           // 0 unused
   "Air Conditioning",  // 1
@@ -167,6 +167,7 @@ const AMENITIES_LIST: readonly (string | undefined)[] = [
   "Disabled Access",   // 12
   "Wi-fi",             // 13
   "BBQ",               // 14
+  "Balcony",           // 15
 ];
 
 /** Translation key: t(getAmenityLabelKey(id)) */
@@ -177,7 +178,7 @@ export const getAmenityLabelKey = (id: number): string =>
 export const getAmenityLabel = (id: number): string =>
   AMENITIES_LIST[id] ?? `#${id}`;
 
-/** {id, text} options for checkboxes (IDs 1–14). */
+/** {id, text} options for checkboxes (IDs 1–15). */
 export const AMENITY_OPTIONS = AMENITIES_LIST.flatMap((text, id) =>
   id === 0 || text === undefined ? [] : [{ id, text }]
 );
