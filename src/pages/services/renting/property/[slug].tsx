@@ -260,18 +260,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       return urlParts.join('-').replace(/--+/g, '-');
     };
 
-    const correctSlug = generatePropertySlug(property);
-    
-    // If accessed with old format or incorrect slug, redirect to correct SEO-friendly URL
-    if (slug !== correctSlug) {
-      const localePrefix = context.locale && context.locale !== (context.defaultLocale || 'en') ? `/${context.locale}` : '';
-      return {
-        redirect: {
-          destination: `${localePrefix}/services/renting/property/${correctSlug}`,
-          permanent: false,
-        },
-      };
-    }
+    // We intentionally do NOT redirect to a locale-specific canonical slug here.
+    // Reason: when the user switches language, we want to preserve the current URL/slug
+    // and only change the language. Canonical URL is still handled via <link rel="canonical">.
 
     return {
       props: {

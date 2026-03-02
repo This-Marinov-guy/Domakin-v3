@@ -159,9 +159,11 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
     },
   ].filter((item) => item.content && item.content !== "" && item.content !== "—");
 
-  const showAmenitiesCol = AMENITY_OPTIONS.length > 0 && amenityIdsSet.size > 0;
-  const showSharedSpaceCol = SHARED_SPACE_OPTIONS.length > 0 && sharedSpaceIdsSet.size > 0;
-  const hasAmenitiesOrSharedSpace = showAmenitiesCol || showSharedSpaceCol;
+  const availableAmenities = AMENITY_OPTIONS.filter(({ id }) => amenityIdsSet.has(id));
+  const availableSharedSpaces = SHARED_SPACE_OPTIONS.filter(({ id }) => sharedSpaceIdsSet.has(id));
+
+  const showAmenitiesCol = availableAmenities.length > 0;
+  const showSharedSpaceCol = availableSharedSpaces.length > 0;
 
   return (
     <>
@@ -198,16 +200,12 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
               {t("property.amenities") || "Amenities"}
             </div>
             <div className="d-flex flex-wrap gap-2">
-              {AMENITY_OPTIONS.map(({ id }) => {
+              {availableAmenities.map(({ id }) => {
                 const label = getTranslatedEnum(t, getAmenityLabelKey(id), getAmenityLabel(id));
-                const available = amenityIdsSet.has(id);
                 return (
                   <span
                     key={id}
-                    className={`d-inline-flex align-items-center border-10 p-15 fs-14 fw-500 ${available
-                      ? "bg-blue text-white"
-                      : "bg-light opacity-50 text-muted"
-                      }`}
+                    className="d-inline-flex align-items-center border-10 p-15 fs-14 fw-500 bg-blue text-white"
                   >
                     {label}
                   </span>
@@ -223,16 +221,12 @@ const CommonPropertyOverview = ({ property, extendedData }: any) => {
               {t("property.shared_space") || "Shared space"}
             </div>
             <div className="d-flex flex-wrap gap-2">
-              {SHARED_SPACE_OPTIONS.map(({ id }) => {
+              {availableSharedSpaces.map(({ id }) => {
                 const label = getTranslatedEnum(t, getSharedSpaceLabelKey(id), getSharedSpaceLabel(id));
-                const available = sharedSpaceIdsSet.has(id);
                 return (
                   <span
                     key={id}
-                    className={`d-inline-flex align-items-center border-10 p-15 fs-14 fw-500 ${available
-                      ? "bg-blue text-white"
-                      : "bg-light opacity-50 text-muted"
-                      }`}
+                    className="d-inline-flex align-items-center border-10 p-15 fs-14 fw-500 bg-blue text-white"
                   >
                     {label}
                   </span>
