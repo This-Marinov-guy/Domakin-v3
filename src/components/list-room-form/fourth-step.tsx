@@ -9,7 +9,15 @@ import useTranslation from "next-translate/useTranslation";
 import { FiChevronDown, FiChevronUp, FiInfo } from "react-icons/fi";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
-import { AMENITY_OPTIONS, SHARED_SPACE_OPTIONS } from "@/utils/defines";
+import {
+    AMENITY_OPTIONS,
+    SHARED_SPACE_OPTIONS,
+    getAmenityLabel,
+    getAmenityLabelKey,
+    getSharedSpaceLabel,
+    getSharedSpaceLabelKey,
+    getTranslatedEnum,
+} from "@/utils/defines";
 import { turnDecimalToInteger } from "@/utils/helpers";
 
 const toInputValue = (val: any): number | string =>
@@ -48,8 +56,20 @@ function FourthStep({
 
     const amenitiesSorted = useMemo(
         () =>
-            AMENITY_OPTIONS.map(({ id, text: label }) => ({ id, label })),
-        []
+            AMENITY_OPTIONS.map(({ id }) => ({
+                id,
+                label: getTranslatedEnum(t, getAmenityLabelKey(id), getAmenityLabel(id)),
+            })),
+        [t]
+    );
+
+    const sharedSpacesSorted = useMemo(
+        () =>
+            SHARED_SPACE_OPTIONS.map(({ id }) => ({
+                id,
+                label: getTranslatedEnum(t, getSharedSpaceLabelKey(id), getSharedSpaceLabel(id)),
+            })),
+        [t]
     );
 
     const flatmatesMaleCount = Math.max(0, parseInt(String(pd?.flatmatesMale ?? "0"), 10) || 0);
@@ -421,7 +441,7 @@ function FourthStep({
                     <small className="d-block">* {t("list_room_steps.fourth.select_multiple")}</small>
 
                     <div className="row g-2 mt-3">
-                        {SHARED_SPACE_OPTIONS.map(({ id, text: label }) => {
+                        {sharedSpacesSorted.map(({ id, label }) => {
                             const inputId = `shared-space-${id}`;
                             const checked = selectedSharedSpaces.includes(id);
                             return (

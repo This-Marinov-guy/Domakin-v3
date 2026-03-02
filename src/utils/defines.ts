@@ -150,25 +150,28 @@ export const FURNISHED_TYPES = FURNISHED_TYPE_LABELS.flatMap((text, value) =>
   value === 0 || text === undefined ? [] : [{ value, text }]
 );
 
-// Amenities — DB values 1–15 (index = id); 0 is unused; append new values at the end
-const AMENITIES_LIST: readonly (string | undefined)[] = [
-  undefined,           // 0 unused
-  "Air Conditioning",  // 1
-  "Washing Machine",   // 2
-  "Dishwasher",        // 3
-  "Microwave",         // 4
-  "Stove",             // 5
-  "Oven",              // 6
-  "Bike Space",        // 7
-  "Garage",            // 8
-  "Parking",           // 9
-  "Storage Space",     // 10
-  "Garden",            // 11
-  "Disabled Access",   // 12
-  "Wi-fi",             // 13
-  "BBQ",               // 14
-  "Balcony",           // 15
-];
+// Amenities — single source of truth: id → { text, order }.
+// - IDs must stay stable (DB).
+// - Change `order` to reorder in UI without changing ids.
+// - Add new amenities by adding a new id entry.
+const AMENITIES: Record<number, { text: string; order: number }> = {
+  1: { text: "Air Conditioning", order: 1 },
+  2: { text: "Washing Machine", order: 2 },
+  16: { text: "Dryer", order: 3 }, // placed after washing machine without changing existing ids
+  3: { text: "Dishwasher", order: 4 },
+  4: { text: "Microwave", order: 5 },
+  5: { text: "Stove", order: 6 },
+  6: { text: "Oven", order: 7 },
+  7: { text: "Bike Space", order: 8 },
+  8: { text: "Garage", order: 9 },
+  9: { text: "Parking", order: 10 },
+  10: { text: "Storage Space", order: 11 },
+  11: { text: "Garden", order: 12 },
+  12: { text: "Disabled Access", order: 13 },
+  13: { text: "Wi-fi", order: 14 },
+  14: { text: "BBQ", order: 15 },
+  15: { text: "Balcony", order: 16 },
+};
 
 /** Translation key: t(getAmenityLabelKey(id)) */
 export const getAmenityLabelKey = (id: number): string =>
@@ -176,23 +179,23 @@ export const getAmenityLabelKey = (id: number): string =>
 
 /** Fallback English label for amenity id. */
 export const getAmenityLabel = (id: number): string =>
-  AMENITIES_LIST[id] ?? `#${id}`;
+  AMENITIES[id]?.text ?? `#${id}`;
 
-/** {id, text} options for checkboxes (IDs 1–15). */
-export const AMENITY_OPTIONS = AMENITIES_LIST.flatMap((text, id) =>
-  id === 0 || text === undefined ? [] : [{ id, text }]
-);
+/** {id, text} options for checkboxes, in display order. */
+export const AMENITY_OPTIONS = Object.entries(AMENITIES)
+  .map(([id, { text, order }]) => ({ id: Number(id), text, order }))
+  .sort((a, b) => a.order - b.order)
+  .map(({ id, text }) => ({ id, text }));
 
-// Shared space — DB values 1–6 (index = id); 0 is unused; append new values at the end
-const SHARED_SPACE_LIST: readonly (string | undefined)[] = [
-  undefined,       // 0 unused
-  "Balcony",       // 1
-  "Kitchen",       // 2
-  "Bathroom",      // 3
-  "Toilet",        // 4
-  "Storage space", // 5
-  "Living room",   // 6
-];
+// Shared space — single source of truth: id → { text, order } (same idea as amenities).
+const SHARED_SPACE: Record<number, { text: string; order: number }> = {
+  1: { text: "Balcony", order: 1 },
+  2: { text: "Kitchen", order: 2 },
+  3: { text: "Bathroom", order: 3 },
+  4: { text: "Toilet", order: 4 },
+  5: { text: "Storage space", order: 5 },
+  6: { text: "Living room", order: 6 },
+};
 
 /** Translation key: t(getSharedSpaceLabelKey(id)) */
 export const getSharedSpaceLabelKey = (id: number): string =>
@@ -200,12 +203,13 @@ export const getSharedSpaceLabelKey = (id: number): string =>
 
 /** Fallback English label for shared space id. */
 export const getSharedSpaceLabel = (id: number): string =>
-  SHARED_SPACE_LIST[id] ?? `#${id}`;
+  SHARED_SPACE[id]?.text ?? `#${id}`;
 
-/** {id, text} options for checkboxes (IDs 1–6). */
-export const SHARED_SPACE_OPTIONS = SHARED_SPACE_LIST.flatMap((text, id) =>
-  id === 0 || text === undefined ? [] : [{ id, text }]
-);
+/** {id, text} options for checkboxes, in display order. */
+export const SHARED_SPACE_OPTIONS = Object.entries(SHARED_SPACE)
+  .map(([id, { text, order }]) => ({ id: Number(id), text, order }))
+  .sort((a, b) => a.order - b.order)
+  .map(({ id, text }) => ({ id, text }));
 
 /** Return translated label if key exists, otherwise fallback. Use: getTranslatedEnum(t, getXLabelKey(id), getXLabel(id)). */
 export const getTranslatedEnum = (
