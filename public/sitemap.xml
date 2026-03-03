@@ -551,16 +551,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.domakin.nl/services/renting/property/1013-groningen-room-with-a-private-bathroom-in-groningen"/>
   </url>
   <url>
-    <loc>https://www.domakin.nl/services/renting/property/1070-groningen-student-apartment-near-umcg-hospital</loc>
-    <lastmod>2026-03-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.domakin.nl/services/renting/property/1070-groningen-student-apartment-near-umcg-hospital"/>
-    <xhtml:link rel="alternate" hreflang="bg" href="https://www.domakin.nl/bg/services/renting/property/1070-groningen-student-apartment-near-umcg-hospital"/>
-    <xhtml:link rel="alternate" hreflang="el" href="https://www.domakin.nl/gr/services/renting/property/1070-groningen-student-apartment-near-umcg-hospital"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.domakin.nl/services/renting/property/1070-groningen-student-apartment-near-umcg-hospital"/>
-  </url>
-  <url>
     <loc>https://www.domakin.nl/services/renting/property/1016-groningen-available-room</loc>
     <lastmod>2026-03-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -611,16 +601,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.domakin.nl/services/renting/property/1094-groningen-fully-furnished-apartment-in-the-city-center-for-a-couple"/>
   </url>
   <url>
-    <loc>https://www.domakin.nl/services/renting/property/1077-leeuwarden-cozy-room-with-balcony-available</loc>
-    <lastmod>2026-03-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.domakin.nl/services/renting/property/1077-leeuwarden-cozy-room-with-balcony-available"/>
-    <xhtml:link rel="alternate" hreflang="bg" href="https://www.domakin.nl/bg/services/renting/property/1077-leeuwarden-cozy-room-with-balcony-available"/>
-    <xhtml:link rel="alternate" hreflang="el" href="https://www.domakin.nl/gr/services/renting/property/1077-leeuwarden-cozy-room-with-balcony-available"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.domakin.nl/services/renting/property/1077-leeuwarden-cozy-room-with-balcony-available"/>
-  </url>
-  <url>
     <loc>https://www.domakin.nl/services/renting/property/1054-amsterdam-spacious-furnished-living-room</loc>
     <lastmod>2026-03-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -669,6 +649,16 @@
     <xhtml:link rel="alternate" hreflang="bg" href="https://www.domakin.nl/bg/services/renting/property/1040-groningen-room-in-a-shared-appartment"/>
     <xhtml:link rel="alternate" hreflang="el" href="https://www.domakin.nl/gr/services/renting/property/1040-groningen-room-in-a-shared-appartment"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.domakin.nl/services/renting/property/1040-groningen-room-in-a-shared-appartment"/>
+  </url>
+  <url>
+    <loc>https://www.domakin.nl/services/renting/property/1070-groningen-student-apartment-near-umcg-hospital</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.domakin.nl/services/renting/property/1070-groningen-student-apartment-near-umcg-hospital"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://www.domakin.nl/bg/services/renting/property/1070-groningen-student-apartment-near-umcg-hospital"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.domakin.nl/gr/services/renting/property/1070-groningen-student-apartment-near-umcg-hospital"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.domakin.nl/services/renting/property/1070-groningen-student-apartment-near-umcg-hospital"/>
   </url>
   <url>
     <loc>https://www.domakin.nl/services/renting/property/1024-maastricht-available-room</loc>
