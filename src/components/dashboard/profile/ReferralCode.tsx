@@ -202,7 +202,8 @@ const ReferralCode = () => {
             </li>
           </ul>
 
-          <div className="gradient-blue-card mx-auto">
+// TODO: add better content to this banner
+          {/* <div className="gradient-blue-card mx-auto">
             <p>
               Refer a listed room:{" "}
               <strong>{REFERRAL_BONUS_LISTING} euro</strong>
@@ -210,7 +211,7 @@ const ReferralCode = () => {
             <p>
               All other referrals: <strong>{REFERRAL_BONUS_OTHERS} euro</strong>
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
       <Modal centered show={editModal} onHide={handleEditClose}>
