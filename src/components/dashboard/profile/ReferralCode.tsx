@@ -202,8 +202,8 @@ const ReferralCode = () => {
             </li>
           </ul>
 
-// TODO: add better content to this banner
           {/* <div className="gradient-blue-card mx-auto">
+            // TODO: add better content to this banner
             <p>
               Refer a listed room:{" "}
               <strong>{REFERRAL_BONUS_LISTING} euro</strong>
