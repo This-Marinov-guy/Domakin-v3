@@ -406,6 +406,7 @@ export const formatJsonKeyValuePairs = (jsonString: string, onlyValues: string[]
 
 export const parsePropertyPreviewData = (property: any) => {
   return {
+    ...property,
     ...property.personal_data,
     ...property.property_data,
   };

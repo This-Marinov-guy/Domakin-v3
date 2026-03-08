@@ -596,9 +596,7 @@ export default class PropertyStore {
     };
 
     if (data.terms) this.addListingData.terms = { ...this.addListingData.terms, ...data.terms };
-    if (data.referralCode !== undefined || data.referral_code !== undefined) {
-      this.addListingData.referralCode = data.referralCode ?? data.referral_code ?? "";
-    }
+    this.addListingData.referralCode = data.referralCode ?? data.referral_code ?? "";
 
     const images = flat.images;
     if (images !== undefined) {

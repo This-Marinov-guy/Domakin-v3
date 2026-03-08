@@ -14,6 +14,7 @@ import { getAmenityLabel, getAmenityLabelKey, getTranslatedEnum } from "@/utils/
 const FIELD_LABELS: Record<string, string> = {
   id: "ID",
   created_at: "Application date",
+  updated_at: "Updated at",
   name: "Name",
   surname: "Surname",
   phone: "Phone",
@@ -78,9 +79,22 @@ const ApplicationPreviewModal = () => {
       ? APPLICATION_STATUSES.find((s) => s.value === statusValue)?.text ?? String(statusValue)
       : "—";
 
+  const renderImages = (images: string[]): React.ReactNode => (
+    <div className="d-flex flex-wrap gap-2 mt-1">
+      {images.map((src, i) => (
+        <img
+          key={i}
+          src={src}
+          alt={`Image ${i + 1}`}
+          style={{ width: 100, height: 100, objectFit: "cover", borderRadius: 4, border: "1px solid #dee2e6" }}
+        />
+      ))}
+    </div>
+  );
+
   const toDisplayText = (key: string, val: unknown): React.ReactNode => {
     if (val == null || val === "") return null;
-    if (key === "created_at") return moment(String(val)).format("DD-MM-YYYY HH:mm");
+    if (key === "created_at" || key === "updated_at") return moment(String(val)).format("DD-MM-YYYY HH:mm");
     if (key === "letter") {
       const url = String(val);
       if (/^https?:\/\//i.test(url))
@@ -102,6 +116,15 @@ const ApplicationPreviewModal = () => {
         }
       }
       return String(val);
+    }
+    if (key === "images" || key === "property_data.images") {
+      const arr = Array.isArray(val)
+        ? (val as string[])
+        : typeof val === "string"
+        ? (() => { try { return JSON.parse(val) as string[]; } catch { return []; } })()
+        : [];
+      if (arr.length > 0) return renderImages(arr);
+      return null;
     }
     if (key === "property_data") return null;
     if (typeof val === "object" && val !== null) {
@@ -126,10 +149,10 @@ const ApplicationPreviewModal = () => {
         if (pd && typeof pd === "object") {
           for (const [k, v] of Object.entries(pd)) {
             if (v === undefined || v === null) continue;
-            const display =
-              typeof v === "object" ? JSON.stringify(v) : String(v);
+            const compositeKey = `property_data.${k}`;
+            const display = toDisplayText(compositeKey, v) ?? (typeof v === "object" ? JSON.stringify(v) : String(v));
             rows.push({
-              key: `property_data.${k}`,
+              key: compositeKey,
               label: k.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
               value: display,
             });

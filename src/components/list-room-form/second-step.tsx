@@ -22,14 +22,25 @@ function SecondStep({ steps, currentStep }: SecondStepProps) {
             addListingData: { personalData, terms, referralCode },
             updateListingData,
             errorFields,
+            referenceId,
         },
-        userStore: { user },
+        userStore: { user, referralCode: userReferralCode, loadReferralCode },
     } = useStore();
 
 
     useEffect(() => {
         prefillUserInfo((field: string, _: string, value: any) => updateListingData("personalData", field, value), user, null);
     }, [user, updateListingData]);
+
+    useEffect(() => {
+        loadReferralCode();
+    }, []);
+
+    useEffect(() => {
+        if (userReferralCode && !referralCode && !referenceId) {
+            updateListingData("referralCode", "", userReferralCode);
+        }
+    }, [userReferralCode]);
 
     return (
         <div className="list-room-modal__seventh-step list-room-modal__first-step">

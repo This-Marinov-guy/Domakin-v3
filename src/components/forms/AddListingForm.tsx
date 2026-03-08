@@ -70,7 +70,7 @@ const AddListingForm = () => {
       errorFields,
       setHasNewImages,
     },
-    userStore: { user, isUserFullySet },
+    userStore: { user, isUserFullySet, referralCode: userReferralCode, loadReferralCode },
     modalStore,
   } = useStore();
 
@@ -250,6 +250,16 @@ const AddListingForm = () => {
     prefillUserInfo((field: string, _: string, value: any) => updateListingData("personalData", field, value), user, propertyStore.addListingData?.personalData);
   }, [user]);
 
+  useEffect(() => {
+    loadReferralCode();
+  }, []);
+
+  useEffect(() => {
+    if (userReferralCode && !referralCode) {
+      updateListingData("referralCode", "", userReferralCode);
+    }
+  }, [userReferralCode]);
+
   return (
     <form className="form-style-one wow fadeInUp pt-40 pb-40">
       <div className="container m-a controls">
@@ -326,6 +336,20 @@ const AddListingForm = () => {
               </div>
             </div>
           }
+
+          <div className="col-6">
+            <div className="input-group-meta form-group mb-30">
+              <label htmlFor="">{t("emergency_housing.referral_code")}</label>
+              <Form.Control
+                type="text"
+                value={referralCode}
+                onChange={(e) => {
+                  updateListingData("referralCode", "", e.target.value);
+                }}
+                isInvalid={errorFields.includes("referralCode")}
+              />
+            </div>
+          </div>
         </div>
 
         <div className="row mt-20 mb-20">
@@ -775,20 +799,6 @@ const AddListingForm = () => {
                 isInvalid={errorFields.includes("propertyData.description")}
               />
               <small>* {t("emergency_housing.description_disclaimer")}</small>
-            </div>
-          </div>
-
-          <div className="col-6">
-            <div className="input-group-meta form-group mb-30">
-              <label htmlFor="">{t("emergency_housing.referral_code")}</label>
-              <Form.Control
-                type="text"
-                value={referralCode}
-                onChange={(e) => {
-                  updateListingData("referralCode", "", e.target.value);
-                }}
-                isInvalid={errorFields.includes("referralCode")}
-              />
             </div>
           </div>
 

@@ -94,7 +94,7 @@ const PropertyDataPreview = ({ onHide, data }: any) => {
   const availableTo = data?.availableTo ?? data?.available_to;
   const petsAllowed = data?.petsAllowed ?? data?.pets_allowed;
   const smokingAllowed = data?.smokingAllowed ?? data?.smoking_allowed;
-
+  
   return (
     <Modal show={!!data} onHide={onHide} size="lg" centered>
       <Modal.Header closeButton>
@@ -107,6 +107,7 @@ const PropertyDataPreview = ({ onHide, data }: any) => {
           <li>Name: {(data?.name ?? "-") + " " + (data?.surname ?? "-")}</li>
           <li>Phone: {data?.phone ?? "-"}</li>
           <li>Email: {data?.email ?? "-"}</li>
+          <li>Referral code: {data?.referral_code ?? "-"}</li>
         </ul>
 
         <h6>Property Details</h6>
