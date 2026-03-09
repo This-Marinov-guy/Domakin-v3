@@ -11,6 +11,8 @@ import SingleDatePicker from "../ui/inputs/dates/SingleDatePicker";
 import PrefixPhoneInput from "../ui/inputs/phone/PrefixPhoneInput";
 import NiceSelect from "@/ui/NiceSelect";
 import { prefillUserInfo, transformToFormData } from "@/utils/helpers";
+import SearchableCitySelect from "../ui/SearchableCitySelect";
+import { DUTCH_CITIES } from "@/utils/countries";
 
 const RoomSearchingForm = () => {
   const { t } = useTranslation("translations");
@@ -155,13 +157,13 @@ const RoomSearchingForm = () => {
         <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta form-group mb-30">
             <label htmlFor="">{t("emergency_housing.city")}</label>
-            <Form.Control
-              type="text"
+            <SearchableCitySelect
               value={searchingData.city}
-              onChange={(e) => {
-                updateSearchingData("city", "", e.target.value);
+              onChange={(value: string) => {
+                updateSearchingData("city", "", value);
               }}
               isInvalid={searchingErrorFields.includes("city")}
+              cities={DUTCH_CITIES}
             />
           </div>
         </div>
