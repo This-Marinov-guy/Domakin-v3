@@ -9,7 +9,13 @@ import { APPLICATION_STATUSES } from "@/utils/defines";
 import moment from "moment";
 import useTranslation from "next-translate/useTranslation";
 import { formatJsonKeyValuePairs } from "@/utils/helpers";
-import { getAmenityLabel, getAmenityLabelKey, getTranslatedEnum } from "@/utils/defines";
+import {
+  getAmenityLabel,
+  getAmenityLabelKey,
+  getSharedSpaceLabel,
+  getSharedSpaceLabelKey,
+  getTranslatedEnum,
+} from "@/utils/defines";
 
 const FIELD_LABELS: Record<string, string> = {
   id: "ID",
@@ -95,6 +101,11 @@ const ApplicationPreviewModal = () => {
   const toDisplayText = (key: string, val: unknown): React.ReactNode => {
     if (val == null || val === "") return null;
     if (key === "created_at" || key === "updated_at") return moment(String(val)).format("DD-MM-YYYY HH:mm");
+    if (key === "property_id") {
+      const n = Number(val);
+      if (Number.isFinite(n)) return String(n + 1000);
+      return String(val);
+    }
     if (key === "letter") {
       const url = String(val);
       if (/^https?:\/\//i.test(url))
@@ -106,6 +117,62 @@ const ApplicationPreviewModal = () => {
       return url;
     }
     if (key === "status") return statusText;
+    if (key === "amenities" || key === "property_data.amenities") {
+      const raw = val;
+      let ids: number[] = [];
+      if (Array.isArray(raw)) {
+        ids = (raw as unknown[]).map((x) => Number(x)).filter((n) => !Number.isNaN(n));
+      } else if (typeof raw === "string") {
+        try {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            ids = (parsed as unknown[]).map((x) => Number(x)).filter((n) => !Number.isNaN(n));
+          } else {
+            ids = raw
+              .split(",")
+              .map((s) => parseInt(s.trim(), 10))
+              .filter((n) => !Number.isNaN(n));
+          }
+        } catch {
+          ids = raw
+            .split(",")
+            .map((s) => parseInt(s.trim(), 10))
+            .filter((n) => !Number.isNaN(n));
+        }
+      }
+      const labels = ids
+        .map((id) => getTranslatedEnum(t, getAmenityLabelKey(id), getAmenityLabel(id)))
+        .filter(Boolean);
+      return labels.length ? labels.join(", ") : null;
+    }
+    if (key === "shared_space" || key === "property_data.shared_space") {
+      const raw = val;
+      let ids: number[] = [];
+      if (Array.isArray(raw)) {
+        ids = (raw as unknown[]).map((x) => Number(x)).filter((n) => !Number.isNaN(n));
+      } else if (typeof raw === "string") {
+        try {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            ids = (parsed as unknown[]).map((x) => Number(x)).filter((n) => !Number.isNaN(n));
+          } else {
+            ids = raw
+              .split(",")
+              .map((s) => parseInt(s.trim(), 10))
+              .filter((n) => !Number.isNaN(n));
+          }
+        } catch {
+          ids = raw
+            .split(",")
+            .map((s) => parseInt(s.trim(), 10))
+            .filter((n) => !Number.isNaN(n));
+        }
+      }
+      const labels = ids
+        .map((id) => getTranslatedEnum(t, getSharedSpaceLabelKey(id), getSharedSpaceLabel(id)))
+        .filter(Boolean);
+      return labels.length ? labels.join(", ") : null;
+    }
     if (key === "property_title") {
       if (typeof val === "object" && val !== null) {
         try {
@@ -127,6 +194,44 @@ const ApplicationPreviewModal = () => {
       return null;
     }
     if (key === "property_data") return null;
+    if (key === "property_data.flatmates") {
+      const raw = val;
+      let male: number | null = null;
+      let female: number | null = null;
+      try {
+        if (Array.isArray(raw)) {
+          const arr = raw as unknown[];
+          if (arr.length > 0) male = Number(arr[0]);
+          if (arr.length > 1) female = Number(arr[1]);
+        } else if (typeof raw === "string") {
+          const trimmed = raw.trim();
+          if (trimmed.startsWith("[")) {
+            const arr = JSON.parse(trimmed) as unknown[];
+            if (arr.length > 0) male = Number(arr[0]);
+            if (arr.length > 1) female = Number(arr[1]);
+          } else if (trimmed.startsWith("{")) {
+            const obj = JSON.parse(trimmed) as { male?: unknown; female?: unknown };
+            if (obj.male != null) male = Number(obj.male);
+            if (obj.female != null) female = Number(obj.female);
+          } else {
+            const parts = trimmed.split(",").map((s) => s.trim());
+            if (parts.length > 0) male = Number(parts[0]);
+            if (parts.length > 1) female = Number(parts[1]);
+          }
+        } else if (typeof raw === "object" && raw !== null) {
+          const obj = raw as { male?: unknown; female?: unknown };
+          if (obj.male != null) male = Number(obj.male);
+          if (obj.female != null) female = Number(obj.female);
+        }
+      } catch {
+        // ignore parse errors
+      }
+      if (male == null && female == null) return null;
+      const maleText = Number.isFinite(male as number) ? `${male} male` : "";
+      const femaleText = Number.isFinite(female as number) ? `${female} female` : "";
+      const parts = [maleText, femaleText].filter(Boolean);
+      return parts.length ? parts.join(" / ") : null;
+    }
     if (typeof val === "object" && val !== null) {
       if (Array.isArray(val)) return JSON.stringify(val);
       return JSON.stringify(val);
@@ -185,10 +290,13 @@ const ApplicationPreviewModal = () => {
   }
 
   // Grouped sections
-  const metaKeys = new Set(["reference_id", "created_at", "updated_at"]);
+  const metaKeys = new Set(["reference_id", "created_at", "updated_at", "step"]);
   const personalKeys = new Set(["name", "surname", "email", "phone", "referral_code"]);
 
-  const metaRows = rows.filter((r) => metaKeys.has(r.key));
+  const metaOrder = ["reference_id", "created_at", "updated_at", "step"];
+  const metaRows = metaOrder
+    .map((k) => rows.find((r) => r.key === k))
+    .filter((r): r is { key: string; label: string; value: React.ReactNode } => Boolean(r));
   const propertyRows = rows.filter((r) => !metaKeys.has(r.key) && !personalKeys.has(r.key));
 
   const fullName = `${(entry?.name as string | undefined) ?? ""} ${(entry?.surname as string | undefined) ?? ""}`.trim();
