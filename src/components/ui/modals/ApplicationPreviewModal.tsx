@@ -184,6 +184,21 @@ const ApplicationPreviewModal = () => {
     }
   }
 
+  // Grouped sections
+  const metaKeys = new Set(["reference_id", "created_at", "updated_at"]);
+  const personalKeys = new Set(["name", "surname", "email", "phone", "referral_code"]);
+
+  const metaRows = rows.filter((r) => metaKeys.has(r.key));
+  const propertyRows = rows.filter((r) => !metaKeys.has(r.key) && !personalKeys.has(r.key));
+
+  const fullName = `${(entry?.name as string | undefined) ?? ""} ${(entry?.surname as string | undefined) ?? ""}`.trim();
+  const personalInfo = {
+    name: fullName || null,
+    email: (entry?.email as string | undefined) ?? null,
+    phone: (entry?.phone as string | undefined) ?? null,
+    referralCode: (entry?.referral_code as string | undefined) ?? null,
+  };
+
   return (
     <Modal show={isOpen} onHide={handleClose} size="lg" centered>
       <Modal.Header closeButton>
@@ -194,14 +209,60 @@ const ApplicationPreviewModal = () => {
           <p className="text-muted">No application data.</p>
         ) : (
           <>
-            <h6>Application details</h6>
-            <ul>
-              {rows.map(({ key, label, value }) => (
-                <li key={key}>
-                  {label}: {value}
-                </li>
-              ))}
-            </ul>
+            {/* Reference & timestamps */}
+            <h6 className="mb-2">Application info</h6>
+            <table className="table table-sm table-borderless mb-3">
+              <tbody>
+                {metaRows.map(({ key, label, value }) => (
+                  <tr key={key}>
+                    <td className="text-muted small pe-2">{label}</td>
+                    <td>{value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            {/* Personal info */}
+            <h6 className="mb-2">Personal info</h6>
+            <table className="table table-sm table-borderless mb-3">
+              <tbody>
+                {personalInfo.name && (
+                  <tr>
+                    <td className="text-muted small pe-2">Name</td>
+                    <td>{personalInfo.name}</td>
+                  </tr>
+                )}
+                {personalInfo.email && (
+                  <tr>
+                    <td className="text-muted small pe-2">Email</td>
+                    <td>{personalInfo.email}</td>
+                  </tr>
+                )}
+                {personalInfo.phone && (
+                  <tr>
+                    <td className="text-muted small pe-2">Phone</td>
+                    <td>{personalInfo.phone}</td>
+                  </tr>
+                )}
+                  <tr>
+                    <td className="text-muted small pe-2">Referral code</td>
+                    <td>{personalInfo?.referralCode ?? "-"}</td>
+                  </tr>
+              </tbody>
+            </table>
+
+            {/* Property data and other fields */}
+            <h6 className="mb-2">Property data</h6>
+            <table className="table table-sm table-borderless mb-0">
+              <tbody>
+                {propertyRows.map(({ key, label, value }) => (
+                  <tr key={key}>
+                    <td className="text-muted small pe-2">{label}</td>
+                    <td>{value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </>
         )}
       </Modal.Body>
