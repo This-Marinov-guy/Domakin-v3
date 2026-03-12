@@ -36,6 +36,15 @@ export default function Document() {
           data-key="0GB4Vkq+KdR17/QhsU/78Q"
           async
         />
+
+        {/* Datafast Analytics */}
+        <Script
+          defer
+          data-website-id="dfid_8Py0g1v6hae9btbAyWBTo"
+          data-domain="domakin.nl"
+          src="https://datafa.st/js/script.js"
+          strategy="afterInteractive"
+        />
       </Head>
       <body>
         <Main />
