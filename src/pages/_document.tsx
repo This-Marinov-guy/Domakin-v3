@@ -36,15 +36,6 @@ export default function Document() {
           data-key="0GB4Vkq+KdR17/QhsU/78Q"
           async
         />
-
-        {/* Mabel Analytics */}
-        <Script
-          defer
-          data-website-id="81cd401f-a630-4b6d-98b3-d95358779fe1"
-          data-domain="domakin.nl"
-          src="https://mabel-beige.vercel.app/js/script.js"
-          strategy="afterInteractive"
-        />
       </Head>
       <body>
         <Main />
