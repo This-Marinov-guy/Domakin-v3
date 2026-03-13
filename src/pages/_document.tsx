@@ -37,12 +37,12 @@ export default function Document() {
           async
         />
 
-        {/* Datafast Analytics */}
+        {/* Mabel Analytics */}
         <Script
           defer
-          data-website-id="dfid_8Py0g1v6hae9btbAyWBTo"
+          data-website-id="81cd401f-a630-4b6d-98b3-d95358779fe1"
           data-domain="domakin.nl"
-          src="https://datafa.st/js/script.js"
+          src="https://mabel-beige.vercel.app/js/script.js"
           strategy="afterInteractive"
         />
       </Head>
