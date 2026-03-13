@@ -23,6 +23,7 @@
     "@types/react-google-recaptcha": "^2.1.9",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
+    "datafast": "^2.0.1",
     "firebase": "^12.9.0",
     "framer-motion": "^11.18.2",
     "heic2any": "^0.0.4",

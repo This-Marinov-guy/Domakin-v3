@@ -1,5 +1,6 @@
 import React, { Fragment, Suspense, useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { initDataFast } from "datafast";
 import SEO from "./seo";
 import { useRouter } from "next/router";
 
@@ -15,6 +16,13 @@ const MyApp = ({ Component, pageProps }: any) => {
   const router = useRouter();
   const { lang } = useTranslation();
   
+  // Datafast analytics
+  useEffect(() => {
+    initDataFast({
+      websiteId: "dfid_Aw0DgTAlDjJ5ZzvzHnKKh",
+    }).catch(() => {});
+  }, []);
+
   // Normalize locale based on path prefix without logging
   useEffect(() => {
     if (router.asPath.startsWith('/bg') && router.locale !== 'bg') {
