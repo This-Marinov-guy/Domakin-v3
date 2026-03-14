@@ -119,6 +119,7 @@ const AgentsListBody = () => {
               <th className="text-center" scope="col">Name</th>
               <th className="text-center" scope="col">Email</th>
               <th className="text-center" scope="col">Referral Code</th>
+              <th className="text-center" scope="col">IBAN</th>
               <th className="text-center" scope="col">Role</th>
             </tr>
           </thead>

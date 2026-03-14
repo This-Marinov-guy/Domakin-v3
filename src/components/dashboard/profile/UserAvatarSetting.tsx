@@ -94,6 +94,19 @@ const UserAvatarSetting = () => {
         </div>
       </div>
 
+      <div className="col-sm-6">
+        <div className="dash-input-wrapper mb-30">
+          <label htmlFor="">IBAN</label>
+          <Form.Control
+            value={editUser.iban}
+            onChange={(e) => {
+              updateUserDetails("iban", e.target.value);
+            }}
+            type="text"
+          />
+        </div>
+      </div>
+
       <hr />
       <h6 className="mb-30">Change your password</h6>
 

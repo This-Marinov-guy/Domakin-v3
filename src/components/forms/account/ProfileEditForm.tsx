@@ -70,6 +70,7 @@ const ProfileEditForm = () => {
           name: responseData.data.user.name,
           email: responseData.data.user.email,
           phone: responseData.data.user.phone,
+          iban: responseData.data.user.iban || "",
         });
 
         showGeneralSuccess();

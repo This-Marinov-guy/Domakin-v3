@@ -33,6 +33,7 @@ export default class UserStore {
     lastName: "",
     email: "",
     phone: "",
+    iban: "",
     password: "",
     password_confirmation: "",
   };
@@ -85,7 +86,7 @@ export default class UserStore {
   @action setUser = async (session: any) => {
     const { data } = (await supabase
       .from("users")
-      .select("phone, profile_image, status, roles, name, email")
+      .select("phone, profile_image, status, roles, name, email, iban")
       .eq("id", session.user.id)
       .single()) ?? {
       phone: "",
@@ -175,6 +176,7 @@ export default class UserStore {
       lastName: this.user.name?.split(" ").slice(1).join(" ") || "",
       email: this.user.email,
       phone: this.user.phone,
+      iban: this.user.iban || "",
       password: "",
       password_confirmation: "",
     };

@@ -15,6 +15,7 @@ export interface AgentListItem {
   referral_code?: string;
   roles?: string;
   profile_image?: string;
+  iban?: string;
 }
 
 interface AgentsTableBodyProps {
@@ -86,6 +87,7 @@ const AgentsTableBody = ({
           <td className="center">{agent.name ?? "—"}</td>
           <td className="center">{agent.email ?? "—"}</td>
           <td className="center">{agent.referral_code ?? "—"}</td>
+          <td className="center">{agent.iban ?? "—"}</td>
           <td className="center">
             <span className="badge bg-success px-3 py-2">Agent</span>
           </td>
