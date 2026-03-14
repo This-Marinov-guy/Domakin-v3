@@ -12,6 +12,7 @@ import LongLoadingModal from "@/components/ui/modals/LongLoadingModal";
 import PaymentLinkModal from "@/components/ui/modals/PaymentLinkModal";
 import ApplicationsModal from "@/components/ui/modals/ApplicationsModal";
 import ApplicationPreviewModal from "@/components/ui/modals/ApplicationPreviewModal";
+import PromoteUsersModal from "@/components/ui/modals/PromoteUsersModal";
 
 function ModalsLayout() {
   return (
@@ -22,6 +23,7 @@ function ModalsLayout() {
       <PaymentLinkModal />
       <ApplicationsModal />
       <ApplicationPreviewModal />
+      <PromoteUsersModal />
     </>
   );
 }

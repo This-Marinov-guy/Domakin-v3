@@ -2,6 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { observer } from "mobx-react-lite";
+import { useStore } from "@/stores/storeContext";
 
 import dashboardLogo from "@/assets/images/logo/logo_01.svg";
 import dashboardIconActive_1 from "@/assets/images/dashboard/icon/icon_1_active.svg";
@@ -16,8 +18,6 @@ import dashboardIconActive_6 from "@/assets/images/dashboard/icon/icon_6_active.
 import dashboardIcon_6 from "@/assets/images/dashboard/icon/icon_6.svg";
 import dashboardIconActive_8 from "@/assets/images/dashboard/icon/icon_8_active.svg";
 import dashboardIcon_8 from "@/assets/images/dashboard/icon/icon_8.svg";
-import dashboardIconActive_9 from "@/assets/images/dashboard/icon/icon_9_active.svg";
-import dashboardIcon_9 from "@/assets/images/dashboard/icon/icon_9.svg";
 import dashboardIconActive_10 from "@/assets/images/dashboard/icon/icon_10_active.svg";
 import dashboardIcon_10 from "@/assets/images/dashboard/icon/icon_10.svg";
 import dashboardIcon_11 from "@/assets/images/dashboard/icon/icon_41.svg";
@@ -32,8 +32,9 @@ import dashboardIconActive_settings from "@/assets/images/dashboard/icon/icon_39
 import footerLogo from "@/assets/img/logo-transparent.png";
 import LogoutButton from "../Menu/LogoutButton";
 
-const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
+const DashboardHeaderOne = observer(({ isActive, setIsActive }: any) => {
   const pathname = usePathname();
+  const { userStore: { isAdmin } } = useStore();
 
   return (
     <aside className={`dash-aside-navbar ${isActive ? "show" : ""}`}>
@@ -183,6 +184,33 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
                 <span>Applications</span>
               </Link>
             </li>
+            {isAdmin && (
+              <>
+                <li className="bottom-line pt-30 lg-pt-20 mb-40 lg-mb-30"></li>
+                <li>
+                  <div className="nav-title">Admin</div>
+                </li>
+                <li className="plr">
+                  <Link
+                    href="/account/agents"
+                    className={`d-flex w-100 align-items-center ${
+                      pathname === "/account/agents" ? "active" : ""
+                    }`}
+                  >
+                    <i
+                      className="fas fa-briefcase"
+                      style={{
+                        fontSize: 22,
+                        width: 30,
+                        textAlign: "center",
+                        color: pathname === "/account/agents" ? "#fff" : undefined,
+                      }}
+                    />
+                    <span>Agents</span>
+                  </Link>
+                </li>
+              </>
+            )}
             {/* <li className="plr"><Link href="/account/favourites" className={`d-flex w-100 align-items-center ${pathname === '/dashboard/favourites' ? 'active' : ''}`}>
                      <Image src={pathname === '/dashboard/favourites' ? dashboardIconActive_8 : dashboardIcon_8} alt="" />
                      <span>Favourites</span>
@@ -225,6 +253,6 @@ const DashboardHeaderOne = ({ isActive, setIsActive }: any) => {
       </div>
     </aside>
   );
-};
+});
 
 export default DashboardHeaderOne;

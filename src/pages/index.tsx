@@ -24,6 +24,9 @@ const Index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
   );
 };
 
+const stripUndefined = (value: unknown): unknown =>
+  JSON.parse(JSON.stringify(value ?? null));
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const lang = context.locale || "en";
   const feedbacks = await fetchFeedbacks(lang);
@@ -31,8 +34,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      serverFeedbacks: feedbacks,
-      serverProperties: properties,
+      serverFeedbacks: stripUndefined(feedbacks),
+      serverProperties: stripUndefined(properties),
     },
   };
 };
