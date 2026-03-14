@@ -41,13 +41,15 @@ const index = ({ serverFeedbacks }: SupportProps) => {
   );
 };
 
+const stripUndefined = (value: any): any => JSON.parse(JSON.stringify(value ?? null));
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const lang = context.locale || "en";
   const feedbacks = await fetchFeedbacks(lang);
 
   return {
     props: {
-      serverFeedbacks: feedbacks,
+      serverFeedbacks: stripUndefined(feedbacks),
     },
   };
 };

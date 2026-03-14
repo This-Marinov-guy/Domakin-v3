@@ -75,6 +75,21 @@ export const PAYMENT_LINK_MODAL = "PAYMENT_LINK_MODAL";
 export const APPLICATION_MODAL = "APPLICATION_MODAL";
 export const APPLICATION_PREVIEW_MODAL = "APPLICATION_PREVIEW_MODAL";
 export const PROMOTE_USERS_MODAL = "PROMOTE_USERS_MODAL";
+export const REFERRAL_BONUS_EDIT_MODAL = "REFERRAL_BONUS_EDIT_MODAL";
+export const REFERRAL_BONUS_PREVIEW_MODAL = "REFERRAL_BONUS_PREVIEW_MODAL";
+
+export const REFERRAL_BONUS_STATUSES = [
+  { value: 1, text: "Waiting Approval" },
+  { value: 2, text: "Pending" },
+  { value: 3, text: "Completed" },
+  { value: 4, text: "Rejected" },
+];
+
+export const REFERRAL_BONUS_TYPES = [
+  { value: 1, text: "Listing" },
+  { value: 2, text: "Viewing" },
+  { value: 3, text: "Renting" },
+];
 
 // local storage
 export const LISTING_REFERENCE_ID = "listing_reference_id";

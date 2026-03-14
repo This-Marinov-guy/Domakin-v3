@@ -13,6 +13,7 @@ import PaymentLinkModal from "@/components/ui/modals/PaymentLinkModal";
 import ApplicationsModal from "@/components/ui/modals/ApplicationsModal";
 import ApplicationPreviewModal from "@/components/ui/modals/ApplicationPreviewModal";
 import PromoteUsersModal from "@/components/ui/modals/PromoteUsersModal";
+import ReferralBonusEditModal, { ReferralBonusPreviewModal } from "@/components/ui/modals/ReferralBonusEditModal";
 
 function ModalsLayout() {
   return (
@@ -24,6 +25,8 @@ function ModalsLayout() {
       <ApplicationsModal />
       <ApplicationPreviewModal />
       <PromoteUsersModal />
+      <ReferralBonusEditModal />
+      <ReferralBonusPreviewModal />
     </>
   );
 }

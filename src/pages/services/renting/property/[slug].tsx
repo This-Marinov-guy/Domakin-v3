@@ -193,6 +193,8 @@ const index = ({ serverProperties }: PropertyDetailsProps) => {
   );
 };
 
+const stripUndefined = (value: any): any => JSON.parse(JSON.stringify(value ?? null));
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const { slug } = context.params || {};
@@ -266,14 +268,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     return {
       props: {
-        serverProperties: allProperties,
+        serverProperties: stripUndefined(allProperties),
       },
     };
   } catch (error) {
     console.error('Error in property getServerSideProps:', error);
     return {
       props: {
-        serverProperties: [],
+        serverProperties: stripUndefined([]),
       },
     };
   }

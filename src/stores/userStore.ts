@@ -197,6 +197,10 @@ export default class UserStore {
     return this.user?.roles?.includes("admin") || false;
   }
 
+  @computed get isAgent() {
+    return this.user?.roles?.includes("agent") || false;
+  }
+
   @computed get isUserFullySet() {
     return (
       !!this.user?.name &&

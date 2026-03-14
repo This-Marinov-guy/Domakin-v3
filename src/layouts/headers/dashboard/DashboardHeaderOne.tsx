@@ -34,7 +34,7 @@ import LogoutButton from "../Menu/LogoutButton";
 
 const DashboardHeaderOne = observer(({ isActive, setIsActive }: any) => {
   const pathname = usePathname();
-  const { userStore: { isAdmin } } = useStore();
+  const { userStore: { isAdmin, isAgent } } = useStore();
 
   return (
     <aside className={`dash-aside-navbar ${isActive ? "show" : ""}`}>
@@ -184,12 +184,35 @@ const DashboardHeaderOne = observer(({ isActive, setIsActive }: any) => {
                 <span>Applications</span>
               </Link>
             </li>
-            {isAdmin && (
+            {(isAdmin || isAgent) && (
               <>
                 <li className="bottom-line pt-30 lg-pt-20 mb-40 lg-mb-30"></li>
                 <li>
-                  <div className="nav-title">Admin</div>
+                  <div className="nav-title">{isAdmin ? "Admin" : "Agent"}</div>
                 </li>
+                <li className="plr">
+                  <Link
+                    href="/account/referral-bonuses"
+                    className={`d-flex w-100 align-items-center ${
+                      pathname === "/account/referral-bonuses" ? "active" : ""
+                    }`}
+                  >
+                    <i
+                      className="fas fa-dollar-sign"
+                      style={{
+                        fontSize: 22,
+                        width: 30,
+                        textAlign: "center",
+                        color: pathname === "/account/referral-bonuses" ? "#fff" : undefined,
+                      }}
+                    />
+                    <span>Referral Bonuses</span>
+                  </Link>
+                </li>
+              </>
+            )}
+            {isAdmin && (
+              <>
                 <li className="plr">
                   <Link
                     href="/account/agents"

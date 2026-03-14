@@ -130,13 +130,15 @@ const index = ({ serverProperties }: PropertiesIndexProps) => {
   );
 };
 
+const stripUndefined = (value: any): any => JSON.parse(JSON.stringify(value ?? null));
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const lang = context.locale || "en";
   const properties = await fetchProperties(lang);
 
   return {
     props: {
-      serverProperties: properties,
+      serverProperties: stripUndefined(properties),
     },
   };
 };
