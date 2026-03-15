@@ -29,8 +29,8 @@ export default class UserStore {
   @observable user: any = null;
   @observable editUser = {
     profileImage: "",
-    firstName: "",
-    lastName: "",
+    name: "",
+    surname: "",
     email: "",
     phone: "",
     iban: "",
@@ -172,8 +172,8 @@ export default class UserStore {
 
     this.editUser = {
       ...this.editUser,
-      firstName: this.user.name || "",
-      lastName: this.user.surname || "",
+      name: this.user.name || "",
+      surname: this.user.surname || "",
       email: this.user.email,
       phone: this.user.phone,
       iban: this.user.iban || "",

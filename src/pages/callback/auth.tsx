@@ -27,20 +27,20 @@ export default function AuthCallback() {
           const meta = session.user.user_metadata ?? {};
           const identityMeta = session.user.identities?.[0]?.identity_data ?? {};
 
-          let firstName: string;
-          let lastName: string;
+          let name: string;
+          let surname: string;
 
           if (provider === "google") {
-            firstName = meta.given_name || identityMeta.given_name || "";
-            lastName = meta.family_name || identityMeta.family_name || "";
+            name = meta.given_name || identityMeta.given_name || "";
+            surname = meta.family_name || identityMeta.family_name || "";
           } else {
             const fullName = (meta.full_name || meta.name || identityMeta.full_name || identityMeta.name || "").trim();
             const parts = fullName.split(/\s+/);
-            firstName = parts[0] || "";
-            lastName = parts.slice(1).join(" ") || "";
+            name = parts[0] || "";
+            surname = parts.slice(1).join(" ") || "";
           }
 
-          if (!firstName) {
+          if (!name) {
             showGeneralError(t("api.general_error"));
             await supabase.auth.signOut();
             return router.push("/");
@@ -51,8 +51,8 @@ export default function AuthCallback() {
             "POST",
             {
               isSSO: true,
-              firstName,
-              lastName,
+              name,
+              surname,
               email: meta.email,
               phone: session.user.phone,
               profile_image: meta.picture ?? meta.avatar_url ?? null,
@@ -67,6 +67,7 @@ export default function AuthCallback() {
           } else if (responseData?.status) {
             router.push("/account");
           } else {
+            await supabase.auth.signOut();
             showGeneralError(t("api.general_error"));
             return router.push("/");
           }

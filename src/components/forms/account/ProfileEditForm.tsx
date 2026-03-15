@@ -65,9 +65,8 @@ const ProfileEditForm = () => {
       if (responseData?.status) {
         updateUser({
           profileImage: responseData.data.user.profile_image,
-          firstName: responseData.data.user.first_name || responseData.data.user.name?.split(" ")[0] || "",
-          lastName: responseData.data.user.last_name || responseData.data.user.name?.split(" ").slice(1).join(" ") || "",
-          name: responseData.data.user.name,
+          name: responseData.data.user.name, 
+          surname: responseData.data.user.surname,
           email: responseData.data.user.email,
           phone: responseData.data.user.phone,
           iban: responseData.data.user.iban || "",

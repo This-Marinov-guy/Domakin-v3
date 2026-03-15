@@ -15,8 +15,8 @@ import supabase from "@/utils/supabase";
 import { showGeneralError, showStandardNotification } from "@/utils/helpers";
 
 const defaultData = {
-  firstName: "",
-  lastName: "",
+  name: "",
+  surname: "",
   phone: "",
   email: "",
   password: "",
@@ -73,7 +73,7 @@ const RegisterForm = () => {
         password: form.password,
         phone: form.phone,
         options: {
-          data: { display_name: `${form.firstName} ${form.lastName}`.trim() },
+          data: { display_name: `${form.name} ${form.surname}`.trim() },
         },
       });
 
@@ -125,12 +125,12 @@ const RegisterForm = () => {
             <label htmlFor="">{tAccount("authentication.first_name")}</label>
             <Form.Control
               type="text"
-              name="firstName"
-              value={form.firstName}
+              name="name"
+              value={form.name}
               onChange={(e) => {
                 handleChange(e);
               }}
-              isInvalid={errors.includes("firstName")}
+              isInvalid={errors.includes("name")}
             />
           </div>
         </div>
@@ -140,12 +140,12 @@ const RegisterForm = () => {
             <label htmlFor="">{tAccount("authentication.last_name")}</label>
             <Form.Control
               type="text"
-              name="lastName"
-              value={form.lastName}
+              name="surname"
+              value={form.surname}
               onChange={(e) => {
                 handleChange(e);
               }}
-              isInvalid={errors.includes("lastName")}
+              isInvalid={errors.includes("surname")}
             />
           </div>
         </div>
