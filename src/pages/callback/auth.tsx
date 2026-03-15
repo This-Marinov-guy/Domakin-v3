@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { showGeneralError } from "@/utils/helpers";
@@ -8,7 +9,7 @@ import supabase from "@/utils/supabase";
 
 export default function AuthCallback() {
   const {
-    userStore: { setUser },
+    userStore: { user, setUser },
   } = useStore();
   const router = useRouter();
   const { sendRequest } = useServer();
@@ -23,52 +24,27 @@ export default function AuthCallback() {
         } = await supabase.auth.getSession();
 
         if (session) {
-          const provider = session.user.app_metadata?.provider;
-          const meta = session.user.user_metadata ?? {};
-          const identityMeta = session.user.identities?.[0]?.identity_data ?? {};
-
-          let name: string;
-          let surname: string;
-
-          if (provider === "google") {
-            name = meta.given_name || identityMeta.given_name || "";
-            surname = meta.family_name || identityMeta.family_name || "";
-          } else {
-            const fullName = (meta.full_name || meta.name || identityMeta.full_name || identityMeta.name || "").trim();
-            const parts = fullName.split(/\s+/);
-            name = parts[0] || "";
-            surname = parts.slice(1).join(" ") || "";
-          }
-
-          if (!name) {
-            showGeneralError(t("api.general_error"));
-            await supabase.auth.signOut();
-            return router.push("/");
-          }
+          await setUser(session);
 
           const responseData = await sendRequest(
             "/authentication/register",
             "POST",
             {
               isSSO: true,
-              name,
-              surname,
-              email: meta.email,
+              name: session.user.user_metadata.full_name?.split(" ")[0] ?? "Guest",
+              surname: session.user.user_metadata.full_name?.split(" ")[1] ?? "-", 
+              email: session.user.user_metadata.email,
               phone: session.user.phone,
-              profile_image: meta.picture ?? meta.avatar_url ?? null,
+              profile_image: session.user.user_metadata.avatar_url,
             }
           );
 
-          if (responseData?.status) {
-            await setUser(session);
-            if (sessionStorage.getItem("redirect")) {
-              router.push(sessionStorage.getItem("redirect") as string);
-              sessionStorage.removeItem("redirect");
-            } else {
-              router.push("/account");
-            }
+          if (responseData?.status && sessionStorage.getItem("redirect")) {
+            router.push(sessionStorage.getItem("redirect") as string);
+            sessionStorage.removeItem("redirect");
+          } else if (responseData?.status) {
+            router.push("/account");
           } else {
-            await supabase.auth.signOut();
             showGeneralError(t("api.general_error"));
             return router.push("/");
           }
