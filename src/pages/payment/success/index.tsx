@@ -5,6 +5,7 @@ export const metadata = {
    title: "Payment Success || Domakin - Real Estate Platform",
 };
 
+
 const index = () => {
    return (
       <Wrapper>
