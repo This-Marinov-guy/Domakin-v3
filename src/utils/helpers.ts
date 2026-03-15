@@ -354,8 +354,8 @@ export const prefillUserInfo = (callback: Function, user: any | null, currentDat
     return;
   }
 
-  if (!currentData?.name) callback("name", "", user.name.split(" ")[0] ?? "");
-  if (!currentData?.surname) callback("surname", "", user.name.split(" ")[1] ?? "-");
+  if (!currentData?.name) callback("name", "", user.name ?? "");
+  if (!currentData?.surname) callback("surname", "", user.surname ?? "");
   if (!currentData?.email) callback("email", "", user.email ?? "");
 
   // or else we will set the code to null

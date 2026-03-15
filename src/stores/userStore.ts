@@ -172,8 +172,8 @@ export default class UserStore {
 
     this.editUser = {
       ...this.editUser,
-      firstName: this.user.name?.split(" ")[0] || "",
-      lastName: this.user.name?.split(" ").slice(1).join(" ") || "",
+      firstName: this.user.name || "",
+      lastName: this.user.surname || "",
       email: this.user.email,
       phone: this.user.phone,
       iban: this.user.iban || "",
