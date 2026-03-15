@@ -23,9 +23,9 @@ export default function AuthCallback() {
           error,
         } = await supabase.auth.getSession();
 
-        if (session) {
-          await setUser(session);
+        console.log(session);
 
+        if (session) {
           const responseData = await sendRequest(
             "/authentication/register",
             "POST",
@@ -35,9 +35,13 @@ export default function AuthCallback() {
               surname: session.user.user_metadata.full_name?.split(" ")[1] ?? "-", 
               email: session.user.user_metadata.email,
               phone: session.user.phone,
-              profile_image: session.user.user_metadata.avatar_url,
+              profile_image: session.user.user_metadata.profile_image ?? session.user.user_metadata.avatar_urls[0],
             }
           );
+
+          if (responseData?.status) {
+            await setUser(responseData.data.user);
+          }
 
           if (responseData?.status && sessionStorage.getItem("redirect")) {
             router.push(sessionStorage.getItem("redirect") as string);
