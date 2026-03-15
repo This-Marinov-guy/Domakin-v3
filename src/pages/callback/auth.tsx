@@ -60,13 +60,14 @@ export default function AuthCallback() {
             }
           );
 
-          await setUser(session);
-
-          if (responseData?.status && sessionStorage.getItem("redirect")) {
-            router.push(sessionStorage.getItem("redirect") as string);
-            sessionStorage.removeItem("redirect");
-          } else if (responseData?.status) {
-            router.push("/account");
+          if (responseData?.status) {
+            await setUser(session);
+            if (sessionStorage.getItem("redirect")) {
+              router.push(sessionStorage.getItem("redirect") as string);
+              sessionStorage.removeItem("redirect");
+            } else {
+              router.push("/account");
+            }
           } else {
             await supabase.auth.signOut();
             showGeneralError(t("api.general_error"));
