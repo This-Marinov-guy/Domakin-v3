@@ -30,11 +30,10 @@ export default function AuthCallback() {
             "POST",
             {
               isSSO: true,
-              name: session.user.user_metadata.full_name?.split(" ")[0] ?? session.user.user_metadata.display_name,
-              surname: session.user.user_metadata.full_name?.split(" ")[1] ?? '-',
+              name: session.user.user_metadata.full_name ?? session.user.user_metadata.display_name ?? 'Guest User',
               email: session.user.user_metadata.email,
               phone: session.user.phone,
-              profile_image: session.user.user_metadata.picture ?? session.user.user_metadata.avatar_url,
+              profile_image: session.user.user_metadata.picture ?? session.user.user_metadata.avatar_url ?? null,
             }
           );
 
