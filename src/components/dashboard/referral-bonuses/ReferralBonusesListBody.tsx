@@ -133,10 +133,10 @@ const ReferralBonusesListBody = () => {
             </div>
             <div className="col-12 col-md-auto">
               <Form.Group>
-                <Form.Label className="small text-muted mb-1">User ID</Form.Label>
+                <Form.Label className="small text-muted mb-1">User name</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Filter by user ID..."
+                  placeholder="Filter by user name..."
                   value={userIdInput}
                   onChange={(e) => setUserIdInput(e.target.value)}
                 />
@@ -210,7 +210,7 @@ const ReferralBonusesListBody = () => {
           <thead>
             <tr>
               <th className="text-center" scope="col">ID</th>
-              {isAdmin && <th className="text-center" scope="col">User ID</th>}
+              {isAdmin && <th className="text-center" scope="col">User name</th>}
               <th className="text-center" scope="col">Referral Code</th>
               <th className="text-center" scope="col">Type</th>
               <th className="text-center" scope="col">Amount</th>

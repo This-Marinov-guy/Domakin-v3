@@ -5,7 +5,8 @@ import { useRouter } from "next/router";
 import Form from "react-bootstrap/Form";
 import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
-import { PROMOTE_USERS_MODAL } from "@/utils/defines";
+import { AGENT_EDIT_MODAL, AGENT_PREVIEW_MODAL, PROMOTE_USERS_MODAL } from "@/utils/defines";
+import type { AgentListItem } from "./AgentsTableBody";
 import AgentsTableBody from "./AgentsTableBody";
 
 const DEBOUNCE_MS = 400;
@@ -59,10 +60,18 @@ const AgentsListBody = () => {
     router.replace({ pathname: router.pathname, query: q }, undefined, { shallow: true });
   }, [isInitialized, filterSearch, filterReferralCode]);
 
+  const onSuccess = () => setRefreshKey((k) => k + 1);
+
   const openPromoteModal = () => {
-    modalStore.setActiveModal(PROMOTE_USERS_MODAL, {
-      onSuccess: () => setRefreshKey((k) => k + 1),
-    });
+    modalStore.setActiveModal(PROMOTE_USERS_MODAL, { onSuccess });
+  };
+
+  const openPreview = (agent: AgentListItem) => {
+    modalStore.setActiveModal(AGENT_PREVIEW_MODAL, { agent, onSuccess });
+  };
+
+  const openEdit = (agent: AgentListItem) => {
+    modalStore.setActiveModal(AGENT_EDIT_MODAL, { agent, onSuccess });
   };
 
   return (
@@ -121,6 +130,7 @@ const AgentsListBody = () => {
               <th className="text-center" scope="col">Referral Code</th>
               <th className="text-center" scope="col">IBAN</th>
               <th className="text-center" scope="col">Role</th>
+              <th className="text-center" scope="col">Actions</th>
             </tr>
           </thead>
           <AgentsTableBody
@@ -128,6 +138,8 @@ const AgentsListBody = () => {
             filterReferralCode={filterReferralCode}
             loadEnabled={isInitialized}
             refreshKey={refreshKey}
+            onPreview={openPreview}
+            onEdit={openEdit}
           />
         </table>
       </div>

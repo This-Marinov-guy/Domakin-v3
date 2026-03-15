@@ -23,6 +23,8 @@ interface AgentsTableBodyProps {
   filterReferralCode?: string;
   loadEnabled?: boolean;
   refreshKey?: number;
+  onPreview?: (agent: AgentListItem) => void;
+  onEdit?: (agent: AgentListItem) => void;
 }
 
 const AgentsTableBody = ({
@@ -30,6 +32,8 @@ const AgentsTableBody = ({
   filterReferralCode = "",
   loadEnabled = true,
   refreshKey = 0,
+  onPreview,
+  onEdit,
 }: AgentsTableBodyProps) => {
   const { sendRequest } = useServer();
   const paginationRef = useRef<PaginatedTableWrapperHandle>(null);
@@ -90,6 +94,24 @@ const AgentsTableBody = ({
           <td className="center">{agent.iban ?? "—"}</td>
           <td className="center">
             <span className="badge bg-success px-3 py-2">Agent</span>
+          </td>
+          <td className="center">
+            <div className="d-flex gap-2 justify-content-center">
+              <button
+                className="btn btn-sm btn-outline-secondary"
+                title="Preview"
+                onClick={() => onPreview?.(agent)}
+              >
+                <i className="fas fa-eye" />
+              </button>
+              <button
+                className="btn btn-sm btn-outline-primary"
+                title="Edit"
+                onClick={() => onEdit?.(agent)}
+              >
+                <i className="fas fa-pencil" />
+              </button>
+            </div>
           </td>
         </tr>
       ))}

@@ -14,6 +14,7 @@ import ApplicationsModal from "@/components/ui/modals/ApplicationsModal";
 import ApplicationPreviewModal from "@/components/ui/modals/ApplicationPreviewModal";
 import PromoteUsersModal from "@/components/ui/modals/PromoteUsersModal";
 import ReferralBonusEditModal, { ReferralBonusPreviewModal } from "@/components/ui/modals/ReferralBonusEditModal";
+import AgentEditModal, { AgentPreviewModal } from "@/components/ui/modals/AgentEditModal";
 
 function ModalsLayout() {
   return (
@@ -27,6 +28,8 @@ function ModalsLayout() {
       <PromoteUsersModal />
       <ReferralBonusEditModal />
       <ReferralBonusPreviewModal />
+      <AgentEditModal />
+      <AgentPreviewModal />
     </>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { observer } from "mobx-react-lite";
+import moment from "moment";
 import { useServer } from "@/hooks/useServer";
 import { showGeneralError, showStandardNotification } from "@/utils/helpers";
 import { REFERRAL_BONUS_STATUSES, REFERRAL_BONUS_TYPES } from "@/utils/defines";
@@ -12,6 +13,7 @@ import PaginatedTableWrapper, {
 export interface ReferralBonusItem {
   id: number;
   user_id?: string;
+  user_name?: string;
   referral_code: string;
   type: number;
   amount: number;
@@ -21,6 +23,7 @@ export interface ReferralBonusItem {
   internal_note?: string;
   metadata?: any;
   created_at: string;
+  updated_at?: string;
 }
 
 interface Props {
@@ -58,11 +61,7 @@ const statusBadgeClass = (status: number) => {
 
 const formatDate = (dateStr: string) => {
   if (!dateStr) return "—";
-  return new Date(dateStr).toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
+  return moment(dateStr).format("DD-MM-YY HH:mm");
 };
 
 const ReferralBonusesTableBody = ({
@@ -138,7 +137,7 @@ const ReferralBonusesTableBody = ({
           <td className="center">{bonus.id}</td>
           {isAdmin && (
             <td className="center" style={{ fontSize: 12, maxWidth: 160, wordBreak: "break-all" }}>
-              {bonus.user_id ?? "—"}
+              {bonus.user_name ?? "—"}
             </td>
           )}
           <td className="center">{bonus.referral_code ?? "—"}</td>
