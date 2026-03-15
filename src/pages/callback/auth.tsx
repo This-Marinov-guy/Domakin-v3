@@ -51,6 +51,7 @@ export default function AuthCallback() {
             "POST",
             {
               isSSO: true,
+              id: session.user.id,
               name,
               surname,
               email: meta.email,
