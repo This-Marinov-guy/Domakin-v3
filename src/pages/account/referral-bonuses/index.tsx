@@ -8,6 +8,9 @@ export const metadata = {
 const ReferralBonusesPage = () => {
   return (
     <DashboardFrame title="Referral Bonuses">
+      <div className="container mb-40">
+        Your referral bonuses for our services will be displayed here as well as their status and details. Make sure to save your IBAN in the profile section so any bonuses can be paid.
+      </div>
       <ReferralBonusesListBody />
     </DashboardFrame>
   );
