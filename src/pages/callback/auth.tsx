@@ -8,7 +8,7 @@ import supabase from "@/utils/supabase";
 
 export default function AuthCallback() {
   const {
-    userStore: { user, setUser },
+    userStore: { setUser },
   } = useStore();
   const router = useRouter();
   const { sendRequest } = useServer();
@@ -23,26 +23,43 @@ export default function AuthCallback() {
         } = await supabase.auth.getSession();
 
         if (session) {
-          await setUser(session);
+          const provider = session.user.app_metadata?.provider;
+          const meta = session.user.user_metadata ?? {};
+          const identityMeta = session.user.identities?.[0]?.identity_data ?? {};
+
+          let firstName: string;
+          let lastName: string;
+
+          if (provider === "google") {
+            firstName = meta.given_name || identityMeta.given_name || "";
+            lastName = meta.family_name || identityMeta.family_name || "";
+          } else {
+            const fullName = (meta.full_name || meta.name || identityMeta.full_name || identityMeta.name || "").trim();
+            const parts = fullName.split(/\s+/);
+            firstName = parts[0] || "";
+            lastName = parts.slice(1).join(" ") || "";
+          }
+
+          if (!firstName) {
+            showGeneralError(t("api.general_error"));
+            await supabase.auth.signOut();
+            return router.push("/");
+          }
 
           const responseData = await sendRequest(
             "/authentication/register",
             "POST",
             {
               isSSO: true,
-              firstName: (() => {
-                const parts = session.user.user_metadata.full_name?.trim().split(/\s+/) ?? [];
-                return parts[0] || 'Guest';
-              })(),
-              lastName: (() => {
-                const parts = session.user.user_metadata.full_name?.trim().split(/\s+/) ?? [];
-                return parts.slice(1).join(' ') || '';
-              })(),
-              email: session.user.user_metadata.email,
+              firstName,
+              lastName,
+              email: meta.email,
               phone: session.user.phone,
-              profile_image: session.user.user_metadata.picture ?? session.user.user_metadata.avatar_url ?? null,
+              profile_image: meta.picture ?? meta.avatar_url ?? null,
             }
           );
+
+          await setUser(session);
 
           if (responseData?.status && sessionStorage.getItem("redirect")) {
             router.push(sessionStorage.getItem("redirect") as string);

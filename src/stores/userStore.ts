@@ -86,7 +86,7 @@ export default class UserStore {
   @action setUser = async (session: any) => {
     const { data } = (await supabase
       .from("users")
-      .select("phone, profile_image, status, roles, name, email, iban")
+      .select("phone, profile_image, status, roles, name, surname, email, iban")
       .eq("id", session.user.id)
       .single()) ?? {
       phone: "",
