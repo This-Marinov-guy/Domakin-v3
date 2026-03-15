@@ -68,33 +68,28 @@ const RegisterForm = () => {
         return;
       }
 
-      const { data: {session, user}, error } = await supabase.auth.signUp({
-        email: form.email,
-        password: form.password,
-        phone: form.phone,
-        options: {
-          data: { display_name: `${form.name} ${form.surname}`.trim() },
-        },
-      });
-
-      if (error && error.code === 'user_already_exists') {
-        return showGeneralError(tAccount("authentication.errors.email_exists"));
-      } else if (error) {
-        return showGeneralError(tTranslations("api.general_error"));
-      }
-
       const responseData = await sendRequest("/authentication/register", "POST", {
         isSSO: false,
-        id: user?.id,
         ...form,
       });
 
+      if (responseData?.invalid_fields) {
+        setErrors(responseData.invalid_fields);
+      }
+
       if (responseData?.status) {
+        const { data: { session }, error } = await supabase.auth.signInWithPassword({
+          email: form.email,
+          password: form.password,
+        });
+
+        if (error || !session) {
+          return showGeneralError(tTranslations("api.general_error"));
+        }
+
         await userStore.setUser(session);
         modalStore.closeAll();
         router.push("/account");
-      } else if (responseData?.invalid_fields) {
-        setErrors(responseData.invalid_fields);
       }
     } catch (error) {
       showGeneralError(tTranslations("api.general_error"));
