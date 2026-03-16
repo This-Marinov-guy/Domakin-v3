@@ -140,15 +140,11 @@ const AuthModal = () => {
       }
 
       setMagicLoading(true);
-      const redirectTo =
-        typeof window !== "undefined"
-          ? `${window.location.origin}/account`
-          : undefined;
 
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: redirectTo,
+          emailRedirectTo: process.env.NEXT_PUBLIC_URL + "/account",
         },
       });
 
