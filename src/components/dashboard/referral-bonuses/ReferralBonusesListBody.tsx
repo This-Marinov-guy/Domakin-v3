@@ -7,7 +7,6 @@ import { useStore } from "@/stores/storeContext";
 import { observer } from "mobx-react-lite";
 import {
   REFERRAL_BONUS_EDIT_MODAL,
-  REFERRAL_BONUS_PREVIEW_MODAL,
   REFERRAL_BONUS_STATUSES,
   REFERRAL_BONUS_TYPES,
 } from "@/utils/defines";
@@ -98,10 +97,6 @@ const ReferralBonusesListBody = () => {
   }, [isInitialized, isAdmin, filterReferralCode, filterUserId, filterStatus, filterType, sortBy, sortDir]);
 
   const onSuccess = () => setRefreshKey((k) => k + 1);
-
-  const openPreview = (bonus: any) => {
-    modalStore.setActiveModal(REFERRAL_BONUS_PREVIEW_MODAL, { bonus, onSuccess });
-  };
 
   const openEdit = (bonus: any) => {
     modalStore.setActiveModal(REFERRAL_BONUS_EDIT_MODAL, { bonus, onSuccess });
@@ -229,7 +224,6 @@ const ReferralBonusesListBody = () => {
             sortDir={sortDir}
             refreshKey={refreshKey}
             loadEnabled={isInitialized}
-            onPreview={openPreview}
             onEdit={openEdit}
             onDeleteSuccess={onSuccess}
           />

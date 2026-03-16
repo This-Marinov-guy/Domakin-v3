@@ -71,11 +71,9 @@ const ReferralBonusEditModal = ({ previewOnly }: { previewOnly?: boolean }) => {
       const payload: Record<string, any> = {
         id: bonus!.id,
         referral_code: form.referral_code || undefined,
-        user_id: form.user_id || undefined,
         amount: form.amount !== "" ? Number(form.amount) : undefined,
         status: form.status ? Number(form.status) : undefined,
         type: form.type ? Number(form.type) : undefined,
-        reference_id: form.reference_id || undefined,
         public_note: form.public_note || undefined,
         internal_note: form.internal_note || undefined,
       };
@@ -127,19 +125,11 @@ const ReferralBonusEditModal = ({ previewOnly }: { previewOnly?: boolean }) => {
             />
           )
         )}
-        {fieldRow(
+        {isReadOnly && fieldRow(
           "User ID",
-          isReadOnly ? (
-            <div className="py-2 px-1" style={{ wordBreak: "break-all", fontSize: 13 }}>
-              {form.user_id || "—"}
-            </div>
-          ) : (
-            <Form.Control
-              type="text"
-              value={form.user_id}
-              onChange={(e) => handleChange("user_id", e.target.value)}
-            />
-          )
+          <div className="py-2 px-1" style={{ wordBreak: "break-all", fontSize: 13 }}>
+            {form.user_id || "—"}
+          </div>
         )}
         {fieldRow(
           "Amount (€)",
@@ -188,17 +178,9 @@ const ReferralBonusEditModal = ({ previewOnly }: { previewOnly?: boolean }) => {
             </Form.Select>
           )
         )}
-        {fieldRow(
+        {isReadOnly && fieldRow(
           "Reference ID",
-          isReadOnly ? (
-            <div className="py-2 px-1">{form.reference_id || "—"}</div>
-          ) : (
-            <Form.Control
-              type="text"
-              value={form.reference_id}
-              onChange={(e) => handleChange("reference_id", e.target.value)}
-            />
-          )
+          <div className="py-2 px-1">{form.reference_id || "—"}</div>
         )}
         {fieldRow(
           "Public Note",

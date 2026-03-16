@@ -335,7 +335,7 @@ export const showStandardNotification = (
   type: ToastType,
   message: ToastContent,
   options: ToastOptions = {}
-) => {
+) => {  
   (toast as any)[type](message, {
     position: "top-center",
     autoClose: 5000,

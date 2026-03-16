@@ -1,6 +1,6 @@
 import axios from "axios";
 import { GENERAL_ERROR_RESPONSE_CODES, SERVER_ENDPOINT } from "@/utils/config";
-import { ENV_PROD } from "@/utils/defines";
+import { ENV_PROD, SUCCESS_RESPONSE_CODES } from "@/utils/defines";
 import { useStore } from "@/stores/storeContext";
 import { toast } from "react-toastify";
 import { isEmpty } from "lodash";
@@ -161,8 +161,10 @@ export const useServer = () => {
       };
     }
 
+    let sendError = false;
+
     try {
-      const response = await axios.request(requestData);
+      const response = await axios.request(requestData);      
 
       if (options.withError && !response.data.status) {
         const errorMessage = getErrorMessage(response);        
@@ -182,7 +184,8 @@ export const useServer = () => {
         const data = err.response?.data;
         const hasStatus = data != null && Object.prototype.hasOwnProperty.call(data, "status");
         const statusOk = data?.status;
-        if (!hasStatus || !statusOk) {
+
+        if (!sendError && (!hasStatus || !statusOk)) {
           const httpStatus = err.response?.status;
           let errorMessage =
             GENERAL_ERROR_RESPONSE_CODES.includes(httpStatus)

@@ -88,7 +88,7 @@ const MainLayout = ({ children }: any) => {
       setInterval(async () => {
         await refreshSession();
       }, SESSION_REFRESH_INTERVAL);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -113,23 +113,19 @@ const MainLayout = ({ children }: any) => {
           <ModalsLayout />
           <ScrollToTop />
           {toastMounted &&
-            typeof document !== "undefined" &&
-            createPortal(
-              <ToastContainer
-                position="top-center"
-                autoClose={5000}
-                hideProgressBar={true}
-                newestOnTop={false}
-                closeOnClick={false}
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-                style={{ zIndex: 99999 }}
-              />,
-              document.body
-            )}
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={true}
+              newestOnTop={false}
+              closeOnClick={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+              style={{ zIndex: 99999 }}
+            />}
         </TrackingLayout>
       </StoreProvider>
     </ErrorLayout>

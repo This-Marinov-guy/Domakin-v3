@@ -24,7 +24,7 @@ import { useServer } from "@/hooks/useServer";
 import PropertyDataPreview from "@/components/ui/modals/PropertyDataPreview";
 import EditPropertyModal from "@/components/ui/modals/EditPropertyModal";
 import { PROPERTY_STATUS } from "@/utils/enum";
-import { APPLICATION_MODAL, EDIT_PROPERTY_MODAL, PROPERTY_ID_OFFSET } from "@/utils/defines";
+import { APPLICATION_MODAL, EDIT_PROPERTY_MODAL, POTENTIAL_SEARCHERS_MODAL, PROPERTY_ID_OFFSET } from "@/utils/defines";
 import { formatJsonKeyValuePairs, parsePropertyPreviewData, showGeneralError, showStandardNotification } from "@/utils/helpers";
 import StripePaymentLinkButton from "@/components/ui/buttons/StripePaymentLinkButton";
 import { getPropertyUrl } from "@/utils/seoHelpers";
@@ -73,6 +73,14 @@ const PropertyTableBody = () => {
         total: 0,
       },
     };
+  };
+
+  const openPotentialSearchersModal = (item: any) => {
+    modalStore.setActiveModal(POTENTIAL_SEARCHERS_MODAL, {
+      propertyId: item.id,
+      propertyCity: item.property_data?.city,
+      propertyTitle: formatJsonKeyValuePairs(item.property_data?.title, ['en']),
+    });
   };
 
   const openApplicationsModal = (item: any) => {
@@ -273,6 +281,14 @@ const PropertyTableBody = () => {
                           onClick={() => openApplicationsModal(item)}
                         >
                           <i className="fas fa-users"></i> Applications
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          className="dropdown-item"
+                          onClick={() => openPotentialSearchersModal(item)}
+                        >
+                          <i className="fas fa-search"></i> Potential Searchers
                         </button>
                       </li>
                       <li>

@@ -73,6 +73,7 @@ export const EDIT_PROPERTY_MODAL = "EDIT_PROPERTY_MODAL";
 export const LONG_LOADING_MODAL = "LONG_LOADING_MODAL";
 export const PAYMENT_LINK_MODAL = "PAYMENT_LINK_MODAL";
 export const APPLICATION_MODAL = "APPLICATION_MODAL";
+export const POTENTIAL_SEARCHERS_MODAL = "POTENTIAL_SEARCHERS_MODAL";
 export const APPLICATION_PREVIEW_MODAL = "APPLICATION_PREVIEW_MODAL";
 export const PROMOTE_USERS_MODAL = "PROMOTE_USERS_MODAL";
 export const REFERRAL_BONUS_EDIT_MODAL = "REFERRAL_BONUS_EDIT_MODAL";
@@ -91,6 +92,7 @@ export const REFERRAL_BONUS_TYPES = [
   { value: 1, text: "Listing" },
   { value: 2, text: "Viewing" },
   { value: 3, text: "Renting" },
+  { value: 4, text: "Application" },
 ];
 
 // local storage
@@ -240,3 +242,5 @@ export const getTranslatedEnum = (
 };
 
 export const FCM_TOKEN_KEY = 'fcm_token_registered';
+
+export const SUCCESS_RESPONSE_CODES = [200, 201, 202, 203, 204];
