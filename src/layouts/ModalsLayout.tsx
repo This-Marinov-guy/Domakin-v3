@@ -15,7 +15,7 @@ import PotentialSearchersModal from "@/components/ui/modals/PotentialSearchersMo
 import ApplicationPreviewModal from "@/components/ui/modals/ApplicationPreviewModal";
 import PromoteUsersModal from "@/components/ui/modals/PromoteUsersModal";
 import ReferralBonusEditModal from "@/components/ui/modals/ReferralBonusEditModal";
-import AgentEditModal, { AgentPreviewModal } from "@/components/ui/modals/AgentEditModal";
+import AgentEditModal from "@/components/ui/modals/AgentEditModal";
 
 function ModalsLayout() {
   return (
@@ -30,7 +30,7 @@ function ModalsLayout() {
       <PromoteUsersModal />
       <ReferralBonusEditModal />
       <AgentEditModal />
-      <AgentPreviewModal />
+      <AgentEditModal previewOnly />
     </>
   );
 }

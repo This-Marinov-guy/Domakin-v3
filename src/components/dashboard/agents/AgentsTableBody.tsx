@@ -96,21 +96,27 @@ const AgentsTableBody = ({
             <span className="badge bg-success px-3 py-2">Agent</span>
           </td>
           <td className="center">
-            <div className="d-flex gap-2 justify-content-center">
+            <div className="action-dots float-end">
               <button
-                className="btn btn-sm btn-outline-secondary"
-                title="Preview"
-                onClick={() => onPreview?.(agent)}
+                className="action-btn dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
-                <i className="fas fa-eye" />
+                <span></span>
               </button>
-              <button
-                className="btn btn-sm btn-outline-primary"
-                title="Edit"
-                onClick={() => onEdit?.(agent)}
-              >
-                <i className="fas fa-pencil" />
-              </button>
+              <ul className="dropdown-menu dropdown-menu-end">
+                <li>
+                  <button className="dropdown-item" onClick={() => onPreview?.(agent)}>
+                    <i className="fas fa-eye me-2" /> Preview
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item" onClick={() => onEdit?.(agent)}>
+                    <i className="fas fa-pencil me-2" /> Edit
+                  </button>
+                </li>
+              </ul>
             </div>
           </td>
         </tr>

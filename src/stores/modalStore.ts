@@ -1,4 +1,4 @@
-import { APPLICATION_MODAL, APPLICATION_PREVIEW_MODAL, COOKIE_MODAL, EDIT_PROPERTY_MODAL, LOGIN_MODAL, LONG_LOADING_MODAL, PAYMENT_LINK_MODAL, PROMOTE_USERS_MODAL, REFERRAL_BONUS_EDIT_MODAL, REFERRAL_BONUS_PREVIEW_MODAL } from "@/utils/defines";
+import { AGENT_EDIT_MODAL, AGENT_PREVIEW_MODAL, APPLICATION_MODAL, APPLICATION_PREVIEW_MODAL, COOKIE_MODAL, EDIT_PROPERTY_MODAL, LOGIN_MODAL, LONG_LOADING_MODAL, PAYMENT_LINK_MODAL, POTENTIAL_SEARCHERS_MODAL, PROMOTE_USERS_MODAL, REFERRAL_BONUS_EDIT_MODAL, REFERRAL_BONUS_PREVIEW_MODAL } from "@/utils/defines";
 import { makeAutoObservable, toJS } from "mobx";
 
 export interface ModalSettingsType {
@@ -26,6 +26,9 @@ const initialValues = {
   [PROMOTE_USERS_MODAL]: false,
   [REFERRAL_BONUS_EDIT_MODAL]: false,
   [REFERRAL_BONUS_PREVIEW_MODAL]: false,
+  [AGENT_EDIT_MODAL]: false,
+  [AGENT_PREVIEW_MODAL]: false,
+  [POTENTIAL_SEARCHERS_MODAL]: false,
 };
 
 export default class ModalStore {
@@ -76,7 +79,7 @@ export default class ModalStore {
   }
 
   resetModal = () => {
-    this.modals = initialValues;
+    this.modals = { ...initialValues };
     this.modalSettings = defaultModalSettings;
   }
 
