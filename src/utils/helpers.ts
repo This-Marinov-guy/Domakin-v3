@@ -359,7 +359,7 @@ export const prefillUserInfo = (callback: Function, user: any | null, currentDat
   if (!currentData?.email) callback("email", "", user.email ?? "");
 
   // or else we will set the code to null
-  if (currentData?.phone?.length < 5 && user.phone) {
+  if (currentData?.phone?.length < 6 && user.phone) {
     callback("phone", "", user.phone ?? "");
   }
 };
