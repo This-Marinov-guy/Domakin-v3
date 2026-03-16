@@ -116,6 +116,21 @@ const RegisterForm = () => {
           </div>
         </div>
 
+        <div className="col-12">
+          <div className="input-group-meta position-relative mb-25">
+            <label htmlFor="">{tAccount("authentication.phone")}</label>
+            <PrefixPhoneInput
+              value={form.phone}
+              onChange={(value: string) => {
+                setForm((prevState) => {
+                  return { ...prevState, phone: value };
+                });
+              }}
+              isInvalid={errors.includes("phone")}
+            />
+          </div>
+        </div>
+
         <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta position-relative mb-25">
             <label htmlFor="">{tAccount("authentication.first_name")}</label>
@@ -146,20 +161,7 @@ const RegisterForm = () => {
           </div>
         </div>
 
-        <div className="col-lg-6 col-md-6 col-12">
-          <div className="input-group-meta position-relative mb-25">
-            <label htmlFor="">{tAccount("authentication.phone")}</label>
-            <PrefixPhoneInput
-              value={form.phone}
-              onChange={(value: string) => {
-                setForm((prevState) => {
-                  return { ...prevState, phone: value };
-                });
-              }}
-              isInvalid={errors.includes("phone")}
-            />
-          </div>
-        </div>
+       
 
         <div className="col-lg-6 col-md-6 col-12">
           <div className="input-group-meta position-relative mb-20">

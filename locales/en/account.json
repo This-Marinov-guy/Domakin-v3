@@ -19,6 +19,13 @@
         "already_registered": "Already have an account?",
         "terms": "By hitting the Register button, you agree to the <link>Terms & Conditions</link>",
 
+        "magic_link": "Magic link",
+        "magic_link_email_required": "Please enter your email address to receive a magic link.",
+        "magic_link_sent": "We sent you a magic link. Please check your email.",
+        "magic_link_error": "We could not send the magic link. Please try again.",
+        "magic_link_prompt": "Enter your email address to receive a magic link:",
+        "magic_link_tooltip": "We’ll email you a secure, one-time login link. No password needed.",
+
         "errors" : {
             "email": "Please enter a valid email address",
             "email_exists": "This email is already registered",

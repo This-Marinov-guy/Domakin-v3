@@ -20,7 +20,12 @@ const defaultData = {
   keepLogged: true,
 };
 
-const LoginForm = () => {
+interface LoginFormProps {
+  onEmailChange?: (email: string) => void;
+  emailErrorExternal?: boolean;
+}
+
+const LoginForm = ({ onEmailChange, emailErrorExternal }: LoginFormProps) => {
   const { t } = useTranslation("account");
 
   const { modalStore } = useStore();
@@ -35,32 +40,99 @@ const LoginForm = () => {
   const [form, setForm] = useState(defaultData);
   const [errors, setErrors] = useState<string[]>([]);
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
+  const [isSendingMagicLink, setIsSendingMagicLink] = useState(false);
 
   const togglePasswordVisibility = () => {
     setPasswordVisibility(!isPasswordVisible);
   };
 
   const handleChange = (e: any) => {
+    const { name, value } = e.target;
     setForm((prevState) => {
-      return { ...prevState, [e.target.name]: e.target.value };
+      return { ...prevState, [name]: value };
     });
+    if (name === "email") {
+      onEmailChange?.(value);
+    }
   };
 
-  // TODO: Implement the Forgotten Password function
-  const handleChangePass = (e: any) => {
-    toast.warning(
-      "Changing password is currently not available - please contact support for help!",
-      {
+  const sendMagicLink = async () => {
+    const emailRequiredMessage =
+      (t("authentication.magic_link_email_required") as string) ||
+      "Please enter your email address to receive a magic link.";
+
+    if (!form.email.trim()) {
+      toast.error(emailRequiredMessage as any, {
         position: "top-center",
-        autoClose: 10000,
+        autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
         theme: "colored",
+      });
+      return;
+    }
+
+    try {
+      setIsSendingMagicLink(true);
+      startLoading();
+      const redirectTo =
+        typeof window !== "undefined"
+          ? `${window.location.origin}/account`
+          : undefined;
+
+      const { error } = await supabase.auth.signInWithOtp({
+        email: form.email.trim(),
+        options: {
+          emailRedirectTo: redirectTo,
+        },
+      });
+
+      const genericErrorMessage =
+        (t("authentication.magic_link_error") as string) ||
+        "We could not send the magic link. Please try again.";
+
+      if (error) {
+        toast.error((error.message || genericErrorMessage) as any, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        return;
       }
-    );
+
+      const successMessage =
+        (t("authentication.magic_link_sent") as string) ||
+        "We sent you a magic link. Please check your email.";
+
+      toast.success(successMessage as any, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    } catch (error) {
+      showGeneralError(t("api.general_error"));
+    } finally {
+      setIsSendingMagicLink(false);
+      stopLoading();
+    }
+  };
+
+  const handleChangePass = async (e: any) => {
+    e.preventDefault();
+    await sendMagicLink();
   };
 
   const signInWithPassword = async (e: any) => {
@@ -112,7 +184,7 @@ const LoginForm = () => {
               onChange={(e) => {
                 handleChange(e);
               }}
-              isInvalid={errors.includes("email")}
+              isInvalid={errors.includes("email") || emailErrorExternal}
             />
           </div>
         </div>
@@ -156,7 +228,7 @@ const LoginForm = () => {
               />
               <label>{t("authentication.keep_logged_in")}</label>
             </div>
-            <Link href="#" onClick={handleChangePass}>
+            <Link href="#" style={{ color: "black" }} onClick={handleChangePass}>
               {t("authentication.forgot_password")}
             </Link>
           </div>
@@ -164,11 +236,11 @@ const LoginForm = () => {
         <div className="col-12">
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || isSendingMagicLink}
             onClick={signInWithPassword}
             className="btn-two w-100 text-uppercase d-block mt-20"
           >
-            {loading ? <Spinner size='sm' animation="border"/> : t("authentication.log_in")}
+            {loading ? <Spinner size='sm' animation="border" /> : t("authentication.log_in")}
           </button>
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Modal from "react-bootstrap/Modal";
+import Spinner from "react-bootstrap/Spinner";
 import Link from "next/link";
 import LoginForm from "@/components/forms/LoginForm";
 import { useEffect, useState, useRef } from "react";
@@ -15,7 +16,10 @@ import { observer } from "mobx-react-lite";
 import { Provider } from "@supabase/supabase-js";
 import supabase from "@/utils/supabase";
 import useTranslation from "next-translate/useTranslation";
-import { showGeneralError, showStandardNotification } from "@/utils/helpers";
+import { showGeneralError } from "@/utils/helpers";
+import { toast } from "react-toastify";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const AuthModal = () => {
   const [isClient, setIsClient] = useState(false);
@@ -27,6 +31,10 @@ const AuthModal = () => {
     commonStore: { loading, startLoading, stopLoading },
   } = useStore();
   const router = useRouter();
+
+  const [loginEmail, setLoginEmail] = useState("");
+  const [magicEmailError, setMagicEmailError] = useState(false);
+  const [magicLoading, setMagicLoading] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -109,6 +117,80 @@ const AuthModal = () => {
     }
   };
 
+  const sendMagicLink = async () => {
+    try {
+      const email = loginEmail.trim();
+
+      if (!email) {
+        setMagicEmailError(true);
+        const msg =
+          (t("authentication.magic_link_email_required") as string) ||
+          "Please enter your email address to receive a magic link.";
+        toast.error(msg as any, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        return;
+      }
+
+      setMagicLoading(true);
+      const redirectTo =
+        typeof window !== "undefined"
+          ? `${window.location.origin}/account`
+          : undefined;
+
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: redirectTo,
+        },
+      });
+
+      const genericErrorMessage =
+        (t("authentication.magic_link_error") as string) ||
+        "We could not send the magic link. Please try again.";
+
+      if (error) {
+        toast.error((error.message || genericErrorMessage) as any, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        return;
+      }
+
+      const successMessage =
+        (t("authentication.magic_link_sent") as string) ||
+        "We sent you a magic link. Please check your email.";
+
+      toast.success(successMessage as any, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    } catch (error) {
+      showGeneralError(t("api.general_error"));
+    } finally {
+      setMagicLoading(false);
+    }
+  };
+
   if (!isClient) return null;
 
   return (
@@ -137,9 +219,8 @@ const AuthModal = () => {
                   className="nav-item"
                 >
                   <button
-                    className={`nav-link ${
-                      activeTab === tab.id ? "active" : ""
-                    }`}
+                    className={`nav-link ${activeTab === tab.id ? "active" : ""
+                      }`}
                   >
                     {tab.text}
                   </button>
@@ -157,7 +238,15 @@ const AuthModal = () => {
               </div>
             )}
             <div className="tab-content mt-30">
-              {activeTab === LOGIN_IN && <LoginForm />}
+              {activeTab === LOGIN_IN && (
+                <LoginForm
+                  onEmailChange={(e) => {
+                    setLoginEmail(e);
+                    setMagicEmailError(false);
+                  }}
+                  emailErrorExternal={magicEmailError}
+                />
+              )}
               {activeTab === SIGN_UP && <RegisterForm />}
             </div>
             <div className="d-flex align-items-center mt-30 mb-10">
@@ -168,26 +257,62 @@ const AuthModal = () => {
               <div className="line"></div>
             </div>
             <div className="row">
-              <div className="col-sm-6">
+              <div className={activeTab === LOGIN_IN ? "col-sm-4" : "col-sm-6"}>
                 <button
                   onClick={() => signInWithSSO("google")}
-                  disabled={loading}
+                  disabled={loading || magicLoading}
                   className="social-use-btn d-flex align-items-center justify-content-center tran3s w-100 mt-10"
                 >
                   <Image src={loginIcon_1} alt="Google" />
                   <span className="ps-3">Google</span>
                 </button>
               </div>
-              <div className="col-sm-6">
+              <div className={activeTab === LOGIN_IN ? "col-sm-4" : "col-sm-6"}>
                 <button
                   onClick={() => signInWithSSO("facebook")}
-                  disabled={loading}
+                  disabled={loading || magicLoading}
                   className="social-use-btn d-flex align-items-center justify-content-center tran3s w-100 mt-10"
                 >
                   <Image src={loginIcon_2} alt="Facebook" />
                   <span className="ps-3">Facebook</span>
                 </button>
               </div>
+              {activeTab === LOGIN_IN && (
+                <div className={"col-sm-4"}>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={
+                      <Tooltip id="magic-link-tooltip">
+                        {t("authentication.magic_link_tooltip")}
+                      </Tooltip>
+                    }
+                  >
+                    <button
+                      onClick={sendMagicLink}
+                      disabled={loading || magicLoading}
+                      style={{ gap: "10px" }}
+                      className="social-use-btn d-flex align-items-center justify-content-center tran3s w-100 mt-10"
+                    >
+                      <span className="d-flex align-items-center">
+                        {magicLoading ? (
+                          <Spinner size="sm" animation="border" />
+                        ) : (
+                          <>
+                            <img
+                              src="/assets/images/icon/magic-link.svg"
+                              alt="Magic link"
+                              width={20}
+                              height={20}
+                              style={{ marginRight: "10px" }}
+                            />
+                            {t("authentication.magic_link") || "Magic link"}
+                          </>
+                        )}
+                      </span>
+                    </button>
+                  </OverlayTrigger>
+                </div>
+              )}
             </div>
           </div>
         </div>
