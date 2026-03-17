@@ -180,7 +180,7 @@ const ReferralBonusesTableBody = ({
         <tr className="listing-table" key={bonus.id}>
           <td className="center">{bonus.id}</td>
           {isAdmin && (
-            <td className="center" style={{ fontSize: 12, maxWidth: 160, wordBreak: "break-all" }}>
+            <td className="center" style={{ maxWidth: 160, wordBreak: "break-all" }}>
               {bonus.user_name ?? "—"}
             </td>
           )}
