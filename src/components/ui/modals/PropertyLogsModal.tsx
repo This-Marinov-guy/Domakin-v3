@@ -199,7 +199,7 @@ const PropertyLogsModal = () => {
               ))}
             </>
           ) : logs.length === 0 ? (
-            <p className="text-muted text-center mt-4">No activity logs yet.</p>
+            <p className="text-muted text-center mt-4">Nothing here — be the first to add a message.</p>
           ) : (
             logs.map((log) => {
               const isOwn = log.userId === currentUserId;
