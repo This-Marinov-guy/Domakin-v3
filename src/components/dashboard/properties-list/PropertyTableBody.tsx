@@ -23,8 +23,9 @@ import { useEffect, useState, useRef } from "react";
 import { useServer } from "@/hooks/useServer";
 import PropertyDataPreview from "@/components/ui/modals/PropertyDataPreview";
 import EditPropertyModal from "@/components/ui/modals/EditPropertyModal";
+import PropertyLogsModal from "@/components/ui/modals/PropertyLogsModal";
 import { PROPERTY_STATUS } from "@/utils/enum";
-import { APPLICATION_MODAL, EDIT_PROPERTY_MODAL, POTENTIAL_SEARCHERS_MODAL, PROPERTY_ID_OFFSET } from "@/utils/defines";
+import { APPLICATION_MODAL, EDIT_PROPERTY_MODAL, POTENTIAL_SEARCHERS_MODAL, PROPERTY_ID_OFFSET, PROPERTY_LOGS_MODAL } from "@/utils/defines";
 import { formatJsonKeyValuePairs, parsePropertyPreviewData, showGeneralError, showStandardNotification } from "@/utils/helpers";
 import StripePaymentLinkButton from "@/components/ui/buttons/StripePaymentLinkButton";
 import { getPropertyUrl } from "@/utils/seoHelpers";
@@ -73,6 +74,13 @@ const PropertyTableBody = () => {
         total: 0,
       },
     };
+  };
+
+  const openLogsModal = (item: any) => {
+    modalStore.setActiveModal(PROPERTY_LOGS_MODAL, {
+      propertyId: item.id,
+      isAdmin,
+    });
   };
 
   const openPotentialSearchersModal = (item: any) => {
@@ -145,6 +153,7 @@ const PropertyTableBody = () => {
         </Modal.Footer>
       </Modal>
       <EditPropertyModal callback={() => paginationRef.current?.reload()} />
+      <PropertyLogsModal />
       {userProperties.map((item) => {
         const isRentSwap = item.interface === "rentswap" || item.property_data?.interface === "rentswap";
 
@@ -251,6 +260,14 @@ const PropertyTableBody = () => {
                   <span></span>
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => openLogsModal(item)}
+                    >
+                      <i className="fas fa-history"></i> History
+                    </button>
+                  </li>
                   <li>
                     <button
                       className="dropdown-item"
