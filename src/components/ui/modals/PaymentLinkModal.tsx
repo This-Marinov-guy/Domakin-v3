@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+import Accordion from "react-bootstrap/Accordion";
 import { useServer } from "@/hooks/useServer";
 import { observer } from "mobx-react-lite";
 import { useStore } from "@/stores/storeContext";
@@ -106,38 +107,40 @@ const PaymentLinkModal: any = () => {
             </Form.Group>
 
             {isAdmin && (
-              <>
-                <hr className="my-3" />
-                <p className="text-muted small mb-3 fw-semibold">Admin Settings</p>
+              <Accordion className="mt-3">
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>Extended settings</Accordion.Header>
+                  <Accordion.Body>
+                    <Form.Group className="mb-3" controlId="productTitle">
+                      <Form.Label>Product Title (Optional)</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Override default payment link title"
+                        value={productTitle}
+                        onChange={(e) => setProductTitle(e.target.value)}
+                      />
+                      <Form.Text className="text-muted">
+                        Replaces the auto-generated title in Stripe.
+                      </Form.Text>
+                    </Form.Group>
 
-                <Form.Group className="mb-3" controlId="productTitle">
-                  <Form.Label>Product Title (Optional)</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Override default payment link title"
-                    value={productTitle}
-                    onChange={(e) => setProductTitle(e.target.value)}
-                  />
-                  <Form.Text className="text-muted">
-                    Replaces the auto-generated title in Stripe.
-                  </Form.Text>
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="paymentAmount">
-                  <Form.Label>Payment Amount in € (Optional)</Form.Label>
-                  <Form.Control
-                    type="number"
-                    min="0.01"
-                    step="0.01"
-                    placeholder="Override default rent amount"
-                    value={paymentAmount}
-                    onChange={(e) => setPaymentAmount(e.target.value)}
-                  />
-                  <Form.Text className="text-muted">
-                    Overrides the property rent amount used for this link.
-                  </Form.Text>
-                </Form.Group>
-              </>
+                    <Form.Group className="mb-3" controlId="paymentAmount">
+                      <Form.Label>Payment Amount in € (Optional)</Form.Label>
+                      <Form.Control
+                        type="number"
+                        min="0.01"
+                        step="0.01"
+                        placeholder="Override default rent amount"
+                        value={paymentAmount}
+                        onChange={(e) => setPaymentAmount(e.target.value)}
+                      />
+                      <Form.Text className="text-muted">
+                        Overrides the property rent amount used for this link.
+                      </Form.Text>
+                    </Form.Group>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
             )}
 
             <div className="d-flex justify-content-end">
