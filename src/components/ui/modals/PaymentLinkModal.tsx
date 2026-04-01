@@ -11,27 +11,40 @@ import { showGeneralError, showStandardNotification } from "@/utils/helpers";
 import { PAYMENT_LINK_MODAL } from "@/utils/defines";
 
 const PaymentLinkModal: any = () => {
-  const { modalStore } = useStore();
+  const { modalStore, userStore } = useStore();
   const { sendRequest, loading } = useServer();
-  
+
   const propertyId = modalStore.modalSettings?.propertyId;
+  const isAdmin = userStore.isAdmin;
 
   const [customerName, setCustomerName] = useState<string>("");
   const [paymentLink, setPaymentLink] = useState<string>("");
+  const [productTitle, setProductTitle] = useState<string>("");
+  const [paymentAmount, setPaymentAmount] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (propertyId == null) return;
+
+    const body: Record<string, any> = {
+      id: propertyId,
+      name: customerName.trim() || undefined,
+    };
+
+    if (isAdmin) {
+      if (productTitle.trim()) body.custom_title = productTitle.trim();
+      if (paymentAmount !== "") {
+        const parsed = parseFloat(paymentAmount);
+        if (!isNaN(parsed) && parsed > 0) body.custom_amount = parsed;
+      }
+    }
 
     try {
       const response = await sendRequest(
         "/property/payment/create-link",
         "POST",
-        {
-          id: propertyId,
-          name: customerName.trim() || undefined,
-        },
+        body,
         {},
         {
           withError: true,
@@ -60,9 +73,10 @@ const PaymentLinkModal: any = () => {
 
   const handleClose = () => {
     modalStore.closeAll();
-    // Reset state when modal is closed
     setCustomerName("");
     setPaymentLink("");
+    setProductTitle("");
+    setPaymentAmount("");
   };
 
   return (
@@ -90,6 +104,41 @@ const PaymentLinkModal: any = () => {
                 Customer name will be added to the payment link title.
               </Form.Text>
             </Form.Group>
+
+            {isAdmin && (
+              <>
+                <hr className="my-3" />
+                <p className="text-muted small mb-3 fw-semibold">Admin Settings</p>
+
+                <Form.Group className="mb-3" controlId="productTitle">
+                  <Form.Label>Product Title (Optional)</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Override default payment link title"
+                    value={productTitle}
+                    onChange={(e) => setProductTitle(e.target.value)}
+                  />
+                  <Form.Text className="text-muted">
+                    Replaces the auto-generated title in Stripe.
+                  </Form.Text>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="paymentAmount">
+                  <Form.Label>Payment Amount in € (Optional)</Form.Label>
+                  <Form.Control
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    placeholder="Override default rent amount"
+                    value={paymentAmount}
+                    onChange={(e) => setPaymentAmount(e.target.value)}
+                  />
+                  <Form.Text className="text-muted">
+                    Overrides the property rent amount used for this link.
+                  </Form.Text>
+                </Form.Group>
+              </>
+            )}
 
             <div className="d-flex justify-content-end">
               <Button
@@ -148,6 +197,8 @@ const PaymentLinkModal: any = () => {
                 onClick={() => {
                   setPaymentLink("");
                   setCustomerName("");
+                  setProductTitle("");
+                  setPaymentAmount("");
                 }}
               >
                 Generate Another
