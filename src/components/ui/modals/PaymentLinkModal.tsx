@@ -119,9 +119,7 @@ const PaymentLinkModal: any = () => {
                         value={productTitle}
                         onChange={(e) => setProductTitle(e.target.value)}
                       />
-                      <Form.Text className="text-muted">
-                        Replaces the auto-generated title in Stripe.
-                      </Form.Text>
+                     
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="paymentAmount">
@@ -134,16 +132,14 @@ const PaymentLinkModal: any = () => {
                         value={paymentAmount}
                         onChange={(e) => setPaymentAmount(e.target.value)}
                       />
-                      <Form.Text className="text-muted">
-                        Overrides the property rent amount used for this link.
-                      </Form.Text>
+                     
                     </Form.Group>
                   </Accordion.Body>
                 </Accordion.Item>
               </Accordion>
             )}
 
-            <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-end mt-3">
               <Button
                 variant="primary"
                 type="submit"
