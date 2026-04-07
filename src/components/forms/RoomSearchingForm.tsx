@@ -204,7 +204,7 @@ const RoomSearchingForm = () => {
             <NiceSelect
               className="nice-select border-one d-flex align-items-center"
               options={periodOptions}
-              value={periodOptions[0].value}
+              value={searchingData.period}
               onChange={(e) => {
                 updateSearchingData("period", "", e.target.value);
               }}
@@ -224,7 +224,7 @@ const RoomSearchingForm = () => {
                 { value: "yes", text: t("common.yes") },
                 { value: "no", text: t("common.no") },
               ]}
-              value="yes"
+              value={searchingData.registration}
               onChange={(e) => {
                 updateSearchingData("registration", "", e.target.value);
               }}
@@ -241,7 +241,7 @@ const RoomSearchingForm = () => {
             <NiceSelect
               className="nice-select border-one d-flex align-items-center"
               options={typeOptions}
-              value={typeOptions[0].value}
+              value={searchingData.type}
               onChange={(e) => {
                 updateSearchingData("type", "", e.target.value);
               }}
@@ -258,7 +258,7 @@ const RoomSearchingForm = () => {
             <NiceSelect
               className="nice-select border-one d-flex align-items-center"
               options={peopleOptions}
-              value={peopleOptions[0].value}
+              value={searchingData.people}
               onChange={(e) => {
                 updateSearchingData("people", "", e.target.value);
               }}
