@@ -8,7 +8,8 @@ import brandLogo_3 from "@/assets/img/partners/3.png";
 import brandLogo_4 from "@/assets/img/partners/4.png";
 import brandLogo_5 from "@/assets/img/partners/5.png";
 import brandLogo_6 from "@/assets/img/partners/6.png";
-import brandLogo_7 from "@/assets/img/partners/7.svg";
+import brandLogo_7 from "@/assets/img/partners/6.avif";
+import brandLogo_8 from "@/assets/img/partners/7.jpeg";
 import Link from "next/link";
 
 const brand_data: any[] = [
@@ -35,6 +36,14 @@ const brand_data: any[] = [
   {
     logo: brandLogo_6,
     link: "https://www.integral.bg/",
+  },
+  {
+    logo: brandLogo_7,
+    link: "https://signaal.app/",
+  },
+  {
+    logo: brandLogo_8,
+    link: "https://www.instagram.com/isu_groningen/",
   },
   // {
   //   logo: brandLogo_7,
