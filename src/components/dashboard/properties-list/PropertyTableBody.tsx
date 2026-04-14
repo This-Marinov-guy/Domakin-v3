@@ -42,6 +42,7 @@ const PropertyTableBody = () => {
   const [propertyPreview, setPropertyPreview] = useState(null);
   const [deleteConfirm, setDeleteConfirm] = useState<{ id: number; title: string } | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const [sendingCampaignId, setSendingCampaignId] = useState<number | null>(null);
 
   const { sendRequest } = useServer();
 
@@ -129,6 +130,37 @@ const PropertyTableBody = () => {
     }
   };
 
+  const handleSendRoomCityCampaign = async (propertyId: number) => {
+    setSendingCampaignId(propertyId);
+    try {
+      const response = await sendRequest(
+        "/property/send-room-city-campaign",
+        "POST",
+        {
+          id: propertyId,
+          language: lang,
+        }
+      );
+
+      if (response?.status) {
+        const sent = Number(response?.data?.sent ?? 0);
+        const city = response?.data?.city;
+        showStandardNotification(
+          "success",
+          sent > 0
+            ? `Advertising email sent to ${sent} recipient${sent === 1 ? "" : "s"}${city ? ` in ${city}` : ""}.`
+            : `No recipients found${city ? ` in ${city}` : ""}.`
+        );
+      } else {
+        showGeneralError(response?.message ?? "Failed to send advertising email.");
+      }
+    } catch {
+      showGeneralError("Failed to send advertising email.");
+    } finally {
+      setSendingCampaignId(null);
+    }
+  };
+
   // Table row renderer
   const renderRows = (userProperties: any[]) => (
     <>
@@ -156,6 +188,8 @@ const PropertyTableBody = () => {
       <PropertyLogsModal />
       {userProperties.map((item) => {
         const isRentSwap = item.interface === "rentswap" || item.property_data?.interface === "rentswap";
+        const isRoom = Number(item.property_data?.type) === 1;
+        const isSendingCampaign = sendingCampaignId === item.id;
 
         return (
           <tr className="listing-table" key={item.id}>
@@ -308,6 +342,18 @@ const PropertyTableBody = () => {
                           <i className="fas fa-search"></i> Potential Searchers
                         </button>
                       </li>
+                      {isRoom && (
+                        <li>
+                          <button
+                            className="dropdown-item"
+                            onClick={() => handleSendRoomCityCampaign(item.id)}
+                            disabled={isSendingCampaign}
+                          >
+                            <i className="fas fa-bullhorn"></i>{" "}
+                            {isSendingCampaign ? "Sending..." : "Send Ad Email"}
+                          </button>
+                        </li>
+                      )}
                       <li>
                         <button
                           className="dropdown-item text-danger"
