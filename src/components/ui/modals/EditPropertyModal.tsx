@@ -57,6 +57,7 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
   const [isSignalClicked, setIsSignalClicked] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showSubmitLoadingModal, setShowSubmitLoadingModal] = useState(false);
+  const [declineReason, setDeclineReason] = useState("");
   const footerRef = useRef<HTMLDivElement>(null);
 
   // Use the sticky footer hook to detect if footer is visible
@@ -202,6 +203,7 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
         images: imagesOrder,
       },
       newImages: newFiles,
+      decline_reason: declineReason,
     };
 
     if (newFiles.length > 0) setShowSubmitLoadingModal(true);
@@ -255,6 +257,7 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
 
   const closeModal = () => {
     setIsSignalClicked(false);
+    setDeclineReason("");
     modalStore.closeAll();
   };
 
@@ -360,7 +363,9 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
                             new Date()
                           );
                         }
-
+                        if (e.target.value !== "4") {
+                          setDeclineReason("");
+                        }
                         updateEditListingData("status", "", e.target.value);
                       }}
                       isInvalid={editErrorFields.includes("propertyData.status")}
@@ -369,6 +374,39 @@ const EditPropertyModal = ({ callback = () => { } }: any) => {
                     />
                   </div>
                 </div>}
+
+                {isAdmin && String(editPropertyData.status) === "4" && (
+                  <div className="col-12 mb-30">
+                    <div className="input-group-meta form-group">
+                      <label>Decline Reason</label>
+                      <div className="d-flex flex-wrap gap-2 mb-2">
+                        {[
+                          "Looks suspicious",
+                          "Too little details",
+                          "Client cannot be contacted for verification",
+                        ].map((option) => (
+                          <button
+                            key={option}
+                            type="button"
+                            className={`btn btn-sm${declineReason === option ? " btn-danger" : " btn-outline-danger"}`}
+                            onClick={() =>
+                              setDeclineReason(declineReason === option ? "" : option)
+                            }
+                          >
+                            {option}
+                          </button>
+                        ))}
+                      </div>
+                      <Form.Control
+                        as="textarea"
+                        rows={2}
+                        placeholder="Or type a custom reason..."
+                        value={declineReason}
+                        onChange={(e) => setDeclineReason(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                )}
 
                 {isAdmin && <div className="col-md-6">
                   <div className="input-group-meta form-group mb-30">
