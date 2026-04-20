@@ -24,12 +24,20 @@ import { useServer } from "@/hooks/useServer";
 import PropertyDataPreview from "@/components/ui/modals/PropertyDataPreview";
 import EditPropertyModal from "@/components/ui/modals/EditPropertyModal";
 import PropertyLogsModal from "@/components/ui/modals/PropertyLogsModal";
+import RoomCityCampaignConfirmationModal from "@/components/ui/modals/RoomCityCampaignConfirmationModal";
 import { PROPERTY_STATUS } from "@/utils/enum";
 import { APPLICATION_MODAL, EDIT_PROPERTY_MODAL, POTENTIAL_SEARCHERS_MODAL, PROPERTY_ID_OFFSET, PROPERTY_LOGS_MODAL } from "@/utils/defines";
 import { formatJsonKeyValuePairs, parsePropertyPreviewData, showGeneralError, showStandardNotification } from "@/utils/helpers";
 import StripePaymentLinkButton from "@/components/ui/buttons/StripePaymentLinkButton";
 import { getPropertyUrl } from "@/utils/seoHelpers";
 import useTranslation from "next-translate/useTranslation";
+
+type RoomCityCampaignConfirmState = {
+  id: number;
+  title: string;
+  city?: string;
+  totalRecipients: number;
+} | null;
 
 const PropertyTableBody = () => {
   const {
@@ -42,6 +50,8 @@ const PropertyTableBody = () => {
   const [propertyPreview, setPropertyPreview] = useState(null);
   const [deleteConfirm, setDeleteConfirm] = useState<{ id: number; title: string } | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const [campaignConfirm, setCampaignConfirm] = useState<RoomCityCampaignConfirmState>(null);
+  const [previewingCampaignId, setPreviewingCampaignId] = useState<number | null>(null);
   const [sendingCampaignId, setSendingCampaignId] = useState<number | null>(null);
 
   const { sendRequest } = useServer();
@@ -130,32 +140,71 @@ const PropertyTableBody = () => {
     }
   };
 
-  const handleSendRoomCityCampaign = async (propertyId: number) => {
-    setSendingCampaignId(propertyId);
+  const openRoomCityCampaignConfirmation = async (item: any) => {
+    const propertyTitle =
+      formatJsonKeyValuePairs(item.property_data?.title, ["en"]) || `Property #${item.id}`;
+
+    setPreviewingCampaignId(item.id);
+    try {
+      const response = await sendRequest(
+        "/property/send-room-city-campaign-preview",
+        "POST",
+        {
+          id: item.id,
+          language: lang,
+        },
+        {},
+        { withLoading: false, withError: false }
+      );
+
+      if (response?.status) {
+        setCampaignConfirm({
+          id: item.id,
+          title: propertyTitle,
+          city: response?.data?.city,
+          totalRecipients: Number(response?.data?.total_recipients ?? 0),
+        });
+      } else {
+        showGeneralError(response?.message ?? "Failed to load campaign preview.");
+      }
+    } catch {
+      showGeneralError("Failed to load campaign preview.");
+    } finally {
+      setPreviewingCampaignId(null);
+    }
+  };
+
+  const handleConfirmRoomCityCampaign = async () => {
+    if (!campaignConfirm) return;
+
+    setSendingCampaignId(campaignConfirm.id);
     try {
       const response = await sendRequest(
         "/property/send-room-city-campaign",
         "POST",
         {
-          id: propertyId,
+          id: campaignConfirm.id,
           language: lang,
-        }
+        },
+        {},
+        { withLoading: false, withError: false }
       );
 
       if (response?.status) {
-        const sent = Number(response?.data?.sent ?? 0);
         const city = response?.data?.city;
+        const totalRecipients = campaignConfirm.totalRecipients;
         showStandardNotification(
           "success",
-          sent > 0
-            ? `Advertising email sent to ${sent} recipient${sent === 1 ? "" : "s"}${city ? ` in ${city}` : ""}.`
-            : `No recipients found${city ? ` in ${city}` : ""}.`
+          totalRecipients > 0
+            ? `Campaign queued for ${totalRecipients} recipient${totalRecipients === 1 ? "" : "s"}${city ? ` in ${city}` : ""}.`
+            : `Campaign queued${city ? ` for ${city}` : ""}.`
         );
+        setCampaignConfirm(null);
       } else {
-        showGeneralError(response?.message ?? "Failed to send advertising email.");
+        showGeneralError(response?.message ?? "Failed to queue advertising email.");
       }
     } catch {
-      showGeneralError("Failed to send advertising email.");
+      showGeneralError("Failed to queue advertising email.");
     } finally {
       setSendingCampaignId(null);
     }
@@ -167,6 +216,15 @@ const PropertyTableBody = () => {
       <PropertyDataPreview
         data={propertyPreview}
         onHide={() => setPropertyPreview(null)}
+      />
+      <RoomCityCampaignConfirmationModal
+        show={!!campaignConfirm}
+        onHide={() => setCampaignConfirm(null)}
+        onConfirm={handleConfirmRoomCityCampaign}
+        propertyTitle={campaignConfirm?.title ?? ""}
+        city={campaignConfirm?.city}
+        totalRecipients={campaignConfirm?.totalRecipients ?? 0}
+        isSubmitting={sendingCampaignId === campaignConfirm?.id}
       />
       <Modal show={!!deleteConfirm} onHide={() => !deleting && setDeleteConfirm(null)} centered closeButton>
        
@@ -189,7 +247,7 @@ const PropertyTableBody = () => {
       {userProperties.map((item) => {
         const isRentSwap = item.interface === "rentswap" || item.property_data?.interface === "rentswap";
         const isRoom = Number(item.property_data?.type) === 1;
-        const isSendingCampaign = sendingCampaignId === item.id;
+        const isCampaignBusy = previewingCampaignId === item.id || sendingCampaignId === item.id;
 
         return (
           <tr className="listing-table" key={item.id}>
@@ -346,11 +404,15 @@ const PropertyTableBody = () => {
                         <li>
                           <button
                             className="dropdown-item"
-                            onClick={() => handleSendRoomCityCampaign(item.id)}
-                            disabled={isSendingCampaign}
+                            onClick={() => openRoomCityCampaignConfirmation(item)}
+                            disabled={isCampaignBusy}
                           >
                             <i className="fas fa-bullhorn"></i>{" "}
-                            {isSendingCampaign ? "Sending..." : "Send Ad Email"}
+                            {previewingCampaignId === item.id
+                              ? "Preparing..."
+                              : sendingCampaignId === item.id
+                                ? "Queueing..."
+                                : "Send Ad Email"}
                           </button>
                         </li>
                       )}
