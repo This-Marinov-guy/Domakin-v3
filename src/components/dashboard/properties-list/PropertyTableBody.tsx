@@ -26,8 +26,19 @@ import EditPropertyModal from "@/components/ui/modals/EditPropertyModal";
 import PropertyLogsModal from "@/components/ui/modals/PropertyLogsModal";
 import RoomCityCampaignConfirmationModal from "@/components/ui/modals/RoomCityCampaignConfirmationModal";
 import { PROPERTY_STATUS } from "@/utils/enum";
-import { APPLICATION_MODAL, EDIT_PROPERTY_MODAL, POTENTIAL_SEARCHERS_MODAL, PROPERTY_ID_OFFSET, PROPERTY_LOGS_MODAL } from "@/utils/defines";
-import { formatJsonKeyValuePairs, parsePropertyPreviewData, showGeneralError, showStandardNotification } from "@/utils/helpers";
+import {
+  APPLICATION_MODAL,
+  EDIT_PROPERTY_MODAL,
+  POTENTIAL_SEARCHERS_MODAL,
+  PROPERTY_ID_OFFSET,
+  PROPERTY_LOGS_MODAL,
+} from "@/utils/defines";
+import {
+  formatJsonKeyValuePairs,
+  parsePropertyPreviewData,
+  showGeneralError,
+  showStandardNotification,
+} from "@/utils/helpers";
 import StripePaymentLinkButton from "@/components/ui/buttons/StripePaymentLinkButton";
 import { getPropertyUrl } from "@/utils/seoHelpers";
 import useTranslation from "next-translate/useTranslation";
@@ -48,11 +59,19 @@ const PropertyTableBody = () => {
   const { lang } = useTranslation("translations");
 
   const [propertyPreview, setPropertyPreview] = useState(null);
-  const [deleteConfirm, setDeleteConfirm] = useState<{ id: number; title: string } | null>(null);
+  const [deleteConfirm, setDeleteConfirm] = useState<{
+    id: number;
+    title: string;
+  } | null>(null);
   const [deleting, setDeleting] = useState(false);
-  const [campaignConfirm, setCampaignConfirm] = useState<RoomCityCampaignConfirmState>(null);
-  const [previewingCampaignId, setPreviewingCampaignId] = useState<number | null>(null);
-  const [sendingCampaignId, setSendingCampaignId] = useState<number | null>(null);
+  const [campaignConfirm, setCampaignConfirm] =
+    useState<RoomCityCampaignConfirmState>(null);
+  const [previewingCampaignId, setPreviewingCampaignId] = useState<
+    number | null
+  >(null);
+  const [sendingCampaignId, setSendingCampaignId] = useState<number | null>(
+    null,
+  );
 
   const { sendRequest } = useServer();
 
@@ -62,8 +81,9 @@ const PropertyTableBody = () => {
   // Fetch function for PaginatedTableWrapper
   const fetchData = async (page: number, perPage: number) => {
     const response = await sendRequest(
-      `${isAdmin ? "/property/list-extended" : "/property/list"
-      }?page=${page}&per_page=${perPage}`
+      `${
+        isAdmin ? "/property/list-extended" : "/property/list"
+      }?page=${page}&per_page=${perPage}`,
     );
     if (response?.status) {
       return {
@@ -98,7 +118,7 @@ const PropertyTableBody = () => {
     modalStore.setActiveModal(POTENTIAL_SEARCHERS_MODAL, {
       propertyId: item.id,
       propertyCity: item.property_data?.city,
-      propertyTitle: formatJsonKeyValuePairs(item.property_data?.title, ['en']),
+      propertyTitle: formatJsonKeyValuePairs(item.property_data?.title, ["en"]),
     });
   };
 
@@ -110,7 +130,7 @@ const PropertyTableBody = () => {
 
     modalStore.setActiveModal(APPLICATION_MODAL, {
       propertyId: item.id,
-      propertyTitle: formatJsonKeyValuePairs(item.property_data?.title, ['en']),
+      propertyTitle: formatJsonKeyValuePairs(item.property_data?.title, ["en"]),
       propertyUrl: getPropertyUrl(propertyPayload, true, lang),
     });
   };
@@ -124,7 +144,7 @@ const PropertyTableBody = () => {
         "DELETE",
         {},
         {},
-        { withLoading: false }
+        { withLoading: false },
       );
       if (res?.status) {
         showStandardNotification("success", "Property deleted.");
@@ -142,7 +162,8 @@ const PropertyTableBody = () => {
 
   const openRoomCityCampaignConfirmation = async (item: any) => {
     const propertyTitle =
-      formatJsonKeyValuePairs(item.property_data?.title, ["en"]) || `Property #${item.id}`;
+      formatJsonKeyValuePairs(item.property_data?.title, ["en"]) ||
+      `Property #${item.id}`;
 
     setPreviewingCampaignId(item.id);
     try {
@@ -154,7 +175,7 @@ const PropertyTableBody = () => {
           language: lang,
         },
         {},
-        { withLoading: false, withError: false }
+        { withLoading: false, withError: false },
       );
 
       if (response?.status) {
@@ -165,7 +186,9 @@ const PropertyTableBody = () => {
           totalRecipients: Number(response?.data?.total_recipients ?? 0),
         });
       } else {
-        showGeneralError(response?.message ?? "Failed to load campaign preview.");
+        showGeneralError(
+          response?.message ?? "Failed to load campaign preview.",
+        );
       }
     } catch {
       showGeneralError("Failed to load campaign preview.");
@@ -187,7 +210,7 @@ const PropertyTableBody = () => {
           language: lang,
         },
         {},
-        { withLoading: false, withError: false }
+        { withLoading: false, withError: false },
       );
 
       if (response?.status) {
@@ -197,11 +220,13 @@ const PropertyTableBody = () => {
           "success",
           totalRecipients > 0
             ? `Campaign queued for ${totalRecipients} recipient${totalRecipients === 1 ? "" : "s"}${city ? ` in ${city}` : ""}.`
-            : `Campaign queued${city ? ` for ${city}` : ""}.`
+            : `Campaign queued${city ? ` for ${city}` : ""}.`,
         );
         setCampaignConfirm(null);
       } else {
-        showGeneralError(response?.message ?? "Failed to queue advertising email.");
+        showGeneralError(
+          response?.message ?? "Failed to queue advertising email.",
+        );
       }
     } catch {
       showGeneralError("Failed to queue advertising email.");
@@ -226,18 +251,32 @@ const PropertyTableBody = () => {
         totalRecipients={campaignConfirm?.totalRecipients ?? 0}
         isSubmitting={sendingCampaignId === campaignConfirm?.id}
       />
-      <Modal show={!!deleteConfirm} onHide={() => !deleting && setDeleteConfirm(null)} centered closeButton>
-       
+      <Modal
+        show={!!deleteConfirm}
+        onHide={() => !deleting && setDeleteConfirm(null)}
+        centered
+        closeButton
+      >
         <Modal.Body>
           {deleteConfirm && (
-            <>Are you sure you want to delete &quot;{deleteConfirm.title}&quot;?</>
+            <>
+              Are you sure you want to delete &quot;{deleteConfirm.title}&quot;?
+            </>
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button className="btn-danger" onClick={() => setDeleteConfirm(null)} disabled={deleting}>
+          <Button
+            className="btn-danger"
+            onClick={() => setDeleteConfirm(null)}
+            disabled={deleting}
+          >
             Cancel
           </Button>
-          <Button className="btn-danger-solid" onClick={handleDeleteProperty} disabled={deleting}>
+          <Button
+            className="btn-danger-solid"
+            onClick={handleDeleteProperty}
+            disabled={deleting}
+          >
             {deleting ? "Deleting…" : "Delete"}
           </Button>
         </Modal.Footer>
@@ -245,9 +284,11 @@ const PropertyTableBody = () => {
       <EditPropertyModal callback={() => paginationRef.current?.reload()} />
       <PropertyLogsModal />
       {userProperties.map((item) => {
-        const isRentSwap = item.interface === "rentswap" || item.property_data?.interface === "rentswap";
-        const isRoom = Number(item.property_data?.type) === 1;
-        const isCampaignBusy = previewingCampaignId === item.id || sendingCampaignId === item.id;
+        const isRentSwap =
+          item.interface === "rentswap" ||
+          item.property_data?.interface === "rentswap";
+        const isCampaignBusy =
+          previewingCampaignId === item.id || sendingCampaignId === item.id;
 
         return (
           <tr className="listing-table" key={item.id}>
@@ -275,10 +316,14 @@ const PropertyTableBody = () => {
                   >
                     <a
                       target="_blank"
-                      href={getPropertyUrl({
-                        ...item.property_data,
-                        id: PROPERTY_ID_OFFSET + item.id,
-                      }, true, lang)}
+                      href={getPropertyUrl(
+                        {
+                          ...item.property_data,
+                          id: PROPERTY_ID_OFFSET + item.id,
+                        },
+                        true,
+                        lang,
+                      )}
                     >
                       <Image
                         src={item.property_data.images[0]}
@@ -298,9 +343,7 @@ const PropertyTableBody = () => {
                     className="p-img"
                   />
                 )}
-
               </div>
-
             </td>
             <td className="center w-25 responsive-title-col">
               <strong className="price color-dark">
@@ -318,7 +361,7 @@ const PropertyTableBody = () => {
               >
                 <div
                   className={`property-status ${statusLabel(
-                    item.status
+                    item.status,
                   ).toLowerCase()}`}
                   style={{ cursor: "pointer" }}
                   onClick={() => {
@@ -331,7 +374,6 @@ const PropertyTableBody = () => {
                   {statusLabel(item.status)}
                 </div>
               </OverlayTrigger>
-
             </td>
             {/* Payment link column */}
             <td className="center">
@@ -341,7 +383,6 @@ const PropertyTableBody = () => {
             </td>
             {/* Action column */}
             <td className="center">
-
               <div className="action-dots float-end">
                 <button
                   className="action-btn dropdown-toggle"
@@ -382,7 +423,7 @@ const PropertyTableBody = () => {
                       <Image src={icon_3} alt="" className="lazy-img" /> Edit
                     </button>
                   </li>
-                  {isAdmin &&
+                  {isAdmin && (
                     <>
                       <li>
                         <button
@@ -400,29 +441,31 @@ const PropertyTableBody = () => {
                           <i className="fas fa-search"></i> Potential Searchers
                         </button>
                       </li>
-                      {isRoom && (
-                        <li>
-                          <button
-                            className="dropdown-item"
-                            onClick={() => openRoomCityCampaignConfirmation(item)}
-                            disabled={isCampaignBusy}
-                          >
-                            <i className="fas fa-bullhorn"></i>{" "}
-                            {previewingCampaignId === item.id
-                              ? "Preparing..."
-                              : sendingCampaignId === item.id
-                                ? "Queueing..."
-                                : "Send Ad Email"}
-                          </button>
-                        </li>
-                      )}
+                      <li>
+                        <button
+                          className="dropdown-item"
+                          onClick={() => openRoomCityCampaignConfirmation(item)}
+                          disabled={isCampaignBusy}
+                        >
+                          <i className="fas fa-bullhorn"></i>{" "}
+                          {previewingCampaignId === item.id
+                            ? "Preparing..."
+                            : sendingCampaignId === item.id
+                              ? "Queueing..."
+                              : "Send Ad Email"}
+                        </button>
+                      </li>
                       <li>
                         <button
                           className="dropdown-item text-danger"
                           onClick={() =>
                             setDeleteConfirm({
                               id: item.id,
-                              title: formatJsonKeyValuePairs(item.property_data?.title, ["en"]) || `Property #${item.id}`,
+                              title:
+                                formatJsonKeyValuePairs(
+                                  item.property_data?.title,
+                                  ["en"],
+                                ) || `Property #${item.id}`,
                             })
                           }
                         >
@@ -430,8 +473,7 @@ const PropertyTableBody = () => {
                         </button>
                       </li>
                     </>
-                  }
-
+                  )}
                 </ul>
               </div>
             </td>
