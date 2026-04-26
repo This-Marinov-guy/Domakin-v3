@@ -29,7 +29,9 @@ const menu_data: MenuItem[] = [
       {
         id: 1,
         mega_title: "features.viewings",
-        mega_menus: [{ link: "/services/viewing", title: "features.viewings" }],
+        mega_menus: [
+          { link: "/services/viewing", title: "features.book_remote_viewing" },
+        ],
       },
       {
         id: 2,
