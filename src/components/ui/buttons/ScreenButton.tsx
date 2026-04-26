@@ -5,7 +5,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 const ScreenButton = ({
   refElement,
 }: {
-  refElement: React.RefObject<HTMLElement>;
+  refElement: React.RefObject<HTMLElement | null>;
 }) => {
   const isVisible = useOnScreen(refElement);
 
@@ -30,7 +30,7 @@ const ScreenButton = ({
       className={`btn-six centered-btn ${isVisible ? "fade-out" : "fade-in"}`}
       style={{ display: isVisible ? "none" : "block" }} // Hide the button when visible
     >
-      {t("renting.apply_now")}
+      {t("room_searching.apply_for_searching")}
     </button>
   );
 };

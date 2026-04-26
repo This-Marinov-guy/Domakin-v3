@@ -24,6 +24,7 @@ const defaultSearchingData = {
   email: "",
   phone: "",
   city: "",
+  property_id: "",
   registration: true,
   budget: "",
   type: "any",

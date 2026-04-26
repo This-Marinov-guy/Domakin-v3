@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import FooterFour from "@/layouts/footers/FooterFour";
 import HeaderOne from "@/layouts/headers/HeaderOne";
 import FancyBanner from "@/components/common/FancyBanner";
-import RentingForm from "@/components/forms/RentingForm";
+import RoomSearchingForm from "@/components/forms/RoomSearchingForm";
 import ListingDetailsOneArea from "@/components/ListingDetails/listing-details-1/ListingDetailsOneArea";
 import PageLoader from "@/components/ui/loading/PageLoader";
 import { useStore } from "@/stores/storeContext";
@@ -11,6 +11,7 @@ import { useParams } from "next/navigation";
 import { observer } from "mobx-react-lite";
 import RelatedProperties from "@/components/ListingDetails/listing-details-1/RelatedProperties";
 import ScreenButton from "@/components/ui/buttons/ScreenButton";
+import { PROPERTY_ID_OFFSET } from "@/utils/defines";
 
 const PropertyDetailsOne = () => {
   const {
@@ -19,7 +20,7 @@ const PropertyDetailsOne = () => {
 
   const { t } = useTranslation("translations");
 
-  const formRef = useRef(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   const { slug } = useParams();
 
@@ -40,6 +41,10 @@ const PropertyDetailsOne = () => {
 
   const propertyId = extractPropertyId(slug as string);
   const property = propertyId ? allProperties.find((p: any) => p?.id?.toString() === propertyId) : null;
+  const backendPropertyId =
+    property && Number(property.id) >= PROPERTY_ID_OFFSET
+      ? Number(property.id) - PROPERTY_ID_OFFSET
+      : undefined;
 
   const relatedProperties = allProperties
     .filter((p) => p.city == property?.city && p.id != property?.id)
@@ -52,9 +57,13 @@ const PropertyDetailsOne = () => {
   return (
     <>
       <HeaderOne />
-      {property.statusCode !== 3 && <ScreenButton refElement={formRef} />}
+      <ScreenButton refElement={formRef} />
       <ListingDetailsOneArea property={property} slug={propertyId} />
-      <RentingForm refElement={formRef} property={property} />
+      <RoomSearchingForm
+        refElement={formRef}
+        defaultCity={property.city || property.location}
+        propertyId={backendPropertyId}
+      />
       <RelatedProperties properties={relatedProperties} />
       <FancyBanner />
       <FooterFour />

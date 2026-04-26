@@ -22,6 +22,7 @@ export interface ListByPropertyEntry {
 }
 
 const DISPLAY_FIELDS = [
+  'entry_type',
   'created_at',
   "name",
   "surname",
@@ -35,6 +36,7 @@ const DISPLAY_FIELDS = [
 ] as const;
 
 const FIELD_LABELS: Record<string, string> = {
+  entry_type: "Source",
   name: "Name",
   surname: "Surname",
   phone: "Phone",
@@ -178,12 +180,24 @@ const ApplicationsModal = () => {
                   const isExpanded = expandedId === id;
                   const editRow = getEntryEdit(entry);
                   const isSaving = savingId === entry.id;
+                  const isReadOnly = Boolean(entry.read_only);
 
                   const renderField = (key: string) => {
                     const val = editRow[key];
                     const isObj = typeof val === "object" && val !== null && !Array.isArray(val);
                     const displayVal = isObj ? JSON.stringify(val) : String(val ?? "");
                     const label = FIELD_LABELS[key] ?? key;
+
+                    if (key === "entry_type") {
+                      return (
+                        <tr key={key}>
+                          <td className="text-muted small pe-2">{label}</td>
+                          <td>
+                            {displayVal === "search_renting" ? "Search request" : "Application"}
+                          </td>
+                        </tr>
+                      );
+                    }
 
                     if (key === "created_at") {
                       return (
@@ -215,6 +229,17 @@ const ApplicationsModal = () => {
                     }
 
                     if (key === "status") {
+                      if (isReadOnly) {
+                        return (
+                          <tr key={key}>
+                            <td className="text-muted small pe-2">{label}</td>
+                            <td>
+                              <span className="text-break">{displayVal || "—"}</span>
+                            </td>
+                          </tr>
+                        );
+                      }
+
                       const statusValue = editRow.status;
                       return (
                         <tr key={key}>
@@ -236,6 +261,17 @@ const ApplicationsModal = () => {
                     }
 
                     if (key === "internal_note") {
+                      if (isReadOnly) {
+                        return (
+                          <tr key={key}>
+                            <td className="text-muted small pe-2">{label}</td>
+                            <td>
+                              <span className="text-break">{displayVal || "—"}</span>
+                            </td>
+                          </tr>
+                        );
+                      }
+
                       const internalUpdatedAt = entry.internal_updated_at ? moment(entry.internal_updated_at as string).format("DD-MM-YYYY HH:mm") : null;
                       const internalUpdatedBy = (entry.internal_updated_by_user as any)?.name as string;
                       const hasMeta = internalUpdatedAt != null || internalUpdatedBy != null;
@@ -320,23 +356,25 @@ const ApplicationsModal = () => {
                             </table>
                             <div className="d-flex justify-content-end mt-2">
                               <div className="d-flex justify-content-center align-items-center gap-3">
-                                <button
-                                  disabled={loading || isSaving}
-                                  type="submit"
-                                  className="btn-nine text-uppercase rounded-3 fw-normal w-100"
-                                >
-                                  {isSaving ? (
-                                    <Spinner
-                                      as="span"
-                                      animation="border"
-                                      size="sm"
-                                      role="status"
-                                      aria-hidden="true"
-                                    />
-                                  ) : (
-                                    "Save"
-                                  )}
-                                </button>
+                                {!isReadOnly && (
+                                  <button
+                                    disabled={loading || isSaving}
+                                    type="submit"
+                                    className="btn-nine text-uppercase rounded-3 fw-normal w-100"
+                                  >
+                                    {isSaving ? (
+                                      <Spinner
+                                        as="span"
+                                        animation="border"
+                                        size="sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                      />
+                                    ) : (
+                                      "Save"
+                                    )}
+                                  </button>
+                                )}
                                 <button
                                   disabled={loading || isSaving}
                                   onClick={modalStore.closeAll}

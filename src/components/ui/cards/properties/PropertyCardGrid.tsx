@@ -48,14 +48,14 @@ const PropertyCardGrid = (props: {
       >
         <div className="img-gallery p-15">
           <div className="position-relative border-25 overflow-hidden">
-            <div
+            {/* <div
               className={`tag border-25 ${
                 // @ts-expect-error
                 STATUS_COLORS[property.statusCode]
               }`}
             >
               {property.status}
-            </div>
+            </div> */}
             {/* <Link href="#" className="fav-btn tran3s"><i className="fa-light fa-heart"></i></Link> */}
             <div
               ref={carouselRef}

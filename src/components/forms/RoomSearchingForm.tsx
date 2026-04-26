@@ -14,7 +14,17 @@ import { prefillUserInfo, transformToFormData } from "@/utils/helpers";
 import SearchableCitySelect from "../ui/SearchableCitySelect";
 import { DUTCH_CITIES } from "@/utils/countries";
 
-const RoomSearchingForm = () => {
+interface RoomSearchingFormProps {
+  defaultCity?: string;
+  propertyId?: number | string;
+  refElement?: React.Ref<HTMLFormElement>;
+}
+
+const RoomSearchingForm = ({
+  defaultCity,
+  propertyId,
+  refElement,
+}: RoomSearchingFormProps) => {
   const { t } = useTranslation("translations");
 
   const { sendRequest, loading } = useServer();
@@ -86,10 +96,26 @@ const RoomSearchingForm = () => {
     prefillUserInfo(updateSearchingData, user, searchingData);
   }, [user]);
 
+  useEffect(() => {
+    if (defaultCity && !searchingData.city) {
+      updateSearchingData("city", "", defaultCity);
+    }
+
+    if (propertyId && !searchingData.property_id) {
+      updateSearchingData("property_id", "", String(propertyId));
+    }
+  }, [
+    defaultCity,
+    propertyId,
+    searchingData.city,
+    searchingData.property_id,
+    updateSearchingData,
+  ]);
+
   return (
-    <form className="form-style-one wow fadeInUp pt-40 pb-40">
+    <form ref={refElement} className="form-style-one wow fadeInUp pt-40 pb-40">
       <div className="container m-a row controls">
-        <h4 className="mb-20">{t("viewing.fill_your_details")}</h4>
+        <h4 className="mb-20">{t("room_searching.apply_for_property_searching")}</h4>
 
         {
           <div className="col-lg-6 col-md-6 col-12">
@@ -271,7 +297,10 @@ const RoomSearchingForm = () => {
 
         <div className="col-lg-6 col-md-12 col-12 mb-40">
           <div className="input-item input-item-name">
-            <label htmlFor="">{t("files.motivational_letter_input")}</label>
+            <label htmlFor="">
+              {t("files.motivational_letter_input")}{" "}
+              <span className="text-muted small">({t("common.optional")})</span>
+            </label>
             <Form.Control
               type="file"
               accept=".docx,.doc,.pdf"

@@ -39,14 +39,14 @@ const PropertyCardList = (props: {
           }}
           className={`img-gallery position-relative z-1 border-20 overflow-hidden`}
         >
-          <div
+          {/* <div
             className={`tag border-20 ${
               // @ts-expect-error
               STATUS_COLORS[property.statusCode]
             }`}
           >
             {property.status}
-          </div>
+          </div> */}
           <div className="img-slider-btn">
             {allImages.length} <i className="fa-regular fa-image"></i>
             <Fancybox
