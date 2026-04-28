@@ -67,6 +67,19 @@ const truncateText = (value?: string | null, maxLength: number = 60) => {
   return `${value.slice(0, maxLength).trimEnd()}...`;
 };
 
+const getInternalUpdateMeta = (viewing: ViewingItem) => {
+  const updatedAt = viewing.internal_updated_at
+    ? moment(viewing.internal_updated_at).format("DD-MM-YYYY HH:mm")
+    : null;
+  const updatedBy = viewing.internal_updated_by_user?.name ?? null;
+
+  if (!updatedAt && !updatedBy) {
+    return null;
+  }
+
+  return [updatedAt, updatedBy].filter(Boolean).join(" by ");
+};
+
 const ViewingsTableBody = ({
   filterCity = "",
   filterSearch = "",
@@ -201,15 +214,9 @@ const ViewingsTableBody = ({
                   placeholder="Add an internal note..."
                 />
               </Form.Group>
-              {(editingViewing.internal_updated_at || editingViewing.internal_updated_by_user?.name) && (
+              {getInternalUpdateMeta(editingViewing) && (
                 <div className="small text-muted">
-                  Last internal update:
-                  {" "}
-                  {editingViewing.internal_updated_at
-                    ? moment(editingViewing.internal_updated_at).format("DD-MM-YYYY HH:mm")
-                    : "—"}
-                  {" by "}
-                  {editingViewing.internal_updated_by_user?.name ?? "Unknown"}
+                  Last internal update: {getInternalUpdateMeta(editingViewing)}
                 </div>
               )}
             </div>
@@ -236,6 +243,7 @@ const ViewingsTableBody = ({
         const createdAt = viewing.created_at
           ? moment(viewing.created_at).format("DD-MM-YY HH:mm")
           : "—";
+        const internalUpdateMeta = getInternalUpdateMeta(viewing);
 
         return (
           <tr className="listing-table" key={viewing.id}>
@@ -245,12 +253,29 @@ const ViewingsTableBody = ({
             <td className="center">{location}</td>
             <td className="center">{appointment}</td>
             <td className="center">
-              <span className={`badge px-2 py-1 ${statusBadgeClass(viewing.status)}`}>
+              <button
+                type="button"
+                className={`badge px-2 py-1 border-0 ${statusBadgeClass(viewing.status)}`}
+                style={{ cursor: "pointer" }}
+                onClick={() => openEditModal(viewing)}
+                title="Edit status and internal note"
+              >
                 {statusLabel(viewing.status)}
-              </span>
+              </button>
             </td>
             <td className="center" style={{ maxWidth: 240 }}>
-              {truncateText(viewing.internal_note)}
+              <button
+                type="button"
+                className="btn btn-link p-0 text-decoration-none text-body"
+                style={{ maxWidth: 240 }}
+                onClick={() => openEditModal(viewing)}
+                title="Edit internal note"
+              >
+                <span className="d-block">{truncateText(viewing.internal_note)}</span>
+                {internalUpdateMeta && (
+                  <span className="d-block small text-muted mt-1">{internalUpdateMeta}</span>
+                )}
+              </button>
             </td>
             <td className="center">{createdAt}</td>
             <td className="center">
@@ -271,7 +296,7 @@ const ViewingsTableBody = ({
                       onClick={() => openEditModal(viewing)}
                     >
                       <i className="fas fa-pencil me-2" />
-                      Edit internal status
+                      Edit status and note
                     </button>
                   </li>
                 </ul>
