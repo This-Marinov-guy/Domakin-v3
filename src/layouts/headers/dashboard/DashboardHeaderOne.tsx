@@ -192,6 +192,25 @@ const DashboardHeaderOne = observer(({ isActive, setIsActive }: any) => {
                 </li>
                 <li className="plr">
                   <Link
+                    href="/account/viewings"
+                    className={`d-flex w-100 align-items-center ${
+                      pathname === "/account/viewings" ? "active" : ""
+                    }`}
+                  >
+                    <i
+                      className="fas fa-calendar-check"
+                      style={{
+                        fontSize: 22,
+                        width: 30,
+                        textAlign: "center",
+                        color: pathname === "/account/viewings" ? "#fff" : undefined,
+                      }}
+                    />
+                    <span>Viewings</span>
+                  </Link>
+                </li>
+                <li className="plr">
+                  <Link
                     href="/account/referral-bonuses"
                     className={`d-flex w-100 align-items-center ${
                       pathname === "/account/referral-bonuses" ? "active" : ""
