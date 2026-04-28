@@ -25,7 +25,7 @@ interface ViewingItem {
   date?: string;
   time?: string;
   note?: string;
-  status?: number;
+  status?: number | string | null;
   internal_note?: string;
   created_at?: string;
   internal_updated_at?: string;
@@ -39,12 +39,29 @@ interface Props {
   filterCity?: string;
   filterSearch?: string;
   filterReferenceId?: string;
-  filterStatus?: string;
   loadEnabled?: boolean;
 }
 
 const statusLabel = (status?: number) =>
   APPLICATION_STATUSES.find((entry) => entry.value === status)?.text ?? "—";
+
+const normalizeStatus = (status?: number | string | null): number => {
+  if (typeof status === "number" && Number.isFinite(status)) {
+    return status;
+  }
+
+  if (typeof status === "string") {
+    const trimmed = status.trim();
+    if (trimmed !== "") {
+      const parsed = Number(trimmed);
+      if (Number.isFinite(parsed)) {
+        return parsed;
+      }
+    }
+  }
+
+  return 1;
+};
 
 const statusBadgeClass = (status?: number) => {
   switch (status) {
@@ -84,7 +101,6 @@ const ViewingsTableBody = ({
   filterCity = "",
   filterSearch = "",
   filterReferenceId = "",
-  filterStatus = "",
   loadEnabled = true,
 }: Props) => {
   const { sendRequest } = useServer();
@@ -101,7 +117,6 @@ const ViewingsTableBody = ({
     if (filterCity) params.set("city", filterCity);
     if (filterSearch) params.set("search", filterSearch);
     if (filterReferenceId) params.set("reference_id", filterReferenceId);
-    if (filterStatus) params.set("status", filterStatus);
 
     const response = await sendRequest(`/viewing/list?${params.toString()}`);
     if (response?.status && response?.data != null) {
@@ -131,9 +146,11 @@ const ViewingsTableBody = ({
   };
 
   const openEditModal = (viewing: ViewingItem) => {
+    const normalizedStatus = normalizeStatus(viewing.status);
+
     setEditingViewing(viewing);
     setForm({
-      status: String(viewing.status ?? 1),
+      status: String(normalizedStatus),
       internal_note: viewing.internal_note ?? "",
     });
   };
@@ -237,6 +254,7 @@ const ViewingsTableBody = ({
       </Modal>
 
       {viewings.map((viewing) => {
+        const normalizedStatus = normalizeStatus(viewing.status);
         const applicant = [viewing.name, viewing.surname].filter(Boolean).join(" ") || "—";
         const location = [viewing.city, viewing.address].filter(Boolean).join(" | ") || "—";
         const appointment = [viewing.date, viewing.time].filter(Boolean).join(" ") || "—";
@@ -255,12 +273,12 @@ const ViewingsTableBody = ({
             <td className="center">
               <button
                 type="button"
-                className={`badge px-2 py-1 border-0 ${statusBadgeClass(viewing.status)}`}
+                className={`badge px-2 py-1 border-0 ${statusBadgeClass(normalizedStatus)}`}
                 style={{ cursor: "pointer" }}
                 onClick={() => openEditModal(viewing)}
                 title="Edit status and internal note"
               >
-                {statusLabel(viewing.status)}
+                {statusLabel(normalizedStatus)}
               </button>
             </td>
             <td className="center" style={{ maxWidth: 240 }}>
@@ -312,7 +330,6 @@ const ViewingsTableBody = ({
     filterCity,
     filterSearch,
     filterReferenceId,
-    filterStatus,
   ].join("-");
 
   return (

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Form from "react-bootstrap/Form";
 import ViewingsTableBody from "./ViewingsTableBody";
-import { APPLICATION_STATUSES } from "@/utils/defines";
 
 const DEBOUNCE_MS = 400;
 
@@ -13,12 +12,10 @@ const ViewingsListBody = () => {
   const [cityInput, setCityInput] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [referenceIdInput, setReferenceIdInput] = useState("");
-  const [statusInput, setStatusInput] = useState("");
 
   const [filterCity, setFilterCity] = useState("");
   const [filterSearch, setFilterSearch] = useState("");
   const [filterReferenceId, setFilterReferenceId] = useState("");
-  const [filterStatus, setFilterStatus] = useState("");
 
   const [isInitialized, setIsInitialized] = useState(false);
   const hasInitializedFromUrl = useRef(false);
@@ -31,17 +28,14 @@ const ViewingsListBody = () => {
     const city = typeof q.city === "string" ? q.city : "";
     const search = typeof q.search === "string" ? q.search : "";
     const referenceId = typeof q.reference_id === "string" ? q.reference_id : "";
-    const status = typeof q.status === "string" ? q.status : "";
 
     setCityInput(city);
     setSearchInput(search);
     setReferenceIdInput(referenceId);
-    setStatusInput(status);
 
     setFilterCity(city);
     setFilterSearch(search);
     setFilterReferenceId(referenceId);
-    setFilterStatus(status);
     setIsInitialized(true);
   }, [router.isReady, router.query]);
 
@@ -59,11 +53,6 @@ const ViewingsListBody = () => {
 
   useEffect(() => {
     if (!isInitialized) return;
-    setFilterStatus(statusInput);
-  }, [isInitialized, statusInput]);
-
-  useEffect(() => {
-    if (!isInitialized) return;
 
     const q = { ...router.query } as Record<string, string>;
     const current = { ...router.query } as Record<string, string>;
@@ -75,20 +64,18 @@ const ViewingsListBody = () => {
     set("city", filterCity);
     set("search", filterSearch);
     set("reference_id", filterReferenceId);
-    set("status", filterStatus);
 
     const same =
       (current.city ?? "") === (q.city ?? "") &&
       (current.search ?? "") === (q.search ?? "") &&
-      (current.reference_id ?? "") === (q.reference_id ?? "") &&
-      (current.status ?? "") === (q.status ?? "");
+      (current.reference_id ?? "") === (q.reference_id ?? "");
 
     if (same) return;
 
     router.replace({ pathname: router.pathname, query: q }, undefined, {
       shallow: true,
     });
-  }, [isInitialized, filterCity, filterSearch, filterReferenceId, filterStatus, router]);
+  }, [isInitialized, filterCity, filterSearch, filterReferenceId, router]);
 
   return (
     <div className="bg-white card-box p0 border-20">
@@ -127,23 +114,6 @@ const ViewingsListBody = () => {
               />
             </Form.Group>
           </div>
-          <div className="col-12 col-md-auto">
-            <Form.Group>
-              <Form.Label className="small text-muted mb-1">Status</Form.Label>
-              <Form.Select
-                value={statusInput}
-                onChange={(e) => setStatusInput(e.target.value)}
-                style={{ minWidth: 160 }}
-              >
-                <option value="">All statuses</option>
-                {APPLICATION_STATUSES.map((status) => (
-                  <option key={status.value} value={status.value}>
-                    {status.text}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-          </div>
         </div>
       </div>
 
@@ -172,7 +142,6 @@ const ViewingsListBody = () => {
             filterCity={filterCity}
             filterSearch={filterSearch}
             filterReferenceId={filterReferenceId}
-            filterStatus={filterStatus}
             loadEnabled={isInitialized}
           />
         </table>
