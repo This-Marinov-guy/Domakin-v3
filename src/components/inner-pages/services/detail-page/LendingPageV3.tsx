@@ -34,12 +34,29 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
             setReferenceId,
             setAddListingDataFromApplication,
             showListRoomModal,
-            showReminderModal,
             setShowListRoomModal,
-            setShowReminderModal,
             referenceId
         },
     } = useStore();
+
+    const showReminderModal = router.query.modal === "reminder";
+
+    const openReminderModal = () => {
+        router.replace(
+            { pathname: router.pathname, query: { ...router.query, modal: "reminder" } },
+            undefined,
+            { shallow: true }
+        );
+    };
+
+    const closeReminderModal = () => {
+        const { modal, ...rest } = router.query;
+        router.replace(
+            { pathname: router.pathname, query: rest },
+            undefined,
+            { shallow: true }
+        );
+    };
 
     const { sendRequest } = useServer();
     const hasFetchedRef = useRef(false);
@@ -134,7 +151,7 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
                         isShowListingButton={true}
                         secClasses="reminder-sec-two"
                         openListingModal={() => setShowListRoomModal(true)}
-                        openReminderModal={() => setShowReminderModal(true)}
+                        openReminderModal={openReminderModal}
                     />
                 </div>
 
@@ -159,13 +176,13 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
                 isShowListingButton={true}
                 secClasses="reminder-sec-two"
                 openListingModal={() => setShowListRoomModal(true)}
-                openReminderModal={() => setShowReminderModal(true)}
+                openReminderModal={openReminderModal}
             />
 
             <QuestionsSection secClasses="custom-accordion-sec-v2" />
 
             <ListRoomModal show={showListRoomModal} onHide={() => setShowListRoomModal(false)} />
-            <ReminderFormModal show={showReminderModal} onHide={() => setShowReminderModal(false)} />
+            <ReminderFormModal show={showReminderModal} onHide={closeReminderModal} />
             <FooterFour />
 
             {/* Floating bottom-center \"List\" button, reusing the same component as careers page */}
