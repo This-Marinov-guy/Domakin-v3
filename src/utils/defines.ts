@@ -1,5 +1,8 @@
 export const ENV_PROD = process.env.NODE_ENV === "production";
 
+// admin app (separate domain with its own PWA / install prompt)
+export const ADMIN_APP_URL = "https://admin.domakin.nl";
+
 // social
 export const EMAIL = "info@domakin.nl";
 export const PHONE_NUMBER = "+31 85 083 5000";

@@ -1,16 +1,29 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
+import { observer } from "mobx-react-lite";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
+import { useStore } from "@/stores/storeContext";
+import { ADMIN_APP_URL } from "@/utils/defines";
 
 const DownloadApp = () => {
   const [showGuide, setShowGuide] = useState(false);
   const { isInstalled, isIOS, triggerInstall } = usePWAInstall();
+  const {
+    userStore: { isAdmin },
+  } = useStore();
 
   const handleInstall = async () => {
     const result = await triggerInstall();
     if (result === "guide") {
       setShowGuide(true);
     }
+  };
+
+  // The admin app lives on its own domain, so the install prompt has to come
+  // from there. Open it in a new window with a hint so it can auto-trigger
+  // its own PWA install.
+  const handleAdminInstall = () => {
+    window.open(`${ADMIN_APP_URL}/?install=1`, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -54,6 +67,19 @@ const DownloadApp = () => {
               Install App
             </button>
           )}
+
+          {isAdmin && (
+            <div className="mt-4 pt-3 border-top">
+              <p className="text-muted mb-3">
+                Install the Domakin Admin app from its own site for managing the
+                platform on the go.
+              </p>
+              <button className="btn-ten" onClick={handleAdminInstall}>
+                <i className="fa-regular fa-shield-halved me-2"></i>
+                Install Admin
+              </button>
+            </div>
+          )}
         </li>
       </ul>
 
@@ -84,4 +110,4 @@ const DownloadApp = () => {
   );
 };
 
-export default DownloadApp;
+export default observer(DownloadApp);
