@@ -38,48 +38,44 @@ const DownloadApp = () => {
             works offline and launches straight from your home screen.
           </p>
 
-          {isInstalled ? (
-            <div className="d-flex align-items-center gap-2 text-success">
-              <i className="fa-regular fa-circle-check fs-5"></i>
-              <span>App is already installed on this device.</span>
-            </div>
-          ) : isIOS ? (
-            <ol className="mb-0 d-flex flex-column gap-2">
-              <li>
-                Open this page in <strong>Safari</strong> if you haven&apos;t
-                already
-              </li>
-              <li>
-                Tap the <strong>Share</strong> button{" "}
-                <i className="fa-regular fa-arrow-up-from-bracket"></i> at the
-                bottom of the screen
-              </li>
-              <li>
-                Scroll down and tap <strong>Add to Home Screen</strong>
-              </li>
-              <li>
-                Tap <strong>Add</strong> to confirm
-              </li>
-            </ol>
-          ) : (
-            <button className="btn-ten" onClick={handleInstall}>
-              <i className="fa-regular fa-download me-2"></i>
-              Install App
-            </button>
-          )}
-
-          {isAdmin && (
-            <div className="mt-4 pt-3 border-top">
-              <p className="text-muted mb-3">
-                Install the Domakin Admin app from its own site for managing the
-                platform on the go.
-              </p>
+          <div className="d-flex justify-start items-center gap-3">
+            {isAdmin && (
               <button className="btn-ten" onClick={handleAdminInstall}>
                 <i className="fa-regular fa-shield-halved me-2"></i>
                 Install Admin
               </button>
-            </div>
-          )}
+            )}
+            
+            {isInstalled ? (
+              <div className="d-flex align-items-center gap-2 text-success">
+                <i className="fa-regular fa-circle-check fs-5"></i>
+                <span>App is already installed on this device.</span>
+              </div>
+            ) : isIOS ? (
+              <ol className="mb-0 d-flex flex-column gap-2">
+                <li>
+                  Open this page in <strong>Safari</strong> if you haven&apos;t
+                  already
+                </li>
+                <li>
+                  Tap the <strong>Share</strong> button{" "}
+                  <i className="fa-regular fa-arrow-up-from-bracket"></i> at the
+                  bottom of the screen
+                </li>
+                <li>
+                  Scroll down and tap <strong>Add to Home Screen</strong>
+                </li>
+                <li>
+                  Tap <strong>Add</strong> to confirm
+                </li>
+              </ol>
+            ) : (
+              <button className="btn-ten" onClick={handleInstall}>
+                <i className="fa-regular fa-download me-2"></i>
+                Install App
+              </button>
+            )}
+          </div>
         </li>
       </ul>
 
