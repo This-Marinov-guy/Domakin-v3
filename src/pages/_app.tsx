@@ -10,6 +10,17 @@ import PageLoader from "@/components/ui/loading/PageLoader";
 import MainLayout from "@/layouts/MainLayout";
 import useTranslation from "next-translate/useTranslation";
 
+if (typeof window !== "undefined") {
+  window.addEventListener(
+    "beforeinstallprompt",
+    (event: Event) => {
+      event.preventDefault();
+      (window as any).__pwaInstallPrompt = event;
+    },
+    { once: true },
+  );
+}
+
 const MyApp = ({ Component, pageProps }: any) => {
   const recaptchaRef = React.createRef();
   const router = useRouter();

@@ -2,15 +2,11 @@ import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
-import { useStore } from "@/stores/storeContext";
 import { ADMIN_APP_URL } from "@/utils/defines";
 
 const DownloadApp = () => {
   const [showGuide, setShowGuide] = useState(false);
   const { isInstalled, isIOS, triggerInstall } = usePWAInstall();
-  const {
-    userStore: { isAdmin },
-  } = useStore();
 
   const handleInstall = async () => {
     const result = await triggerInstall();
@@ -39,13 +35,11 @@ const DownloadApp = () => {
           </p>
 
           <div className="d-flex justify-start items-center gap-3">
-            {isAdmin && (
-              <button className="btn-ten" onClick={handleAdminInstall}>
-                <i className="fa-regular fa-shield-halved me-2"></i>
-                Install Admin
-              </button>
-            )}
-            
+            <button className="btn-ten" onClick={handleAdminInstall}>
+              <i className="fa-regular fa-shield-halved me-2"></i>
+              Install Admin
+            </button>
+
             {isInstalled ? (
               <div className="d-flex align-items-center gap-2 text-success">
                 <i className="fa-regular fa-circle-check fs-5"></i>
