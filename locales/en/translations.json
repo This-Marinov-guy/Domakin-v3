@@ -231,7 +231,7 @@
     "surname": "Surname",
     "phone": "Phone",
     "email": "Email",
-    "comments": "Any comments you would like to be sent to our agent\n\nAny questions that you want our agent to ask on your behalf?\n\n- How many tenants is the bathroom shared with\n- Is there a storage room\n- Do I need to buy kitchen utensils",
+    "comments": "Questions you want our agent to ask on your behalf\n\n- How many tenants is the bathroom shared with\n- Is there a storage room\n- Do I need to buy kitchen utensils",
     "comments_optional": "Any comments you would like to be sent to our agent (optional)",
     "consent": "I give my consent to be contacted by the company via phone or email and for them to store my information for service purposes only",
     "submit_request": "Submit Request",
@@ -245,7 +245,8 @@
       "terms_required": "Terms must be accepted",
       "city_required": "Please provide the city of the viewing",
       "date_required": "Please provide the date of the viewing",
-      "time_required": "Please provide the time of the viewing"
+      "time_required": "Please provide the time of the viewing",
+      "questions_required": "Please add the questions for the viewing"
     },
     "successful_request": "Successful Request",
     "confirmation_message": "Your information has been sent so expect soon to be contacted by one of our agents!",

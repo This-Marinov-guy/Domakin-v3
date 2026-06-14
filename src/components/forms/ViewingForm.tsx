@@ -69,7 +69,7 @@ const ViewingForm = () => {
   }, [user]);
 
   return (
-    <form className="form-style-one wow fadeInUp pt-40 pb-40">
+    <form className="form-style-one wow fadeInUp pt-40 pb-40" onSubmit={handleSubmit}>
       <div className="container m-a row controls">
         {isUserFullySet && (
           <h4 className="mb-20">{t("viewing.fill_your_details")}</h4>
@@ -217,6 +217,7 @@ const ViewingForm = () => {
           <div className="input-group-meta form-group mb-40">
             <Form.Control
               as="textarea"
+              required
               placeholder={t("viewing.comments")}
               value={viewingData.note}
               onChange={(e) => {
@@ -275,7 +276,6 @@ const ViewingForm = () => {
           <button
             disabled={loading}
             type="submit"
-            onClick={handleSubmit}
             className="btn-nine text-uppercase rounded-3 fw-normal w-100"
           >
             {loading ? (
