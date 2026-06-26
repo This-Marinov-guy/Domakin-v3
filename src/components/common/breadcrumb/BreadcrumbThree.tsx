@@ -32,13 +32,13 @@ const BreadcrumbThree = ({
       <div className="container">
         <div className="row">
           <div className="col-12 d-flex flex-column align-items-center justify-content-center">
-            <h3
+            <h1
               className={`${
                 style ? "xl-mb-30 md-mb-20" : "xl-mb-20 pt-15"
               } mb-35`}
             >
               {title}
-            </h3>
+            </h1>
             <BreadcrumbNav link_title={link_title} sub_title={sub_title} />
           </div>
         </div>

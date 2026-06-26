@@ -25,12 +25,12 @@ const HeroBanner = () => {
             />
             <div className="col-xl-6 col-lg-4 col-md-12 col-12">
               <div className="pt-35 wow fadeInRight">
-                <h5
+                <h1
                   className="color-dark hero-heading mb-40"
                   style={{ color: "#004aad" }}
                 >
                   {t("home.company_for_accommodation_searching")}
-                </h5>
+                </h1>
                 {/* <p className="color-dark sub-heading mb-40 lg-mb-20">
                   <i
                     className="fa-solid fa-house"

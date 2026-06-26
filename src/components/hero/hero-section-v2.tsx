@@ -32,12 +32,12 @@ export default function HeroSectionV2({ openModal }: HeroSectionV2Props) {
 
                             <div className="d-flex flex-column">
 
-                                <h2 className="hero-header__title-v2">
+                                <h1 className="hero-header__title-v2">
                                     <Trans
                                         i18nKey="translations:hero_lending.get_commission_title"
                                         components={{ span: <span />, br: <br /> }}
                                     />
-                                </h2>
+                                </h1>
                                 
                                 {/* <p className="hero-v2-msg-text">
                                     Listing is Free
