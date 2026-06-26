@@ -11,6 +11,10 @@ import Head from "next/head";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import RelatedPosts from "@/components/blogs/common-blog/RelatedPosts";
 import BlogPostMeta from "@/components/blogs/common-blog/BlogPostMeta";
+import AnswerFirstBlock, {
+  createAnswerFirstFaqJsonLd,
+  getAnswerFirstData,
+} from "@/components/blogs/common-blog/AnswerFirstBlock";
 
 interface BlogPostProps {
   serverBlogPost: any;
@@ -56,6 +60,7 @@ const BlogPost = ({
   
   // Use the slug from the API response
   const seoSlug = post?.slug || slug;
+  const answerFirstData = getAnswerFirstData(seoSlug);
 
   // Determine the best image to use (image or thumbnail as fallback)
   const postImage = post?.image || post?.thumbnail;
@@ -142,6 +147,14 @@ const BlogPost = ({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {answerFirstData && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(createAnswerFirstFaqJsonLd(answerFirstData)),
+            }}
+          />
+        )}
       </Head>
       <HeaderOne />
       <div className="container mt-40 mb-40">
@@ -154,6 +167,8 @@ const BlogPost = ({
                 
                 {/* Blog Post Meta Information */}
                 <BlogPostMeta post={post} />
+
+                <AnswerFirstBlock data={answerFirstData} />
 
                 {/* Display featured image if available */}
                 {postImage && (
