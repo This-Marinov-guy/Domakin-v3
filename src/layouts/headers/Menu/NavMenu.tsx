@@ -44,12 +44,15 @@ const NavMenu = () => {
       {menu_data.map((menu: any) => (
         <li key={menu.id} className={`nav-item dropdown ${menu.class_name}`}>
           <Link
-            href={menu.has_dropdown ? "" : menu.link}
+            href={menu.has_dropdown ? menu.link || "#" : menu.link}
             className={`nav-link ${menu.has_dropdown && "dropdown-toggle"} ${
               pathname === menu.link ? "active" : ""
             }
                      ${navTitle === menu.title ? "show" : ""}`}
-            onClick={() => openMobileMenu(menu.title)}
+            onClick={(event) => {
+              if (menu.has_dropdown) event.preventDefault();
+              openMobileMenu(menu.title);
+            }}
           >
             {t(menu.title)}
           </Link>

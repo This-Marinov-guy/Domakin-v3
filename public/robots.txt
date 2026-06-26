@@ -1,2 +1,10 @@
 User-agent: *
 Disallow: /user/
+Disallow: /account/
+Disallow: /api/
+Disallow: /callback/
+Disallow: /payment/
+Disallow: /firebase-messaging-sw.js
+
+Sitemap: https://www.domakin.nl/sitemap.xml
+Sitemap: https://www.domakin.nl/sitemap-index.xml

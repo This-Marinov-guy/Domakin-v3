@@ -12,6 +12,7 @@ const BreadcrumbThree = ({
   sub_title,
   style,
   background = 6,
+  headingTag: HeadingTag = "h1",
 }: any) => {
   const selectHandler = (e: any) => {};
 
@@ -32,13 +33,13 @@ const BreadcrumbThree = ({
       <div className="container">
         <div className="row">
           <div className="col-12 d-flex flex-column align-items-center justify-content-center">
-            <h3
+            <HeadingTag
               className={`${
                 style ? "xl-mb-30 md-mb-20" : "xl-mb-20 pt-15"
               } mb-35`}
             >
               {title}
-            </h3>
+            </HeadingTag>
             <BreadcrumbNav link_title={link_title} sub_title={sub_title} />
           </div>
         </div>

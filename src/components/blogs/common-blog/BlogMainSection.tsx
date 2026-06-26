@@ -1,90 +1,78 @@
-import React from "react";
-import inner_blog_data from "@/data/inner-data/BlogData";
-import BlogSidebar from "../common-blog/BlogSidebar";
-import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
-import ReactPaginate from "react-paginate";
+import Link from "next/link";
+// import { useStore } from "@/stores"; // uncomment + adjust if you want MobX
 
-import paginateIcon from "@/assets/images/icon/icon_46.svg";
-import useTranslation from "next-translate/useTranslation";
-import { useStore } from "@/stores/storeContext";
-import BlogCardSmall from "./BlogCardSmall";
-import { observer } from "mobx-react-lite";
-import BlogCardBig from "./BlogCardBig";
-import BlogLoadingSection from "@/components/ui/loading/BlogLoadingSection";
+type WPPost = {
+  id: number;
+  slug: string;
+  title: { rendered: string };
+  excerpt?: { rendered: string };
+  date: string;
+  _embedded?: {
+    "wp:featuredmedia"?: { source_url: string }[];
+  };
+};
 
-const BlogMainSection = () => {
-  const { t } = useTranslation("translations");
+export default function BlogMainSection({ initialPosts }: { initialPosts: WPPost[] }) {
+  // start with server-rendered posts
+  const [renderPosts, setRenderPosts] = useState(initialPosts);
+
+  // OPTIONAL: hydrate with MobX store if you have one
+  /*
   const {
-    blogStore: { posts, loading },
+    blogStore: { posts: storePosts },
   } = useStore();
 
-  const itemsPerPage = 6;
-  const [itemOffset, setItemOffset] = useState(0);
-  const endOffset = itemOffset + itemsPerPage;
-  const currentItems = posts.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(posts.length / itemsPerPage);
-  // click to request another page.
-  const handlePageClick = (event: any) => {
-    const newOffset = (event.selected * itemsPerPage) % posts.length;
-    setItemOffset(newOffset);
-  };
+  useEffect(() => {
+    if (Array.isArray(storePosts) && storePosts.length > 0) {
+      setRenderPosts(storePosts);
+    }
+  }, [storePosts]);
+  */
 
-  const hasPosts = posts?.length > 0;
-  const [mainPost, ...otherPosts] = posts;
-
-  if (loading) {
-    return (
-      <>
-        <BlogLoadingSection title={t("blog.description")} />
-      </>
-    );
-  }
-
-  if (!hasPosts) {
-    return (
-      <h4 className="text-center mt-130 xl-mt-100 mb-150 xl-mb-100">
-        {t("blog.no_posts_description")}
-      </h4>
-    );
+  if (!renderPosts || renderPosts.length === 0) {
+    return <p>No posts available.</p>;
   }
 
   return (
-    <div className="blog-section-three mt-40 mb-40">
-      <div className="container container-large">
-        <div className="row">
-          <h4 className="text-center mb-40">{t("blog.description")}</h4>
-        </div>
-        <div className="row">
-          <BlogCardBig post={mainPost} />
-        </div>
-        <div className="row">
-          <div className="col-12">
-            <div className="row gx-xxl-5">
-              {otherPosts.map((post, index) => (
-                <BlogCardSmall key={index} post={post} />
-              ))}
-            </div>
+    <section className="blog-main-section container mx-auto py-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {renderPosts.map((post) => {
+          const featuredImage =
+            post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ?? null;
 
-            {/* <ReactPaginate
-              breakLabel="..."
-              nextLabel={<Image src={paginateIcon} alt="" className="ms-2" />}
-              onPageChange={handlePageClick}
-              pageRangeDisplayed={3}
-              pageCount={pageCount}
-              previousLabel={
-                <Image src={paginateIcon} alt="" className="ms-2" />
-              }
-              renderOnZeroPageCount={null}
-              className="pagination-one square d-flex align-items-center style-none pt-30"
-            /> */}
-          </div>
-          {/* <BlogSidebar /> */}
-        </div>
+          return (
+            <article
+              key={post.id ?? post.slug}
+              className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+            >
+              {featuredImage && (
+                <Link href={`/blog/${post.slug}`}>
+                  <img
+                    src={featuredImage}
+                    alt={post.title.rendered}
+                    className="w-full h-48 object-cover"
+                  />
+                </Link>
+              )}
+              <div className="p-4">
+                <Link href={`/blog/${post.slug}`}>
+                  <h2
+                    className="text-xl font-semibold mb-2 hover:underline"
+                    dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+                  />
+                </Link>
+                {post.excerpt?.rendered && (
+                  <div
+                    className="text-gray-600 text-sm"
+                    dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                  />
+                )}
+              </div>
+            </article>
+          );
+        })}
       </div>
-    </div>
+    </section>
   );
-};
-
-export default observer(BlogMainSection);
+}

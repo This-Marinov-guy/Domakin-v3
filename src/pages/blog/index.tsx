@@ -1,27 +1,39 @@
-import BreadcrumbThree from "@/components/common/breadcrumb/BreadcrumbThree";
-import FooterFour from "@/layouts/footers/FooterFour";
-import HeaderOne from "@/layouts/headers/HeaderOne";
-import FancyBanner from "@/components/common/FancyBanner";
-import useTranslation from "next-translate/useTranslation";
+// src/pages/blog/index.tsx
+import dynamic from "next/dynamic";
 import BlogMainSection from "@/components/blogs/common-blog/BlogMainSection";
+import { fetchWordPressPosts, type WordPressPost } from "@/lib/wordpress";
 
-const Blog = () => {
-  const { t } = useTranslation("translations");
+const HeaderOne = dynamic(() => import("@/layouts/headers/HeaderOne"), { ssr: false });
+const FooterFour = dynamic(() => import("@/layouts/footers/FooterFour"), { ssr: false });
+const BreadcrumbThree = dynamic(
+  () => import("@/components/common/breadcrumb/BreadcrumbThree"),
+  { ssr: false }
+);
 
+export default function BlogPage({ initialPosts }: { initialPosts: WordPressPost[] }) {
   return (
     <>
       <HeaderOne />
-      <BreadcrumbThree
-        title={t("blog.title")}
-        link_title={t("blog.title")}
-        background={8}
-        style={false}
-      />
-      <BlogMainSection />
-      <FancyBanner />
+      <BreadcrumbThree title="Blog" />
+      <BlogMainSection initialPosts={initialPosts} />
       <FooterFour />
     </>
   );
-};
+}
 
-export default Blog;
+export async function getStaticProps() {
+  try {
+    const posts = await fetchWordPressPosts("?_embed=1");
+
+    return {
+      props: { initialPosts: posts },
+      revalidate: 600, // refresh every 10 min
+    };
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return {
+      props: { initialPosts: [] },
+      revalidate: 600,
+    };
+  }
+}
