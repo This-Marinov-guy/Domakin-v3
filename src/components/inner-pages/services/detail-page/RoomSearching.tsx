@@ -8,9 +8,11 @@ import StepDescriptionOne from "@/components/common/StepDescriptionOne";
 import useTranslation from "next-translate/useTranslation";
 import ViewingForm from "@/components/forms/ViewingForm";
 import RoomSearchingForm from "@/components/forms/RoomSearchingForm";
+import ServiceAnswerBlock, { getServiceAnswerData } from "../ServiceAnswerBlock";
 
 const RoomSearching = () => {
   const { t } = useTranslation("translations");
+  const serviceAnswerData = getServiceAnswerData("room-searching");
 
   const details = {
     title: t("room_searching.tell_us_what_are_you_looking_for"),
@@ -39,6 +41,7 @@ const RoomSearching = () => {
         style={false}
       />
       <StepDescriptionOne details={details} />
+      <ServiceAnswerBlock data={serviceAnswerData} />
       <RoomSearchingForm />
       <FancyBanner />
       <FooterFour />
