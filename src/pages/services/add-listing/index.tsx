@@ -6,6 +6,11 @@ import { fetchFeedbacks, fetchProperties } from "@/services/api";
 import useTranslation from "next-translate/useTranslation";
 import LendingPageV3 from "@/components/inner-pages/services/detail-page/LendingPageV3";
 import LendingPage from "@/components/inner-pages/services/detail-page/LendingPage";
+import {
+  createServiceFaqJsonLd,
+  createServiceJsonLd,
+  getServiceAnswerData,
+} from "@/components/inner-pages/services/ServiceAnswerBlock";
 
 interface HomeProps {
   serverFeedbacks: any[];
@@ -18,6 +23,7 @@ const index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
   
   const baseUrl = "https://www.domakin.nl";
   const currentUrl = `${baseUrl}${router.asPath}`;
+  const serviceAnswerData = getServiceAnswerData("add-listing");
   
   // Get localized content
   const title = lang === "en" 
@@ -66,6 +72,18 @@ const index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
           : lang === "bg"
           ? "отдай стая, прехвърли договор, намери съквартирант, обява за стая, Нидерландия"
           : "καταχώρηση δωματίου, μεταβίβαση συμβολαίου, εύρεση συγκατοίκου, Ολλανδία"} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(createServiceJsonLd(serviceAnswerData, currentUrl)),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(createServiceFaqJsonLd(serviceAnswerData)),
+          }}
+        />
       </Head>
       <Wrapper>
         <LendingPageV3 serverFeedbacks={serverFeedbacks} serverProperties={serverProperties}/>

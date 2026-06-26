@@ -9,9 +9,11 @@ import StepDescriptionOne from "@/components/common/StepDescriptionOne";
 import useTranslation from "next-translate/useTranslation";
 import ViewingForm from "@/components/forms/ViewingForm";
 import Link from "next/link";
+import ServiceAnswerBlock, { getServiceAnswerData } from "../ServiceAnswerBlock";
 
 const ViewingPage = () => {
   const {t} = useTranslation('translations');
+  const serviceAnswerData = getServiceAnswerData("viewing");
 
   const details = {
     title: t("viewing.let_us_make_the_viewing_for_you"),
@@ -41,8 +43,9 @@ const ViewingPage = () => {
         style={false}
       />
       <StepDescriptionOne details={details} />
+      <ServiceAnswerBlock data={serviceAnswerData} />
       <div className="container mt-50 mb-50 text-center">
-        <div 
+        <div
           className="pricing-policy-banner p-4 rounded-3" 
           style={{ 
             backgroundColor: '#004AAD',

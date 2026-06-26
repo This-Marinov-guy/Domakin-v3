@@ -22,6 +22,20 @@ const nextConfig = nextTranslate({
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
+  async redirects() {
+    return [
+      {
+        source: "/blog/bsn-number-id-netherlands",
+        destination: "/blog/bsn-nummer-id-nederland",
+        permanent: true,
+      },
+      {
+        source: "/blog/rent-allowance-netherlands",
+        destination: "/blog/rent-allowance-netherlands-2026",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

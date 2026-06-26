@@ -3,6 +3,11 @@ import Wrapper from "@/layouts/Wrapper";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
+import {
+  createServiceFaqJsonLd,
+  createServiceJsonLd,
+  getServiceAnswerData,
+} from "@/components/inner-pages/services/ServiceAnswerBlock";
 
 const index = () => {
   const router = useRouter();
@@ -10,6 +15,7 @@ const index = () => {
   
   const baseUrl = "https://www.domakin.nl";
   const currentUrl = `${baseUrl}${router.asPath}`;
+  const serviceAnswerData = getServiceAnswerData("viewing");
   
   // Get localized content
   const title = lang === "en" 
@@ -58,6 +64,18 @@ const index = () => {
           : lang === "bg"
           ? "оглед на имот, услуга за огледи, Нидерландия, студентско жилище, оглед на настаняване"
           : "προβολή ακινήτου, υπηρεσία προβολής, Ολλανδία, φοιτητική στέγαση"} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(createServiceJsonLd(serviceAnswerData, currentUrl)),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(createServiceFaqJsonLd(serviceAnswerData)),
+          }}
+        />
       </Head>
       <Wrapper>
         <ViewingPage />

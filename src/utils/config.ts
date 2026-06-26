@@ -3,8 +3,27 @@ import logoDefault from "@/assets/img/logo-2.png";
 import { ENV_PROD } from "./defines";
 import { isTodayInRange } from "./helpers";
 
+const normalizeEnvUrl = (value?: string) => value?.trim().replace(/^['"]|['"]$/g, "");
+
+const isLocalApiUrl = (value?: string) => {
+  if (!value) return false;
+
+  try {
+    const url = new URL(value);
+    return ["localhost", "127.0.0.1", "::1"].includes(url.hostname);
+  } catch {
+    return false;
+  }
+};
+
+const envServerEndpoint = normalizeEnvUrl(process.env.NEXT_PUBLIC_SERVER_URL);
+const envApiBaseUrl = normalizeEnvUrl(process.env.API_BASE_URL);
+
 // server
-export const SERVER_ENDPOINT = process.env.NEXT_PUBLIC_SERVER_URL;
+export const SERVER_ENDPOINT =
+  envServerEndpoint
+  || (process.env.NODE_ENV === "production" && isLocalApiUrl(envApiBaseUrl) ? undefined : envApiBaseUrl)
+  || "https://orange.domakin.nl";
 
 // Enhanced debugging for server endpoint
 console.log(`[Config] Environment: ${typeof window !== 'undefined' ? 'Client' : 'Server'}`);

@@ -11,6 +11,10 @@ import Head from "next/head";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import RelatedPosts from "@/components/blogs/common-blog/RelatedPosts";
 import BlogPostMeta from "@/components/blogs/common-blog/BlogPostMeta";
+import AnswerFirstBlock, {
+  createAnswerFirstFaqJsonLd,
+  getAnswerFirstData,
+} from "@/components/blogs/common-blog/AnswerFirstBlock";
 
 interface BlogPostProps {
   serverBlogPost: any;
@@ -56,6 +60,7 @@ const BlogPost = ({
   
   // Use the slug from the API response
   const seoSlug = post?.slug || slug;
+  const answerFirstData = getAnswerFirstData(seoSlug);
 
   // Determine the best image to use (image or thumbnail as fallback)
   const postImage = post?.image || post?.thumbnail;
@@ -142,6 +147,14 @@ const BlogPost = ({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {answerFirstData && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(createAnswerFirstFaqJsonLd(answerFirstData)),
+            }}
+          />
+        )}
       </Head>
       <HeaderOne />
       <div className="container mt-40 mb-40">
@@ -149,11 +162,13 @@ const BlogPost = ({
           <div className="col-12">
             {post ? (
               <div className="wordpress-embedded-container">
-                <h2 className="mb-4">{postTitle}</h2>
+                <h1 className="mb-4">{postTitle}</h1>
                 <BreadcrumbNav link_title={t("blog.title")} />
                 
                 {/* Blog Post Meta Information */}
                 <BlogPostMeta post={post} />
+
+                <AnswerFirstBlock data={answerFirstData} />
 
                 {/* Display featured image if available */}
                 {postImage && (
