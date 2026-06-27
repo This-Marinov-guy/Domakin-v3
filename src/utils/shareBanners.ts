@@ -25,7 +25,7 @@ export const getShareBannerForPath = (path: string) => {
     return SHARE_BANNERS.viewing;
   }
 
-  if (normalizedPath === "services/add-listing") {
+  if (normalizedPath === "services/add-listing" || normalizedPath === "account/add-listing") {
     return SHARE_BANNERS.upload;
   }
 
