@@ -11,6 +11,7 @@ import Head from "next/head";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import RelatedPosts from "@/components/blogs/common-blog/RelatedPosts";
 import BlogPostMeta from "@/components/blogs/common-blog/BlogPostMeta";
+import { SHARE_BANNERS } from "@/utils/shareBanners";
 
 interface BlogPostProps {
   serverBlogPost: any;
@@ -60,6 +61,7 @@ const BlogPost = ({
   // Determine the best image to use (image or thumbnail as fallback)
   const postImage = post?.image || post?.thumbnail;
   const defaultImage = "https://www.domakin.nl/assets/img/logo.png";
+  const shareImage = postImage || SHARE_BANNERS.main;
 
   // Generate JSON-LD structured data for the blog post
   const jsonLd = {
@@ -118,15 +120,15 @@ const BlogPost = ({
         <meta property="og:type" content="article" />
         <meta property="og:url" content={`https://www.domakin.nl/blog/${seoSlug}`} />
         <meta property="og:site_name" content="Domakin" />
-        {postImage && <meta property="og:image" content={postImage} />}
-        {postImage && <meta property="og:image:width" content="1200" />}
-        {postImage && <meta property="og:image:height" content="630" />}
+        <meta property="og:image" content={shareImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         
         {/* Twitter Card meta tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${postTitle} | Domakin`} />
         <meta name="twitter:description" content={cleanExcerpt} />
-        {postImage && <meta name="twitter:image" content={postImage} />}
+        <meta name="twitter:image" content={shareImage} />
         
         {/* Article meta tags */}
         <meta property="article:published_time" content={post?.date} />

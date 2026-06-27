@@ -8,6 +8,7 @@ import { GetServerSideProps } from "next";
 import { fetchBlogPosts } from "@/services/api";
 import Head from "next/head";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import { SHARE_BANNERS } from "@/utils/shareBanners";
 
 interface BlogProps {
   serverBlogPosts: any[];
@@ -75,7 +76,7 @@ const Blog = ({ serverBlogPosts, currentPage, totalPages, itemsPerPage }: BlogPr
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.domakin.nl/blog" />
         <meta property="og:site_name" content="Domakin" />
-        <meta property="og:image" content="https://www.domakin.nl/assets/img/blog/blog-og-image.jpg" />
+        <meta property="og:image" content={SHARE_BANNERS.main} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         
@@ -83,7 +84,7 @@ const Blog = ({ serverBlogPosts, currentPage, totalPages, itemsPerPage }: BlogPr
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${t("blog.title")} | Domakin`} />
         <meta name="twitter:description" content={t("blog.description")} />
-        <meta name="twitter:image" content="https://www.domakin.nl/assets/img/blog/blog-og-image.jpg" />
+        <meta name="twitter:image" content={SHARE_BANNERS.main} />
         
         {/* Article meta tags */}
         <meta property="article:section" content="Student Housing" />
