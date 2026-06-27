@@ -55,7 +55,7 @@ const MainLayout = ({ children }: any) => {
 
     if (storedLanguage) {
       localStorage.setItem("language", locale);
-      axios.defaults.headers.common["Accept-Language"] = lang || "en";
+      axios.defaults.headers.common["Accept-Language"] = storedLanguage || "en";
       return await setLanguage(storedLanguage);
     }
 
@@ -75,7 +75,7 @@ const MainLayout = ({ children }: any) => {
     }
 
     if (storedLanguage) {
-      axios.defaults.headers.common["Accept-Language"] = lang || "en";
+      axios.defaults.headers.common["Accept-Language"] = storedLanguage || "en";
       await setLanguage(storedLanguage);
     }
   };
