@@ -14,7 +14,7 @@ import { prefillUserInfo } from "@/utils/helpers";
 import moment from "moment";
 
 const ViewingForm = () => {
-  const { t } = useTranslation("translations");
+  const { t, lang } = useTranslation("translations");
 
   const { sendRequest, loading } = useServer();
 
@@ -42,6 +42,7 @@ const ViewingForm = () => {
       time: viewingData.time
         ? viewingData.time.format("HH:mm")
         : viewingData.time,
+      locale: lang,
     };
 
     sendRequest("/viewing/create", "POST", data).then((res) => {

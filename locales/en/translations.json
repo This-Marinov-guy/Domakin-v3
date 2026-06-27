@@ -213,6 +213,15 @@
         "title": "Who is this service for?",
         "description": "Ideal for students and expats looking for a trustworthy and stress-free way to secure housing. Whether you're arriving alone or with a friend or partner, each tenant receives personalized support—and pays only upon successful contract signing."
       }
+    },
+    "commission_through_listing": {
+      "section_title": "Commission through Listing",
+      "description": "Clients who list a property through our website are eligible for commission when that property is successfully taken through our platform. The commission is received when the rental contract is signed.",
+      "service_link": "List your room through Domakin",
+      "items": {
+        "direct": "Earn €200 when directly uploading a room to Domakin.",
+        "agent": "Earn €100 when uploading a room through a Domakin Housing Agent."
+      }
     }
   },
   "viewing": {
