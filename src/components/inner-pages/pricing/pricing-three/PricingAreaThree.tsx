@@ -164,8 +164,18 @@ const PricingAreaThree = () => {
               <p>{t("pricing.commission_through_listing.description")}</p>
 
               <ul>
-                <li>{t("pricing.commission_through_listing.items.direct")}</li>
-                <li>{t("pricing.commission_through_listing.items.agent")}</li>
+                <li>
+                  <Trans
+                    i18nKey="translations:pricing.commission_through_listing.items.direct"
+                    components={{ b: <b /> }}
+                  />
+                </li>
+                <li>
+                  <Trans
+                    i18nKey="translations:pricing.commission_through_listing.items.agent"
+                    components={{ b: <b /> }}
+                  />
+                </li>
               </ul>
 
               <Link
