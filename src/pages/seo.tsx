@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { LANGUAGES } from "@/utils/defines";
 import useTranslation from "next-translate/useTranslation";
 import { hasCustomSEO } from "@/utils/seo";
+import { getShareBannerForPath } from "@/utils/shareBanners";
 
 const SEO = () => {
   const router = useRouter();
@@ -24,6 +25,7 @@ const SEO = () => {
     .split('/')
     .filter(Boolean)
     .join('/') || '';
+  const shareBanner = getShareBannerForPath(path);
 
   // Skip rendering SEO if page has its own SEO
   if (hasCustomSEO(normalizedPath)) {
@@ -62,7 +64,7 @@ const SEO = () => {
         "@value": "Πλατφόρμα για βοήθεια στην αναζήτηση διαμερισμάτων στο Ολλανδία. Προσφέρουμε προβολές, επαφή με ιδιοκτήτες και ανάληψη δωματίων."
       }
     ],
-    image: "https://www.domakin.nl/assets/img/logo-2.png",
+    image: shareBanner,
   };
 
   return (
@@ -207,9 +209,11 @@ const SEO = () => {
       />
 
       {/* Common social media properties */}
-      <meta name="twitter:image" content="./assets/img/logo-2.png" />
-      <meta name="twitter:card" content="./assets/img/logo-2.png" />
-      <meta property="og:image" content="./assets/img/logo-2.png" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content={shareBanner} />
+      <meta property="og:image" content={shareBanner} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://www.domakin.nl" />
 

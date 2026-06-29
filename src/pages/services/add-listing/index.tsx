@@ -11,6 +11,7 @@ import {
   createServiceJsonLd,
   getServiceAnswerData,
 } from "@/components/inner-pages/services/ServiceAnswerBlock";
+import { SHARE_BANNERS } from "@/utils/shareBanners";
 
 interface HomeProps {
   serverFeedbacks: any[];
@@ -38,7 +39,7 @@ const index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
     ? "Прехвърлете договора си за наем или намерете нов съквартирант. Публикувайте стаята си в Domakin и се свържете с проверени студенти, търсещи настаняване в Нидерландия."
     : "Μεταβιβάστε το συμβόλαιο ενοικίασής σας ή βρείτε νέο συγκάτοικο. Καταχωρίστε το δωμάτιό σας στο Domakin και συνδεθείτε με επαληθευμένους φοιτητές που αναζητούν διαμονή στην Ολλανδία.";
   
-  const ogImage = `${baseUrl}/assets/img/icons/11.png`;
+  const ogImage = SHARE_BANNERS.upload;
 
   return (
     <>

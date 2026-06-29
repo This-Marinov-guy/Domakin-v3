@@ -155,6 +155,35 @@ const PricingAreaThree = () => {
 
               <h6 className="mt-30">{t("pricing.renting_room.audience.title")}</h6>
               <p>{t("pricing.renting_room.audience.description")}</p>
+
+              {/* Commission through listing */}
+              <h4 className="mt-40">
+                {t("pricing.commission_through_listing.section_title")}
+              </h4>
+
+              <p>{t("pricing.commission_through_listing.description")}</p>
+
+              <ul>
+                <li>
+                  <Trans
+                    i18nKey="translations:pricing.commission_through_listing.items.direct"
+                    components={{ b: <b /> }}
+                  />
+                </li>
+                <li>
+                  <Trans
+                    i18nKey="translations:pricing.commission_through_listing.items.agent"
+                    components={{ b: <b /> }}
+                  />
+                </li>
+              </ul>
+
+              <Link
+                href="/services/add-listing"
+                className="btn-eleven mt-10"
+              >
+                {t("pricing.commission_through_listing.service_link")}
+              </Link>
             </article>
           </div>
         </div>

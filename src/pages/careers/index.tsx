@@ -6,6 +6,7 @@ import FancyBanner from "@/components/common/FancyBanner";
 import useTranslation from "next-translate/useTranslation";
 import Head from "next/head";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import { SHARE_BANNERS } from "@/utils/shareBanners";
 
 const Careers = () => {
   const { t } = useTranslation("translations");
@@ -37,6 +38,13 @@ const Careers = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.domakin.nl/careers" />
         <meta property="og:site_name" content="Domakin" />
+        <meta property="og:image" content={SHARE_BANNERS.main} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${t("careers.title")} | Domakin`} />
+        <meta name="twitter:description" content={t("careers.meta_description")} />
+        <meta name="twitter:image" content={SHARE_BANNERS.main} />
       </Head>
       <HeaderOne style={true} />
       <BreadcrumbTwo

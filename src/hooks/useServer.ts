@@ -27,7 +27,7 @@ export const useServer = () => {
     userStore: { user },
   } = useStore();
 
-  const { t } = useTranslation("translations");
+  const { t, lang } = useTranslation("translations");
 
   const getErrorMessage = (response: any) => {
     if (!isEmpty(response?.data?.tag)) {
@@ -91,6 +91,11 @@ export const useServer = () => {
       sessionCookie ?? ""
     );
 
+    const requestHeaders = {
+      "Accept-Language": lang || "en",
+      ...headers,
+    };
+
     let requestData = {};
 
     if (["GET", "DELETE"].includes(method)) {
@@ -110,7 +115,7 @@ export const useServer = () => {
         url: queryString ? `${basePath}?${queryString}` : basePath,
         method,
         data: {},
-        headers,
+        headers: requestHeaders,
       };
     } else {
       // Add interface to request body (handles both objects and FormData)
@@ -157,7 +162,7 @@ export const useServer = () => {
         url: SERVER_ENDPOINT + "/api" + "/v" + options.version + url,
         method,
         data: requestBody,
-        headers,
+        headers: requestHeaders,
       };
     }
 

@@ -9,6 +9,7 @@ import useTranslation from "next-translate/useTranslation";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import PropertySchema from "@/components/seo/PropertySchema";
 import { useParams } from "next/navigation";
+import { SHARE_BANNERS } from "@/utils/shareBanners";
 
 interface PropertyDetailsProps {
   serverProperties: any[];
@@ -71,9 +72,10 @@ const index = ({ serverProperties }: PropertyDetailsProps) => {
   const propertyDescription = property.description?.property || 
     `Quality student accommodation in ${property.city}, Netherlands. ${property.description?.period || ''} ${property.description?.bills || ''}`.trim();
   
-  const propertyImage = property.main_image?.startsWith('http') 
-    ? property.main_image 
+  const propertyImage = property.main_image?.startsWith('http')
+    ? property.main_image
     : `https://www.domakin.nl/assets/img/properties/${property.folder ?? "property_" + property.id}/${property.main_image}`;
+  const shareImage = SHARE_BANNERS.main;
 
   // Generate SEO-friendly slug for URLs
   // Generate SEO-friendly slug: id-location-title
@@ -155,7 +157,7 @@ const index = ({ serverProperties }: PropertyDetailsProps) => {
         <meta property="og:type" content="product" />
         <meta property="og:url" content={`https://www.domakin.nl/services/renting/property/${seoSlug}`} />
         <meta property="og:site_name" content="Domakin" />
-        <meta property="og:image" content={propertyImage} />
+        <meta property="og:image" content={shareImage} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         
@@ -168,7 +170,7 @@ const index = ({ serverProperties }: PropertyDetailsProps) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${propertyTitle} | Domakin`} />
         <meta name="twitter:description" content={propertyDescription} />
-        <meta name="twitter:image" content={propertyImage} />
+        <meta name="twitter:image" content={shareImage} />
         
         {/* Location meta tags */}
         <meta name="geo.region" content="NL" />

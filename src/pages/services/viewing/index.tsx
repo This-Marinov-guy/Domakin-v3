@@ -8,6 +8,7 @@ import {
   createServiceJsonLd,
   getServiceAnswerData,
 } from "@/components/inner-pages/services/ServiceAnswerBlock";
+import { SHARE_BANNERS } from "@/utils/shareBanners";
 
 const index = () => {
   const router = useRouter();
@@ -30,7 +31,7 @@ const index = () => {
     ? "Нека нашите агенти присъстват на огледите вместо вас. Предоставяме снимки, видеоклипове и подробна обратна връзка, за да ви помогнем да вземете информирано решение за настаняване в Нидерландия."
     : "Αφήστε τους πράκτορές μας να παρακολουθήσουν τις προβολές ακινήτων εκ μέρους σας. Παρέχουμε φωτογραφίες, βίντεο και λεπτομερή ανατροφοδότηση για να σας βοηθήσουμε να πάρετε ενημερωμένες αποφάσεις για τη διαμονή στην Ολλανδία.";
   
-  const ogImage = `${baseUrl}/assets/img/icons/10.png`;
+  const ogImage = SHARE_BANNERS.viewing;
 
   return (
     <>

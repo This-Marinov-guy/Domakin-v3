@@ -15,6 +15,7 @@ export const PAGES_WITH_CUSTOM_SEO = [
   'services/add-listing',
   'services/room-searching',
   'services/renting',
+  'account/add-listing',
   // Blog pages with custom SEO
   'blog',
   // Careers page with custom SEO

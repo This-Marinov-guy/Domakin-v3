@@ -7,6 +7,7 @@ import useTranslation from "next-translate/useTranslation";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import { getPropertyUrl } from "@/utils/seoHelpers";
 import { useRouter } from "next/router";
+import { SHARE_BANNERS } from "@/utils/shareBanners";
 
 interface PropertiesIndexProps {
   serverProperties: any[];
@@ -78,7 +79,7 @@ const index = ({ serverProperties }: PropertiesIndexProps) => {
     ? "Намерете качествени студентски жилища и наемни имоти в Нидерландия. Разгледайте проверени обяви за стаи и апартаменти с прозрачни цени."
     : "Βρείτε ποιοτική φοιτητική διαμονή και ακίνητα προς ενοικίαση στην Ολλανδία. Περιηγηθείτε σε επαληθευμένες καταχωρήσεις για δωμάτια και διαμερίσματα με διαφανείς τιμές.";
   
-  const ogImage = `${baseUrl}/assets/img/icons/12.png`;
+  const ogImage = SHARE_BANNERS.searching;
 
   return (
     <>
