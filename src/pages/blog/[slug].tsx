@@ -14,6 +14,7 @@ import BlogPostMeta from "@/components/blogs/common-blog/BlogPostMeta";
 import AnswerFirstBlock, {
   createAnswerFirstFaqJsonLd,
   getAnswerFirstData,
+  getAnswerFirstFallbackPost,
 } from "@/components/blogs/common-blog/AnswerFirstBlock";
 import { SHARE_BANNERS } from "@/utils/shareBanners";
 
@@ -253,6 +254,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           serverBlogPost: foundPost,
           serverBlogPosts: Array.isArray(blogPosts) ? blogPosts : [],
           slug: foundPost.slug || actualSlug,
+        },
+      };
+    }
+
+    const fallbackPost = getAnswerFirstFallbackPost(actualSlug);
+    if (fallbackPost) {
+      return {
+        props: {
+          serverBlogPost: fallbackPost,
+          serverBlogPosts: Array.isArray(blogPosts) ? blogPosts : [],
+          slug: actualSlug,
         },
       };
     }

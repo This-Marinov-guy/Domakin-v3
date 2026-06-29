@@ -1,5 +1,13 @@
 const baseUrl = (process.argv[2] || "http://localhost:3011").replace(/\/$/, "");
 
+const legacyRemoteViewingBlogPaths = [
+  "/blog/remote-viewing-netherlands",
+  "/blog/remote-viewing-netherlands-2025",
+];
+
+const isLegacyRemoteViewingLoc = (loc) =>
+  legacyRemoteViewingBlogPaths.some((path) => loc.includes(path));
+
 const extractLocs = (xml) =>
   [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 
@@ -76,6 +84,7 @@ for (const path of [
     locs: locs.length,
     duplicateLocs: locs.length - new Set(locs).size,
     apiLocs: locs.filter((loc) => loc.includes("/api/")).length,
+    legacyRemoteViewingLocs: locs.filter(isLegacyRemoteViewingLoc).length,
   });
 }
 
@@ -158,6 +167,8 @@ const redirectChecks = [];
 for (const [from, to] of [
   ["/blog/bsn-number-id-netherlands", "/blog/bsn-nummer-id-nederland"],
   ["/blog/rent-allowance-netherlands", "/blog/rent-allowance-netherlands-2026"],
+  ["/blog/remote-viewing-netherlands", "/services/viewing"],
+  ["/blog/remote-viewing-netherlands-2025", "/services/viewing"],
 ]) {
   const result = await fetchText(from, { redirect: "manual" });
   redirectChecks.push({
@@ -179,6 +190,7 @@ console.table(redirectChecks);
 const failures = [
   ...sitemapChecks.filter((result) => {
     if (result.status !== 200 || result.duplicateLocs !== 0) return true;
+    if (result.legacyRemoteViewingLocs !== 0) return true;
     if (result.path === "/sitemap-index.xml") {
       return result.locs !== 1 || result.apiLocs !== 0;
     }

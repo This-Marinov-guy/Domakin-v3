@@ -10,6 +10,21 @@ export type AnswerFirstData = {
   sources: AnswerSource[];
 };
 
+type AnswerFirstFallbackPost = {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  date: string;
+  modified: string;
+  category: string;
+  tags: string[];
+  author: {
+    name: string;
+  };
+};
+
 const ANSWER_FIRST_BY_SLUG: Record<string, AnswerFirstData> = {
   "student-finance-netherlands-2026": {
     question: "Can international students get student finance in the Netherlands?",
@@ -85,8 +100,58 @@ const ANSWER_FIRST_BY_SLUG: Record<string, AnswerFirstData> = {
   },
 };
 
+const FALLBACK_TITLES_BY_SLUG: Record<string, string> = {
+  "student-finance-netherlands-2026": "Student Finance in the Netherlands 2026",
+  "bsn-nummer-id-nederland": "BSN Number in the Netherlands",
+  "rent-allowance-netherlands-2026": "Rent Allowance in the Netherlands 2026",
+};
+
 export const getAnswerFirstData = (slug?: string) =>
   slug ? ANSWER_FIRST_BY_SLUG[slug] : undefined;
+
+export const getAnswerFirstFallbackPost = (
+  slug?: string,
+): AnswerFirstFallbackPost | null => {
+  const data = getAnswerFirstData(slug);
+  if (!slug || !data) return null;
+
+  return {
+    id: `answer-first-${slug}`,
+    slug,
+    title: FALLBACK_TITLES_BY_SLUG[slug] || data.question,
+    excerpt: data.answer,
+    content: [
+      `<p>${escapeHtml(data.answer)}</p>`,
+      "<h2>Next steps</h2>",
+      `<ol>${data.nextSteps
+        .map((step) => `<li>${escapeHtml(step)}</li>`)
+        .join("")}</ol>`,
+      "<h2>Official sources</h2>",
+      `<ul>${data.sources
+        .map(
+          (source) =>
+            `<li><a href="${escapeHtml(source.url)}">${escapeHtml(
+              source.label,
+            )}</a></li>`,
+        )
+        .join("")}</ul>`,
+    ].join(""),
+    date: "2026-06-29",
+    modified: "2026-06-29",
+    category: "Student Housing",
+    tags: ["student housing", "netherlands", "official guidance"],
+    author: {
+      name: "Domakin Team",
+    },
+  };
+};
+
+const escapeHtml = (value: string) =>
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 
 export const createAnswerFirstFaqJsonLd = (data: AnswerFirstData) => ({
   "@context": "https://schema.org",

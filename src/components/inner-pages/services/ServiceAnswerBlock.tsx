@@ -44,12 +44,12 @@ const SERVICE_ANSWER_BY_ID: Record<ServiceAnswerId, ServiceAnswerData> = {
   },
   viewing: {
     id: "viewing",
-    serviceName: "Domakin property viewing service",
-    serviceType: "Rental property viewing assistance",
-    audience: "Students who need a rental viewing in the Netherlands",
-    question: "Can Domakin view a rental property for you?",
+    serviceName: "Domakin remote property viewing service",
+    serviceType: "Remote rental property viewing assistance",
+    audience: "Students who need a remote rental viewing in the Netherlands",
+    question: "Can Domakin do a remote rental viewing for you?",
     answer:
-      "Yes. Domakin can attend a viewing on your behalf and report back with photos, video and practical notes so you can decide faster from abroad or another city. The legal decision remains yours; compare the viewing notes with the written tenancy agreement and landlord information.",
+      "Yes. Domakin can attend a rental viewing on your behalf and report back with photos, video and practical notes so you can decide faster from abroad or another city. The legal decision remains yours; compare the remote viewing notes with the written tenancy agreement and landlord information.",
     nextSteps: [
       "Send the viewing address, scheduled time and questions you want answered.",
       "Use the photos, video and notes to decide whether to proceed.",
@@ -59,12 +59,12 @@ const SERVICE_ANSWER_BY_ID: Record<ServiceAnswerId, ServiceAnswerData> = {
   },
   "add-listing": {
     id: "add-listing",
-    serviceName: "Domakin room listing service",
+    serviceName: "Domakin list a room service",
     serviceType: "Room listing and tenant handover support",
     audience: "Tenants, landlords and students listing a room in the Netherlands",
-    question: "Can Domakin help find a new tenant or flatmate?",
+    question: "Can Domakin help you list a room and find a new tenant or flatmate?",
     answer:
-      "Yes. Domakin helps present your room, coordinate interested students and support a smoother handover. Before transferring a contract, subletting or changing occupants, check your rental agreement, landlord permission and written information requirements.",
+      "Yes. Domakin helps you list a room, present it to interested students and support a smoother tenant or flatmate handover. Before transferring a contract, subletting or changing occupants, check your rental agreement, landlord permission and written information requirements.",
     nextSteps: [
       "Prepare room details, availability, rent, service costs and photos.",
       "Confirm whether contract transfer, subletting or a new tenancy is allowed.",

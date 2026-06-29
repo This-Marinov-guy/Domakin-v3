@@ -102,7 +102,7 @@ const mappings = [
   },
   {
     id: "viewing-service",
-    query: "property viewing service Netherlands students",
+    query: "remote property viewing service Netherlands students",
     impact: 4,
     targetPath: "/services/viewing",
     sourceFiles: [
@@ -112,7 +112,8 @@ const mappings = [
     ],
     engines: allEngineIds,
     requiredPhrases: [
-      "Can Domakin view a rental property for you?",
+      "Can Domakin do a remote rental viewing for you?",
+      "Domakin remote property viewing service",
       "Quick answer",
       "Official sources",
       "Government.nl rented housing",
@@ -125,7 +126,7 @@ const mappings = [
   },
   {
     id: "add-listing-service",
-    query: "find tenant flatmate Netherlands room listing",
+    query: "list a room Netherlands find tenant flatmate",
     impact: 4,
     targetPath: "/services/add-listing",
     sourceFiles: [
@@ -135,7 +136,8 @@ const mappings = [
     ],
     engines: allEngineIds,
     requiredPhrases: [
-      "Can Domakin help find a new tenant or flatmate?",
+      "Can Domakin help you list a room and find a new tenant or flatmate?",
+      "Domakin list a room service",
       "Quick answer",
       "Official sources",
       "Government.nl rented housing",

@@ -20,13 +20,13 @@ const index = () => {
   
   // Get localized content
   const title = lang === "en" 
-    ? "Viewing Service | Domakin - Property Viewing Assistance in Netherlands"
+    ? "Remote Property Viewing Service Netherlands | Domakin"
     : lang === "bg"
     ? "Услуга за огледи | Domakin - Помощ при огледи на имоти в Нидерландия"
     : "Υπηρεσία Προβολής | Domakin - Βοήθεια στην Προβολή Ακινήτων στην Ολλανδία";
   
   const description = lang === "en"
-    ? "Let our agents attend property viewings on your behalf. We provide photos, videos, and detailed feedback to help you make informed decisions about accommodation in the Netherlands."
+    ? "Book a remote property viewing in the Netherlands. Domakin agents attend rental viewings for students abroad or in another city and send photos, video, and practical feedback."
     : lang === "bg"
     ? "Нека нашите агенти присъстват на огледите вместо вас. Предоставяме снимки, видеоклипове и подробна обратна връзка, за да ви помогнем да вземете информирано решение за настаняване в Нидерландия."
     : "Αφήστε τους πράκτορές μας να παρακολουθήσουν τις προβολές ακινήτων εκ μέρους σας. Παρέχουμε φωτογραφίες, βίντεο και λεπτομερή ανατροφοδότηση για να σας βοηθήσουμε να πάρετε ενημερωμένες αποφάσεις για τη διαμονή στην Ολλανδία.";
@@ -61,7 +61,7 @@ const index = () => {
         
         {/* Additional meta tags */}
         <meta name="keywords" content={lang === "en" 
-          ? "property viewing, viewing service, Netherlands, student housing, accommodation viewing, property inspection"
+          ? "remote property viewing, remote viewing service, property viewing service Netherlands, rental viewing Netherlands, student housing viewing, accommodation viewing"
           : lang === "bg"
           ? "оглед на имот, услуга за огледи, Нидерландия, студентско жилище, оглед на настаняване"
           : "προβολή ακινήτου, υπηρεσία προβολής, Ολλανδία, φοιτητική στέγαση"} />

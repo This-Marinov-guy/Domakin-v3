@@ -53,6 +53,31 @@ const mappings = [
       ["huurtoeslag"],
     ],
   },
+  {
+    id: "viewing-service",
+    query: "remote property viewing service Netherlands",
+    targetPath: "/services/viewing",
+    impact: 8,
+    patterns: [
+      ["remote", "viewing"],
+      ["property", "viewing"],
+      ["rental", "viewing"],
+      ["viewing", "service"],
+    ],
+  },
+  {
+    id: "add-listing-service",
+    query: "list a room Netherlands",
+    targetPath: "/services/add-listing",
+    impact: 8,
+    patterns: [
+      ["list", "room"],
+      ["room", "listing"],
+      ["find", "tenant"],
+      ["find", "flatmate"],
+      ["contract", "transfer"],
+    ],
+  },
 ];
 
 const account = loadServiceAccount(process.env);

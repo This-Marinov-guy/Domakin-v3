@@ -26,6 +26,11 @@ const API_CONFIG = {
   language: config.defaultLanguage,
 };
 
+const legacyServiceIntentBlogSlugs = new Set([
+  "remote-viewing-netherlands",
+  "remote-viewing-netherlands-2025",
+]);
+
 // Load static properties from translations
 function loadStaticProperties() {
   try {
@@ -231,6 +236,10 @@ function generateSitemap(
   properties = [],
   staticProperties = []
 ) {
+  const indexableBlogPosts = blogPosts.filter(
+    (post) => post.slug && !legacyServiceIntentBlogSlugs.has(post.slug)
+  );
+
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 `;
@@ -266,7 +275,7 @@ function generateSitemap(
   });
 
   // Add blog posts (English version only with hreflang alternates)
-  blogPosts.forEach((post) => {
+  indexableBlogPosts.forEach((post) => {
     const slug = post.slug;
     const lastmod =
       post.modified || post.date || new Date().toISOString().split("T")[0];
@@ -434,7 +443,9 @@ async function main() {
     // Calculate total URLs (English version only, with hreflang tags for alternates)
     const totalUrls =
       staticPages.length +
-      blogPosts.length +
+      blogPosts.filter(
+        (post) => post.slug && !legacyServiceIntentBlogSlugs.has(post.slug)
+      ).length +
       properties.length +
       staticProperties.length;
 
@@ -445,7 +456,13 @@ async function main() {
       `📊 Total URLs: ${totalUrls} (English version with hreflang tags)`
     );
     console.log(`   - Static pages: ${staticPages.length}`);
-    console.log(`   - Blog posts: ${blogPosts.length}`);
+    console.log(
+      `   - Blog posts: ${
+        blogPosts.filter(
+          (post) => post.slug && !legacyServiceIntentBlogSlugs.has(post.slug)
+        ).length
+      }`
+    );
     console.log(`   - Dynamic properties: ${properties.length}`);
     console.log(`   - Static properties: ${staticProperties.length}`);
     console.log(
@@ -479,4 +496,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { generateSitemap, staticPages };
+module.exports = { generateSitemap, staticPages, legacyServiceIntentBlogSlugs };
