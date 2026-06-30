@@ -1,0 +1,321 @@
+{
+  "generatedAt": "2026-06-30T23:00:58.786Z",
+  "dateFrom": "2026-06-16",
+  "dateTo": "2026-06-29",
+  "highImpactImpressions": 50,
+  "sitesRequested": 21,
+  "rowsFetched": 4193,
+  "errors": [],
+  "results": [
+    {
+      "id": "student-jobs-city",
+      "query": "student jobs Groningen",
+      "targetPath": "/jobs",
+      "impact": 5,
+      "matchedRows": 105,
+      "impressions": 360,
+      "clicks": 60,
+      "targetImpressions": 80,
+      "targetClicks": 8,
+      "bestPosition": 1,
+      "bestTargetPosition": 1,
+      "topPages": [
+        {
+          "page": "https://www.studentjobsgroningen.nl/",
+          "clicks": 44,
+          "impressions": 101,
+          "averagePosition": 2.2,
+          "target": false
+        },
+        {
+          "page": "https://www.bijbanengroningen.nl/",
+          "clicks": 5,
+          "impressions": 49,
+          "averagePosition": 2.9,
+          "target": false
+        },
+        {
+          "page": "https://www.studentjobsgroningen.nl/nl/vacatures/bijbaan-vakkenvuller-jumbo-groningen-grote-markt-jumbo-groningen-grote-markt-groningen-d5a57ea7",
+          "clicks": 1,
+          "impressions": 32,
+          "averagePosition": 5.3,
+          "target": false
+        },
+        {
+          "page": "https://www.studentjobsgroningen.nl/nl/vacatures/door-to-door-sales-pepperminds-groningen-pepperminds-groningen-7343149b",
+          "clicks": 2,
+          "impressions": 24,
+          "averagePosition": 5.4,
+          "target": false
+        },
+        {
+          "page": "https://www.studentjobsgroningen.nl/jobs",
+          "clicks": 2,
+          "impressions": 18,
+          "averagePosition": 10.8,
+          "target": true
+        }
+      ]
+    },
+    {
+      "id": "english-speaking-city",
+      "query": "student jobs Groningen English",
+      "targetPath": "/english-speaking-student-jobs",
+      "impact": 5,
+      "matchedRows": 22,
+      "impressions": 190,
+      "clicks": 12,
+      "targetImpressions": 0,
+      "targetClicks": 0,
+      "bestPosition": 1.4,
+      "bestTargetPosition": null,
+      "topPages": [
+        {
+          "page": "https://www.studentjobsgroningen.nl/",
+          "clicks": 10,
+          "impressions": 71,
+          "averagePosition": 6.9,
+          "target": false
+        },
+        {
+          "page": "https://www.studentjobsgroningen.nl/jobs/coolblue-student-jobs-groningen",
+          "clicks": 1,
+          "impressions": 57,
+          "averagePosition": 4.3,
+          "target": false
+        },
+        {
+          "page": "https://www.studentjobsgroningen.nl/jobs/pepperminds-door-to-door-sales-groningen",
+          "clicks": 0,
+          "impressions": 44,
+          "averagePosition": 5,
+          "target": false
+        },
+        {
+          "page": "https://www.studentjobsgroningen.nl/jobs",
+          "clicks": 0,
+          "impressions": 4,
+          "averagePosition": 13,
+          "target": false
+        },
+        {
+          "page": "https://www.studentjobsgroningen.nl/jobs/o-malley-s-irish-pub-hospitality-staff-groningen-2026-06-14",
+          "clicks": 1,
+          "impressions": 3,
+          "averagePosition": 3,
+          "target": false
+        }
+      ]
+    },
+    {
+      "id": "english-speaking-amsterdam",
+      "query": "English speaking student jobs Amsterdam",
+      "targetPath": "/english-speaking-student-jobs",
+      "impact": 5,
+      "matchedRows": 6,
+      "impressions": 29,
+      "clicks": 0,
+      "targetImpressions": 0,
+      "targetClicks": 0,
+      "bestPosition": 1.3,
+      "bestTargetPosition": null,
+      "topPages": [
+        {
+          "page": "https://www.studentjobsamsterdam.nl/",
+          "clicks": 0,
+          "impressions": 20,
+          "averagePosition": 5.8,
+          "target": false
+        },
+        {
+          "page": "https://www.studentjobsamsterdam.nl/jobs/going-abroad-english-speaking-student-job-in-a-lunchroom-in-the-centre-of-eindhoven-amsterdam-2026-06-06",
+          "clicks": 0,
+          "impressions": 9,
+          "averagePosition": 1.7,
+          "target": false
+        }
+      ]
+    },
+    {
+      "id": "summer-jobs-city",
+      "query": "summer jobs Groningen students",
+      "targetPath": "/summer-jobs",
+      "impact": 4,
+      "matchedRows": 5,
+      "impressions": 17,
+      "clicks": 4,
+      "targetImpressions": 0,
+      "targetClicks": 0,
+      "bestPosition": 1,
+      "bestTargetPosition": null,
+      "topPages": [
+        {
+          "page": "https://www.studentjobsgroningen.nl/",
+          "clicks": 4,
+          "impressions": 11,
+          "averagePosition": 1,
+          "target": false
+        },
+        {
+          "page": "https://www.studentjobsgroningen.nl/jobs",
+          "clicks": 0,
+          "impressions": 3,
+          "averagePosition": 15.3,
+          "target": false
+        },
+        {
+          "page": "https://www.bijbanengroningen.nl/",
+          "clicks": 0,
+          "impressions": 2,
+          "averagePosition": 1,
+          "target": false
+        },
+        {
+          "page": "https://www.studentjobsgroningen.nl/nl/vacatures/verkoopmedewerker-bijbaan-intertoys-vismarkt-groningen-intertoys-vismarkt-groningen-996a6318",
+          "clicks": 0,
+          "impressions": 1,
+          "averagePosition": 1,
+          "target": false
+        }
+      ]
+    },
+    {
+      "id": "area-zernike",
+      "query": "student jobs Zernike Groningen",
+      "targetPath": "/areas/zernike",
+      "impact": 4,
+      "matchedRows": 0,
+      "impressions": 0,
+      "clicks": 0,
+      "targetImpressions": 0,
+      "targetClicks": 0,
+      "bestPosition": null,
+      "bestTargetPosition": null,
+      "topPages": []
+    },
+    {
+      "id": "international-student-jobs-netherlands",
+      "query": "international student jobs Netherlands",
+      "targetPath": "/blog/international-student-jobs-netherlands",
+      "impact": 5,
+      "matchedRows": 3,
+      "impressions": 3,
+      "clicks": 0,
+      "targetImpressions": 0,
+      "targetClicks": 0,
+      "bestPosition": 38,
+      "bestTargetPosition": null,
+      "topPages": [
+        {
+          "page": "https://www.studentjobsrotterdam.nl/",
+          "clicks": 0,
+          "impressions": 1,
+          "averagePosition": 69,
+          "target": false
+        },
+        {
+          "page": "https://www.studentjobsamsterdam.nl/",
+          "clicks": 0,
+          "impressions": 1,
+          "averagePosition": 44,
+          "target": false
+        },
+        {
+          "page": "https://www.studentjobseindhoven.nl/",
+          "clicks": 0,
+          "impressions": 1,
+          "averagePosition": 38,
+          "target": false
+        }
+      ]
+    },
+    {
+      "id": "part-time-international-students-netherlands",
+      "query": "part time jobs Netherlands international students",
+      "targetPath": "/blog/international-student-jobs-netherlands",
+      "impact": 5,
+      "matchedRows": 3,
+      "impressions": 3,
+      "clicks": 0,
+      "targetImpressions": 0,
+      "targetClicks": 0,
+      "bestPosition": 38,
+      "bestTargetPosition": null,
+      "topPages": [
+        {
+          "page": "https://www.studentjobsrotterdam.nl/",
+          "clicks": 0,
+          "impressions": 1,
+          "averagePosition": 69,
+          "target": false
+        },
+        {
+          "page": "https://www.studentjobsamsterdam.nl/",
+          "clicks": 0,
+          "impressions": 1,
+          "averagePosition": 44,
+          "target": false
+        },
+        {
+          "page": "https://www.studentjobseindhoven.nl/",
+          "clicks": 0,
+          "impressions": 1,
+          "averagePosition": 38,
+          "target": false
+        }
+      ]
+    },
+    {
+      "id": "bsn-student-job-netherlands",
+      "query": "BSN student job Netherlands",
+      "targetPath": "/blog/bsn-registration-netherlands-student-jobs",
+      "impact": 4,
+      "matchedRows": 0,
+      "impressions": 0,
+      "clicks": 0,
+      "targetImpressions": 0,
+      "targetClicks": 0,
+      "bestPosition": null,
+      "bestTargetPosition": null,
+      "topPages": []
+    },
+    {
+      "id": "health-insurance-student-job-netherlands",
+      "query": "health insurance student job Netherlands",
+      "targetPath": "/blog/dutch-health-insurance-zorgtoeslag-student-job-netherlands",
+      "impact": 4,
+      "matchedRows": 0,
+      "impressions": 0,
+      "clicks": 0,
+      "targetImpressions": 0,
+      "targetClicks": 0,
+      "bestPosition": null,
+      "bestTargetPosition": null,
+      "topPages": []
+    },
+    {
+      "id": "bank-account-student-job-netherlands",
+      "query": "Dutch bank account international student salary Netherlands",
+      "targetPath": "/blog/dutch-bank-account-international-student-job-netherlands",
+      "impact": 3,
+      "matchedRows": 0,
+      "impressions": 0,
+      "clicks": 0,
+      "targetImpressions": 0,
+      "targetClicks": 0,
+      "bestPosition": null,
+      "bestTargetPosition": null,
+      "topPages": []
+    }
+  ],
+  "findings": [
+    {
+      "id": "english-speaking-city",
+      "query": "student jobs Groningen English",
+      "targetPath": "/english-speaking-student-jobs",
+      "severity": "high",
+      "impact": 5,
+      "issue": "190 impressions matched this priority query, but no impressions landed on the mapped target page /english-speaking-student-jobs."
+    }
+  ]
+}

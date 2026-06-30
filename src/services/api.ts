@@ -1,6 +1,8 @@
 import axios from "axios";
 import { SERVER_ENDPOINT } from "@/utils/config";
 
+const BLOG_API_TIMEOUT_MS = Number(process.env.SERVER_API_TIMEOUT_MS || 8000);
+
 // Server-side API functions that can be called from getServerSideProps or getStaticProps
 export const fetchBlogPosts = async (lang = "en") => {
   console.log(`[API] fetchBlogPosts called with lang: ${lang}`);
@@ -15,7 +17,7 @@ export const fetchBlogPosts = async (lang = "en") => {
       headers: {
         "Accept-Language": lang
       },
-      timeout: 15000 // 15 second timeout
+      timeout: BLOG_API_TIMEOUT_MS,
     });
     
     console.log(`[API] Response status: ${response.status}`);
@@ -29,7 +31,7 @@ export const fetchBlogPosts = async (lang = "en") => {
       console.log(`[API] Localized fetch returned empty, trying English fallback`);
       const fallback = await axios.get(url, {
         headers: { "Accept-Language": "en" },
-        timeout: 15000,
+        timeout: BLOG_API_TIMEOUT_MS,
       });
       console.log(`[API] Fallback response status: ${fallback.status}`);
       console.log(`[API] Fallback data length: ${fallback.data?.data?.length || 0}`);
@@ -63,7 +65,7 @@ export const fetchBlogPostBySlug = async (slug: string, lang = "en") => {
       headers: {
         "Accept-Language": lang
       },
-      timeout: 15000 // 15 second timeout
+      timeout: BLOG_API_TIMEOUT_MS,
     });
     
     console.log(`[API] Response status: ${response.status}`);
@@ -81,7 +83,7 @@ export const fetchBlogPostBySlug = async (slug: string, lang = "en") => {
       console.log(`[API] Trying slug fetch in English`);
       const enResponse = await axios.get(endpoint, {
         headers: { "Accept-Language": "en" },
-        timeout: 15000,
+        timeout: BLOG_API_TIMEOUT_MS,
       });
       console.log(`[API] English response status: ${enResponse.status}`);
       console.log(`[API] English response data status: ${enResponse.data?.status}`);
@@ -125,7 +127,7 @@ export const fetchBlogPostById = async (id: string, lang = "en") => {
       headers: {
         "Accept-Language": lang
       },
-      timeout: 15000 // 15 second timeout
+      timeout: BLOG_API_TIMEOUT_MS,
     });
     
     console.log(`[API] Direct response status: ${response.status}`);
@@ -143,7 +145,7 @@ export const fetchBlogPostById = async (id: string, lang = "en") => {
       console.log(`[API] Trying direct fetch in English`);
       const enResponse = await axios.get(directEndpoint, {
         headers: { "Accept-Language": "en" },
-        timeout: 15000,
+        timeout: BLOG_API_TIMEOUT_MS,
       });
       console.log(`[API] English direct response status: ${enResponse.status}`);
       console.log(`[API] English direct response data status: ${enResponse.data?.status}`);

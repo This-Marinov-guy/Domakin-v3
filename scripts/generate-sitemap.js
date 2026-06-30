@@ -27,6 +27,8 @@ const API_CONFIG = {
 };
 
 const legacyServiceIntentBlogSlugs = new Set([
+  "bsn-number-id-netherlands",
+  "rent-allowance-netherlands",
   "remote-viewing-netherlands",
   "remote-viewing-netherlands-2025",
 ]);

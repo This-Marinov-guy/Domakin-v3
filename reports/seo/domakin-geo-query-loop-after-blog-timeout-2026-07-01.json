@@ -1,0 +1,258 @@
+{
+  "generatedAt": "2026-06-30T22:59:27.999Z",
+  "engines": [
+    {
+      "id": "google",
+      "type": "search"
+    },
+    {
+      "id": "bing",
+      "type": "search"
+    },
+    {
+      "id": "chatgpt",
+      "type": "ai-answer"
+    },
+    {
+      "id": "perplexity",
+      "type": "ai-answer"
+    }
+  ],
+  "results": [
+    {
+      "id": "student-finance-netherlands-2026",
+      "query": "student finance Netherlands 2026",
+      "targetPath": "/blog/student-finance-netherlands-2026",
+      "impact": 5,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "src/components/blogs/common-blog/AnswerFirstBlock.tsx",
+        "src/pages/blog/[slug].tsx"
+      ],
+      "answerFirst": true,
+      "cited": true,
+      "jsonLdTypes": [
+        "Answer",
+        "BlogPosting",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Person",
+        "Question",
+        "Service",
+        "WebPage"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    },
+    {
+      "id": "bsn-nummer-id-nederland",
+      "query": "BSN number Netherlands",
+      "targetPath": "/blog/bsn-nummer-id-nederland",
+      "impact": 5,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "src/components/blogs/common-blog/AnswerFirstBlock.tsx",
+        "src/pages/blog/[slug].tsx"
+      ],
+      "answerFirst": true,
+      "cited": true,
+      "jsonLdTypes": [
+        "Answer",
+        "BlogPosting",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Person",
+        "Question",
+        "Service",
+        "WebPage"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    },
+    {
+      "id": "rent-allowance-netherlands-2026",
+      "query": "rent allowance Netherlands 2026",
+      "targetPath": "/blog/rent-allowance-netherlands-2026",
+      "impact": 4,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "src/components/blogs/common-blog/AnswerFirstBlock.tsx",
+        "src/pages/blog/[slug].tsx"
+      ],
+      "answerFirst": true,
+      "cited": true,
+      "jsonLdTypes": [
+        "Answer",
+        "BlogPosting",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Person",
+        "Question",
+        "Service",
+        "WebPage"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    },
+    {
+      "id": "room-searching-service",
+      "query": "room searching service Netherlands students",
+      "targetPath": "/services/room-searching",
+      "impact": 4,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "src/components/inner-pages/services/ServiceAnswerBlock.tsx",
+        "src/components/inner-pages/services/detail-page/RoomSearching.tsx",
+        "src/pages/services/room-searching/index.tsx"
+      ],
+      "answerFirst": true,
+      "cited": true,
+      "jsonLdTypes": [
+        "AdministrativeArea",
+        "Answer",
+        "Audience",
+        "Country",
+        "CreativeWork",
+        "FAQPage",
+        "Offer",
+        "Organization",
+        "Question",
+        "Service"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    },
+    {
+      "id": "services-hub",
+      "query": "Domakin services remote viewing list a room Netherlands",
+      "targetPath": "/services",
+      "impact": 5,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "src/components/inner-pages/services/ServicesHub.tsx",
+        "src/pages/services/index.tsx"
+      ],
+      "answerFirst": true,
+      "cited": true,
+      "jsonLdTypes": [
+        "Answer",
+        "BreadcrumbList",
+        "Country",
+        "FAQPage",
+        "ItemList",
+        "ListItem",
+        "Organization",
+        "Question",
+        "Service",
+        "WebPage",
+        "WebSite"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    },
+    {
+      "id": "viewing-service",
+      "query": "remote property viewing service Netherlands students",
+      "targetPath": "/services/viewing",
+      "impact": 4,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "src/components/inner-pages/services/ServiceAnswerBlock.tsx",
+        "src/components/inner-pages/services/detail-page/ViewingPage.tsx",
+        "src/components/forms/ViewingForm.tsx",
+        "src/data/viewingLocations.ts",
+        "src/pages/services/viewing/index.tsx"
+      ],
+      "answerFirst": true,
+      "cited": true,
+      "jsonLdTypes": [
+        "AdministrativeArea",
+        "Answer",
+        "Audience",
+        "Country",
+        "CreativeWork",
+        "FAQPage",
+        "Offer",
+        "Organization",
+        "Question",
+        "Service"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    },
+    {
+      "id": "add-listing-service",
+      "query": "list a room Netherlands find tenant flatmate",
+      "targetPath": "/services/add-listing",
+      "impact": 4,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "src/components/inner-pages/services/ServiceAnswerBlock.tsx",
+        "src/components/inner-pages/services/detail-page/LendingPageV3.tsx",
+        "src/pages/services/add-listing/index.tsx"
+      ],
+      "answerFirst": true,
+      "cited": true,
+      "jsonLdTypes": [
+        "AdministrativeArea",
+        "Answer",
+        "Audience",
+        "Country",
+        "CreativeWork",
+        "FAQPage",
+        "Offer",
+        "Organization",
+        "Question",
+        "Service"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    }
+  ],
+  "findings": []
+}

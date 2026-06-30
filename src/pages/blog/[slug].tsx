@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { fetchBlogPostBySlug, fetchBlogPosts } from "@/services/api";
+import { fetchBlogPosts } from "@/services/api";
 import { useStore } from "@/stores/storeContext";
 import { useEffect } from "react";
 import BreadcrumbNav from "@/components/common/breadcrumb/BreadcrumbNav";
@@ -235,36 +235,31 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 
     actualSlug = actualSlug.trim();
-
-    // Fetch the specific post by slug using the new API
-    const postResult = await fetchBlogPostBySlug(actualSlug, lang);
-    
-    let foundPost = null;
-    if (postResult.found && postResult.post) {
-      foundPost = postResult.post;
+    const fallbackPost = getAnswerFirstFallbackPost(actualSlug);
+    if (fallbackPost) {
+      return {
+        props: {
+          serverBlogPost: fallbackPost,
+          serverBlogPosts: [],
+          slug: actualSlug,
+        },
+      };
     }
 
-    // Also fetch all blog posts for related posts functionality
+    // Use the all-posts endpoint because the per-slug API can exceed the
+    // production serverless timeout. The list endpoint is already used by /blog
+    // and gives us both article lookup and related-post data in one request.
     const blogPosts = await fetchBlogPosts(lang);
+    const allPosts = Array.isArray(blogPosts) ? blogPosts : [];
+    const foundPost = findBlogPostBySlug(allPosts, actualSlug);
 
     // If post found, return it
     if (foundPost) {
       return {
         props: {
           serverBlogPost: foundPost,
-          serverBlogPosts: Array.isArray(blogPosts) ? blogPosts : [],
+          serverBlogPosts: allPosts,
           slug: foundPost.slug || actualSlug,
-        },
-      };
-    }
-
-    const fallbackPost = getAnswerFirstFallbackPost(actualSlug);
-    if (fallbackPost) {
-      return {
-        props: {
-          serverBlogPost: fallbackPost,
-          serverBlogPosts: Array.isArray(blogPosts) ? blogPosts : [],
-          slug: actualSlug,
         },
       };
     }
@@ -275,6 +270,29 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     console.error('Error in blog post getServerSideProps:', error);
     return { notFound: true };
   }
+};
+
+const normalizeBlogSlug = (value: unknown) =>
+  String(value || "")
+    .trim()
+    .replace(/^\/+|\/+$/g, "")
+    .split("/")
+    .pop() || "";
+
+const findBlogPostBySlug = (posts: any[], slug: string) => {
+  const normalizedSlug = normalizeBlogSlug(slug);
+
+  return posts.find((post: any) => {
+    const postSlug = normalizeBlogSlug(post?.slug);
+    const postId = normalizeBlogSlug(post?.id);
+    const wordpressId = normalizeBlogSlug(post?.wordpress_id);
+
+    return (
+      postSlug === normalizedSlug ||
+      postId === normalizedSlug ||
+      wordpressId === normalizedSlug
+    );
+  }) || null;
 };
 
 export default BlogPost;

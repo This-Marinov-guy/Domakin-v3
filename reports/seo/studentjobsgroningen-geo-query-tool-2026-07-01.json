@@ -1,0 +1,332 @@
+{
+  "generatedAt": "2026-06-30T23:00:54.730Z",
+  "engines": [
+    {
+      "id": "google",
+      "type": "search"
+    },
+    {
+      "id": "bing",
+      "type": "search"
+    },
+    {
+      "id": "chatgpt",
+      "type": "ai-answer"
+    },
+    {
+      "id": "perplexity",
+      "type": "ai-answer"
+    }
+  ],
+  "results": [
+    {
+      "id": "student-jobs-city",
+      "query": "student jobs Groningen",
+      "targetPath": "/jobs",
+      "impact": 5,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "src/app/jobs/page.tsx"
+      ],
+      "answerFirst": false,
+      "cited": false,
+      "internalLinks": 4,
+      "jsonLdTypes": [
+        "ItemList",
+        "ListItem"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    },
+    {
+      "id": "english-speaking-city",
+      "query": "student jobs Groningen English",
+      "targetPath": "/english-speaking-student-jobs",
+      "impact": 5,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "src/app/english-speaking-student-jobs/page.tsx"
+      ],
+      "answerFirst": true,
+      "cited": false,
+      "internalLinks": 11,
+      "jsonLdTypes": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "ItemList",
+        "ListItem",
+        "Question",
+        "WebPage"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    },
+    {
+      "id": "english-speaking-amsterdam",
+      "query": "English speaking student jobs Amsterdam",
+      "targetPath": "/english-speaking-student-jobs",
+      "impact": 5,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "src/app/english-speaking-student-jobs/page.tsx"
+      ],
+      "answerFirst": true,
+      "cited": false,
+      "internalLinks": 11,
+      "jsonLdTypes": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "ItemList",
+        "ListItem",
+        "Question",
+        "WebPage"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    },
+    {
+      "id": "summer-jobs-city",
+      "query": "summer jobs Groningen students",
+      "targetPath": "/summer-jobs",
+      "impact": 4,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "src/app/summer-jobs/page.tsx"
+      ],
+      "answerFirst": true,
+      "cited": true,
+      "internalLinks": 4,
+      "jsonLdTypes": [
+        "Answer",
+        "FAQPage",
+        "ItemList",
+        "ListItem",
+        "Question",
+        "WebPage"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    },
+    {
+      "id": "area-zernike",
+      "query": "student jobs Zernike Groningen",
+      "targetPath": "/areas/zernike",
+      "impact": 4,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "src/app/areas/[area]/page.tsx",
+        "src/lib/neighborhood-pages.ts"
+      ],
+      "answerFirst": true,
+      "cited": false,
+      "internalLinks": 3,
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "CollectionPage",
+        "ItemList",
+        "ListItem",
+        "Place"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    },
+    {
+      "id": "international-student-jobs-netherlands",
+      "query": "international student jobs Netherlands",
+      "targetPath": "/blog/international-student-jobs-netherlands",
+      "impact": 5,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "scripts/upsert-city-seo-blogs.ts"
+      ],
+      "answerFirst": true,
+      "cited": true,
+      "internalLinks": 17,
+      "jsonLdTypes": [
+        "Answer",
+        "Article",
+        "BreadcrumbList",
+        "FAQPage",
+        "HowTo",
+        "HowToStep",
+        "ListItem",
+        "Organization",
+        "Question",
+        "WebPage"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    },
+    {
+      "id": "part-time-international-students-netherlands",
+      "query": "part time jobs Netherlands international students",
+      "targetPath": "/blog/international-student-jobs-netherlands",
+      "impact": 5,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "scripts/upsert-city-seo-blogs.ts"
+      ],
+      "answerFirst": true,
+      "cited": true,
+      "internalLinks": 17,
+      "jsonLdTypes": [
+        "Answer",
+        "Article",
+        "BreadcrumbList",
+        "FAQPage",
+        "HowTo",
+        "HowToStep",
+        "ListItem",
+        "Organization",
+        "Question",
+        "WebPage"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    },
+    {
+      "id": "bsn-student-job-netherlands",
+      "query": "BSN student job Netherlands",
+      "targetPath": "/blog/bsn-registration-netherlands-student-jobs",
+      "impact": 4,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "scripts/upsert-city-seo-blogs.ts"
+      ],
+      "answerFirst": true,
+      "cited": true,
+      "internalLinks": 17,
+      "jsonLdTypes": [
+        "Answer",
+        "Article",
+        "BreadcrumbList",
+        "FAQPage",
+        "HowTo",
+        "HowToStep",
+        "ListItem",
+        "Organization",
+        "Question",
+        "WebPage"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    },
+    {
+      "id": "health-insurance-student-job-netherlands",
+      "query": "health insurance student job Netherlands",
+      "targetPath": "/blog/dutch-health-insurance-zorgtoeslag-student-job-netherlands",
+      "impact": 4,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "scripts/upsert-city-seo-blogs.ts"
+      ],
+      "answerFirst": true,
+      "cited": true,
+      "internalLinks": 17,
+      "jsonLdTypes": [
+        "Answer",
+        "Article",
+        "BreadcrumbList",
+        "FAQPage",
+        "HowTo",
+        "HowToStep",
+        "ListItem",
+        "Organization",
+        "Question",
+        "WebPage"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    },
+    {
+      "id": "bank-account-student-job-netherlands",
+      "query": "Dutch bank account international student salary Netherlands",
+      "targetPath": "/blog/dutch-bank-account-international-student-job-netherlands",
+      "impact": 3,
+      "engines": [
+        "google",
+        "bing",
+        "chatgpt",
+        "perplexity"
+      ],
+      "sourceFiles": [
+        "scripts/upsert-city-seo-blogs.ts"
+      ],
+      "answerFirst": true,
+      "cited": true,
+      "internalLinks": 17,
+      "jsonLdTypes": [
+        "Answer",
+        "Article",
+        "BreadcrumbList",
+        "FAQPage",
+        "HowTo",
+        "HowToStep",
+        "ListItem",
+        "Organization",
+        "Question",
+        "WebPage"
+      ],
+      "missingPhrases": [],
+      "missingLinks": [],
+      "missingJsonLdTypes": []
+    }
+  ],
+  "findings": []
+}

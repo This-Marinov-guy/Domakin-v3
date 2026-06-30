@@ -1,0 +1,785 @@
+{
+  "generatedAt": "2026-06-30T22:51:04.686Z",
+  "source": "https://www.domakin.nl/blog + sitemap.xml",
+  "urlCount": 38,
+  "articleCount": 37,
+  "issueCounts": {
+    "meta_description_short_or_missing": 1,
+    "fetch_TimeoutError": 35,
+    "status_0": 35,
+    "status_308": 2
+  },
+  "rows": [
+    {
+      "url": "https://www.domakin.nl/blog",
+      "path": "/blog",
+      "status": 200,
+      "location": null,
+      "fetchError": null,
+      "titleLength": 37,
+      "descriptionLength": 56,
+      "h1Count": 1,
+      "canonical": "https://www.domakin.nl/blog",
+      "jsonLdTypes": [
+        "Blog",
+        "BlogPosting",
+        "BreadcrumbList",
+        "ImageObject",
+        "ListItem",
+        "Organization",
+        "Person"
+      ],
+      "wordCount": 286,
+      "internalLinks": 28,
+      "externalHosts": [
+        "",
+        "facebook.com",
+        "fonts.googleapis.com",
+        "instagram.com",
+        "linkedin.com"
+      ],
+      "officialSourceHosts": [],
+      "issues": [
+        "meta_description_short_or_missing"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/student-bikes-groningen",
+      "path": "/blog/student-bikes-groningen",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/best-english-news-netherlands-expat-guide",
+      "path": "/blog/best-english-news-netherlands-expat-guide",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/student-jobs-rotterdam-2026",
+      "path": "/blog/student-jobs-rotterdam-2026",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/student-jobs-maastricht-2026",
+      "path": "/blog/student-jobs-maastricht-2026",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/student-jobs-groningen-2026",
+      "path": "/blog/student-jobs-groningen-2026",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/student-jobs-enschede-2026",
+      "path": "/blog/student-jobs-enschede-2026",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/student-jobs-eindhoven-2026",
+      "path": "/blog/student-jobs-eindhoven-2026",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/student-jobs-delft-2026",
+      "path": "/blog/student-jobs-delft-2026",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/student-jobs-amsterdam-2026",
+      "path": "/blog/student-jobs-amsterdam-2026",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/kamerwisselprogramma-domakin",
+      "path": "/blog/kamerwisselprogramma-domakin",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/chatgpt-perplexity-find-housing-netherlands-without-getting-scammed",
+      "path": "/blog/chatgpt-perplexity-find-housing-netherlands-without-getting-scammed",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/christmas-in-amsterdam",
+      "path": "/blog/christmas-in-amsterdam",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/amsterdam-city-guide",
+      "path": "/blog/amsterdam-city-guide",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/how-to-manage-money-smartly-as-a-student-in-the-netherlands",
+      "path": "/blog/how-to-manage-money-smartly-as-a-student-in-the-netherlands",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/student-storage-tips-netherlands",
+      "path": "/blog/student-storage-tips-netherlands",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/whatsapp-housing-groups-netherlands-2026",
+      "path": "/blog/whatsapp-housing-groups-netherlands-2026",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/student-jobs-in-rotterdam-2",
+      "path": "/blog/student-jobs-in-rotterdam-2",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/bsn-nummer-id-nederland",
+      "path": "/blog/bsn-nummer-id-nederland",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/bsn-number-id-netherlands",
+      "path": "/blog/bsn-number-id-netherlands",
+      "status": 308,
+      "location": "/blog/bsn-nummer-id-nederland",
+      "fetchError": null,
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "status_308"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/domakin-at-wiki-finance-expo-cyprus-embracing-the-future-of-real-estate",
+      "path": "/blog/domakin-at-wiki-finance-expo-cyprus-embracing-the-future-of-real-estate",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/student-jobs-in-rotterdam",
+      "path": "/blog/student-jobs-in-rotterdam",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/student-jobs-groningen",
+      "path": "/blog/student-jobs-groningen",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/find-a-roommate-in-the-netherlands-and-earn-e200",
+      "path": "/blog/find-a-roommate-in-the-netherlands-and-earn-e200",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/student-jobs-groningen-rotterdam-amsterdam-domakin",
+      "path": "/blog/student-jobs-groningen-rotterdam-amsterdam-domakin",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/domakin-helped-students-find-apartment-groningen",
+      "path": "/blog/domakin-helped-students-find-apartment-groningen",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/avoid-housing-scams-netherlands-remote",
+      "path": "/blog/avoid-housing-scams-netherlands-remote",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/rent-allowance-netherlands-2026",
+      "path": "/blog/rent-allowance-netherlands-2026",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/no-internationals-challenges-international-students-face-on-the-dutch-housing-market",
+      "path": "/blog/no-internationals-challenges-international-students-face-on-the-dutch-housing-market",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/student-finance-netherlands-2026",
+      "path": "/blog/student-finance-netherlands-2026",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/rent-allowance-netherlands",
+      "path": "/blog/rent-allowance-netherlands",
+      "status": 308,
+      "location": "/blog/rent-allowance-netherlands-2026",
+      "fetchError": null,
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "status_308"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/stores-in-groningen",
+      "path": "/blog/stores-in-groningen",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/housing-lottery-netherlands",
+      "path": "/blog/housing-lottery-netherlands",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/stores-in-the-netherlands",
+      "path": "/blog/stores-in-the-netherlands",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/moving-out-the-netherlands",
+      "path": "/blog/moving-out-the-netherlands",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/student-housing-in-the-netherlands",
+      "path": "/blog/student-housing-in-the-netherlands",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/moving-in-the-netherlands",
+      "path": "/blog/moving-in-the-netherlands",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    },
+    {
+      "url": "https://www.domakin.nl/blog/welcome-to-domakins-blog-section-2",
+      "path": "/blog/welcome-to-domakins-blog-section-2",
+      "status": 0,
+      "location": null,
+      "fetchError": "TimeoutError",
+      "titleLength": 0,
+      "descriptionLength": 0,
+      "h1Count": 0,
+      "canonical": "",
+      "jsonLdTypes": [],
+      "wordCount": 0,
+      "internalLinks": 0,
+      "externalHosts": [],
+      "officialSourceHosts": [],
+      "issues": [
+        "fetch_TimeoutError",
+        "status_0"
+      ]
+    }
+  ]
+}
