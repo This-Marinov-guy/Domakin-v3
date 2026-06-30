@@ -638,13 +638,18 @@ const ViewingForm = () => {
               >
                 {viewingPaymentHighlights.map((item) => (
                   <div className="viewing-payment-item" key={item.label}>
-                    <i
-                      className={`fa-solid ${item.icon}`}
-                      aria-hidden="true"
-                    ></i>
                     <div>
-                      <span>{item.label}</span>
-                      <strong style={{color: 'white'}}>{item.price} euros</strong>
+                      <span>
+                        <i
+                          className={`fa-solid ${item.icon} mr-5`}
+                          aria-hidden="true"
+                          style={{ color: "#004aad" }}
+                        ></i>
+                        {item.label}
+                      </span>
+                      <strong style={{ color: "white" }}>
+                        {item.price} euros
+                      </strong>
                       <small>{item.tooltip}</small>
                     </div>
                   </div>
@@ -654,10 +659,15 @@ const ViewingForm = () => {
                     className="fa-solid fa-circle-check"
                     aria-hidden="true"
                   ></i>
-                  <span style={{color: 'white'}}>No charge unless we successfully attend.</span>
+                  <span style={{ color: "white" }}>
+                    No charge unless we successfully attend.
+                  </span>
                 </div>
               </div>
-              <a href="#viewing-request-form-start" className="mt-10 btn-thirteen">
+              <a
+                href="#viewing-request-form-start"
+                className="mt-10 btn-thirteen"
+              >
                 Start request
                 <i className="fa-solid fa-arrow-down" aria-hidden="true"></i>
               </a>
