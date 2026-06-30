@@ -1,0 +1,1541 @@
+{
+  "language": "nl",
+  "header": {
+    "home": "Home",
+    "change_language": "Voorkeurstaal",
+    "about": "Over het bedrijf",
+    "contact": "Contact",
+    "register": "Aanmelden",
+    "the_netherlands": "Nederland",
+    "services": "Diensten",
+    "legacy": "Geschiedenis",
+    "agents": "Team",
+    "our_services": "Onze diensten",
+    "recommendations": "Platforms",
+    "add_listing": "Kamer plaatsen",
+    "pricing": "Prijzen",
+    "logout": "Uitloggen"
+  },
+  "footer": {
+    "all_rights_reserved": "Alle rechten voorbehouden @ Domakin",
+    "terms_policy": "Voorwaarden & Beleid",
+    "the_netherlands": "Nederland",
+    "company": "Over het bedrijf",
+    "about_us": "Geschiedenis",
+    "team": "Team",
+    "services": "Diensten",
+    "viewings": "Bezichtigingen",
+    "expect_more_soon": "Binnenkort meer...",
+    "support": "Hulp",
+    "contact_us": "Contact",
+    "renting": "Huren",
+    "lending": "Verhuren",
+    "recommendations": "Platforms"
+  },
+  "about": {
+    "about_the_company": "Over het bedrijf",
+    "about_us": "Over ons",
+    "helping_you_find_a_place": "Wij helpen je een woning te vinden",
+    "when_to_reach_us": "Wanneer kun je contact met ons opnemen:",
+    "at_the_end_of_2022": "In 2023 kwam het team van Domakin samen om een probleem aan te pakken waar veel studenten, net als zij, tijdens hun verblijf in Nederland mee te maken krijgen: het vinden van woonruimte.",
+    "with_the_aim_to_help": "Sommige oprichters van Domakin hadden al een landelijke studentenorganisatie opgericht. Na gesprekken met studenten, makelaars en ouders werd duidelijk dat de grootste uitdaging voor internationale studenten in Nederland nog steeds het vinden van woonruimte is. Daarom hebben wij Domakin opgericht, met de missie om dit proces voor meer studenten makkelijker te maken.",
+    "it_is_hard_for": "Als team van mensen die deze uitdagingen zelf tijdens hun studie in Nederland hebben ervaren, zijn wij hier om je te helpen je nieuwe thuis te vinden:",
+    "if_you_are_located": "Als je woonruimte zoekt in Nederland, zijn wij er om je te helpen!",
+    "if_you_want": "Als je momenteel in het buitenland bent en niet bij een bezichtiging aanwezig kunt zijn, kunnen wij je vertegenwoordigen tijdens de bezichtiging!",
+    "if_you_are_searching": "Als je je kamer verlaat of huisgenoten zoekt en een andere student wilt helpen woonruimte te vinden, bieden wij een platform voor kameradvertenties aan!",
+    "services_we_offer": "Wij bieden de volgende diensten aan:",
+    "service_1": "Vertegenwoordiging bij bezichtigingen",
+    "service_2": "Platform voor het zoeken naar woonruimte",
+    "service_3": "Platform voor het plaatsen van een kamer- of appartementadvertentie"
+  },
+  "partners": {
+    "official_partners": "Officiële partners"
+  },
+  "contact": {
+    "contact_us": "Neem contact met ons op",
+    "contact": "Contact",
+    "email": "E-mail",
+    "telephone": "Telefoonnummer",
+    "expect_soon": "Binnenkort verwacht",
+    "office_address": "Kantooradres",
+    "your_message_was_sent_successfully": "Je bericht is succesvol verzonden!",
+    "error_please_try_again": "Fout! Probeer het opnieuw!",
+    "contact_us_directly": "Neem direct contact met ons op",
+    "enter_your_email": "Voer je e-mailadres in",
+    "enter_the_subject": "Voer het onderwerp van je aanvraag in",
+    "enter_your_message": "Voer je bericht in",
+    "send": "Aanvraag verzenden"
+  },
+  "careers": {
+    "title": "Carrières",
+    "meta_description": "Word viewing agent of property seeker bij Domakin. Flexibele werktijden, commissiesysteem en werk door heel Nederland.",
+    "join_our_team": "Word onderdeel van ons team",
+    "hero_title": "Bouw je carrière op met Domakin",
+    "hero_description": "Wij zoeken gepassioneerde mensen die studenten willen helpen hun perfecte woning in Nederland te vinden. Sluit je bij ons aan en maak verschil!",
+    "we_are_looking_for": "Wij zoeken",
+    "positions_intro": "Wij hebben mooie kansen voor gemotiveerde mensen die studenten willen helpen woonruimte te vinden in heel Nederland.",
+    "viewing_agent_title": "Viewing agents",
+    "viewing_agent_description": "Bezoek bezichtigingen namens studenten die zelf niet aanwezig kunnen zijn. Geef gedetailleerde feedback en maak foto’s om hen te helpen een goed geïnformeerde beslissing te nemen.",
+    "property_seeker_title": "Property seekers",
+    "property_seeker_description": "Help studenten hun ideale woning te vinden door woningen te zoeken, bezichtigingen te plannen en persoonlijke ondersteuning te bieden tijdens hun zoektocht.",
+    "commission_per_viewing": "Commissie per bezichtiging",
+    "commission_per_room": "Vast bedrag van €200 per kamer",
+    "why_join_us": "Waarom bij ons aansluiten",
+    "benefits_intro": "Wij bieden een flexibele en belonende werkomgeving met competitieve vergoeding.",
+    "flexible_working_time": "Flexibele werktijden",
+    "flexible_working_time_desc": "Werk volgens je eigen planning en beheer je tijd zoals jij dat prettig vindt.",
+    "commission_based": "Commissiesysteem",
+    "commission_based_desc": "Verdien competitieve commissies op basis van je resultaten.",
+    "all_around_netherlands": "Door heel Nederland",
+    "all_around_netherlands_desc": "Werk vanuit elke plek in Nederland en help studenten in het hele land.",
+    "growth_opportunities": "Groeimogelijkheden",
+    "growth_opportunities_desc": "Bouw je carrière op met mogelijkheden voor groei en ontwikkeling van vaardigheden.",
+    "work_with_us": "Werk met ons",
+    "make_difference": "Maak verschil",
+    "work_description_1": "Bij Domakin zetten wij ons in om internationale studenten te helpen veilige, comfortabele en betaalbare woonruimte in Nederland te vinden.",
+    "work_description_2": "Als onderdeel van ons team speel je een belangrijke rol in het realiseren van deze missie.",
+    "work_benefit_1": "Een flexibel schema dat past bij jouw levensstijl",
+    "work_benefit_2": "Competitieve inkomsten op commissiebasis",
+    "work_benefit_3": "Maak een positieve impact op het leven van studenten",
+    "team_work": "Teamwerk",
+    "apply_now": "Solliciteer nu",
+    "name": "Naam",
+    "enter_name": "Voer je naam in",
+    "surname": "Achternaam",
+    "enter_surname": "Voer je achternaam in",
+    "email": "E-mail",
+    "enter_email": "Voer je e-mailadres in",
+    "phone": "Telefoon",
+    "enter_phone": "Voer je telefoonnummer in",
+    "position": "Functie",
+    "select_position": "Selecteer functie",
+    "viewing_agent": "Viewing agent",
+    "property_seeker": "Property seeker",
+    "location": "Locatie",
+    "enter_location": "Voer je locatie in (stad, Nederland)",
+    "experience": "Ervaring",
+    "enter_experience": "Voer je relevante ervaring in",
+    "resume": "CV",
+    "cover_letter": "Motivatiebrief",
+    "enter_cover_letter": "Vertel ons waarom je deel wilt uitmaken van ons team",
+    "submit_application": "Sollicitatie verzenden",
+    "submitting": "Verzenden...",
+    "application_submitted_successfully": "Je sollicitatie is succesvol verzonden! We nemen binnenkort contact met je op.",
+    "error_please_try_again": "Fout! Probeer het opnieuw!",
+    "resume_error": "Ongeldig bestandsformaat. Upload een PDF-, DOC- of DOCX-bestand."
+  },
+  "pricing": {
+    "pricing": "Prijzen",
+    "page_title": "Onze diensten en prijzen",
+    "introduction": {
+      "part_1": "Het vinden van woonruimte in Nederland kan een uitdaging zijn, vooral voor studenten en buitenlanders.",
+      "part_2": "Bij Domakin willen we je zoektocht eenvoudiger, sneller en veiliger maken.",
+      "part_3": "Hieronder vind je een gedetailleerd overzicht van onze diensten, ontworpen om je bij elke stap van het huurproces te ondersteunen."
+    },
+    "viewing_assistance": {
+      "section_title": " Diensten voor hulp bij bezichtigingen",
+      "intro": "Wij begrijpen dat het niet altijd mogelijk is om persoonlijk bij woningbezichtigingen aanwezig te zijn. Daarom bieden wij ondersteuning bij bezichtigingen aan, waarbij een vertrouwde vertegenwoordiger van Domakin namens jou aanwezig is en gedetailleerde feedback geeft.",
+      "types": {
+        "standard": {
+          "title": "Standaard hulp bij bezichtiging – €<b>{{price}}</b>",
+          "description": "Plan vooraf een bezichtiging in, en een van onze agents zal namens jou aanwezig zijn."
+        },
+        "same_day": {
+          "title": "Express hulp bij bezichtiging – €<b>{{price}}</b>",
+          "description": "Voor dringende aanvragen bieden wij prioritaire planning van bezichtigingen binnen 24 uur."
+        }
+      },
+      "included": {
+        "title": "Wat beide diensten omvatten:",
+        "items": {
+          "1": "Volledige aanwezigheid bij de woningbezichtiging.",
+          "2": "Foto’s en video’s van de woning.",
+          "3": "Antwoorden op alle vragen die je mogelijk hebt over de woning."
+        }
+      },
+      "audience": {
+        "title": "Voor wie is deze dienst geschikt?",
+        "description": "Deze dienst is ideaal voor studenten, buitenlanders of iedereen die niet persoonlijk bij bezichtigingen aanwezig kan zijn. Of je nu in het buitenland bent, een druk schema hebt of iemand nodig hebt die snel kan handelen, wij zorgen ervoor dat je geen woonkansen mist."
+      }
+    },
+    "viewing_by_agent": {
+      "section_title": "📅 Bezichtiging georganiseerd door onze agent – €<b>{{price}}</b>",
+      "intro": "Tijd vinden om woningbezichtigingen te organiseren kan lastig zijn. Met onze dienst voor bezichtigingen georganiseerd door een agent nemen wij het volledige planningsproces op ons, zodat je zoektocht naar woonruimte soepeler en efficiënter verloopt.",
+      "how_it_works": {
+        "title": "Hoe het werkt:",
+        "steps": {
+          "1": "Je verstrekt je persoonlijke gegevens, huurvoorkeuren en cv.",
+          "2": "Onze agent neemt namens jou contact op met verhuurders of vastgoedbeheerders.",
+          "3": "Wij plannen een bezichtiging en geven je alle benodigde details."
+        }
+      },
+      "included": {
+        "title": "Wat is inbegrepen:",
+        "items": {
+          "1": "Directe communicatie met verhuurders of vastgoedbeheerders.",
+          "2": "Een geplande bezichtiging die aansluit bij jouw voorkeuren.",
+          "3": "Persoonlijke ondersteuning gedurende het hele proces."
+        }
+      },
+      "audience": {
+        "title": "Voor wie is deze dienst geschikt?",
+        "description": "Deze dienst is ideaal voor drukke mensen of voor mensen die niet bekend zijn met de Nederlandse huurmarkt. Of je nu student, buitenlander of professional bent, wij nemen de stress van het plannen van bezichtigingen weg, zodat jij je kunt richten op het vinden van de perfecte woning."
+      }
+    },
+    "renting_room": {
+      "section_title": " Een kamer huren via ons platform – <b>1 maand huur</b>",
+      "intro": "Zoek je een studentvriendelijke kamer zonder de stress van eindeloos zoeken? Onze dienst voor het huren van een kamer via Domakin brengt je in contact met gecontroleerde advertenties en biedt een veilige en betrouwbare manier om woonruimte te vinden.",
+      "how_it_works": {
+        "title": "Hoe het werkt:",
+        "option_1": "Optie 1 – Zelfservice:",
+        "steps": {
+          "1": "Bekijk de beschikbare kamers op onze website.",
+          "2": "Reageer op opties die aansluiten bij jouw voorkeuren.",
+          "3": "Als je via Domakin een huurovereenkomst tekent, geldt een eenmalige vergoeding van 1 maand huur per persoon."
+        },
+        "option_2": "Optie 2 – Wij zoeken namens jou:",
+        "steps2": {
+          "1": "Vertel ons je woonvoorkeuren.",
+          "2": "Een agent neemt contact met je op en begint met zoeken.",
+          "3": "Als je via Domakin een huurovereenkomst tekent, geldt een eenmalige vergoeding van 1 maand huur per persoon."
+        }
+      },
+      "why_choose_us": {
+        "title": "Waarom kiezen voor deze dienst?",
+        "points": {
+          "1": "Wij werken direct samen met betrouwbare verhuurders om veilige woonmogelijkheden te bieden.",
+          "2": "Alle advertenties worden gecontroleerd om het risico op oplichting te verkleinen.",
+          "3": "Onze agents streven ernaar om opties aan te bieden die aansluiten bij jouw voorkeuren.",
+          "4": "Speciaal ontwikkeld voor de behoeften van studenten en buitenlanders in Nederland."
+        }
+      },
+      "audience": {
+        "title": "Voor wie is deze dienst bedoeld?",
+        "description": "Ideaal voor studenten en buitenlanders die op zoek zijn naar een betrouwbare en stressvrije manier om woonruimte te vinden. Of je nu alleen aankomt of met een vriend/partner, elke huurder krijgt persoonlijke ondersteuning en betaalt alleen bij het succesvol ondertekenen van een huurovereenkomst."
+      }
+    },
+    "commission_through_listing": {
+      "section_title": "Commissie via het plaatsen van een advertentie",
+      "description": "Klanten die via onze website een woning plaatsen, hebben recht op commissie wanneer deze woning succesvol via ons platform wordt verhuurd. De commissie wordt ontvangen bij het ondertekenen van de huurovereenkomst.",
+      "service_link": "Plaats je kamer via Domakin",
+      "items": {
+        "direct": "Verdien <b>€200</b> wanneer je direct een kamer op Domakin plaatst.",
+        "agent": "Verdien <b>€100</b> wanneer je een kamer plaatst via een Domakin Housing Agent."
+      }
+    }
+  },
+  "viewing": {
+    "viewing_service": "Bezichtigingsdienst",
+    "viewing": "Bezichtiging",
+    "let_us_make_the_viewing_for_you": "Laat ons de bezichtiging voor jou doen",
+    "description": "Heb je een kamer of appartement in Nederland gevonden, maar kun je niet aanwezig zijn bij de bezichtiging, of ben je op zoek naar woonruimte en wil je zeker weten dat iemand jou tijdens de bezichtiging vertegenwoordigt?",
+    "service_offer": "Wij bieden een dienst voor vertegenwoordiging bij bezichtigingen. Onze agent zal volgens jouw wensen aanwezig zijn bij de bezichtiging. Hij of zij maakt foto’s en video’s en stelt vragen aan de verhuurder. Waar mogelijk zorgen wij voor een live videoverbinding, zodat je een realistischer beeld van de woning krijgt.",
+    "step_1": "1) Vul je gegevens in",
+    "step_2": "2) Wacht tot onze agent contact met je opneemt",
+    "step_3": "3) Organiseer de bezichtiging(en) en laat de rest aan ons over",
+    "fill_your_details": "Vul je gegevens in",
+    "viewing_details": "Details van de bezichtiging",
+    "address_of_viewing": "Adres van de bezichtiging",
+    "name": "Naam",
+    "surname": "Achternaam",
+    "phone": "Telefoon",
+    "email": "E-mail",
+    "comments": "Vragen die je wilt dat de agent namens jou stelt\n\n- Met hoeveel huurders wordt de badkamer gedeeld\n- Is er opslagruimte\n- Moet ik keukengerei kopen",
+    "comments_optional": "Opmerkingen die je naar onze agent wilt sturen (optioneel)",
+    "consent": "Ik geef toestemming dat het bedrijf contact met mij opneemt via telefoon of e-mail en mijn informatie alleen bewaart voor het doel van deze dienst",
+    "submit_request": "Aanvraag verzenden",
+    "errors": {
+      "name_required": "Naam is verplicht",
+      "surname_required": "Achternaam is verplicht",
+      "phone_number_invalid": "Het telefoonnummer is niet volledig of begint niet met de landcode (bijvoorbeeld +359)",
+      "phone_required": "Telefoonnummer is verplicht",
+      "email_invalid": "Voer een geldig e-mailadres in",
+      "email_required": "Voer een e-mailadres in",
+      "terms_required": "Je moet de voorwaarden accepteren",
+      "city_required": "Geef de stad van de bezichtiging op",
+      "date_required": "Geef de datum van de bezichtiging op",
+      "time_required": "Geef het tijdstip van de bezichtiging op",
+      "questions_required": "Voeg de vragen voor de bezichtiging toe"
+    },
+    "successful_request": "Aanvraag succesvol",
+    "confirmation_message": "Je gegevens zijn verzonden. Onze agent neemt binnenkort contact met je op!",
+    "city_of_viewing": "Stad van de bezichtiging",
+    "date": "Datum van de bezichtiging",
+    "time": "Tijdstip van de bezichtiging",
+    "address_of_viewing_optional": "Adres van de bezichtiging (optioneel)",
+    "pricing_policy_banner_title": "Bekijk onze prijzen en ons beleid 'Geen resultaat, geen betaling'",
+    "pricing_policy_banner_description": "Wij brengen alleen kosten in rekening als wij succesvol namens jou bij de bezichtiging aanwezig zijn — geen resultaat, geen betaling.",
+    "pricing_link": "Prijzen",
+    "policy_link": "Beleid"
+  },
+  "room_searching": {
+    "room_searching_service": "Kamer zoeken",
+    "apply_for_searching": "Aanvragen voor zoekhulp",
+    "apply_for_property_searching": "Aanvragen voor woningzoekhulp",
+    "tell_us_what_are_you_looking_for": "Vertel ons wat je zoekt en wij vinden het!",
+    "step_1": "1) Vul het formulier in",
+    "step_2": "2) Wacht tot een van onze agents contact met je opneemt",
+    "step_3": "3) Onze agent vindt de plek voor jou",
+    "registration": "Is registratie vereist",
+    "budget": "Budget",
+    "move_in_date": "Inhuisdatum",
+    "period": "Verblijfsperiode",
+    "people": "Aantal personen",
+    "type": "Type accommodatie",
+    "type_options": {
+      "shared": "Privé",
+      "private": "Gedeeld",
+      "any": "Maakt niet uit"
+    }
+  },
+  "renting": {
+    "renting_accommodations": "Woonruimte huren",
+    "renting": "Huren",
+    "find_the_perfect_place_for_you": "Vind de perfecte woonruimte voor jou",
+    "platform_description": "Onze website biedt verschillende woningen met verschillende voorwaarden. Bekijk de lijst met woningen en klik op de foto om de galerij te bekijken. Bij interesse volg je deze stappen: ",
+    "step_1": "1) Kies een woning uit de onderstaande lijst",
+    "step_2": "2) Vul het aanvraagformulier in de advertentie in",
+    "step_3": "3) Wacht tot een van onze agents contact met je opneemt met meer details",
+    "step_4": "4) Rond de deal af met onze agent",
+    "services": "Diensten",
+    "properties": "Beschikbare woningen",
+    "per_month": "per maand",
+    "select": "selecteer",
+    "no_properties_message": "Momenteel hebben wij geen beschikbare woningen - controleer de website regelmatig of neem contact met ons op!",
+    "free_of_charge": "GRATIS",
+    "per_night": "per nacht",
+    "apply_now": "Nu aanvragen",
+    "the_property_is_taken": "De woning is bezet"
+  },
+  "lending": {
+    "transfer_and_old_contract": "Oud contract overdragen",
+    "transferring": "Overdracht",
+    "transfer_your_old_contract_through_us": "Draag je oude contract via ons over",
+    "description": "Wij bieden de mogelijkheid om het resterende deel van je contract over te dragen aan een klant die wij vinden. Hiervoor moet je contract overdracht toestaan en is toestemming van de verhuurder nodig. Om de procedure te starten, volg je de volgende stappen: ",
+    "step_1": "1) Vul het onderstaande formulier in",
+    "step_2": "2) Wacht op feedback van onze agent",
+    "step_3": "3) Bekijk samen je contract en rond de deal af"
+  },
+  "emergency_housing": {
+    "emergency_housing": "Noodhuisvesting",
+    "looking_for_place": "Als je een plek zoekt om te verblijven totdat je je eigen woonruimte vindt",
+    "short_stay_description": "Als je nog geen plek in Nederland hebt gevonden of pas later in je woning kunt intrekken, kun je gebruikmaken van tijdelijke accommodatie die andere Bulgaren in de stad aanbieden, door deze stappen te volgen: ",
+    "step_1": "1) Kies hieronder de optie 'Zoeken'",
+    "step_2": "2) Kies een kamer door op de selectieknop te klikken",
+    "step_3": "3) Vul je gegevens in het formulier in dat verschijnt",
+    "step_4": "4) Wacht op ons antwoord om informatie over de eigenaar van de woning te ontvangen",
+    "offering_place": "Als je tijdelijk een plek aanbiedt",
+    "lend_extra_bed": "Het studiejaar begint, maar er zijn nog studenten die accommodatie nodig hebben. Als je een vrije bank of kamer hebt, kun je Bulgaren helpen die nog geen woonruimte hebben gevonden door tijdelijke accommodatie aan te bieden via de volgende stappen: ",
+    "step_1_offer": "1) Kies hieronder de optie 'Aanbieden'",
+    "step_2_offer": "3) Vul je gegevens en de gegevens van de woning in het formulier in dat verschijnt",
+    "step_3_offer": "4) Wacht op ons antwoord om goedgekeurd te worden",
+    "thank_you_message": "\"Het team van Domakin is iedereen die bereid is te helpen enorm dankbaar\"",
+    "ellipsis": "...",
+    "searching": "Zoeken",
+    "offering": "Aanbieden",
+    "personal_information": "Persoonlijke informatie",
+    "name": "Naam",
+    "surname": "Achternaam",
+    "phone": "Telefoon",
+    "email": "E-mail",
+    "referral_code": "Referentiecode (optioneel)",
+    "brief_description": "Stel jezelf kort voor",
+    "property_information": "Woninginformatie",
+    "location": "Locatie",
+    "city": "Stad",
+    "address": "Adres",
+    "postcode": "Postcode",
+    "postcode_disclaimer": "Dit wordt niet aan klanten getoond",
+    "pets_allowed": "Zijn huisdieren toegestaan",
+    "smoking_allowed": "Is roken toegestaan",
+    "precise_address": "Geef het exacte adres en huisnummer op, zodat wij een bezichtiging kunnen organiseren (wij delen dit niet op onze website)",
+    "size": "Grootte",
+    "period": "Beschikbaarheidsperiode",
+    "rent": "Basishuur",
+    "bills": "Geschatte kosten van rekeningen in euro",
+    "flatmates": "Aantal huisgenoten",
+    "registration": "Is registratie op het adres mogelijk",
+    "description": "Beschrijving van de woning",
+    "description_disclaimer": "Leg kort uit wat de huurder kan verwachten van de woning, de locatie en de huisgenoten, evenals andere belangrijke informatie",
+    "note": "Opmerking voor onze agents",
+    "what_is_included": "Wat is inbegrepen",
+    "max_staying_period": "Maximale verblijfsperiode",
+    "price_per_night": "Prijs per nacht",
+    "free_of_charge": "*Je kunt de plek gratis aanbieden",
+    "property_description": "Beschrijving van de woning (bijvoorbeeld of het een bed/bank is en wat de huurder verder mag gebruiken)",
+    "permission": "Ik geef toestemming om door de organisatie gecontacteerd te worden voor het doel van deze dienst",
+    "room_pictures": "Foto’s van de kamer",
+    "property_images": "Foto’s van de kamer / gemeenschappelijke ruimtes / buitenruimtes / voorzieningen / enz.",
+    "image_requirements": "Stuur minimaal 3 foto’s en maximaal 10",
+    "image_submission": "* Upload minimaal 1 foto en maximaal 6",
+    "extra_images": "Extra foto’s worden niet geaccepteerd",
+    "supported_formats": "* Ondersteunde formaten zijn jpg, jpeg en png",
+    "send_room": "kamer verzenden",
+    "dont_forget_images": "* Vergeet de foto’s niet",
+    "errors": {
+      "name_required": "naam is verplicht",
+      "surname_required": "achternaam is verplicht",
+      "email_required": "e-mail is verplicht",
+      "phone_too_short": "telefoonnummer is te kort",
+      "invalid_phone": "ongeldig telefoonnummer (voeg + en landcode toe)",
+      "phone_required": "telefoonnummer is verplicht",
+      "description_required": "je beschrijving is vereist",
+      "location_required": "locatie is verplicht",
+      "period_required": "periode is verplicht",
+      "price_required": "prijs is verplicht",
+      "property_description_required": "beschrijving van de woning is verplicht",
+      "terms_required": "De voorwaarden moeten worden geaccepteerd",
+      "invalid_file": "Er is een ongeldig bestand",
+      "missing_fields": "Ontbrekende of onjuiste velden - corrigeer ze en verzend opnieuw!"
+    }
+  },
+  "home": {
+    "company_for_accommodation_searching": "Door studenten, voor studenten",
+    "find_your_place_to_live": "Vind je nieuwe woning in Nederland met Domakin",
+    "with_our_help": "met onze hulp",
+    "description": "Wij helpen je met het vinden en verhuren van woonruimte in elke regio van Nederland",
+    "contact_us": "Doe een aanvraag"
+  },
+  "features": {
+    "our_main_focus": "Diensten",
+    "our_services": "Onze diensten",
+    "viewings": "Bezichtigingen uitvoeren",
+    "book_remote_viewing": "Boek een bezichtiging op afstand",
+    "agents_service": "Onze agents voeren de bezichtigingen namens jou uit en houden rekening met al jouw eisen",
+    "check_it_out": "Naar de dienst",
+    "rent_an_apartment": "Woningcatalogus",
+    "room_searching": "Kamer zoeken",
+    "property_inquiry": "Bekijk de woningen in onze advertentiesectie, solliciteer direct of stuur ons een aanvraag met je woonwensen",
+    "list_a_room": "Kamer verhuren",
+    "services": "Diensten",
+    "search_for_new_flatmate_or_transfer_contract": "Als je een huisgenoot wilt vinden of je kamer wilt overdragen aan een nieuwe huurder",
+    "emergency_housing": "Noodhuisvesting",
+    "emergency_housing_description": "Als je tijdelijk verblijf zoekt of aanbiedt voor een student in nood",
+    "pricing_information": "Vind onze prijslijst hieronder"
+  },
+  "team": {
+    "team": "Team",
+    "property_agents": "Agents",
+    "members": [
+      {
+        "name": "Lazar Popov",
+        "position": "Chief Executive Officer (CEO)",
+        "about": "Bachelor in Kunstmatige Intelligentie",
+        "about_extra": "Hallo, mijn naam is Lazar. Ik kom uit Ruse, maar woon al vijf jaar in Groningen. Ik heb een masterdiploma in Kunstmatige Intelligentie. Ik ken de stad goed en heb ervaring met het zoeken en vinden van huurwoningen. Mijn interesses zijn vechtsporten en kunstmatige intelligentie. Naast agent bij Domakin.nl ben ik ook president en medeoprichter van de non-profit studentenorganisatie Bulgarian Society Groningen. Ik help je graag!"
+      },
+      {
+        "name": "Sava Popov",
+        "position": "Manager voor Groningen",
+        "about": "Bachelor in Creative Media",
+        "about_extra": "Hallo, ik ben Sava en ik studeer Creative Media and Technology in Groningen. In de zomer voordat ik naar deze stad kwam, heb ik veel tijd besteed aan het zoeken naar appartementen, het bezoeken van bezichtigingen en het vragen van advies aan bekenden. Na meerdere mislukte pogingen vond ik uiteindelijk een plek, en ik geloof dat ik nu een goed begrip heb van de fouten en successen bij het zoeken naar woonruimte. Ik help graag iedereen die zich in een vergelijkbare situatie bevindt!"
+      },
+      {
+        "name": "Paolina Gocheva",
+        "position": "Manager voor Rotterdam",
+        "about": "Bachelor in Micro- en Macro-economie",
+        "about_extra": "Hallo, mijn naam is Paolina. Ik kom oorspronkelijk uit Varna, Bulgarije, en woon inmiddels bijna drie jaar in Rotterdam. Momenteel rond ik mijn studie Economie af en heb ik verschillende cursussen in business en management gevolgd om mijn expertise te versterken. Ik ben gepassioneerd over sport en reizen om verschillende culturen te leren kennen. Naast mijn rol als Regional Manager voor Domakin in Rotterdam heb ik meerdere leidinggevende functies bekleed binnen non-profit studentenorganisaties. Ik ben bekend met de huurmarkt in Rotterdam en help je graag je ideale woning te vinden!"
+      },
+      {
+        "name": "Radost Lozanova",
+        "position": "Design Manager",
+        "about": "Bachelor in Euroculture",
+        "about_extra": "Hallo! Ik ben Radost, creative director en medeoprichter van Bulgarian Society Groningen. Als student heb ik in verschillende landen gewoond, wat vaak verhuizen met zich meebracht. Als onderdeel van het team van Domakin.nl help ik graag meer Bulgaren hun nieuwe thuis in Nederland te vinden."
+      },
+      {
+        "name": "Vladi Marinov",
+        "position": "Chief Technology Officer (CTO)",
+        "about": "Bachelor in Business Management",
+        "about_extra": "Hallo, mijn naam is Vladislav en ik heb business gestudeerd in Londen, Engeland. Hoewel dat in een ander land was, ben ik bekend met de problemen waarmee een student te maken kan krijgen bij het zoeken naar woonruimte. Stress, wanhoop en frustratie zijn slechts enkele van de emoties die ik persoonlijk heb ervaren tijdens mijn zoektocht naar een appartement in Londen. Ik weet hoeveel moeilijkheden er kunnen ontstaan, vooral wanneer je op afstand zoekt. Voor mij is het een plezier om aan dit platform te werken, waarvan ik geloof dat het veel mensen zal helpen!"
+      }
+    ],
+    "agents": "Agents",
+    "marketing": "Marketing",
+    "design": "Design"
+  },
+  "error": {
+    "be_careful_error": "Let op, er is een fout opgetreden!",
+    "page_not_found": "Pagina niet gevonden",
+    "page_not_exists": "De pagina die je zocht bestaat niet! Mogelijk is deze verplaatst of verwijderd.",
+    "back_to_home": "Terug naar home"
+  },
+  "donations": {
+    "your_contribution_means_a_lot": "Jouw bijdrage betekent veel voor ons!",
+    "thank_you": "Dank je wel",
+    "name_optional": "Naam (optioneel)",
+    "amount_in_eur": "Bedrag in euro",
+    "message_optional": "Je bericht aan ons (optioneel)",
+    "continue": "Doorgaan",
+    "pay": "Betalen",
+    "processing": "Verwerken...",
+    "unexpected_error_occurred": "Er is een fout opgetreden - probeer het opnieuw!",
+    "insert_positive_amount": "Het bedrag is negatief",
+    "minimum_amount_2_euro": "Het minimumbedrag is 2 euro",
+    "insert_amount": "Voer een bedrag in"
+  },
+  "feedbacks": {
+    "help_the_organization": "Ondersteuning",
+    "about": "Over ons",
+    "feedbacks_and_donations": "Feedback en donaties",
+    "share_your_experience": "Deel je ervaring met onze diensten",
+    "name": "Naam",
+    "share_your_feedback": "Deel je feedback",
+    "minimum_20_characters": "Minimaal 20 tekens",
+    "send": "Verzenden",
+    "name_required": "Naam is verplicht",
+    "do_not_leave_empty": "Laat de feedback niet leeg",
+    "please_type_at_least_20_characters": "Minimaal 20 tekens zijn vereist",
+    "you_passed_the_300_characters_limit": "Je hebt de limiet van 300 woorden overschreden",
+    "thank_you_your_feedback_was_sent": "Bedankt, je feedback wordt binnenkort beoordeeld!",
+    "feedbacks": "Feedback van onze klanten!",
+    "donations": "Donaties",
+    "want_to_support_the_organisation": "Wil je de organisatie steunen?",
+    "you_can_now_donate_or_leave_feedback": "Wij accepteren nu ook donaties - dankzij deze donaties en jouw feedback kunnen wij bij Domakin steeds meer studenten helpen!",
+    "contribute": "Help mee",
+    "no_feedbacks": "Er is geen feedback gevonden - wees de eerste!",
+    "expand": "Uitklappen",
+    "shrink": "Inklappen"
+  },
+  "recommendations": {
+    "our_recommendations": "Onze aanbevelingen",
+    "support": "Hulp",
+    "our_services": "Naar onze diensten",
+    "recommended_from_domakin_nl": "Aanbevolen door Domakin.nl",
+    "team_made_list": "Het team van Domakin onderhoudt een lijst met websites en groepen voor het zoeken en verhuren van woonruimte in Groningen. Hier vind je de meest gebruikte platforms, en wij kunnen je daarnaast helpen met het zoeken of aanbieden van woonruimte! Klik eenvoudig op de titel om het platform te bekijken.",
+    "websites": "Websites",
+    "by_domakin_nl": "door Domakin.nl",
+    "contact_for_help": "Neem voor informatie of extra hulp contact met ons op via de contactpagina of de dienstenpagina!",
+    "beware_of_scammers": "Wees alert op valse aanbiedingen! Controleer het Facebookprofiel van de aanbieder, vraag om een bezichtiging en zorg ervoor dat de aanbieding legitiem is voordat je documenten verstuurt of betalingen doet! Neem contact met ons op als je hulp nodig hebt!"
+  },
+  "privacy_policy_content": {
+    "legal": "Juridisch",
+    "terms_and_policy": "Voorwaarden en beleid",
+    "effective_date": "Ingangsdatum: 1 augustus 2023",
+    "introduction": "Bij Domakin streven wij ernaar je privacy te beschermen en de veiligheid van je persoonlijke informatie te waarborgen. Dit privacybeleid beschrijft hoe wij je gegevens verzamelen, gebruiken en beveiligen terwijl je ons platform voor het vinden van accommodatie in Nederland gebruikt. Door toegang te krijgen tot en gebruik te maken van de website of mobiele applicatie van Domakin, hierna het \"Platform\" genoemd, stem je in met de praktijken die in dit privacybeleid worden beschreven.",
+    "information_we_collect": "1. Informatie die wij verzamelen",
+    "information_details": "Wij kunnen verschillende soorten informatie van je verzamelen, waaronder maar niet beperkt tot: Persoonlijke informatie: je naam, e-mailadres, telefoonnummer en andere contactgegevens.\nProfielinformatie: details over je voorkeuren, interesses en woonwensen.\nCorrespondentie-informatie: gegevens van correspondentie tussen jou en Domakin.\nGebruiksinformatie: gegevens over je interacties met het Platform, zoals zoekopdrachten, bekeken advertenties en gebruikersinteracties. Verklaringen over gezin en inkomen: bepaalde gegevens over je gezinsinkomen, persoonlijk inkomen en andere financiële informatie die door een verhuurder of andere betrokken partij kan worden gevraagd, uitsluitend voor doeleinden die verband houden met huisvesting.",
+    "how_we_use_your_information": "2. Hoe wij je informatie gebruiken",
+    "usage_purposes": "Wij gebruiken de verzamelde informatie voor de volgende doeleinden: Om het gebruik van het Platform te vergemakkelijken en gepersonaliseerde diensten te leveren.\nOm je te koppelen aan passende woonadvertenties op basis van je voorkeuren.\nOm onze diensten, gebruikerservaring en klantenservice te verbeteren.\nOm met je te communiceren over je profiel, advertenties en gerelateerde updates.\nOm gebruikspatronen te analyseren en onderzoek uit te voeren met als doel onze dienstverlening te verbeteren.",
+    "sharing_of_information": "3. Delen van informatie",
+    "sharing_circumstances": "Wij kunnen je informatie delen in de volgende gevallen: Met de accommodatieaanbieder: informatie uit je profiel kan worden gedeeld met eigenaren van accommodaties om reservering en communicatie te vergemakkelijken.\nMet externe dienstverleners: wij kunnen betrouwbare derde partijen inschakelen om ons te helpen bij het leveren van diensten, zoals betalingsverwerking of data-analyse. Naleving van wettelijke vereisten: wij kunnen informatie openbaar maken indien dit wettelijk vereist is of om onze rechten, privacy, veiligheid, eigendom of die van anderen te beschermen.",
+    "your_choices": "4. Je keuzes",
+    "your_choices_description": "Je kunt je persoonlijke informatie op ons accommodatieplatform beheren via de accountinstellingen, waaronder je contactgegevens, marketingvoorkeuren en opgeslagen betaalmethoden. Wij geven je de mogelijkheid om je af te melden voor niet-essentiële communicatie en je account op elk moment te verwijderen, hoewel wij bepaalde informatie kunnen bewaren voor juridische of veiligheidsgerelateerde doeleinden. Je kunt een kopie opvragen van de persoonsgegevens die wij over je bewaren, of vragen om onjuiste informatie te corrigeren door contact op te nemen met ons supportteam. Als je je in bepaalde regio’s bevindt, zoals de EU, heb je aanvullende rechten, waaronder het recht op gegevensoverdraagbaarheid en het recht om te verzoeken dat wij je persoonlijke informatie verwijderen, met inachtneming van wettelijke vereisten.",
+    "data_security": "5. Gegevensbeveiliging",
+    "security_measures": "Je kunt de informatie in je profiel en je communicatievoorkeuren bijwerken en beheren via je accountinstellingen. Afmelden voor communicatie: je kunt je afmelden voor het ontvangen van bepaalde berichten van ons door de instructies in die berichten te volgen.",
+    "children_s_privacy": "6. Privacy van kinderen",
+    "children_policy": "Het Platform is niet bedoeld voor personen jonger dan 16 jaar. Wij verzamelen niet bewust persoonlijke informatie van minderjarigen zonder ouderlijke toestemming.",
+    "contracting": "7. Contractvorming",
+    "contract_policy": "Om de veiligheid van beide partijen te waarborgen, kunnen wij vragen dat je je gegevens invult en een contract ondertekent wanneer er financiële zaken bij betrokken zijn. Het contract kan door ons worden bewaard en gebruikt voor alle noodzakelijke juridische stappen als een van de partijen zich niet houdt aan de gestelde voorwaarden. Domakin garandeert dat een kopie van het contract aan de klant en aan elke andere betrokken partij wordt verstrekt wanneer een verzoek is ontvangen en goedgekeurd.",
+    "cookies": "8. Cookies",
+    "cookies_policy": "Wij gebruiken cookies om onze accommodatiewebsite beter voor je te laten werken. Deze cookies onthouden je inloggegevens, voorkeuren en hoe je onze site gebruikt, wat ons helpt om relevantere accommodaties te tonen en onze dienst te verbeteren. Sommige cookies zijn essentieel voor het goed functioneren van de website, terwijl andere ons helpen te begrijpen hoe mensen onze site gebruiken of om gepersonaliseerde advertenties te tonen. Door onze website te blijven gebruiken, stem je in met ons gebruik van cookies, maar je kunt de cookie-instellingen in je browser op elk moment aanpassen.",
+    "contact_us": "Als je vragen, zorgen of verzoeken hebt met betrekking tot je privacy",
+    "contact_details": "Neem contact met ons op"
+  },
+  "locations": {
+    "amsterdam": "Amsterdam",
+    "breda": "Breda",
+    "eindhoven": "Eindhoven",
+    "enschede": "Enschede",
+    "groningen": "Groningen",
+    "leeuwarden": "Leeuwarden",
+    "maastricht": "Maastricht",
+    "nijmegen": "Nijmegen",
+    "rotterdam": "Rotterdam",
+    "hague": "Den Haag",
+    "tilburg": "Tilburg",
+    "utrecht": "Utrecht",
+    "venlo": "Venlo"
+  },
+  "property": {
+    "property_details": "Woningdetails",
+    "gallery": "Galerij",
+    "back_to_properties": "Terug naar woningen",
+    "related_properties": "Vergelijkbare woningen",
+    "location": "Locatie",
+    "free_from_period": "Beschikbaar vanaf / periode",
+    "price_in_euro": "Prijs in euro",
+    "bills": "Rekeningen",
+    "bills_label": "Rekeningen",
+    "deposit_label": "Borg",
+    "flatmates": "Huisgenoten",
+    "no_related_properties_found": "Geen vergelijkbare woningen gevonden",
+    "no_properties_for_the_criteria": "Geen woningen gevonden voor de zoekcriteria",
+    "type": "Type",
+    "furnished_type": "Meubilering",
+    "amenities": "Voorzieningen",
+    "registration": "Registratie op adres",
+    "shared_space": "Gedeelde ruimtes",
+    "pets_allowed": "Huisdieren",
+    "bathrooms": "Badkamers",
+    "toilets": "Toiletten",
+    "rent": "Basishuur"
+  },
+  "enums": {
+    "property_type": {
+      "1": "Kamer in gedeelde woning",
+      "2": "Studio",
+      "3": "Appartement",
+      "4": "Huis"
+    },
+    "furnished_type": {
+      "1": "Volledig gemeubileerd",
+      "2": "Gedeeltelijk gemeubileerd",
+      "3": "Ongemeubileerd"
+    },
+    "amenities": {
+      "1": "Airconditioning",
+      "2": "Wasmachine",
+      "3": "Vaatwasser",
+      "4": "Magnetron",
+      "5": "Kookplaat",
+      "6": "Oven",
+      "7": "Fietsenstalling",
+      "8": "Garage",
+      "9": "Parkeerplaats",
+      "10": "Opslagruimte",
+      "11": "Tuin",
+      "12": "Toegang voor mensen met een beperking",
+      "13": "Wifi",
+      "14": "Barbecue",
+      "15": "Balkon",
+      "16": "Droger"
+    },
+    "shared_space": {
+      "1": "Balkon",
+      "2": "Keuken",
+      "3": "Badkamer",
+      "4": "Toilet",
+      "5": "Opslagruimte",
+      "6": "Woonkamer"
+    }
+  },
+  "filter": {
+    "search_keyword": "Zoeken op trefwoord...",
+    "your_range": "Jouw bereik",
+    "property_location": "Filteren op locatie",
+    "filter_by_price": "Filteren op prijs",
+    "apply": "Toepassen",
+    "toggle_all": "Alles selecteren",
+    "availability": "Beschikbaarheid",
+    "showing": "Weergeven van <span class='color-dark fw-500'>{{start}}</span>–<span class='color-dark fw-500'>{{end}}</span> van <span class='color-dark fw-500'>{{total}}</span> resultaten",
+    "sort": "Sorteren op",
+    "all": "Alles",
+    "newest": "Nieuwste",
+    "oldest": "Oudste",
+    "price_low_high": "Prijs: laag naar hoog",
+    "price_high_low": "Prijs: hoog naar laag",
+    "select_city": "Selecteer stad"
+  },
+  "statusCodeMapping": {
+    "in_process": "Gereserveerd",
+    "free": "Beschikbaar",
+    "taken": "Bezet"
+  },
+  "FOR_RENT": [
+    {
+      "id": "39",
+      "hidden": false,
+      "status": "Bezet",
+      "price": 400,
+      "statusCode": 3,
+      "title": "Kamer in een gedeeld huis",
+      "city": "Groningen",
+      "location": "Marowijnestraat, Groningen",
+      "description": {
+        "property": "De kamer bevindt zich op de derde verdieping van een huis. De woning ligt op 10 minuten fietsen van de Zernike-campus en op 10 minuten van het stadscentrum. In de omgeving zijn meerdere supermarkten en een grote sportschool. Er is ook een mooi park direct naast het huis. Momenteel zijn de huisgenoten 3 meisjes, met wie de badkamer en keuken worden gedeeld. Eén keer per week komt er een schoonmaker om de gemeenschappelijke ruimtes van het huis schoon te maken. De kamer wordt aangeboden met meubels die apart worden verkocht en omvatten: bureau en stoel, bed, kledingrek, verrijdbare opbergkast, 2 salontafels, 2 stoelen en een slaapbank die ook als extra bed kan worden gebruikt. Registratie is mogelijk!",
+        "period": "Vanaf april",
+        "bills": "inbegrepen",
+        "flatmates": "3 personen"
+      },
+      "main_image": "1.png",
+      "images": [
+        "2.png",
+        "3.png"
+      ]
+    },
+    {
+      "id": "38",
+      "hidden": false,
+      "status": "Bezet",
+      "price": 258,
+      "statusCode": 3,
+      "title": "Kleine kamer in een gedeeld huis",
+      "city": "Groningen",
+      "location": "Abeelstraat, Groningen",
+      "description": {
+        "property": "De kamer is 8 m² en je deelt de keuken en badkamer met drie andere huisgenoten (twee jongens en één meisje). Ze zijn allemaal vriendelijk, respectvol en rustig. Ze zitten allemaal aan het einde van hun bacheloropleiding, waardoor ze behoorlijk gefocust zijn op hun studie. Er is een gedeeld balkon, maar geen gedeelde woonkamer. Het appartement bevindt zich op de tweede verdieping van het gebouw, in de wijk Selwerd, op slechts 10 minuten fietsen van het stadscentrum en de Zernike-campus. Registratie is mogelijk!",
+        "period": "Vanaf april",
+        "bills": "Wordt nog bevestigd",
+        "flatmates": "2 jongens en 1 meisje"
+      },
+      "main_image": "1.png",
+      "images": [
+        "2.png",
+        "3.png",
+        "4.png"
+      ]
+    },
+    {
+      "id": "37",
+      "hidden": false,
+      "status": "Bezet",
+      "price": 540,
+      "statusCode": 3,
+      "title": "Kleine kamer in een gedeeld huis",
+      "city": "Leeuwarden",
+      "location": "Lenteklokje, Leeuwarden",
+      "description": {
+        "property": "De kamer van 12 m² beschikt over een bureau, stoel, tweepersoonsbed, ladekast, kledingkast, radiator en spiegel. Er is een gedeelde keuken en badkamer met nog 5 huurders. Registratie is mogelijk!",
+        "period": "Vanaf 3 januari voor minimaal een half jaar",
+        "bills": "alle kosten zijn inbegrepen",
+        "flatmates": "5 personen"
+      },
+      "main_image": "1.jpg",
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg"
+      ]
+    },
+    {
+      "id": "36",
+      "hidden": false,
+      "status": "Bezet",
+      "price": 899,
+      "statusCode": 3,
+      "city": "Rotterdam",
+      "location": "Rotterdam",
+      "title": "Moderne kamer",
+      "description": {
+        "property": "Appartement met 4 slaapkamers biedt een beschikbare kamer aan. Het appartement is nieuw en goed onderhouden. Registratie is NIET mogelijk.",
+        "period": "Nu beschikbaar",
+        "bills": "alle kosten zijn inbegrepen",
+        "flatmates": "4 personen"
+      },
+      "main_image": "1.jpeg",
+      "images": [
+        "2.jpeg",
+        "3.jpeg",
+        "4.jpeg",
+        "5.jpeg",
+        "6.jpeg"
+      ]
+    },
+    {
+      "id": "35",
+      "hidden": false,
+      "status": "Bezet",
+      "price": 820,
+      "statusCode": 3,
+      "title": "Moderne kamer",
+      "city": "Amsterdam",
+      "location": "Loenermark, Amsterdam",
+      "description": {
+        "property": "Appartement met 4 slaapkamers biedt een beschikbare kamer aan. Het appartement is nieuw en goed onderhouden. De locatie is uitstekend, omdat het op 5 minuten lopen van metrostation Noord ligt. Registratie zal mogelijk zijn kort nadat de kamer is verhuurd.",
+        "period": "Nu beschikbaar",
+        "bills": "alle kosten zijn inbegrepen",
+        "flatmates": "3 personen"
+      },
+      "main_image": "1.jpeg",
+      "images": [
+        "2.jpeg",
+        "3.jpeg",
+        "4.jpeg"
+      ]
+    },
+    {
+      "id": "34",
+      "hidden": false,
+      "status": "Bezet",
+      "price": 410,
+      "statusCode": 3,
+      "city": "Groningen",
+      "location": "Zwarteweg, Groningen",
+      "title": "Kamer te huur",
+      "description": {
+        "property": "De kamer is ruim, volledig gemeubileerd en heeft een lang balkon dat verbonden is met de keuken. De huurders zijn 3 jongens van 20-22 jaar, en de gedeelde voorzieningen omvatten een keuken (gootsteen, kasten, 2 koelkasten, fornuis, oven, magnetron en nieuwe wasmachine), badkamer en apart toilet dat binnenkort wordt gerenoveerd. Er is een strikt schoonmaakschema. De woning ligt in een geweldige buurt naast het Noorderplantsoen, op 10 minuten fietsen van de Zernike-campus en op 15 minuten lopen van het centrum. Supermarkt Plus ligt om de hoek, en winkels zoals Albert Heijn, Jumbo, Aldi, Kruidvat en winkelcentrum Paddepoel liggen op 10 minuten lopen. De jongens zijn erg aardig en betrouwbaar. We kunnen goed met elkaar opschieten, omdat communicatie, wederzijds respect en het behouden van een vriendelijke sfeer prioriteit hebben. Soms drinken we samen een biertje. Registratie is NIET mogelijk.",
+        "period": "Van 1 februari tot 31 juli",
+        "bills": "Alleen internet is niet inbegrepen (€13 per maand)",
+        "flatmates": "3 personen"
+      },
+      "main_image": "2.jpg",
+      "images": [
+        "1.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg",
+        "9.jpg",
+        "10.jpg"
+      ]
+    },
+    {
+      "id": "33",
+      "hidden": false,
+      "status": "Bezet",
+      "price": 850,
+      "statusCode": 3,
+      "title": "Kamer te huur",
+      "city": "Amsterdam",
+      "location": "Amsterdam",
+      "description": {
+        "property": "De woning is volledig gemeubileerd en uitgerust, waardoor huurders met minimale voorbereiding kunnen intrekken. 🌱 Onderhuurperiode: 13 december 2024 tot 13 januari 2025 (€850, alles inbegrepen). 🌱 De locatie is zeer handig, met AH, Vomar, OBA en verschillende Turkse winkels in de buurt. 🌱 Openbaar vervoer is gemakkelijk bereikbaar: tram 13 naar Centraal Station stopt op 100 m van het gebouw, en bus 369 verbindt met station Sloterdijk in slechts 10 minuten. 🌱 De woning ligt op ongeveer 30 minuten fietsen of 45 minuten met de trein van de campus van de Universiteit van Amsterdam. 🍀 Contractoverdracht: de huurder die wil verhuizen heeft goedkeuring van de eigenaar, dus er is een mogelijkheid om het contract over te dragen met registratie op het adres.",
+        "period": "Van 13 december 2024 tot 13 januari 2025",
+        "bills": "inbegrepen",
+        "flatmates": "2 personen"
+      },
+      "main_image": "1.jpg",
+      "images": [
+        "2.jpg",
+        "3.jpg",
+        "4.jpg"
+      ]
+    },
+    {
+      "id": "32",
+      "hidden": false,
+      "status": "Bezet",
+      "price": 475,
+      "statusCode": 3,
+      "city": "Groningen",
+      "location": "Neptunnusstraat, Groningen",
+      "title": "Kamer van 20 m² in een gedeeld huis",
+      "description": {
+        "property": "Gezellige kamer met natuurlijk licht! De meubels moeten worden overgenomen van de vorige huurder en er is een borg vereist ter hoogte van één maand huur. Registratie is mogelijk!",
+        "period": "Vanaf eind december (minimaal 1 jaar)",
+        "bills": "niet inbegrepen",
+        "flatmates": "4-5 personen"
+      },
+      "main_image": "1.jpeg",
+      "images": [
+        "2.jpeg",
+        "3.jpeg",
+        "4.jpeg",
+        "5.jpeg",
+        "6.jpeg",
+        "7.jpeg"
+      ]
+    },
+    {
+      "id": "31",
+      "hidden": false,
+      "status": "Bezet",
+      "price": 950,
+      "statusCode": 3,
+      "city": "Amsterdam",
+      "location": "Nadezjda Mandelstamstraat",
+      "title": "Kamer van 12 m² in een gedeeld huis",
+      "description": {
+        "property": "Geniet van een goed uitgeruste woning met voorzieningen zoals een wasmachine, vaatwasser en wasruimte. De woning heeft ook twee badkamers, een groot terras en een tuin – ideaal voor ontspanning en sociale activiteiten. Het betrouwbare verwarmingssysteem zorgt het hele jaar door voor comfort. Gelegen in een levendige buurt, ben je op enkele minuten van Amsterdam Bijlmer Arena, nabijgelegen stations, sportscholen, supermarkten en meerdere universiteiten. Deze kamer biedt comfortabel en gastvrij wonen met gemakkelijke toegang tot alle benodigde voorzieningen voor een gebalanceerde levensstijl. Registratie is mogelijk!",
+        "period": "1 maart - 1 september 2025",
+        "bills": "alle kosten inbegrepen",
+        "flatmates": "2 mannen"
+      },
+      "main_image": "1.jpeg",
+      "images": [
+        "2.jpeg",
+        "3.jpeg",
+        "4.jpeg",
+        "5.jpeg",
+        "6.jpeg",
+        "7.jpeg",
+        "8.jpeg",
+        "9.jpeg",
+        "10.jpeg",
+        "11.jpeg",
+        "12.jpeg",
+        "13.jpeg"
+      ]
+    },
+    {
+      "id": "30",
+      "hidden": false,
+      "status": "Bezet",
+      "price": 560,
+      "statusCode": 3,
+      "title": "Ruime kamer in een gedeeld huis",
+      "city": "Leeuwarden",
+      "location": "Bleeklaan, Leeuwarden",
+      "description": {
+        "property": "Ruime kamer in een huis met twee verdiepingen. De eerste verdieping is gemeenschappelijk, en op de tweede verdieping bevinden zich 4 slaapkamers. De plek is geschikt voor jonge mensen, dicht bij winkels en bushaltes - slechts 15 minuten van het stadscentrum. Registratie is mogelijk voor minimaal één jaar.",
+        "period": "Nu beschikbaar",
+        "bills": "niet inbegrepen",
+        "flatmates": "3"
+      },
+      "main_image": "1.jpeg",
+      "images": [
+        "2.jpeg",
+        "3.jpeg",
+        "4.jpeg",
+        "5.jpeg",
+        "6.jpeg",
+        "7.jpeg",
+        "8.jpeg",
+        "9.jpeg",
+        "10.jpeg",
+        "11.jpeg"
+      ]
+    },
+  {
+    "id": "29",
+    "hidden": false,
+    "status": "Bezet",
+    "price": 1474,
+    "statusCode": 3,
+    "title": "Ruim appartement met twee slaapkamers",
+    "description": {
+      "property": "Nieuw gemeubileerd appartement met twee slaapkamers, woonkamer en aparte keuken. Er is ook een balkon. We zoeken twee nieuwe huurders. Registratie is mogelijk.",
+      "period": "Beschikbaar vanaf 1 december",
+      "bills": "ongeveer €100-150",
+      "flatmates": "1"
+    },
+    "main_image": "1.jpeg",
+    "images": [
+      "2.jpeg",
+      "3.jpeg",
+      "4.jpeg",
+      "5.jpeg",
+      "6.jpeg",
+      "7.jpeg",
+      "8.jpeg",
+      "9.jpeg",
+      "10.jpeg",
+      "11.jpeg",
+      "12.jpeg"
+    ]
+  },
+  {
+    "id": "28",
+    "hidden": false,
+    "status": "Bezet",
+    "price": 320,
+    "statusCode": 3,
+    "title": "Kleine kamer in een gedeeld huis",
+    "city": "Leeuwarden",
+    "location": "Marijkestraat, Leeuwarden",
+    "description": {
+      "property": "Het huis heeft 2 verdiepingen en een kelder. Op de tweede verdieping zijn er 3 kamers en een badkamer. Op de begane grond zijn er een woonkamer, keuken en toilet. In de kelder zijn er 2 ruimtes waar de wasmachine staat. De aangeboden kamer bevindt zich op de tweede verdieping. Nieuwe huurders moeten de aanwezige meubels overnemen voor €160. Daarnaast neemt de nieuwe huurder de rol van hoofdhuurder op zich, wat betekent dat hij/zij verantwoordelijk is voor het innen van de huur van de andere huisgenoten. Het huis ligt in een rustige buurt, op slechts 3 minuten lopen van Lidl en 15 minuten van het station. Er is ook een bushalte direct voor het huis. Er is ook een borg van €320 vereist. Het contract moet minimaal 1 jaar zijn.",
+      "period": "Vanaf half december op zijn vroegst of begin januari op zijn laatst",
+      "bills": "ongeveer €100",
+      "flatmates": "2-3"
+    },
+    "main_image": "1.jpeg",
+    "images": [
+      "2.jpeg",
+      "3.jpeg",
+      "4.jpeg",
+      "5.jpeg",
+      "6.jpeg",
+      "7.jpeg",
+      "8.jpeg",
+      "9.jpeg",
+      "10.jpeg"
+    ]
+  },
+  {
+    "id": "27",
+    "hidden": false,
+    "status": "Bezet",
+    "price": 550,
+    "statusCode": 3,
+    "title": "Gemeubileerde kamer",
+    "city": "Groningen",
+    "location": "Speenkruidstraat, Groningen",
+    "description": {
+      "property": "Zonnige kamer in een goed bereikbare buurt. Er wordt gezocht naar een meisje, bij voorkeur een studente en veganistisch/vegetarisch. Alle meubels zijn inbegrepen en registratie is mogelijk! Er is geen borg nodig voor de kamer.",
+      "period": "Vanaf 1 november | Langdurig",
+      "bills": "rekeningen niet inbegrepen",
+      "flatmates": "1 veganistisch meisje"
+    },
+    "main_image": "1.jpeg",
+    "images": [
+      "2.jpeg",
+      "3.jpeg"
+    ]
+  },
+  {
+    "id": "26",
+    "hidden": false,
+    "status": "Bezet",
+    "price": 795,
+    "statusCode": 3,
+    "title": "Studio",
+    "city": "Groningen",
+    "location": "Aweg, Groningen",
+    "description": {
+      "property": "Studio in het stadscentrum. Dicht bij alle benodigde winkels en diensten, evenals parken, universiteiten en clubs. Registratie is mogelijk!",
+      "period": "Vanaf 1 november | Langdurig",
+      "bills": "alle rekeningen zijn inbegrepen",
+      "flatmates": "-"
+    },
+    "main_image": "1.jpeg",
+    "images": [
+      "2.jpeg",
+      "3.jpeg",
+      "4.jpeg",
+      "5.jpeg",
+      "6.jpeg",
+      "7.jpeg",
+      "8.mp4"
+    ]
+  },
+  {
+    "id": "25",
+    "hidden": false,
+    "status": "Bezet",
+    "price": 950,
+    "statusCode": 3,
+    "title": "Kamer in een gedeeld appartement",
+    "city": "Hague",
+    "location": "Goeverneurlaan 462 Den Haag",
+    "description": {
+      "property": "Gezellige kamer in een ruim appartement. De aangeboden kamer is te zien op de eerste en tweede foto, en de meubels kunnen worden overgenomen voor €150 extra. Registratie is mogelijk.",
+      "period": "1 oktober 2024 - 1 juli 2025 met mogelijkheid tot verlenging",
+      "bills": "sommige rekeningen zijn inbegrepen",
+      "flatmates": "2"
+    },
+    "main_image": "4.jpg",
+    "images": [
+      "2.jpg",
+      "3.jpg",
+      "1.jpg",
+      "5.jpg",
+      "6.jpg",
+      "7.jpg"
+    ]
+  },
+  {
+    "id": "24",
+    "hidden": false,
+    "status": "Bezet",
+    "price": 832,
+    "statusCode": 3,
+    "title": "Kortetermijnstudio",
+    "city": "Groningen",
+    "location": "Gedempte Zuiderdiep, Groningen",
+    "description": {
+      "property": "Gezellig studio-appartement van 20 vierkante meter met keuken en badkamer. Gelegen dicht bij het centrum van Groningen, op 4 minuten lopen van de Vismarkt, 8 minuten van het treinstation Groningen en 10 minuten van de Universiteitsbibliotheek. Het gebouw is voornamelijk voor studenten. Registratie is mogelijk gedurende de verblijfsperiode.",
+      "period": "beschikbaar september-december 2024/januari 2025",
+      "bills": "alle rekeningen zijn inbegrepen",
+      "flatmates": "geen huisgenoten"
+    },
+    "main_image": "4.jpg",
+    "images": [
+      "2.jpg",
+      "3.jpg",
+      "1.jpg",
+      "5.jpg",
+      "6.jpg",
+      "7.jpg"
+    ]
+  },
+  {
+    "id": "23",
+    "hidden": false,
+    "status": "Bezet",
+    "price": 453,
+    "statusCode": 3,
+    "title": "Kamer in een gedeeld appartement",
+    "city": "Groningen",
+    "location": "Petrus Driessenstraat, Groningen",
+    "description": {
+      "property": "Gezellige kamer van 15 vierkante meter, dicht bij het stadscentrum. De kamer is gemeubileerd. Het huis wordt gedeeld met 3 andere Bulgaarse huisgenoten. Er is 1 keuken, 1 toilet, 1 badkamer en een gemeenschappelijke ontspanningsruimte. Registratie is NIET mogelijk.",
+      "period": "beschikbaar van 22 augustus tot 31 januari",
+      "bills": "rekeningen zijn NIET inbegrepen",
+      "flatmates": "tot 3 huisgenoten"
+    },
+    "main_image": "1.jpg",
+    "images": [
+      "2.jpg",
+      "3.jpg",
+      "4.jpg",
+      "5.jpg",
+      "6.jpg"
+    ]
+  },
+  {
+    "id": "22",
+    "hidden": false,
+    "status": "Bezet",
+    "price": 440,
+    "statusCode": 3,
+    "title": "Kamer in een vrouwenwoning",
+    "city": "Groningen",
+    "location": "Oosterhamrikkade, Groningen",
+    "description": {
+      "property": "De kamer is 17 m² en gemeubileerd. Het appartement heeft alles wat nodig is en de meubels blijven zoals op de foto’s beschreven. De kamer wordt voor korte termijn verhuurd terwijl de eigenaar op uitwisseling is, en registratie is NIET mogelijk.",
+      "period": "beschikbaar van augustus tot februari 2025",
+      "bills": "alle rekeningen inbegrepen",
+      "flatmates": "tot 3 huisgenoten"
+    },
+    "main_image": "1.jpg",
+    "images": [
+      "2.jpg",
+      "3.jpg",
+      "4.jpg"
+    ]
+  },
+  {
+    "id": "21",
+    "status": "Bezet",
+    "price": 353,
+    "statusCode": 3,
+    "title": "Privékamer",
+    "city": "Groningen",
+    "location": "Goudlaan, Groningen ",
+    "description": {
+      "property": "De kamer is 14 m² en gemeubileerd. Ze bevindt zich in de wijk Vinkhuizen. Het adres is Goudlaan 233, Groningen, en de huur is €353 alles inbegrepen. De prijs van de meubels is €200. De borg is €353. De gedeelde voorzieningen in het huis zijn keuken, badkamer, klein toilet en tuin. Het huis heeft 3 verdiepingen en is voor 6 huurders. Registratie is mogelijk.",
+      "period": "beschikbaar vanaf 23 juli",
+      "bills": "alle rekeningen inbegrepen",
+      "flatmates": "tot 5 huisgenoten"
+    },
+    "main_image": "1.jpg",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg",
+      "4.jpg",
+      "5.jpg",
+      "6.jpg",
+      "7.jpg",
+      "8.jpg",
+      "9.jpg",
+      "10.jpg"
+    ]
+  },
+  {
+    "id": "20",
+    "status": "Bezet",
+    "price": 1150,
+    "statusCode": 3,
+    "title": "Woonboot",
+    "city": "Leeuwarden",
+    "location": "Central Leeuwarden",
+    "description": {
+      "property": "De woonboot ligt dicht bij het stadscentrum, vlak bij Cambuur, het stadsstadion waar allerlei winkels te vinden zijn. Met de fiets is het 5 minuten naar het centrum, 5 minuten naar Cambuur en 5 minuten naar NHL Stenden. De woonboot heeft 2 slaapkamers, een grote woonkamer, een volledig ingerichte keuken met vaatwasser, badkamer en 2 toiletten, inclusief wasmachine en droger. De oppervlakte is ongeveer 50-60 m².",
+      "period": "beschikbaar vanaf januari 2025",
+      "bills": "sommige rekeningen zijn inbegrepen",
+      "flatmates": "tot 3-4"
+    },
+    "main_image": "1.jpg",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg",
+      "4.jpg",
+      "5.jpg",
+      "6.jpg",
+      "7.jpg",
+      "8.jpg",
+      "9.jpg",
+      "10.jpg",
+      "11.jpg",
+      "12.jpg",
+      "13.jpg",
+      "14.jpg"
+    ]
+  }
+],
+  "EMERGENCY_HOUSING": [
+    {
+      "id": "1",
+      "status": "Beschikbaar",
+      "statusCode": 0,
+      "title": "Slaapbank in de woonkamer",
+      "location": "Petrus Driessenstraat 42A, Groningen",
+      "description": {
+        "property": "Beschikt over een badkamer, wasmachine, internet en alle benodigdheden",
+        "period": "Maximale verblijfsduur tot 14 dagen",
+        "flatmates": "4 studentenhuisgenoten"
+      },
+      "main_image": "/img/emergency-housing/1.jpg",
+      "images": [
+        "/img/emergency-housing/3.jpg",
+        "/img/emergency-housing/4.jpg",
+        "/img/emergency-housing/5.jpg",
+        "/img/emergency-housing/6.jpg",
+        "/img/emergency-housing/7.jpg"
+      ],
+      "owner": {
+        "image": "/img/emergency-housing/owner1.jpg",
+        "description": "Hallo, wij zijn Sava, Koko en Dimi en wij maken deel uit van het bestuur van BGSG. Wij helpen graag iedereen die noodhuisvesting nodig heeft!"
+      }
+    },
+    {
+      "id": "2",
+      "status": "Beschikbaar",
+      "statusCode": 0,
+      "title": "Slaapbank in de woonkamer",
+      "location": "Petrus Driessenstraat 42A, Groningen",
+      "description": {
+        "property": "Beschikt over een badkamer, wasmachine, internet en alle benodigdheden",
+        "period": "Maximale verblijfsduur tot 14 dagen",
+        "flatmates": "4 studentenhuisgenoten"
+      },
+      "main_image": "/img/emergency-housing/2.jpg",
+      "images": [
+        "/img/emergency-housing/3.jpg",
+        "/img/emergency-housing/4.jpg",
+        "/img/emergency-housing/5.jpg",
+        "/img/emergency-housing/6.jpg",
+        "/img/emergency-housing/7.jpg"
+      ],
+      "owner": {
+        "image": "/img/emergency-housing/owner1.jpg",
+        "description": "Hallo, wij zijn Sava, Koko en Dimi en wij maken deel uit van het bestuur van BGSG. Wij helpen graag iedereen die noodhuisvesting nodig heeft!"
+      }
+    }
+  ],
+  "cookies": {
+    "title": "Cookiebeleid",
+    "content": "Om een soepele ervaring te bieden, moeten onze klanten de verplichte cookies accepteren voordat zij de website gebruiken - je kunt later meer lezen in de juridische sectie.",
+    "mandatory_only": "Alleen verplichte",
+    "accept_all": "Alles accepteren"
+  },
+  "legals": {
+    "title": "Juridische documenten",
+    "cookies": "Cookies",
+    "privacy": "Privacybeleid",
+    "terms": "Gebruiksvoorwaarden",
+    "permission_contact": "Ik geef toestemming dat de organisatie contact met mij opneemt voor het doel van deze dienst",
+    "permission_terms": "Ik heb de <link> Gebruiksvoorwaarden </link> gelezen en ga ermee akkoord"
+  },
+  "common": {
+    "agree": "Akkoord",
+    "continue": "Doorgaan",
+    "search": "Zoeken",
+    "code": "Code",
+    "back": "Terug",
+    "next": "Volgende",
+    "cancel": "Annuleren",
+    "submit": "Verzenden",
+    "exit": "Afsluiten",
+    "loading": "Laden...",
+    "uploading": "Uploaden...",
+    "yes": "Ja",
+    "no": "Nee",
+    "mandatory": "Verplicht",
+    "optional": "Optioneel",
+    "fields": "Velden",
+    "field": "Veld",
+    "less_than": "minder dan",
+    "unlimited": "onbeperkt",
+    "click_here": "Klik hier",
+    "go_to": "Ga naar",
+    "or": "of",
+    "and": "en",
+    "from": "van",
+    "to": "tot"
+  },
+  "date_time": {
+    "10": "Oktober",
+    "11": "November",
+    "12": "December",
+    "timezone_nl": "Tijdzone: Europa/Amsterdam",
+    "years": "jaren",
+    "months": "maanden",
+    "weeks": "weken",
+    "days": "dagen",
+    "hours": "uren",
+    "minutes": "minuten",
+    "01": "Januari",
+    "02": "Februari",
+    "03": "Maart",
+    "04": "April",
+    "05": "Mei",
+    "06": "Juni",
+    "07": "Juli",
+    "08": "Augustus",
+    "09": "September",
+    "today": "Vandaag"
+  },
+  "files": {
+    "drag_files": "Sleep bestanden hierheen of klik om te uploaden",
+    "required": "Voeg een bestand toe!",
+    "wrong_file_type": "Er is een probleem met het bestand. Zorg ervoor dat het {{allowed_types}} is",
+    "file_too_big": "Het bestand is te groot - voeg een bestand toe kleiner dan 3 MB",
+    "allowed_type_note": "Voeg een bestand toe van het type: {{allowed_types}}",
+    "allowed_types_note": "Voeg bestanden toe van het type: {{allowed_types}}",
+    "allowed_sizes_note": "Voeg bestanden toe kleiner dan {{allowed_size}}",
+    "allowed_size_note": "Voeg een bestand toe kleiner dan {{allowed_size}}",
+    "max_files": "Je kunt maximaal {{max_files}} bestanden toevoegen",
+    "motivational_letter_input": "Motivatiebrief die wij naar de verhuurder/huisgenoot sturen",
+    "motivational_letter_example": "Je kunt onze kant-en-klare motivatiebriefsjabloon gebruiken",
+    "download": "Downloaden",
+    "file_corrupted": "Het/de bestand(en) {{file}} kunnen beschadigd zijn. Probeer opnieuw, converteer ze naar .jpg of gebruik een ander bestand."
+  },
+  "subscribe_email": {
+    "description": "Abonneer je op onze nieuwsbrief en ontvang updates over nieuwe woningen en diensten!",
+    "email": "E-mailadres",
+    "send": "Verzenden"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Blijf op de hoogte van het laatste nieuws en tips uit onze blog",
+    "search_placeholder": "Zoek berichten op titel of categorie...",
+    "read_more": "Lees meer",
+    "no_posts": "Geen berichten",
+    "no_posts_description": "Er zijn momenteel geen berichten. Kom later terug!",
+    "related_posts": "Gerelateerde berichten",
+    "details": "Blogdetails",
+    "post_not_found": "Bericht niet gevonden"
+  },
+  "react_error": {
+    "something_went_wrong": "Technisch probleem - probeer het opnieuw of meld het probleem om hulp te krijgen.",
+    "try_again": "Probeer opnieuw",
+    "go_home": "Naar home"
+  },
+  "api": {
+    "error": "Fout",
+    "fill_fields": "Vul alle verplichte velden in",
+    "invalid_action": "Ongeldige actie",
+    "request_failed": "De aanvraag is mislukt, probeer het opnieuw",
+    "too_many_requests": "Te veel aanvragen, probeer het later opnieuw.",
+    "general_error": "Er is een onverwachte fout opgetreden. Probeer het opnieuw of neem contact met ons op voor hulp",
+    "forbidden_access": "Verboden toegang: toegang geweigerd",
+    "not_enough_pictures": "Niet genoeg foto’s, upload er minimaal 3",
+    "failed_fetching_feedbacks": "Het ophalen van feedback is mislukt - probeer het opnieuw!"
+  },
+  "payment": {
+    "success": {
+      "title": "Betaling succesvol!",
+      "message": "Je betaling is succesvol verwerkt.",
+      "description": "Bedankt voor je betaling. Je transactie is voltooid en je ontvangt een bevestigingsmail.",
+      "view_membership": "Lidmaatschap bekijken"
+    },
+    "failure": {
+      "title": "Betaling mislukt",
+      "message": "Wij konden je betaling niet verwerken.",
+      "description": "Er is een probleem opgetreden bij het verwerken van je betaling. Controleer je betaalgegevens en probeer het opnieuw, of neem contact op met ons supportteam.",
+      "try_again": "Probeer opnieuw",
+      "contact_support": "Neem contact op met support"
+    }
+  },
+  "list_room_modal": {
+    "save_exit": "Opslaan en afsluiten",
+    "loading_next_step": "Het uploaden van de foto’s duurt iets langer",
+    "step_titles": {
+      "welcome": "Welkom bij het plaatsen van een woning",
+      "contact": "Vul je contactgegevens in",
+      "basics": "Vertel ons de basisinformatie",
+      "details": "Laten we meer details toevoegen",
+      "photos": "Maak goede foto’s",
+      "review_publish": "Bekijken en publiceren"
+    },
+    "submit_modal": {
+      "loading_1": "Advertentie uploaden...",
+      "loading_2": "Foto’s verwerken...",
+      "loading_3": "Bijna klaar...",
+      "success_title": "Succes!",
+      "success_message": "Je advertentie is succesvol ter beoordeling ingediend. We nemen binnenkort contact met je op!",
+      "error_title": "Er is iets misgegaan",
+      "error_message": "Er is een fout opgetreden bij het indienen van de advertentie. Probeer het opnieuw."
+    }
+  },
+  "faq": {
+    "title": "Veelgestelde vragen",
+    "items": [
+      {
+        "question": "Wanneer ontvang ik mijn €200?",
+        "answer": "Je ontvangt €200 nadat de nieuwe huurder het contract heeft ondertekend en officieel in de kamer is ingetrokken. De betaling wordt gedaan nadat alles is bevestigd en het duidelijk is dat de huurperiode is begonnen."
+      },
+      {
+        "question": "Voor wie is Domakin bedoeld?",
+        "answer": "Domakin is bedoeld voor iedereen die snel en veilig een huurder moet vinden. Dit omvat:<ul class=\"mb-0 mt-2\"><li>Studenten die de stad verlaten</li><li>Exchange-studenten</li><li>Mensen die van universiteit veranderen</li><li>Huurders die tijdelijk willen onderverhuren</li><li>Iedereen die een soepele en veilige overdracht nodig heeft</li></ul>Wij organiseren bezichtigingen volgens jouw criteria en jij kiest de meest geschikte kandidaat."
+      },
+      {
+        "question": "Kan ik onderverhuren als ik een verhuurder heb?",
+        "answer": "Ja. Domakin functioneert als een sociaal woonplatform, vergelijkbaar met Facebook- of WhatsApp-groepen, maar met extra structuur, controle en ondersteuning.<br><br>Je moet je verhuurder echter informeren en toestemming hebben om onder te verhuren als je contract dat vereist."
+      },
+      {
+        "question": "Kan ik onderverhuren als ik via een makelaar huur?",
+        "answer": "Ja. Dezelfde regel geldt. Domakin helpt je een huurder te vinden, maar je makelaar moet onderverhuur toestaan volgens je contract.<br><br>Als onderverhuur niet is toegestaan in je contract, moet je eerst schriftelijke goedkeuring krijgen."
+      },
+      {
+        "question": "Wat is de minimale periode voor onderverhuur?",
+        "answer": "De minimale periode voor onderverhuur is 6 maanden.<br><br>Dit zorgt voor stabiliteit voor de nieuwe huurder en voorkomt onnodig korte huurwisselingen."
+      },
+      {
+        "question": "Moet de kamer registratie toestaan?",
+        "answer": "Ja. Om je kamer op Domakin te plaatsen, moet gemeentelijke registratie mogelijk zijn.<br><br>Dit beschermt zowel de nieuwe huurder als jou en zorgt ervoor dat alles legaal is."
+      },
+      {
+        "question": "Kan iemand zich op het adres registreren terwijl ik onderverhuur?",
+        "answer": "Ja. We kunnen het contract zo structureren dat de nieuwe huurder zich op het adres kan registreren terwijl hij/zij je kamer huurt.<br><br>Dit kan worden geregeld op een manier die geen invloed heeft op DUO of andere toeslagen, afhankelijk van je situatie. Wij begeleiden je naar de juiste opzet."
+      },
+      {
+        "question": "Moet ik zelf de bezichtigingen organiseren?",
+        "answer": "Nee. Domakin kan de bezichtigingen namens jou organiseren en beheren volgens jouw voorkeuren. Jij behoudt de controle over de uiteindelijke beslissing."
+      },
+      {
+        "question": "Hoe kiezen jullie huurders?",
+        "answer": "Wij screenen kandidaten vooraf en presenteren alleen serieuze en geschikte opties. Jij neemt altijd de uiteindelijke beslissing."
+      }
+    ]
+  },
+  "list_room_steps": {
+    "first": {
+      "intro": "We gaan enkele gegevens over de woning en essentiële contactgegevens verzamelen. Het proces is eenvoudig en je kunt op elk moment opslaan en later verdergaan waar je gebleven was.",
+      "start": "Laten we beginnen!"
+    },
+    "third": {
+      "property_types": {
+        "room_shared": "Kamer in een gedeelde woning",
+        "studio": "Studio",
+        "entire_place": "Gehele woning",
+        "student_house": "Studentenhuis"
+      },
+      "available_from": "Beschikbaar vanaf",
+      "available_to": "Beschikbaar tot",
+      "select_date": "Selecteer datum",
+      "select_type_label": "Selecteer woningtype"
+    },
+    "fourth": {
+      "deposit_label": "Borg in euro",
+      "tooltips": {
+        "base_rent": "Het bedrag dat elke maand nodig is om de woning te gebruiken.",
+        "bills": "Gezamenlijk bedrag van alle vaste maandelijkse kosten. Als deze variëren, kun je een geschat bedrag invullen.",
+        "deposit": "Een eenmalige betaling die door de verhuurder wordt vastgehouden en wordt teruggegeven wanneer je de woning verlaat. Deze wordt meestal ingehouden als de woning beschadigd is of als de huurder niet reageert.",
+        "size": "Geschatte grootte van de privéruimte. Gedeelde ruimtes moeten niet worden meegerekend."
+      },
+      "flatmates_male": "Man",
+      "flatmates_female": "Vrouw",
+      "bathrooms_toilets_label": "Aantal badkamers en toiletten",
+      "bathrooms_label": "Badkamers",
+      "toilets_label": "Toiletten",
+      "total": "Totaal",
+      "house_rules": "Huisregels",
+      "no_smoking": "Niet roken",
+      "no_pets": "Geen huisdieren",
+      "amenities_label": "Voorzieningen",
+      "select_multiple": "Je kunt meer dan één optie selecteren",
+      "shared_spaces_label": "Gedeelde ruimtes",
+      "furniture_label": "Meubilair"
+    },
+    "fifth": {
+      "intro_1": "In deze stap begeleiden we je bij het maken van foto’s van je woning, zodat deze opvalt.",
+      "intro_2": "Voeg minimaal 4 foto’s toe om meer kandidaten aan te trekken. 6–10 werkt het best. Afbeeldingen boven de toegestane limiet worden niet geaccepteerd.",
+      "wishlist_title": "Aanbevolen foto’s:",
+      "wishlist": {
+        "private_rooms": "Privékamers",
+        "common_areas": "Gemeenschappelijke ruimtes",
+        "bathroom_toilet": "Badkamer(s) en toilet(ten)",
+        "amenities": "Voorzieningen (bijv. wasruimte, keuken, opslagruimte)",
+        "outdoors": "Buitenruimte",
+        "private_furniture": "Eventueel privémeubilair dat bij de huur is inbegrepen"
+      },
+      "upload_rejected": "Bestandsupload geweigerd. Controleer de bestandsgrootte en het formaat.",
+      "preview_order_title": "Voorbeeld & volgorde",
+      "preview_order_hint": "*Sleep om de volgorde te wijzigen, klik op een afbeelding om deze als hoofdafbeelding te kiezen.",
+      "main_badge": "Hoofdafbeelding"
+    },
+    "sixth": {
+      "available_property_title": "Beschikbare woning",
+      "photo_uploaded_one": "foto geüpload",
+      "photo_uploaded_other": "foto’s geüpload",
+      "add_photos_hint": "Voeg foto’s toe in stap 5 om hier een voorbeeld van je advertentie te zien."
+    },
+    "success": {
+      "title": "Succes",
+      "message": "Advertentie succesvol<br/>ter beoordeling verzonden<br/>We nemen binnenkort contact met je op!",
+      "contact_intro": "Als je vragen hebt, aarzel dan niet om contact met ons op te nemen via",
+      "or_at": "of via",
+      "tips": "Hoe je meer kandidaten krijgt:<br/>voeg 6–10 foto’s toe, vermeld<br/>afmetingen en noem registratie."
+    },
+    "draft": {
+      "title": "Opslaan en later afronden?",
+      "subtitle": "Vul je e-mailadres in en we sturen je een link om verder te gaan.",
+      "trusted_by_prefix": "Vertrouwd door",
+      "trusted_by_suffix": "studenten",
+      "saved_message": "Concept opgeslagen! We hebben een hervattingslink naar {{email}} gestuurd."
+    },
+    "reminder": {
+      "title": "Herinnering voor uploaden",
+      "future_date_error": "Selecteer een maand en jaar in de toekomst (niet de huidige of een eerdere periode).",
+      "success_toast": "Herinnering succesvol ingesteld.",
+      "when_free": "Wanneer komt je kamer vrij?",
+      "month": "Maand",
+      "year": "Jaar"
+    }
+  },
+  "lending_page": {
+    "listing_in_progress": "Je hebt een advertentie in behandeling.",
+    "continue_from_here": "Ga hier verder",
+    "reminder_title_filled": "De meeste kamers worden binnen 4 dagen gevuld",
+    "reminder_title_list_room": "Plaats je kamer in 2–3 minuten.",
+    "preview_intro": "Voorbeeld van je advertentie — het exacte",
+    "preview_address_is": "adres is",
+    "preview_never_public": "nooit openbaar",
+    "list_my_room": "Plaats mijn kamer"
+  },
+  "reminder_section": {
+    "list_my_room": "Plaats mijn kamer",
+    "remind_me_later": "Herinner mij later"
+  },
+  "hero_lending": {
+    "trusted_by": "Vertrouwd door",
+    "trusted_by_suffix": "studenten",
+    "get_commission_title": "Ontvang <span> €200 </span> wanneer je <br /> je kamer plaatst"
+  },
+  "how_to_works_lending": {
+    "title": "Hoe werkt het?",
+    "step1_title": "1. Voeg kamerdetails toe",
+    "step1_description": "Voeg een beschrijving en foto’s van de kamer en gemeenschappelijke ruimtes toe.",
+    "step2_title": "2. Kies je huurder",
+    "step2_description": "Ontvang een lijst met kwalitatieve kandidaten en kies de nieuwe huurder.",
+    "step3_title": "3. Ontvang je commissie",
+    "step3_description": "Ontvang €200 zodra de nieuwe huurder het contract ondertekent."
+  },
+  "modal": {
+    "long_loading": {
+      "title": "Laden...",
+      "description": "Wacht terwijl wij je aanvraag verwerken"
+    }
+  },
+  "services_hub": {
+    "eyebrow": "Domakin-diensten",
+    "h1": "Huisvestingsdiensten voor studenten in Nederland",
+    "lead": "Kies de juiste Domakin-dienst voor bezichtigingen op afstand, woningzoekhulp, kamerzoekhulp of het plaatsen van een kamer voor een nieuwe huurder of huisgenoot.",
+    "quick_answer_label": "Snel antwoord",
+    "quick_answer_question": "Welke Domakin-diensten helpen met huisvesting in Nederland?",
+    "quick_answer_text": "Domakin helpt met bezichtigingen op afstand, het vinden van huurwoningen, kamerzoekhulp en kameradvertenties. Begin met Boek een bezichtiging op afstand als je niet zelf bij een bezichtiging aanwezig kunt zijn, of Plaats een kamer als je een nieuwe huurder of huisgenoot moet vinden.",
+    "groups": {
+      "viewings": {
+        "label": "Bezichtigingen",
+        "title": "Domakin-dienst voor woningbezichtigingen op afstand",
+        "text": "Boek een bezichtiging op afstand wanneer je bent uitgenodigd voor een huurbezichtiging in Nederland, maar zelf niet aanwezig kunt zijn. Een lokale agent kan langsgaan, jouw vragen stellen en foto’s, video’s en praktische opmerkingen terugsturen.",
+        "link": "Boek bezichtiging op afstand"
+      },
+      "renting": {
+        "label": "Huren",
+        "title": "Vind en vergelijk huuropties",
+        "text": "Gebruik de woningcatalogus of kamerzoekdienst om van een brede zoektocht naar woonruimte naar specifieke bezichtigingen, aanvragen en huurcontroles te gaan.",
+        "link_catalogue": "Woningcatalogus",
+        "link_search": "Zoek een kamer"
+      },
+      "lending": {
+        "label": "Verhuren",
+        "title": "Domakin-dienst voor het plaatsen van een kamer",
+        "text": "Plaats een kamer wanneer je een nieuwe huurder of huisgenoot moet vinden. Bereid de kamerdetails, huur, servicekosten, beschikbaarheid en foto’s voor voordat je de advertentie deelt.",
+        "link": "Plaats een kamer"
+      }
+    },
+    "proof_eyebrow": "Controles voor een goed voorbereide aanvraag",
+    "proof_title": "Wat je moet voorbereiden voordat je een dienst kiest",
+    "proof_checks": {
+      "viewing": "Bezichtiging op afstand: adres, tijdstip, vragen, huur, borg, registratie en deadline voor aanmelding.",
+      "room_search": "Kamerzoekhulp: stad, budget, verhuisdatum, registratiebehoefte en geschiktheid van de shortlist.",
+      "listing": "Kamer plaatsen: toestemming van de verhuurder, contractregels, huur, servicekosten, beschikbaarheid en overdrachtsdocumentatie."
+    },
+    "seo": {
+      "title": "Domakin-diensten | Bezichtiging op afstand, kamer zoeken & kamer plaatsen",
+      "description": "Vergelijk Domakin-diensten voor huurbezichtigingen op afstand, woningzoekhulp, kamerzoekhulp en het plaatsen van een kamer in Nederland.",
+      "keywords": "Domakin-diensten, bezichtiging op afstand Nederland, kamer plaatsen Nederland, kamerzoekdienst, huurwoningcatalogus"
+    }
+  }
+}

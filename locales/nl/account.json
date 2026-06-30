@@ -1,0 +1,41 @@
+{
+  "authentication": {
+    "login": "Inloggen",
+    "register": "Registreren",
+    "welcome_back": "Welkom terug!",
+    "no_account": "Heeft u nog geen account?",
+    "sign_up": "Registreren",
+    "log_in": "Inloggen",
+    "forgot_password": "Wachtwoord vergeten?",
+    "keep_logged_in": "Ingelogd blijven",
+    "or": "of",
+    "email": "E-mail",
+    "password": "Wachtwoord",
+    "name": "Naam",
+    "first_name": "Voornaam",
+    "last_name": "Achternaam",
+    "phone": "Telefoonnummer",
+    "confirm_password": "Bevestig wachtwoord",
+    "already_registered": "Heeft u al een account?",
+    "terms": "Door op de knop Registreren te klikken, gaat u akkoord met de <link>Algemene Voorwaarden</link>",
+
+    "errors": {
+      "email": "Voer een geldig e-mailadres in",
+      "email_exists": "Dit e-mailadres is al geregistreerd",
+      "email_invalid": "Voer een geldig e-mailadres in",
+      "phone_exists": "Dit telefoonnummer is al geregistreerd",
+      "phone_invalid": "Voer een geldig telefoonnummer in",
+      "password": "Het wachtwoord moet minimaal 8 tekens bevatten, met minstens één hoofdletter, één kleine letter, één cijfer en één speciaal teken",
+      "password_confirmation": "De wachtwoorden komen niet overeen",
+      "login_failed": "Ongeldig e-mailadres en/of wachtwoord",
+      "terms_must_be_accepted": "U dient akkoord te gaan met de Algemene Voorwaarden om door te gaan"
+    }
+  },
+  "profile": {
+    "errors": {
+      "referral_code_required": "Referralcode is verplicht",
+      "referral_code_too_short": "Referralcode is te kort",
+      "referral_code_taken": "Deze referralcode is al in gebruik"
+    }
+  }
+}

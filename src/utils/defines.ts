@@ -44,7 +44,12 @@ export const STATUS_COLORS = {
   2: "bg-green",
   3: "bg-red",
 };
-export const LANGUAGES = ["en", "bg", "gr"];
+export const LANGUAGES = ["en", "bg", "gr", "nl"];
+
+// Locales that must NOT be auto-selected from the visitor's IP/country.
+// nl is a supported locale but Dutch visitors should keep the default (en),
+// not be switched to Dutch automatically.
+export const GEO_EXCLUDED_LANGUAGES = ["nl"];
 
 // prices
 export const REFERRAL_BONUS_LISTING = 50;

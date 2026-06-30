@@ -14,9 +14,10 @@ const ChangeLanguage = () => {
   // ];
 
   const options = [
-    { value: "en", text: "EN" },
-    { value: "bg", text: "BG" },
-    { value: "gr", text: "GR" },
+    { value: "en", text: "EN", icon: "/assets/img/flags/gb.svg" },
+    { value: "bg", text: "BG", icon: "/assets/img/flags/bg.svg" },
+    { value: "gr", text: "GR", icon: "/assets/img/flags/gr.svg" },
+    { value: "nl", text: "NL", icon: "/assets/img/flags/nl.svg" },
   ];
 
   const changeLanguage = async (newLang: string) => {
@@ -40,7 +41,7 @@ const ChangeLanguage = () => {
       onChange={selectHandler}
       name=""
       placeholder=""
-      icon="/assets/img/icons/translate-icon.png"
+      // icon="/assets/img/icons/translate-icon.png"
     />
   );
 };

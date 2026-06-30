@@ -2,6 +2,7 @@ import ServicesHub from "@/components/inner-pages/services/ServicesHub";
 import Wrapper from "@/layouts/Wrapper";
 import { SHARE_BANNERS } from "@/utils/shareBanners";
 import Head from "next/head";
+import useTranslation from "next-translate/useTranslation";
 
 const canonical = "https://www.domakin.nl/services";
 
@@ -110,19 +111,17 @@ const jsonLd = [
 ];
 
 const ServicesPage = () => {
-  const title = "Domakin Services | Remote Viewing, Room Search & List a Room";
-  const description =
-    "Compare Domakin services for remote rental viewings, property search, room searching, and listing a room in the Netherlands.";
+  const { t } = useTranslation("translations");
+  const title = t("services_hub.seo.title");
+  const description = t("services_hub.seo.description");
+  const keywords = t("services_hub.seo.keywords");
 
   return (
     <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta
-          name="keywords"
-          content="Domakin services, remote viewing Netherlands, list a room Netherlands, room searching service, rental property catalogue"
-        />
+        <meta name="keywords" content={keywords} />
         <link rel="canonical" href={canonical} />
         <link rel="alternate" hrefLang="en" href={canonical} />
         <link

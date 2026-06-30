@@ -10,7 +10,18 @@ import { useClickAway } from "react-use";
 interface Option {
   value: string | number;
   text: string;
+  /** Optional leading icon (e.g. a flag) shown next to the option text. */
+  icon?: string;
 }
+
+const optionIconStyle: React.CSSProperties = {
+  width: 20,
+  height: 14,
+  objectFit: "cover",
+  borderRadius: 2,
+  flexShrink: 0,
+  border: "1px solid rgba(0, 0, 0, 0.1)",
+};
 
 type NiceSelectProps = {
   options: Option[];
@@ -108,7 +119,10 @@ const NiceSelect: FC<NiceSelectProps> = ({
       ref={ref}
     >
       {icon && <img src={icon} style={{ width: "20px" }} alt="icon" />}
-      <span className="current">
+      <span className="current d-inline-flex align-items-center gap-2">
+        {selectedOptions.length && !multi && selectedOptions[0].icon && (
+          <img src={selectedOptions[0].icon} alt="" style={optionIconStyle} />
+        )}
         {selectedOptions.length
           ? multi
             ? selectedOptions.map((item) => item.text).join(", ")
@@ -156,6 +170,7 @@ const NiceSelect: FC<NiceSelectProps> = ({
                 )}
               </span>
             )}
+            {item.icon && <img src={item.icon} alt="" style={optionIconStyle} />}
             {item.text}
           </li>
         ))}

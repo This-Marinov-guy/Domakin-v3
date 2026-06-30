@@ -10,7 +10,7 @@ import { useServer } from "@/hooks/useServer";
 import useTranslation from "next-translate/useTranslation";
 import { getGeoInfo } from "@/utils/helpers";
 import setLanguage from "next-translate/setLanguage";
-import { LANGUAGES } from "@/utils/defines";
+import { GEO_EXCLUDED_LANGUAGES, LANGUAGES } from "@/utils/defines";
 import supabase from "@/utils/supabase";
 import ErrorLayout from "@/pages/_error";
 import { SESSION_REFRESH_INTERVAL } from "@/utils/config";
@@ -67,7 +67,7 @@ const MainLayout = ({ children }: any) => {
       if (geoLocation) {
         const country = geoLocation.country.toLowerCase();
 
-        if (LANGUAGES.includes(country)) {
+        if (LANGUAGES.includes(country) && !GEO_EXCLUDED_LANGUAGES.includes(country)) {
           storedLanguage = country;
           localStorage.setItem("language", country);
         }

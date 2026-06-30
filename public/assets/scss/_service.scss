@@ -84,7 +84,7 @@
 }
 
 .services-hub {
-    background: #fff;
+    background: #fff8f4;
 }
 
 .services-hub-hero {
@@ -97,21 +97,13 @@
     padding: 154px 0 78px;
     position: relative;
 
-    &::before {
-        background: linear-gradient(90deg, rgba(0, 32, 76, 0.96) 0%, rgba(0, 74, 173, 0.92) 46%, rgba(0, 74, 173, 0.66) 74%, rgba(0, 74, 173, 0.4) 100%);
-        content: "";
-        inset: 0;
-        position: absolute;
-        z-index: 1;
-    }
-
     .container {
         position: relative;
         z-index: 2;
     }
 
     h1 {
-        color: #fff;
+        color: #ff914d;
         font-size: 56px;
         font-weight: 700;
         line-height: 1.08;
@@ -122,12 +114,11 @@
 
 .services-hub-hero {
     .services-hub-eyebrow {
-        color: #fff;
+        color: #004aad;
     }
 
     .services-hub-lead {
-        color: rgba(255, 255, 255, 0.88);
-        text-shadow: 0 1px 18px rgba(0, 0, 0, 0.18);
+        color: #004aad;
     }
 }
 
@@ -207,16 +198,14 @@
 
 .services-hub-card-icon {
     align-items: center;
-    background: #eef4ff;
-    border: 1px solid rgba(0, 74, 173, 0.14);
-    border-radius: 50%;
-    color: #004aad;
     display: inline-flex;
-    font-size: 18px;
-    height: 46px;
     justify-content: center;
     margin-bottom: 20px;
-    width: 46px;
+
+    img {
+        height: auto;
+        width: 64px;
+    }
 }
 
 .services-hub-card-links {
@@ -1113,4 +1102,14 @@
     .viewing-pricing-grid {
         grid-template-columns: 1fr;
     }
+}
+
+@media (min-width: 992px) {
+  .services-hub-answer-col {
+    margin-right: 10%;
+  }
+
+  .services-hub-hero-row .col-lg-8 {
+    width: 56.666667%;
+  }
 }

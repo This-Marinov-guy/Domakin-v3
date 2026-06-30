@@ -18,7 +18,7 @@ const HeroBanner = () => {
           <div className="row landing">
             <Image
               className="col-lg-3 col-md-3 col-12 position-relative wow fadeInLeft landing-image"
-              src={`/assets/img/landing/1-${lang}.png`}
+              src={`/assets/img/landing/1-${lang === 'nl' ? 'en' : lang}.png`}
               height={1000}
               width={1000}
               alt="Landing One"

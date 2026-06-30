@@ -1,95 +1,64 @@
 import Link from "next/link";
+import Image from "next/image";
+import useTranslation from "next-translate/useTranslation";
 import FooterFour from "@/layouts/footers/FooterFour";
 import HeaderOne from "@/layouts/headers/HeaderOne";
 
 const serviceGroups = [
   {
-    label: "Viewings",
-    title: "Domakin remote property viewing service",
-    text: "Book a remote viewing when you have been invited to a rental viewing in the Netherlands but cannot attend yourself. A local agent can visit, ask your questions, and send back photos, video, and practical notes.",
-    links: [
-      {
-        label: "Book remote viewing",
-        href: "/services/viewing",
-      },
-    ],
-    icon: "fa-solid fa-video",
+    key: "viewings",
+    links: [{ labelKey: "services_hub.groups.viewings.link", href: "/services/viewing" }],
+    icon: "/assets/img/icons/10.png",
   },
   {
-    label: "Renting",
-    title: "Find and compare rental options",
-    text: "Use the property catalogue or room searching service to move from broad housing search to specific viewings, applications, and tenancy checks.",
+    key: "renting",
     links: [
-      {
-        label: "Property catalogue",
-        href: "/services/renting",
-      },
-      {
-        label: "Search for a room",
-        href: "/services/room-searching",
-      },
+      { labelKey: "services_hub.groups.renting.link_catalogue", href: "/services/renting" },
+      { labelKey: "services_hub.groups.renting.link_search", href: "/services/room-searching" },
     ],
-    icon: "fa-solid fa-key",
+    icon: "/assets/img/icons/12.png",
   },
   {
-    label: "Lending",
-    title: "Domakin list a room service",
-    text: "List a room when you need to find a new tenant or flatmate. Prepare the room details, rent, service costs, availability, and photos before sharing the listing.",
-    links: [
-      {
-        label: "List a room",
-        href: "/services/add-listing",
-      },
-    ],
-    icon: "fa-solid fa-house-user",
+    key: "lending",
+    links: [{ labelKey: "services_hub.groups.lending.link", href: "/services/add-listing" }],
+    icon: "/assets/img/icons/11.png",
   },
 ];
 
-const priorityChecks = [
-  "Remote viewing: address, timing, questions, rent, deposit, registration, and application deadline.",
-  "Room search: city, budget, move-in date, registration needs, and shortlist fit.",
-  "List a room: landlord permission, contract rules, rent, service costs, availability, and handover records.",
+const priorityCheckKeys = [
+  "services_hub.proof_checks.viewing",
+  "services_hub.proof_checks.room_search",
+  "services_hub.proof_checks.listing",
 ];
 
 export default function ServicesHub() {
+  const { t } = useTranslation("translations");
+
   return (
     <>
       <HeaderOne style={true} />
       <main className="services-hub">
         <section
           className="services-hub-hero"
-          style={{ backgroundImage: "url(/assets/img/bg/9.webp)" }}
-          data-geo-services-hub-hero-image="/assets/img/bg/9.webp"
+          style={{ backgroundImage: "url(/assets/img/bg/8.webp)" }}
+          data-geo-services-hub-hero-image="/assets/img/bg/8.webp"
         >
           <div className="container">
-            <div className="row align-items-center gy-4">
-              <div className="col-lg-8">
-                <p className="services-hub-eyebrow">Domakin services</p>
-                <h1>Housing services for students in the Netherlands</h1>
-                <p className="services-hub-lead">
-                  Choose the right Domakin service for remote viewings,
-                  property search, room searching, or listing a room for a new
-                  tenant or flatmate.
-                </p>
+            <div className="row align-items-center gy-4 gx-lg-5 services-hub-hero-row">
+              <div className="col-lg-8 order-lg-2">
+                <h1>{t("services_hub.h1")}</h1>
+                <p className="services-hub-lead">{t("services_hub.lead")}</p>
               </div>
-              <div className="col-lg-4">
+              <div className="col-lg-4 order-lg-1 services-hub-answer-col">
                 <div
                   className="services-hub-answer-card"
                   data-geo-services-hub-answer-block
                 >
-                  <p className="fw-semibold text-uppercase small mb-2">
-                    Quick answer
-                  </p>
-                  <h2>
-                    Which Domakin services help with housing in the
-                    Netherlands?
-                  </h2>
-                  <p>
-                    Domakin helps with remote rental viewings, rental property
-                    discovery, room searching, and room listings. Start with
-                    Book remote viewing if you cannot attend a viewing, or List
-                    a room if you need to find a new tenant or flatmate.
-                  </p>
+                  {/* <p className="fw-semibold text-uppercase small mb-2">
+                    {t("services_hub.quick_answer_label")}
+                  </p> */}
+                  <h2>{t("services_hub.quick_answer_question")}</h2>
+                  <p>{t("services_hub.quick_answer_text")}</p>
                 </div>
               </div>
             </div>
@@ -100,18 +69,20 @@ export default function ServicesHub() {
           <div className="container">
             <div className="row gx-xxl-5 gy-4">
               {serviceGroups.map((group) => (
-                <div className="col-lg-4 d-flex" key={group.label}>
+                <div className="col-lg-4 d-flex" key={group.key}>
                   <article className="services-hub-card">
                     <div className="services-hub-card-icon">
-                      <i className={group.icon} aria-hidden="true"></i>
+                      <Image src={group.icon} alt="" width={64} height={64} />
                     </div>
-                    <p className="services-hub-card-label">{group.label}</p>
-                    <h2>{group.title}</h2>
-                    <p>{group.text}</p>
+                    <p className="services-hub-card-label">
+                      {t(`services_hub.groups.${group.key}.label`)}
+                    </p>
+                    <h2>{t(`services_hub.groups.${group.key}.title`)}</h2>
+                    <p>{t(`services_hub.groups.${group.key}.text`)}</p>
                     <div className="services-hub-card-links">
                       {group.links.map((link) => (
                         <Link href={link.href} key={link.href}>
-                          {link.label}
+                          {t(link.labelKey)}
                           <i
                             className="fa-thin fa-arrow-up-right"
                             aria-hidden="true"
@@ -130,14 +101,16 @@ export default function ServicesHub() {
           <div className="container">
             <div className="services-hub-proof">
               <div>
-                <p className="services-hub-eyebrow">Answer-ready checks</p>
-                <h2>What to prepare before choosing a service</h2>
+                <p className="services-hub-eyebrow">
+                  {t("services_hub.proof_eyebrow")}
+                </p>
+                <h2>{t("services_hub.proof_title")}</h2>
               </div>
               <ul>
-                {priorityChecks.map((item) => (
-                  <li key={item}>
+                {priorityCheckKeys.map((checkKey) => (
+                  <li key={checkKey}>
                     <i className="fa-solid fa-check" aria-hidden="true"></i>
-                    <span>{item}</span>
+                    <span>{t(checkKey)}</span>
                   </li>
                 ))}
               </ul>

@@ -1913,5 +1913,46 @@
       "title": "Loading...",
       "description": "Please wait while we are processing your request"
     }
+  },
+  "services_hub": {
+    "eyebrow": "Domakin services",
+    "h1": "Housing services for students in the Netherlands",
+    "lead": "Choose the right Domakin service for remote viewings, property search, room searching, or listing a room for a new tenant or flatmate.",
+    "quick_answer_label": "Quick answer",
+    "quick_answer_question": "Which Domakin services help with housing in the Netherlands?",
+    "quick_answer_text": "Domakin helps with remote rental viewings, rental property discovery, room searching, and room listings. Start with Book remote viewing if you cannot attend a viewing, or List a room if you need to find a new tenant or flatmate.",
+    "groups": {
+      "viewings": {
+        "label": "Viewings",
+        "title": "Domakin remote property viewing service",
+        "text": "Book a remote viewing when you have been invited to a rental viewing in the Netherlands but cannot attend yourself. A local agent can visit, ask your questions, and send back photos, video, and practical notes.",
+        "link": "Book remote viewing"
+      },
+      "renting": {
+        "label": "Renting",
+        "title": "Find and compare rental options",
+        "text": "Use the property catalogue or room searching service to move from broad housing search to specific viewings, applications, and tenancy checks.",
+        "link_catalogue": "Property catalogue",
+        "link_search": "Search for a room"
+      },
+      "lending": {
+        "label": "Lending",
+        "title": "Domakin list a room service",
+        "text": "List a room when you need to find a new tenant or flatmate. Prepare the room details, rent, service costs, availability, and photos before sharing the listing.",
+        "link": "List a room"
+      }
+    },
+    "proof_eyebrow": "Answer-ready checks",
+    "proof_title": "What to prepare before choosing a service",
+    "proof_checks": {
+      "viewing": "Remote viewing: address, timing, questions, rent, deposit, registration, and application deadline.",
+      "room_search": "Room search: city, budget, move-in date, registration needs, and shortlist fit.",
+      "listing": "List a room: landlord permission, contract rules, rent, service costs, availability, and handover records."
+    },
+    "seo": {
+      "title": "Domakin Services | Remote Viewing, Room Search & List a Room",
+      "description": "Compare Domakin services for remote rental viewings, property search, room searching, and listing a room in the Netherlands.",
+      "keywords": "Domakin services, remote viewing Netherlands, list a room Netherlands, room searching service, rental property catalogue"
+    }
   }
 }
