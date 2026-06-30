@@ -96,6 +96,51 @@
     flex: 0 0 218px;
 }
 
+.viewing-question-chip {
+    align-items: center;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    border-radius: 999px;
+    color: #000;
+    display: inline-flex;
+    font-size: 14px;
+    gap: 8px;
+    line-height: 1.35;
+    padding: 8px 13px;
+    text-align: left;
+    transition: all 0.2s ease;
+
+    i {
+        font-size: 12px;
+    }
+
+    &:hover,
+    &.selected {
+        background: #004aad;
+        border-color: #004aad;
+        color: #fff;
+    }
+}
+
+.viewing-icon-input {
+    position: relative;
+
+    > i {
+        color: rgba(0, 0, 0, 0.72);
+        left: 17px;
+        pointer-events: none;
+        position: absolute;
+        top: 25px;
+        transform: translateY(-50%);
+        z-index: 3;
+    }
+
+    input,
+    .rc-time-picker-input {
+        padding-left: 46px !important;
+    }
+}
+
 @media (min-width: 992px) {
     .viewing-journey-grid {
         display: grid;

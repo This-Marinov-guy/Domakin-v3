@@ -53,6 +53,19 @@ const viewingDeliverables = [
   },
 ];
 
+const viewingSuggestedQuestions = [
+  "How many tenants is the bathroom shared with?",
+  "Is there a storage room?",
+  "Do I need to buy kitchen utensils?",
+  "How do I apply for the property if I am interested?",
+  "How much is the rent and the deposit?",
+  "What is the contract length?",
+  "Is registration possible?",
+  "Is housing allowance possible?",
+  "How to apply for the place after the viewing and what is the deadline?",
+  "How many people are interested in the place and what are the chances of getting it?",
+];
+
 const viewingJourneySteps = [
   {
     image: "/assets/img/bg/listing-header.webp",
@@ -81,6 +94,10 @@ const viewingJourneySteps = [
   },
 ];
 
+const VIEWING_OTHER_CITY = "Other";
+const VIEWING_OTHER_CITY_DISCLAIMER =
+  "We might not be able to fulfill this request, but we are going to contact you to let you know.";
+
 type ViewingAddressParts = {
   postcode: string;
   houseNumber: string;
@@ -105,6 +122,9 @@ const composeViewingAddress = ({
   return [streetLine, postcode.trim()].filter(Boolean).join(", ");
 };
 
+const composeViewingNote = (questions: string[], extraQuestions: string) =>
+  [...questions, extraQuestions.trim()].filter(Boolean).join("\n");
+
 const ViewingForm = () => {
   const { t } = useTranslation("translations");
 
@@ -124,6 +144,29 @@ const ViewingForm = () => {
   const [addressParts, setAddressParts] = useState<ViewingAddressParts>({
     ...defaultViewingAddressParts,
   });
+  const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
+  const [extraQuestions, setExtraQuestions] = useState("");
+
+  const updateViewingQuestions = (
+    questions: string[],
+    nextExtraQuestions = extraQuestions,
+  ) => {
+    setSelectedQuestions(questions);
+    updateViewingData("note", "", composeViewingNote(questions, nextExtraQuestions));
+  };
+
+  const handleSuggestedQuestionToggle = (question: string) => {
+    const nextQuestions = selectedQuestions.includes(question)
+      ? selectedQuestions.filter((item) => item !== question)
+      : [...selectedQuestions, question];
+
+    updateViewingQuestions(nextQuestions);
+  };
+
+  const handleExtraQuestionsChange = (value: string) => {
+    setExtraQuestions(value);
+    updateViewingData("note", "", composeViewingNote(selectedQuestions, value));
+  };
 
   const handleAddressPartChange = (
     key: keyof ViewingAddressParts,
@@ -158,6 +201,8 @@ const ViewingForm = () => {
       if (res?.status) {
         resetViewingData();
         setAddressParts({ ...defaultViewingAddressParts });
+        setSelectedQuestions([]);
+        setExtraQuestions("");
 
         toast.success(t("viewing.confirmation_message") as ToastContent, {
           position: "top-center",
@@ -342,28 +387,58 @@ const ViewingForm = () => {
                 </div>
 
                 <div className="col-12">
-                  <div className="input-group-meta form-group mb-40">
-                    <label htmlFor="viewing-questions">
+                  <div className="input-group-meta form-group mb-35">
+                    <label>
                       Questions you want our agent to ask on your behalf
                     </label>
+                    <p className="small mb-3">
+                      Select the question chips below, then add anything
+                      specific in the extra field.
+                    </p>
+                    <div className="d-flex flex-wrap gap-2 mb-25">
+                      {viewingSuggestedQuestions.map((question) => {
+                        const isSelected = selectedQuestions.includes(question);
+
+                        return (
+                          <button
+                            className={`viewing-question-chip ${
+                              isSelected ? "selected" : ""
+                            }`}
+                            key={question}
+                            type="button"
+                            onClick={() => handleSuggestedQuestionToggle(question)}
+                            aria-pressed={isSelected}
+                          >
+                            <i
+                              className={`fa-solid ${
+                                isSelected ? "fa-check" : "fa-plus"
+                              }`}
+                              aria-hidden="true"
+                            ></i>
+                            {question}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <label htmlFor="viewing-extra-questions">
+                      Extra questions or notes
+                    </label>
                     <Form.Control
-                      id="viewing-questions"
+                      id="viewing-extra-questions"
                       as="textarea"
-                      required
-                      placeholder={
-                        "How many tenants is the bathroom shared with?\nIs there a storage room?\nDo I need to buy kitchen utensils?\nHow do I apply for the property if I am interested?"
-                      }
-                      value={viewingData.note}
+                      placeholder="Anything specific you want us to check, ask, photograph or mention during the viewing."
+                      value={extraQuestions}
                       onChange={(e) => {
-                        updateViewingData("note", "", e.target.value);
+                        handleExtraQuestionsChange(e.target.value);
                       }}
                       isInvalid={viewingErrorFields.includes("note")}
-                      rows={7}
+                      rows={4}
                       style={{
                         fontFamily: "inherit",
                         lineHeight: "1.5",
                         resize: "vertical",
-                        minHeight: "150px",
+                        minHeight: "110px",
                       }}
                     />
                   </div>
@@ -372,57 +447,29 @@ const ViewingForm = () => {
         <h4 className="col-12 mb-20 mt-10">Where is the place?</h4>
 
         <div className="col-lg-6 col-md-6 col-12">
-          <div className="input-group-meta form-group mb-30">
+          <div className="input-group-meta form-group mb-25">
             <label htmlFor="">City of viewing</label>
             <SearchableCitySelect
               value={viewingData.city}
               onChange={(value) => {
                 updateViewingData("city", "", value);
               }}
-              cities={[...VIEWING_SERVICE_LOCATIONS]}
-              placeholder="Choose a supported city"
+              cities={[...VIEWING_SERVICE_LOCATIONS, VIEWING_OTHER_CITY]}
+              placeholder="Choose city or Other"
               isInvalid={viewingErrorFields.includes("city")}
             />
             <small className="d-block mt-2">
-              City missing from the dropdown? Contact us at{" "}
-              <a href="mailto:info@domakin.nl">info@domakin.nl</a> and we will
-              confirm whether an agent can attend.
+              Choose a supported city from the list, or choose Other if your
+              city is missing.
+              <br />
+              {`${VIEWING_OTHER_CITY_DISCLAIMER} You can also contact us at `}
+              <a href="mailto:info@domakin.nl">info@domakin.nl</a>.
             </small>
           </div>
         </div>
 
         <div className="col-lg-6 col-md-6 col-12">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="viewing-postcode">Postcode</label>
-            <Form.Control
-              id="viewing-postcode"
-              type="text"
-              value={addressParts.postcode}
-              onChange={(e) => {
-                handleAddressPartChange("postcode", e.target.value);
-              }}
-              isInvalid={viewingErrorFields.includes("address")}
-            />
-          </div>
-        </div>
-
-        <div className="col-lg-6 col-md-6 col-12">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="viewing-house-number">House number</label>
-            <Form.Control
-              id="viewing-house-number"
-              type="text"
-              value={addressParts.houseNumber}
-              onChange={(e) => {
-                handleAddressPartChange("houseNumber", e.target.value);
-              }}
-              isInvalid={viewingErrorFields.includes("address")}
-            />
-          </div>
-        </div>
-
-        <div className="col-lg-6 col-md-6 col-12">
-          <div className="input-group-meta form-group mb-30">
+          <div className="input-group-meta form-group mb-25">
             <label htmlFor="viewing-street-name">Street name</label>
             <Form.Control
               id="viewing-street-name"
@@ -436,34 +483,70 @@ const ViewingForm = () => {
           </div>
         </div>
 
-        <h4 className="col-12 mb-20 mt-10">When is the viewing?</h4>
-
-        <div className="col-lg-6 col-md-6 col-12">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{t("viewing.date")}</label>
-            <SingleDatePicker
-              placeholder=""
-              value={viewingData.date}
-              onChange={(value: string) => {
-                updateViewingData("date", "", value);
+        <div className="col-lg-3 col-md-6 col-6">
+          <div className="input-group-meta form-group mb-25">
+            <label htmlFor="viewing-postcode">Postcode</label>
+            <Form.Control
+              id="viewing-postcode"
+              type="text"
+              value={addressParts.postcode}
+              onChange={(e) => {
+                handleAddressPartChange("postcode", e.target.value);
               }}
-              isInvalid={viewingErrorFields.includes("date")}
+              isInvalid={viewingErrorFields.includes("address")}
             />
           </div>
         </div>
 
-        <div className="col-lg-6 col-md-6 col-12">
-          <div className="input-group-meta form-group mb-30">
-            <label htmlFor="">{`${t("viewing.time")}`}</label>
-            <TimePickerInput
-              showSecond={false}
-              minuteStep={15}
-              value={viewingData.time}
-              onChange={(value: any) => {
-                updateViewingData("time", "", value);
+        <div className="col-lg-3 col-md-6 col-6">
+          <div className="input-group-meta form-group mb-25">
+            <label htmlFor="viewing-house-number">House number</label>
+            <Form.Control
+              id="viewing-house-number"
+              type="text"
+              value={addressParts.houseNumber}
+              onChange={(e) => {
+                handleAddressPartChange("houseNumber", e.target.value);
               }}
-              isInvalid={viewingErrorFields.includes("time")}
+              isInvalid={viewingErrorFields.includes("address")}
             />
+          </div>
+        </div>
+
+        <h4 className="col-12 mb-20 mt-10">When is the viewing?</h4>
+
+        <div className="col-lg-6 col-md-6 col-12">
+          <div className="input-group-meta form-group mb-25">
+            <label htmlFor="">Date of the viewing</label>
+            <div className="viewing-icon-input">
+              <i className="fa-solid fa-calendar-days" aria-hidden="true"></i>
+              <SingleDatePicker
+                placeholder=""
+                value={viewingData.date}
+                onChange={(value: string) => {
+                  updateViewingData("date", "", value);
+                }}
+                isInvalid={viewingErrorFields.includes("date")}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="col-lg-6 col-md-6 col-12">
+          <div className="input-group-meta form-group mb-25">
+            <label htmlFor="">Time of the viewing</label>
+            <div className="viewing-icon-input">
+              <i className="fa-solid fa-clock" aria-hidden="true"></i>
+              <TimePickerInput
+                showSecond={false}
+                minuteStep={15}
+                value={viewingData.time}
+                onChange={(value: any) => {
+                  updateViewingData("time", "", value);
+                }}
+                isInvalid={viewingErrorFields.includes("time")}
+              />
+            </div>
             <small>{t("date_time.timezone_nl")}</small>
           </div>
         </div>
