@@ -220,11 +220,8 @@ const SEO = () => {
       <meta property="al:ios:url" content="https://www.domakin.nl" />
       <meta property="al:ios:app_name" content="Domakin" />
       <meta name="apple-mobile-web-app-title" content="Domakin" />
-      <link rel="apple-touch-icon" href="./assets/img/logo-2.png"></link>
 
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link rel="icon" href="./favicon.ico" type="image/x-icon" />
-      <link rel="manifest" href="/manifest.json" />
       <link rel="robots" href="./robots.txt" />
       <link
         rel="alternate"

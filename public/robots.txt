@@ -4,6 +4,7 @@ Disallow: /account/
 Disallow: /api/
 Disallow: /callback/
 Disallow: /payment/
+Disallow: /scheduled-viewing/
 Disallow: /firebase-messaging-sw.js
 
 Sitemap: https://www.domakin.nl/sitemap.xml
