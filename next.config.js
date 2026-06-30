@@ -25,6 +25,12 @@ const nextConfig = nextTranslate({
   async headers() {
     return [
       {
+        source: "/scheduled-viewing/:path*",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive, nosnippet" },
+        ],
+      },
+      {
         source: "/firebase-messaging-sw.js",
         headers: [
           { key: "X-Robots-Tag", value: "noindex, nofollow" },

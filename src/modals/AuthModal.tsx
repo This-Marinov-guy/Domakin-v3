@@ -20,6 +20,7 @@ import { showGeneralError } from "@/utils/helpers";
 import { toast } from "react-toastify";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { cleanAuthRedirectPath } from "@/utils/authRedirect";
 
 const AuthModal = () => {
   const [isClient, setIsClient] = useState(false);
@@ -98,13 +99,15 @@ const AuthModal = () => {
   const signInWithSSO = async (provider: Provider) => {
     try {
       startLoading();
+      const redirectPath = cleanAuthRedirectPath();
+      sessionStorage.setItem("redirect", redirectPath);
 
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
           redirectTo: new URL(
             "/callback/auth",
-            process.env.NEXT_PUBLIC_URL
+            typeof window !== "undefined" ? window.location.origin : process.env.NEXT_PUBLIC_URL
           ).toString(),
         },
       });
@@ -140,11 +143,16 @@ const AuthModal = () => {
       }
 
       setMagicLoading(true);
+      const redirectPath = cleanAuthRedirectPath();
+      sessionStorage.setItem("redirect", redirectPath);
 
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: process.env.NEXT_PUBLIC_URL + "/account",
+          emailRedirectTo: new URL(
+            redirectPath,
+            typeof window !== "undefined" ? window.location.origin : process.env.NEXT_PUBLIC_URL
+          ).toString(),
         },
       });
 

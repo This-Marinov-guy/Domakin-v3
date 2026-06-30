@@ -13,6 +13,7 @@ import { useStore } from "@/stores/storeContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { showGeneralError, showStandardNotification } from "@/utils/helpers";
+import { cleanAuthRedirectPath } from "@/utils/authRedirect";
 
 const defaultData = {
   email: "",
@@ -78,9 +79,11 @@ const LoginForm = ({ onEmailChange, emailErrorExternal }: LoginFormProps) => {
     try {
       setIsSendingMagicLink(true);
       startLoading();
+      const redirectPath = cleanAuthRedirectPath();
+      sessionStorage.setItem("redirect", redirectPath);
       const redirectTo =
         typeof window !== "undefined"
-          ? `${window.location.origin}/account`
+          ? new URL(redirectPath, window.location.origin).toString()
           : undefined;
 
       const { error } = await supabase.auth.signInWithOtp({

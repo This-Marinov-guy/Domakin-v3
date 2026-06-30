@@ -1,14 +1,12 @@
-import React, { Fragment, Suspense, useEffect } from "react";
+import React, { Suspense } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import SEO from "./seo";
-import { useRouter } from "next/router";
 
 import "../styles/index.scss";
 import "rc-time-picker/assets/index.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import PageLoader from "@/components/ui/loading/PageLoader";
 import MainLayout from "@/layouts/MainLayout";
-import useTranslation from "next-translate/useTranslation";
 
 if (typeof window !== "undefined") {
   window.addEventListener(
@@ -23,19 +21,6 @@ if (typeof window !== "undefined") {
 
 const MyApp = ({ Component, pageProps }: any) => {
   const recaptchaRef = React.createRef();
-  const router = useRouter();
-  const { lang } = useTranslation();
-  
-  // Normalize locale based on path prefix without logging
-  useEffect(() => {
-    if (router.asPath.startsWith('/bg') && router.locale !== 'bg') {
-      const newPath = router.asPath.replace('/bg', '');
-      router.push(newPath, newPath, { locale: 'bg', shallow: true });
-    } else if (router.asPath.startsWith('/gr') && router.locale !== 'gr') {
-      const newPath = router.asPath.replace('/gr', '');
-      router.push(newPath, newPath, { locale: 'gr', shallow: true });
-    }
-  }, [router.asPath]);
 
   const onChange = () => {
     // on captcha change
