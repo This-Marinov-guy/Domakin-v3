@@ -56,7 +56,11 @@ export default function ServicesHub() {
     <>
       <HeaderOne style={true} />
       <main className="services-hub">
-        <section className="services-hub-hero">
+        <section
+          className="services-hub-hero"
+          style={{ backgroundImage: "url(/assets/img/bg/9.webp)" }}
+          data-geo-services-hub-hero-image="/assets/img/bg/9.webp"
+        >
           <div className="container">
             <div className="row align-items-center gy-4">
               <div className="col-lg-8">

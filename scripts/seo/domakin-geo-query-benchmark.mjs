@@ -118,6 +118,7 @@ const mappings = [
       "List a room",
       "Domakin remote property viewing service",
       "Domakin list a room service",
+      "/assets/img/bg/9.webp",
     ],
     requiredLinks: [
       "/services/viewing",

@@ -15,6 +15,7 @@ const pages = [
       "Domakin remote property viewing service",
       "Domakin list a room service",
     ],
+    requiredHtml: ["/assets/img/bg/9.webp"],
   },
   {
     path: "/services/room-searching",
@@ -165,6 +166,9 @@ for (const page of pages) {
   const forbiddenHtmlAbsent = (page.forbiddenHtml || []).every(
     (phrase) => !visibleHtml.includes(phrase),
   );
+  const requiredHtmlPresent = (page.requiredHtml || []).every((phrase) =>
+    visibleHtml.includes(phrase),
+  );
   const requiredOrderPresent = (page.requiredOrder || []).every((marker) =>
     visibleHtml.includes(marker),
   );
@@ -185,6 +189,7 @@ for (const page of pages) {
     visibleOccurrenceLimitsMet,
     forbiddenPhrasesAbsent,
     forbiddenHtmlAbsent,
+    requiredHtmlPresent,
     requiredOrderPresent,
     requiredOrderCorrect,
     serviceJsonLd: jsonLdTypes.has("Service"),
@@ -203,6 +208,7 @@ const failures = results.filter(
     !result.visibleOccurrenceLimitsMet ||
     !result.forbiddenPhrasesAbsent ||
     !result.forbiddenHtmlAbsent ||
+    !result.requiredHtmlPresent ||
     !result.requiredOrderPresent ||
     !result.requiredOrderCorrect ||
     !result.serviceJsonLd ||

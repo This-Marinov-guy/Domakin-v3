@@ -102,6 +102,7 @@ const pageExpectations = [
       "Domakin remote property viewing service",
       "Domakin list a room service",
     ],
+    requiredHtml: ["/assets/img/bg/9.webp"],
     forbiddenText: ["Official sources"],
     requiredTypes: ["WebPage", "ItemList", "Service", "FAQPage", "BreadcrumbList"],
     minInternalLinks: 5,
@@ -217,6 +218,9 @@ for (const expectation of pageExpectations) {
     requiredText: expectation.requiredText
       ? expectation.requiredText.every((phrase) => result.body.includes(phrase))
       : true,
+    requiredHtml: expectation.requiredHtml
+      ? expectation.requiredHtml.every((phrase) => result.body.includes(phrase))
+      : true,
     forbiddenText: expectation.forbiddenText
       ? expectation.forbiddenText.every((phrase) => !result.body.includes(phrase))
       : true,
@@ -273,6 +277,7 @@ const failures = [
       !result.answerBlock ||
       !result.source ||
       !result.requiredText ||
+      !result.requiredHtml ||
       !result.forbiddenText ||
       result.internalLinks < result.minInternalLinks ||
       !result.requiredTypesPresent,
