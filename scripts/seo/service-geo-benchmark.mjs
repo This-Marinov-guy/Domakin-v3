@@ -1,9 +1,87 @@
 const baseUrl = (process.argv[2] || "http://localhost:3011").replace(/\/$/, "");
 
 const pages = [
-  "/services/room-searching",
-  "/services/viewing",
-  "/services/add-listing",
+  {
+    path: "/services/room-searching",
+    needsOfficialSource: true,
+  },
+  {
+    path: "/services/viewing",
+    needsOfficialSource: false,
+    forbiddenPhrases: ["Official sources", "1) Fill in your details"],
+    forbiddenHtml: ["theme-main-menu", "inner-banner-two", "navbar-toggler"],
+    requiredPhrases: [
+      "Remote viewing pricing",
+      "Standard remote viewing",
+      "Express remote viewing",
+      "Read more",
+      "info@domakin.nl",
+      "Choose a supported city",
+      "Book a remote viewing",
+      "Agent attends for you",
+      "Photos, video and question checks",
+      "EUR 50",
+      "EUR 100",
+      "Request remote viewing",
+      "online viewing",
+      "Supported viewing cities",
+      "Amsterdam",
+      "Breda",
+      "Delft",
+      "Eindhoven",
+      "Enschede",
+      "Groningen",
+      "Leeuwarden",
+      "Leiden",
+      "Maastricht",
+      "Rotterdam",
+      "The Hague",
+      "Tilburg",
+      "Utrecht",
+      "cannot attend because you are abroad",
+      "think the listing may be a scam",
+      "increase your chances during a housing lottery",
+      "save time and money traveling",
+      "good condition as advertised",
+      "report with pictures and videos",
+      "all your questions answered",
+      "make a decision",
+      "You have been invited to a viewing",
+      "What would you like to know about the place?",
+      "Questions you want our agent to ask on your behalf",
+      "How many tenants is the bathroom shared with?",
+      "Is there a storage room?",
+      "Do I need to buy kitchen utensils?",
+      "How do I apply for the property if I am interested?",
+      "Where is the place?",
+      "Postcode",
+      "House number",
+      "Street name",
+      "When is the viewing?",
+      "Who is this viewing for?",
+      "You have been invited to a viewing you cannot attend",
+      "You schedule a viewing",
+      "They attend on your behalf, presenting you in your best light",
+      "They send you a report with pictures and videos",
+      "You make your own decision",
+    ],
+    visibleOccurrenceLimits: [
+      { phrase: "Remote viewing pricing", count: 1 },
+      { phrase: "EUR 50", count: 1 },
+      { phrase: "EUR 100", count: 1 },
+    ],
+    requiredOrder: [
+      "data-viewing-logo-only-header",
+      "data-viewing-signup-section",
+      'id="book-viewing"',
+      "data-viewing-funnel-steps",
+      "data-geo-service-answer-block",
+    ],
+  },
+  {
+    path: "/services/add-listing",
+    needsOfficialSource: true,
+  },
 ];
 
 const officialSourceNeedle =
@@ -43,16 +121,48 @@ const extractJsonLdTypes = (html) => {
 
 const results = [];
 
-for (const path of pages) {
+for (const page of pages) {
+  const path = page.path;
   const response = await fetch(`${baseUrl}${path}`);
   const html = await response.text();
+  const visibleHtml = html.replace(/<script[\s\S]*?<\/script>/gi, "");
+  const visibleText = visibleHtml
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/\s+/g, " ");
   const jsonLdTypes = extractJsonLdTypes(html);
+  const officialSource = visibleHtml.includes(officialSourceNeedle);
+  const requiredPhrasesPresent = (page.requiredPhrases || []).every((phrase) =>
+    visibleText.includes(phrase),
+  );
+  const visibleOccurrenceLimitsMet = (
+    page.visibleOccurrenceLimits || []
+  ).every(({ phrase, count }) => countOccurrences(visibleText, phrase) === count);
+  const forbiddenPhrasesAbsent = (page.forbiddenPhrases || []).every(
+    (phrase) => !visibleText.includes(phrase),
+  );
+  const forbiddenHtmlAbsent = (page.forbiddenHtml || []).every(
+    (phrase) => !visibleHtml.includes(phrase),
+  );
+  const requiredOrderPresent = (page.requiredOrder || []).every((marker) =>
+    visibleHtml.includes(marker),
+  );
+  const requiredOrderCorrect = (page.requiredOrder || []).every(
+    (marker, index, markers) =>
+      index === 0 ||
+      visibleHtml.indexOf(markers[index - 1]) < visibleHtml.indexOf(marker),
+  );
 
   results.push({
     path,
     status: response.status,
-    answerBlock: html.includes("data-geo-service-answer-block"),
-    officialSource: html.includes(officialSourceNeedle),
+    answerBlock: visibleHtml.includes("data-geo-service-answer-block"),
+    officialSource,
+    requiredPhrasesPresent,
+    visibleOccurrenceLimitsMet,
+    forbiddenPhrasesAbsent,
+    forbiddenHtmlAbsent,
+    requiredOrderPresent,
+    requiredOrderCorrect,
     serviceJsonLd: jsonLdTypes.has("Service"),
     faqJsonLd: jsonLdTypes.has("FAQPage"),
   });
@@ -62,7 +172,15 @@ const failures = results.filter(
   (result) =>
     result.status !== 200 ||
     !result.answerBlock ||
-    !result.officialSource ||
+    (pages.find((page) => page.path === result.path)?.needsOfficialSource
+      ? !result.officialSource
+      : result.officialSource) ||
+    !result.requiredPhrasesPresent ||
+    !result.visibleOccurrenceLimitsMet ||
+    !result.forbiddenPhrasesAbsent ||
+    !result.forbiddenHtmlAbsent ||
+    !result.requiredOrderPresent ||
+    !result.requiredOrderCorrect ||
     !result.serviceJsonLd ||
     !result.faqJsonLd,
 );
@@ -79,3 +197,7 @@ if (failures.length) {
 }
 
 console.log("Service GEO benchmark passed.");
+
+function countOccurrences(text, phrase) {
+  return text.split(phrase).length - 1;
+}

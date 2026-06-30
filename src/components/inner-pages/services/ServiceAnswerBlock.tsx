@@ -1,6 +1,20 @@
+import Link from "next/link";
+import { VIEWING_SERVICE_LOCATIONS } from "@/data/viewingLocations";
+
 type ServiceAnswerSource = {
   label: string;
   url: string;
+};
+
+type ServiceAnswerPricing = {
+  label: string;
+  options: {
+    name: string;
+    price: number;
+    description: string;
+  }[];
+  readMoreHref: string;
+  readMoreLabel: string;
 };
 
 export type ServiceAnswerId = "room-searching" | "viewing" | "add-listing";
@@ -13,7 +27,9 @@ export type ServiceAnswerData = {
   question: string;
   answer: string;
   nextSteps: string[];
-  sources: ServiceAnswerSource[];
+  serviceAreas?: readonly string[];
+  sources?: ServiceAnswerSource[];
+  pricing?: ServiceAnswerPricing;
 };
 
 const tenantStepPlanSource = {
@@ -49,13 +65,30 @@ const SERVICE_ANSWER_BY_ID: Record<ServiceAnswerId, ServiceAnswerData> = {
     audience: "Students who need a remote rental viewing in the Netherlands",
     question: "Can Domakin do a remote rental viewing for you?",
     answer:
-      "Yes. Domakin can attend a rental viewing on your behalf and report back with photos, video and practical notes so you can decide faster from abroad or another city. The legal decision remains yours; compare the remote viewing notes with the written tenancy agreement and landlord information.",
+      "Yes. Domakin can attend a rental viewing on your behalf and report back with photos, video and practical notes so you can decide faster from abroad or another city. Students may call this a viewing, remote viewing or online viewing service. The legal decision remains yours; compare the remote viewing notes with the written tenancy agreement and landlord information.",
     nextSteps: [
       "Send the viewing address, scheduled time and questions you want answered.",
       "Use the photos, video and notes to decide whether to proceed.",
       "Check rent, deposit, service costs and house rules against the written documents before paying.",
     ],
-    sources: [tenantStepPlanSource, rentedHousingSource],
+    serviceAreas: VIEWING_SERVICE_LOCATIONS,
+    pricing: {
+      label: "Remote viewing pricing",
+      options: [
+        {
+          name: "Standard remote viewing",
+          price: 50,
+          description: "For viewings scheduled in advance.",
+        },
+        {
+          name: "Express remote viewing",
+          price: 100,
+          description: "For urgent viewings within 24 hours when an agent is available.",
+        },
+      ],
+      readMoreHref: "/pricing",
+      readMoreLabel: "Read more",
+    },
   },
   "add-listing": {
     id: "add-listing",
@@ -80,33 +113,58 @@ export const getServiceAnswerData = (id: ServiceAnswerId) =>
 export const createServiceJsonLd = (
   data: ServiceAnswerData,
   currentUrl: string,
-) => ({
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "@id": `${currentUrl}#service`,
-  name: data.serviceName,
-  serviceType: data.serviceType,
-  description: data.answer,
-  url: currentUrl,
-  provider: {
-    "@type": "Organization",
-    name: "Domakin",
-    url: "https://www.domakin.nl",
-  },
-  areaServed: {
-    "@type": "Country",
-    name: "Netherlands",
-  },
-  audience: {
-    "@type": "Audience",
-    audienceType: data.audience,
-  },
-  citation: data.sources.map((source) => ({
-    "@type": "CreativeWork",
-    name: source.label,
-    url: source.url,
-  })),
-});
+) => {
+  const sources = data.sources ?? [];
+  const serviceJsonLd: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${currentUrl}#service`,
+    name: data.serviceName,
+    serviceType: data.serviceType,
+    description: data.answer,
+    url: currentUrl,
+    provider: {
+      "@type": "Organization",
+      name: "Domakin",
+      url: "https://www.domakin.nl",
+    },
+    areaServed: data.serviceAreas?.length
+      ? data.serviceAreas.map((area) => ({
+          "@type": "AdministrativeArea",
+          name: area,
+        }))
+      : {
+          "@type": "Country",
+          name: "Netherlands",
+        },
+    audience: {
+      "@type": "Audience",
+      audienceType: data.audience,
+    },
+  };
+
+  if (sources.length) {
+    serviceJsonLd.citation = sources.map((source) => ({
+      "@type": "CreativeWork",
+      name: source.label,
+      url: source.url,
+    }));
+  }
+
+  if (data.pricing) {
+    serviceJsonLd.offers = data.pricing.options.map((option) => ({
+      "@type": "Offer",
+      name: option.name,
+      price: option.price,
+      priceCurrency: "EUR",
+      description: option.description,
+      url: new URL(data.pricing?.readMoreHref ?? currentUrl, currentUrl)
+        .toString(),
+    }));
+  }
+
+  return serviceJsonLd;
+};
 
 export const createServiceFaqJsonLd = (data: ServiceAnswerData) => ({
   "@context": "https://schema.org",
@@ -128,6 +186,8 @@ export default function ServiceAnswerBlock({
 }: {
   data: ServiceAnswerData;
 }) {
+  const sources = data.sources ?? [];
+
   return (
     <section
       className="container mt-50 mb-50"
@@ -143,16 +203,55 @@ export default function ServiceAnswerBlock({
             <li key={step}>{step}</li>
           ))}
         </ol>
-        <p className="fw-semibold mb-2">Official sources</p>
-        <ul className="mb-0 ps-4">
-          {data.sources.map((source) => (
-            <li key={source.url}>
-              <a href={source.url} target="_blank" rel="noopener noreferrer">
-                {source.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        {data.serviceAreas && data.serviceAreas.length > 0 && (
+          <div className="mb-3" data-geo-service-areas>
+            <p className="fw-semibold mb-2">Supported viewing cities</p>
+            <p className="mb-0">{data.serviceAreas.join(", ")}</p>
+          </div>
+        )}
+        {data.pricing && (
+          <div
+            className="mt-4 p-3 rounded bg-white border"
+            data-geo-service-pricing
+          >
+            <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+              <div>
+                <p className="fw-semibold mb-2">{data.pricing.label}</p>
+                <div className="d-flex flex-wrap gap-3">
+                  {data.pricing.options.map((option) => (
+                    <div key={option.name}>
+                      <p className="mb-1 fw-semibold">
+                        {option.name}: EUR {option.price}
+                      </p>
+                      <p className="mb-0 small">{option.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <Link href={data.pricing.readMoreHref} className="btn-eleven">
+                {data.pricing.readMoreLabel}
+              </Link>
+            </div>
+          </div>
+        )}
+        {sources.length > 0 && (
+          <>
+            <p className="fw-semibold mb-2">Official sources</p>
+            <ul className="mb-0 ps-4">
+              {sources.map((source) => (
+                <li key={source.url}>
+                  <a
+                    href={source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {source.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
     </section>
   );

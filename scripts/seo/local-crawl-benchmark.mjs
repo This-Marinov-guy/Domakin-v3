@@ -105,7 +105,35 @@ const pageExpectations = [
   {
     path: "/services/viewing",
     answerMarker: "data-geo-service-answer-block",
-    sourceMarker: "government.nl/themes/building-and-housing/housing/rented-housing",
+    forbiddenSourceMarker: "government.nl/themes/building-and-housing/housing/rented-housing",
+    requiredText: [
+      "Remote viewing pricing",
+      "Standard remote viewing",
+      "Express remote viewing",
+      "online viewing",
+      "Supported viewing cities",
+      "Choose a supported city",
+      "info@domakin.nl",
+      "Amsterdam",
+      "Breda",
+      "Delft",
+      "Eindhoven",
+      "Enschede",
+      "Groningen",
+      "Leeuwarden",
+      "Leiden",
+      "Maastricht",
+      "Rotterdam",
+      "The Hague",
+      "Tilburg",
+      "Utrecht",
+      "You have been invited to a viewing you cannot attend",
+      "You schedule a viewing",
+      "They attend on your behalf, presenting you in your best light",
+      "They send you a report with pictures and videos",
+      "You make your own decision",
+    ],
+    forbiddenText: ["Official sources"],
     requiredTypes: ["Service", "FAQPage"],
     minInternalLinks: 3,
   },
@@ -156,6 +184,14 @@ for (const expectation of pageExpectations) {
       : true,
     source: expectation.sourceMarker
       ? result.body.includes(expectation.sourceMarker)
+      : expectation.forbiddenSourceMarker
+        ? !result.body.includes(expectation.forbiddenSourceMarker)
+        : true,
+    requiredText: expectation.requiredText
+      ? expectation.requiredText.every((phrase) => result.body.includes(phrase))
+      : true,
+    forbiddenText: expectation.forbiddenText
+      ? expectation.forbiddenText.every((phrase) => !result.body.includes(phrase))
       : true,
     internalLinks: countInternalLinks(result.body),
     minInternalLinks: expectation.minInternalLinks ?? 0,
@@ -209,6 +245,8 @@ const failures = [
       !result.canonical ||
       !result.answerBlock ||
       !result.source ||
+      !result.requiredText ||
+      !result.forbiddenText ||
       result.internalLinks < result.minInternalLinks ||
       !result.requiredTypesPresent,
   ),

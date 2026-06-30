@@ -82,3 +82,29 @@
         }
     }
 }
+
+.viewing-journey-grid {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.viewing-journey-card {
+    border-radius: 8px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.05);
+    flex: 0 0 218px;
+}
+
+@media (min-width: 992px) {
+    .viewing-journey-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        overflow-x: visible;
+    }
+
+    .viewing-journey-card {
+        flex: initial;
+        min-width: 0;
+    }
+}

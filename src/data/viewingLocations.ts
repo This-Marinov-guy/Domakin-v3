@@ -1,0 +1,15 @@
+export const VIEWING_SERVICE_LOCATIONS = [
+  "Amsterdam",
+  "Breda",
+  "Delft",
+  "Eindhoven",
+  "Enschede",
+  "Groningen",
+  "Leeuwarden",
+  "Leiden",
+  "Maastricht",
+  "Rotterdam",
+  "The Hague",
+  "Tilburg",
+  "Utrecht",
+] as const;

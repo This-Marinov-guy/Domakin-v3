@@ -9,6 +9,7 @@ import {
   getServiceAnswerData,
 } from "@/components/inner-pages/services/ServiceAnswerBlock";
 import { SHARE_BANNERS } from "@/utils/shareBanners";
+import { VIEWING_SERVICE_LOCATIONS } from "@/data/viewingLocations";
 
 const index = () => {
   const router = useRouter();
@@ -17,6 +18,7 @@ const index = () => {
   const baseUrl = "https://www.domakin.nl";
   const currentUrl = `${baseUrl}${router.asPath}`;
   const serviceAnswerData = getServiceAnswerData("viewing");
+  const supportedViewingCities = VIEWING_SERVICE_LOCATIONS.join(", ");
   
   // Get localized content
   const title = lang === "en" 
@@ -26,7 +28,7 @@ const index = () => {
     : "Υπηρεσία Προβολής | Domakin - Βοήθεια στην Προβολή Ακινήτων στην Ολλανδία";
   
   const description = lang === "en"
-    ? "Book a remote property viewing in the Netherlands. Domakin agents attend rental viewings for students abroad or in another city and send photos, video, and practical feedback."
+    ? `Book a viewing, remote viewing, or online viewing in the Netherlands. Domakin agents attend rental viewings in supported cities including ${supportedViewingCities} and send photos, video, and practical feedback.`
     : lang === "bg"
     ? "Нека нашите агенти присъстват на огледите вместо вас. Предоставяме снимки, видеоклипове и подробна обратна връзка, за да ви помогнем да вземете информирано решение за настаняване в Нидерландия."
     : "Αφήστε τους πράκτορές μας να παρακολουθήσουν τις προβολές ακινήτων εκ μέρους σας. Παρέχουμε φωτογραφίες, βίντεο και λεπτομερή ανατροφοδότηση για να σας βοηθήσουμε να πάρετε ενημερωμένες αποφάσεις για τη διαμονή στην Ολλανδία.";
@@ -61,7 +63,7 @@ const index = () => {
         
         {/* Additional meta tags */}
         <meta name="keywords" content={lang === "en" 
-          ? "remote property viewing, remote viewing service, property viewing service Netherlands, rental viewing Netherlands, student housing viewing, accommodation viewing"
+          ? `viewing, remote viewing, online viewing, remote property viewing, remote viewing service, online viewing service Netherlands, property viewing service Netherlands, rental viewing Netherlands, student housing viewing, accommodation viewing, ${supportedViewingCities}`
           : lang === "bg"
           ? "оглед на имот, услуга за огледи, Нидерландия, студентско жилище, оглед на настаняване"
           : "προβολή ακινήτου, υπηρεσία προβολής, Ολλανδία, φοιτητική στέγαση"} />
