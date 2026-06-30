@@ -27,35 +27,49 @@ const index = ({ serverProperties }: PropertiesIndexProps) => {
     description: "Find quality student accommodation and rental properties in the Netherlands. Browse verified listings for rooms and apartments.",
     url: "https://www.domakin.nl/services/renting",
     numberOfItems: propertiesForJsonLd.length,
-    itemListElement: propertiesForJsonLd.slice(0, 10).map((property: any, index: number) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: {
-        "@type": "Accommodation",
-        "@id": `https://www.domakin.nl${getPropertyUrl(property, true, lang)}`,
-        name: property.title || `${property.city} Property`,
-        description: property.description?.property || property.description,
-        url: `https://www.domakin.nl${getPropertyUrl(property, true, lang)}`,
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: property.city,
-          addressCountry: "NL",
-        },
-        ...(property.price && {
-          offers: {
-            "@type": "Offer",
-            price: property.price,
-            priceCurrency: "EUR",
-            availability: "https://schema.org/InStock",
+    itemListElement: propertiesForJsonLd.slice(0, 10).map((property: any, index: number) => {
+      const propertyUrl = `https://www.domakin.nl${getPropertyUrl(property, true, lang)}`;
+
+      return {
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": ["Accommodation", "Product"],
+          "@id": propertyUrl,
+          name: property.title || `${property.city} Property`,
+          description: property.description?.property || property.description,
+          url: propertyUrl,
+          brand: {
+            "@type": "Brand",
+            name: "Domakin",
           },
-        }),
-        ...(property.main_image && {
-          image: property.main_image.startsWith('http') 
-            ? property.main_image 
-            : `https://www.domakin.nl/assets/img/properties/${property.folder ?? "property_" + property.id}/${property.main_image}`,
-        }),
-      },
-    })),
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: property.city,
+            addressCountry: "NL",
+          },
+          ...(property.price && {
+            offers: {
+              "@type": "Offer",
+              price: property.price,
+              priceCurrency: "EUR",
+              availability: "https://schema.org/InStock",
+              url: propertyUrl,
+              seller: {
+                "@type": "Organization",
+                name: "Domakin",
+                url: "https://www.domakin.nl",
+              },
+            },
+          }),
+          ...(property.main_image && {
+            image: property.main_image.startsWith('http')
+              ? property.main_image
+              : `https://www.domakin.nl/assets/img/properties/${property.folder ?? "property_" + property.id}/${property.main_image}`,
+          }),
+        },
+      };
+    }),
   };
 
   // Breadcrumb data for structured data

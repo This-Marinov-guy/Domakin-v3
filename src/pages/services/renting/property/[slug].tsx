@@ -93,16 +93,22 @@ const index = ({ serverProperties }: PropertyDetailsProps) => {
   };
 
   const seoSlug = generatePropertySlug(property);
+  const propertyUrl = `https://www.domakin.nl/services/renting/property/${seoSlug}`;
 
   // Real Estate specific structured data
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Accommodation",
-    "@id": `https://www.domakin.nl/services/renting/property/${seoSlug}`,
+    "@type": ["Accommodation", "Product"],
+    "@id": propertyUrl,
     name: propertyTitle,
     description: propertyDescription,
-    url: `https://www.domakin.nl/services/renting/property/${seoSlug}`,
+    url: propertyUrl,
     image: propertyImage,
+    brand: {
+      "@type": "Brand",
+      name: "Domakin",
+    },
+    sku: `domakin-rental-${property.id}`,
     address: {
       "@type": "PostalAddress",
       addressLocality: property.city,
@@ -115,6 +121,12 @@ const index = ({ serverProperties }: PropertyDetailsProps) => {
         price: property.price,
         priceCurrency: "EUR",
         availability: property.status === "Available" ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+        url: propertyUrl,
+        seller: {
+          "@type": "Organization",
+          name: "Domakin",
+          url: "https://www.domakin.nl",
+        },
         priceValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 30 days from now
       },
     }),
@@ -132,7 +144,6 @@ const index = ({ serverProperties }: PropertyDetailsProps) => {
     ],
     additionalType: "https://schema.org/House",
     category: "Student Housing",
-    keywords: `student housing, ${property.city}, accommodation, room rental, Netherlands`,
   };
 
   // Breadcrumb data for structured data
@@ -140,7 +151,7 @@ const index = ({ serverProperties }: PropertyDetailsProps) => {
     { name: "Home", url: "https://www.domakin.nl" },
     { name: "Services", url: "https://www.domakin.nl/services" },
     { name: "Renting", url: "https://www.domakin.nl/services/renting" },
-    { name: propertyTitle, url: `https://www.domakin.nl/services/renting/property/${seoSlug}` },
+    { name: propertyTitle, url: propertyUrl },
   ];
 
   return (
@@ -149,13 +160,13 @@ const index = ({ serverProperties }: PropertyDetailsProps) => {
         <title>{`${propertyTitle} | Student Housing in ${property.city} | Domakin`}</title>
         <meta name="description" content={propertyDescription} />
         <meta name="keywords" content={`student housing ${property.city}, room rental, accommodation, ${property.city} student room, Netherlands housing`} />
-        <link rel="canonical" href={`https://www.domakin.nl/services/renting/property/${seoSlug}`} />
+        <link rel="canonical" href={propertyUrl} />
         
         {/* Open Graph meta tags */}
         <meta property="og:title" content={`${propertyTitle} | Domakin`} />
         <meta property="og:description" content={propertyDescription} />
         <meta property="og:type" content="product" />
-        <meta property="og:url" content={`https://www.domakin.nl/services/renting/property/${seoSlug}`} />
+        <meta property="og:url" content={propertyUrl} />
         <meta property="og:site_name" content="Domakin" />
         <meta property="og:image" content={shareImage} />
         <meta property="og:image:width" content="1200" />
