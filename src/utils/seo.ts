@@ -11,6 +11,7 @@
 
 export const PAGES_WITH_CUSTOM_SEO = [
   // Service pages with custom SEO
+  'services',
   'services/viewing',
   'services/add-listing',
   'services/room-searching',

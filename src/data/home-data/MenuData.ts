@@ -23,7 +23,7 @@ const menu_data: MenuItem[] = [
     id: 3,
     has_dropdown: true,
     title: "header.services",
-    link: "#",
+    link: "/services",
     class_name: "mega-dropdown-sm",
     menu_column: [
       {

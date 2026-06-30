@@ -2,8 +2,24 @@ const baseUrl = (process.argv[2] || "http://localhost:3011").replace(/\/$/, "");
 
 const pages = [
   {
+    path: "/services",
+    needsOfficialSource: false,
+    forbiddenPhrases: ["Official sources"],
+    requiredPhrases: [
+      "Which Domakin services help with housing in the Netherlands?",
+      "Quick answer",
+      "Book remote viewing",
+      "Property catalogue",
+      "Search for a room",
+      "List a room",
+      "Domakin remote property viewing service",
+      "Domakin list a room service",
+    ],
+  },
+  {
     path: "/services/room-searching",
-    needsOfficialSource: true,
+    needsOfficialSource: false,
+    forbiddenPhrases: ["Official sources"],
   },
   {
     path: "/services/viewing",
@@ -85,7 +101,8 @@ const pages = [
   },
   {
     path: "/services/add-listing",
-    needsOfficialSource: true,
+    needsOfficialSource: false,
+    forbiddenPhrases: ["Official sources"],
   },
 ];
 
@@ -160,7 +177,9 @@ for (const page of pages) {
   results.push({
     path,
     status: response.status,
-    answerBlock: visibleHtml.includes("data-geo-service-answer-block"),
+    answerBlock:
+      visibleHtml.includes("data-geo-service-answer-block") ||
+      visibleHtml.includes("data-geo-services-hub-answer-block"),
     officialSource,
     requiredPhrasesPresent,
     visibleOccurrenceLimitsMet,

@@ -60,8 +60,21 @@ const viewingDeliverables = [
   {
     icon: "fa-circle-question",
     title: "Questions answered",
-    text: "Your agent asks the questions you select in the form and adds the answers to your report.",
+    text: "Your agent asks the questions you select in the form, so you can get all your questions answered in the report.",
   },
+];
+
+const viewingQuestionChecklist = [
+  "How much is the rent and the deposit?",
+  "What is the contract length?",
+  "Is registration possible?",
+  "Is housing allowance possible?",
+  "How many tenants is the bathroom shared with?",
+  "Is there a storage room?",
+  "Do I need to buy kitchen utensils?",
+  "How do I apply for the property if I am interested?",
+  "How to apply for the place after the viewing and what is the deadline?",
+  "How many people are interested in the place and what are the chances of getting it?",
 ];
 
 const viewingAnswerFaqs = [
@@ -623,14 +636,14 @@ const ViewingForm = () => {
               </p>
               <div
                 className="viewing-payment-strip"
-                aria-label="Remote viewing pricing and payment terms"
+                aria-label="Viewing payment terms"
               >
                 {viewingPaymentHighlights.map((item) => (
                   <div className="viewing-payment-item" key={item.label}>
                     <i className={`fa-solid ${item.icon}`} aria-hidden="true"></i>
                     <div>
                       <span>{item.label}</span>
-                      <strong>EUR {item.price}</strong>
+                      <strong>{item.price} euros</strong>
                       <small>{item.note}</small>
                     </div>
                   </div>
@@ -1127,6 +1140,7 @@ const ViewingForm = () => {
 
             <div
               className="viewing-below-form"
+              data-geo-service-answer-block
               data-viewing-below-form
               itemScope
               itemType="https://schema.org/FAQPage"
@@ -1144,7 +1158,7 @@ const ViewingForm = () => {
                   lets a local Domakin agent attend a rental viewing for you in
                   the Netherlands. The agent checks the property, asks your
                   questions, takes pictures and videos, and sends you a report
-                  so you can make your own decision. It is built for people
+                  so you can make a decision. It is built for people
                   searching for viewing Netherlands, remote viewing Netherlands
                   or online viewing Netherlands support.
                 </p>
@@ -1207,6 +1221,19 @@ const ViewingForm = () => {
                     </article>
                   ))}
                 </div>
+                <div className="viewing-question-checklist">
+                  <h4 className="small fw-semibold mb-2">
+                    Common questions your agent can ask
+                  </h4>
+                  <ul>
+                    {viewingQuestionChecklist.map((question) => (
+                      <li key={question}>
+                        <i className="fa-solid fa-check" aria-hidden="true"></i>
+                        {question}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 <a href="#book-viewing" className="viewing-inline-cta">
                   Start the request
                 </a>
@@ -1214,7 +1241,7 @@ const ViewingForm = () => {
 
               <ViewingAnswerAccordion
                 eyebrow="Viewing Netherlands cities"
-                title="Where can you book a remote viewing in the Netherlands?"
+                title="Supported viewing cities for remote viewing in the Netherlands"
                 onToggle={handleViewingAnswerAccordionToggle}
               >
                 <p className="mb-3">

@@ -91,7 +91,6 @@ const mappings = [
     requiredPhrases: [
       "What does Domakin's room searching service do?",
       "Quick answer",
-      "Official sources",
       "Government.nl rented housing",
     ],
     requiredLinks: [
@@ -99,6 +98,33 @@ const mappings = [
     ],
     requiredJsonLdTypes: ["Service", "FAQPage"],
     answerMarker: "data-geo-service-answer-block",
+  },
+  {
+    id: "services-hub",
+    query: "Domakin services remote viewing list a room Netherlands",
+    impact: 5,
+    targetPath: "/services",
+    sourceFiles: [
+      "src/components/inner-pages/services/ServicesHub.tsx",
+      "src/pages/services/index.tsx",
+    ],
+    engines: allEngineIds,
+    requiredPhrases: [
+      "Which Domakin services help with housing in the Netherlands?",
+      "Quick answer",
+      "Book remote viewing",
+      "Property catalogue",
+      "Search for a room",
+      "List a room",
+      "Domakin remote property viewing service",
+      "Domakin list a room service",
+    ],
+    requiredLinks: [
+      "/services/viewing",
+      "/services/add-listing",
+    ],
+    requiredJsonLdTypes: ["WebPage", "ItemList", "Service", "FAQPage"],
+    answerMarker: "data-geo-services-hub-answer-block",
   },
   {
     id: "viewing-service",
@@ -172,7 +198,6 @@ const mappings = [
       "Can Domakin help you list a room and find a new tenant or flatmate?",
       "Domakin list a room service",
       "Quick answer",
-      "Official sources",
       "Government.nl rented housing",
     ],
     requiredLinks: [

@@ -91,6 +91,22 @@ for (const path of [
 const pageChecks = [];
 const pageExpectations = [
   {
+    path: "/services",
+    answerMarker: "data-geo-services-hub-answer-block",
+    requiredText: [
+      "Which Domakin services help with housing in the Netherlands?",
+      "Book remote viewing",
+      "Property catalogue",
+      "Search for a room",
+      "List a room",
+      "Domakin remote property viewing service",
+      "Domakin list a room service",
+    ],
+    forbiddenText: ["Official sources"],
+    requiredTypes: ["WebPage", "ItemList", "Service", "FAQPage", "BreadcrumbList"],
+    minInternalLinks: 5,
+  },
+  {
     path: "/services/renting",
     requiredTypes: ["ItemList", "Accommodation", "Offer", "BreadcrumbList"],
     minInternalLinks: 3,
@@ -99,6 +115,7 @@ const pageExpectations = [
     path: "/services/room-searching",
     answerMarker: "data-geo-service-answer-block",
     sourceMarker: "government.nl/themes/building-and-housing/housing/rented-housing",
+    forbiddenText: ["Official sources"],
     requiredTypes: ["Service", "FAQPage"],
     minInternalLinks: 3,
   },
@@ -150,6 +167,7 @@ const pageExpectations = [
     path: "/services/add-listing",
     answerMarker: "data-geo-service-answer-block",
     sourceMarker: "government.nl/themes/building-and-housing/housing/rented-housing",
+    forbiddenText: ["Official sources"],
     requiredTypes: ["Service", "FAQPage"],
     minInternalLinks: 3,
   },

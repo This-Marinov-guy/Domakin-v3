@@ -63,7 +63,7 @@ const SERVICE_ANSWER_BY_ID: Record<ServiceAnswerId, ServiceAnswerData> = {
     serviceName: "Domakin remote property viewing service",
     serviceType: "Remote rental property viewing assistance",
     audience: "Students who need a remote rental viewing in the Netherlands",
-    question: "Can Domakin do a remote rental viewing in the Netherlands for you?",
+    question: "Can Domakin do a remote rental viewing for you?",
     answer:
       "Yes. Domakin provides a viewing Netherlands service for renters who cannot attend in person. A local agent can attend a remote rental viewing on your behalf and report back with photos, video and practical notes so you can decide faster from abroad or another city. Students may call this a viewing, remote viewing, online viewing or property viewing service in the Netherlands. The legal decision remains yours; compare the remote viewing notes with the written tenancy agreement and landlord information.",
     nextSteps: [
@@ -186,8 +186,6 @@ export default function ServiceAnswerBlock({
 }: {
   data: ServiceAnswerData;
 }) {
-  const sources = data.sources ?? [];
-
   return (
     <section
       className="container mt-50 mb-50"
@@ -233,24 +231,6 @@ export default function ServiceAnswerBlock({
               </Link>
             </div>
           </div>
-        )}
-        {sources.length > 0 && (
-          <>
-            <p className="fw-semibold mb-2">Official sources</p>
-            <ul className="mb-0 ps-4">
-              {sources.map((source) => (
-                <li key={source.url}>
-                  <a
-                    href={source.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {source.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </>
         )}
       </div>
     </section>

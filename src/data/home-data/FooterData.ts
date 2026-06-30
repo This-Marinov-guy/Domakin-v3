@@ -116,6 +116,7 @@ const footer_data: DataType[] = [
     page: "home_4",
     widget_title: "footer.services",
     footer_link: [
+      { link: "/services", link_title: "footer.services" },
       { link: "/services/viewing", link_title: "footer.viewings" },
       { link: "/services/renting", link_title: "features.rent_an_apartment" },
       {
