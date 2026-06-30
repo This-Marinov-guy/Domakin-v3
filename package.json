@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "perf:viewing": "node scripts/perf/viewing-response-budget.mjs",
     "sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
@@ -37,7 +38,7 @@
     "next-translate": "^2.6.2",
     "next-translate-plugin": "^2.6.2",
     "rc-time-picker": "^3.7.3",
-    "react": "^18",
+    "react": "^18.3.1",
     "react-18-image-lightbox": "^5.1.4",
     "react-bootstrap": "^2.10.7",
     "react-chartjs-2": "^5.2.0",
@@ -76,7 +77,7 @@
     "@types/react-modal-video": "^1.2.3",
     "@types/react-slick": "^0.23.12",
     "eslint": "^9.39.3",
-    "eslint-config-next": "^0.2.4",
+    "eslint-config-next": "^15.5.9",
     "typescript": "^5"
   }
 }

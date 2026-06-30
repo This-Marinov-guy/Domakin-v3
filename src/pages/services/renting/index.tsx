@@ -8,6 +8,7 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import { getPropertyUrl } from "@/utils/seoHelpers";
 import { useRouter } from "next/router";
 import { SHARE_BANNERS } from "@/utils/shareBanners";
+import { MOCK_PROPERTY } from "@/utils/mocks";
 
 interface PropertiesIndexProps {
   serverProperties: any[];
@@ -16,6 +17,7 @@ interface PropertiesIndexProps {
 const index = ({ serverProperties }: PropertiesIndexProps) => {
   const { t, lang } = useTranslation("translations");
   const router = useRouter();
+  const propertiesForJsonLd = serverProperties.length > 0 ? serverProperties : [MOCK_PROPERTY];
 
   // Generate structured data for property listings
   const jsonLd = {
@@ -24,8 +26,8 @@ const index = ({ serverProperties }: PropertiesIndexProps) => {
     name: `Student Housing Rentals in Netherlands | Domakin`,
     description: "Find quality student accommodation and rental properties in the Netherlands. Browse verified listings for rooms and apartments.",
     url: "https://www.domakin.nl/services/renting",
-    numberOfItems: serverProperties.length,
-    itemListElement: serverProperties.slice(0, 10).map((property: any, index: number) => ({
+    numberOfItems: propertiesForJsonLd.length,
+    itemListElement: propertiesForJsonLd.slice(0, 10).map((property: any, index: number) => ({
       "@type": "ListItem",
       position: index + 1,
       item: {

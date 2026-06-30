@@ -3,6 +3,11 @@ import Wrapper from "@/layouts/Wrapper";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
+import {
+  createServiceFaqJsonLd,
+  createServiceJsonLd,
+  getServiceAnswerData,
+} from "@/components/inner-pages/services/ServiceAnswerBlock";
 import { SHARE_BANNERS } from "@/utils/shareBanners";
 
 const index = () => {
@@ -11,6 +16,7 @@ const index = () => {
   
   const baseUrl = "https://www.domakin.nl";
   const currentUrl = `${baseUrl}${router.asPath}`;
+  const serviceAnswerData = getServiceAnswerData("room-searching");
   
   // Get localized content
   const title = lang === "en" 
@@ -59,6 +65,18 @@ const index = () => {
           : lang === "bg"
           ? "търсене на стая, намери стая, търсене на студентска стая, търсене на настаняване, Нидерландия"
           : "αναζήτηση δωματίου, εύρεση δωματίου, αναζήτηση φοιτητικού δωματίου, Ολλανδία"} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(createServiceJsonLd(serviceAnswerData, currentUrl)),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(createServiceFaqJsonLd(serviceAnswerData)),
+          }}
+        />
       </Head>
       <Wrapper>
         <RoomSearching />

@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Primary Generated Sitemap (includes all content) -->
   <sitemap>
     <loc>https://www.domakin.nl/sitemap.xml</loc>
-    <lastmod>2024-12-19</lastmod>
-  </sitemap>
-  
-  <!-- Fallback Static Sitemap -->
-  <sitemap>
-    <loc>https://www.domakin.nl/sitemap.xml</loc>
-    <lastmod>2024-12-19</lastmod>
-  </sitemap>
-  
-  <!-- Dynamic Content Sitemap (Blog Posts & Properties) -->
-  <sitemap>
-    <loc>https://www.domakin.nl/api/v1/sitemap.xml</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2026-06-26</lastmod>
   </sitemap>
 </sitemapindex>

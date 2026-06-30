@@ -16,6 +16,12 @@ export default function Document() {
           content="5bb9c9b954a6dcbe124f256875661b8543d910643c63a6209a7064ec74b56183"
         />
 
+        {/* Google Fonts */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap"
+          rel="stylesheet"
+        />
+
         {/* Google tag (gtag.js) */}
         {process.env.NEXT_PUBLIC_GTM_ENABLE === "1" && (
           <>

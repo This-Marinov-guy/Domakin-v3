@@ -20,6 +20,7 @@ import HeaderOne from "@/layouts/headers/HeaderOne";
 import PropertyCardGrid from "@/components/ui/cards/properties/PropertyCardGrid";
 import { MOCK_PROPERTY } from "@/utils/mocks";
 import FloatingCenterButton from "@/components/ui/buttons/FloatingCenterButton";
+import ServiceAnswerBlock, { getServiceAnswerData } from "../ServiceAnswerBlock";
 
 interface HomeSixProps {
     serverFeedbacks?: any[];
@@ -29,6 +30,7 @@ interface HomeSixProps {
 function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixProps) {
     const { t } = useTranslation("translations");
     const router = useRouter();
+    const serviceAnswerData = getServiceAnswerData("add-listing");
     const {
         propertyStore: {
             setReferenceId,
@@ -142,6 +144,7 @@ function LendingPageV3({ serverFeedbacks = [], serverProperties = [] }: HomeSixP
             <HeaderOne />
             <HeroSectionV2 openModal={() => setShowListRoomModal(true)} />
             <HowToWorksSectionHorizontal />
+            <ServiceAnswerBlock data={serviceAnswerData} />
 
 
             <div className='row'>

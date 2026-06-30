@@ -2,6 +2,9 @@ import React, { useState, useRef, useCallback } from "react";
 import { useClickAway } from "react-use";
 
 interface SearchableCitySelectProps {
+  id?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
   value: string;
   onChange: (value: string) => void;
   isInvalid?: boolean;
@@ -10,6 +13,9 @@ interface SearchableCitySelectProps {
 }
 
 const SearchableCitySelect: React.FC<SearchableCitySelectProps> = ({
+  id,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   value,
   onChange,
   isInvalid,
@@ -19,6 +25,8 @@ const SearchableCitySelect: React.FC<SearchableCitySelectProps> = ({
   const [open, setOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const ref = useRef<HTMLDivElement>(null);
+  const generatedListboxId = React.useId();
+  const listboxId = id ? `${id}-listbox` : generatedListboxId;
 
   const filteredCities = cities.filter((city) =>
     city.toLowerCase().includes(searchTerm.toLowerCase())
@@ -42,14 +50,22 @@ const SearchableCitySelect: React.FC<SearchableCitySelectProps> = ({
       className={`searchable-city-select ${open ? "open" : ""} ${isInvalid ? "is-invalid" : ""}`}
     >
       <div
+        id={id}
         className="select-trigger"
         onClick={() => setOpen(!open)}
-        role="button"
+        role="combobox"
         tabIndex={0}
+        aria-expanded={open}
+        aria-haspopup="listbox"
+        aria-controls={listboxId}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
             setOpen(!open);
+          } else if (e.key === "Escape") {
+            setOpen(false);
           }
         }}
       >
@@ -63,15 +79,16 @@ const SearchableCitySelect: React.FC<SearchableCitySelectProps> = ({
           <div className="search-input-wrapper">
             <i className="bi bi-search"></i>
             <input
-            style={{ padding: "0 20px 0 34px" }}
+              style={{ padding: "0 20px 0 34px" }}
               type="text"
               className="search-input"
+              aria-label="Search cities"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               autoFocus
             />
           </div>
-          <ul className="options-list">
+          <ul className="options-list" id={listboxId} role="listbox">
             {filteredCities.length > 0 ? (
               filteredCities.map((city, index) => (
                 <li
@@ -84,7 +101,8 @@ const SearchableCitySelect: React.FC<SearchableCitySelectProps> = ({
                       handleSelect(city);
                     }
                   }}
-                  role="menuitem"
+                  role="option"
+                  aria-selected={value === city}
                   tabIndex={0}
                 >
                   {city}

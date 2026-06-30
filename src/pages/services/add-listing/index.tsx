@@ -6,6 +6,11 @@ import { fetchFeedbacks, fetchProperties } from "@/services/api";
 import useTranslation from "next-translate/useTranslation";
 import LendingPageV3 from "@/components/inner-pages/services/detail-page/LendingPageV3";
 import LendingPage from "@/components/inner-pages/services/detail-page/LendingPage";
+import {
+  createServiceFaqJsonLd,
+  createServiceJsonLd,
+  getServiceAnswerData,
+} from "@/components/inner-pages/services/ServiceAnswerBlock";
 import { SHARE_BANNERS } from "@/utils/shareBanners";
 
 interface HomeProps {
@@ -19,16 +24,17 @@ const index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
   
   const baseUrl = "https://www.domakin.nl";
   const currentUrl = `${baseUrl}${router.asPath}`;
+  const serviceAnswerData = getServiceAnswerData("add-listing");
   
   // Get localized content
   const title = lang === "en" 
-    ? "List a Room | Domakin - Transfer Your Contract or Find a Flatmate"
+    ? "List a Room in the Netherlands | Domakin"
     : lang === "bg"
     ? "Отдай стая | Domakin - Прехвърли договора си или намери съквартирант"
     : "Καταχωρίστε Δωμάτιο | Domakin - Μεταβιβάστε τη Συνδρομή σας ή Βρείτε Συγκάτοικο";
   
   const description = lang === "en"
-    ? "Transfer your rental contract or find a new flatmate. List your room on Domakin and connect with verified students looking for accommodation in the Netherlands."
+    ? "List your room on Domakin to find a new tenant or flatmate in the Netherlands. Share room details, availability, rent and photos with students looking for accommodation."
     : lang === "bg"
     ? "Прехвърлете договора си за наем или намерете нов съквартирант. Публикувайте стаята си в Domakin и се свържете с проверени студенти, търсещи настаняване в Нидерландия."
     : "Μεταβιβάστε το συμβόλαιο ενοικίασής σας ή βρείτε νέο συγκάτοικο. Καταχωρίστε το δωμάτιό σας στο Domakin και συνδεθείτε με επαληθευμένους φοιτητές που αναζητούν διαμονή στην Ολλανδία.";
@@ -63,10 +69,22 @@ const index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
         
         {/* Additional meta tags */}
         <meta name="keywords" content={lang === "en" 
-          ? "list a room, transfer contract, find flatmate, room listing, Netherlands, student accommodation, contract transfer"
+          ? "list a room Netherlands, room listing service, find tenant Netherlands, find flatmate Netherlands, transfer rental contract, student accommodation listing"
           : lang === "bg"
           ? "отдай стая, прехвърли договор, намери съквартирант, обява за стая, Нидерландия"
           : "καταχώρηση δωματίου, μεταβίβαση συμβολαίου, εύρεση συγκατοίκου, Ολλανδία"} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(createServiceJsonLd(serviceAnswerData, currentUrl)),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(createServiceFaqJsonLd(serviceAnswerData)),
+          }}
+        />
       </Head>
       <Wrapper>
         <LendingPageV3 serverFeedbacks={serverFeedbacks} serverProperties={serverProperties}/>

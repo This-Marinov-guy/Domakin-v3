@@ -72,8 +72,8 @@ const index = ({ serverProperties }: PropertyDetailsProps) => {
   const propertyDescription = property.description?.property || 
     `Quality student accommodation in ${property.city}, Netherlands. ${property.description?.period || ''} ${property.description?.bills || ''}`.trim();
   
-  const propertyImage = property.main_image?.startsWith('http') 
-    ? property.main_image 
+  const propertyImage = property.main_image?.startsWith('http')
+    ? property.main_image
     : `https://www.domakin.nl/assets/img/properties/${property.folder ?? "property_" + property.id}/${property.main_image}`;
   const shareImage = SHARE_BANNERS.main;
 

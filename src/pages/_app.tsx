@@ -24,21 +24,25 @@ const MyApp = ({ Component, pageProps }: any) => {
 
   const onChange = () => {
     // on captcha change
-  };  
+  };
 
   return (
     <Suspense fallback={<PageLoader />}>
+      {/* SEO can still handle meta tags, titles, etc.
+          Just make sure it does NOT insert <link rel="stylesheet" href="https://fonts.googleapis..."> anymore */}
       <SEO />
       <MainLayout>
         <Component {...pageProps} recaptchaRef={recaptchaRef} />
-        {process.env.NEXT_PUBLIC_RECAPTCHA_ENABLE == '1' && <div className="rc-anchor">
-          <ReCAPTCHA
-            size="invisible"
-            badge="bottomleft"
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ""}
-            onChange={onChange}
-          />
-        </div>}
+        {process.env.NEXT_PUBLIC_RECAPTCHA_ENABLE === "1" && (
+          <div className="rc-anchor">
+            <ReCAPTCHA
+              size="invisible"
+              badge="bottomleft"
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ""}
+              onChange={onChange}
+            />
+          </div>
+        )}
       </MainLayout>
     </Suspense>
   );

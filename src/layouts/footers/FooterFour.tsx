@@ -7,8 +7,14 @@ import footer_data from "@/data/home-data/FooterData"
 import { EMAIL, FACEBOOK, INSTAGRAM, KVK, LINKEDIN } from "@/utils/defines"
 import useTranslation from "next-translate/useTranslation"
 
-const FooterFour = () => {
+type FooterFourProps = {
+  openLinksInNewTab?: boolean;
+};
+
+const FooterFour = ({ openLinksInNewTab = false }: FooterFourProps) => {
    const {t} = useTranslation('translations');
+   const linkTarget = openLinksInNewTab ? "_blank" : undefined;
+   const linkRel = openLinksInNewTab ? "noreferrer" : undefined;
 
    return (
      <div className="footer-four position-relative z-1">
@@ -18,7 +24,7 @@ const FooterFour = () => {
              <div className="col-xxl-3 col-lg-4 mb-60">
                <div className="footer-intro">
                  <div className="logo mb-20">
-                   <Link href="/">
+                   <Link href="/" target={linkTarget} rel={linkRel}>
                      <Image className="logo" src={footerLogo} alt="" />
                    </Link>
                  </div>
@@ -26,23 +32,24 @@ const FooterFour = () => {
                  <a
                    href={`mailto:${EMAIL}`}
                    target="_blank"
+                   rel="noreferrer"
                    className="email tran3s mb-60 md-mb-30"
                  >
                    {EMAIL}
                  </a>
                  <ul className="style-none d-flex align-items-center social-icon">
                    <li>
-                     <a href={FACEBOOK} target="_blank">
+                     <a href={FACEBOOK} target="_blank" rel="noreferrer">
                        <i className="fa-brands fa-facebook-f"></i>
                      </a>
                    </li>
                    <li>
-                     <a href={INSTAGRAM} target="_blank">
+                     <a href={INSTAGRAM} target="_blank" rel="noreferrer">
                        <i className="fa-brands fa-instagram"></i>
                      </a>
                    </li>
                    <li>
-                     <a href={LINKEDIN} target="_blank">
+                     <a href={LINKEDIN} target="_blank" rel="noreferrer">
                        <i className="fa-brands fa-linkedin"></i>
                      </a>
                    </li>
@@ -62,7 +69,9 @@ const FooterFour = () => {
                      <ul className="footer-nav-link style-none">
                        {item.footer_link.map((li, i) => (
                          <li key={i}>
-                           <Link href={li.link}>{t(li.link_title)}</Link>
+                           <Link href={li.link} target={linkTarget} rel={linkRel}>
+                             {t(li.link_title)}
+                           </Link>
                          </li>
                        ))}
                      </ul>

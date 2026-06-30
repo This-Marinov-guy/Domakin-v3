@@ -17,6 +17,9 @@ type NiceSelectProps = {
   /** The currently selected value (controlled). Pass undefined to show placeholder. */
   value?: string | number;
   placeholder: string;
+  id?: string;
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
   className?: string;
   style?: React.CSSProperties;
   icon?: string;
@@ -30,6 +33,9 @@ const NiceSelect: FC<NiceSelectProps> = ({
   options,
   value,
   placeholder,
+  id,
+  ariaLabel,
+  ariaLabelledBy,
   className,
   style,
   onChange,
@@ -46,6 +52,8 @@ const NiceSelect: FC<NiceSelectProps> = ({
 
   const ref = useRef<HTMLDivElement | null>(null);
   useClickAway(ref, onClose);
+  const generatedListboxId = React.useId();
+  const listboxId = id ? `${id}-listbox` : generatedListboxId;
 
   // Derive selected options from the value prop — no internal selection state
   const selectedOptions =
@@ -76,14 +84,27 @@ const NiceSelect: FC<NiceSelectProps> = ({
 
   return (
     <div
+      id={id}
       className={`nice-select form-select-lg ${className || ""} ${
         open ? "open" : ""
       } ${isInvalid ? "is-invalid" : ""}`}
       style={style}
-      role="button"
+      role="combobox"
       tabIndex={0}
+      aria-expanded={open}
+      aria-haspopup="listbox"
+      aria-controls={listboxId}
+      aria-label={ariaLabel || (!ariaLabelledBy ? placeholder : undefined)}
+      aria-labelledby={ariaLabelledBy}
       onClick={() => setOpen((prev) => !prev)}
-      onKeyDown={(e) => e}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setOpen((prev) => !prev);
+        } else if (e.key === "Escape") {
+          setOpen(false);
+        }
+      }}
       ref={ref}
     >
       {icon && <img src={icon} style={{ width: "20px" }} alt="icon" />}
@@ -95,7 +116,10 @@ const NiceSelect: FC<NiceSelectProps> = ({
           : placeholder}
       </span>
       <ul
+        id={listboxId}
         className="list"
+        role="listbox"
+        aria-multiselectable={multi || undefined}
         onClick={(e) => e.stopPropagation()}
         onKeyDown={(e) => e.stopPropagation()}
       >
@@ -109,16 +133,28 @@ const NiceSelect: FC<NiceSelectProps> = ({
                 : ""
             }`}
             style={{ fontSize: "14px" }}
-            role="menuitem"
+            role="option"
+            aria-selected={selectedOptions.some((s) => s.value === item.value)}
             onClick={() => currentHandler(item)}
             onKeyDown={(e) => e}
           >
             {multi && (
-              <input
-                type="checkbox"
-                checked={selectedOptions.some((s) => s.value === item.value)}
-                onChange={() => {}}
-              />
+              <span
+                aria-hidden="true"
+                className="nice-select-check"
+                style={{
+                  alignItems: "center",
+                  border: "1px solid currentColor",
+                  display: "inline-flex",
+                  height: 14,
+                  justifyContent: "center",
+                  width: 14,
+                }}
+              >
+                {selectedOptions.some((s) => s.value === item.value) && (
+                  <i className="fa-solid fa-check" aria-hidden="true"></i>
+                )}
+              </span>
             )}
             {item.text}
           </li>

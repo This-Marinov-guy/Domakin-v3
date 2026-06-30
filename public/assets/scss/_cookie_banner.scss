@@ -144,6 +144,53 @@
   }
 }
 
+@media (max-width: 575.98px) {
+  .cookie-banner {
+    max-height: none;
+    padding: 0.55rem 0;
+
+    .container {
+      padding: 0 0.75rem;
+    }
+
+    &__content {
+      align-items: stretch;
+      gap: 0.55rem;
+    }
+
+    &__text {
+      gap: 0.55rem;
+    }
+
+    &__icon {
+      font-size: 1rem;
+      margin-top: 0.1rem;
+    }
+
+    &__title {
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+
+    &__description {
+      font-size: 0.78rem;
+      line-height: 1.35;
+    }
+
+    &__actions {
+      flex-direction: row;
+      gap: 0.5rem;
+    }
+
+    &__btn {
+      flex: 1 1 0;
+      font-size: 0.76rem;
+      min-width: 0;
+      padding: 0.62rem 0.45rem;
+    }
+  }
+}
+
 // Ensure body doesn't scroll when banner is visible (optional)
 body.cookie-banner-open {
   padding-bottom: 0;
