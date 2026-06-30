@@ -1136,3 +1136,42 @@
     width: 56.666667%;
   }
 }
+
+.viewing-payment-label-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px;
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.viewing-payment-svg-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  flex: 0 0 20px;
+  background-color: $color-two;
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.viewing-payment-label-text {
+  display: inline-block !important;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.viewing-payment-price {
+  color: white !important;
+  margin-left: auto;
+  white-space: nowrap;
+}

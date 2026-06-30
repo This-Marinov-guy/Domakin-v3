@@ -266,7 +266,191 @@
     "pricing_policy_banner_title": "View Pricing & Our \"No Cure, No Pay\" Policy",
     "pricing_policy_banner_description": "We only charge if we successfully attend the viewing for you — no cure, no pay.",
     "pricing_link": "Pricing",
-    "policy_link": "Policy"
+    "policy_link": "Policy",
+    "page": {
+      "hero_title": "How remote viewing works",
+      "no_charge": "No charge unless we successfully attend.",
+      "start_request": "Start request",
+      "payment": {
+        "standard_label": "Standard",
+        "standard_tooltip": "more than 24 hours of notice",
+        "express_label": "Express",
+        "express_tooltip": "less than 24 hours of notice"
+      },
+      "journey": {
+        "step1": "You have been invited to a viewing you cannot attend",
+        "step2": "Schedule a viewing and tell us everything you want to know about the place",
+        "step3": "We attend on your behalf and create a report with pictures and videos + your specific questions",
+        "step4": "We send you the report and tell us our opinion on the property",
+        "step5": "You make your own decision"
+      },
+      "journey_nav": {
+        "previous": "Previous remote viewing step",
+        "next": "Next remote viewing step",
+        "start": "Start remote viewing request",
+        "step": "Step"
+      },
+      "form_intro": "Tell us what to check, where to go and who the viewing is for.",
+      "form_heading": "You have been invited to a viewing",
+      "question_label": "Question",
+      "add_question": "Add another question",
+      "remove_question": "Remove question",
+      "question_placeholder_1": "Question 1 suggestion: Is registration possible?",
+      "question_placeholder_2": "Question 2 suggestion: How much is the rent and deposit?",
+      "question_placeholder_3": "Question 3 suggestion: How do I apply?",
+      "question_placeholder_fallback": "Add anything else the agent should ask",
+      "extra_questions_label": "Extra questions or notes",
+      "extra_questions_placeholder": "Anything specific you want us to check, ask, photograph or mention during the viewing.",
+      "where_heading": "Where is the place?",
+      "city_label": "City of viewing",
+      "city_placeholder": "Choose city or Other",
+      "other_city": "Other",
+      "other_city_label": "City or location",
+      "other_city_placeholder": "Type the city or nearby location",
+      "other_city_disclaimer": "We will contact you about this location, but we might not be able to fulfill the viewing.",
+      "street_label": "Street name",
+      "postcode_label": "Postcode",
+      "house_number_label": "House number",
+      "date_label": "Date of the viewing",
+      "time_label": "Time of the viewing",
+      "applicant_heading": "Who is this viewing for?",
+      "phone_country_aria": "Phone country code",
+      "submit": "Request remote viewing",
+      "info": {
+        "form_intro": "Add the exact questions you want the agent to ask. Start with the suggested placeholders or write your own.",
+        "extra_questions": "Use this for broader context, scam concerns, furniture details, documents you need checked or exact photos you want.",
+        "location": "Add the exact viewing location from your invitation so the agent can confirm the right property and arrive prepared.",
+        "city": "Choose one of the supported cities. If your city is missing, choose Other and type the location so we can check whether an agent is available.",
+        "custom_city": "Type the city, village or nearby area. We will contact you if we cannot cover that location.",
+        "street": "Use the street name from the invitation or listing so the agent can match the viewing correctly.",
+        "timing": "Use the viewing date and Netherlands local time shown in your invitation, so we book the agent for the correct slot.",
+        "date": "Select the date from the viewing invitation.",
+        "time": "Use the viewing time in Europe/Amsterdam time.",
+        "applicant": "These details tell us who the viewing is for, how to contact you and where to send the report with photos and videos."
+      },
+      "faq_title": "FAQ",
+      "cta": {
+        "book": "Book your remote viewing",
+        "start": "Start the request",
+        "check_city": "Check your viewing city",
+        "request": "Request a remote viewing",
+        "read_more_pricing": "Read more about pricing",
+        "back_to_request": "Go back to the viewing request"
+      },
+      "a_what": {
+        "eyebrow": "Remote viewing answer",
+        "title": "What is a remote viewing service in the Netherlands?",
+        "body": "A remote viewing, online viewing or virtual viewing service lets a local Domakin agent attend a rental viewing for you in the Netherlands. The agent checks the property, asks your questions, takes pictures and videos, and sends you a report so you can make a decision. It is built for people searching for viewing Netherlands, remote viewing Netherlands or online viewing Netherlands support."
+      },
+      "a_when": {
+        "eyebrow": "Remote viewing use cases",
+        "title": "When should you book a remote or online viewing?",
+        "body": "Book a remote viewing in the Netherlands when you are invited to a rental viewing but cannot attend, need a scam check, or want practical property feedback before applying."
+      },
+      "a_deliverables": {
+        "eyebrow": "Remote viewing deliverables",
+        "title": "What do you get after a Domakin remote viewing?",
+        "body": "After a Domakin online viewing, you get the information a renter needs to compare the listing, decide faster and avoid unnecessary travel.",
+        "checklist_title": "Common questions your agent can ask"
+      },
+      "a_cities": {
+        "eyebrow": "Viewing Netherlands cities",
+        "title": "Supported viewing cities for remote viewing in the Netherlands",
+        "body_prefix": "Domakin offers remote viewings and online viewings in",
+        "body_suffix": "If your city is not in the list, choose Other in the form and type the location; we will contact you and let you know if an agent can cover it.",
+        "area_aria": "Remote viewing service cities"
+      },
+      "a_faq": {
+        "title": "Remote viewing FAQ"
+      },
+      "a_pricing": {
+        "eyebrow": "Remote viewing pricing",
+        "title": "What does a remote viewing cost in the Netherlands?",
+        "body": "Choose the option based on how soon the viewing is scheduled. Both remote viewing prices include an agent attending the rental viewing, asking your questions, checking the property condition and sending a report with pictures and videos.",
+        "next_title": "What happens after you request a viewing?"
+      },
+      "a_links": {
+        "eyebrow": "Domakin information",
+        "title": "Where can you find Domakin company links?"
+      },
+      "use_cases": {
+        "abroad_title": "Invited but abroad",
+        "abroad_text": "Use this when you get invited for a viewing but cannot attend because you are abroad.",
+        "scam_title": "Scam and condition check",
+        "scam_text": "Use it when you think the listing may be a scam or want to know if the place is in good condition as advertised.",
+        "lottery_title": "Move faster in lotteries",
+        "lottery_text": "You can increase your chances during a housing lottery by deciding quickly after the viewing.",
+        "trips_title": "Avoid wasted trips",
+        "trips_text": "You can save time and money traveling when you need a trusted local check first."
+      },
+      "deliverables": {
+        "report_title": "Viewing report",
+        "report_text": "You receive a practical report with the agent's notes, pictures and videos from the property.",
+        "check_title": "Property check",
+        "check_text": "The agent checks the condition of the room, studio or apartment against the advert and your concerns.",
+        "questions_title": "Questions answered",
+        "questions_text": "Your agent asks the questions you select in the form, so you can get all your questions answered in the report."
+      },
+      "checklist": {
+        "q1": "How much is the rent and the deposit?",
+        "q2": "What is the contract length?",
+        "q3": "Is registration possible?",
+        "q4": "Is housing allowance possible?",
+        "q5": "How many tenants is the bathroom shared with?",
+        "q6": "Is there a storage room?",
+        "q7": "Do I need to buy kitchen utensils?",
+        "q8": "How do I apply for the property if I am interested?",
+        "q9": "How to apply for the place after the viewing and what is the deadline?",
+        "q10": "How many people are interested in the place and what are the chances of getting it?"
+      },
+      "faqs": {
+        "q1": "What is a remote viewing?",
+        "a1": "A remote viewing is an in-person rental viewing attended by a local Domakin agent on your behalf. The agent inspects the property, asks your questions, records photos and videos, then sends you a report so you can decide from abroad or from another city.",
+        "q2": "When should I book an online viewing?",
+        "a2": "Book an online viewing when you are invited to a viewing but cannot attend, when you want a scam or condition check, or when you need to decide quickly in a competitive housing process.",
+        "q3": "Does a remote viewing improve my chances?",
+        "a3": "A remote viewing can improve your chances by helping you respond faster after a housing lottery or invitation, ask the right questions and avoid wasting time on unsuitable or suspicious listings.",
+        "q4": "What happens after the viewing?",
+        "a4": "After the viewing, you receive the report with pictures, videos, answers and practical notes. You then decide yourself whether to apply, continue negotiating or walk away."
+      },
+      "next_steps": {
+        "s1": "Send the viewing address, scheduled time and questions you want answered.",
+        "s2": "Use the photos, video and notes to decide whether to proceed.",
+        "s3": "Check rent, deposit, service costs and house rules against the written documents before paying."
+      },
+      "pricing": {
+        "standard_name": "Standard remote viewing",
+        "standard_badge": "Planned viewing",
+        "standard_description": "For viewings scheduled in advance when there is enough time to match an agent.",
+        "standard_best": "Best when your viewing is not urgent.",
+        "standard_inc1": "Agent attends the viewing on your behalf",
+        "standard_inc2": "Your selected questions are asked",
+        "standard_inc3": "Photos, videos and a written report",
+        "express_name": "Express remote viewing",
+        "express_badge": "Urgent request",
+        "express_description": "For urgent viewings within 24 hours when a Domakin agent is available.",
+        "express_best": "Best when the landlord gave you a short deadline.",
+        "express_inc1": "Priority agent check for short-notice availability",
+        "express_inc2": "Agent attends, asks your questions and checks condition",
+        "express_inc3": "Photos, videos and a written report"
+      },
+      "links": {
+        "about": "About Domakin",
+        "contact": "Contact us",
+        "whatsapp": "WhatsApp",
+        "pricing": "Pricing",
+        "room_search": "Room search service",
+        "list_room": "List a room",
+        "instagram": "Instagram"
+      },
+      "sticky_return": {
+        "label": "Back to remote viewing request",
+        "note": "Continue booking"
+      },
+      "euros": "euros",
+      "section_aria": "Book a remote viewing",
+      "payment_terms_aria": "Viewing payment terms"
+    }
   },
   "room_searching": {
     "room_searching_service": "Room searching",

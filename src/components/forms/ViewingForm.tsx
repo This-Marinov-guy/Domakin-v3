@@ -20,186 +20,167 @@ import {
   VIEWING_STANDARD_PRICE,
 } from "@/utils/defines";
 import moment from "moment";
+import Image from "next/image";
 
 const domakinWhatsAppLink = `https://wa.me/${PHONE_NUMBER.replace(/\D/g, "")}`;
 
-const viewingUseCases = [
+type Translate = (key: string) => string;
+
+const getViewingUseCases = (t: Translate) => [
   {
     icon: "fa-plane-departure",
-    title: "Invited but abroad",
-    text: "Use this when you get invited for a viewing but cannot attend because you are abroad.",
+    title: t("viewing.page.use_cases.abroad_title"),
+    text: t("viewing.page.use_cases.abroad_text"),
   },
   {
     icon: "fa-shield-halved",
-    title: "Scam and condition check",
-    text: "Use it when you think the listing may be a scam or want to know if the place is in good condition as advertised.",
+    title: t("viewing.page.use_cases.scam_title"),
+    text: t("viewing.page.use_cases.scam_text"),
   },
   {
     icon: "fa-ranking-star",
-    title: "Move faster in lotteries",
-    text: "You can increase your chances during a housing lottery by deciding quickly after the viewing.",
+    title: t("viewing.page.use_cases.lottery_title"),
+    text: t("viewing.page.use_cases.lottery_text"),
   },
   {
     icon: "fa-clock",
-    title: "Avoid wasted trips",
-    text: "You can save time and money traveling when you need a trusted local check first.",
+    title: t("viewing.page.use_cases.trips_title"),
+    text: t("viewing.page.use_cases.trips_text"),
   },
 ];
 
-const viewingDeliverables = [
+const getViewingDeliverables = (t: Translate) => [
   {
     icon: "fa-clipboard-check",
-    title: "Viewing report",
-    text: "You receive a practical report with the agent's notes, pictures and videos from the property.",
+    title: t("viewing.page.deliverables.report_title"),
+    text: t("viewing.page.deliverables.report_text"),
   },
   {
     icon: "fa-house-circle-check",
-    title: "Property check",
-    text: "The agent checks the condition of the room, studio or apartment against the advert and your concerns.",
+    title: t("viewing.page.deliverables.check_title"),
+    text: t("viewing.page.deliverables.check_text"),
   },
   {
     icon: "fa-circle-question",
-    title: "Questions answered",
-    text: "Your agent asks the questions you select in the form, so you can get all your questions answered in the report.",
+    title: t("viewing.page.deliverables.questions_title"),
+    text: t("viewing.page.deliverables.questions_text"),
   },
 ];
 
-const viewingQuestionChecklist = [
-  "How much is the rent and the deposit?",
-  "What is the contract length?",
-  "Is registration possible?",
-  "Is housing allowance possible?",
-  "How many tenants is the bathroom shared with?",
-  "Is there a storage room?",
-  "Do I need to buy kitchen utensils?",
-  "How do I apply for the property if I am interested?",
-  "How to apply for the place after the viewing and what is the deadline?",
-  "How many people are interested in the place and what are the chances of getting it?",
+const getViewingQuestionChecklist = (t: Translate) => [
+  t("viewing.page.checklist.q1"),
+  t("viewing.page.checklist.q2"),
+  t("viewing.page.checklist.q3"),
+  t("viewing.page.checklist.q4"),
+  t("viewing.page.checklist.q5"),
+  t("viewing.page.checklist.q6"),
+  t("viewing.page.checklist.q7"),
+  t("viewing.page.checklist.q8"),
+  t("viewing.page.checklist.q9"),
+  t("viewing.page.checklist.q10"),
 ];
 
-const viewingAnswerFaqs = [
-  {
-    question: "What is a remote viewing?",
-    answer:
-      "A remote viewing is an in-person rental viewing attended by a local Domakin agent on your behalf. The agent inspects the property, asks your questions, records photos and videos, then sends you a report so you can decide from abroad or from another city.",
-  },
-  {
-    question: "When should I book an online viewing?",
-    answer:
-      "Book an online viewing when you are invited to a viewing but cannot attend, when you want a scam or condition check, or when you need to decide quickly in a competitive housing process.",
-  },
-  {
-    question: "Does a remote viewing improve my chances?",
-    answer:
-      "A remote viewing can improve your chances by helping you respond faster after a housing lottery or invitation, ask the right questions and avoid wasting time on unsuitable or suspicious listings.",
-  },
-  {
-    question: "What happens after the viewing?",
-    answer:
-      "After the viewing, you receive the report with pictures, videos, answers and practical notes. You then decide yourself whether to apply, continue negotiating or walk away.",
-  },
+const getViewingAnswerFaqs = (t: Translate) => [
+  { question: t("viewing.page.faqs.q1"), answer: t("viewing.page.faqs.a1") },
+  { question: t("viewing.page.faqs.q2"), answer: t("viewing.page.faqs.a2") },
+  { question: t("viewing.page.faqs.q3"), answer: t("viewing.page.faqs.a3") },
+  { question: t("viewing.page.faqs.q4"), answer: t("viewing.page.faqs.a4") },
 ];
 
-const viewingNextSteps = [
-  "Send the viewing address, scheduled time and questions you want answered.",
-  "Use the photos, video and notes to decide whether to proceed.",
-  "Check rent, deposit, service costs and house rules against the written documents before paying.",
+const getViewingNextSteps = (t: Translate) => [
+  t("viewing.page.next_steps.s1"),
+  t("viewing.page.next_steps.s2"),
+  t("viewing.page.next_steps.s3"),
 ];
 
-const viewingPricingOptions = [
+const getViewingPricingOptions = (t: Translate) => [
   {
-    name: "Standard remote viewing",
+    name: t("viewing.page.pricing.standard_name"),
     price: VIEWING_STANDARD_PRICE,
-    badge: "Planned viewing",
-    description:
-      "For viewings scheduled in advance when there is enough time to match an agent.",
-    bestFor: "Best when your viewing is not urgent.",
+    badge: t("viewing.page.pricing.standard_badge"),
+    description: t("viewing.page.pricing.standard_description"),
+    bestFor: t("viewing.page.pricing.standard_best"),
     includes: [
-      "Agent attends the viewing on your behalf",
-      "Your selected questions are asked",
-      "Photos, videos and a written report",
+      t("viewing.page.pricing.standard_inc1"),
+      t("viewing.page.pricing.standard_inc2"),
+      t("viewing.page.pricing.standard_inc3"),
     ],
   },
   {
-    name: "Express remote viewing",
+    name: t("viewing.page.pricing.express_name"),
     price: VIEWING_EXPRESS_PRICE,
-    badge: "Urgent request",
-    description:
-      "For urgent viewings within 24 hours when a Domakin agent is available.",
-    bestFor: "Best when the landlord gave you a short deadline.",
+    badge: t("viewing.page.pricing.express_badge"),
+    description: t("viewing.page.pricing.express_description"),
+    bestFor: t("viewing.page.pricing.express_best"),
     includes: [
-      "Priority agent check for short-notice availability",
-      "Agent attends, asks your questions and checks condition",
-      "Photos, videos and a written report",
+      t("viewing.page.pricing.express_inc1"),
+      t("viewing.page.pricing.express_inc2"),
+      t("viewing.page.pricing.express_inc3"),
     ],
   },
 ];
 
-const viewingPaymentHighlights = [
+const getViewingPaymentHighlights = (t: Translate) => [
   {
-    icon: "fa-calendar-check",
-    label: "Standard",
-    tooltip: "more than 24 hours of notice",
+    icon: "calendar-check",
+    label: t("viewing.page.payment.standard_label"),
+    tooltip: t("viewing.page.payment.standard_tooltip"),
     price: VIEWING_STANDARD_PRICE,
-    note: "Planned viewing",
   },
   {
-    icon: "fa-bolt",
-    label: "Express",
-    tooltip: "less than 24 hours of notice",
+    icon: "flash",
+    label: t("viewing.page.payment.express_label"),
+    tooltip: t("viewing.page.payment.express_tooltip"),
     price: VIEWING_EXPRESS_PRICE,
-    note: "Urgent request",
   },
 ];
 
-const viewingTrustLinks = [
-  {
-    href: "/about",
-    label: "About Domakin",
-    icon: "fa-building",
-  },
+const getViewingTrustLinks = (t: Translate) => [
+  { href: "/about", label: t("viewing.page.links.about"), icon: "fa-building" },
   {
     href: "/contact",
-    label: "Contact us",
+    label: t("viewing.page.links.contact"),
     icon: "fa-envelope",
   },
   {
     href: domakinWhatsAppLink,
-    label: "WhatsApp",
+    label: t("viewing.page.links.whatsapp"),
     icon: "fa-brands fa-whatsapp",
   },
-  {
-    href: "/pricing",
-    label: "Pricing",
-    icon: "fa-tag",
-  },
+  { href: "/pricing", label: t("viewing.page.links.pricing"), icon: "fa-tag" },
   {
     href: "/services/room-searching",
-    label: "Room search service",
+    label: t("viewing.page.links.room_search"),
     icon: "fa-magnifying-glass-location",
   },
   {
     href: "/services/add-listing",
-    label: "List a room",
+    label: t("viewing.page.links.list_room"),
     icon: "fa-house-user",
   },
   {
     href: INSTAGRAM,
-    label: "Instagram",
+    label: t("viewing.page.links.instagram"),
     icon: "fa-brands fa-instagram",
   },
 ];
 
 const initialViewingQuestionFields = ["", ""];
-const viewingQuestionFieldPlaceholders = [
-  "Question 1 suggestion: Is registration possible?",
-  "Question 2 suggestion: How much is the rent and deposit?",
-  "Question 3 suggestion: How do I apply?",
-];
 
-const getViewingQuestionPlaceholder = (index: number) =>
-  viewingQuestionFieldPlaceholders[index] ||
-  `Question ${index + 1}: Add anything else the agent should ask`;
+const getViewingQuestionPlaceholder = (t: Translate, index: number) => {
+  const placeholders = [
+    t("viewing.page.question_placeholder_1"),
+    t("viewing.page.question_placeholder_2"),
+    t("viewing.page.question_placeholder_3"),
+  ];
+
+  return (
+    placeholders[index] ||
+    `${t("viewing.page.question_label")} ${index + 1}: ${t(
+      "viewing.page.question_placeholder_fallback",
+    )}`
+  );
+};
 
 type ViewingAnswerAccordionProps = {
   eyebrow?: string;
@@ -229,11 +210,7 @@ const ViewingAnswerAccordion = ({
         {/* {eyebrow && (
           <span className="viewing-answer-accordion-eyebrow">{eyebrow}</span>
         )} */}
-        <h6
-          itemProp="name"
-        >
-          {title}
-        </h6>
+        <h6 itemProp="name">{title}</h6>
       </span>
       <i
         className="fa-solid fa-chevron-down viewing-answer-accordion-toggle"
@@ -251,62 +228,46 @@ const ViewingAnswerAccordion = ({
   </details>
 );
 
-const viewingJourneySteps = [
+const getViewingJourneySteps = (t: Translate) => [
   {
     image: "/assets/img/bg/listing-header.webp",
-    icon: "fa-envelope-open-text",
-    title: "You have been invited to a viewing you cannot attend",
+    icon: "email-received",
+    title: t("viewing.page.journey.step1"),
   },
   {
     image: "/assets/img/properties/property_20/1.jpg",
-    icon: "fa-calendar-check",
-    title:
-      "Schedule a viewing and tell us everything you want to know about the place",
+    icon: "calendar-time",
+    title: t("viewing.page.journey.step2"),
   },
   {
     image: "/assets/img/properties/property_10/1.jpeg",
-    icon: "fa-person-walking-luggage",
-    title:
-      "We attend on your behalf and create a report with pictures and videos + your specific questions",
+    icon: "camera",
+    title: t("viewing.page.journey.step3"),
   },
   {
     image: "/assets/img/properties/property_21/1.jpg",
-    icon: "fa-images",
-    title: "We send you the report and tell us our opinion on the property",
+    icon: "document",
+    title: t("viewing.page.journey.step4"),
   },
   {
     image: "/assets/img/properties/property_19/4.jpg",
-    icon: "fa-circle-check",
-    title: "You make your own decision",
+    icon: "check-bill",
+    title: t("viewing.page.journey.step5"),
   },
 ];
 
-const VIEWING_OTHER_CITY = "Other";
-const VIEWING_OTHER_CITY_DISCLAIMER =
-  "We will contact you about this location, but we might not be able to fulfill the viewing.";
-const VIEWING_FORM_INTRO =
-  "Tell us what to check, where to go and who the viewing is for.";
-const VIEWING_INFO_TEXT = {
-  formIntro:
-    "Add the exact questions you want the agent to ask. Start with the suggested placeholders or write your own.",
-  extraQuestions:
-    "Use this for broader context, scam concerns, furniture details, documents you need checked or exact photos you want.",
-  location:
-    "Add the exact viewing location from your invitation so the agent can confirm the right property and arrive prepared.",
-  city:
-    "Choose one of the supported cities. If your city is missing, choose Other and type the location so we can check whether an agent is available.",
-  customCity:
-    "Type the city, village or nearby area. We will contact you if we cannot cover that location.",
-  street:
-    "Use the street name from the invitation or listing so the agent can match the viewing correctly.",
-  timing:
-    "Use the viewing date and Netherlands local time shown in your invitation, so we book the agent for the correct slot.",
-  date: "Select the date from the viewing invitation.",
-  time: "Use the viewing time in Europe/Amsterdam time.",
-  applicant:
-    "These details tell us who the viewing is for, how to contact you and where to send the report with photos and videos.",
-};
-const VIEWING_CITY_OPTIONS = [...VIEWING_SERVICE_LOCATIONS, VIEWING_OTHER_CITY];
+const getViewingInfoText = (t: Translate) => ({
+  formIntro: t("viewing.page.info.form_intro"),
+  extraQuestions: t("viewing.page.info.extra_questions"),
+  location: t("viewing.page.info.location"),
+  city: t("viewing.page.info.city"),
+  customCity: t("viewing.page.info.custom_city"),
+  street: t("viewing.page.info.street"),
+  timing: t("viewing.page.info.timing"),
+  date: t("viewing.page.info.date"),
+  time: t("viewing.page.info.time"),
+  applicant: t("viewing.page.info.applicant"),
+});
 
 type ViewingAddressParts = {
   postcode: string;
@@ -372,6 +333,24 @@ const composeViewingNote = (questions: string[], extraQuestions: string) =>
 
 const ViewingForm = () => {
   const { t } = useTranslation("translations");
+
+  const viewingUseCases = getViewingUseCases(t);
+  const viewingDeliverables = getViewingDeliverables(t);
+  const viewingQuestionChecklist = getViewingQuestionChecklist(t);
+  const viewingAnswerFaqs = getViewingAnswerFaqs(t);
+  const viewingNextSteps = getViewingNextSteps(t);
+  const viewingPricingOptions = getViewingPricingOptions(t);
+  const viewingPaymentHighlights = getViewingPaymentHighlights(t);
+  const viewingTrustLinks = getViewingTrustLinks(t);
+  const viewingJourneySteps = getViewingJourneySteps(t);
+  const VIEWING_INFO_TEXT = getViewingInfoText(t);
+  const VIEWING_FORM_INTRO = t("viewing.page.form_intro");
+  const VIEWING_OTHER_CITY = t("viewing.page.other_city");
+  const VIEWING_OTHER_CITY_DISCLAIMER = t("viewing.page.other_city_disclaimer");
+  const VIEWING_CITY_OPTIONS = [
+    ...VIEWING_SERVICE_LOCATIONS,
+    VIEWING_OTHER_CITY,
+  ];
 
   const { sendRequest, loading } = useServer();
 
@@ -449,7 +428,11 @@ const ViewingForm = () => {
     nextExtraQuestions = extraQuestions,
   ) => {
     setViewingQuestionFields(questions);
-    updateViewingData("note", "", composeViewingNote(questions, nextExtraQuestions));
+    updateViewingData(
+      "note",
+      "",
+      composeViewingNote(questions, nextExtraQuestions),
+    );
   };
 
   const handleQuestionFieldChange = (index: number, value: string) => {
@@ -469,13 +452,19 @@ const ViewingForm = () => {
     }
 
     updateViewingQuestions(
-      viewingQuestionFields.filter((_, questionIndex) => questionIndex !== index),
+      viewingQuestionFields.filter(
+        (_, questionIndex) => questionIndex !== index,
+      ),
     );
   };
 
   const handleExtraQuestionsChange = (value: string) => {
     setExtraQuestions(value);
-    updateViewingData("note", "", composeViewingNote(viewingQuestionFields, value));
+    updateViewingData(
+      "note",
+      "",
+      composeViewingNote(viewingQuestionFields, value),
+    );
   };
 
   const handleViewingFaqToggle = (
@@ -614,7 +603,7 @@ const ViewingForm = () => {
     <section
       className="viewing-signup-section pt-60 pb-60"
       data-viewing-signup-section
-      aria-label="Book a remote viewing"
+      aria-label={t("viewing.page.section_aria")}
     >
       <span
         id="book-viewing"
@@ -629,26 +618,32 @@ const ViewingForm = () => {
         <div className="mb-40" data-viewing-funnel-steps>
           <div className="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-20">
             <div>
-              <h1 className="h3 mb-0">How remote viewing works</h1>
+              <h1 className="h3 mb-0">{t("viewing.page.hero_title")}</h1>
             </div>
             <div className="viewing-hero-summary">
               <div
                 className="viewing-payment-strip"
-                aria-label="Viewing payment terms"
+                aria-label={t("viewing.page.payment_terms_aria")}
               >
                 {viewingPaymentHighlights.map((item) => (
                   <div className="viewing-payment-item" key={item.label}>
                     <div>
-                      <span>
-                        <i
-                          className={`fa-solid ${item.icon} mr-5`}
+                      <span className="viewing-payment-label-row">
+                        <span
+                          className="viewing-payment-svg-icon"
+                          style={{
+                            WebkitMaskImage: `url(/assets/img/icons/${item.icon}.svg)`,
+                            maskImage: `url(/assets/img/icons/${item.icon}.svg)`,
+                          }}
                           aria-hidden="true"
-                          style={{ color: "#004aad" }}
-                        ></i>
-                        {item.label}
+                        />
+
+                        <small className="viewing-payment-label-text">
+                          {item.label}
+                        </small>
                       </span>
-                      <strong style={{ color: "white" }}>
-                        {item.price} euros
+                      <strong className="viewing-payment-price">
+                        {item.price} {t("viewing.page.euros")}
                       </strong>
                       <small>{item.tooltip}</small>
                     </div>
@@ -660,7 +655,7 @@ const ViewingForm = () => {
                     aria-hidden="true"
                   ></i>
                   <span style={{ color: "white" }}>
-                    No charge unless we successfully attend.
+                    {t("viewing.page.no_charge")}
                   </span>
                 </div>
               </div>
@@ -668,7 +663,7 @@ const ViewingForm = () => {
                 href="#viewing-request-form-start"
                 className="mt-10 btn-thirteen"
               >
-                Start request
+                {t("viewing.page.start_request")}
                 <i className="fa-solid fa-arrow-down" aria-hidden="true"></i>
               </a>
             </div>
@@ -680,7 +675,7 @@ const ViewingForm = () => {
                 type="button"
                 className="viewing-journey-arrow viewing-journey-arrow-prev"
                 onClick={() => scrollJourneySteps("previous")}
-                aria-label="Previous remote viewing step"
+                aria-label={t("viewing.page.journey_nav.previous")}
               >
                 <i className="fa-solid fa-arrow-left" aria-hidden="true"></i>
               </button>
@@ -716,11 +711,18 @@ const ViewingForm = () => {
                       }}
                       aria-hidden="true"
                     >
-                      <i className={`fa-solid ${step.icon} color-dark`}></i>
+                      <Image
+                        src={`/assets/img/icons/${step.icon}.svg`}
+                        alt="step icon"
+                        width={30}
+                        height={30}
+                      />
                     </span>
                   </div>
                   <div className="p-3 pt-4">
-                    <p className="small fw-semibold mb-1">Step {index + 1}</p>
+                    <p className="small fw-semibold mb-1">
+                      {t("viewing.page.journey_nav.step")} {index + 1}
+                    </p>
                     <h2
                       className="h6 mb-0"
                       style={{ fontSize: 15, lineHeight: 1.35 }}
@@ -737,8 +739,8 @@ const ViewingForm = () => {
               onClick={() => scrollJourneySteps("next")}
               aria-label={
                 canScrollJourneyNext
-                  ? "Next remote viewing step"
-                  : "Start remote viewing request"
+                  ? t("viewing.page.journey_nav.next")
+                  : t("viewing.page.journey_nav.start")
               }
             >
               <i
@@ -761,7 +763,7 @@ const ViewingForm = () => {
                 className="col-12 mb-10 viewing-request-form-start"
                 id="viewing-request-form-start"
               >
-                <h2 className="h4 mb-2">You have been invited to a viewing</h2>
+                <h2 className="h4 mb-2">{t("viewing.page.form_heading")}</h2>
                 <p className="mb-0">
                   <InfoLabel info={VIEWING_INFO_TEXT.formIntro}>
                     {VIEWING_FORM_INTRO}
@@ -785,13 +787,16 @@ const ViewingForm = () => {
                           key={questionId}
                         >
                           <label htmlFor={questionId}>
-                            Question {index + 1}
+                            {t("viewing.page.question_label")} {index + 1}
                           </label>
                           <div className="viewing-question-input-row">
                             <Form.Control
                               id={questionId}
                               type="text"
-                              placeholder={getViewingQuestionPlaceholder(index)}
+                              placeholder={getViewingQuestionPlaceholder(
+                                t,
+                                index,
+                              )}
                               value={question}
                               onChange={(event) => {
                                 handleQuestionFieldChange(
@@ -806,7 +811,7 @@ const ViewingForm = () => {
                                 type="button"
                                 className="viewing-question-remove"
                                 onClick={() => removeQuestionField(index)}
-                                aria-label={`Remove question ${index + 1}`}
+                                aria-label={`${t("viewing.page.remove_question")} ${index + 1}`}
                               >
                                 <i
                                   className="fa-solid fa-xmark"
@@ -825,7 +830,7 @@ const ViewingForm = () => {
                       onClick={addQuestionField}
                     >
                       <i className="fa-solid fa-plus" aria-hidden="true"></i>
-                      Add another question
+                      {t("viewing.page.add_question")}
                     </button>
                   </div>
 
@@ -835,13 +840,15 @@ const ViewingForm = () => {
                       htmlFor="viewing-extra-questions"
                     >
                       <InfoLabel info={VIEWING_INFO_TEXT.extraQuestions}>
-                        Extra questions or notes
+                        {t("viewing.page.extra_questions_label")}
                       </InfoLabel>
                     </label>
                     <Form.Control
                       id="viewing-extra-questions"
                       as="textarea"
-                      placeholder="Anything specific you want us to check, ask, photograph or mention during the viewing."
+                      placeholder={t(
+                        "viewing.page.extra_questions_placeholder",
+                      )}
                       value={extraQuestions}
                       onChange={(e) => {
                         handleExtraQuestionsChange(e.target.value);
@@ -855,7 +862,7 @@ const ViewingForm = () => {
 
               <h4 className="col-12 mb-20 mt-10">
                 <InfoLabel info={VIEWING_INFO_TEXT.location}>
-                  Where is the place?
+                  {t("viewing.page.where_heading")}
                 </InfoLabel>
               </h4>
 
@@ -863,7 +870,7 @@ const ViewingForm = () => {
                 <div className="input-group-meta form-group mb-25">
                   <label id="viewing-city-label">
                     <InfoLabel info={VIEWING_INFO_TEXT.city}>
-                      City of viewing
+                      {t("viewing.page.city_label")}
                     </InfoLabel>
                   </label>
                   <SearchableCitySelect
@@ -872,20 +879,20 @@ const ViewingForm = () => {
                     value={citySelectDisplayValue}
                     onChange={handleCityChange}
                     cities={VIEWING_CITY_OPTIONS}
-                    placeholder="Choose city or Other"
+                    placeholder={t("viewing.page.city_placeholder")}
                     isInvalid={viewingErrorFields.includes("city")}
                   />
                   {isOtherViewingCity && (
                     <div className="mt-3">
                       <label htmlFor="viewing-custom-city">
                         <InfoLabel info={VIEWING_INFO_TEXT.customCity}>
-                          City or location
+                          {t("viewing.page.other_city_label")}
                         </InfoLabel>
                       </label>
                       <Form.Control
                         id="viewing-custom-city"
                         type="text"
-                        placeholder="Type the city or nearby location"
+                        placeholder={t("viewing.page.other_city_placeholder")}
                         value={customViewingCity}
                         onChange={(e) => {
                           handleCustomCityChange(e.target.value);
@@ -904,7 +911,7 @@ const ViewingForm = () => {
                 <div className="input-group-meta form-group mb-25">
                   <label htmlFor="viewing-street-name">
                     <InfoLabel info={VIEWING_INFO_TEXT.street}>
-                      Street name
+                      {t("viewing.page.street_label")}
                     </InfoLabel>
                   </label>
                   <Form.Control
@@ -921,7 +928,9 @@ const ViewingForm = () => {
 
               <div className="col-sm-6 col-12">
                 <div className="input-group-meta form-group mb-25">
-                  <label htmlFor="viewing-postcode">Postcode</label>
+                  <label htmlFor="viewing-postcode">
+                    {t("viewing.page.postcode_label")}
+                  </label>
                   <Form.Control
                     id="viewing-postcode"
                     type="text"
@@ -936,7 +945,9 @@ const ViewingForm = () => {
 
               <div className="col-sm-6 col-12">
                 <div className="input-group-meta form-group mb-25">
-                  <label htmlFor="viewing-house-number">House number</label>
+                  <label htmlFor="viewing-house-number">
+                    {t("viewing.page.house_number_label")}
+                  </label>
                   <Form.Control
                     id="viewing-house-number"
                     type="text"
@@ -959,7 +970,7 @@ const ViewingForm = () => {
                 <div className="input-group-meta form-group mb-25">
                   <label htmlFor="viewing-date">
                     <InfoLabel info={VIEWING_INFO_TEXT.date}>
-                      Date of the viewing
+                      {t("viewing.page.date_label")}
                     </InfoLabel>
                   </label>
                   <div className="viewing-icon-input">
@@ -984,7 +995,7 @@ const ViewingForm = () => {
                 <div className="input-group-meta form-group mb-25">
                   <label htmlFor="viewing-time">
                     <InfoLabel info={VIEWING_INFO_TEXT.time}>
-                      Time of the viewing
+                      {t("viewing.page.time_label")}
                     </InfoLabel>
                   </label>
                   <div className="viewing-icon-input">
@@ -1006,7 +1017,7 @@ const ViewingForm = () => {
 
               <h4 className="col-12 mb-20 mt-10">
                 <InfoLabel info={VIEWING_INFO_TEXT.applicant}>
-                  Who is this viewing for?
+                  {t("viewing.page.applicant_heading")}
                 </InfoLabel>
               </h4>
 
@@ -1052,7 +1063,7 @@ const ViewingForm = () => {
                     <label htmlFor="viewing-phone">{t("viewing.phone")}</label>
                     <PrefixPhoneInput
                       id="viewing-phone"
-                      prefixAriaLabel="Phone country code"
+                      prefixAriaLabel={t("viewing.page.phone_country_aria")}
                       value={viewingData.phone}
                       onChange={(value: string) => {
                         updateViewingData("phone", "", value);
@@ -1149,7 +1160,7 @@ const ViewingForm = () => {
                   {loading ? (
                     <Spinner size="sm" animation="border" />
                   ) : (
-                    "Request remote viewing"
+                    t("viewing.page.submit")
                   )}
                 </button>
               </div>
@@ -1163,38 +1174,30 @@ const ViewingForm = () => {
             itemScope
             itemType="https://schema.org/FAQPage"
           >
-            <h2 className="viewing-faq-section-title">FAQ</h2>
+            <h2 className="viewing-faq-section-title">
+              {t("viewing.page.faq_title")}
+            </h2>
 
             <ViewingAnswerAccordion
-              eyebrow="Remote viewing answer"
-              title="What is a remote viewing service in the Netherlands?"
+              eyebrow={t("viewing.page.a_what.eyebrow")}
+              title={t("viewing.page.a_what.title")}
               titleClassName="h4"
               onToggle={handleViewingAnswerAccordionToggle}
             >
               <p className="viewing-answer-lead mb-3">
-                A remote viewing, online viewing or virtual viewing service lets
-                a local Domakin agent attend a rental viewing for you in the
-                Netherlands. The agent checks the property, asks your questions,
-                takes pictures and videos, and sends you a report so you can
-                make a decision. It is built for people searching for viewing
-                Netherlands, remote viewing Netherlands or online viewing
-                Netherlands support.
+                {t("viewing.page.a_what.body")}
               </p>
               <a href="#book-viewing" className="viewing-inline-cta">
-                Book your remote viewing
+                {t("viewing.page.cta.book")}
               </a>
             </ViewingAnswerAccordion>
 
             <ViewingAnswerAccordion
-              eyebrow="Remote viewing use cases"
-              title="When should you book a remote or online viewing?"
+              eyebrow={t("viewing.page.a_when.eyebrow")}
+              title={t("viewing.page.a_when.title")}
               onToggle={handleViewingAnswerAccordionToggle}
             >
-              <p className="mb-3">
-                Book a remote viewing in the Netherlands when you are invited to
-                a rental viewing but cannot attend, need a scam check, or want
-                practical property feedback before applying.
-              </p>
+              <p className="mb-3">{t("viewing.page.a_when.body")}</p>
               <div className="d-flex flex-column gap-3">
                 {viewingUseCases.map((item) => (
                   <article className="viewing-answer-row" key={item.title}>
@@ -1211,15 +1214,11 @@ const ViewingForm = () => {
             </ViewingAnswerAccordion>
 
             <ViewingAnswerAccordion
-              eyebrow="Remote viewing deliverables"
-              title="What do you get after a Domakin remote viewing?"
+              eyebrow={t("viewing.page.a_deliverables.eyebrow")}
+              title={t("viewing.page.a_deliverables.title")}
               onToggle={handleViewingAnswerAccordionToggle}
             >
-              <p className="mb-3">
-                After a Domakin online viewing, you get the information a renter
-                needs to compare the listing, decide faster and avoid
-                unnecessary travel.
-              </p>
+              <p className="mb-3">{t("viewing.page.a_deliverables.body")}</p>
               <div className="d-flex flex-column gap-3 mb-3">
                 {viewingDeliverables.map((item) => (
                   <article className="viewing-answer-row" key={item.title}>
@@ -1235,7 +1234,7 @@ const ViewingForm = () => {
               </div>
               <div className="viewing-question-checklist">
                 <h4 className="small fw-semibold mb-2">
-                  Common questions your agent can ask
+                  {t("viewing.page.a_deliverables.checklist_title")}
                 </h4>
                 <ul>
                   {viewingQuestionChecklist.map((question) => (
@@ -1247,36 +1246,35 @@ const ViewingForm = () => {
                 </ul>
               </div>
               <a href="#book-viewing" className="viewing-inline-cta">
-                Start the request
+                {t("viewing.page.cta.start")}
               </a>
             </ViewingAnswerAccordion>
 
             <ViewingAnswerAccordion
-              eyebrow="Viewing Netherlands cities"
-              title="Supported viewing cities for remote viewing in the Netherlands"
+              eyebrow={t("viewing.page.a_cities.eyebrow")}
+              title={t("viewing.page.a_cities.title")}
               onToggle={handleViewingAnswerAccordionToggle}
             >
               <p className="mb-3">
-                Domakin offers remote viewings and online viewings in{" "}
-                {VIEWING_SERVICE_LOCATIONS.join(", ")}. If your city is not in
-                the list, choose Other in the form and type the location; we
-                will contact you and let you know if an agent can cover it.
+                {t("viewing.page.a_cities.body_prefix")}{" "}
+                {VIEWING_SERVICE_LOCATIONS.join(", ")}.{" "}
+                {t("viewing.page.a_cities.body_suffix")}
               </p>
               <div
                 className="viewing-service-area-list"
-                aria-label="Remote viewing service cities"
+                aria-label={t("viewing.page.a_cities.area_aria")}
               >
                 {VIEWING_SERVICE_LOCATIONS.map((city) => (
                   <span key={city}>{city}</span>
                 ))}
               </div>
               <a href="#book-viewing" className="viewing-inline-cta mt-3">
-                Check your viewing city
+                {t("viewing.page.cta.check_city")}
               </a>
             </ViewingAnswerAccordion>
 
             <ViewingAnswerAccordion
-              title="Remote viewing FAQ"
+              title={t("viewing.page.a_faq.title")}
               onToggle={handleViewingAnswerAccordionToggle}
             >
               <div
@@ -1315,21 +1313,16 @@ const ViewingForm = () => {
                 ))}
               </div>
               <a href="#book-viewing" className="viewing-inline-cta mt-3">
-                Request a remote viewing
+                {t("viewing.page.cta.request")}
               </a>
             </ViewingAnswerAccordion>
 
             <ViewingAnswerAccordion
-              eyebrow="Remote viewing pricing"
-              title="What does a remote viewing cost in the Netherlands?"
+              eyebrow={t("viewing.page.a_pricing.eyebrow")}
+              title={t("viewing.page.a_pricing.title")}
               onToggle={handleViewingAnswerAccordionToggle}
             >
-              <p className="mb-3">
-                Choose the option based on how soon the viewing is scheduled.
-                Both remote viewing prices include an agent attending the rental
-                viewing, asking your questions, checking the property condition
-                and sending a report with pictures and videos.
-              </p>
+              <p className="mb-3">{t("viewing.page.a_pricing.body")}</p>
               <div className="viewing-pricing-grid mb-4">
                 {viewingPricingOptions.map((option) => (
                   <article className="viewing-pricing-option" key={option.name}>
@@ -1360,7 +1353,7 @@ const ViewingForm = () => {
               </div>
               <div className="viewing-pricing-next">
                 <h4 className="small fw-semibold mb-2">
-                  What happens after you request a viewing?
+                  {t("viewing.page.a_pricing.next_title")}
                 </h4>
                 <ol className="viewing-next-steps mb-0">
                   {viewingNextSteps.map((step) => (
@@ -1374,13 +1367,13 @@ const ViewingForm = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                Read more about pricing
+                {t("viewing.page.cta.read_more_pricing")}
               </a>
             </ViewingAnswerAccordion>
 
             <ViewingAnswerAccordion
-              eyebrow="Domakin information"
-              title="Where can you find Domakin company links?"
+              eyebrow={t("viewing.page.a_links.eyebrow")}
+              title={t("viewing.page.a_links.title")}
               onToggle={handleViewingAnswerAccordionToggle}
             >
               <div className="viewing-trust-links">
@@ -1403,7 +1396,7 @@ const ViewingForm = () => {
                 })}
               </div>
               <a href="#book-viewing" className="viewing-inline-cta mt-3">
-                Go back to the viewing request
+                {t("viewing.page.cta.back_to_request")}
               </a>
             </ViewingAnswerAccordion>
           </div>
@@ -1411,10 +1404,10 @@ const ViewingForm = () => {
             <a href="#book-viewing" className="viewing-sticky-return">
               <span>
                 <i className="fa-solid fa-arrow-up" aria-hidden="true"></i>
-                Back to remote viewing request
+                {t("viewing.page.sticky_return.label")}
               </span>
               <span className="viewing-sticky-return-note">
-                Continue booking
+                {t("viewing.page.sticky_return.note")}
               </span>
             </a>
           )}
