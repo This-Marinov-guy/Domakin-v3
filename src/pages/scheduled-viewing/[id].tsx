@@ -558,7 +558,7 @@ const ViewingApprovalPage = ({ viewing: initialViewing }: ViewingApprovalPagePro
         <title>Approve viewing | Domakin</title>
       </Head>
       <ViewingShell>
-        <StatusPanel icon="searching" iconAlt="Unassigned viewing" title="Approve this viewing">
+        <StatusPanel icon="searching" iconAlt="Unassigned viewing" title="Accept this viewing">
           <ViewingDetails details={viewing.details} />
 
           <div className="viewing-approval-action-section" ref={actionSectionRef}>
