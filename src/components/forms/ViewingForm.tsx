@@ -967,7 +967,7 @@ const ViewingForm = () => {
               <TimePickerInput
                 id="viewing-time"
                 showSecond={false}
-                minuteStep={15}
+                minuteStep={5}
                 value={viewingData.time}
                 onChange={(value: any) => {
                   updateViewingData("time", "", value);
