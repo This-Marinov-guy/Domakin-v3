@@ -356,8 +356,12 @@
 }
 
 .viewing-hero-summary {
-    flex: 0 1 470px;
-    max-width: 470px;
+    flex: 0 1 540px;
+    max-width: 540px;
+
+    .btn-thirteen {
+        width: 100%;
+    }
 }
 
 .viewing-form-stack {
@@ -398,7 +402,7 @@
 }
 
 .viewing-payment-strip {
-    background: #f6f9ff;
+    background: $color-one;
     border: 1px solid rgba(0, 74, 173, 0.16);
     border-radius: 8px;
     display: grid;
@@ -410,15 +414,15 @@
 
 .viewing-payment-item,
 .viewing-payment-note {
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     display: flex;
+    
     gap: 9px;
     min-width: 0;
 
     > i {
         align-items: center;
-        background: #fff;
-        border: 1px solid rgba(0, 74, 173, 0.16);
         border-radius: 50%;
         color: #004aad;
         display: inline-flex;
@@ -645,6 +649,7 @@
 .viewing-answer-accordion {
     overflow: hidden;
     padding: 0;
+    interpolate-size: allow-keywords;
 
     &[open] {
         .viewing-answer-accordion-toggle {
@@ -654,6 +659,20 @@
         .viewing-answer-accordion-body {
             border-top: 1px solid rgba(0, 0, 0, 0.08);
         }
+    }
+
+    // Smoothly animate the panel open AND closed (progressive enhancement:
+    // browsers without ::details-content / interpolate-size just toggle instantly).
+    &::details-content {
+        block-size: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: block-size 0.32s ease, opacity 0.32s ease, content-visibility 0.32s ease allow-discrete;
+    }
+
+    &[open]::details-content {
+        block-size: auto;
+        opacity: 1;
     }
 }
 
@@ -678,8 +697,11 @@
 
 .viewing-answer-accordion-heading {
     display: grid;
-    gap: 6px;
     min-width: 0;
+
+    h6 {
+        margin-bottom: 0 !important; 
+    }
 }
 
 .viewing-answer-accordion-eyebrow {
