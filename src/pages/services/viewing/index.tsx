@@ -22,13 +22,13 @@ const index = () => {
   
   // Get localized content
   const title = lang === "en" 
-    ? "Remote Property Viewing Service Netherlands | Domakin"
+    ? "Viewing Netherlands | Remote Rental Viewing Service | Domakin"
     : lang === "bg"
     ? "Услуга за огледи | Domakin - Помощ при огледи на имоти в Нидерландия"
     : "Υπηρεσία Προβολής | Domakin - Βοήθεια στην Προβολή Ακινήτων στην Ολλανδία";
   
   const description = lang === "en"
-    ? `Book a viewing, remote viewing, or online viewing in the Netherlands. Domakin agents attend rental viewings in supported cities including ${supportedViewingCities} and send photos, video, and practical feedback.`
+    ? `Need a viewing in the Netherlands but cannot attend? Book a remote viewing, online viewing, or property viewing service with Domakin in ${supportedViewingCities}. Get photos, video, answers, and practical feedback.`
     : lang === "bg"
     ? "Нека нашите агенти присъстват на огледите вместо вас. Предоставяме снимки, видеоклипове и подробна обратна връзка, за да ви помогнем да вземете информирано решение за настаняване в Нидерландия."
     : "Αφήστε τους πράκτορές μας να παρακολουθήσουν τις προβολές ακινήτων εκ μέρους σας. Παρέχουμε φωτογραφίες, βίντεο και λεπτομερή ανατροφοδότηση για να σας βοηθήσουμε να πάρετε ενημερωμένες αποφάσεις για τη διαμονή στην Ολλανδία.";
@@ -63,7 +63,7 @@ const index = () => {
         
         {/* Additional meta tags */}
         <meta name="keywords" content={lang === "en" 
-          ? `viewing, remote viewing, online viewing, remote property viewing, remote viewing service, online viewing service Netherlands, property viewing service Netherlands, rental viewing Netherlands, student housing viewing, accommodation viewing, ${supportedViewingCities}`
+          ? `viewing Netherlands, remote viewing Netherlands, online viewing Netherlands, remote rental viewing Netherlands, property viewing service Netherlands, rental viewing Netherlands, student housing viewing, accommodation viewing, viewing service Netherlands, ${supportedViewingCities}`
           : lang === "bg"
           ? "оглед на имот, услуга за огледи, Нидерландия, студентско жилище, оглед на настаняване"
           : "προβολή ακινήτου, υπηρεσία προβολής, Ολλανδία, φοιτητική στέγαση"} />

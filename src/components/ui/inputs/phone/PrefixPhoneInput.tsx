@@ -8,7 +8,17 @@ import { LOCAL_STORAGE_LOCATION } from "@/utils/localstorage";
 import Prefix from "./Prefix";
 
 const PrefixPhoneInput = (props: any) => {
-  const { className, style, value = "", onChange, isInvalid } = props;
+  const {
+    className,
+    style,
+    value = "",
+    onChange,
+    isInvalid,
+    id,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
+    prefixAriaLabel,
+  } = props;
 
   const [selectedCode, setSelectedCode] = useState("");
   const [mainPart, setMainPart] = useState("");
@@ -47,6 +57,7 @@ const PrefixPhoneInput = (props: any) => {
     <div className="phone-input">
       <Prefix
         value={selectedCode}
+        buttonAriaLabel={prefixAriaLabel}
         onChange={(code: string) => {
           const country = WORLDS_COUNTRIES.find((c) => c.phoneCode === code);
 
@@ -58,8 +69,11 @@ const PrefixPhoneInput = (props: any) => {
         }}
       />
       <Form.Control
+        id={id}
         type="number"
         className="phone-content form-control"
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
         value={mainPart}
         onChange={(e) => setMainPart(e.target.value)}
         isInvalid={isInvalid}

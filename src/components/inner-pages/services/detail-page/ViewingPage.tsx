@@ -1,7 +1,6 @@
 import FooterFour from "@/layouts/footers/FooterFour";
 import FancyBanner from "@/components/common/FancyBanner";
 import ViewingForm from "@/components/forms/ViewingForm";
-import ServiceAnswerBlock, { getServiceAnswerData } from "../ServiceAnswerBlock";
 import Image from "next/image";
 import { logoByTheme } from "@/utils/config";
 
@@ -43,19 +42,14 @@ const ViewingLogoHeader = () => (
   </header>
 );
 
-const ViewingPage = () => {
-  const serviceAnswerData = getServiceAnswerData("viewing");
-
-  return (
-    <>
-      <ViewingLogoHeader />
-      <div aria-hidden="true" style={{ height: VIEWING_LOGO_HEADER_HEIGHT }} />
-      <ViewingForm />
-      <ServiceAnswerBlock data={serviceAnswerData} />
-      <FancyBanner />
-      <FooterFour />
-    </>
-  );
-};
+const ViewingPage = () => (
+  <>
+    <ViewingLogoHeader />
+    <div aria-hidden="true" style={{ height: VIEWING_LOGO_HEADER_HEIGHT }} />
+    <ViewingForm />
+    <FancyBanner />
+    <FooterFour openLinksInNewTab />
+  </>
+);
 
 export default ViewingPage;

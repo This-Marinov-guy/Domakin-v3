@@ -12,15 +12,16 @@ const SingleDatePicker = (props: any) => {
   return (
     <div className="dropdown" ref={calendarRef}>
       <input
+        id={props.id}
+        aria-label={props["aria-label"]}
+        aria-labelledby={props["aria-labelledby"]}
         type="text"
         value={props.value ? new Date(props.value).toLocaleDateString() : ""}
         placeholder={props.placeholder ?? "Select a date"}
         readOnly
         inputMode="none"
-        onKeyDown={(e) => e.preventDefault()}
         onPaste={(e) => e.preventDefault()}
         data-bs-toggle="dropdown"
-        aria-expanded="false"
         data-bs-auto-close="outside"
         className={`${props.isInvalid ? "is-invalid" : ""} form-control`}
       />
@@ -33,6 +34,9 @@ const SingleDatePicker = (props: any) => {
           endMonth={new Date(2055, 11)}
           onSelect={(date: any) => handleDateSelect(date)}
           {...props}
+          id={undefined}
+          aria-label={undefined}
+          aria-labelledby={undefined}
         />
       </div>
     </div>

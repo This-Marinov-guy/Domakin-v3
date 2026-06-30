@@ -6,7 +6,7 @@ import useTranslation from "next-translate/useTranslation";
 import Search from "../Search";
 
 const Prefix = (props: any) => {
-  const { value, onChange } = props;
+  const { value, onChange, buttonAriaLabel } = props;
   const { t } = useTranslation("translations");
 
   const PHONE_CODES = WORLDS_COUNTRIES.map((c) => c.phoneCode);
@@ -23,6 +23,7 @@ const Prefix = (props: any) => {
         type="button"
         data-bs-toggle="dropdown" // Bootstrap handles dropdown toggle
         aria-expanded="false"
+        aria-label={buttonAriaLabel}
       >
         {value || t("common.code")}
       </button>

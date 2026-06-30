@@ -63,9 +63,9 @@ const SERVICE_ANSWER_BY_ID: Record<ServiceAnswerId, ServiceAnswerData> = {
     serviceName: "Domakin remote property viewing service",
     serviceType: "Remote rental property viewing assistance",
     audience: "Students who need a remote rental viewing in the Netherlands",
-    question: "Can Domakin do a remote rental viewing for you?",
+    question: "Can Domakin do a remote rental viewing in the Netherlands for you?",
     answer:
-      "Yes. Domakin can attend a rental viewing on your behalf and report back with photos, video and practical notes so you can decide faster from abroad or another city. Students may call this a viewing, remote viewing or online viewing service. The legal decision remains yours; compare the remote viewing notes with the written tenancy agreement and landlord information.",
+      "Yes. Domakin provides a viewing Netherlands service for renters who cannot attend in person. A local agent can attend a remote rental viewing on your behalf and report back with photos, video and practical notes so you can decide faster from abroad or another city. Students may call this a viewing, remote viewing, online viewing or property viewing service in the Netherlands. The legal decision remains yours; compare the remote viewing notes with the written tenancy agreement and landlord information.",
     nextSteps: [
       "Send the viewing address, scheduled time and questions you want answered.",
       "Use the photos, video and notes to decide whether to proceed.",
@@ -194,7 +194,7 @@ export default function ServiceAnswerBlock({
       data-geo-service-answer-block
       aria-label="Quick service answer"
     >
-      <div className="border rounded p-4 bg-light">
+      <div className="service-answer-card viewing-answer-card">
         <p className="fw-semibold text-uppercase small mb-2">Quick answer</p>
         <h2 className="h4 mb-3">{data.question}</h2>
         <p className="mb-3">{data.answer}</p>
