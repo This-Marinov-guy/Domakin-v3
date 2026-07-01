@@ -24,4 +24,4 @@ const ViewingPage = () => {
   );
 };
 
-export default ViewingPage;
+export default ViewingPage

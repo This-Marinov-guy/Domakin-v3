@@ -618,7 +618,7 @@ const ViewingForm = () => {
         <div className="mb-40" data-viewing-funnel-steps>
           <div className="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-20">
             <div>
-              <h1 className="h3 mb-0">{t("viewing.page.hero_title")}</h1>
+              <h1 style={{maxWidth: '11em'}} className="h3 mb-0">{t("viewing.page.hero_title")}</h1>
             </div>
             <div className="viewing-hero-summary">
               <div
