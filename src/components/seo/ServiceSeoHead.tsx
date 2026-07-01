@@ -6,6 +6,7 @@ const LOCALE_PREFIXES = [
   { hreflang: "en", prefix: "" },
   { hreflang: "bg", prefix: "/bg" },
   { hreflang: "el", prefix: "/gr" },
+  { hreflang: "nl", prefix: "/nl" },
 ];
 
 type Faq = {

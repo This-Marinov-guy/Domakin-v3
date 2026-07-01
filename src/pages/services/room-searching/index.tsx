@@ -23,12 +23,16 @@ const index = () => {
     ? "Room Searching Service | Domakin - Find Your Perfect Student Room"
     : lang === "bg"
     ? "Услуга за търсене на стая | Domakin - Намерете перфектната студентска стая"
+    : lang === "nl"
+    ? "Kamerzoekservice | Domakin - Vind jouw perfecte studentenkamer"
     : "Υπηρεσία Αναζήτησης Δωματίου | Domakin - Βρείτε το Ιδανικό Φοιτητικό Δωμάτιο";
-  
+
   const description = lang === "en"
     ? "Tell us your requirements and we'll search for the perfect room for you. Our agents will find accommodation that matches your specifications in the Netherlands."
     : lang === "bg"
     ? "Кажете ни вашите изисквания и ние ще намерим перфектната стая за вас. Нашите агенти ще намерят настаняване, което отговаря на вашите спецификации в Нидерландия."
+    : lang === "nl"
+    ? "Vertel ons uw wensen en wij zoeken de perfecte kamer voor u. Onze agenten vinden accommodatie die aansluit bij uw specificaties in Nederland."
     : "Πείτε μας τις απαιτήσεις σας και θα βρούμε το ιδανικό δωμάτιο για εσάς. Οι πράκτορές μας θα βρουν διαμονή που ταιριάζει με τις προδιαγραφές σας στην Ολλανδία.";
   
   const ogImage = SHARE_BANNERS.searching;
@@ -50,7 +54,7 @@ const index = () => {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content={title} />
-        <meta property="og:locale" content={lang === "en" ? "en_US" : lang === "bg" ? "bg_BG" : "el_GR"} />
+        <meta property="og:locale" content={lang === "en" ? "en_US" : lang === "bg" ? "bg_BG" : lang === "nl" ? "nl_NL" : "el_GR"} />
         
         {/* Twitter Card meta tags */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -64,6 +68,8 @@ const index = () => {
           ? "room searching, find a room, student room search, accommodation search, Netherlands, room finder service"
           : lang === "bg"
           ? "търсене на стая, намери стая, търсене на студентска стая, търсене на настаняване, Нидерландия"
+          : lang === "nl"
+          ? "kamer zoeken, kamer vinden, studentenkamer zoeken, accommodatie zoeken, Nederland, kamerzoekservice"
           : "αναζήτηση δωματίου, εύρεση δωματίου, αναζήτηση φοιτητικού δωματίου, Ολλανδία"} />
         <script
           type="application/ld+json"

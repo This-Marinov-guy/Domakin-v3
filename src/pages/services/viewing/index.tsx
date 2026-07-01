@@ -25,12 +25,16 @@ const index = () => {
     ? "Viewing Netherlands | Remote Rental Viewing Service | Domakin"
     : lang === "bg"
     ? "Услуга за огледи | Domakin - Помощ при огледи на имоти в Нидерландия"
+    : lang === "nl"
+    ? "Bezichtiging Nederland | Domakin - Bezichtigingsservice op afstand"
     : "Υπηρεσία Προβολής | Domakin - Βοήθεια στην Προβολή Ακινήτων στην Ολλανδία";
-  
+
   const description = lang === "en"
     ? `Need a viewing in the Netherlands but cannot attend? Book a remote viewing, online viewing, or property viewing service with Domakin in ${supportedViewingCities}. Get photos, video, answers, and practical feedback.`
     : lang === "bg"
     ? "Нека нашите агенти присъстват на огледите вместо вас. Предоставяме снимки, видеоклипове и подробна обратна връзка, за да ви помогнем да вземете информирано решение за настаняване в Нидерландия."
+    : lang === "nl"
+    ? `Uitgenodigd voor een bezichtiging in Nederland maar kunt u niet komen? Boek een bezichtiging op afstand met Domakin in ${supportedViewingCities}. Ontvang foto's, video, antwoorden en praktische feedback.`
     : "Αφήστε τους πράκτορές μας να παρακολουθήσουν τις προβολές ακινήτων εκ μέρους σας. Παρέχουμε φωτογραφίες, βίντεο και λεπτομερή ανατροφοδότηση για να σας βοηθήσουμε να πάρετε ενημερωμένες αποφάσεις για τη διαμονή στην Ολλανδία.";
   
   const ogImage = SHARE_BANNERS.viewing;
@@ -52,7 +56,7 @@ const index = () => {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content={title} />
-        <meta property="og:locale" content={lang === "en" ? "en_US" : lang === "bg" ? "bg_BG" : "el_GR"} />
+        <meta property="og:locale" content={lang === "en" ? "en_US" : lang === "bg" ? "bg_BG" : lang === "nl" ? "nl_NL" : "el_GR"} />
         
         {/* Twitter Card meta tags */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -66,6 +70,8 @@ const index = () => {
           ? `viewing Netherlands, remote viewing Netherlands, online viewing Netherlands, remote rental viewing Netherlands, property viewing service Netherlands, rental viewing Netherlands, student housing viewing, accommodation viewing, viewing service Netherlands, ${supportedViewingCities}`
           : lang === "bg"
           ? "оглед на имот, услуга за огледи, Нидерландия, студентско жилище, оглед на настаняване"
+          : lang === "nl"
+          ? `bezichtiging Nederland, bezichtiging op afstand, online bezichtiging, huurbezichtiging, bezichtigingsservice, studentenhuisvesting, ${supportedViewingCities}`
           : "προβολή ακινήτου, υπηρεσία προβολής, Ολλανδία, φοιτητική στέγαση"} />
         <script
           type="application/ld+json"

@@ -31,12 +31,16 @@ const index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
     ? "List a Room in the Netherlands | Domakin"
     : lang === "bg"
     ? "Отдай стая | Domakin - Прехвърли договора си или намери съквартирант"
+    : lang === "nl"
+    ? "Plaats een kamer in Nederland | Domakin"
     : "Καταχωρίστε Δωμάτιο | Domakin - Μεταβιβάστε τη Συνδρομή σας ή Βρείτε Συγκάτοικο";
-  
+
   const description = lang === "en"
     ? "List your room on Domakin to find a new tenant or flatmate in the Netherlands. Share room details, availability, rent and photos with students looking for accommodation."
     : lang === "bg"
     ? "Прехвърлете договора си за наем или намерете нов съквартирант. Публикувайте стаята си в Domakin и се свържете с проверени студенти, търсещи настаняване в Нидерландия."
+    : lang === "nl"
+    ? "Plaats uw kamer op Domakin om een nieuwe huurder of huisgenoot te vinden in Nederland. Deel kamerdetails, beschikbaarheid, huur en foto's met studenten die accommodatie zoeken."
     : "Μεταβιβάστε το συμβόλαιο ενοικίασής σας ή βρείτε νέο συγκάτοικο. Καταχωρίστε το δωμάτιό σας στο Domakin και συνδεθείτε με επαληθευμένους φοιτητές που αναζητούν διαμονή στην Ολλανδία.";
   
   const ogImage = SHARE_BANNERS.upload;
@@ -58,7 +62,7 @@ const index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content={title} />
-        <meta property="og:locale" content={lang === "en" ? "en_US" : lang === "bg" ? "bg_BG" : "el_GR"} />
+        <meta property="og:locale" content={lang === "en" ? "en_US" : lang === "bg" ? "bg_BG" : lang === "nl" ? "nl_NL" : "el_GR"} />
         
         {/* Twitter Card meta tags */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +76,8 @@ const index = ({ serverFeedbacks, serverProperties }: HomeProps) => {
           ? "list a room Netherlands, room listing service, find tenant Netherlands, find flatmate Netherlands, transfer rental contract, student accommodation listing"
           : lang === "bg"
           ? "отдай стая, прехвърли договор, намери съквартирант, обява за стая, Нидерландия"
+          : lang === "nl"
+          ? "kamer plaatsen Nederland, kameradvertentie, huurder vinden Nederland, huisgenoot vinden, huurcontract overdragen, studentenaccommodatie plaatsen"
           : "καταχώρηση δωματίου, μεταβίβαση συμβολαίου, εύρεση συγκατοίκου, Ολλανδία"} />
         <script
           type="application/ld+json"

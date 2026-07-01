@@ -73,12 +73,16 @@ const index = ({ serverProperties }: PropertiesIndexProps) => {
     ? "Student Housing Rentals Netherlands | Domakin - Find Your Perfect Room"
     : lang === "bg"
     ? "Студентски жилища в Нидерландия | Domakin - Намерете перфектната стая"
+    : lang === "nl"
+    ? "Studentenhuisvesting Nederland | Domakin - Vind jouw perfecte kamer"
     : "Φοιτητική Στέγαση στην Ολλανδία | Domakin - Βρείτε το Ιδανικό Δωμάτιο";
-  
+
   const description = lang === "en"
     ? "Find quality student accommodation and rental properties in the Netherlands. Browse verified listings for rooms and apartments with transparent pricing."
     : lang === "bg"
     ? "Намерете качествени студентски жилища и наемни имоти в Нидерландия. Разгледайте проверени обяви за стаи и апартаменти с прозрачни цени."
+    : lang === "nl"
+    ? "Vind kwalitatieve studentenhuisvesting en huurwoningen in Nederland. Bekijk geverifieerde advertenties voor kamers en appartementen met transparante prijzen."
     : "Βρείτε ποιοτική φοιτητική διαμονή και ακίνητα προς ενοικίαση στην Ολλανδία. Περιηγηθείτε σε επαληθευμένες καταχωρήσεις για δωμάτια και διαμερίσματα με διαφανείς τιμές.";
   
   const ogImage = SHARE_BANNERS.searching;
@@ -92,6 +96,8 @@ const index = ({ serverProperties }: PropertiesIndexProps) => {
           ? "student housing Netherlands, rental properties, student accommodation, rooms for rent, apartments, student housing Amsterdam, Rotterdam, Utrecht"
           : lang === "bg"
           ? "студентско жилище Нидерландия, наемни имоти, студентско настаняване, стаи под наем, апартаменти"
+          : lang === "nl"
+          ? "studentenhuisvesting Nederland, huurwoningen, studentenaccommodatie, kamers te huur, appartementen, studentenhuisvesting Amsterdam, Rotterdam, Utrecht"
           : "φοιτητική στέγαση Ολλανδία, ακίνητα προς ενοικίαση, φοιτητική διαμονή, δωμάτια προς ενοικίαση"} />
         <link rel="canonical" href={currentUrl} />
         
@@ -105,7 +111,7 @@ const index = ({ serverProperties }: PropertiesIndexProps) => {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content={title} />
-        <meta property="og:locale" content={lang === "en" ? "en_US" : lang === "bg" ? "bg_BG" : "el_GR"} />
+        <meta property="og:locale" content={lang === "en" ? "en_US" : lang === "bg" ? "bg_BG" : lang === "nl" ? "nl_NL" : "el_GR"} />
         
         {/* Twitter Card meta tags */}
         <meta name="twitter:card" content="summary_large_image" />

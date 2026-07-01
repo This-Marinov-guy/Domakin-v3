@@ -13,10 +13,11 @@ const SEO = () => {
 
   let currentLang = router.locale || lang || "en";
 
-  // Ensure Bulgarian/Greek are respected both on server and client
+  // Ensure Bulgarian/Greek/Dutch are respected both on server and client
   const path = router.asPath || "";
   if (path.startsWith('/bg')) currentLang = 'bg';
   if (path.startsWith('/gr')) currentLang = 'gr';
+  if (path.startsWith('/nl')) currentLang = 'nl';
 
   // Normalize path (remove language prefix and query params)
   const normalizedPath = path
@@ -48,6 +49,10 @@ const SEO = () => {
       {
         "@language": "el", // ISO code for Greek
         "@value": "Domakin - Στέγαση από φοιτητές σε φοιτητές"
+      },
+      {
+        "@language": "nl",
+        "@value": "Domakin - Huisvesting van studenten voor studenten"
       }
     ],
     description: [
@@ -62,6 +67,10 @@ const SEO = () => {
       {
         "@language": "el", // ISO code for Greek
         "@value": "Πλατφόρμα για βοήθεια στην αναζήτηση διαμερισμάτων στο Ολλανδία. Προσφέρουμε προβολές, επαφή με ιδιοκτήτες και ανάληψη δωματίων."
+      },
+      {
+        "@language": "nl",
+        "@value": "Platform dat helpt bij het zoeken naar een woning in Nederland. Wij bieden bezichtigingen, contact met verhuurders en het overnemen van kamers."
       }
     ],
     image: shareBanner,
@@ -110,6 +119,19 @@ const SEO = () => {
         </>
       )}
 
+      {currentLang === "nl" && (
+        <>
+          <meta
+            name="keywords"
+            content="Vastgoed, Accommodatie, Woningen, Nederland, Bezichtigingen, Studenten, Huisvesting, Kamers, Huur, Zoeken, Vastgoedcarrières, Bezichtigingsagent, Vastgoedagent, Amsterdam, Rotterdam, Den Haag, Utrecht, Eindhoven, Groningen, Tilburg, Almere, Breda, Nijmegen, Enschede, Haarlem, Arnhem, Zaanstad, Amersfoort, Apeldoorn, Hoofddorp, Maastricht, Leiden, Dordrecht, Zoetermeer, Zwolle, Deventer, Delft, Heerlen, Alkmaar, Venlo, Leeuwarden, Hilversum, Amstelveen, Purmerend, Schiedam, Spijkenisse, Vlaardingen, Alphen aan den Rijn, Hoorn, Gouda, Zaandam, Hengelo, Velsen, Ede, Barneveld, Capelle aan den IJssel, Helmond, Roosendaal, Schagen, Vught, Katwijk, Heerenveen, Nieuwegein"
+          />
+          <meta
+            name="description"
+            content="Platform dat helpt bij het zoeken naar een woning in Nederland. Wij bieden aan om de bezichtigingen voor u te doen, u direct in contact te brengen met een verhuurder of iemand te vinden die uw kamer/appartement overneemt. Onze jonge agenten leveren snel en efficiënt werk voor al onze klanten!"
+          />
+        </>
+      )}
+
       {/* Alternative language versions for SEO (hidden from most user agents) */}
       <meta
         name="description:en"
@@ -122,6 +144,10 @@ const SEO = () => {
       <meta
         name="description:gr"
         content="Πλατφόρμα για βοήθεια στην αναζήτηση διαμερισμάτων στην πόλη του Ολλανδία. Προσφέρουμε τη δυνατότητα να κάνουμε τις προβολές για εσάς, να επικοινωνούμε απευθείας με τον ιδιοκτήτη."
+      />
+      <meta
+        name="description:nl"
+        content="Platform dat helpt bij het zoeken naar een woning in Nederland. Wij bieden aan om de bezichtigingen voor u te doen, u direct in contact te brengen met een verhuurder of iemand te vinden die uw kamer/appartement overneemt."
       />
 
       <meta name="author" content="Domakin Team" />
@@ -194,6 +220,27 @@ const SEO = () => {
         </>
       )}
 
+      {currentLang === "nl" && (
+        <>
+          <meta
+            name="twitter:title"
+            content="Domakin - Huisvesting van studenten voor studenten"
+          />
+          <meta
+            property="twitter:description"
+            content="Platform dat helpt bij het zoeken naar een woning in Nederland. Wij bieden bezichtigingen, contact met verhuurders en het overnemen van kamers."
+          />
+          <meta
+            name="og:title"
+            content="Domakin - Huisvesting van studenten voor studenten"
+          />
+          <meta
+            property="og:description"
+            content="Platform dat helpt bij het zoeken naar een woning in Nederland. Wij bieden bezichtigingen, contact met verhuurders en het overnemen van kamers."
+          />
+        </>
+      )}
+
       {/* Alternative language versions (hidden from most user agents but helpful for SEO) */}
       <meta
         name="twitter:title:en"
@@ -206,6 +253,10 @@ const SEO = () => {
       <meta
         name="twitter:title:gr"
         content="Domakin - Στέγαση από φοιτητές σε φοιτητές"
+      />
+      <meta
+        name="twitter:title:nl"
+        content="Domakin - Huisvesting van studenten voor studenten"
       />
 
       {/* Common social media properties */}
@@ -270,6 +321,11 @@ const SEO = () => {
               rel="alternate"
               href={`https://www.domakin.nl/gr${canonicalPath}`}
               hrefLang="el"
+            />
+            <link
+              rel="alternate"
+              href={`https://www.domakin.nl/nl${canonicalPath}`}
+              hrefLang="nl"
             />
           </>
         );
