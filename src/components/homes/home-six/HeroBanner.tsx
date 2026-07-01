@@ -6,6 +6,7 @@ import DropdownSix from "@/components/search-dropdown/home-dropdown/DropdownSix"
 import useTranslation from "next-translate/useTranslation";
 import SnowBackground from "@/components/common/backgrounds/SnowBackground";
 import { THEME, WINTER } from "@/utils/config";
+import TrustpilotBadge from "@/components/common/TrustpilotBadge";
 
 const HeroBanner = () => {
   const { t, lang } = useTranslation("translations");
@@ -26,11 +27,12 @@ const HeroBanner = () => {
             <div className="col-xl-6 col-lg-4 col-md-12 col-12">
               <div className="pt-35 wow fadeInRight">
                 <h1
-                  className="color-dark hero-heading mb-40"
+                  className="color-dark hero-heading mb-20"
                   style={{ color: "#004aad" }}
                 >
                   {t("home.company_for_accommodation_searching")}
                 </h1>
+                <TrustpilotBadge align="start" className="mb-40" withButton={false}/>
                 {/* <p className="color-dark sub-heading mb-40 lg-mb-20">
                   <i
                     className="fa-solid fa-house"

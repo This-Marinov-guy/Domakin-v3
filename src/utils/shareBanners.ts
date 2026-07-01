@@ -5,6 +5,7 @@ export const SHARE_BANNERS = {
   searching: `${SITE_URL}/assets/img/banner/searching-banner.png`,
   viewing: `${SITE_URL}/assets/img/banner/viewing-banner.png`,
   upload: `${SITE_URL}/assets/img/banner/upload-banner.png`,
+  services: `${SITE_URL}/assets/img/banner/service-banner.png`,
 } as const;
 
 const normalizeSharePath = (path: string) =>

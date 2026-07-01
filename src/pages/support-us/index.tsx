@@ -1,15 +1,11 @@
-import AboutUsOne from "@/components/inner-pages/about-us/about-us-one";
-import AgentArea from "@/components/homes/home-one/AgentArea";
 import Wrapper from "@/layouts/Wrapper";
 import HeaderOne from "@/layouts/headers/HeaderOne";
 import Feedback from "@/components/homes/home-five/Feedback";
 import FooterFour from "@/layouts/footers/FooterFour";
 import FancyBanner from "@/components/common/FancyBanner";
 import useTranslation from "next-translate/useTranslation";
-import Brand from "@/components/inner-pages/about-us/about-us-one/Brand";
 import BreadcrumbOne from "@/components/common/breadcrumb/BreadcrumbOne";
-import CreateFeedback from "@/components/forms/CreateFeedback";
-import CreateDonation from "@/components/forms/CreateDonation";
+import TrustpilotBadge from "@/components/common/TrustpilotBadge";
 import { GetServerSideProps } from "next";
 import { fetchFeedbacks } from "@/services/api";
 
@@ -29,12 +25,15 @@ const index = ({ serverFeedbacks }: SupportProps) => {
       <HeaderOne style={true} />
       <BreadcrumbOne
         title={t("feedbacks.help_the_organization")}
-        sub_title={t("feedbacks.feedbacks_and_donations")}
+        sub_title={t("feedbacks.feedbacks")}
       />
-      {/* <CreateDonation /> */}
-      <CreateFeedback />
+      <div className="container">
+        <div className="support-trustpilot text-center pt-60 pb-30">
+          <h2 className="mb-30">{t("feedbacks.trustpilot_heading")}</h2>
+          <TrustpilotBadge align="center" buttonClassName="btn-two mt-10" />
+        </div>
+      </div>
       <Feedback style={true} feedbacks={serverFeedbacks} />
-      <Brand />
       <FancyBanner style={false} />
       <FooterFour />
     </Wrapper>

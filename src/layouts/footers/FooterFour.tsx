@@ -5,6 +5,7 @@ import footerShape from "@/assets/images/assets/ils_06.svg"
 import Link from "next/link"
 import footer_data from "@/data/home-data/FooterData"
 import { EMAIL, FACEBOOK, INSTAGRAM, KVK, LINKEDIN } from "@/utils/defines"
+import TrustpilotBadge from "@/components/common/TrustpilotBadge"
 import useTranslation from "next-translate/useTranslation"
 
 type FooterFourProps = {
@@ -78,6 +79,12 @@ const FooterFour = ({ openLinksInNewTab = false }: FooterFourProps) => {
                    </div>
                  </div>
                ))}
+
+             <div className="col-xxl-3 col-lg-4 col-md-4 col-12 mb-30 ms-auto">
+               <div className="footer-trustpilot">
+                 <TrustpilotBadge align="end" buttonClassName="btn-ten" />
+               </div>
+             </div>
            </div>
          </div>
          <div className="bottom-footer">

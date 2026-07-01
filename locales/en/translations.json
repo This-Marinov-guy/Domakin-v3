@@ -30,7 +30,8 @@
     "contact_us": "Contact us",
     "renting": "Renting",
     "lending": "Lending",
-    "recommendations": "Recommendations"
+    "recommendations": "Recommendations",
+    "review_us_on_trustpilot": "Review us on Trustpilot"
   },
   "about": {
     "about_the_company": "About the company",
@@ -677,7 +678,8 @@
     "contribute": "Contribute",
     "no_feedbacks": "No feedbacks yet - A chance to be the first!",
     "expand": "Expand",
-    "shrink": "Shrink"
+    "shrink": "Shrink",
+    "trustpilot_heading": "What our clients say on Trustpilot"
   },
   "recommendations": {
     "our_recommendations": "Our recommendations",

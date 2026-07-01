@@ -69,6 +69,7 @@ const menu_data: MenuItem[] = [
     sub_menus: [
       { link: "/about", title: "header.legacy" },
       { link: "/agents", title: "header.agents" },
+      { link: "/support-us", title: "footer.support" },
     ],
   },
   // {

@@ -140,14 +140,14 @@ const ServicesPage = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <meta property="og:site_name" content="Domakin" />
-        <meta property="og:image" content={SHARE_BANNERS.main} />
+        <meta property="og:image" content={SHARE_BANNERS.services} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content={title} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={SHARE_BANNERS.main} />
+        <meta name="twitter:image" content={SHARE_BANNERS.services} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

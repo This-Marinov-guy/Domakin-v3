@@ -30,7 +30,8 @@
     "contact_us": "Επικοινωνήστε μαζί μας",
     "renting": "Ενοικίαση",
     "lending": "Δάνηση",
-    "recommendations": "Συστάσεις"
+    "recommendations": "Συστάσεις",
+    "review_us_on_trustpilot": "Αξιολογήστε μας στο Trustpilot"
   },
   "about": {
     "about_the_company": "Σχετικά με την εταιρεία",
@@ -677,7 +678,8 @@
     "contribute": "Συνεισφορά",
     "no_feedbacks": "Δεν υπάρχουν σχόλια ακόμα - Μια ευκαιρία να είστε ο πρώτος!",
     "expand": "Ανάπτυξη",
-    "shrink": "Σύμπτυξη"
+    "shrink": "Σύμπτυξη",
+    "trustpilot_heading": "Τι λένε οι πελάτες μας στο Trustpilot"
   },
   "recommendations": {
     "our_recommendations": "Οι συστάσεις μας",

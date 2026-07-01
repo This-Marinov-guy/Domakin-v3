@@ -30,7 +30,8 @@
     "contact_us": "Контакти",
     "renting": "Наемане",
     "lending": "Отдаване",
-    "recommendations": "Платформи"
+    "recommendations": "Платформи",
+    "review_us_on_trustpilot": "Оценете ни в Trustpilot"
   },
   "about": {
     "about_the_company": "За компанията",
@@ -677,7 +678,8 @@
     "contribute": "Помогни",
     "no_feedbacks": "Не бяха открити отзиви - бъдете първи!",
     "expand": "Разгъни",
-    "shrink": "Свий"
+    "shrink": "Свий",
+    "trustpilot_heading": "Какво казват нашите клиенти в Trustpilot"
   },
   "recommendations": {
     "our_recommendations": "Нашите препоръки",

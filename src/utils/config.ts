@@ -67,3 +67,27 @@ export const GENERAL_ERROR_RESPONSE_CODES = [419, 500];
 
 export const PAGINATION_PER_PAGE_OPTIONS_1 = [2, 5, 10];
 export const PAGINATION_PER_PAGE_OPTIONS_2 = [2, 5, 10, 20, 50];
+
+// Trustpilot
+// Account-specific Business Unit ID (required for the official TrustBox widgets).
+// Set NEXT_PUBLIC_TRUSTPILOT_BUSINESS_UNIT_ID in the environment.
+export const TRUSTPILOT_BUSINESS_UNIT_ID =
+  process.env.NEXT_PUBLIC_TRUSTPILOT_BUSINESS_UNIT_ID?.trim() || "";
+// Token for the Review Collector TrustBox (the widget available on the current plan).
+export const TRUSTPILOT_REVIEW_TOKEN =
+  process.env.NEXT_PUBLIC_TRUSTPILOT_REVIEW_TOKEN?.trim() || "";
+export const TRUSTPILOT_REVIEW_URL = "https://www.trustpilot.com/review/domakin.nl";
+// Direct "leave a review" short link from the Trustpilot dashboard.
+export const TRUSTPILOT_EVALUATE_URL = "https://trstp.lt/OwFqU1cND7";
+export const TRUSTPILOT_BOOTSTRAP_SRC =
+  "https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js";
+
+// Trustpilot TrustBox template IDs. The Review Collector is the one enabled for
+// this business unit; the others need a paid plan and otherwise render a fallback.
+export const TRUSTPILOT_TEMPLATES = {
+  reviewCollector: "56278e9abfbbba0bdcd568bc", // invite to leave a review
+  microCombo: "5419b6ffb0d04a076446a9af",
+  microStar: "5419b6a8b0d04a076446a9ad",
+  carousel: "53aa8912dec7e10d38f59f36",
+  horizontal: "5406e65db0d04a09e042d5fc",
+} as const;
