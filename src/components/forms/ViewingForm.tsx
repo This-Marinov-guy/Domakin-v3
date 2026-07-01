@@ -235,22 +235,22 @@ const getViewingJourneySteps = (t: Translate) => [
     title: t("viewing.page.journey.step1"),
   },
   {
-    image: "/assets/img/properties/property_20/1.jpg",
+    image: "/assets/img/real/step2.png",
     icon: "calendar-time",
     title: t("viewing.page.journey.step2"),
   },
   {
-    image: "/assets/img/properties/property_10/1.jpeg",
+    image: "/assets/img/real/step3.png",
     icon: "camera",
     title: t("viewing.page.journey.step3"),
   },
   {
-    image: "/assets/img/properties/property_21/1.jpg",
+    image: "/assets/img/real/step4.png",
     icon: "document",
     title: t("viewing.page.journey.step4"),
   },
   {
-    image: "/assets/img/properties/property_19/4.jpg",
+    image: "/assets/img/real/step5.png",
     icon: "check-bill",
     title: t("viewing.page.journey.step5"),
   },
@@ -630,7 +630,7 @@ const ViewingForm = () => {
                     <div>
                       <span className="viewing-payment-label-row">
                         <span
-                          className="viewing-payment-svg-icon"
+                          className="viewing-payment-svg-icon icon-blue"
                           style={{
                             WebkitMaskImage: `url(/assets/img/icons/${item.icon}.svg)`,
                             maskImage: `url(/assets/img/icons/${item.icon}.svg)`,
